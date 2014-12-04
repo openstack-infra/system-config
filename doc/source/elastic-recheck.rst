@@ -18,7 +18,7 @@ At a Glance
 :Projects:
  * https://git.openstack.org/cgit/openstack-infra/elastic-recheck
 :Bugs:
-  * http://bugs.launchpad.net/openstack-ci
+  * https://storyboard.openstack.org/#!/project/713
 :Resources:
   * `elastic-recheck Documentation <http://docs.openstack.org/infra/elastic-recheck/>`_
 
