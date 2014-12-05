@@ -10,7 +10,7 @@ same processes, tools and philosophy as any other OpenStack project.
 The infrastructure team is an open meritocracy that welcomes new
 members.  You can read about the OpenStack way on the wiki:
 
-* https://wiki.openstack.org/wiki/How_To_Contribute
+* http://docs.openstack.org/infra/manual/developers.html
 * https://wiki.openstack.org/wiki/Open
 * https://wiki.openstack.org/wiki/Governance
 * https://wiki.openstack.org/wiki/Programs

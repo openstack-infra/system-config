@@ -37,8 +37,8 @@ and official integration. As such, the target audience for this document
 is current OpenStack developers who are assumed to already be familiar
 with how changes are uploaded and reviewed within OpenStack projects. As
 an introduction to OpenStack contribution, it is recommend to first read
-https://wiki.openstack.org/wiki/How_To_Contribute and in particular the
-https://wiki.openstack.org/wiki/Gerrit_Workflow article linked from it.
+http://docs.openstack.org/infra/manual/developers.html and in particular the
+http://docs.openstack.org/infra/manual/developers.html#development-workflow article linked from it.
 
 Add a Project to StackForge
 ***************************

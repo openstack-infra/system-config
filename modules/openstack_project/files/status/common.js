@@ -67,7 +67,7 @@ function footer() {
   ' <li><a href="http://www.openstack.org/events/">Events</a></li>'+
   ' <li><a href="http://www.openstack.org/jobs/">Jobs</a></li>'+
   ' <li><a href="http://www.openstack.org/companies/">Companies</a></li>'+
-  ' <li><a href="http://wiki.openstack.org/HowToContribute">Contribute</a></li>'+
+  ' <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>'+
   '</ul>'+
   '</div>\n'+
   '<div class="span-4">'+
