@@ -181,6 +181,9 @@ class Subunit2SQLProcessor(object):
         if log_url:
             log_dir = os.path.dirname(os.path.dirname(log_url))
             shell.CONF.set_override('artifacts', log_dir)
+        run_id = subunit.get('build_uuid', None)
+        if run_id:
+            shell.CONF.set_override('run_id', run_id)
         shell.CONF.set_override('run_meta', subunit)
         # Parse subunit stream and store in DB
         logging.debug('Converting Subunit V2 stream to SQL')
