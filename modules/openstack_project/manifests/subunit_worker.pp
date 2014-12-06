@@ -16,7 +16,8 @@
 #
 class openstack_project::subunit_worker (
   $sysadmins = [],
-  $subunit2sql_db_uri
+  $subunit2sql_db_host,
+  $subunit2sql_db_pass,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
@@ -26,18 +27,22 @@ class openstack_project::subunit_worker (
   include subunit2sql
   subunit2sql::worker { 'A':
     config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    subunit2sql_db_uri => $subunit2sql_db_uri,
+    db_host            => $subunit2sql_db_host,
+    db_pass            => $subunit2sql_db_pass,
   }
   subunit2sql::worker { 'B':
     config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    subunit2sql_db_uri => $subunit2sql_db_uri,
+    db_host            => $subunit2sql_db_host,
+    db_pass            => $subunit2sql_db_pass,
   }
   subunit2sql::worker { 'C':
     config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    subunit2sql_db_uri => $subunit2sql_db_uri,
+    db_host            => $subunit2sql_db_host,
+    db_pass            => $subunit2sql_db_pass,
   }
   subunit2sql::worker { 'D':
     config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    subunit2sql_db_uri => $subunit2sql_db_uri,
+    db_host            => $subunit2sql_db_host,
+    db_pass            => $subunit2sql_db_pass,
   }
 }

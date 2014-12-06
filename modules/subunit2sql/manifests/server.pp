@@ -16,7 +16,12 @@
 # == Class: subunit2sql
 #
 class subunit2sql::server (
-  $subunit2sql_db_uri,
+  $db_dialect = 'mysql',
+  $db_user = 'subunit2sql',
+  $db_pass,
+  $db_host,
+  $db_port = '3306',
+  $db_name = 'subunit2sql',
 ) {
 
   file { '/etc/subunit2sql.conf':
