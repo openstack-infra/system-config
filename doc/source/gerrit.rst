@@ -467,6 +467,10 @@ To rename a project:
 
      ssh -p 29418 review.openstack.org gerrit rename-group OLDNAME NEWNAME
 
+#. If renamed/transfered projects using StoryBoard, update the db:
+
+     update projects set name='stackforge/OLD' where name='openstack/NEW';
+
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
 
