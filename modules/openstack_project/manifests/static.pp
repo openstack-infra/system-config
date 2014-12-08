@@ -9,6 +9,16 @@ class openstack_project::static (
   $swift_region_name = '',
   $swift_default_container = '',
   $project_config_repo = '',
+  $vhost_tarballs = 'tarballs.openstack.org',
+  $vhost_ci = 'ci.openstack.org',
+  $vhost_logs = 'logs.openstack.org',
+  $vhost_logs_dev = 'logs-dev.openstack.org',
+  $vhost_docs_draft = 'docs-draft.openstack.org',
+  $vhost_security = 'security.openstack.org',
+  $vhost_governance = 'governance.openstack.org',
+  $vhost_specs = 'specs.openstack.org',
+  $vhost_summit = 'summit.openstack.org',
+  $vhost_devstack = 'devstack.org',
 ) {
 
   class { 'openstack_project::server':
@@ -47,7 +57,7 @@ class openstack_project::static (
   ###########################################################
   # Tarballs
 
-  apache::vhost { 'tarballs.openstack.org':
+  apache::vhost { "${vhost_tarballs}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',
@@ -64,7 +74,7 @@ class openstack_project::static (
   ###########################################################
   # CI
 
-  apache::vhost { 'ci.openstack.org':
+  apache::vhost { "${vhost_ci}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/ci',
@@ -81,7 +91,7 @@ class openstack_project::static (
   ###########################################################
   # Logs
 
-  apache::vhost { 'logs.openstack.org':
+  apache::vhost { "${vhost_logs}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/logs',
@@ -89,7 +99,7 @@ class openstack_project::static (
     template => 'openstack_project/logs.vhost.erb',
   }
 
-  apache::vhost { 'logs-dev.openstack.org':
+  apache::vhost { "${vhost_logs_dev}":
     port     => 80,
     priority => '51',
     docroot  => '/srv/static/logs',
@@ -184,7 +194,7 @@ class openstack_project::static (
   ###########################################################
   # Docs-draft
 
-  apache::vhost { 'docs-draft.openstack.org':
+  apache::vhost { "${vhost_docs_draft}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/docs-draft',
@@ -210,7 +220,7 @@ class openstack_project::static (
   ###########################################################
   # Security
 
-  apache::vhost { 'security.openstack.org':
+  apache::vhost { "${vhost_security}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/security',
@@ -227,7 +237,7 @@ class openstack_project::static (
   ###########################################################
   # Governance
 
-  apache::vhost { 'governance.openstack.org':
+  apache::vhost { "${vhost_governance}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/governance',
@@ -244,7 +254,7 @@ class openstack_project::static (
   ###########################################################
   # Specs
 
-  apache::vhost { 'specs.openstack.org':
+  apache::vhost { "${vhost_specs}":
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/specs',
@@ -271,7 +281,7 @@ class openstack_project::static (
   ###########################################################
   # legacy summit.openstack.org site redirect
 
-  apache::vhost { 'summit.openstack.org':
+  apache::vhost { "${vhost_summit}":
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
@@ -281,11 +291,11 @@ class openstack_project::static (
   ###########################################################
   # legacy devstack.org site redirect
 
-  apache::vhost { 'devstack.org':
+  apache::vhost { "${vhost_devstack}":
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
-    serveraliases => ['*.devstack.org'],
+    serveraliases => ["*.${vhost_devstack}"],
     template      => 'openstack_project/devstack.vhost.erb',
   }
 }
