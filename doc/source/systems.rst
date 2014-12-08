@@ -30,6 +30,7 @@ Major Systems
    storyboard
    kerberos
    afs
+   askbot
 
 .. NOTE(dhellmann): These projects were not listed above, or in any
    other toctree, which breaks the build. It's not clear why they were
