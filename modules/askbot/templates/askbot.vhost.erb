@@ -1,0 +1,58 @@
+# ************************************
+# Askbot vhost template
+# Managed by Puppet
+# ************************************
+
+WSGIRestrictStdout On
+WSGIRestrictSignal Off
+
+NameVirtualHost <%= @vhost_name %>:80
+<VirtualHost <%= @vhost_name %>:80>
+<% if @site_ssl_enabled %>
+  ServerName <%= @srvname %>
+  Redirect / https://<%= @srvname %>/
+</VirtualHost>
+
+NameVirtualHost <%= @vhost_name %>:443
+<VirtualHost <%= @vhost_name %>:443>
+  SSLEngine on
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLCertificateFile      <%= @site_ssl_cert_file %>
+  SSLCertificateKeyFile   <%= @site_ssl_key_file %>
+<% if @site_ssl_chain_file_contents %>
+  SSLCertificateChainFile <%= @site_ssl_chain_file %>
+<% end %>
+<% end %>
+  ServerName <%= @srvname %>
+  # DocumentRoot <%= @docroot %>
+
+  # media files
+  Alias /m/ <%= @docroot %>/static/
+  <Directory <%= @docroot %>/static/>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  # uploaded files
+  Alias /upfiles/ <%= @docroot %>/upfiles/
+  <Directory <%= @docroot %>/upfiles/>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  # wsgi daemon
+  WSGIDaemonProcess askbot user=<%= @www_user %> group=<%= @www_group %> maximum-requests=1000 display-name=askbot processes=2 threads=1 shutdown-timeout=10 python-path=<%= @docroot %>
+
+  WSGIScriptAlias /  <%= @docroot %>/config/django.wsgi
+
+  <Location />
+   WSGIProcessGroup askbot
+   Order deny,allow
+   Allow from all
+  </Location>
+
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>
