@@ -698,4 +698,17 @@ node /^afs.*\..*\.openstack\.org$/ {
   }
 }
 
+# Node-OS: precise
+node 'ask.openstack.org' {
+  class { 'openstack_project::ask':
+    sysadmins                    => hiera('sysadmins', []),
+    db_user                      => hiera('ask_db_user', 'ask'),
+    db_password                  => hiera('ask_db_password', 'XXX'),
+    redis_password               => hiera('ask_redis_password', 'XXX'),
+    site_ssl_cert_file_contents  => hiera('ask_site_ssl_cert_file_contents', undef),
+    site_ssl_key_file_contents   => hiera('ask_site_ssl_key_file_contents', undef),
+    site_ssl_chain_file_contents => hiera('ask_site_ssl_chain_file_contents', undef),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
