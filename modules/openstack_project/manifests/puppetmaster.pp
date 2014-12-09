@@ -40,9 +40,7 @@ class openstack_project::puppetmaster (
     source => 'puppet:///modules/openstack_project/puppetmaster/production_environment.conf',
   }
 
-  class { 'ansible':
-    ansible_hostfile => '/etc/ansible/hostfile',
-  }
+  include ansible
 
   file { '/etc/ansible/hostfile':
     ensure  => present,
