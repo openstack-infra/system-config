@@ -359,9 +359,9 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
   }
 }
 
-# A CentOS machine to load balance git access.
+# CentOS machines to load balance git access.
 # Node-OS: centos6
-node 'git.openstack.org' {
+node /^git(-frontend\d+)?\.openstack\.org$/ {
   class { 'openstack_project::git':
     sysadmins               => hiera('sysadmins', []),
     balancer_member_names   => [
