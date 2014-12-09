@@ -434,6 +434,22 @@ node 'storyboard.openstack.org' {
   }
 }
 
+# A machine to run a Storyboard dev instance
+# Node-OS: precise
+node 'storyboard-dev.openstack.org' {
+  class { 'openstack_project::storyboard':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+    sysadmins               => hiera('sysadmins', []),
+    mysql_host              => hiera('storyboard_dev_db_host', 'localhost'),
+    mysql_user              => hiera('storyboard_dev_db_user', 'username'),
+    mysql_password          => hiera('storyboard_dev_db_password', 'XXX'),
+    rabbitmq_user           => hiera('storyboard_dev_rabbit_user', 'username'),
+    rabbitmq_password       => hiera('storyboard_dev_rabbit_password', 'XXX'),
+    ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
+  }
+}
+
 # A machine to serve static content.
 # Node-OS: precise
 node 'static.openstack.org' {
