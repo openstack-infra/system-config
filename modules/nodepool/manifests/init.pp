@@ -78,6 +78,7 @@ class nodepool (
     'libssl-dev',
     'kpartx',
     'qemu-utils',
+    'libgmp-dev',         # transitive dep of paramiko
   ]
 
   package { $packages:
@@ -133,6 +134,7 @@ class nodepool (
       Package['libffi-dev'],
       Package['libssl-dev'],
       Package['python-lxml'],
+      Package['libgmp-dev'],
     ],
   }
 
