@@ -1,5 +1,8 @@
 class openstack_project::summit (
-  $sysadmins = []
+  $admin_users = [
+    'ttx',
+  ],
+  $sysadmins = [],
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
@@ -7,7 +10,7 @@ class openstack_project::summit (
   }
 
   realize (
-    User::Virtual::Localuser['ttx'],
+    User::Virtual::Localuser[$admin_users],
   )
 }
 
