@@ -143,12 +143,12 @@ class openstack_project::gerrit (
       },
       {
         name  => 'bug',
-        match => '\\bbug:? #?(\\d+)',
+        match => '\\b[Bb]ug:? #?(\\d+)',
         link  => 'https://launchpad.net/bugs/$1',
       },
       {
         name  => 'story',
-        match => '\\bstory:? #?(\\d+)',
+        match => '\\b[Ss]tory:? #?(\\d+)',
         link  => 'https://storyboard.openstack.org/#!/story/$1',
       },
       {
