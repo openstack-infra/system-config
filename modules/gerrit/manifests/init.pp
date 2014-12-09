@@ -40,6 +40,8 @@
 #     Gerrit configuration options; see Gerrit docs.
 #   commentlinks:
 #     A list of regexes Gerrit should hyperlink.
+#   trackingids:
+#     A list of regexes to reference external tracking systems.
 #   war:
 #     The URL of the Gerrit WAR that should be downloaded and installed.
 #     Note that only the final component is used for comparing to the most
@@ -136,6 +138,7 @@ class gerrit(
   $httpd_maxthreads = '',
   $httpd_maxwait = '',
   $commentlinks = [],
+  $trackingids = [],
   $contactstore = false,
   $contactstore_appsec = '',
   $contactstore_pubkey = '',
@@ -293,6 +296,7 @@ class gerrit(
   # - $httpd_minthreads
   # - $httpd_maxthreads
   # - $commentlinks
+  # - $trackingids
   # - $enable_melody
   # - $melody_session
   # - $gitweb
