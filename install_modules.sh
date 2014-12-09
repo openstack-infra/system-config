@@ -65,6 +65,12 @@ if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
     exit 0
 fi
 
+if [ "${#MODULES[*]}" -ne "${#MODULES_TO_INSTALL[*]}" ] ; then
+    echo "ERROR: the elements number of MODULES and MODULES_TO_INSTALL must be"
+    echo "  equal. Check the module definitions in modules.env file."
+    exit 1
+fi
+
 MODULE_LIST=`puppet module list`
 
 # Transition away from old things
@@ -73,7 +79,7 @@ if [ -d /etc/puppet/modules/vcsrepo/.git ]; then
 fi
 
 # Install all the modules
-for MOD in ${!MODULES[*]} ; do
+for MOD in ${MODULES_TO_INSTALL[*]} ; do
     # If the module at the current version does not exist upgrade or install it.
     if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1 ; then
         # Attempt module upgrade. If that fails try installing the module.

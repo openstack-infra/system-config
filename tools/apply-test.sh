@@ -91,6 +91,7 @@ echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
 sudo mkdir -p /var/run/puppet
+sudo rm -rf /etc/puppet/modules/*
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
