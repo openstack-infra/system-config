@@ -10,17 +10,21 @@ define user::virtual::localuser(
   $old_keys   = [],
   $shell      = '/bin/bash',
   $home       = "/home/${title}",
+  $uid        = unset,
+  $gid        = unset,
   $managehome = true
 ) {
 
   group { $title:
     ensure => present,
+    gid    => $gid,
   }
 
   user { $title:
     ensure     => present,
     comment    => $realname,
-    gid        => $title,
+    uid        => $uid,
+    gid        => $gid,
     groups     => $groups,
     home       => $home,
     managehome => $managehome,
