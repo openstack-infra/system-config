@@ -4,14 +4,24 @@ class openstack_project::storyboard(
   $mysql_host = '',
   $mysql_password = '',
   $mysql_user = '',
+  $mysql_database = 'storyboard',
   $rabbitmq_user = 'storyboard',
   $rabbitmq_password,
+  $rabbitmq_port = 5672,
+  $rabbitmq_host = 'localhost',
+  $rabbitmq_vhost = '/',
   $sysadmins = [],
   $ssl_cert_file_contents = undef,
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
   $project_config_repo = '',
+  $cors_allowed_origins = [
+    'https://storyboard.openstack.org',
+    'http://docs-draft.openstack.org',
+  ],
+  $cors_max_age = 3600,
+  $worker_count = 5,
 ) {
 
   class { 'project_config':
@@ -40,19 +50,16 @@ class openstack_project::storyboard(
 
   class { '::storyboard::application':
     hostname               => $::fqdn,
-    cors_allowed_origins   => [
-      'https://storyboard.openstack.org',
-      'http://docs-draft.openstack.org',
-    ],
-    cors_max_age           => 3600,
+    cors_allowed_origins   => $cors_allowed_origins,
+    cors_max_age           => $cors_max_age,
     openid_url             => $openid_url,
     mysql_host             => $mysql_host,
-    mysql_database         => 'storyboard',
+    mysql_database         => $mysql_database,
     mysql_user             => $mysql_user,
     mysql_user_password    => $mysql_password,
-    rabbitmq_host          => 'localhost',
-    rabbitmq_port          => 5672,
-    rabbitmq_vhost         => '/',
+    rabbitmq_host          => $rabbitmq_host,
+    rabbitmq_port          => $rabbitmq_port,
+    rabbitmq_vhost         => $rabbitmq_vhost,
     rabbitmq_user          => $rabbitmq_user,
     rabbitmq_user_password => $rabbitmq_password,
   }
@@ -63,7 +70,7 @@ class openstack_project::storyboard(
   }
 
   class { '::storyboard::workers':
-    worker_count => 5,
+    worker_count => $worker_count,
   }
 
   # Load the projects into the database.
