@@ -55,7 +55,11 @@ class openstack_project::storyboard(
   }
 
   # Install all the things.
-  include ::storyboard::apache::https
+  if $::storyboard::params::ssl_cert_content == undef {
+    include ::storyboard::apache::http
+  } else {
+    include ::storyboard::apache::https
+  }
   include ::storyboard::rabbit
   include ::storyboard::mysql
   include ::storyboard::application
