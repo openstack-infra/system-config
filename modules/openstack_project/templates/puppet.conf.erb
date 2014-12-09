@@ -6,16 +6,15 @@ rundir=/var/run/puppet
 <% if @puppet_version.to_f < 3.6 -%>
 factpath=$vardir/lib/facter
 templatedir=$confdir/templates
-server=puppetmaster.openstack.org
-certname=<%= @certname %>
-pluginsync=true
 <% end %>
 <% if @puppet_version.to_f >= 3.6 -%>
 basemodulepath = /etc/puppet/modules
 environmentpath = /etc/puppet/environments
 environmenttimeout = 0
 <% end %>
-
+server=puppetmaster.openstack.org
+certname=<%= @certname %>
+pluginsync=true
 
 [master]
 # These are needed when the puppetmaster is run by passenger
