@@ -8,7 +8,9 @@ class openstack_project::storyboard(
   $rabbitmq_password,
   $sysadmins = [],
   $ssl_cert_file_contents = undef,
+  $ssl_cert_file = undef,
   $ssl_key_file_contents = undef,
+  $ssl_key_file = undef,
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
   $project_config_repo = '',
@@ -32,9 +34,9 @@ class openstack_project::storyboard(
 
   class { '::storyboard::cert':
     ssl_cert_content => $ssl_cert_file_contents,
-    ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
+    ssl_cert_file    => $ssl_cert_file,
     ssl_key_content  => $ssl_key_file_contents,
-    ssl_key          => '/etc/ssl/private/storyboard.openstack.org.key',
+    ssl_key_file     => $ssl_key_file,
     ssl_ca_content   => $ssl_chain_file_contents,
   }
 
@@ -66,13 +68,13 @@ class openstack_project::storyboard(
     worker_count => 5,
   }
 
-  # Load the projects into the database.
+# Load the projects into the database.
   class { '::storyboard::load_projects':
     source  => $::project_config::jeepyb_project_file,
     require => $::project_config::config_dir,
   }
 
-  # Load the superusers into the database
+# Load the superusers into the database
   class { '::storyboard::load_superusers':
     source => 'puppet:///modules/openstack_project/storyboard/superusers.yaml',
   }
