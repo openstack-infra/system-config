@@ -69,6 +69,7 @@ class nodepool (
     require  => [
       Class['mysql::server'],
       Class['mysql::server::account_security'],
+      Package['libgmp-dev'],
     ],
   }
 
@@ -78,6 +79,7 @@ class nodepool (
     'libssl-dev',
     'kpartx',
     'qemu-utils',
+    'libgmp-dev',         # transitive dep of paramiko
   ]
 
   package { $packages:
