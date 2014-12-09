@@ -12,6 +12,17 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
+  $vhost_index = 'status.openstack.org',
+  $jquery_visibility_git_url = 'https://github.com/mathiasbynens/jquery-visibility.git',
+  $jquery_graphite_git_url = 'https://github.com/prestontimmons/graphitejs.git',
+  $jquery_flot_git_url = 'https://github.com/flot/flot.git',
+  $reviewday_git_url = 'git://git.openstack.org/openstack-infra/reviewday',
+  $reviewday_serveradmin = 'webmaster@openstack.org',
+  $reviewday_gerrit_url = 'review.openstack.org',
+  $reviewday_gerrit_port = '29418',
+  $reviewday_gerrit_user = 'reviewday',
+  $bugdaystats_git_url = 'git://git.openstack.org/openstack-infra/bugdaystats',
+  $bugdaystats_serveradmin = 'webmaster@openstack.org',
 ) {
 
   class { 'openstack_project::server':
@@ -43,7 +54,7 @@ class openstack_project::status (
   ###########################################################
   # Status - Index
 
-  apache::vhost { 'status.openstack.org':
+  apache::vhost { '${vhost_index}':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/status',
@@ -92,7 +103,7 @@ class openstack_project::status (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+    source   => $jquery_visibility_git_url,
   }
 
   exec { 'install_jquery-visibility' :
@@ -108,7 +119,7 @@ class openstack_project::status (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://github.com/prestontimmons/graphitejs.git',
+    source   => $jquery_graphite_git_url,
   }
 
   file { '/srv/static/status/jquery-graphite.js':
@@ -121,7 +132,7 @@ class openstack_project::status (
     ensure   => latest,
     provider => git,
     revision => 'master',
-    source   => 'https://github.com/flot/flot.git',
+    source   => $jquery_flot_git_url,
   }
 
   exec { 'install_flot' :
@@ -217,12 +228,12 @@ class openstack_project::status (
   include reviewday
 
   reviewday::site { 'reviewday':
-    git_url                       => 'git://git.openstack.org/openstack-infra/reviewday',
-    serveradmin                   => 'webmaster@openstack.org',
+    git_url                       => $reviewday_git_url,
+    serveradmin                   => $reviewday_serveradmin,
     httproot                      => '/srv/static/reviewday',
-    gerrit_url                    => 'review.openstack.org',
-    gerrit_port                   => '29418',
-    gerrit_user                   => 'reviewday',
+    gerrit_url                    => $reviewday_gerrit_url,
+    gerrit_port                   => $reviewday_gerrit_port,
+    gerrit_user                   => $reviewday_gerrit_user,
     reviewday_gerrit_ssh_key      => $gerrit_ssh_host_key,
     reviewday_rsa_pubkey_contents => $reviewday_ssh_public_key,
     reviewday_rsa_key_contents    => $reviewday_ssh_private_key,
@@ -247,8 +258,8 @@ class openstack_project::status (
   include bugdaystats
 
   bugdaystats::site { 'bugdaystats':
-    git_url     => 'git://git.openstack.org/openstack-infra/bugdaystats',
-    serveradmin => 'webmaster@openstack.org',
+    git_url     => $bugdaystats_git_url,
+    serveradmin => $bugdaystats_serveradmin,
     httproot    => '/srv/static/bugdaystats',
     configfile  => '/var/lib/bugdaystats/config.js',
   }
