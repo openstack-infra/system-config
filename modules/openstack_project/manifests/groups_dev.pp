@@ -22,8 +22,8 @@ class openstack_project::groups_dev (
   $sysadmins = [],
   $site_ssl_cert_file_contents = undef,
   $site_ssl_key_file_contents = undef,
-  $site_ssl_cert_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
-  $site_ssl_key_file = '/etc/ssl/private/groups-dev.openstack.org.key',
+  $site_ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+  $site_ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
 ) {
 
   realize (
