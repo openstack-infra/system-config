@@ -5,16 +5,23 @@
 class openstack_project::template (
   $iptables_public_tcp_ports = [],
   $iptables_public_udp_ports = [],
-  $iptables_rules4           = [],
-  $iptables_rules6           = [],
-  $pin_puppet                = '3.',
-  $install_users             = true,
-  $install_resolv_conf       = true,
-  $automatic_upgrades        = true,
-  $certname                  = $::fqdn,
-  $ca_server                 = undef,
-  $enable_unbound            = true,
-  $afs                       = false,
+  $iptables_rules4 = [],
+  $iptables_rules6 = [],
+  $pin_puppet = '3.',
+  $install_users = true,
+  $install_resolv_conf = true,
+  $automatic_upgrades = true,
+  $certname = $::fqdn,
+  $ca_server = undef,
+  $enable_unbound = true,
+  $afs = false,
+  $kdc_cell = 'openstack.org',
+  $kdc_realm = 'OPENSTACK.ORG',
+  $kdc_admin_server = 'kdc.openstack.org',
+  $kdc_servers = [
+      'kdc01.openstack.org',
+      'kdc02.openstack.org',
+  ],
 ) {
   include ntp
   include ssh
@@ -30,13 +37,10 @@ class openstack_project::template (
       $iptables_public_udp_ports, [7001])
 
     class { 'openafs::client':
-      cell         => 'openstack.org',
-      realm        => 'OPENSTACK.ORG',
-      admin_server => 'kdc.openstack.org',
-      kdcs         => [
-        'kdc01.openstack.org',
-        'kdc02.openstack.org',
-      ],
+      cell         => $kdc_cell,
+      realm        => $kdc_realm,
+      admin_server => $kdc_admin_server,
+      kdcs         => $kdc_servers,
     }
   } else {
     $all_udp = $iptables_public_udp_ports
