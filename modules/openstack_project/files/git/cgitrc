@@ -29,6 +29,9 @@ enable-index-owner=0
 # Show extra links for each repository on the index page
 enable-index-links=1
 
+# Disable dumb HTTP git protocol endoint
+enable-http-clone=0
+
 # Add a cgit favicon
 favicon=/static/favicon.ico
 
