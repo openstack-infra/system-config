@@ -2,6 +2,8 @@
 # slaves.
 class openstack_project::thick_slave(
   $all_mysql_privs = false,
+  $gem_rake_version = '10.1.1',
+  $gem_puppet_lint_version = '0.3.2',
 ){
 
   include openstack_project::jenkins_params
@@ -139,14 +141,14 @@ class openstack_project::thick_slave(
     }
   }
   package { 'rake':
-    ensure   => '10.1.1',
+    ensure   => $gem_rake_version,
     provider => gem,
     before   => Package['puppetlabs_spec_helper'],
     require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
   package { 'puppet-lint':
-    ensure   => '0.3.2',
+    ensure   => $gem_puppet_lint_version,
     provider => gem,
     require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
