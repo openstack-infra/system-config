@@ -6,9 +6,12 @@ define user::virtual::disable(
 ) {
   $username = $title
   #1. Remove user
-  exec { "disable_${username}":
-    command => "userdel ${username}",
-    onlyif  => "grep ^${username}: /etc/passwd",
+  #exec { "disable_${username}":
+  #  command => "userdel ${username}",
+  #  onlyif  => "grep ^${username}: /etc/passwd",
+  #}
+  user { "${username}":
+     ensure => absent,
   }
   #2. remove sshkeys file(s)
   file { "rm_authorized_keys_${username}":

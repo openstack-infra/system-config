@@ -17,6 +17,20 @@
 #   }
 
 class openstack_project::users_install (
+  $admin_users = [
+    'mordred',
+    'corvus',
+    'clarkb',
+    'fungi',
+    'slukjanov',
+  ],
+  $admin_users_disable = {
+    'mordred' => {},
+    'corvus' => {},
+    'clarkb' => {},
+    'fungi' => {},
+    'slukjanov' => {},
+  },
   $install_users = false,
 ) {
 
@@ -28,18 +42,9 @@ class openstack_project::users_install (
       ensure => present
     }
     realize (
-      User::Virtual::Localuser['mordred'],
-      User::Virtual::Localuser['corvus'],
-      User::Virtual::Localuser['clarkb'],
-      User::Virtual::Localuser['fungi'],
-      User::Virtual::Localuser['slukjanov'],
+      User::Virtual::Localuser[$admin_users],
     )
   } else {
-      user::virtual::disable{'mordred':}
-      user::virtual::disable{'corvus':}
-      user::virtual::disable{'clarkb':}
-      user::virtual::disable{'fungi':}
-      user::virtual::disable{'slukjanov':}
+    create_resources(User::Virtual::Disable,$admin_users_disable)
   }
 }
-
