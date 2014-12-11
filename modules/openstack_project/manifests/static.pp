@@ -258,16 +258,6 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
-  file { '/srv/static/specs/index.html':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0444',
-    source  => $::project_config::specs_index_file,
-    require => [File['/srv/static/specs'],
-                $::project_config::config_dir],
-  }
-
   ###########################################################
   # legacy summit.openstack.org site redirect
 
