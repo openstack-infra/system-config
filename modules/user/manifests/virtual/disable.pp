@@ -6,9 +6,8 @@ define user::virtual::disable(
 ) {
   $username = $title
   #1. Remove user
-  exec { "disable_${username}":
-    command => "userdel ${username}",
-    onlyif  => "grep ^${username}: /etc/passwd",
+  user { "${username}":
+    ensure => absent,
   }
   #2. remove sshkeys file(s)
   file { "rm_authorized_keys_${username}":
@@ -20,9 +19,12 @@ define user::virtual::disable(
     path    => "/home/${username}/.ssh/authorized_keys2",
   }
   #3. rm screen dir (just in case)
-  exec { "rm_screen_${username}":
-    command => "rm -rf /var/run/screen/S-${username}",
-    onlyif  => "ls /var/run/screen/S-${username}",
+  file { "rm_screen_${username}":
+    ensure => absent,
+    path => "/var/run/screen/S-${username}",
+    recurse => true,
+    purge => true,
+    force => true,
   }
 }
 
