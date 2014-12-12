@@ -1,8 +1,0 @@
-[mysql-proxy]
-log-file = /var/log/mysql-proxy.log
-log-level = message
-proxy-read-only-backend-addresses = <%= @db_host %>:<%= @db_port %>
-proxy-lua-script = <%= @lua_script %>
-admin-username = <%= @admin_username %>
-admin-password = <%= @admin_pass %>
-admin-lua-script = /usr/share/mysql-proxy/admin.lua
