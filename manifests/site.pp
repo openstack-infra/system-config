@@ -311,6 +311,13 @@ node 'wiki.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'activity-dev.openstack.org' {
+  class { 'openstack_project::activity_dev':
+    sysadmins => hiera('sysadmins'),
+  }
+}
+
 # Node-OS: precise
 node 'logstash.openstack.org' {
   class { 'openstack_project::logstash':
