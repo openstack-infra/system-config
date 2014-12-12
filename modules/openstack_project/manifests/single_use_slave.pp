@@ -37,6 +37,7 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8000 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8003 -s 172.24.4.0/24 -j ACCEPT',
         '-p tcp --dport 8004 -s 172.24.4.0/24 -j ACCEPT',
+        '-m limit --limit 2/min --log-prefix "iptables dropped: " -j LOG',
       ],
   }
   class { 'jenkins::slave':
