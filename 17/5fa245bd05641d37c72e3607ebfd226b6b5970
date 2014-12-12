@@ -1,0 +1,15 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Kurt Taylor <kurt.r.taylor@gmail.com>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 12 Dec 2014 16:58:53 +0000
+Reviewed-on: https://review.openstack.org/139123
+Project: openstack-infra/system-config
+Branch: refs/heads/master
