@@ -124,6 +124,15 @@ class openstack_project::puppetmaster (
     ensure => present,
   }
 
+  file { '/etc/apache2/sites-available/puppetmaster.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('openstack_project/puppetmaster/puppetmaster_vhost.conf.erb'),
+    require => Package['puppetmaster-passenger'],
+  }
+
 # To set LANG to utf8, otherwise we get charset errors on manifests
 # with non-ascii chars
   file { '/etc/apache2/envvars':
