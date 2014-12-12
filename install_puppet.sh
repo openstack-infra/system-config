@@ -143,7 +143,6 @@ function setup_puppet_ubuntu {
         THREE=yes
     fi
 
-    # NB: keep in sync with openstack_project/files/00-puppet.pref
     if [ "$THREE" == 'yes' ]; then
         PUPPET_VERSION=3.*
         PUPPETDB_VERSION=2.*
