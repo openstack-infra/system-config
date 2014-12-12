@@ -17,24 +17,21 @@
 class mysql_proxy {
 
     package { 'mysql-proxy':
-      ensure => present,
+      ensure => absent,
     }
 
     file { '/etc/mysql-proxy':
-      ensure   => directory,
-      owner    => 'root',
-      group    => 'root',
-      mode     => '0644',
-      require  => Package['mysql-proxy'],
-
+      ensure  => absent,
+      recurse => true,
+      force   => true,
     }
 
     file { '/etc/default/mysql-proxy':
-      owner    => 'root',
-      group    => 'root',
-      mode     => '0644',
-      source   => 'puppet:///modules/mysql_proxy/mysql-proxy',
-      require  => Package['mysql-proxy'],
+      ensure => absent,
+    }
+
+    package { 'simpleproxy':
+      ensure => latest,
     }
 
 }

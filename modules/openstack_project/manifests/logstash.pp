@@ -22,7 +22,6 @@ class openstack_project::logstash (
   $sysadmins = [],
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
-  $mysql_proxy_admin_pass,
 ) {
   $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -58,7 +57,5 @@ class openstack_project::logstash (
 
   class { 'mysql_proxy::server':
     db_host            => $subunit2sql_db_host,
-    admin_username     => 'admin',
-    admin_pass         => $mysql_proxy_admin_pass,
   }
 }

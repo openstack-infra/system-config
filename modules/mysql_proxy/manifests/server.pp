@@ -17,25 +17,24 @@
 class mysql_proxy::server (
   $db_host,
   $db_port='3306',
-  $lua_script = '/usr/share/mysql-proxy/rw-splitting.lua',
-  $admin_username = 'admin',
-  $admin_pass,
 ) {
 
   file { '/etc/mysql-proxy/mysql-proxy.conf':
-    ensure   => file,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0600',
-    content  => template("mysql_proxy/mysql-proxy.conf.erb"),
-    require  => File['/etc/mysql-proxy']
+    ensure  => absent,
   }
 
-  service{ 'mysql-proxy':
-    ensure => running,
-    subscribe => [
-      Package['mysql-proxy'],
-      File['/etc/mysql-proxy/mysql-proxy.conf'],
-    ],
+  file { "/etc/init.d/simpleproxy-mysql":
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    content => template('mysql_proxy/simpleproxy-mysql.init.erb'),
+    require => Package['simpleproxy']
+  }
+
+  service{ 'simpleproxy-mysql':
+    enable      => true,
+    hasrestart  => true,
+    require    => File["/etc/init.d/simpleproxy-mysql"],
   }
 }
