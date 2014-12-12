@@ -58,7 +58,5 @@ class openstack_project::logstash (
 
   class { 'mysql_proxy::server':
     db_host            => $subunit2sql_db_host,
-    admin_username     => 'admin',
-    admin_pass         => $mysql_proxy_admin_pass,
   }
 }
