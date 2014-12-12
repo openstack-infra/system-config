@@ -27,7 +27,7 @@ class openstack_project::logstash (
   $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
   $iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 4040],
+    iptables_public_tcp_ports => [22, 80, 3306],
     iptables_rules6           => $iptables_rule,
     iptables_rules4           => $iptables_rule,
     sysadmins                 => $sysadmins,
