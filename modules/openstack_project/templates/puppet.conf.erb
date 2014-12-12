@@ -3,12 +3,18 @@ logdir=/var/log/puppet
 vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
+<% if @puppet_version.to_f < 3.6 -%>
+factpath=$vardir/lib/facter
+templatedir=$confdir/templates
 server=puppetmaster.openstack.org
 certname=<%= @certname %>
 pluginsync=true
+<% end %>
+<% if @puppet_version.to_f >= 3.6 -%>
 basemodulepath = /etc/puppet/modules
 environmentpath = /etc/puppet/environments
 environmenttimeout = 0
+<% end %>
 
 
 [master]
@@ -16,6 +22,11 @@ environmenttimeout = 0
 # and can safely be removed if webrick is used.
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
+<% if @puppet_version.to_f < 3.6 -%>
+manifestdir=/opt/system-config/$environment/manifests
+modulepath=/opt/system-config/$environment/modules:/etc/puppet/modules
+manifest=$manifestdir/site.pp
+<% end -%>
 reports=store,puppetdb
 <% if @ca_server -%>
 ca = false
