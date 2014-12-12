@@ -18,7 +18,9 @@ class openstack_project::puppetmaster (
     ca_server                 => $ca_server,
   }
 
-  $ansible_remote_puppet_source = 'puppet:///modules/openstack_project/ansible/remote_puppet.yaml'
+  $ansible_remote_puppet_else_source = 'puppet:///modules/openstack_project/ansible/remote_puppet_else.yaml'
+  $ansible_remote_puppet_afs_source = 'puppet:///modules/openstack_project/ansible/remote_puppet_afs.yaml'
+  $ansible_remote_puppet_git_source = 'puppet:///modules/openstack_project/ansible/remote_puppet_git.yaml'
 
   file {'/etc/puppet/environments':
     ensure => directory,
@@ -162,9 +164,21 @@ class openstack_project::puppetmaster (
 
 # Playbooks
 #
-  file { '/etc/ansible/remote_puppet.yaml':
+  file { '/etc/ansible/remote_puppet_else.yaml':
     ensure  => present,
-    source  => $ansible_remote_puppet_source,
+    source  => $ansible_remote_puppet_else_source,
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/remote_puppet_afs.yaml':
+    ensure  => present,
+    source  => $ansible_remote_puppet_afs_source,
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/remote_puppet_git.yaml':
+    ensure  => present,
+    source  => $ansible_remote_puppet_git_source,
     require => Class[ansible],
   }
 
