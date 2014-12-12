@@ -89,6 +89,12 @@
 	html = "<%= commentlink['html'] %>"
 <% end -%>
 <% end -%>
+<% @trackingids.each do |trackingid| -%>
+[trackingid "<%= trackingid['name'] %>"]
+	match = "<%= trackingid['match'] %>"
+	footer = "<%= trackingid['footer'] %>"
+	system = "<%= trackingid['system'] %>"
+<% end -%>
 [theme]
 	backgroundColor = ffffff
 	topMenuColor = ffffff

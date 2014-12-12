@@ -177,6 +177,14 @@ class openstack_project::gerrit (
         html  => '$1<a href=\"#q,$2,n,z\">$2</a>$3',
       },
     ],
+    trackingids                         => [
+      {
+        name   => 'storyboard',
+        footer => 'story:',
+        match  => '\\#?(\\d+)',
+        system => 'Storyboard',
+      },
+    ],
     war                                 => $war,
     contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
