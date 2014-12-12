@@ -1,6 +1,9 @@
 # == Class: openstack_project::zuul_dev
 #
 class openstack_project::zuul_dev(
+  $admin_users = [
+    'zaro',
+  ],
   $vhost_name = $::fqdn,
   $gearman_server = '127.0.0.1',
   $gerrit_server = '',
@@ -14,10 +17,13 @@ class openstack_project::zuul_dev(
   $statsd_host = '',
   $gearman_workers = [],
   $project_config_repo = '',
+  $zuul_git_email = 'jenkins@openstack.org',
+  $zuul_git_name = 'OpenStack Jenkins',
+  $zuul_known_hosts_content = "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
 ) {
 
   realize (
-    User::Virtual::Localuser['zaro'],
+    User::Virtual::Localuser[$admin_users],
   )
 
   # Turn a list of hostnames into a list of iptables rules
@@ -46,8 +52,8 @@ class openstack_project::zuul_dev(
     job_name_in_report   => true,
     status_url           => $status_url,
     statsd_host          => $statsd_host,
-    git_email            => 'jenkins@openstack.org',
-    git_name             => 'OpenStack Jenkins',
+    git_email            => $zuul_git_email,
+    git_name             => $zuul_git_name,
   }
 
   class { '::zuul::server':
@@ -70,7 +76,7 @@ class openstack_project::zuul_dev(
       owner   => 'zuul',
       group   => 'zuul',
       mode    => '0600',
-      content => "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
+      content => $zuul_known_hosts_content,
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
