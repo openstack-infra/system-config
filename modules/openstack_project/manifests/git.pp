@@ -35,6 +35,10 @@ class openstack_project::git (
     ensure => present,
   }
 
+  package { 'lsof':
+    ensure => present,
+  }
+
   class { 'haproxy':
     enable         => true,
     global_options => {

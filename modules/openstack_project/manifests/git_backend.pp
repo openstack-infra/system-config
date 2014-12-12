@@ -26,6 +26,10 @@ class openstack_project::git_backend (
   $project_config_repo = '',
 ) {
 
+  package { 'lsof':
+    ensure => present,
+  }
+
   class { 'project_config':
     url  => $project_config_repo,
   }
