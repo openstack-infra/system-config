@@ -6,9 +6,6 @@ rundir=/var/run/puppet
 server=puppetmaster.openstack.org
 certname=<%= @certname %>
 pluginsync=true
-basemodulepath = /etc/puppet/modules
-environmentpath = /etc/puppet/environments
-environmenttimeout = 0
 
 
 [master]
@@ -17,6 +14,9 @@ environmenttimeout = 0
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 reports=store,puppetdb
+basemodulepath = /etc/puppet/modules
+environmentpath = /etc/puppet/environments
+environmenttimeout = 0
 <% if @ca_server -%>
 ca = false
 ca_server = <%= @ca_server %>
