@@ -330,7 +330,6 @@ node 'logstash.openstack.org' {
     ],
     subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass     => hiera('subunit2sql_db_password', ''),
-    mysql_proxy_admin_pass  => hiera('subunit2sql_proxy_pass', ''),
   }
 }
 
