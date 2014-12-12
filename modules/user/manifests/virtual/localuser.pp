@@ -4,14 +4,14 @@
 
 define user::virtual::localuser(
   $realname,
+  $uid,
+  $gid,
   $groups     = [ 'sudo', 'admin', ],
   $sshkeys    = '',
   $key_id     = '',
   $old_keys   = [],
   $shell      = '/bin/bash',
   $home       = "/home/${title}",
-  $uid        = unset,
-  $gid        = unset,
   $managehome = true
 ) {
 
