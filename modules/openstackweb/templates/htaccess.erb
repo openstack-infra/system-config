@@ -1,0 +1,56 @@
+### SILVERSTRIPE START ###
+<Files *.ss>
+	Order deny,allow
+	Deny from all
+	Allow from 127.0.0.1
+</Files>
+
+<Files web.config>
+	Order deny,allow
+	Deny from all
+</Files>
+
+# This denies access to all yml files, since developers might include sensitive
+# information in them. See the docs for work-arounds to serve some yaml files
+<Files *.yml>
+	Order allow,deny
+	Deny from all
+</Files>
+
+ErrorDocument 404 /assets/error-404.html
+ErrorDocument 500 /assets/error-500.html
+ErrorDocument 400 /assets/error-400.html
+
+<IfModule mod_rewrite.c>
+	SetEnv HTTP_MOD_REWRITE On
+	RewriteEngine On
+	RewriteBase '/'
+
+   	### These two rules added to make www canonical ###
+   	RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
+   	RewriteCond %{HTTP_HOST} !^direct\.openstack\.org$ [NC]
+   	RewriteRule ^(.*)$ http://www.openstack.org/$1 [R=301,L]
+
+   	# Hide robots.txt for the www domain, but show it otherwise
+   	# (so that crawlers don't index our subdomain which bypasses the CDN).
+   	RewriteCond %{HTTP_HOST} !^www\.openstack\.org$ [NC]
+   	RewriteCond %{REQUEST_URI} ^/robots.txt$ [NC]
+   	RewriteRule robots.txt robots_for_direct.txt [L]
+
+	RewriteRule ^vendor(/|$) - [F,L,NC]
+	RewriteRule silverstripe-cache(/|$) - [F,L,NC]
+	RewriteRule composer\.(json|lock) - [F,L,NC]
+	
+	RewriteCond %{REQUEST_URI} ^(.*)$
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !\.php$
+	RewriteRule .* framework/main.php?url=%1&%{QUERY_STRING} [L]
+</IfModule>
+### SILVERSTRIPE END ###
+
+php_value memory_limit 512M
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off
+php_flag log_errors off
+php_value error_reporting 30711
