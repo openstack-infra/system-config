@@ -701,4 +701,15 @@ node /^afs.*\..*\.openstack\.org$/ {
   }
 }
 
+# Node-OS: trusty
+node 'www-dev.openstack.org' {
+  class { 'openstack_project::www':
+    dbname    => 'www',
+    dbuser    => 'www',
+    dbpasswd  => hiera('www_dev_db_passwd', 'XXX'),
+    dbhost    => hiera('www_dev_db_host', 'XXX'),
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
