@@ -46,6 +46,7 @@ class openstack_project::eavesdrop (
         '#openstack-blazar',
         '#openstack-ceilometer',
         '#openstack-chef',
+        '#openstack-community',
         '#openstack-containers',
         '#openstack-dev',
         '#openstack-dns',
