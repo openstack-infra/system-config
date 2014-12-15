@@ -329,3 +329,18 @@ chance of success if you follow these steps:
   your system should be able to vote, the release group for that program
   or project can add you to the <project>-ci group specific to that
   program/project.
+
+Third Party - FAQ
+-----------------
+
+* Q: How do you serve the content of compressed logs so they are rendered within
+     in the browser, rather than presenting a download prompt to the user?
+  A: Add the following lines to your web server conf file::
+
+     AddEncoding x-gzip .gz
+     RewriteCond   %{HTTP:Accept-Encoding} gzip
+     RewriteCond   %{LA-U:REQUEST_FILENAME}.gz -f
+     RewriteRule   ^(.+)$ $1.gz [L]
+     <FilesMatch ".*\.gz$">
+          ForceType text/plain
+     </FilesMatch>
