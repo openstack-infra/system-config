@@ -329,3 +329,13 @@ chance of success if you follow these steps:
   your system should be able to vote, the release group for that program
   or project can add you to the <project>-ci group specific to that
   program/project.
+  
+Third Party - FAQ
+-----------------
+
+* Q: How to preview the content of compressed logs on a browser without
+     downloaded prompt after clicked?
+  A: Edit Apache conf file that should located: /etc/apache2/sites-enabled 
+     Use the following example: https://www.irccloud.com/pastebin/t1Yx0e8y.raw
+     Comprass the log files to gzip format: gzip -9 -f <path_to_log_file>
+    
