@@ -87,8 +87,16 @@ class openstack_project::review_dev (
         threads              => '4',
         mirror               => true,
       },
+      {
+        name                 => 'afs',
+        url                  => 'file:///afs/openstack.org/mirror/git-sandbox/',
+        replicationDelay     => '0',
+        threads              => '4',
+        mirror               => true,
+      },
     ],
     require                         => $::project_config::config_dir,
+    afs                             => true,
   }
 
   gerrit::plugin { 'javamelody':
