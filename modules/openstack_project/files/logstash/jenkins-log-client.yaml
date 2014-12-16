@@ -195,6 +195,18 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-tr-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-tr-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-tr-tmgr.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/horizon_error.txt
     tags:
       - apacheerror
