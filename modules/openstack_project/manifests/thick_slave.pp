@@ -41,7 +41,6 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::openstack_project::jenkins_params::python_libvirt_package,
     $::openstack_project::jenkins_params::python_lxml_package, # for validating openstack manuals
-    $::openstack_project::jenkins_params::python_magic_package, # for pushing files to swift
     $::openstack_project::jenkins_params::python_zmq_package, # zeromq unittests (not pip installable)
     $::openstack_project::jenkins_params::rubygems_package,
     $::openstack_project::jenkins_params::sbcl_package, # cl-openstack-client testing

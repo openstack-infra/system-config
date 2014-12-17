@@ -121,4 +121,9 @@ class openstack_project::slave_common(
   package { $header_packages:
     ensure => present
   }
+
+  # Install python-magic for uploading swift files
+  package { 'python-magic':
+    ensure => present
+  }
 }
