@@ -71,8 +71,6 @@ class openstack_project::cacti (
   }
 
   $cacti_hosts = [
-    # community is currently not running puppet.
-    #'community.openstack.org',
     'afs01.dfw.openstack.org',
     'afs01.ord.openstack.org',
     'afsdb01.openstack.org',
