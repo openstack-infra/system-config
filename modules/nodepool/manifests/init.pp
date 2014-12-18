@@ -79,6 +79,8 @@ class nodepool (
     'kpartx',
     'qemu-utils',
     'libgmp-dev',         # transitive dep of paramiko
+    # debootstrap is needed for building Debian images
+    'debootstrap',
   ]
 
   package { $packages:
