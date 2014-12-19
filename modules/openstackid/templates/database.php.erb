@@ -41,10 +41,10 @@ return array(
      //primary DB
      'openstackid' => array(
      'driver'    => 'mysql',
-     'host'      => '<%= id_mysql_host %>',
-     'database'  => '<%= id_db_name %>',
-     'username'  => '<%= id_mysql_user %>',
-     'password'  => '<%= id_mysql_password %>',
+     'host'      => '<%= @id_mysql_host %>',
+     'database'  => '<%= @id_db_name %>',
+     'username'  => '<%= @id_mysql_user %>',
+     'password'  => '<%= @id_mysql_password %>',
      'charset'   => 'utf8',
      'collation' => 'utf8_unicode_ci',
      'prefix'    => '',
@@ -52,10 +52,10 @@ return array(
      //secondary DB (OS Membership)
      'os_members' => array(
      'driver'    => 'mysql',
-     'host'      => '<%= ss_mysql_host %>',
-     'database'  => '<%= ss_db_name %>',
-     'username'  => '<%= ss_mysql_user %>',
-     'password'  => '<%= ss_mysql_password %>',
+     'host'      => '<%= @ss_mysql_host %>',
+     'database'  => '<%= @ss_db_name %>',
+     'username'  => '<%= @ss_mysql_user %>',
+     'password'  => '<%= @ss_mysql_password %>',
      'charset'   => 'utf8',
      'collation' => 'utf8_unicode_ci',
      'prefix'    => '',
@@ -85,10 +85,10 @@ return array(
   'redis' => array(
      'cluster' => false,
      'default' => array(
-     'host' => '<%= redis_host %>',
-     'port' => <%= redis_port %>,
+     'host' => '<%= @redis_host %>',
+     'port' => <%= @redis_port %>,
      'database' => 0,
-     'password' => '<%= redis_password %>'
+     'password' => '<%= @redis_password %>'
     ),
   ),
 );

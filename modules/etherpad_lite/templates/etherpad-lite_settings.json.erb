@@ -5,7 +5,7 @@
 */
 {
   // Name your instance!
-  "title": "<%= etherpad_title %>",
+  "title": "<%= @etherpad_title %>",
 
   //Ip and port which etherpad should bind at
   "ip": "127.0.0.1",
@@ -16,17 +16,17 @@
 
   // Session Key, used for reconnecting user sessions
   // Set this to a secure string at least 10 characters long.  Do not share this value.
-  "sessionKey" : "<%= sessionKey %>",
+  "sessionKey" : "<%= @sessionKey %>",
 
   //The Type of the database. You can choose between dirty, sqlite and mysql
   //You should use mysql or sqlite for anything else than testing or development
-  "dbType" : "<%= dbType %>",
+  "dbType" : "<%= @dbType %>",
   //the database specific settings
   "dbSettings" : {
-                   "user"    : "<%= database_user %>",
-                   "host"    : "<%= database_host %>",
-                   "password": "<%= database_password %>",
-                   "database": "<%= database_name %>"
+                   "user"    : "<%= @database_user %>",
+                   "host"    : "<%= @database_host %>",
+                   "password": "<%= @database_password %>",
+                   "database": "<%= @database_name %>"
                  },
   //the default text of a pad
   "defaultPadText" : "Welcome to Etherpad Lite!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nEtherpad Lite on Github: http:\/\/j.mp/ep-lite\n",

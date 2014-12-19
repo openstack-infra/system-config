@@ -22,12 +22,12 @@ pidfile /var/run/redis/redis-server.pid
 
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
-port <%= redis_port %>
+port <%= @redis_port %>
 
 # If you want you can bind a single interface, if the bind option is not
 # specified all the interfaces will listen for incoming connections.
 #
-bind <%= redis_bind %>
+bind <%= @redis_bind %>
 
 # Specify the path for the unix socket that will be used to listen for
 # incoming connections. There is no default, so Redis will not listen
@@ -147,8 +147,8 @@ slave-serve-stale-data yes
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
-<% if redis_password != "" %>
-requirepass <%= redis_password %>
+<% if @redis_password != "" %>
+requirepass <%= @redis_password %>
 <% end %>
 
 # Command renaming.
@@ -194,7 +194,7 @@ requirepass <%= redis_password %>
 # to upgrade. With maxmemory after the limit is reached you'll start to get
 # errors for write operations, and this may even lead to DB inconsistency.
 #
-maxmemory <%= redis_max_memory %>
+maxmemory <%= @redis_max_memory %>
 
 # MAXMEMORY POLICY: how Redis will select what to remove when maxmemory
 # is reached? You can select among five behavior:

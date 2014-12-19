@@ -8,8 +8,8 @@ return array(
   | Set the public and private API keys as provided by reCAPTCHA.
   |
   */
-  'public_key'  => '<%= id_recaptcha_public_key %>',
-  'private_key' => '<%= id_recaptcha_private_key %>',
+  'public_key'  => '<%= @id_recaptcha_public_key %>',
+  'private_key' => '<%= @id_recaptcha_private_key %>',
   /*
   |--------------------------------------------------------------------------
   | Template
@@ -18,5 +18,5 @@ return array(
   | Set a template to use if you don't want to use the standard one.
   |
   */
-  'template' => '<%= id_recaptcha_template %>'
+  'template' => '<%= @id_recaptcha_template %>'
 );

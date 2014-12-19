@@ -3,7 +3,7 @@
 #
 # Default value: supybot
 ###
-supybot.nick: <%= nick %>
+supybot.nick: <%= @nick %>
 
 ###
 # Determines what alternative nicks will be used if the primary nick
@@ -22,7 +22,7 @@ supybot.nick.alternates: %s` %s_
 #
 # Default value: supybot
 ###
-supybot.ident: <%= nick %>
+supybot.ident: <%= @nick %>
 
 ###
 # Determines the user the bot sends to the server. A standard user using
@@ -31,14 +31,14 @@ supybot.ident: <%= nick %>
 #
 # Default value:
 ###
-supybot.user: <%= nick %>
+supybot.user: <%= @nick %>
 
 ###
 # Determines what networks the bot will connect to.
 #
 # Default value:
 ###
-supybot.networks: <%= network %>
+supybot.networks: <%= @network %>
 
 ###
 # Determines what password will be used on network. Yes, we know that
@@ -47,7 +47,7 @@ supybot.networks: <%= network %>
 #
 # Default value:
 ###
-supybot.networks.<%= network %>.password:
+supybot.networks.<%= @network %>.password:
 
 ###
 # Determines what servers the bot will connect to for FreeNode. Each
@@ -56,21 +56,21 @@ supybot.networks.<%= network %>.password:
 #
 # Default value:
 ###
-supybot.networks.<%= network %>.servers: <%= server %>
+supybot.networks.<%= @network %>.servers: <%= @server %>
 
 ###
 # Determines what channels the bot will join only on network.
 #
 # Default value:
 ###
-supybot.networks.<%= network %>.channels: <% channels.each do |channel| %> <%= channel %> <% end %>
+supybot.networks.<%= @network %>.channels: <% channels.each do |channel| %> <%= channel %> <% end %>
 
 ###
 # Determines what key (if any) will be used to join the channel.
 #
 # Default value:
 ###
-supybot.networks.<%= network %>.channels.key:
+supybot.networks.<%= @network %>.channels.key:
 
 ###
 # Determines whether the bot will attempt to connect with SSL sockets to
@@ -78,7 +78,7 @@ supybot.networks.<%= network %>.channels.key:
 #
 # Default value: False
 ###
-supybot.networks.<%= network %>.ssl: <%= use_ssl %>
+supybot.networks.<%= @network %>.ssl: <%= @use_ssl %>
 
 ###
 # Determines how timestamps printed for human reading should be
@@ -619,28 +619,28 @@ supybot.drivers.maxReconnectWait: 300.0
 #
 # Default value: conf
 ###
-supybot.directories.conf: /var/lib/meetbot/<%= name %>/conf
+supybot.directories.conf: /var/lib/meetbot/<%= @name %>/conf
 
 ###
 # Determines what directory data is put into.
 #
 # Default value: data
 ###
-supybot.directories.data: /var/lib/meetbot/<%= name %>/data
+supybot.directories.data: /var/lib/meetbot/<%= @name %>/data
 
 ###
 # Determines what directory temporary files are put into.
 #
 # Default value: tmp
 ###
-supybot.directories.data.tmp: /var/lib/meetbot/<%= name %>/data/tmp
+supybot.directories.data.tmp: /var/lib/meetbot/<%= @name %>/data/tmp
 
 ###
 # Determines what directory backup data is put into.
 #
 # Default value: backup
 ###
-supybot.directories.backup: /var/lib/meetbot/<%= name %>/backup
+supybot.directories.backup: /var/lib/meetbot/<%= @name %>/backup
 
 ###
 # Determines what directories the bot will look for plugins in. Accepts
@@ -658,7 +658,7 @@ supybot.directories.plugins: /usr/share/pyshared/supybot/plugins
 #
 # Default value: logs
 ###
-supybot.directories.log: /var/lib/meetbot/<%= name %>/logs
+supybot.directories.log: /var/lib/meetbot/<%= @name %>/logs
 
 ###
 # Determines what plugins will be loaded.
@@ -932,7 +932,7 @@ supybot.plugins.Services.public: True
 #
 # Default value:
 ###
-supybot.plugins.Services.nicks: <%= nick %>
+supybot.plugins.Services.nicks: <%= @nick %>
 
 ###
 # Determines what networks this plugin will be disabled on.
@@ -972,7 +972,7 @@ supybot.plugins.Services.NickServ: NickServ
 # Default value:
 ###
 supybot.plugins.Services.NickServ.password:
-supybot.plugins.Services.NickServ.password.<%= nick %>: <%= nickpass %>
+supybot.plugins.Services.NickServ.password.<%= @nick %>: <%= @nickpass %>
 
 ###
 # Determines what nick the 'ChanServ' service has.
