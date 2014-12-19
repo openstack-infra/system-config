@@ -1,7 +1,7 @@
 script-dir: /etc/nodepool/scripts
 elements-dir: /etc/nodepool/elements
 images-dir: /opt/nodepool_dib
-dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
+dburi: 'mysql://nodepool:<%= @mysql_password %>@localhost/nodepool'
 
 cron:
   cleanup: '*/1 * * * *'
@@ -224,9 +224,9 @@ providers:
     region-name: 'DFW'
     service-type: 'compute'
     service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
+    username: '<%= @rackspace_username %>'
+    password: '<%= @rackspace_password %>'
+    project-id: '<%= @rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
     max-servers: 184
@@ -306,9 +306,9 @@ providers:
     region-name: 'ORD'
     service-type: 'compute'
     service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
+    username: '<%= @rackspace_username %>'
+    password: '<%= @rackspace_password %>'
+    project-id: '<%= @rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
     max-servers: 55
@@ -388,9 +388,9 @@ providers:
     region-name: 'IAD'
     service-type: 'compute'
     service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
+    username: '<%= @rackspace_username %>'
+    password: '<%= @rackspace_password %>'
+    project-id: '<%= @rackspace_project %>'
     auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
     boot-timeout: 120
     max-servers: 85
@@ -477,9 +477,9 @@ providers:
     region-name: 'region-a.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 0
@@ -495,9 +495,9 @@ providers:
     region-name: 'region-b.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 100
@@ -586,9 +586,9 @@ providers:
     region-name: 'region-b.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 100
@@ -677,9 +677,9 @@ providers:
     region-name: 'region-b.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 100
@@ -768,9 +768,9 @@ providers:
     region-name: 'region-b.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 100
@@ -860,9 +860,9 @@ providers:
     region-name: 'region-b.geo-1'
     service-type: 'compute'
     service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
+    username: '<%= @hpcloud_username %>'
+    password: '<%= @hpcloud_password %>'
+    project-id: '<%= @hpcloud_project %>'
     auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
     boot-timeout: 120
     max-servers: 100
@@ -952,9 +952,9 @@ providers:
   - name: tripleo-test-cloud
     service-type: 'compute'
     service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
+    username: '<%= @tripleo_username %>'
+    password: '<%= @tripleo_password %>'
+    project-id: '<%= @tripleo_project %>'
     auth-url: 'https://ci-overcloud.tripleo.org:13000/v2.0'
     boot-timeout: 120
     max-servers: 0
@@ -980,9 +980,9 @@ providers:
   - name: tripleo-test-cloud-rh1
     service-type: 'compute'
     service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
+    username: '<%= @tripleo_username %>'
+    password: '<%= @tripleo_password %>'
+    project-id: '<%= @tripleo_project %>'
     auth-url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
     boot-timeout: 120
     max-servers: 60
@@ -1010,45 +1010,45 @@ targets:
   - name: jenkins01
     jenkins:
       url: 'https://jenkins01.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins02
     jenkins:
       url: 'https://jenkins02.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins03
     jenkins:
       url: 'https://jenkins03.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins04
     jenkins:
       url: 'https://jenkins04.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins05
     jenkins:
       url: 'https://jenkins05.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins06
     jenkins:
       url: 'https://jenkins06.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
   - name: jenkins07
     jenkins:
       url: 'https://jenkins07.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
+      user: '<%= @jenkins_api_user %>'
+      apikey: '<%= @jenkins_api_key %>'
+      credentials-id: '<%= @jenkins_credentials_id %>'
 
 diskimages:
   - name: devstack-trusty-dib

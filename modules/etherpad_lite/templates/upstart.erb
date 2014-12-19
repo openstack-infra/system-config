@@ -3,9 +3,9 @@ description "etherpad-lite"
 start on started networking
 stop on runlevel [!2345]
 
-env EPHOME=<%= base_install_dir %>/etherpad-lite
-env EPLOGS=<%= base_log_dir %>/<%= ep_user %>
-env EPUSER=<%= ep_user %>
+env EPHOME=<%= @base_install_dir %>/etherpad-lite
+env EPLOGS=<%= @base_log_dir %>/<%= @ep_user %>
+env EPUSER=<%= @ep_user %>
 
 respawn
 
