@@ -14,10 +14,10 @@
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 DESC="Jenkins Subunit Worker"
-NAME=jenkins-subunit-worker<%= suffix %>
+NAME=jenkins-subunit-worker<%= @suffix %>
 DAEMON=/usr/local/bin/subunit-gearman-worker.py
 PIDFILE=/var/run/$NAME/$NAME.pid
-DAEMON_ARGS="-c /etc/logstash/jenkins-subunit-worker<%= suffix %>.yaml -d /var/log/logstash/subunit-worker<%= suffix %>-debug.log -p $PIDFILE"
+DAEMON_ARGS="-c /etc/logstash/jenkins-subunit-worker<%= @suffix %>.yaml -d /var/log/logstash/subunit-worker<%= @suffix %>-debug.log -p $PIDFILE"
 SCRIPTNAME=/etc/init.d/$NAME
 USER=logstash
 
