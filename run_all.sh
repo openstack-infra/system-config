@@ -27,6 +27,11 @@ git fetch -a && git reset -q --hard @{u}
 # some times
 touch manifests/site.pp
 
+# It's possible for connectivity to a server or manifest application to break
+# for indeterminate periods of time, so the playbooks should be run without
+# errexit
+set +e
+
 # First run the git/gerrit sequence, since it's important that they all work
 # together
 ansible-playbook /etc/ansible/remote_puppet_git.yaml >> /var/log/puppet_run_all.log 2>&1
