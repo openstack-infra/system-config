@@ -225,7 +225,7 @@ function setup_pip {
     fi
 
     python get-pip.py
-    pip install -U "setuptools<8.0"
+    pip install -U setuptools
 }
 
 setup_pip
