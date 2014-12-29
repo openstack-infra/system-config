@@ -83,7 +83,7 @@ function setup_puppet_fedora {
 
 function setup_puppet_rhel7 {
 
-    local epel_pkg="http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm"
+    local epel_pkg="http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm"
     local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
 
     # install EPEL
