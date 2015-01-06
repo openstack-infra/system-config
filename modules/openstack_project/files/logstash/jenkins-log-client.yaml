@@ -131,6 +131,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-n-cpu-1.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-n-crt.txt
     tags:
       - screen
