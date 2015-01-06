@@ -38,7 +38,7 @@ class openstack_project::openstackid_prod (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $release = '1.0.2',
+  $release = '1.0.3',
 ) {
 
   class { 'openstack_project::server':
