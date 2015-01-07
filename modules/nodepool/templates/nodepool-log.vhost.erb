@@ -4,9 +4,8 @@
   <Directory <%= scope.lookupvar("nodepool::image_log_document_root") %>>
     Options <%= scope.lookupvar("apache::params::options") %>
     AllowOverride None
-    Order allow,deny
-    allow from all
-  </Directory>
+    Require all granted
+</Directory>
 
   ErrorLog /var/log/<%= scope.lookupvar("apache::params::apache_name") %>/nodepool_error.log
   LogLevel warn
