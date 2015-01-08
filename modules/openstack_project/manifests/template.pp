@@ -68,6 +68,10 @@ class openstack_project::template (
     ensure => present,
   }
 
+  package { 'rsyslog':
+    ensure => present,
+  }
+
   if ($enable_unbound) {
     class { 'unbound':
       install_resolv_conf => $install_resolv_conf
