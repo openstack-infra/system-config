@@ -4,10 +4,11 @@
 [gerrit]
 	basePath = git
 	canonicalWebUrl = <%= @canonicalweburl %>
+	changeScreen = OLD_UI
 [database]
 	type = MYSQL
 	hostname = <%= @mysql_host %>
-	database = reviewdb
+	database = reviewdbk
 	username = gerrit2
 <% if @database_poollimit != "" -%>
 	poolLimit = <%= @database_poollimit %>
