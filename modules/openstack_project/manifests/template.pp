@@ -113,6 +113,7 @@ class openstack_project::template (
       ensure     => running,
       enable     => true,
       hasrestart => true,
+      require    => Package['rsyslog'],
     }
     $rsyslog_notify = [ Service['rsyslog'] ]
   }
