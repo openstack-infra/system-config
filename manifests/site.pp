@@ -247,7 +247,6 @@ node 'lists.openstack.org' {
 # Node-OS: precise
 node 'paste.openstack.org' {
   class { 'openstack_project::paste':
-    db_host             => hiera('paste_db_host', 'localhost'),
     db_password         => hiera('paste_db_password', 'XXX'),
     mysql_root_password => hiera('paste_mysql_root_password', 'XXX'),
     sysadmins           => hiera('sysadmins', []),
