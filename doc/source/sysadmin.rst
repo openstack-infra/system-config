@@ -277,6 +277,21 @@ for detailed instructions.
 
 .. _cinder:
 
+Disable/Enable Puppet
+=====================
+
+You should normally not make manual changes to servers, but instead,
+make changes through puppet.  However, under some circumstances, you
+may need to temporarily make a manual change to a puppet-managed
+resource on a server.  In that case, run the following command on that
+server to disable puppet::
+
+  sudo puppet agent --disable
+
+When you are ready for puppet to run again, use::
+
+  sudo puppet agent --enable
+
 Cinder Volume Management
 ========================
 
