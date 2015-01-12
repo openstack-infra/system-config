@@ -1098,6 +1098,7 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-precise-dib
     elements:
       - ubuntu
@@ -1110,6 +1111,7 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-centos7-dib
     elements:
       - centos7
@@ -1121,3 +1123,4 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
