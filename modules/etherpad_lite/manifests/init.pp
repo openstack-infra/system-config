@@ -24,7 +24,7 @@ class etherpad_lite (
   $path = "/usr/bin:/bin:/usr/local/bin:${base_install_dir}/etherpad-lite"
 
   user { $ep_user:
-    shell   => '/sbin/nologin',
+    shell   => '/usr/sbin/nologin',
     home    => "${base_log_dir}/${ep_user}",
     system  => true,
     gid     => $ep_user,
