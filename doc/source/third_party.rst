@@ -12,14 +12,11 @@ supplied by OpenStack's Jenkins setup.  It is also possible for these
 systems to feed information back into Gerrit and they can also leave
 non-gating votes on Gerrit review requests.
 
-An example of one such system is `Smokestack <https://smokestack.openstack.org/>`_.
-Smokestack reads the Gerrit event stream and runs its own tests on the commits.
-If one of the tests fails it will publish information and links to the failure
-on the review in Gerrit.
-
-All accounts must have a wikipage entry
+There are several examples of systems that read the Gerrit event stream
+and run their own tests on the commits
 `on this page <https://wiki.openstack.org/wiki/ThirdPartySystems>`_.
-Details are below under Requirements.
+For each patch set the third party system tests, the system adds a comment
+in Gerrit with a summary of the test result and links to the test artifacts.
 
 Requirements
 ------------
@@ -44,7 +41,8 @@ Requirements
 
 * Publish contact information for the maintainers.
 
-  * Follow the instructions on the `ThirdPartySystems wiki page
+  * All accounts must have a wikipage entry. Follow the instructions on
+    the `ThirdPartySystems wiki page
     <https://wiki.openstack.org/wiki/ThirdPartySystems>`_ to add your
     system.  When complete, there should be a page dedicated to your
     system with a URL like:
