@@ -1109,6 +1109,8 @@ diskimages:
       - node-devstack
     release: precise
     env-vars:
+      # Run this image offline to avoid contention over writing to cache.
+      DIB_OFFLINE: '1'
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       QEMU_IMG_OPTIONS: compat=0.10
@@ -1121,6 +1123,8 @@ diskimages:
       - nodepool-base
       - node-devstack
     env-vars:
+      # Run this image offline to avoid contention over writing to cache.
+      DIB_OFFLINE: '1'
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       QEMU_IMG_OPTIONS: compat=0.10
