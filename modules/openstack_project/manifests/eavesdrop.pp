@@ -15,6 +15,7 @@ class openstack_project::eavesdrop (
   $accessbot_nick = '',
   $accessbot_password = '',
   $project_config_repo = '',
+  $project_config_revision = 'master',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -103,7 +104,8 @@ class openstack_project::eavesdrop (
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   class { 'accessbot':

@@ -22,7 +22,8 @@ class openstack_project::review_dev (
   $sysadmins = [],
   $swift_username = '',
   $swift_password = '',
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
 ) {
 
@@ -31,8 +32,9 @@ class openstack_project::review_dev (
   )
 
   class { 'project_config':
-    url  => $project_config_repo,
-    base => 'dev/',
+    url      => $project_config_repo,
+    revision => $project_config_revision,
+    base     => 'dev/',
   }
 
   class { 'openstack_project::gerrit':

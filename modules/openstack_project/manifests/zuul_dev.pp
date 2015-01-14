@@ -13,7 +13,8 @@ class openstack_project::zuul_dev(
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) {
 
   realize (
@@ -31,8 +32,9 @@ class openstack_project::zuul_dev(
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
-    base => 'dev/',
+    url      => $project_config_repo,
+    revision => $project_config_revision,
+    base     => 'dev/',
   }
 
   class { '::zuul':

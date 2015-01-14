@@ -79,12 +79,14 @@ class openstack_project::review (
   # For openstackwatch.
   $swift_username = '',
   $swift_password = '',
-  $project_config_repo = '',
+  $project_config_repo    = '',
+  $project_config_revisin = 'master',
   $projects_config = 'openstack_project/review.projects.ini.erb',
 ) {
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   class { 'openstack_project::gerrit':

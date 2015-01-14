@@ -8,7 +8,8 @@ class openstack_project::static (
   $swift_tenant_name = '',
   $swift_region_name = '',
   $swift_default_container = '',
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) {
 
   class { 'openstack_project::server':
@@ -17,7 +18,8 @@ class openstack_project::static (
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   include openstack_project
