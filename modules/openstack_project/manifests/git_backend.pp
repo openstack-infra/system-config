@@ -23,7 +23,8 @@ class openstack_project::git_backend (
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
   $behind_proxy = false,
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) {
 
   package { 'lsof':
@@ -31,7 +32,8 @@ class openstack_project::git_backend (
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   class { 'openstack_project::server':

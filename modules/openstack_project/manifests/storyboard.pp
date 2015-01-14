@@ -11,11 +11,13 @@ class openstack_project::storyboard(
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) {
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   class { 'openstack_project::server':

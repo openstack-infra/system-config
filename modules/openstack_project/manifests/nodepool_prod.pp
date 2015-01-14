@@ -22,7 +22,8 @@ class openstack_project::nodepool_prod(
   $tripleo_project ='',
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -30,7 +31,8 @@ class openstack_project::nodepool_prod(
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   class { '::nodepool':

@@ -5,7 +5,8 @@
 class openstack_project::slave_common(
   $include_pypy = false,
   $sudo         = false,
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
@@ -15,7 +16,8 @@ class openstack_project::slave_common(
   }
 
   class { 'project_config':
-    url  => $project_config_repo,
+    url      => $project_config_repo,
+    revision => $project_config_revision,
   }
 
   file { '/usr/local/jenkins/slave_scripts':

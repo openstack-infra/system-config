@@ -17,7 +17,8 @@ class openstack_project::jenkins (
   $jenkins_ssh_private_key = '',
   $zmq_event_receivers = [],
   $sysadmins = [],
-  $project_config_repo = '',
+  $project_config_repo     = '',
+  $project_config_revision = 'master',
 ) inherits openstack_project {
   include openstack_project
 
@@ -122,7 +123,8 @@ class openstack_project::jenkins (
 
   if $manage_jenkins_jobs == true {
     class { 'project_config':
-      url  => $project_config_repo,
+      url      => $project_config_repo,
+      revision => $project_config_revision,
     }
 
     class { '::jenkins::job_builder':

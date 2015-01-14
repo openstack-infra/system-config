@@ -16,8 +16,9 @@
 #
 
 class project_config(
-  $url = '',
-  $base = '',
+  $url      = '',
+  $base     = '',
+  $revision = 'master',
 ) {
 
   $config_dir = Vcsrepo['/etc/project-config']
@@ -26,7 +27,7 @@ class project_config(
     vcsrepo { '/etc/project-config':
       ensure   => latest,
       provider => git,
-      revision => 'master',
+      revision => $revision,
       source   => $url,
     }
   }
