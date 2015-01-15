@@ -16,6 +16,7 @@ class openstack_project::review_dev (
   $ssh_rsa_pubkey_contents = '',
   $ssh_project_rsa_key_contents = '',
   $ssh_project_rsa_pubkey_contents = '',
+  $ssh_user_config_options = {},
   $lp_sync_consumer_key = '',
   $lp_sync_token = '',
   $lp_sync_secret = '',
@@ -34,6 +35,7 @@ class openstack_project::review_dev (
     url  => $project_config_repo,
     base => 'dev/',
   }
+  #Ssh_user_config['root'] -> Class['project_config']
 
   class { 'openstack_project::gerrit':
     vhost_name                      => 'review-dev.openstack.org',
@@ -47,6 +49,7 @@ class openstack_project::review_dev (
     ssh_rsa_pubkey_contents         => $ssh_rsa_pubkey_contents,
     ssh_project_rsa_key_contents    => $ssh_project_rsa_key_contents,
     ssh_project_rsa_pubkey_contents => $ssh_project_rsa_pubkey_contents,
+    ssh_user_config_options         => $ssh_user_config_options,
     email                           => 'review-dev@openstack.org',
     war                             =>
       'http://tarballs.openstack.org/ci/test/gerrit-v2.8.4.15.6dc8444.war',

@@ -9,16 +9,19 @@ class openstack_project::static (
   $swift_region_name = '',
   $swift_default_container = '',
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => $sysadmins,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'project_config':
     url  => $project_config_repo,
   }
+  #Ssh_user_config['root'] -> Class['project_config']
 
   include openstack_project
   class { 'jenkins::jenkinsuser':

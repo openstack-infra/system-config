@@ -17,6 +17,7 @@ class openstack_project::slave_common(
   class { 'project_config':
     url  => $project_config_repo,
   }
+  #Ssh_user_config['root'] -> Class['project_config']
 
   file { '/usr/local/jenkins/slave_scripts':
     ensure  => directory,

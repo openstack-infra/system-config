@@ -23,15 +23,18 @@ class openstack_project::nodepool_prod(
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80],
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'project_config':
     url  => $project_config_repo,
   }
+  #Ssh_user_config['root'] -> Class['project_config']
 
   class { '::nodepool':
     mysql_root_password       => $mysql_root_password,

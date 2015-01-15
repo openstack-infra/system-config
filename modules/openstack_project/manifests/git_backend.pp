@@ -24,6 +24,7 @@ class openstack_project::git_backend (
   $ssl_chain_file_contents = '',
   $behind_proxy = false,
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
 
   package { 'lsof':
@@ -33,10 +34,12 @@ class openstack_project::git_backend (
   class { 'project_config':
     url  => $project_config_repo,
   }
+  #Ssh_user_config['root'] -> Class['project_config']
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4443, 8080, 29418],
     sysadmins                 => $sysadmins,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   include jeepyb

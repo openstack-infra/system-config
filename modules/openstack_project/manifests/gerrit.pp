@@ -70,11 +70,13 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $ssh_user_config_options = {},
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
     sysadmins                 => $sysadmins,
     afs                       => $afs,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'jeepyb::openstackwatch':

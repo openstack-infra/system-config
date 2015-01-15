@@ -6,7 +6,8 @@ class openstack_project::slave (
   $ssh_key = '',
   $sysadmins = [],
   $python3 = false,
-  $include_pypy = false
+  $include_pypy = false,
+  $ssh_user_config_options = {},
 ) {
 
   include openstack_project
@@ -17,6 +18,7 @@ class openstack_project::slave (
     iptables_public_udp_ports => [],
     certname                  => $certname,
     sysadmins                 => $sysadmins,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'jenkins::slave':
