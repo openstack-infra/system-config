@@ -87,7 +87,7 @@ node 'review.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
     project_config_repo             => 'https://git.openstack.org/openstack-infra/project-config',
