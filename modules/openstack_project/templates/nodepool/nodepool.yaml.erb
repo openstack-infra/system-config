@@ -520,9 +520,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-dib
@@ -537,9 +536,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
-        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -618,9 +616,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-dib
@@ -629,9 +626,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_bare.sh
+        diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
@@ -716,9 +712,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-dib
@@ -733,9 +728,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
-        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -815,9 +809,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-precise-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-dib
@@ -832,9 +825,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
-        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -915,9 +907,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-dib
@@ -932,9 +923,8 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
-        base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
-        setup: prepare_node_devstack.sh
+        diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty-dib
@@ -1091,6 +1081,19 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
 
 diskimages:
+  - name: devstack-trusty
+    elements:
+      - ubuntu
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: trusty
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-trusty-dib
     elements:
       - ubuntu
@@ -1100,6 +1103,19 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: trusty
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+  - name: devstack-precise
+    elements:
+      - ubuntu
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: precise
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
