@@ -32,13 +32,31 @@ class etherpad_lite::apache (
   a2mod { 'proxy_http':
     ensure => present,
   }
-  file { '/etc/apache2/conf.d/connection-tuning':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/etherpad_lite/apache-connection-tuning',
-    notify  => Service['httpd'],
+
+  if ($::lsbdistcodename == 'precise') {
+    file { '/etc/apache2/conf.d/connection-tuning':
+           ensure => present,
+           owner  => 'root',
+           group  => 'root',
+           mode   => '0644',
+           source => 'puppet:///modules/etherpad_lite/apache-connection-tuning',
+           notify => Service['httpd'],
+    }
+  } else {
+    file { '/etc/apache2/conf-available/connection-tuning':
+           ensure => present,
+           owner  => 'root',
+           group  => 'root',
+           mode   => '0644',
+           source => 'puppet:///modules/etherpad_lite/apache-connection-tuning',
+    }
+
+    file { '/etc/apache2/conf-enabled/connection-tuning':
+           ensure  => link,
+           target  => '/etc/apache2/conf-available/connection-tuning',
+           notify => Service['httpd'],
+           require => File['/etc/apache2/conf-available/connection-tuning'],
+    }
   }
 
   file { '/etc/ssl/certs':
