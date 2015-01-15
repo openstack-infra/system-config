@@ -1,6 +1,17 @@
 # == Class: openstack_project::users
 #
 class openstack_project::users {
+  # Make sure we have our UID/GID account minimums for dynamic users set higher
+  # than we'll use for static assignments, so as to avoid future conflicts.
+  include openstack_project::params
+  file { '/etc/login.defs':
+    ensure => present,
+    source => $::openstack_project::params::login_defs,
+  }
+  User::Virtual::Localuser {
+    require => File['/etc/login.defs']
+  }
+
   @user::virtual::localuser { 'mordred':
     realname => 'Monty Taylor',
     sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDLsTZJ8hXTmzjKxYh/7V07mIy8xl2HL+9BaUlt6A6TMsL3LSvaVQNSgmXX5g0XfPWSCKmkZb1O28q49jQI2n7n7+sHkxn0dJDxj1N2oNrzNY7pDuPrdtCijczLFdievygXNhXNkQ2WIqHXDquN/jfLLJ9L0jxtxtsUMbiL2xxZEZcaf/K5MqyPhscpqiVNE1MjE4xgPbIbv8gCKtPpYIIrktOMb4JbV7rhOp5DcSP5gXtLhOF5fbBpZ+szqrTVUcBX0oTYr3iRfOje9WPsTZIk9vBfBtF416mCNxMSRc7KhSW727AnUu85hS0xiP0MRAf69KemG1OE1pW+LtDIAEYp',
