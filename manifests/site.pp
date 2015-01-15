@@ -461,7 +461,7 @@ node 'status.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'nodepool.openstack.org' {
   class { 'openstack_project::nodepool_prod':
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
