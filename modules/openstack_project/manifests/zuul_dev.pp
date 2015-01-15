@@ -14,6 +14,7 @@ class openstack_project::zuul_dev(
   $statsd_host = '',
   $gearman_workers = [],
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
 
   realize (
@@ -28,12 +29,14 @@ class openstack_project::zuul_dev(
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'project_config':
     url  => $project_config_repo,
     base => 'dev/',
   }
+  Ssh_user_config['root'] -> Class['project_config']
 
   class { '::zuul':
     vhost_name           => $vhost_name,

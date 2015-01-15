@@ -12,15 +12,18 @@ class openstack_project::storyboard(
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
 
   class { 'project_config':
     url  => $project_config_repo,
   }
+  Ssh_user_config['root'] -> Class['project_config']
 
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   mysql_backup::backup_remote { 'storyboard':
