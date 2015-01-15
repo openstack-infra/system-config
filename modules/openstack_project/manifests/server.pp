@@ -11,6 +11,7 @@ class openstack_project::server (
   $pin_puppet                = '3.',
   $ca_server                 = undef,
   $afs                       = false,
+  $ssh_user_config_options   = {},
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -22,7 +23,12 @@ class openstack_project::server (
     ca_server                 => $ca_server,
     afs                       => $afs,
   }
+
   class { 'exim':
     sysadmins => $sysadmins,
+  }
+
+  class { 'ssh_user_config':
+    config_options => $ssh_user_config_options
   }
 }

@@ -15,10 +15,12 @@ class openstack_project::eavesdrop (
   $accessbot_nick = '',
   $accessbot_password = '',
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => $sysadmins
+    ssh_user_config_options   => $ssh_user_config_options,
   }
   include apache
   include meetbot
@@ -105,6 +107,7 @@ class openstack_project::eavesdrop (
   class { 'project_config':
     url  => $project_config_repo,
   }
+  Ssh_user_config['root'] -> Class['project_config']
 
   class { 'accessbot':
     nick          => $accessbot_nick,

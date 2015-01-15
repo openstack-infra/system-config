@@ -22,6 +22,7 @@ class openstack_project::zuul_prod(
   $statsd_host = '',
   $gearman_workers = [],
   $project_config_repo = '',
+  $ssh_user_config_options = {},
 ) {
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -31,11 +32,13 @@ class openstack_project::zuul_prod(
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
+    ssh_user_config_options   => $ssh_user_config_options,
   }
 
   class { 'project_config':
     url  => $project_config_repo,
   }
+  Ssh_user_config['root'] -> Class['project_config']
 
   class { '::zuul':
     vhost_name                     => $vhost_name,
