@@ -6,7 +6,7 @@ class openstack_project::slave (
   $ssh_key = '',
   $sysadmins = [],
   $python3 = false,
-  $include_pypy = false
+  $include_pypy = false,
 ) {
 
   include openstack_project

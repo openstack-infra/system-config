@@ -1,0 +1,11 @@
+<% @config_options['hosts'].each do |host,opts| -%>
+Host <%= host %>
+	StrictHostKeyChecking no
+<% if opts.has_key?('IdentityFile') -%>
+<% if opts['IdentityFile'] = '.' -%>
+	IdentityFile ~/.ssh/<%= host %>.id_rsa
+<% elsif opts['IdentityFile'] != '' -%>
+	IdentityFile <%= opts['IdentityFile'] %>
+<% end -%>
+<% end -%>
+<% end -%>

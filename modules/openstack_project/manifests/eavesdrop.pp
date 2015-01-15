@@ -18,7 +18,7 @@ class openstack_project::eavesdrop (
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => $sysadmins
+    sysadmins                 => $sysadmins,
   }
   include apache
   include meetbot
