@@ -83,11 +83,21 @@ function setup_puppet_fedora {
 
 function setup_puppet_rhel7 {
 
-    local epel_pkg="http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm"
     local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
 
-    # install EPEL
-    rpm -qi epel-release &> /dev/null || rpm -Uvh $epel_pkg
+    # install a bootstrap epel repo to install latest epel-release
+    # package (which provides correct gpg keys, etc); then remove
+    # boostrap
+    cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
+[epel-bootstrap]
+name=Bootstrap EPEL
+mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF
+    yum --enablerepo=epel-bootstrap -y install epel-release
+    rm -f /etc/yum.repos.d/epel-bootstrap.repo
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git puppet
@@ -99,14 +109,21 @@ function setup_puppet_rhel7 {
 }
 
 function setup_puppet_rhel6 {
-    local epel_pkg="http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"
     local puppet_pkg="http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm"
 
-    # install EPEL
-    rpm -qi epel-release &> /dev/null || rpm -Uvh $epel_pkg
-    # NOTE: for RHEL (not CentOS) enable the optional-rpms channel (if
-    # not already enabled)
-    # yum-config-manager --enable rhel-6-server-optional-rpms
+    # install a bootstrap epel repo to install latest epel-release
+    # package (which provides correct gpg keys, etc); then remove
+    # boostrap
+    cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
+[epel-bootstrap]
+name=Bootstrap EPEL
+mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF
+    yum --enablerepo=epel-bootstrap -y install epel-release
+    rm -f /etc/yum.repos.d/epel-bootstrap.repo
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git puppet
