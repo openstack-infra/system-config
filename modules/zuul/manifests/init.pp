@@ -347,9 +347,22 @@ class zuul (
       ensure => present,
     }
   }
-  if ! defined(A2mod['mem_cache']) {
-    a2mod { 'mem_cache':
-      ensure => present,
+
+  case $::lsbdistcodename {
+    'precise': {
+      if ! defined(A2mod['mem_cache']) {
+        a2mod { 'mem_cache':
+          ensure => present,
+        }
+      }
+    }
+    default: {
+      if ! defined(A2mod['cache_disk']) {
+        a2mod { 'cache_disk':
+          ensure => present,
+        }
+      }
     }
   }
+
 }

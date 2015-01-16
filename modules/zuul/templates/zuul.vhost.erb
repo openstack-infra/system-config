@@ -2,6 +2,11 @@
   ServerAdmin <%= scope.lookupvar("::zuul::serveradmin") %>
   DocumentRoot /var/lib/zuul/www
 
+  <Directory /var/lib/zuul/www>
+    Allow from all
+    Satisfy Any
+  </Directory>
+
   ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("::zuul::vhost_name") %>-error.log
 
   LogLevel warn
@@ -31,6 +36,10 @@
       # 8MByte max size per cache entry
       MCacheMaxObjectSize 8388608
       MCacheMaxStreamingBuffer 8388608
+    </IfModule>
+    <IfModule mod_cache_disk.c>
+      CacheEnable disk /status.json
+      CacheRoot /var/cache/apache2/mod_cache_disk
     </IfModule>
   </IfModule>
 
