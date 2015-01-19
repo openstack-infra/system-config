@@ -24,4 +24,4 @@ messages:
     http://status.openstack.org/elastic-recheck/
   no_bugs_found: >-
     I noticed jenkins failed, refer to:
-    https://wiki.openstack.org/wiki/GerritJenkinsGithub#Test_Failures
+    http://docs.openstack.org/infra/manual/developers.html#automated-testing
