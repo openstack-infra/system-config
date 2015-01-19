@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Code-Review+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Dmitry Teselkin <dteselkin@mirantis.com>
+Code-Review+1: Mike Heald <mike.heald@hp.com>
+Code-Review+1: Jan Kundrát <jkt@kde.org>
+Submitted-by: Jenkins
+Submitted-at: Mon, 19 Jan 2015 18:05:53 +0000
+Reviewed-on: https://review.openstack.org/136325
+Project: openstack-infra/system-config
+Branch: refs/heads/master
