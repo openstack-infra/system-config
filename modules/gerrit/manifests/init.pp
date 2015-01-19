@@ -630,9 +630,8 @@ class gerrit(
       File['/home/gerrit2/review_site/lib'],
     ],
   }
-  file { '/home/gerrit2/review_site/lib/mysql-connector-java-5.1.10.jar':
-    ensure  => absent,
-    require => File['/home/gerrit2/review_site/lib/mysql-connector-java.jar'],
+  tidy { '/home/gerrit2/review_site/lib':
+    matches => [ "mysql-connector-java-*.jar"]
   }
 
   package { 'libbcprov-java':
@@ -646,10 +645,6 @@ class gerrit(
       File['/home/gerrit2/review_site/lib'],
     ],
   }
-  file { '/home/gerrit2/review_site/lib/bcprov-jdk16-144.jar':
-    ensure  => absent,
-    require => File['/home/gerrit2/review_site/lib/bcprov.jar'],
-  }
 
   # Install Bouncy Castle's OpenPGP plugin and populate the contact store
   # public key file if we're using that feature.
@@ -662,6 +657,18 @@ class gerrit(
       target  => '/usr/share/java/bcpg.jar',
       require => [
         Package['libbcpg-java'],
+        File['/home/gerrit2/review_site/lib'],
+      ],
+    }
+    # Package is required for Gerrit 2.9.x
+    package { 'libbcpkix-java':
+      ensure => present,
+    }
+    file { '/home/gerrit2/review_site/lib/bcpkix.jar':
+      ensure  => link,
+      target  => '/usr/share/java/bcpkix.jar',
+      require => [
+        Package['libbcpkix-java'],
         File['/home/gerrit2/review_site/lib'],
       ],
     }
@@ -683,5 +690,10 @@ class gerrit(
       source  => 'puppet:///modules/gerrit/fakestore.cgi',
       require => File['/home/gerrit2/review_site/lib'],
     }
+  }
+
+  # Remove libs installed by Gerrit init.
+  tidy { '/home/gerrit2/review_site/lib':
+    matches => [ "bcprov-jdk*.jar", "bcpg-jdk*.jar", "bcpg-jdk*.jar"]
   }
 }
