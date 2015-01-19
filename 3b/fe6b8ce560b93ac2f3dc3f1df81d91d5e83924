@@ -1,0 +1,17 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Kurt Taylor <kurt.r.taylor@gmail.com>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+1: Matthew Oliver <matt@oliver.net.au>
+Submitted-by: Jenkins
+Submitted-at: Mon, 19 Jan 2015 21:14:22 +0000
+Reviewed-on: https://review.openstack.org/101101
+Project: openstack-infra/system-config
+Branch: refs/heads/master
