@@ -260,6 +260,93 @@ should configure as follows::
 This job will now automatically trigger when a new patchset is
 uploaded and will report the results to Gerrit automatically.
 
+The Zuul Gerrit Trigger Way
+---------------------------
+
+`Zuul <http://ci.openstack.org/zuul.html>`_ is a tool that determines what jobs are run when.
+Zuul listens to the Gerrit event stream, and first tries to match each event to one or more pipelines.
+Zuul’s pipelines are configured in a single file called layout.yaml.
+Here’s a snippet from that file that constructs the ``check`` pipeline taken from this
+`Zuul sample layout.yaml file <https://git.openstack.org/cgit/openstack-infra/zuul/tree/etc/layout.yaml-sample>`_
+
+.. code-block:: yaml
+
+    pipelines:
+      - name: check
+        manager: IndependentPipelineManager
+        trigger:
+          gerrit:
+            - event: patchset-created
+        success:
+          gerrit:
+            verified: 1
+        failure:
+         gerrit:
+            verified: -1
+
+
+This pipeline is configured to trigger on any Gerrit event that represents a new
+patch set created. The matching event will invoke the configured Jenkins job(s)
+(discussed next). If all the Jenkins jobs are successful, Zuul will add a comment
+to Gerrit with a ``verified +1`` vote, and if any one fails, with a ``verified -1``.
+
+The sample includes other possible configurations, or you can configure your own by
+following the `Zuul layout documentation <http://ci.openstack.org/zuul/zuul.html#layout-yaml>`_
+
+After a Gerrit event matches a pipeline, Zuul will look at the project identified
+in that Gerrit event and invoke the Jenkins jobs specified in the ``projects`` section
+(for the matching pipeline) using the `Jenkins Gearman Plugin
+<https://wiki.jenkins-ci.org/display/JENKINS/Gearman+Plugin>`_.
+
+For example:
+
+.. code-block:: yaml
+
+    projects:
+      - name: openstack-dev/ci-sandbox
+        check:
+          - my-sandbox-check
+        test:
+          - my-sandbox-test
+
+
+In this case, any Gerrit event generated from the ``openstack-dev/ci-sandbox`` project, that matched
+the ``check`` pipeline would run the ``my-sandbox-check`` job in Jenkins. If the
+Gerrit event also matched the ``test`` pipeline, Zuul would also invoke the ``my-sandbox-test``
+Jenkins job.
+
+The `layout.yaml <https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul/layout.yaml>`_
+used by OpenStack is a good reference for real world pipeline definitions,
+and project-pipeline-job definitions.
+
+Managing Jenkins Jobs
+---------------------
+When code is pushed to Gerrit, a series of jobs are triggered that run a series
+of tests against the proposed code. `Jenkins <http://ci.openstack.org/jenkins.html>`_
+is the server that executes and
+manages these jobs. It is a Java application with an extensible architecture
+that supports plugins that add functionality to the base server.
+
+Each job in Jenkins is configured separately. Behind the scenes, Jenkins stores
+this configuration information in an XML file in its data directory.
+You may manually edit a Jenkins job as an administrator in Jenkins. However,
+in a testing platform as large as the upstream OpenStack CI system,
+doing so manually would be virtually impossible and fraught with errors.
+Luckily, there is a helper tool called `Jenkins Job Builder (JJB)
+<http://ci.openstack.org/jenkins-job-builder/>`_ that
+constructs and manages these XML configuration files after reading a
+set of YAML files and job templating rules. These references provide more details:
+
+* `A basic overview of using JJB to define projects, templates, and jobs in yaml
+  format is available here. <http://ci.openstack.org/jjb.html>`_
+
+* `The official documentation to define Jenkins jobs using JJB is here.
+  <http://ci.openstack.org/jenkins-job-builder/definition.html>`_
+
+* `The JJB description of all jobs used by OpenStack are defined in this folder.
+  <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_
+  (The project.yaml file is a good starting point)
+
 Testing your CI setup
 ---------------------
 
