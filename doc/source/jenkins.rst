@@ -89,9 +89,10 @@ devstack gate source can be found on `git.openstack.org
 describes the process of using devstack gate to run your own devstack
 based tests.
 
-The :ref:`devstack-gate` project is used to maintain a pool of Jenkins
-slaves that are used to run these tests.  Devstack-gate jobs create
-and delete Jenkins slaves as needed in order to maintain the pool.
+The :ref:`devstack-gate` project is used to define the characteristics of a
+pool of Jenkins slaves that are used to run these tests.  Devstack-gate works
+in coordination with :ref:`nodepool` which creates and deletes Jenkins slaves
+as needed in order to maintain the pool.
 
 Sysadmin
 ========
