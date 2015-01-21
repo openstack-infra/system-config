@@ -262,6 +262,82 @@ should configure as follows::
 This job will now automatically trigger when a new patchset is
 uploaded and will report the results to Gerrit automatically.
 
+The Zuul Gerrit Trigger Way
+---------------------------
+
+Zuul is a project gating system. Compared to the jenkins gerrit trigger plugin,
+it provides additional configuration options,
+and is easier to configure and manage its configuration, provides a UI to
+view the status of all jobs, and scales better to manage jobs running across
+multiple Jenkins servers.
+
+Zuul listens to the Gerrit event stream, and first tries to match each event to one or more pipelines.
+Zuul’s pipelines are configured in a single file called layout.yaml.
+Here’s a snippet from that file that constructs the ``check`` pipeline take from
+[zuul sample](https://git.openstack.org/cgit/openstack-infra/zuul/tree/etc/layout.yaml-sample)
+
+.. code-block:: yaml
+
+    pipelines:
+      - name: check
+        manager: IndependentPipelineManager
+        trigger:
+          gerrit:
+            - event: patchset-created
+        success:
+          gerrit:
+            verified: 1
+        failure:
+         gerrit:
+            verified: -1
+
+
+This pipeline is configured to trigger on any gerrit event that represents a new
+patch set created. The matching event will invoke the configured jenkins job(s)
+(discussed next). If all the jenkins jobs are successful, zuul will add a comment
+to gerrit with a verified +1 vote, and if any one fails, with a verified -1.
+
+Full details of each configuration option is available [here](http://ci.openstack.org/zuul/zuul.html#layout-yaml)
+
+After a gerrit event matches a pipeline, zuul will look at the project identified
+in that event and run the jenkins jobs specified in the projects section (for that
+pipeline).
+
+For example:
+
+.. code-block:: yaml
+
+    projects:
+      - name: openstack-dev/ci-sandbox
+        check:
+          - my-sandbox-check
+        test:
+          - my-sandbox-test
+
+
+In this case, any gerrit event in the ``openstack-dev/ci-sandbox`` project, that matched
+the ``check`` pipeline would run the ``my-sandbox-check`` job in Jenkins. If the
+gerrit event also matched the ``test`` pipeline, the ``my-sandbox-test``
+would also run.
+
+
+Managing Jenkins Jobs
+---------------------
+When code is pushed to Gerrit, a series of jobs are triggered that run a series
+of tests against the proposed code. Jenkins is the server that executes and
+manages these jobs. It is a Java application with an extensible architecture
+that supports plugins that add functionality to the base server.
+
+Each job in Jenkins is configured separately. Behind the scenes, Jenkins stores
+this configuration information in an XML file in its data directory.
+You may manually edit a Jenkins job as an administrator in Jenkins. However,
+in a testing platform as large as the upstream OpenStack CI system,
+doing so manually would be virtually impossible and fraught with errors.
+Luckily, there is a helper tool called Jenkins Job Builder (JJB)
+http://ci.openstack.org/jenkins-job-builder/ that
+constructs these XML configuration files after reading a set of
+YAML files and job templating rules.
+
 Testing your CI setup
 ---------------------
 
