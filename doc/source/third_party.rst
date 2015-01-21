@@ -262,6 +262,78 @@ should configure as follows::
 This job will now automatically trigger when a new patchset is
 uploaded and will report the results to Gerrit automatically.
 
+The Zuul Gerrit Trigger Way
+---------------------------
+
+TODO: This is copy and paste from http://www.joinfu.com/2014/01/understanding-the-openstack-ci-system/.
+Ramy to reword & update examples
+
+After a contributor has pushed (1a) a new patch to a changeset or a core team member has reviewed the patch and added an Approved +1 label (1b), Gerrit pushes out a notification event to its event stream (2). This event stream can have a number of subscribers, including the Gerrit Jenkins plugin and Zuul. Zuul was developed to manage the many complex graphs of interdependent branch merge proposals in the upstream system. It monitors in-progress jobs for a set of related patches and will pre-emptively cancel any dependent test jobs that would not succeed due to a failure in a dependent patch [2].
+
+In addition to this dependency monitoring, Zuul is responsible for constructing the pipelines of jobs that should be executed on various events. One of these pipelines is called the “gate” pipeline, appropriately named for the set of jobs that must succeed in order for a proposed patch to be merged into a target branch.
+
+Zuul’s pipelines are configured in a single file called layout.yaml in the OpenStack-Infra config project. Here’s a snippet from that file that constructs the gate pipeline:
+
+.. code-block:: yaml
+
+  - name: gate
+    description: Changes that have been approved by core developers...
+    failure-message: Build failed. For information on how to proceed...
+    manager: DependentPipelineManager
+    precedence: low
+    trigger:
+      gerrit:
+        - event: comment-added
+          approval:
+            - approved: 1
+        - event: comment-added
+          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+    start:
+      gerrit:
+        verified: 0
+    success:
+      gerrit:
+        verified: 2
+        submit: true
+    failure:
+      gerrit:
+        verified: -2
+
+Zuul listens to the Gerrit event stream (3), and matches the type of event to one or more pipelines (4). The matching conditions for the gate pipeline are configured in the trigger:gerrit: section of the YAML snippet above:
+
+.. code-block:: yaml
+
+    trigger:
+      gerrit:
+        - event: comment-added
+          approval:
+            - approved: 1
+        - event: comment-added
+          comment_filter: (?i)^\s*reverify( (?:bug|lp)[\s#:]*(\d+))\s*$
+
+The above indicates that Zuul should fire the gate pipeline when it sees reviews with an Approved +1 label, and any comment to the review that contains “reverify” with or without a bug identifier. Note that there is a similar pipeline that is fired when a new patchset is created or when a review comment is made with the word “recheck”. This pipeline is called the check pipeline. Look in the layout.yaml file for the configuration of the check pipeline.
+
+Once the appropriate pipeline is matched, Zuul executes (5) that particular pipeline for the project that had a patch proposed.
+
+.. more needed here
+
+Managing Jenkins Jobs
+---------------------
+When code is pushed to Gerrit, a series of jobs are triggered that run a series
+of tests against the proposed code. Jenkins is the server that executes and
+manages these jobs. It is a Java application with an extensible architecture
+that supports plugins that add functionality to the base server.
+
+Each job in Jenkins is configured separately. Behind the scenes, Jenkins stores
+this configuration information in an XML file in its data directory.
+You may manually edit a Jenkins job as an administrator in Jenkins. However,
+in a testing platform as large as the upstream OpenStack CI system,
+doing so manually would be virtually impossible and fraught with errors.
+Luckily, there is a helper tool called Jenkins Job Builder (JJB)
+http://ci.openstack.org/jenkins-job-builder/ that
+constructs these XML configuration files after reading a set of
+YAML files and job templating rules.
+
 Testing your CI setup
 ---------------------
 
