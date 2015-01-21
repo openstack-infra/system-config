@@ -151,7 +151,7 @@ Creating a Service Account
 In order to post comments as a Third Party CI System and eventually verify
 your build status on Gerrit patches, you will need a dedicated Gerrit
 CI account. You will need to create this account in our OpenID provider
-`Launchpad <https://launchpad.net>`. You may already have an existing
+`Launchpad <https://launchpad.net>`_. You may already have an existing
 personal account in Launchpad, but you should create a new and entirely
 separate account for this purpose.
 
