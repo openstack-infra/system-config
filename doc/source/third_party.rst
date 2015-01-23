@@ -346,3 +346,9 @@ Third Party - FAQ
           AddEncoding x-gzip gz
         </FilesMatch>
 
+Additional Resources
+--------------------
+
+* `Understanding OpenStack CI system <http://www.joinfu.com/2014/01/understanding-the-openstack-ci-system/>`_
+* Setting up an external OpenStack testing system: `Part 1 <http://www.joinfu.com/2014/02/setting-up-an-external-openstack-testing-system/>`_, `Part 2 <http://www.joinfu.com/2014/02/setting-up-an-openstack-external-testing-system-part-2/>`_
+* `Building your OpenStack third-party CI system <https://www.ibm.com/developerworks/community/blogs/fe313521-2e95-46f2-817d-44a4f27eba32/entry/building_your_openstack_3rd_party_ci_system1?lang=en>`_
