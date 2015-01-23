@@ -52,6 +52,13 @@ Requirements
   * Maintainers are encouraged to be in IRC regularly to make it
     faster to contact them.
 
+* Contact the `Third Party Coordinators
+  <https://review.openstack.org/#/admin/groups/440>`_ asking to add your
+  account to the `Third Party CI mail filter list
+  <https://review.openstack.org/#/admin/groups/270>`_. This is necessary to
+  keep Gerrit from sending email messages every time an account comments on
+  a patch.
+
 * Include a public link to all test artifacts to make debugging failed tests
   easier (using a dns name over a hardcoded ip is recommended).
   This should include:
