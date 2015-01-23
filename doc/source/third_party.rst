@@ -21,53 +21,85 @@ in Gerrit with a summary of the test result and links to the test artifacts.
 Requirements
 ------------
 
-* Until a third party testing system operates in a stable fashion, third
-  party tests can comment on patches but not vote on them.
+All third-party testing systems must follow requirements from the OpenStack
+infrastructure project. These General requirements are listed below. However,
+additional requirements may need to be met based on what you will be testing
+and how that testing is done. Third-party testing systems fall into two
+categories:
 
-  * A system can also be set up to only do '+1' reviews and leave all the
-    '-1's to be manually confirmed.
+* Driver CI systems - these are the most common. This is where your company
+  or project has written software that interfaces with your proprietary device
+  or service and has integrated that software into a particular OpenStack
+  project as a plugin or extension. Testing on this software is provided as a
+  service to the developers of the OpenStack project by your company or
+  project. In most cases your third-party test system may have extra testing
+  requirements imposed by the project your driver has integrated with.
+  Examples of this are:
 
-* A third-party system may only leave one comment per patch set
-  (unless it is retriggered).
+  * `Nova hypervisor requirements <https://wiki.openstack.org/wiki/HypervisorSupportMatrix>`_.
+  * `Neutron plugin requirements <https://wiki.openstack.org/wiki/NeutronThirdPartyTesting>`_.
+  * `Cinder driver requirements <https://wiki.openstack.org/wiki/Cinder/tested-3rdParty-drivers>`_.
 
-* The maintainers are responsible for re-triggering tests when their third
-  party testing system breaks.
+* Platform CI systems - The OpenStack Infrastructure project provides CI
+  testing for on one testing environment. This environment is an x86-based
+  hardware architecture running the Linux operating system. Third-party systems
+  not running Linux or operating on a different hardware architecture may
+  provide CI testing on that platform as a service to the developers of
+  OpenStack. These systems may or may not have drivers specific to their
+  platforms. Some examples of these platforms are:
 
-* Support recheck to request re-running a test.
+  * PowerKVM
+  * Hyper-V
 
-  * Support the following syntaxes: ``recheck``.
-  * Recheck means recheck everything. A single recheck comment should
-    re-trigger all testing systems.
+* General Requirements
 
-* Publish contact information for the maintainers.
+  * Until a third party testing system operates in a stable fashion, third
+    party tests can comment on patches but not vote on them.
 
-  * All accounts must have a wikipage entry. Follow the instructions on
-    the `ThirdPartySystems wiki page
-    <https://wiki.openstack.org/wiki/ThirdPartySystems>`_ to add your
-    system.  When complete, there should be a page dedicated to your
-    system with a URL like:
-    ``https://wiki.openstack.org/wiki/ThirdPartySystems/Example``.
-  * All comments from your CI system must contain a link to the wiki
-    page for your CI system.
-  * Maintainers are encouraged to be in IRC regularly to make it
-    faster to contact them.
+    * A system can also be set up to only do '+1' reviews and leave all the
+      '-1's to be manually confirmed.
 
-* Include a public link to all test artifacts to make debugging failed tests
-  easier (using a dns name over a hardcoded ip is recommended).
-  This should include:
+  * A third-party system may only leave one comment per patch set
+    (unless it is retriggered).
 
-  * Environment details
+  * The maintainers are responsible for re-triggering tests when their third
+    party testing system breaks.
 
-    * This must include a utc timestamp of the test run
-  * Test configuration
+  * Support recheck to request re-running a test.
 
-    * Skipped tests
-    * logs should include a trace of the commands used
-  * OpenStack logs
-  * Tempest logs (including ``testr_results.html.gz``)
+    * Support the following syntaxes: ``recheck``.
+    * Recheck means recheck everything. A single recheck comment should
+      re-trigger all testing systems.
 
-    * logs must be browsable; logs requiring download, installation or login
-      to access are not acceptable
+  * Publish contact information for the maintainers.
+
+    * All accounts must have a wikipage entry. Follow the instructions on
+      the `ThirdPartySystems wiki page
+      <https://wiki.openstack.org/wiki/ThirdPartySystems>`_ to add your
+      system.  When complete, there should be a page dedicated to your
+      system with a URL like:
+      ``https://wiki.openstack.org/wiki/ThirdPartySystems/Example``.
+    * All comments from your CI system must contain a link to the wiki
+      page for your CI system.
+    * Maintainers are encouraged to be in IRC regularly to make it
+      faster to contact them.
+
+  * Include a public link to all test artifacts to make debugging failed tests
+    easier (using a dns name over a hardcoded ip is recommended).
+    This should include:
+
+    * Environment details
+
+      * This must include a utc timestamp of the test run
+    * Test configuration
+
+      * Skipped tests
+      * logs should include a trace of the commands used
+    * OpenStack logs
+    * Tempest logs (including ``testr_results.html.gz``)
+
+      * logs must be browsable; logs requiring download, installation or login
+        to access are not acceptable
 
   .. note:: All test artifacts must be retained for one month.
 
