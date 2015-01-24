@@ -1,4 +1,5 @@
-<VirtualHost <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>:80>
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("etherpad_lite::apache::serveradmin") %>
 
   ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>-error.log
@@ -12,7 +13,7 @@
 </VirtualHost>
 
 <IfModule mod_ssl.c>
-<VirtualHost <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>:443>
+<VirtualHost *:443>
   ServerName <%= scope.lookupvar("etherpad_lite::apache::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("etherpad_lite::apache::serveradmin") %>
 

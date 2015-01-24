@@ -1,4 +1,5 @@
-<VirtualHost <%= scope.lookupvar("nodepool::vhost_name") %>:80>
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("nodepool::vhost_name") %>
 
   DocumentRoot <%= scope.lookupvar("nodepool::image_log_document_root") %>
   <Directory <%= scope.lookupvar("nodepool::image_log_document_root") %>>

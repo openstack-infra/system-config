@@ -1,4 +1,5 @@
-<VirtualHost <%= scope.lookupvar("gerrit::vhost_name") %>:80>
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("gerrit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
 
   ErrorLog ${APACHE_LOG_DIR}/gerrit-error.log
@@ -12,7 +13,7 @@
 </VirtualHost>
 
 <IfModule mod_ssl.c>
-<VirtualHost <%= scope.lookupvar("gerrit::vhost_name") %>:443>
+<VirtualHost *:443>
   ServerName <%= scope.lookupvar("gerrit::vhost_name") %>
   ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
   AllowEncodedSlashes NoDecode
