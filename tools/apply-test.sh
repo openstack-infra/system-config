@@ -93,9 +93,10 @@ sudo mv /tmp/hosts /etc/hosts
 sudo mkdir -p /etc/puppet/environments/production
 sudo touch /etc/puppet/environments/production/environment.conf
 sudo mkdir -p /var/run/puppet
+sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --noop --verbose --debug filearg > /dev/null
+        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
