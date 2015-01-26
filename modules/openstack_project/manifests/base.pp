@@ -72,6 +72,13 @@ class openstack_project::base(
     provider => pip,
     require  => Class['pip'],
   }
+  file { '/etc/pip.conf':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/pip.conf',
+    replace => true,
+  }
 
   if ($install_users) {
     package { $::openstack_project::params::user_packages:
