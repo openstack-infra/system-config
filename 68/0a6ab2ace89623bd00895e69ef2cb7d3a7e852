@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Chris Cannon <ccannon@hp.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 26 Jan 2015 16:02:30 +0000
+Reviewed-on: https://review.openstack.org/142772
+Project: openstack-infra/system-config
+Branch: refs/heads/master
