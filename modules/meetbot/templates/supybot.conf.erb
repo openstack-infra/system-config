@@ -665,7 +665,7 @@ supybot.directories.log: /var/lib/meetbot/<%= name %>/logs
 #
 # Default value:
 ###
-supybot.plugins: MeetBot Admin ChannelLogger Misc Owner User Services Config Channel
+supybot.plugins: MeetBot Bugtracker Admin ChannelLogger Misc Owner User Services Config Channel
 
 ###
 # Determines whether this plugin is loaded by default.
@@ -845,6 +845,98 @@ supybot.plugins.MeetBot.public: True
 # Default value: False
 ###
 supybot.plugins.MeetBot.enableSupybotBasedConfig: False
+
+###
+# Determines whether this plugin is loaded by default.
+###
+supybot.plugins.Bugtracker: True
+
+###
+# Determines whether this plugin is publicly visible.
+#
+# Default value: True
+###
+supybot.plugins.Bugtracker.public: True
+
+###
+# Determines whether the bug snarfer will be enabled, such that any
+# Bugtracker URLs and bug ### seen in the channel will have their
+# information reported into the channel.
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.bugSnarfer: True
+
+###
+# Determines whether the CVE snarfer will be enabled, such that any CVE
+# URLs and CVE-????-???? seen in the channel will have their information
+# reported into the channel.
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.cveSnarfer: False
+
+###
+# Determines whether the OOPS snarfer will be enabled, such that any
+# OOPS ### seen in the channel will have their information reported into
+# the channel.
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.oopsSnarfer: False
+
+###
+# Determines the phrase to use when notifying the user that there is no
+# information about that bugtracker site.
+#
+# Default value: I don't have a bugtracker %s.
+###
+supybot.plugins.Bugtracker.replyNoBugtracker: I don't have a bugtracker %s.
+
+###
+# Determines the bugtracker to query when the snarf command is triggered
+#
+# Default value: launchpad
+###
+supybot.plugins.Bugtracker.snarfTarget: launchpad
+
+###
+# Determines what bugtrackers will be added to the bot when it starts.
+#
+# Default value:
+###
+supybot.plugins.Bugtracker.bugtrackers: launchpad
+supybot.plugins.Bugtracker.bugtrackers.launchpad.url: https://launchpad.net
+supybot.plugins.Bugtracker.bugtrackers.launchpad.description: Launchpad
+supybot.plugins.Bugtracker.bugtrackers.launchpad.trackertype: launchpad
+
+###
+# Whether to send a message when a bug could not be found
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.replyWhenNotFound: False
+
+###
+# Number of seconds to wait between repeated bug calls
+#
+# Default value: 60
+###
+supybot.plugins.Bugtracker.repeatdelay: 60
+
+###
+# Whether to show the assignee in bug reports
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.showassignee: False
+
+###
+# Show optional extneded bug information, specific to trackers
+#
+# Default value: False
+###
+supybot.plugins.Bugtracker.extended: False
 
 ###
 # Determines whether this plugin is loaded by default.
