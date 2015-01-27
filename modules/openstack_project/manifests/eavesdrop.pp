@@ -64,6 +64,7 @@ class openstack_project::eavesdrop (
         '#openstack-meeting-4',
         '#openstack-monasca',
         '#openstack-neutron',
+        '#openstack-nova',
         '#openstack-operators',
         '#openstack-oslo',
         '#openstack-qa',
