@@ -111,6 +111,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-ko':
+    ensure      => present,
+    admin       => 'ianyrchoi@gmail.com',
+    password    => $listpassword,
+    description => 'OpenStack Korea Community Discussions in Korean (오픈스택 한국 커뮤니티 메일링리스트)',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'nov-2013-track-chairs':
     ensure      => present,
     admin       => 'claire@openstack.org',
