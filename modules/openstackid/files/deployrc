@@ -1,8 +1,0 @@
-CONF_DIR=$TOP_DIR
-FILE_OWNER=root
-FILE_GROUP=www-data
-
-# allow local overrides of env variables
-if [ -f $TOP_DIR/localrc ]; then
-    . $TOP_DIR/localrc
-fi
