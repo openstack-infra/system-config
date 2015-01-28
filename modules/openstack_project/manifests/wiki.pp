@@ -8,11 +8,9 @@ class openstack_project::wiki (
   $ssl_chain_file_contents = ''
 ) {
 
-  package { ['openssl', 'ssl-cert']:
+  package { ['openssl', 'ssl-cert', 'subversion']:
     ensure => present;
   }
-
-  include subversion
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
