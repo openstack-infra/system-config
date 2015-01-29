@@ -147,6 +147,14 @@ class openstack_project::base(
       replace => true,
     }
 
+    file { '/etc/apt/apt.conf.d/90no-translations':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/90no-translations',
+      replace => true,
+    }
+
     file { '/etc/apt/preferences.d/00-puppet.pref':
       ensure  => present,
       owner   => 'root',
