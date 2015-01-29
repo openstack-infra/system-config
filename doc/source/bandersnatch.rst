@@ -11,7 +11,11 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://pypi.openstack.org
+  * http://pypi.openstack.org (deprecated)
+  * http://pypi.iad.openstack.org
+  * http://pypi.dfw.openstack.org
+  * http://pypi.ord.openstack.org
+  * http://pypi.region-b.geo-1.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
 :Projects:
