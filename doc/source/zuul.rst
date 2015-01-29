@@ -16,7 +16,7 @@ At a Glance
   * http://zuul.openstack.org
   * http://zuul-dev.openstack.org
 :Puppet:
-  * :file:`modules/zuul`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
   * :file:`modules/openstack_project/manifests/zuul_prod.pp`
   * :file:`modules/openstack_project/manifests/zuul_dev.pp`
 :Configuration:

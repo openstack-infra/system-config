@@ -15,7 +15,7 @@ At a Glance
 :Hosts:
   * http://lists.openstack.org
 :Puppet:
-  * :file:`modules/mailman`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-mailman/tree/
   * :file:`modules/openstack_project/manifests/lists.pp`
 :Projects:
   * http://www.gnu.org/software/mailman/
