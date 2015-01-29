@@ -14,7 +14,7 @@ At a Glance
   * https://git.openstack.org
   * git*.openstack.org
 :Puppet:
-  * :file:`modules/cgit`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-cgit/tree/
   * :file:`modules/openstack_project/manifests/git.pp`
 :Configuration:
   * :file:`modules/openstack_project/files/git/cgitrc`

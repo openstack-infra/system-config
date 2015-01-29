@@ -13,7 +13,7 @@ At a Glance
 :Hosts:
   * http://status.openstack.org
 :Puppet:
-  * :file:`modules/elastic_recheck`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-elastic_recheck/tree/
   * :file:`modules/openstack_project/manifests/status.pp`
 :Projects:
  * https://git.openstack.org/cgit/openstack-infra/elastic-recheck

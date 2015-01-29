@@ -15,7 +15,7 @@ At a Glance
   * http://jenkins.openstack.org
   * http://jenkins-dev.openstack.org
 :Puppet:
-  * :file:`modules/jenkins/manifests/job_builder.pp`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-jenkins/tree/manifests/job_builder.pp
 :Configuration:
   * :config:`jenkins/jobs/`
 :Projects:
