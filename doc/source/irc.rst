@@ -44,7 +44,7 @@ Access
 Register the channel with ChanServ and give the infrastructure team account
 founder access to the channel with::
 
-  /msg chanserv access #channel add openstackinfra +AFRfiorstv
+  /msg chanserv access #channel add openstackinfra +AFRefiorstv
 
 This is good practice project-wide to make sure we keep channels under
 control and is a requirement if you want any of the project bots in
