@@ -49,7 +49,6 @@ class openstack_project::jenkins_params {
       # FIXME: no Python 3 on RHEL
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
-      $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
       $rubygems_package = 'rubygems'
@@ -137,7 +136,6 @@ class openstack_project::jenkins_params {
       $python3_package = 'python3.4'
       $python_libvirt_package = 'python-libvirt'
       $python_lxml_package = 'python-lxml'
-      $python_magic_package = 'python-magic'
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
       if $::lsbdistcodename == 'precise' {
