@@ -14,7 +14,7 @@ At a Glance
 :Hosts:
   * https://wiki.openstack.org
 :Puppet:
-  * :file:`modules/mediawiki`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-mediawiki/tree/
   * :file:`modules/openstack_project/manifests/wiki.pp`
 :Projects:
   * http://www.mediawiki.org/wiki/MediaWiki

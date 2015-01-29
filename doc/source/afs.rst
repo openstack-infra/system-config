@@ -26,7 +26,7 @@ At a Glance
   * afs01.dfw.openstack.org (a fileserver in DFW)
   * afs01.ord.openstack.org (a fileserver in ORD)
 :Puppet:
-  * :file:`modules/openafs`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openafs/tree/
   * :file:`modules/openstack_project/manifests/afsdb.pp`
   * :file:`modules/openstack_project/manifests/afsfs.pp`
 :Projects:

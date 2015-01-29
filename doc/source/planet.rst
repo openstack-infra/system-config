@@ -15,7 +15,7 @@ At a Glance
 :Hosts:
   * http://planet.openstack.org
 :Puppet:
-  * :file:`modules/planet`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-planet/tree/
   * :file:`modules/openstack_project/manifests/planet.pp`
 :Configuration:
   * https://git.openstack.org/cgit/openstack/openstack-planet/tree/planet.ini

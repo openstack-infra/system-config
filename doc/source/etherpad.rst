@@ -16,7 +16,7 @@ At a Glance
 :Hosts:
   * http://etherpad.openstack.org
 :Puppet:
-  * :file:`modules/etherpad_lite`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-etherpad_lite/tree/
   * :file:`modules/openstack_project/manifests/etherpad.pp`
   * :file:`modules/openstack_project/manifests/etherpad_dev.pp`
 :Projects:

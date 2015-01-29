@@ -16,9 +16,9 @@ At a Glance
   * http://review.openstack.org/
   * https://wiki.openstack.org/wiki/Infrastructure_Status
 :Puppet:
-  * :file:`modules/meetbot`
-  * :file:`modules/statusbot`
-  * :file:`modules/gerritbot`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-meetbot/tree/
+  * https://git.openstack.org/cgit/openstack-infra/puppet-statusbot/tree/
+  * https://git.openstack.org/cgit/openstack-infra/puppet-gerritbot/tree/
   * :file:`modules/openstack_project/manifests/eavesdrop.pp`
   * :file:`modules/openstack_project/manifests/review.pp`
 :Configuration:

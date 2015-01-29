@@ -13,7 +13,7 @@ At a Glance
 :Hosts:
   * http://pbx.openstack.org
 :Puppet:
-  * :file:`modules/asterisk`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-asterisk/tree/
   * :file:`modules/openstack_project/manifests/pbx.pp`
 :Projects:
   * http://www.asterisk.org

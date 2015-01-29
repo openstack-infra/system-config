@@ -16,7 +16,7 @@ At a Glance
 :Hosts:
   * kdc*.openstack.org
 :Puppet:
-  * :file:`modules/kerberos`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-kerberos/tree/
   * :file:`modules/openstack_project/manifests/kdc.pp`
 :Projects:
   * http://web.mit.edu/kerberos
