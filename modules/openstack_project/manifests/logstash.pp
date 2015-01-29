@@ -53,9 +53,9 @@ class openstack_project::logstash (
     db_pass => $subunit2sql_db_pass,
   }
 
-  include 'mysql_proxy'
+  include 'simpleproxy'
 
-  class { 'mysql_proxy::server':
+  class { 'simpleproxy::server':
     db_host            => $subunit2sql_db_host,
   }
 }

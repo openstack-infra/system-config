@@ -1,2 +1,0 @@
-ENABLED="true"
-OPTIONS="--defaults-file /etc/mysql-proxy/mysql-proxy.conf"
