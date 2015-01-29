@@ -15,7 +15,7 @@ At a Glance
   * logstash-worker\*.openstack.org
   * elasticsearch\*.openstack.org
 :Puppet:
-  * :file:`modules/logstash`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-logstash/tree/
   * :file:`modules/openstack_project/manifests/logstash.pp`
   * :file:`modules/openstack_project/manifests/logstash_worker.pp`
   * :file:`modules/openstack_project/manifests/elasticsearch.pp`
@@ -116,8 +116,8 @@ the Gearman server.
 If you are interested in technical details the source of these scripts
 can be found at
 
-* :file:`modules/log_processor/files/log-gearman-client.py`
-* :file:`modules/log_processor/files/log-gearman-worker.py`
+* https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/log-gearman-client.py
+* https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/log-gearman-client.py
 
 Logstash
 --------
@@ -280,5 +280,5 @@ Used in a kibana query, it would be structured like this:
 This is still an early effort and additional tuning and refinement should
 be expected.  Should the crm114 settings need to be tuned or expanded,
 a patch may be submitted for this file, which controls the process:
-:file:`modules/log_processor/files/classify-log.crm`
+https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/classify-log.crm
 

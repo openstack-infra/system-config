@@ -14,7 +14,7 @@ At a Glance
 :Hosts:
   * nodepool.openstack.org
 :Puppet:
-  * :file:`modules/nodepool/`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-nodepool/tree/
   * :file:`modules/openstack_project/manifests/nodepool_prod.pp`
   * :file:`modules/openstack_project/manifests/single_use_slave.pp`
 :Configuration:

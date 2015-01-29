@@ -20,7 +20,7 @@ At a Glance
   * http://review.openstack.org
   * http://review-dev.openstack.org
 :Puppet:
-  * :file:`modules/gerrit`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-gerrit/tree/
   * :file:`modules/openstack_project/manifests/review.pp`
   * :file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:

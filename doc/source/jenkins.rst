@@ -16,7 +16,7 @@ At a Glance
   * http://jenkins.openstack.org
   * http://jenkins-dev.openstack.org
 :Puppet:
-  * :file:`modules/jenkins`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-jenkins/tree/
   * :file:`modules/openstack_project/manifests/jenkins.pp`
   * :file:`modules/openstack_project/manifests/jenkins_dev.pp`
 :Configuration:
