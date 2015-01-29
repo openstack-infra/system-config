@@ -165,18 +165,6 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
-  - name: bare-f20
-    image: bare-f20
-    min-ready: 1
-    providers:
-      - name: rax-dfw
-      - name: rax-ord
-      - name: rax-iad
-      - name: hpcloud-b1
-      - name: hpcloud-b2
-      - name: hpcloud-b3
-      - name: hpcloud-b4
-      - name: hpcloud-b5
   - name: devstack-f21
     image: devstack-f21
     ready-script: configure_mirror.sh
@@ -288,13 +276,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
@@ -368,13 +349,6 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -457,13 +431,6 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -565,12 +532,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -659,12 +620,6 @@ providers:
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -774,12 +729,6 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -852,12 +801,6 @@ providers:
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -950,12 +893,6 @@ providers:
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: bare-f20
-        base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
