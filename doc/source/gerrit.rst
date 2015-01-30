@@ -451,9 +451,13 @@ To rename a project:
      cp -ax review_site/index index.backup.`date +%s`
      java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 
-#. Move the git repository on git{01-05}.openstack.org::
+#. Move the git repository on git{01-05}.openstack.org (while the
+   lucene reindex is running)::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
+
+#. Rename the project or transfer ownership in GitHub (while the
+   lucene reindex is running).
 
 #. Start Gerrit on review.openstack.org::
 
@@ -474,21 +478,11 @@ To rename a project:
 
      sudo crontab -u root -e
 
-#. Rename the project in GitHub or, if this is a move to a new org, let
-   the project management run create it for you and then remove the
-   original later (assuming you have sufficient permissions).
-
 #. If this is an org move and the project name itself is not
    changing, gate jobs may fail due to outdated remote URLs. Clear
    the workspaces on persistent Jenkins slaves to mitigate this::
 
      sudo ansible-playbook -f 10 /etc/ansible/playbooks/clean_workspaces.yaml --extra-vars "project=PROJECTNAME"
-
-#. Again, if this is an org move rather than a rename and the GitHub
-   project has been created but is empty, trigger replication to
-   populate it::
-
-     ssh -p 29418 review.openstack.org replication start --all
 
 #. Submit a change that updates .gitreview with the new location of the
    project.
