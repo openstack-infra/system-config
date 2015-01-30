@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Takashi NATSUME <natsume.takashi@lab.ntt.co.jp>
+Code-Review+1: Mikhail S Medvedev <mihailmed@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 30 Jan 2015 20:53:32 +0000
+Reviewed-on: https://review.openstack.org/151103
+Project: openstack-infra/system-config
+Branch: refs/heads/master
