@@ -92,4 +92,9 @@ class openstack_project::zuul_dev(
     ensure => present,
     source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
   }
+
+  file { '/etc/zuul/layout/openstack_functions.py':
+    ensure => present,
+    source => "$::project_config::zuul_layout_dir/openstack_functions.py",
+  }
 }
