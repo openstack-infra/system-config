@@ -12,8 +12,6 @@ class openstack_project::single_use_slave (
   $install_resolv_conf = true,
   $sudo = false,
   $thin = true,
-  $python3 = false,
-  $include_pypy = false,
   $automatic_upgrades = false,
   $all_mysql_privs = false,
   $enable_unbound = true,
@@ -42,11 +40,9 @@ class openstack_project::single_use_slave (
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
-    python3         => $python3,
   }
 
   class { 'openstack_project::slave_common':
-    include_pypy        => $include_pypy,
     sudo                => $sudo,
     project_config_repo => $project_config_repo,
   }

@@ -111,19 +111,6 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
-  - name: py3k-precise
-    image: py3k-precise
-    ready-script: configure_mirror.sh
-    min-ready: 2
-    providers:
-      - name: hpcloud-b1
-      - name: hpcloud-b2
-      - name: hpcloud-b3
-      - name: hpcloud-b4
-      - name: hpcloud-b5
-      - name: rax-dfw
-      - name: rax-ord
-      - name: rax-iad
   - name: devstack-trusty-2-node
     image: devstack-trusty
     ready-script: multinode_setup.sh
@@ -262,13 +249,6 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
         min-ram: 8192
@@ -335,13 +315,6 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
@@ -417,13 +390,6 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-        min-ram: 8192
-        name-filter: 'Performance'
-        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
@@ -549,12 +515,6 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -639,12 +599,6 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -727,12 +681,6 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b4
@@ -820,12 +768,6 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -910,12 +852,6 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20140927) - Partner Image'
-        min-ram: 30720
-        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-hp1
