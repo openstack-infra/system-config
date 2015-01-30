@@ -120,6 +120,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-ru':
+    ensure      => present,
+    admin       => 'ilyaalekseyev@acm.org',
+    password    => $listpassword,
+    description => 'Рассылка для обсуждения OpenStack на русском',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'nov-2013-track-chairs':
     ensure      => present,
     admin       => 'claire@openstack.org',
