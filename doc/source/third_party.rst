@@ -328,8 +328,8 @@ chance of success if you follow these steps:
   or project can add you to the <project>-ci group specific to that
   program/project.
 
-Third Party - FAQ
------------------
+FAQ (Frequently Asked Questions)
+--------------------------------
 
 * Q: How do you serve the content of compressed logs so they are rendered within
      the browser, rather than presenting a download prompt to the user?
