@@ -30,6 +30,12 @@ class openstack_project::lists(
     User::Virtual::Localuser['smaffulli'],
   )
 
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-lists',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
+
   maillist { 'openstack-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
