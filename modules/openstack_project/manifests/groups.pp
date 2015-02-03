@@ -65,10 +65,7 @@ class openstack_project::groups (
     site_ssl_chain_file          => $site_ssl_chain_file,
     package_repository           => 'http://tarballs.openstack.org/groups/drupal-updates/release-history',
     package_branch               => 'stable',
-    conf_cron_key                => $conf_cron_key,
-    conf_markdown_directory      => '/srv/groups-static-pages',
-    conf_ga_account              => 'UA-17511903-1',
-    conf_openid_provider         => 'https://openstackid.org',
+    template_drupal_settings     => 'openstack_project/groups/settings.php.erb',
     require                      => [ Class['openstack_project::server'],
       Vcsrepo['/srv/groups-static-pages'] ],
   }
