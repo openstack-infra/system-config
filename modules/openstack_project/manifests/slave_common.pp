@@ -3,7 +3,6 @@
 # Common configuration between openstack_project::slave and
 # openstack_project::single_use_slave
 class openstack_project::slave_common(
-  $include_pypy = false,
   $sudo         = false,
   $project_config_repo = '',
 ){
@@ -84,18 +83,6 @@ class openstack_project::slave_common(
       subscribe   => File['/etc/sysctl.d/10-ptrace.conf'],
       refreshonly => true,
       command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
-    }
-
-    if $include_pypy {
-      apt::ppa { 'ppa:pypy/ppa': }
-      package { 'pypy':
-        ensure  => present,
-        require => Apt::Ppa['ppa:pypy/ppa']
-      }
-      package { 'pypy-dev':
-        ensure  => present,
-        require => Apt::Ppa['ppa:pypy/ppa']
-      }
     }
   }
 

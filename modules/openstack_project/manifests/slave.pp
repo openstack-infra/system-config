@@ -5,8 +5,6 @@ class openstack_project::slave (
   $certname = $::fqdn,
   $ssh_key = '',
   $sysadmins = [],
-  $python3 = false,
-  $include_pypy = false
 ) {
 
   include openstack_project
@@ -21,7 +19,6 @@ class openstack_project::slave (
 
   class { 'jenkins::slave':
     ssh_key      => $ssh_key,
-    python3      => $python3,
   }
 
   include jenkins::cgroups
@@ -33,9 +30,7 @@ class openstack_project::slave (
     limit_value  => '256'
   }
 
-  class { 'openstack_project::slave_common':
-    include_pypy => $include_pypy,
-  }
+  include openstack_project::slave_common
 
   if (! $thin) {
     include openstack_project::thick_slave
