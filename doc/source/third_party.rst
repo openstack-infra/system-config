@@ -21,6 +21,11 @@ in Gerrit with a summary of the test result and links to the test artifacts.
 Requirements
 ------------
 
+* Before posting a comment to any patch, a third party testing system must
+  contact the project they wish to test and get approval to post comments
+  on their patches. This can be done by attending the project's `meeting
+  <https://wiki.openstack.org/wiki/Meetings>`_.
+
 * Until a third party testing system operates in a stable fashion, third
   party tests can comment on patches but not vote on them.
 
