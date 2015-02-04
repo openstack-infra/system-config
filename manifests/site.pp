@@ -541,6 +541,7 @@ node 'zuul-dev.openstack.org' {
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server        => 'review-dev.openstack.org',
     gerrit_user          => 'zuul-dev',
+    gerrit_ssh_host_key  => hiera('review_dev_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
