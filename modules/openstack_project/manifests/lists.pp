@@ -135,6 +135,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-zh':
+    ensure      => present,
+    admin       => 'zhaoxinyu@huawei.com',
+    password    => $listpassword,
+    description => 'OpenStack社区中文讨论群组',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'nov-2013-track-chairs':
     ensure      => present,
     admin       => 'claire@openstack.org',
