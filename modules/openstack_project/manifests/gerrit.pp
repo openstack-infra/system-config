@@ -224,16 +224,6 @@ class openstack_project::gerrit (
     }
   }
 
-  file { '/home/gerrit2/review_site/static/echosign-cla.html':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/gerrit/echosign-cla.html',
-    replace => true,
-    require => Class['::gerrit'],
-  }
-
   file { '/home/gerrit2/review_site/static/cla.html':
     ensure  => present,
     owner   => 'root',
