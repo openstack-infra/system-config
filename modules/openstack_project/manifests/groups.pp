@@ -18,6 +18,7 @@ class openstack_project::groups (
   $site_admin_password = '',
   $site_mysql_host     = '',
   $site_mysql_password = '',
+  $site_mysql_user = 'groups',
   $conf_cron_key = '',
   $sysadmins = [],
   $site_ssl_cert_file_contents = undef,
@@ -48,7 +49,7 @@ class openstack_project::groups (
     site_name                    => 'groups.openstack.org',
     site_root                    => '/srv/vhosts/groups.openstack.org',
     site_mysql_host              => $site_mysql_host,
-    site_mysql_user              => 'groups',
+    site_mysql_user              => $site_mysql_user,
     site_mysql_password          => $site_mysql_password,
     site_mysql_database          => 'groups',
     site_vhost_root              => '/srv/vhosts',
@@ -71,6 +72,19 @@ class openstack_project::groups (
     conf_openid_provider         => 'https://openstackid.org',
     require                      => [ Class['openstack_project::server'],
       Vcsrepo['/srv/groups-static-pages'] ],
+  }
+
+  mysql_backup::backup_remote { 'groups':
+    database_host     => $site_mysql_host,
+    database_user     => $site_mysql_user,
+    database_password => $site_mysql_password,
+    require           => Class['drupal'],
+  }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-groups',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
   }
 
 }
