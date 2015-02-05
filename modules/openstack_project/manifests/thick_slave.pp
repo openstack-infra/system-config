@@ -56,7 +56,6 @@ class openstack_project::thick_slave(
     ensure => present,
   }
 
-  include pip
   # for pushing files to swift and uploading to pypi with twine
   package { 'requests':
     ensure   => latest,

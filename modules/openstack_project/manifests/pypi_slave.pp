@@ -30,18 +30,14 @@ class openstack_project::pypi_slave (
     ssh_key => $jenkins_ssh_public_key,
   }
 
-  include pip
-
   package { 'twine':
     ensure   => latest,
     provider => pip,
-    require  => Class['pip'],
   }
 
   package { 'wheel':
     ensure   => latest,
     provider => pip,
-    require  => Class['pip'],
   }
 
   file { '/home/jenkins/.pypirc':
