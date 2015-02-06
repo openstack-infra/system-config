@@ -115,6 +115,12 @@ source-files:
     tags:
       - screen
       - oslofmt
+    # even though keystone is going through apache, it modifies log
+    # format to oslo format
+  - name: logs/apache/keystone.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-n-api.txt
     tags:
       - screen
@@ -211,7 +217,7 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/horizon_error.txt
+  - name: logs/apache/horizon_error.txt
     tags:
       - apacheerror
 # TODO(clarkb) Add swift proxy logs here.
