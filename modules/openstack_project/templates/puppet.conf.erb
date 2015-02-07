@@ -4,7 +4,7 @@ vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
 server=puppetmaster.openstack.org
-certname=<%= @certname %>
+certname=<%= @certname.downcase %>
 pluginsync=true
 
 
