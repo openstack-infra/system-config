@@ -193,13 +193,11 @@ labels:
     min-ready: 8
     providers:
       - name: tripleo-test-cloud-rh1
-      - name: tripleo-test-cloud-hp1
   - name: tripleo-f20
     image: tripleo-f20
     min-ready: 8
     providers:
       - name: tripleo-test-cloud-rh1
-      - name: tripleo-test-cloud-hp1
 
 providers:
   - name: rax-dfw
@@ -862,7 +860,7 @@ providers:
     project-id: '<%= tripleo_project %>'
     auth-url: 'https://ci-overcloud.hp1.tripleo.org:13000/v2.0'
     boot-timeout: 120
-    max-servers: 90
+    max-servers: 0
     rate: 0.001
     networks:
       - net-label: default-net
