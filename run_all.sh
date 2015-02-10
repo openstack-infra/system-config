@@ -27,6 +27,7 @@ git fetch -a && git reset -q --hard @{u}
 # some times
 touch manifests/site.pp
 
+
 # It's possible for connectivity to a server or manifest application to break
 # for indeterminate periods of time, so the playbooks should be run without
 # errexit
