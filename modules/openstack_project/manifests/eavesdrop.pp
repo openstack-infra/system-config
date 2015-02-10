@@ -73,6 +73,7 @@ class openstack_project::eavesdrop (
         '#openstack-sdks',
         '#openstack-security',
         '#openstack-sprint',
+        '#openstack-stable',
         '#openstack-swift',
         '#openstack-trove',
         '#openstack-zaqar',
