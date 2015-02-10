@@ -104,6 +104,9 @@ class openstack_project::review_dev (
     version => 'e00d5af',
   }
 
+  package { 'python-launchpadlib':
+    ensure => present,
+  }
   file { '/home/gerrit2/.launchpadlib':
     ensure  => directory,
     owner   => 'gerrit2',
