@@ -27,6 +27,9 @@ git fetch -a && git reset -q --hard @{u}
 # some times
 touch manifests/site.pp
 
+# Get ref to use when updating project_config during all puppet runs
+PROJECT_CONFIG_REF=$(git ls-remote https://git.openstack.org/openstack-infra/project-config master | cut -f 1)
+
 # It's possible for connectivity to a server or manifest application to break
 # for indeterminate periods of time, so the playbooks should be run without
 # errexit
