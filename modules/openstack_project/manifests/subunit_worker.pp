@@ -30,19 +30,4 @@ class openstack_project::subunit_worker (
     db_host            => $subunit2sql_db_host,
     db_pass            => $subunit2sql_db_pass,
   }
-  subunit2sql::worker { 'B':
-    config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    db_host            => $subunit2sql_db_host,
-    db_pass            => $subunit2sql_db_pass,
-  }
-  subunit2sql::worker { 'C':
-    config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    db_host            => $subunit2sql_db_host,
-    db_pass            => $subunit2sql_db_pass,
-  }
-  subunit2sql::worker { 'D':
-    config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    db_host            => $subunit2sql_db_host,
-    db_pass            => $subunit2sql_db_pass,
-  }
 }
