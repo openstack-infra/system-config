@@ -1,10 +1,24 @@
 ---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    # Note that git module does ls-remote if clone is set to no and places
+    # the remote_head value in returndict.after
+    - git: repo=https://git.openstack.org/openstack-infra/project-config clone=no
+      register: gitinfo
 - hosts: git0*
   gather_facts: false
   max_fail_percentage: 1
   roles:
-    - { role: puppet, puppetmaster: puppetmaster.openstack.org }
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
+      facts:
+        project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
 - hosts: review.openstack.org
   gather_facts: false
   roles:
-    - { role: puppet, puppetmaster: puppetmaster.openstack.org }
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
+      facts:
+        project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
