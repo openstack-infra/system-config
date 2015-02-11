@@ -16,12 +16,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Test condition to install puppet 3
-PUPPET_VERSION=${PUPPET_VERSION:-3}
-if [ "$PUPPET_VERSION" = '3' ]; then
-    THREE=yes
-    echo "Running in 3 mode"
-fi
 
 #
 # Distro identification functions
@@ -67,10 +61,6 @@ function setup_puppet_fedora {
 
 
     mkdir -p /etc/puppet/modules/
-    if [ "$THREE" != 'yes' ]; then
-        gem install hiera hiera-puppet
-        ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/
-    fi
 
     # Puppet expects the pip command named as pip-python on
     # Fedora, as per the packaged command name.  However, we're
@@ -140,10 +130,6 @@ enabled=1
 gpgcheck=1
 EOF
 
-    if [ "$THREE" != 'yes' ]; then
-        echo 'exclude=puppet-2.8* puppet-2.9* puppet-3* facter-2*' >> /etc/yum.repos.d/puppetlabs.repo
-    fi
-
     yum update -y
 
     # see comments in setup_puppet_fedora
@@ -156,23 +142,11 @@ function setup_puppet_ubuntu {
             --assume-yes install -y --force-yes lsb-release
     fi
 
-    lsbdistcodename=`lsb_release -c -s`
-    if [ $lsbdistcodename != 'trusty' ] ; then
-        rubypkg=rubygems
-    else
-        rubypkg=ruby
-        THREE=yes
-    fi
+    rubypkg=ruby
 
-    if [ "$THREE" == 'yes' ]; then
-        PUPPET_VERSION=3.*
-        PUPPETDB_VERSION=2.*
-        FACTER_VERSION=2.*
-    else
-        PUPPET_VERSION=2.7*
-        PUPPETDB_VERSION=1.*
-        FACTER_VERSION=1.*
-    fi
+    PUPPET_VERSION=3.*
+    PUPPETDB_VERSION=2.*
+    FACTER_VERSION=2.*
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
