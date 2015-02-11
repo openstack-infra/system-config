@@ -9,6 +9,9 @@ class openstack_project::static (
   $swift_region_name = '',
   $swift_default_container = '',
   $project_config_repo = '',
+  $security_ssl_cert_file_contents,
+  $security_ssl_key_file_contents,
+  $security_ssl_chain_file_contents,
 ) {
 
   class { 'openstack_project::server':
@@ -211,9 +214,11 @@ class openstack_project::static (
   # Security
 
   apache::vhost { 'security.openstack.org':
-    port     => 80,
+    port     => 443,
     priority => '50',
     docroot  => '/srv/static/security',
+    template => 'openstack_project/security.vhost.erb',
+    ssl      => true,
     require  => File['/srv/static/security'],
   }
 
@@ -222,6 +227,50 @@ class openstack_project::static (
     owner   => 'jenkins',
     group   => 'jenkins',
     require => User['jenkins'],
+  }
+
+  file { '/etc/ssl/certs':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { '/etc/ssl/private':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+
+  file { '/etc/ssl/certs/security.openstack.org.pem':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    content => $security_ssl_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => Apache::Vhost['security.openstack.org'],
+  }
+
+  file { '/etc/ssl/private/security.openstack.org.key':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
+    content => $security_ssl_key_file_contents,
+    require => File['/etc/ssl/private'],
+    before  => Apache::Vhost['security.openstack.org'],
+  }
+
+  file { '/etc/ssl/certs/security.openstack.org_intermediate.pem':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    content => $security_ssl_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => Apache::Vhost['security.openstack.org'],
   }
 
   ###########################################################
