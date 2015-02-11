@@ -1,0 +1,40 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+<VirtualHost <%= @vhost_name %>:80>
+  ServerName <%= @srvname %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+<% end -%>
+  RewriteEngine On
+  RewriteRule ^/(.*) https://<%= @vhost_name %>/$1 [last,redirect=permanent]
+  LogLevel warn
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost <%= @vhost_name %>:443>
+  ServerName <%= @srvname %>
+  DocumentRoot <%= @docroot %>
+  SSLEngine on
+  SSLProtocol All -SSLv2 -SSLv3
+  SSLCertificateFile /etc/ssl/certs/<%= @name %>.pem
+  SSLCertificateKeyFile /etc/ssl/private/<%= @name %>.key
+  SSLCertificateChainFile /etc/ssl/certs/<%= @name %>_intermediate.pem
+  <Directory <%= @docroot %>>
+    Options <%= @options %>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+  LogLevel warn
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>
+</IfModule>

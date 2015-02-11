@@ -428,14 +428,17 @@ node 'storyboard.openstack.org' {
 # Node-OS: precise
 node 'static.openstack.org' {
   class { 'openstack_project::static':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins               => hiera('sysadmins', []),
-    swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
-    swift_user              => 'infra-files-ro',
-    swift_key               => hiera('infra_files_ro_password', 'XXX'),
-    swift_tenant_name       => hiera('infra_files_tenant_name', 'tenantname'),
-    swift_region_name       => 'DFW',
-    swift_default_container => 'infra-files',
+    project_config_repo              => 'https://git.openstack.org/openstack-infra/project-config',
+    sysadmins                        => hiera('sysadmins', []),
+    swift_authurl                    => 'https://identity.api.rackspacecloud.com/v2.0/',
+    swift_user                       => 'infra-files-ro',
+    swift_key                        => hiera('infra_files_ro_password', 'XXX'),
+    swift_tenant_name                => hiera('infra_files_tenant_name', 'tenantname'),
+    swift_region_name                => 'DFW',
+    swift_default_container          => 'infra-files',
+    security_ssl_cert_file_contents  => hiera('security_ssl_cert_file_contents', 'XXX'),
+    security_ssl_key_file_contents   => hiera('security_ssl_key_file_contents', 'XXX'),
+    security_ssl_chain_file_contents => hiera('security_ssl_chain_file_contents', 'XXX'),
   }
 }
 
