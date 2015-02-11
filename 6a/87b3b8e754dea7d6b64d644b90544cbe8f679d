@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+1: Ghe Rivero <ghe.rivero@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: James Polley <jp@jamezpolley.com>
+Code-Review+1: greghaynes <greg@greghaynes.net>
+Submitted-by: Jenkins
+Submitted-at: Wed, 11 Feb 2015 14:48:10 +0000
+Reviewed-on: https://review.openstack.org/154561
+Project: openstack-infra/system-config
+Branch: refs/heads/master
