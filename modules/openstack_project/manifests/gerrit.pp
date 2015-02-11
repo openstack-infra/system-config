@@ -425,7 +425,7 @@ class openstack_project::gerrit (
 
     if ($testmode == false) {
       exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects',
+        command     => '/usr/local/bin/manage-projects -v >> /var/log/manage_projects.log 2>&1',
         timeout     => 900, # 15 minutes
         subscribe   => [
             File['/home/gerrit2/projects.yaml'],
@@ -438,6 +438,20 @@ class openstack_project::gerrit (
             File['/home/gerrit2/acls'],
             Class['jeepyb'],
           ],
+      }
+
+      include logrotate
+      logrotate::file { 'manage_projects.log':
+        log     => '/var/log/manage_projects.log',
+        options => [
+          'compress',
+          'missingok',
+          'rotate 30',
+          'daily',
+          'notifempty',
+          'copytruncate',
+        ],
+        require => Exec['manage_projects'],
       }
     }
   }
