@@ -162,6 +162,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'summitsponsors':
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Coordination among OpenStack Summit event sponsors',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-sos':
     ensure      => present,
     admin       => 'dms@danplanet.com',
