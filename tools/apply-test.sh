@@ -90,8 +90,6 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
-sudo mkdir -p /etc/puppet/environments/production
-sudo touch /etc/puppet/environments/production/environment.conf
 sudo mkdir -p /var/run/puppet
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
