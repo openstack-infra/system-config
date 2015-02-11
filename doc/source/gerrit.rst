@@ -93,9 +93,6 @@ other CI tools that get +2/-2 access on reviews.
 
 The `Release Managers` group is used for release managers.
 
-The `Stable Maintainers` group is used for people maintaining stable
-branches - often distinct from the folk maintaining projects.
-
 
 Users
 -----
@@ -207,8 +204,7 @@ High level goals:
    group of the corresponding implementation project as well as to the
    OpenStack Documentation Coordinators.
 #. Full code review of stable branches should be available to the
-   -core group of the project as well as the Stable Maintainers
-   group.
+   -stable-maint group of the project.
 #. Drivers (PTL and delegates) of client library projects should be
    able to add tags (which are automatically used to trigger
    releases).
@@ -296,16 +292,6 @@ Next, edit `project.config` to look like::
   label-Workflow = +0..+1 group Project Bootstrappers
   label-Workflow = +0..+1 group Release Managers
   owner = group Release Managers
-
-  [access "refs/heads/stable/*"]
-  exclusiveGroupPermissions = label-Code-Review label-Workflow
-  forgeAuthor = group openstack-stable-maint
-  forgeCommitter = group openstack-stable-maint
-  label-Code-Review = -2..+2 group Project Bootstrappers
-  label-Code-Review = -2..+2 group openstack-stable-maint
-  label-Code-Review = -1..+1 group Registered Users
-  label-Workflow = +0..+1 group Project Bootstrappers
-  label-Workflow = +0..+1 group openstack-stable-maint
 
   [access "refs/meta/config"]
   read = group Project Owners
