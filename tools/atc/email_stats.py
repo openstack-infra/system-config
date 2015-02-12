@@ -35,8 +35,8 @@ import yaml
 MAILTO_RE = re.compile('mailto:(.*)')
 USERNAME_RE = re.compile('username:(.*)')
 EXTRA_ATC_RE = re.compile('^[^#][^:]*: ([^\(]*) \(([^@]*@[^\)]*)\) \[[^\[]*\]')
-PROGRAMS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
-                '/reference/programs.yaml')
+PROJECTS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
+                '/reference/projects.yaml')
 EXTRA_ATCS_URL = ('https://git.openstack.org/cgit/openstack/governance/plain'
                   '/reference/extra-atcs')
 
@@ -57,7 +57,7 @@ def get_account(accounts, num):
     return a
 
 
-def project_stats(project, output, begin, end, keyfile, user):
+def repo_stats(repo, output, begin, end, keyfile, user):
     accounts = {}
 
     for row in open('accounts.tab'):
@@ -96,7 +96,7 @@ def project_stats(project, output, begin, end, keyfile, user):
 
     atcs = []
 
-    QUERY = "project:%s status:merged" % project
+    QUERY = "project:%s status:merged" % repo
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -152,7 +152,7 @@ def project_stats(project, output, begin, end, keyfile, user):
                 'gerrit query %s resume_sortkey:%s --all-approvals'
                 ' --format JSON' % (QUERY, last_sortkey))
 
-    print 'project: %s' % project
+    print 'repo: %s' % repo
     print 'examined %s changes' % count
     print 'earliest timestamp: %s' % earliest
     writer = csv.writer(open(output, 'w'))
@@ -161,13 +161,13 @@ def project_stats(project, output, begin, end, keyfile, user):
     print
 
 
-def get_projects(url):
-    programs_yaml = yaml.load(requests.get(url).text)
-    projects = []
-    for program in programs_yaml:
-        for project in programs_yaml[program]['projects']:
-            projects.append(project['repo'])
-    return projects
+def get_repos(url):
+    projects_yaml = yaml.load(requests.get(url).text)
+    repos = []
+    for project in projects_yaml:
+        for repo in projects_yaml[project]['projects']:
+            repos.append(repo['repo'])
+    return repos
 
 
 def get_extra_atcs(url):
@@ -199,16 +199,16 @@ def main():
     options, args = optparser.parse_args()
 
     if options.ref:
-        programs_url = '%s?id=%s' % (PROGRAMS_URL, options.ref)
+        projects_url = '%s?id=%s' % (PROJECTS_URL, options.ref)
         extra_atcs_url = '%s?id=%s' % (EXTRA_ATCS_URL, options.ref)
     else:
-        programs_url = PROGRAMS_URL
+        projects_url = PROJECTS_URL
         extra_atcs_url = EXTRA_ATCS_URL
 
-    for project in get_projects(programs_url):
-        output = 'out/%s.csv' % project.split('/')[-1]
-        project_stats(project, output, options.begin, options.end,
-                      options.keyfile, options.user)
+    for repo in get_repos(projects_url):
+        output = 'out/%s.csv' % repo.split('/')[-1]
+        repo_stats(repo, output, options.begin, options.end,
+                   options.keyfile, options.user)
 
     writer = csv.writer(open('out/extra-atcs.csv', 'w'))
     for atc in get_extra_atcs(extra_atcs_url):
