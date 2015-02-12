@@ -72,6 +72,7 @@ class openstack_project::review_dev (
     web_repo_url                    => 'https://git.openstack.org/cgit/',
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
+    replication_force_update        => true,
     replication                     => [
       {
         name                 => 'github',
