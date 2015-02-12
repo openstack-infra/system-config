@@ -272,9 +272,12 @@ function format_change(change, change_queue) {
 
     // Row #1 of the header (project and remaining time)
     html += '<span class="project">' + change['project'] + '</span>';
-    html += '<span class="time" title="Remaining Time">';
-    html += format_time(change['remaining_time'], true);
-    html += '</span><br/>';
+    if (change.live === true) {
+	html += '<span class="time" title="Remaining Time">';
+	html += format_time(change['remaining_time'], true);
+	html += '</span>';
+    }
+    html += '<br/>';
 
     // Row #2 of the header (change id and enqueue time)
     html += '<span class="changeid"> ';
@@ -297,9 +300,10 @@ function format_change(change, change_queue) {
         html += '&nbsp;';
     }
     html += '</span>';
-    html += '<span class="time" title="Queued Time">';
-    html += format_enqueue_time(change['enqueue_time']) + '</span>';
-
+    if (change.live === true) {
+        html += '<span class="time" title="Queued Time">';
+        html += format_enqueue_time(change['enqueue_time']) + '</span>';
+    }
     html += '</div>';
 
     // Job listing from here down
