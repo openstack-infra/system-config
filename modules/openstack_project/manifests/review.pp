@@ -134,6 +134,7 @@ class openstack_project::review (
     sysadmins                           => $sysadmins,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    replication_force_update            => true,
     replication                         => [
       {
         name                 => 'github',
