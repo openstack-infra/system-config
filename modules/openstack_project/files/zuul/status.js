@@ -108,7 +108,9 @@ function create_tree(pipeline) {
         });
         $.each(change_queue['heads'], function(head_i, head) {
             $.each(head, function(change_i, change) {
-                count += 1;
+		if (change.live === true) {
+                    count += 1;
+		}
                 var idx = tree.indexOf(change['id']);
                 if (idx > -1) {
                     change['_tree_index'] = idx;
