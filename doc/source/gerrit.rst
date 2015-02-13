@@ -281,6 +281,7 @@ Next, edit `project.config` to look like::
   label-Verified = -1..+1 group Voting Third-Party CI
   label-Workflow = -1..+0 group Change Owner
   label-Workflow = -1..+1 group Project Bootstrappers
+  rebase = group Registered Users
   submit = group Continuous Integration Tools
   submit = group Project Bootstrappers
 
