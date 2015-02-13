@@ -38,12 +38,27 @@ Requirements
 Initial setup
 =============
 
-1. Clone the CI config repository and adjust it as necessary.
+1. Manually boot a machine or VM with 3G+ of ram to be the puppetmaster.
+   $ grep Mem /proc/meminfo
+   MemTotal:        4049956 kB
+   MemFree:          137952 kB
 
-1. Manually boot a machine with ~2G of ram to be the puppetmaster.
+2. Clone the CI config repository and adjust it as necessary. Avoiding forks 
+   and overriding the default config from Infra is the suggested way to
+   customize your CI system. The CI config is split in 2 projects:
+     a) system-config
+        Contains information on how systems are operated.
+     b) project-config
+        Contains configuration data used by OpenStack projects and services.
+   For more details on the config repo split, red the following spec:
+   `http://specs.openstack.org/openstack-infra/infra-specs/specs/config-repo-split.html`_
 
-1. Follow http://ci.openstack.org/puppet.html#id2 but use your repository
-   rather than the OpenStack CI repository.
+3. Follow http://ci.openstack.org/puppet.html#id2 and use your repository
+   in addition to the OpenStack CI repository. This is appropriate to stay in
+   sync with OpenStack Infra team rolling out new functionality and at the same
+   time applying the necessary customizations through the config overrides.
+   This step consists in configuring puppetmaster to load CI config into
+   modulepath for both Infra projects and custom CI repository.
 
 Changes required
 ================
