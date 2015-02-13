@@ -38,12 +38,27 @@ Requirements
 Initial setup
 =============
 
-1. Clone the CI config repository and adjust it as necessary.
+#. Manually boot a machine or VM with 2G+ of ram to be the puppetmaster.
+   Average memory consumption is between 1GB-1.5GB with random peaks around
+   2GB for puppetdb and ruby processes.
 
-1. Manually boot a machine with ~2G of ram to be the puppetmaster.
+#. Clone the CI config repository and adjust it as necessary. Avoiding forks
+   and overriding the default config from Infra is a good practice to
+   customize your CI system. The CI config is split in 2 projects:
+   a) `system-config <https://github.com/openstack-infra/system-config>`_
+   Contains information on how systems are operated.
+   b) `project-config <https://github.com/openstack-infra/project-config/>`_
+   Contains configuration data used by OpenStack projects and services.
+   For more details on the config repo split, read the following spec:
+   `http://specs.openstack.org/openstack-infra/infra-specs/specs/config-repo-split.html`
 
-1. Follow http://ci.openstack.org/puppet.html#id2 but use your repository
-   rather than the OpenStack CI repository.
+#. Follow http://ci.openstack.org/puppet.html#id2 and use your repository
+   in addition to the OpenStack CI repository. This is appropriate to stay in
+   sync with OpenStack Infra team rolling out new functionality and at the same
+   time applying the necessary customizations through the config overrides.
+   This step consists in configuring puppetmaster to load CI config into
+   modulepath for both Infra projects and your custom CI repository.
+   The necessary changes are explained in the sections below.
 
 Changes required
 ================
