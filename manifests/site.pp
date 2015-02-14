@@ -482,6 +482,7 @@ node 'nodepool.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
     project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
@@ -524,6 +525,7 @@ node 'zuul.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node /^zm\d+\.openstack\.org$/ {
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
@@ -536,6 +538,7 @@ node /^zm\d+\.openstack\.org$/ {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
