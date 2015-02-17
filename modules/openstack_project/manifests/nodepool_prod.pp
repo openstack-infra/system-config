@@ -57,4 +57,19 @@ class openstack_project::nodepool_prod(
       User['nodepool'],
     ],
   }
+
+  # generate the nodepool.logging.conf file; this relies on nodepool
+  # being installed and being able to read /etc/nodepool/nodepool.yaml
+  file { '/etc/nodepool/nodepool.logging.conf':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'root',
+    mode    => '0400',
+    content => generate("/usr/local/bin/nodepool", "generate-log-config", "--image-log-dir", $image_log_document_root),
+    require => [
+      File['/etc/nodepool/nodepool.yaml'],
+      User['nodepool'],
+      Class['::nodepool'],
+    ],
+  }
 }
