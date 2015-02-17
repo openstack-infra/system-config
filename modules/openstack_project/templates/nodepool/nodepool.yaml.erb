@@ -852,34 +852,6 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-  - name: tripleo-test-cloud-hp1
-    service-type: 'compute'
-    service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
-    auth-url: 'https://ci-overcloud.hp1.tripleo.org:13000/v2.0'
-    boot-timeout: 120
-    max-servers: 0
-    rate: 0.001
-    networks:
-      - net-label: default-net
-      - net-label: tripleo-bm-test
-    images:
-      - name: tripleo-precise
-        base-image: 'Ubuntu Precise 12.04 LTS Server 64-bit'
-        min-ram: 8192
-        name-filter: h1
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: tripleo-f20
-        base-image: 'Fedora 20 64-bit'
-        min-ram: 8192
-        name-filter: h1
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-rh1
     service-type: 'compute'
     service-name: 'nova'
