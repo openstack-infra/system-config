@@ -57,4 +57,26 @@ class openstack_project::nodepool_prod(
       User['nodepool'],
     ],
   }
+
+  exec { 'regenerate-nodepool-logging':
+    command => "/usr/local/bin/nodepool generate-log-config --image-log-dir ${image_log_document_root} > /etc/nodepool/nodepool.logging.conf.generated",
+    creates => '/etc/nodepool.logging.conf.generated',
+    user    => 'root',
+    require => [
+      File['/etc/nodepool/nodepool.yaml'],
+      Class['::nodepool'],
+    ],
+  }
+
+  file { '/etc/nodepool/nodepool.logging.conf':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'root',
+    mode    => '0400',
+    content => '/etc/nodepool.logging.conf.generated',
+    require => [
+      Exec['regenerate-nodepool-logging'],
+      User['nodepool'],
+    ],
+  }
 }
