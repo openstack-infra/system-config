@@ -18,6 +18,7 @@ class openstack_project::zuul_prod(
   $swift_region_name = '',
   $swift_default_container = '',
   $swift_default_logserver_prefix = '',
+  $swift_default_expiry = 7200,
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
@@ -58,6 +59,7 @@ class openstack_project::zuul_prod(
     swift_region_name              => $swift_region_name,
     swift_default_container        => $swift_default_container,
     swift_default_logserver_prefix => $swift_default_logserver_prefix,
+    swift_default_expiry           => $swift_default_expiry,
   }
 
   class { '::zuul::server':
