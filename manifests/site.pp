@@ -498,6 +498,7 @@ node 'zuul.openstack.org' {
     swift_region_name              => 'DFW',
     swift_default_container        => 'infra-files',
     swift_default_logserver_prefix => 'http://logs.openstack.org/',
+    swift_default_expiry           => 14400,
     zuul_url                       => 'http://zuul.openstack.org/p',
     sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.openstack.org',
