@@ -47,15 +47,15 @@ class openstack_project::storyboard(
     rabbitmq_user_password => $rabbitmq_password,
     enable_token_cleanup   => true,
     worker_count           => 5,
-    ssl_cert_content => $ssl_cert_file_contents,
-    ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
-    ssl_key_content  => $ssl_key_file_contents,
-    ssl_key          => '/etc/ssl/private/storyboard.openstack.org.key',
-    ssl_ca_content   => $ssl_chain_file_contents,
+    ssl_cert_content       => $ssl_cert_file_contents,
+    ssl_cert               => '/etc/ssl/certs/storyboard.openstack.org.pem',
+    ssl_key_content        => $ssl_key_file_contents,
+    ssl_key                => '/etc/ssl/private/storyboard.openstack.org.key',
+    ssl_ca_content         => $ssl_chain_file_contents,
   }
 
   # Install all the things.
-  include ::storyboard::cert
+  include ::storyboard::apache::https
   include ::storyboard::rabbit
   include ::storyboard::mysql
   include ::storyboard::application
