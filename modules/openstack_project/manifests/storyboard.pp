@@ -30,7 +30,23 @@ class openstack_project::storyboard(
     require           => Class['::storyboard::application'],
   }
 
-  class { '::storyboard::cert':
+  # Set all the configuration parameters for storyboard.
+  class { '::storyboard::params':
+    hostname               => $::fqdn,
+    openid_url             => $openid_url,
+    valid_oauth_clients    => [$hostname, 'docs-draft.openstack.org'],
+    enable_cron            => false,
+    cors_allowed_origins   => [
+      'https://storyboard.openstack.org',
+      'http://docs-draft.openstack.org',
+    ],
+    mysql_host             => $mysql_host,
+    mysql_user             => $mysql_user,
+    mysql_user_password    => $mysql_password,
+    rabbitmq_user          => $rabbitmq_user,
+    rabbitmq_user_password => $rabbitmq_password,
+    enable_token_cleanup   => true,
+    worker_count           => 5,
     ssl_cert_content => $ssl_cert_file_contents,
     ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
     ssl_key_content  => $ssl_key_file_contents,
@@ -38,33 +54,12 @@ class openstack_project::storyboard(
     ssl_ca_content   => $ssl_chain_file_contents,
   }
 
-  class { '::storyboard::application':
-    hostname               => $::fqdn,
-    cors_allowed_origins   => [
-      'https://storyboard.openstack.org',
-      'http://docs-draft.openstack.org',
-    ],
-    cors_max_age           => 3600,
-    openid_url             => $openid_url,
-    mysql_host             => $mysql_host,
-    mysql_database         => 'storyboard',
-    mysql_user             => $mysql_user,
-    mysql_user_password    => $mysql_password,
-    rabbitmq_host          => 'localhost',
-    rabbitmq_port          => 5672,
-    rabbitmq_vhost         => '/',
-    rabbitmq_user          => $rabbitmq_user,
-    rabbitmq_user_password => $rabbitmq_password,
-  }
-
-  class { '::storyboard::rabbit':
-    rabbitmq_user          => $rabbitmq_user,
-    rabbitmq_user_password => $rabbitmq_password,
-  }
-
-  class { '::storyboard::workers':
-    worker_count => 5,
-  }
+  # Install all the things.
+  include ::storyboard::cert
+  include ::storyboard::rabbit
+  include ::storyboard::mysql
+  include ::storyboard::application
+  include ::storyboard::workers
 
   # Load the projects into the database.
   class { '::storyboard::load_projects':
