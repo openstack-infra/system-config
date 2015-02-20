@@ -55,7 +55,7 @@ class openstack_project::storyboard(
   }
 
   # Install all the things.
-  include ::storyboard::cert
+  include ::storyboard::apache::https
   include ::storyboard::rabbit
   include ::storyboard::mysql
   include ::storyboard::application
