@@ -1,0 +1,4 @@
+---
+- src: git+git://git.openstack.org/openstack-infra/ansible-puppet.git
+  version: HEAD
+  name: puppet
