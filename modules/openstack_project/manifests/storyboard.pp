@@ -12,6 +12,7 @@ class openstack_project::storyboard(
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
   $project_config_repo = '',
+  $valid_oauth_clients = [],
 ) {
 
   class { 'project_config':
@@ -44,6 +45,7 @@ class openstack_project::storyboard(
       'https://storyboard.openstack.org',
       'http://docs-draft.openstack.org',
     ],
+    valid_oauth_clients    => $valid_oauth_clients,
     cors_max_age           => 3600,
     openid_url             => $openid_url,
     mysql_host             => $mysql_host,
