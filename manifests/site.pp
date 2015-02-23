@@ -421,9 +421,14 @@ node 'storyboard.openstack.org' {
     ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents', 'XXX'),
+    hostname                => $::fqdn,
     valid_oauth_clients     => [
       $::fqdn,
       'docs-draft.openstack.org',
+    ],
+    cors_allowed_origins     => [
+      "https://${::fqdn}",
+      'http://docs-draft.openstack.org',
     ],
   }
 }
