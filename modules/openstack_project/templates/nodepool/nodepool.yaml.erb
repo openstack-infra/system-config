@@ -65,26 +65,18 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  # Special dib specific labels for testing dib based images
+  # in new providers as we dibify them.
   - name: devstack-trusty-dib
     image: devstack-trusty-dib
     ready-script: configure_mirror.sh
-    min-ready: 1
-    providers:
-      - name: hpcloud-b1
-      - name: hpcloud-b2
-      - name: hpcloud-b3
-      - name: hpcloud-b4
-      - name: hpcloud-b5
+    min-ready: 0
+    providers: []
   - name: devstack-precise-dib
     image: devstack-precise-dib
     ready-script: configure_mirror.sh
-    min-ready: 1
-    providers:
-      - name: hpcloud-b1
-      - name: hpcloud-b2
-      - name: hpcloud-b3
-      - name: hpcloud-b4
-      - name: hpcloud-b5
+    min-ready: 0
+    providers: []
   - name: bare-trusty
     image: bare-trusty
     ready-script: configure_mirror.sh
@@ -457,11 +449,6 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-dib
-        min-ram: 30720
-        diskimage: devstack-precise-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -471,11 +458,6 @@ providers:
       - name: devstack-trusty
         min-ram: 30720
         diskimage: devstack-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-trusty-dib
-        min-ram: 30720
-        diskimage: devstack-trusty-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
@@ -541,11 +523,6 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-dib
-        min-ram: 30720
-        diskimage: devstack-precise-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -555,11 +532,6 @@ providers:
       - name: devstack-trusty
         min-ram: 30720
         diskimage: devstack-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-trusty-dib
-        min-ram: 30720
-        diskimage: devstack-trusty-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
@@ -625,11 +597,6 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-dib
-        min-ram: 30720
-        diskimage: devstack-precise-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -639,11 +606,6 @@ providers:
       - name: devstack-trusty
         min-ram: 30720
         diskimage: devstack-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-trusty-dib
-        min-ram: 30720
-        diskimage: devstack-trusty-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
@@ -710,11 +672,6 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-dib
-        min-ram: 30720
-        diskimage: devstack-precise-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -724,11 +681,6 @@ providers:
       - name: devstack-trusty
         min-ram: 30720
         diskimage: devstack-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-trusty-dib
-        min-ram: 30720
-        diskimage: devstack-trusty-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
@@ -796,11 +748,6 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-precise-dib
-        min-ram: 30720
-        diskimage: devstack-precise-dib
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -810,11 +757,6 @@ providers:
       - name: devstack-trusty
         min-ram: 30720
         diskimage: devstack-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: devstack-trusty-dib
-        min-ram: 30720
-        diskimage: devstack-trusty-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
@@ -967,33 +909,7 @@ diskimages:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       QEMU_IMG_OPTIONS: compat=0.10
-  - name: devstack-trusty-dib
-    elements:
-      - ubuntu
-      - vm
-      - openstack-repos
-      - puppet
-      - nodepool-base
-      - node-devstack
-    release: trusty
-    env-vars:
-      TMPDIR: /opt/dib_tmp
-      DIB_IMAGE_CACHE: /opt/dib_cache
-      QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-precise
-    elements:
-      - ubuntu
-      - vm
-      - openstack-repos
-      - puppet
-      - nodepool-base
-      - node-devstack
-    release: precise
-    env-vars:
-      TMPDIR: /opt/dib_tmp
-      DIB_IMAGE_CACHE: /opt/dib_cache
-      QEMU_IMG_OPTIONS: compat=0.10
-  - name: devstack-precise-dib
     elements:
       - ubuntu
       - vm
