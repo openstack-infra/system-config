@@ -25,9 +25,9 @@ class openstack_project::lists(
   }
 
   realize (
-    User::Virtual::Localuser['oubiwann'],
-    User::Virtual::Localuser['rockstar'],
     User::Virtual::Localuser['smaffulli'],
+    user::virtual::disable{'rockstar':},
+    user::virtual::disable{'oubiwann':}
   )
 
   include bup
