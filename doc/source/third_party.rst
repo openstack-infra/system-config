@@ -191,6 +191,12 @@ Note you should also subscribe to the `third-party-announce
 list to keep on top of announcements there which can include account
 disablement notices.
 
+It would also be a good idea to contact the `Third Party Coordinators
+<https://review.openstack.org/#/admin/groups/440>`_ asking to add your account
+to the `Third Party CI mail filter list
+<https://review.openstack.org/#/admin/groups/270>`_. This is necessary to keep
+Gerrit from sending email messages every time an account comments on a patch.
+
 Once you have done this you will have everything you need to comment on
 Gerrit changes from our CI system but you will not be able to vote +/-1
 Verified on changes. To get voting rights you will need to get the release
