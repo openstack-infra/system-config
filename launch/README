@@ -18,6 +18,7 @@ To launch a node in the OpenStack CI account (production servers)::
   export FLAVOR="8 GB Performance"
   export FQDN=servername.openstack.org
   sudo puppet cert generate $FQDN
+  cd /opt/system-config/production/launch/
   ./launch-node.py $FQDN --flavor "$FLAVOR"
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
