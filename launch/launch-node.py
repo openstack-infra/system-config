@@ -32,6 +32,7 @@ NOVA_PASSWORD = os.environ['OS_PASSWORD']
 NOVA_URL = os.environ['OS_AUTH_URL']
 NOVA_PROJECT_ID = os.environ['OS_TENANT_NAME']
 NOVA_REGION_NAME = os.environ['OS_REGION_NAME']
+NOVA_SERVICE_NAME = os.environ.get('OS_SERVICE_NAME', 'compute')
 NOVACLIENT_INSECURE = os.getenv('NOVACLIENT_INSECURE', None)
 IPV6 = os.environ.get('IPV6', '0') is 1
 
@@ -43,6 +44,7 @@ def get_client():
     kwargs = {}
     kwargs['region_name'] = NOVA_REGION_NAME
     kwargs['service_type'] = 'compute'
+    kwargs['service_name'] = NOVA_SERVICE_NAME
 
     if NOVACLIENT_INSECURE:
         kwargs['insecure'] = True
