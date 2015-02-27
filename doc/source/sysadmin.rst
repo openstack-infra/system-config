@@ -336,6 +336,10 @@ Log into puppetmaster.openstack.org and run::
 
     sudo vgextend main ${DEVICE}1
 
+* However, if the volume group does not exist yet, you can create it::
+
+    sudo vgcreate main ${DEVICE}1
+
 Creating a New Logical Volume
 -----------------------------
 
