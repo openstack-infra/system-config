@@ -210,8 +210,8 @@ On the backup servers::
 
   sudo su -
   BUPUSER=bup-<short-servername>  # eg, bup-jenkins-dev
-  useradd -r $BUPUSER -s /bin/bash -m
-  cd /home/$BUPUSER
+  useradd -r $BUPUSER -s /bin/bash -d /opt/backups/$BUPUSER -m
+  cd /opt/backups/$BUPUSER
   mkdir .ssh
   cat >.ssh/authorized_keys
 
