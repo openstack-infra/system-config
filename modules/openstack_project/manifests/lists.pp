@@ -271,4 +271,13 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'test-certification-standards':
+    ensure      => present,
+    admin       => 'seanroberts66@gmail.com',
+    password    => $listpassword,
+    description => 'OpenStack Foundation test certification standards
+    working group list.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
