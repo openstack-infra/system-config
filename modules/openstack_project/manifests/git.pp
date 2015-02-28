@@ -40,7 +40,7 @@ class openstack_project::git (
   }
 
   class { 'haproxy':
-    enable         => true,
+    service_ensure => 'running',
     global_options => {
       'log'     => '127.0.0.1 local0',
       'chroot'  => '/var/lib/haproxy',
