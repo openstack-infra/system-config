@@ -21,9 +21,9 @@ At a Glance
   * https://puppetlabs.com/
 :Bugs:
   * https://storyboard.openstack.org/#!/project/748
-  * http://projects.puppetlabs.com/
+  * https://tickets.puppetlabs.com/
 :Resources:
-  * `Puppet Language Reference <http://docs.puppetlabs.com/references/2.7.latest/type.html>`_
+  * `Puppet Language Reference <https://docs.puppetlabs.com/references/latest/type.html>`_
 
 Puppet Master
 -------------
@@ -34,15 +34,12 @@ ship the data to the clients.
 The cron jobs, current configuration files and more can be done with ``puppet
 apply`` but first some bootstrapping needs to be done.
 
-First want to install these from puppetlabs' apt repo. We have not yet migrated
-to puppet 3, so we pin puppet to 2.x. There is a script in the root of the
-system-config repository that will setup appropriate pinning and install the
-puppet client. After that installing the puppetmaster and hiera (used to
+You want to install these from puppetlabs' apt repo. There is a script in the
+root of the system-config repository that will setup and install the
+puppet client. After that you must install the puppetmaster and hiera (used to
 maintain secrets on the puppet master).
 
-Please note: Fedora F19 and Ubuntu Raring and above cannot successfully run an
-OpenStack-CI puppetmaster due to new Ruby and older Puppet not being
-compatible, so be sure to use an older release - e.g. Ubuntu Precise.
+Puppet 3 masters can run on Trusty, Precise, and Centos 6.
 
 .. code-block:: bash
 
