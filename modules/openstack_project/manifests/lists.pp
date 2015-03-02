@@ -117,6 +117,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-tw':
+    ensure      => present,
+    admin       => 'macjacktw@hotmail.com',
+    password    => $listpassword,
+    description => 'OpenStack Taiwan User Group 臺灣使用者郵件群組)',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-ko':
     ensure      => present,
     admin       => 'ianyrchoi@gmail.com',
