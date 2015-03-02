@@ -191,4 +191,16 @@ class openstack_project::puppetmaster (
   file { '/etc/ansible/clean_workspaces.yaml':
     ensure => absent,
   }
+
+  file { '/etc/ansible/delete_from_puppet.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/delete_from_puppet.yaml',
+    require => Class[ansible],
+  }
+
+  file { '/etc/ansible/rename.yaml':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/rename.yaml',
+    require => Class[ansible],
+  }
 }

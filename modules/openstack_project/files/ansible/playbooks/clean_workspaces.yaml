@@ -1,4 +1,9 @@
 ---
+<<<<<<< HEAD:modules/openstack_project/files/ansible/playbooks/clean_workspaces.yaml
 - hosts: '*.slave.openstack.org'
+=======
+- hosts: "*.slave.openstack.org"
+  gather_facts: false
+>>>>>>> 19dd15a... Add two more useful ansible playbooks:modules/openstack_project/files/ansible/clean_workspaces.yaml
   tasks:
-    - shell: 'rm -rf ~jenkins/workspace/*{{ project }}*'
+    - command: 'rm -rf ~jenkins/workspace/*{{ project | basename }}*'
