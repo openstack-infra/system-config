@@ -1,0 +1,17 @@
+Verified+2: Jenkins
+Code-Review+1: Tom Fifield <tom@openstack.org>
+Code-Review+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+1: Ghe Rivero <ghe.rivero@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Paul Belanger <paul.belanger@polybeacon.com>
+Code-Review+1: macjack <macjacktw@hotmail.com>
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Hugo Kou <tonytkdk@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 02 Mar 2015 18:59:35 +0000
+Reviewed-on: https://review.openstack.org/158923
+Project: openstack-infra/system-config
+Branch: refs/heads/master
