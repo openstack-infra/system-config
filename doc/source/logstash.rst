@@ -195,6 +195,10 @@ redundancy to distribute disk utilization and provide high availability.
 Each replica is broken into multiple shards providing inceased indexing
 and search throughput as each shard is essentially a valid mini index.
 
+To check on the cluster health, run this command on any es.* node::
+
+  curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
+
 Kibana
 ------
 
