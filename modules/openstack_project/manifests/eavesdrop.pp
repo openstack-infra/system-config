@@ -43,6 +43,7 @@ class openstack_project::eavesdrop (
         '#murano',
         '#openstack',
         '#openstack-api',
+        '#openstack-ansible',
         '#openstack-barbican',
         '#openstack-blazar',
         '#openstack-ceilometer',
