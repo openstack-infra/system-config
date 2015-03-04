@@ -23,6 +23,7 @@ export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
 cd /opt/system-config/production
 git fetch -a && git reset -q --hard @{u}
 ./install_modules.sh
+ansible-galaxy install -r roles.yml
 
 # One must touch manifests/site.pp to trick puppet into re-loading modules
 # some times
