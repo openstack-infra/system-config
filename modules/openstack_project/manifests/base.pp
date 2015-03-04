@@ -10,8 +10,11 @@ class openstack_project::base(
     include apt
   }
   include openstack_project::params
-  include openstack_project::users
   include sudoers
+
+  class { 'openstack_project::users':
+    stage => 'setup',
+  }
 
   case $pin_puppet {
     '2.7.': {

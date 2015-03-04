@@ -38,6 +38,8 @@ $elasticsearch_clients = [
   'subunit-worker01.openstack.org',
 ]
 
+include stdlib
+
 #
 # Default: should at least behave like an openstack server
 #
