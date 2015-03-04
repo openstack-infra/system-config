@@ -42,6 +42,7 @@ class openstack_project::eavesdrop (
         '#magnetodb',
         '#murano',
         '#openstack',
+        '#openstack-api',
         '#openstack-barbican',
         '#openstack-blazar',
         '#openstack-ceilometer',
