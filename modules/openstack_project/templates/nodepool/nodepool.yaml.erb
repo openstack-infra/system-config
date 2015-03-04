@@ -188,6 +188,16 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-fedora21-dib
+    image: devstack-fedora21-dib
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 8
@@ -513,6 +523,12 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -597,6 +613,11 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -679,6 +700,11 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b4
@@ -766,6 +792,11 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
     service-type: 'compute'
@@ -850,6 +881,11 @@ providers:
       - name: devstack-centos7-dib
         min-ram: 30720
         diskimage: devstack-centos7-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora21-dib
+        min-ram: 30720
+        diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-hp1
@@ -1017,4 +1053,18 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+ - name: devstack-fedora21-dib
+   elements:
+      - fedora
+      - vm
+      - puppet
+      - nodepool-base
+      - node-devstack
+   release: 21
+   env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_CLOUD_IMAGES: https://download.fedoraproject.org/pub/fedora/linux/releases/21/Cloud/Images/x86_64/Fedora-Cloud-Base-20141203-21.x86_64.qcow2
+      BASE_IMAGE_FILE: Fedora-Cloud-Base-20141203-21.x86_64.qcow2
       QEMU_IMG_OPTIONS: compat=0.10
