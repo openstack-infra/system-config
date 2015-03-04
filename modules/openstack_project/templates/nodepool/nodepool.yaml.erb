@@ -1054,15 +1054,15 @@ diskimages:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       QEMU_IMG_OPTIONS: compat=0.10
- - name: devstack-fedora21-dib
-   elements:
+  - name: devstack-fedora21-dib
+    elements:
       - fedora
       - vm
       - puppet
       - nodepool-base
       - node-devstack
-   release: 21
-   env-vars:
+    release: 21
+    env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       DIB_CLOUD_IMAGES: https://download.fedoraproject.org/pub/fedora/linux/releases/21/Cloud/Images/x86_64/Fedora-Cloud-Base-20141203-21.x86_64.qcow2
