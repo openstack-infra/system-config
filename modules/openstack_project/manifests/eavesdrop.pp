@@ -37,6 +37,7 @@ class openstack_project::eavesdrop (
     use_ssl     => 'True',
     vhost_extra => $vhost_extra,
     channels    => [
+        '#cloudkitty',
         '#dox',
         '#heat',
         '#magnetodb',
