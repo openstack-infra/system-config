@@ -38,6 +38,19 @@ $elasticsearch_clients = [
   'subunit-worker01.openstack.org',
 ]
 
+# We must have login.defs before any users are created
+Package {
+  require => File['/etc/login.defs'],
+}
+
+User {
+  require => File['/etc/login.defs'],
+}
+
+Group {
+  require => File['/etc/login.defs'],
+}
+
 #
 # Default: should at least behave like an openstack server
 #
