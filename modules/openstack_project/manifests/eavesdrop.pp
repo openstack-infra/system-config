@@ -60,6 +60,7 @@ class openstack_project::eavesdrop (
         '#openstack-keystone',
         '#openstack-ko',
         '#openstack-lbaas',
+        '#openstack-manila',
         '#openstack-meeting',
         '#openstack-meeting-alt',
         '#openstack-meeting-3',
