@@ -1,5 +1,5 @@
 ---
-- hosts: "!review.openstack.org:!git0*:!afs*"
+- hosts: "!afs*"
   gather_facts: false
   roles:
     - { role: puppet, puppetmaster: puppetmaster.openstack.org }
