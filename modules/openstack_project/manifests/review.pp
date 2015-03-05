@@ -190,7 +190,7 @@ class openstack_project::review (
   }
 
   gerrit::plugin { 'javamelody':
-    version => 'e00d5af',
+    version => '46f7880',
   }
 
   class { 'gerritbot':
