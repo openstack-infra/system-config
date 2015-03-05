@@ -22,6 +22,8 @@ class openstack_project::status (
   include openstack_project
   class { 'jenkins::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
+    gitfullname => $openstack_project::jenkins_gitfullname,
+    gitemail    => $openstack_project::jenkins_gitemail,
   }
 
   include apache

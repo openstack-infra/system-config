@@ -25,9 +25,13 @@ class openstack_project::pypi_slave (
   $mavencentral_password,
   $puppet_forge_username,
   $puppet_forge_password,
+  $jenkins_gitfullname,
+  $jenkins_gitemail,
 ) {
   class { 'openstack_project::slave':
-    ssh_key => $jenkins_ssh_public_key,
+    ssh_key     => $jenkins_ssh_public_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
 
   include pip

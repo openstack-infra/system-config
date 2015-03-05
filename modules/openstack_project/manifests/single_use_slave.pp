@@ -16,6 +16,8 @@ class openstack_project::single_use_slave (
   $all_mysql_privs = false,
   $enable_unbound = true,
   $ssh_key = $openstack_project::jenkins_ssh_key,
+  $gitfullname = $openstack_project::jenkins_gitfullname,
+  $gitemail = $openstack_project::jenkins_gitemail,
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) inherits openstack_project {
   class { 'openstack_project::template':
@@ -40,6 +42,8 @@ class openstack_project::single_use_slave (
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
+    gitfullname     => $gitfullname,
+    gitemail        => $gitemail,
   }
 
   class { 'openstack_project::slave_common':
