@@ -70,6 +70,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $jeepyb_git_source_repo = 'https://git.openstack.org/openstack-infra/jeepyb',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -93,13 +94,14 @@ class openstack_project::gerrit (
       'openstack/tempest',
       'openstack-dev/devstack',
     ],
-    container      => 'rss',
-    feed           => 'openstackwatch.xml',
-    json_url       => 'https://review.openstack.org/query?q=status:open',
-    swift_username => $swift_username,
-    swift_password => $swift_password,
-    swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
-    auth_version   => '1.0',
+    container       => 'rss',
+    feed            => 'openstackwatch.xml',
+    json_url        => 'https://review.openstack.org/query?q=status:open',
+    swift_username  => $swift_username,
+    swift_password  => $swift_password,
+    swift_auth_url  => 'https://auth.api.rackspacecloud.com/v1.0',
+    auth_version    => '1.0',
+    git_source_repo => $jeepyb_git_source_repo,
   }
 
   class { '::gerrit':

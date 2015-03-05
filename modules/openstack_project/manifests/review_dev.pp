@@ -24,6 +24,7 @@ class openstack_project::review_dev (
   $swift_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
+  $jeepyb_git_source_repo = 'https://git.openstack.org/openstack-infra/jeepyb',
 ) {
 
   realize (
@@ -72,6 +73,7 @@ class openstack_project::review_dev (
     web_repo_url                    => 'https://git.openstack.org/cgit/',
     swift_username                  => $swift_username,
     swift_password                  => $swift_password,
+    jeepyb_git_source_repo          => $jeepyb_git_source_repo,
     replication                     => [
       {
         name                 => 'github',
