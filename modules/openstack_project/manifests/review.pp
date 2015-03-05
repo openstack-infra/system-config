@@ -81,6 +81,8 @@ class openstack_project::review (
   $swift_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
+  # For jeepyb
+  $jeepyb_git_source_repo = 'https://git.openstack.org/openstack-infra/jeepyb',
 ) {
 
   class { 'project_config':
@@ -134,6 +136,7 @@ class openstack_project::review (
     sysadmins                           => $sysadmins,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    jeepyb_git_source_repo              => $jeepyb_git_source_repo,
     replication                         => [
       {
         name                 => 'github',

@@ -70,6 +70,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $jeepyb_git_source_repo = 'https://git.openstack.org/openstack-infra/jeepyb',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -424,6 +425,10 @@ class openstack_project::gerrit (
     }
 
     if ($testmode == false) {
+      class {'jeepyb':
+          git_source_repo => $jeepyb_git_source_repo,
+      }
+
       exec { 'manage_projects':
         command     => '/usr/local/bin/manage-projects -v >> /var/log/manage_projects.log 2>&1',
         timeout     => 900, # 15 minutes
