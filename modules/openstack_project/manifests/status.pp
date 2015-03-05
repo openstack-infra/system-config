@@ -15,6 +15,8 @@ class openstack_project::status (
   $status_base_url = 'http://status.openstack.org/',
   $status_title = 'OpenStack',
   $graphite_render_url = 'http://graphite.openstack.org/render/',
+  $jenkins_gitfullname = 'OpenStack Jenkins',
+  $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
 
   class { 'openstack_project::server':
@@ -25,6 +27,8 @@ class openstack_project::status (
   include openstack_project
   class { 'jenkins::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
 
   include apache
