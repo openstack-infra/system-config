@@ -390,16 +390,6 @@ class openstack_project::gerrit (
       }
     }
 
-    file { '/home/gerrit2/projects.yaml':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      source  => $projects_file,
-      replace => true,
-      require => Class['::gerrit'],
-    }
-
     file { '/home/gerrit2/projects.ini':
       ensure  => present,
       owner   => 'gerrit2',
@@ -410,36 +400,7 @@ class openstack_project::gerrit (
       require => Class['::gerrit'],
     }
 
-    file { '/home/gerrit2/acls':
-      ensure  => directory,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      recurse => true,
-      replace => true,
-      purge   => true,
-      force   => true,
-      source  => $acls_dir,
-      require => Class['::gerrit']
-    }
-
     if ($testmode == false) {
-      exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects -v >> /var/log/manage_projects.log 2>&1',
-        timeout     => 900, # 15 minutes
-        subscribe   => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-          ],
-        refreshonly => true,
-        logoutput   => true,
-        require     => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-            Class['jeepyb'],
-          ],
-      }
-
       include logrotate
       logrotate::file { 'manage_projects.log':
         log     => '/var/log/manage_projects.log',

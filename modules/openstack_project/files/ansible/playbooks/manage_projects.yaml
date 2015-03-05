@@ -1,0 +1,48 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+      - git:
+          repo: git://git.openstack.org/openstack-infra/project-config
+          dest: /opt/project-config
+- hosts: git0*
+  gather_facts: false
+  max_fail_percentage: 1
+  tasks:
+      - copy:
+          src: /opt/project-config/gerrit/projects.yaml
+          dest: /home/cgit/projects.yaml
+          owner: cgit
+          group: cgit
+          mode: 0444
+          force: yes
+        register: file_copied
+      - cmd: create-cgitrepos
+        environment:
+            SCRATCH_SUBPATH: zuul
+            SCRATCH_OWNER: zuul
+            SCRATCH_GROUP: zuul
+        when: file_copied.changed
+- hosts: review.openstack.org
+  gather_facts: false
+  tasks:
+      - copy:
+          src: /opt/project-config/gerrit/projects.yaml
+          dest: /home/gerrit2/projects.yaml
+          owner: gerrit2
+          group: gerrit2
+          mode: 0444
+          force: yes
+        register: file_copied
+      - copy:
+          src: /opt/project-config/gerrit/acls
+          dest: /home/gerrit2/acls
+          owner: gerrit2
+          group: gerrit2
+          mode: 0444
+          force: yes
+        register: acls_copied
+      - shell: /usr/local/bin/manage-projects -v >> /var/log/manage_projects.log 2>&1
+        timeout: 900
+        when: file_copied.changed or acls_copied.changed

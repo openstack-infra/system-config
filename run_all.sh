@@ -34,9 +34,8 @@ touch manifests/site.pp
 # errexit
 set +e
 
-# First run the git/gerrit sequence, since it's important that they all work
-# together
-ansible-playbook /etc/ansible/playbooks/remote_puppet_git.yaml
+# First run manage projects
+ansible-playbook /etc/ansible/playbooks/manage_projects.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 ansible-playbook -f 1 /etc/ansible/playbooks/remote_puppet_afs.yaml

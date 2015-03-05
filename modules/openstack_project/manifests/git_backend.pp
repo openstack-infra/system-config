@@ -86,32 +86,6 @@ class openstack_project::git_backend (
     user    => 'cgit',
   }
 
-  file { '/home/cgit/projects.yaml':
-    ensure  => present,
-    owner   => 'cgit',
-    group   => 'cgit',
-    mode    => '0444',
-    source  => $::project_config::jeepyb_project_file,
-    require => $::project_config::config_dir,
-    replace => true,
-  }
-
-  exec { 'create_cgitrepos':
-    command     => 'create-cgitrepos',
-    path        => '/bin:/usr/bin:/usr/local/bin',
-    environment => [
-      'SCRATCH_SUBPATH=zuul',
-      'SCRATCH_OWNER=zuul',
-      'SCRATCH_GROUP=zuul',
-    ],
-    require     => [
-      File['/home/cgit/projects.yaml'],
-      User['zuul'],
-    ],
-    subscribe   => File['/home/cgit/projects.yaml'],
-    refreshonly => true,
-  }
-
   if ($::osfamily == 'RedHat') {
     class { 'selinux':
       mode => 'enforcing'
