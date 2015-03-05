@@ -150,7 +150,7 @@ globally orchestrated runs to occur:
 
 .. code-block:: bash
 
-  sudo puppet agent --test --puppetdlockfile=/tmp/alt-lock-file
+  sudo puppet agent --test --agent_disabled_lockfile=/tmp/alt-lock-file
 
 
 Important Notes
