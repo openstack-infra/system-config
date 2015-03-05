@@ -9,6 +9,8 @@ class openstack_project::static (
   $swift_region_name = '',
   $swift_default_container = '',
   $project_config_repo = '',
+  $jenkins_gitfullname = '',
+  $jenkins_gitemail = '',
 ) {
 
   class { 'openstack_project::server':
@@ -22,7 +24,9 @@ class openstack_project::static (
 
   include openstack_project
   class { 'jenkins::jenkinsuser':
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key     => $openstack_project::jenkins_ssh_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
 
   include apache

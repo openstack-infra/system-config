@@ -9,10 +9,14 @@ class openstack_project::proposal_slave (
   $proposal_ssh_private_key,
   $transifex_password = '',
   $transifex_username = 'openstackci',
+  $jenkins_gitfullname = '',
+  $jenkins_gitemail = '',
 ) {
 
   class { 'openstack_project::slave':
-    ssh_key => $jenkins_ssh_public_key,
+    ssh_key     => $jenkins_ssh_public_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
 
   package { ['transifex-client', 'Babel']:

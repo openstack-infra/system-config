@@ -12,6 +12,8 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
+  $jenkins_gitfullname = '',
+  $jenkins_gitemail = '',
 ) {
 
   class { 'openstack_project::server':
@@ -22,6 +24,8 @@ class openstack_project::status (
   include openstack_project
   class { 'jenkins::jenkinsuser':
     ssh_key => $openstack_project::jenkins_ssh_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
 
   include apache
