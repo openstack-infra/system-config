@@ -12,6 +12,8 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
+  $status_base_url = 'http://status.openstack.org/',
+  $status_title = 'OpenStack',
 ) {
 
   class { 'openstack_project::server':
@@ -77,8 +79,9 @@ class openstack_project::status (
 
   file { '/srv/static/status/common.js':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/status/common.js',
+    content => template('openstack_project/status/common.js.erb'),
     require => File['/srv/static/status'],
+    replace => true,
   }
 
   file { '/srv/static/status/jquery.min.js':
