@@ -12,6 +12,7 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
+  $graphite_render_url = 'http://graphite.openstack.org/render/',
 ) {
 
   class { 'openstack_project::server':
@@ -158,13 +159,13 @@ class openstack_project::status (
 
   file { '/srv/static/status/zuul/index.html':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.html',
+    content => template('openstack_project/templates/zuul/status.html.erb'),
     require => File['/srv/static/status/zuul'],
   }
 
   file { '/srv/static/status/zuul/status.js':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/status.js',
+    content => template('openstack_project/templates/zuul/status.js.erb'),
     require => File['/srv/static/status/zuul'],
   }
 

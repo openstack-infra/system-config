@@ -300,7 +300,7 @@ progress[aria-valuenow]:before  {
       <h2> Job Stats </h2>
 
       <script type="text/javascript">
-$.fn.graphite.defaults.url = "http://graphite.openstack.org/render/";
+$.fn.graphite.defaults.url = "<%= @graphite_render_url %>";
 
 $("#graph-container").append($(new Image()).addClass('graph').graphite({
     from: "-24hours",
