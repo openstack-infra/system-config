@@ -50,7 +50,7 @@ Initial setup
    b) `project-config <http://git.openstack.org/cgit/openstack-infra/project-config/>`_
    Contains configuration data used by OpenStack projects and services.
    For more details on the config repo split, read the following spec:
-   `http://specs.openstack.org/openstack-infra/infra-specs/specs/config-repo-split.html`
+   http://specs.openstack.org/openstack-infra/infra-specs/specs/config-repo-split.html.
 
 #. Follow http://ci.openstack.org/puppet.html#id2 and use your repository
    in addition to the OpenStack CI repository. This is appropriate to stay in
@@ -63,27 +63,44 @@ Initial setup
 Changes required
 ================
 
+To run your own infrastructure we recommend you to clone the entire tree and reuse
+the system and project configurations from the OpenStack Infrastructure repositories.
+Your config overrides will be applied on top of these settings by replacing hostnames
+and class names throughout.
+
 site.pp
 ~~~~~~~
 
 This file lists the specific servers you are running. Minimally you need a
-puppetmaster, gerrit (review), jenkins (secure jobs such as making
-releases), jenkins01 (untrusted jobs from any code author), puppetboard,
-nodepool, zuul, and then one or more slaves with appropriate distro choices.
+puppetmaster, jenkins, and then one or more slaves with appropriate distro
+choices. To use all the default services that the OpenStack Infra team uses,
+you need also zuul, nodepool, and puppetboard. Unless you have a specific
+need to setup your own gerrit review system, your CI system can consume events
+from the upstream gerrit and test OpenStack patches.
 
 A minimal site.pp can be useful to start with to get up and running. E.g.
 delete all but the puppetmaster and default definitions.
+Create a node entry for each server registered on puppetmaster and the define 
+the class it belongs to. The parameters will depend on each server and you can
+use the configuration used by the Infra team as a template.
+
+Example::
+
+    node 'jenkins.example.com' {
+      class { 'your-company_openstack_project::jenkins':
+        jenkins_jobs_password   => hiera('jenkins_password'),
+        <...>
+      }
+    }
 
 modules/openstack_project
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This tree defines the shape of servers (some of which are unique, some of which
 are scaled horizonally, thus the separation). To run your own infrastructure we
-recommend you copy the entire tree, delete any servers you won't run, and
-replace hostnames and class names with yours throughout.
-
-Some templates can be used as-is by leaving their references to point
-within the openstack_project tree.
+recommend you copy the entire tree, delete (or simply ignore) any servers you won't
+run, and replace hostnames and class names with yours throughout. Some templates can
+be used as-is by leaving their references to point within the openstack_project tree.
 
 Bootstrapping
 ~~~~~~~~~~~~~
