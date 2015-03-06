@@ -147,7 +147,7 @@ function create_tree(pipeline) {
 function get_sparkline_url(pipeline_name) {
     if (!(pipeline_name in window.zuul_sparkline_urls)) {
         window.zuul_sparkline_urls[pipeline_name] = $.fn.graphite.geturl({
-            url: "http://graphite.openstack.org/render/",
+            url: "<%= @graphite_render_url %>",
             from: "-8hours",
             width: 100,
             height: 16,
