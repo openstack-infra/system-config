@@ -143,8 +143,15 @@ class openstack_project::jenkins_params {
       } else {
         $rubygems_package = 'ruby'
       }
-      $ruby1_9_1_package = 'ruby1.9.1'
-      $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
+
+      if $::lsbdistcodename == 'jessie' {
+          $ruby1_9_1_package = 'ruby'
+          $ruby1_9_1_dev_package = 'ruby-dev'
+      }
+      else {
+          $ruby1_9_1_package = 'ruby1.9.1'
+          $ruby1_9_1_dev_package = 'ruby1.9.1-dev'
+      }
       # Common Lisp interpreter, used for cl-openstack-client
       $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
