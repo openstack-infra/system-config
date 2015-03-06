@@ -15,17 +15,17 @@
 function header(activeTabName) {
   tabsName = new Array();
   tabsLink = new Array();
-  tabsName[0] = 'Status'; tabsLink[0] = 'http://status.openstack.org/';
-  tabsName[1] = 'Zuul'; tabsLink[1] = 'http://status.openstack.org/zuul/';
-  tabsName[2] = 'Rechecks'; tabsLink[2] = 'http://status.openstack.org/elastic-recheck/';
-  tabsName[3] = 'Release'; tabsLink[3] = 'http://status.openstack.org/release/';
-  tabsName[4] = 'Reviews'; tabsLink[4] = 'http://status.openstack.org/reviews/';
-  tabsName[5] = 'Bugday'; tabsLink[5] = 'http://status.openstack.org/bugday/';
+  tabsName[0] = 'Status'; tabsLink[0] = '<%= status_base_url %>';
+  tabsName[1] = 'Zuul'; tabsLink[1] = '<%= status_base_url %>/zuul/';
+  tabsName[2] = 'Rechecks'; tabsLink[2] = '<%= status_base_url %>/elastic-recheck/';
+  tabsName[3] = 'Release'; tabsLink[3] = '<%= status_base_url %>/release/';
+  tabsName[4] = 'Reviews'; tabsLink[4] = '<%= status_base_url %>/reviews/';
+  tabsName[5] = 'Bugday'; tabsLink[5] = '<%= status_base_url %>/bugday/';
 
   document.write(
    '<div id="header" class="container">'+
    '<div class="span-5">'+
-   ' <h1 id="logo"><a href="http://status.openstack.org/">Open Stack</a></h1>'+
+   ' <h1 id="logo"><a href="<%= status_base_url %>">Open Stack</a></h1>'+
    '</div>\n'+
    '<div class="span-19 last blueLine">'+
    '<div id="navigation" class="span-19">'+
