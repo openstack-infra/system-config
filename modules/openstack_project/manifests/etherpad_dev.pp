@@ -10,7 +10,9 @@ class openstack_project::etherpad_dev (
     sysadmins                 => $sysadmins
   }
 
-  include etherpad_lite
+  class { 'etherpad_lite':
+    ep_ensure => 'latest',
+  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
