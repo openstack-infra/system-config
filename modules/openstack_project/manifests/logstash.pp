@@ -33,7 +33,8 @@ class openstack_project::logstash (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'logstash::web':
+  class { '::logstash': }
+  class { '::logstash::web':
     frontend            => 'kibana',
     discover_nodes      => $discover_nodes,
     proxy_elasticsearch => true,

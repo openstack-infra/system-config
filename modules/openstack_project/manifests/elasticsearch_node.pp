@@ -31,7 +31,9 @@ class openstack_project::elasticsearch_node (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'logstash::elasticsearch': }
+  class { '::logstash': }
+
+  class { '::logstash::elasticsearch': }
 
   class { '::elasticsearch':
     es_template_config => {

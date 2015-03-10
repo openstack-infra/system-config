@@ -36,7 +36,8 @@ class openstack_project::logstash_worker (
     source => 'puppet:///modules/openstack_project/logstash/logstash-indexer.default',
   }
 
-  class { 'logstash::indexer':
+  class { '::logstash': }
+  class { '::logstash::indexer':
     conf_template => 'openstack_project/logstash/indexer.conf.erb',
   }
 
