@@ -51,6 +51,7 @@ node default {
 # Long lived servers:
 #
 # Node-OS: precise
+# Node-OS: trusty
 node 'review.openstack.org' {
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
