@@ -3,12 +3,7 @@
 class openstack_project::paste (
   $db_password,
   $mysql_root_password,
-  $sysadmins = []
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => $sysadmins,
-  }
   include lodgeit
   lodgeit::site { 'openstack':
     db_host     => 'localhost',

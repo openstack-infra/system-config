@@ -236,10 +236,13 @@ node 'lists.openstack.org' {
 
 # Node-OS: precise
 node 'paste.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::paste':
     db_password         => hiera('paste_db_password', 'XXX'),
     mysql_root_password => hiera('paste_mysql_root_password', 'XXX'),
-    sysadmins           => hiera('sysadmins', []),
   }
 }
 
