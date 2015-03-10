@@ -2,6 +2,7 @@
 #
 class openstack_project::pypi_mirror (
   $vhost_name,
+  $cron_frequency = '*/5',
 ) {
 
   include apache
@@ -60,7 +61,7 @@ class openstack_project::pypi_mirror (
   }
 
   cron { 'bandersnatch':
-    minute      => '*/5',
+    minute      => $cron_frequency,
     command     => 'flock -n /var/run/bandersnatch/mirror.lock timeout -k 2m 30m run-bandersnatch >>/var/log/bandersnatch/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
