@@ -19,9 +19,10 @@
 # expect.
 set -e
 export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
-ANSIBLE_PLAYBOOKS=/etc/ansible/playbooks
+SYSTEM_CONFIG=/opt/system-config/production
+ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
 
-cd /opt/system-config/production
+cd $SYSTEM_CONFIG
 git fetch -a && git reset -q --hard @{u}
 ./install_modules.sh
 ansible-galaxy install --force -r roles.yaml
