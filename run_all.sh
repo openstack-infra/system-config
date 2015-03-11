@@ -19,7 +19,7 @@
 # expect.
 set -e
 export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
-ANSIBLE_PLAYBOOKS=/etc/ansible/playbooks
+ANSIBLE_PLAYBOOKS=/opt/system-config-production
 
 cd /opt/system-config/production
 git fetch -a && git reset -q --hard @{u}
