@@ -170,10 +170,7 @@ class openstack_project::puppetmaster (
 # Playbooks
 #
   file { '/etc/ansible/playbooks':
-    ensure  => directory,
-    recurse => true,
-    source  => 'puppet:///modules/openstack_project/ansible/playbooks',
-    require => Class[ansible],
+    ensure  => absent,
   }
 
   file { '/etc/ansible/remote_puppet.yaml':
