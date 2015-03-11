@@ -2,4 +2,4 @@
 - hosts: "afs*"
   gather_facts: false
   roles:
-    - { role: puppet, puppetmaster: puppetmaster.openstack.org }
+  - role: puppet

@@ -1,0 +1,4 @@
+puppetmaster: puppetmaster.openstack.org
+hieradata_file: /etc/puppet/hieradata/production/common.yaml
+hierakeys:
+    sysadmins: true
