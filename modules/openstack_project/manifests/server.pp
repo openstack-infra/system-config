@@ -6,6 +6,7 @@ class openstack_project::server (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
+  $manage_iptables           = true,
   $sysadmins                 = [],
   $certname                  = $::fqdn,
   $pin_puppet                = '3.',
@@ -13,6 +14,7 @@ class openstack_project::server (
   $afs                       = false,
 ) {
   class { 'openstack_project::template':
+    manage_iptables           => $manage_iptables,
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
     iptables_rules4           => $iptables_rules4,
