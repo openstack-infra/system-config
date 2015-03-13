@@ -1,7 +1,7 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $root_rsa_key,
+  $root_rsa_key = 'xxx',
   $sysadmins = [],
   $version   = '3.',
   $ca_server = undef,
