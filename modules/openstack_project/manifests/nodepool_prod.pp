@@ -5,6 +5,7 @@ class openstack_project::nodepool_prod(
   $mysql_password,
   $nodepool_ssh_private_key = '',
   $nodepool_template = 'openstack_project/nodepool/nodepool.yaml.erb',
+  $nodepool_logging_template = 'openstack_project/nodepool/nodepool.logging.conf.erb',
   $vhost_name = 'nodepool.openstack.org',
   $sysadmins = [],
   $statsd_host = '',
@@ -44,6 +45,7 @@ class openstack_project::nodepool_prod(
     scripts_dir               => $::project_config::nodepool_scripts_dir,
     elements_dir              => $::project_config::nodepool_elements_dir,
     require                   => $::project_config::config_dir,
+    logging_conf_template     => $nodepool_logging_template,
   }
 
   file { '/etc/nodepool/nodepool.yaml':
