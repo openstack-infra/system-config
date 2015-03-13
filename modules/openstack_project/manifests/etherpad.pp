@@ -16,7 +16,9 @@ class openstack_project::etherpad (
     sysadmins                 => $sysadmins
   }
 
-  include etherpad_lite
+  class { 'etherpad_lite':
+    eplite_version => '56dbad41ada0e1d848fb8fca4a1608d34b372b36',
+  }
 
   class { 'etherpad_lite::apache':
     ssl_cert_file           => $ssl_cert_file,
