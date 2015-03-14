@@ -79,16 +79,16 @@ bottleneck very quickly. This looks something like:
                   jenkins
                      |
                      |
-               gearman-client
-                /    |    \
-               /     |     \
-          gearman gearman gearman
-          worker1 worker2 worker3
-              |      |      |
-         logstash logstash logstash
-         indexer1 indexer2 indexer3
-              \      |      /
-               \     |     /
+               gearman-client ---------------
+                /    |    \                 |
+               /     |     \                |
+          gearman gearman gearman    subunit gearman
+          worker1 worker2 worker3       worker01
+              |      |      |               |
+         logstash logstash logstash         |
+         indexer1 indexer2 indexer3         |
+              \      |      /          subunit2sql
+               \     |     /                DB
                elasticsearch
                   cluster
                      |
@@ -118,6 +118,20 @@ can be found at
 
 * https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/log-gearman-client.py
 * https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/log-gearman-worker.py
+
+Subunit Gearman Worker
+----------------------
+
+Using the same mechanism as the Log pushers there is an additional class of
+gearman worker that takes the subunit output from test runs and stores them in
+a subunit2SQL database. Right now this is only done with the subunit output
+from gate queue tempest runs.
+
+If you are interested in technical details the source of this script can be
+found at:
+
+* http://git.openstack.org/cgit/openstack-infra/puppet-subunit2sql/tree/files/subunit-gearman-worker.py
+
 
 Logstash
 --------
@@ -203,6 +217,35 @@ for querying Logstash events stored in ElasticSearch. Our install can
 be reached at http://logstash.openstack.org. See
 :ref:`query-logstash` for more info on using Kibana to perform
 queries.
+
+subunit2SQL
+-----------
+subunit2SQL is a python project for taking subunit v2 streams and storing them
+in a SQL database. More information on the subunit protocol can be found here:
+https://github.com/testing-cabal/subunit/blob/master/README
+
+subunit2sql provides a database schema, several utilities for interacting with
+the database, and a python library to build tooling on top of the database.
+More information about using subunit2sql can be found at:
+http://docs.openstack.org/developer/subunit2sql/
+
+Our instance of the subunit2SQL database is running on a MySQL database and has
+been configured to be remotely accessible to allow for public querying. The
+public query access is provided with the following credentials::
+
+   username: query
+   password: query
+   hostname: logstash.openstack.org
+   database name: subunit2sql
+   database port: 3306
+
+simpleproxy
+-----------
+Simpleproxy is a simple tcp proxy which allows forwarding tcp connections from
+one host to another. We use it to forward mysql traffic from a publicly
+accessible host to the trove instance running the subunit2sql MySQL DB. This
+allows for public access to the data on the database through the host
+logstash.openstack.org.
 
 .. _query-logstash:
 
