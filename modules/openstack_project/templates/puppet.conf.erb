@@ -3,7 +3,7 @@ logdir=/var/log/puppet
 vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
-server=puppetmaster.openstack.org
+server=<%= @puppetmaster_server %>
 certname=<%= @certname %>
 pluginsync=true
 

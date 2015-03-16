@@ -5,6 +5,7 @@ class openstack_project::base(
   $install_users         = true,
   $pin_puppet            = '3.',
   $ca_server             = undef,
+  $puppetmaster_server   = 'puppetmaster.openstack.org',
 ) {
   if ($::osfamily == 'Debian') {
     include apt
