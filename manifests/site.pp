@@ -115,6 +115,7 @@ node 'review-dev.openstack.org' {
 
 # Node-OS: precise
 node 'jenkins.openstack.org' {
+  $group = "jenkins"
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
@@ -131,6 +132,7 @@ node 'jenkins.openstack.org' {
 
 # Node-OS: precise
 node /^jenkins\d+\.openstack\.org$/ {
+  $group = "jenkins"
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
@@ -329,6 +331,7 @@ node 'logstash.openstack.org' {
 
 # Node-OS: precise
 node /^logstash-worker\d+\.openstack\.org$/ {
+  $group = "logstash-worker"
   class { 'openstack_project::logstash_worker':
     sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
@@ -339,6 +342,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 
 # Node-OS: trusty
 node /^subunit-worker\d+\.openstack\.org$/ {
+  $group = "subunit-worker"
   class { 'openstack_project::subunit_worker':
     sysadmins             => hiera('sysadmins', []),
     subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
@@ -348,6 +352,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 
 # Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
+  $group = "elasticsearch"
   class { 'openstack_project::elasticsearch_node':
     sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
@@ -359,6 +364,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 # CentOS machines to load balance git access.
 # Node-OS: centos6
 node /^git(-fe\d+)?\.openstack\.org$/ {
+  $group = "git-loadbalancer"
   class { 'openstack_project::git':
     sysadmins               => hiera('sysadmins', []),
     balancer_member_names   => [
@@ -382,6 +388,7 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
 # load balanced by git.openstack.org.
 # Node-OS: centos6
 node /^git\d+\.openstack\.org$/ {
+  $group = "git-server"
   include openstack_project
   class { 'openstack_project::git_backend':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -398,6 +405,7 @@ node /^git\d+\.openstack\.org$/ {
 # Machines in each region to run PyPI mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
+  $group = "pypi"
   class { 'openstack_project::pypi':
     sysadmins               => hiera('sysadmins', []),
   }
@@ -544,6 +552,7 @@ node 'zuul.openstack.org' {
 # Node-OS: precise
 # Node-OS: trusty
 node /^zm\d+\.openstack\.org$/ {
+  $group = "zuul-merger"
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
@@ -600,6 +609,7 @@ node 'pbx.openstack.org' {
 # Node-OS: precise
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
+  $group = "ci-backup"
   include openstack_project::backup_server
 }
 
@@ -701,6 +711,7 @@ node 'kdc02.openstack.org' {
 
 # Node-OS: trusty
 node /^afsdb.*\.openstack\.org$/ {
+  $group = "afsdb"
   class { 'openstack_project::afsdb':
     sysadmins => hiera('sysadmins', []),
   }
@@ -708,6 +719,7 @@ node /^afsdb.*\.openstack\.org$/ {
 
 # Node-OS: trusty
 node /^afs.*\..*\.openstack\.org$/ {
+  $group = "afs"
   class { 'openstack_project::afsfs':
     sysadmins => hiera('sysadmins', []),
   }
