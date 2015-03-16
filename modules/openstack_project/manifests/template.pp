@@ -405,6 +405,15 @@ class openstack_project::template (
   service { 'puppet':
     ensure => stopped,
   }
+
+  file { '/etc/puppet/hiera.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    source  => 'puppet:///modules/openstack_project/puppet/hiera.yaml',
+    replace => true,
+  }
   ###########################################################
 
 }
