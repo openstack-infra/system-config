@@ -19,6 +19,9 @@ class openstack_project::zuul_prod(
   $swift_default_container = '',
   $swift_default_logserver_prefix = '',
   $swift_default_expiry = 7200,
+  $proxy_ssl_cert_file_contents = '',
+  $proxy_ssl_key_file_contents = '',
+  $proxy_ssl_chain_file_contents = '',
   $sysadmins = [],
   $statsd_host = '',
   $gearman_workers = [],
@@ -60,6 +63,9 @@ class openstack_project::zuul_prod(
     swift_default_container        => $swift_default_container,
     swift_default_logserver_prefix => $swift_default_logserver_prefix,
     swift_default_expiry           => $swift_default_expiry,
+    proxy_ssl_cert_file_contents   => $proxy_ssl_cert_file_contents,
+    proxy_ssl_key_file_contents    => $proxy_ssl_key_file_contents,
+    proxy_ssl_chain_file_contents  => $proxy_ssl_chain_file_contents,
   }
 
   class { '::zuul::server':
