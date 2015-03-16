@@ -15,6 +15,7 @@ class openstack_project::template (
   $ca_server                 = undef,
   $enable_unbound            = true,
   $afs                       = false,
+  $puppetmaster_server       = '',
 ) {
   include ntp
   include ssh
@@ -50,10 +51,11 @@ class openstack_project::template (
   }
 
   class { 'openstack_project::base':
-    install_users => $install_users,
-    certname      => $certname,
-    pin_puppet    => $pin_puppet,
-    ca_server     => $ca_server,
+    install_users       => $install_users,
+    certname            => $certname,
+    pin_puppet          => $pin_puppet,
+    ca_server           => $ca_server,
+    puppetmaster_server => $puppetmaster_server,
   }
 
   package { 'lvm2':

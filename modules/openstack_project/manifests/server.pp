@@ -11,6 +11,7 @@ class openstack_project::server (
   $pin_puppet                = '3.',
   $ca_server                 = undef,
   $afs                       = false,
+  $puppetmaster_server       = 'puppetmaster.openstack.org',
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -20,6 +21,7 @@ class openstack_project::server (
     certname                  => $certname,
     pin_puppet                => $pin_puppet,
     ca_server                 => $ca_server,
+    puppetmaster_server       => $puppetmaster_server,
     afs                       => $afs,
   }
   class { 'exim':
