@@ -12,7 +12,9 @@ class openstack_project::storyboard(
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
   $project_config_repo = '',
-  $valid_oauth_clients = [],
+  $hostname = $::fqdn,
+  $valid_oauth_clients = [$::fqdn],
+  $cors_allowed_origins = ["https://${::fqdn}"],
 ) {
 
   class { 'project_config':
@@ -40,11 +42,8 @@ class openstack_project::storyboard(
   }
 
   class { '::storyboard::application':
-    hostname               => $::fqdn,
-    cors_allowed_origins   => [
-      'https://storyboard.openstack.org',
-      'http://docs-draft.openstack.org',
-    ],
+    hostname               => $hostname,
+    cors_allowed_origins   => $cors_allowed_origins,
     valid_oauth_clients    => $valid_oauth_clients,
     cors_max_age           => 3600,
     openid_url             => $openid_url,
