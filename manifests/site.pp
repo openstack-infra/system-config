@@ -689,6 +689,7 @@ node 'kdc02.openstack.org' {
 
 # Node-OS: trusty
 node /^afsdb.*\.openstack\.org$/ {
+  $group = "afsdb"
   class { 'openstack_project::afsdb':
     sysadmins => hiera('sysadmins', []),
   }
@@ -696,6 +697,7 @@ node /^afsdb.*\.openstack\.org$/ {
 
 # Node-OS: trusty
 node /^afs.*\..*\.openstack\.org$/ {
+  $group = "afs"
   class { 'openstack_project::afsfs':
     sysadmins => hiera('sysadmins', []),
   }
