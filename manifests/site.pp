@@ -1083,4 +1083,24 @@ node 'codesearch.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /.*wheel-mirror-.*\.openstack\.org/ {
+    include openstack_project
+
+    class { 'openstack_project::server':
+      sysadmins => hiera('sysadmins', [])
+    }
+
+    class { 'openstack_project::wheel_mirror_slave':
+        jenkins_ssh_public_key       => $openstack_project::jenkins_ssh_key,
+        pypi_mirror_dfw_host_key     => hiera('pypi_mirror_dfw_host_key'),
+        pypi_mirror_gra1_host_key    => hiera('pypi_mirror_gra1_host_key'),
+        pypi_mirror_iad_host_key     => hiera('pypi_mirror_iad_host_key'),
+        pypi_mirror_ord_host_key     => hiera('pypi_mirror_ord_host_key'),
+        pypi_mirror_hp1_host_key     => hiera('pypi_mirror_hp1_host_key'),
+        wheel_mirror_ssh_public_key  => hiera('wheel_mirror_ssh_public_key_contents'),
+        wheel_mirror_ssh_private_key => hiera('wheel_mirror_ssh_private_key_contents'),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
