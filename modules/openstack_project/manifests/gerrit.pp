@@ -271,12 +271,29 @@ class openstack_project::gerrit (
     ensure => present,
   }
 
-  file { '/home/gerrit2/review_site/static/jquery.min.js':
+  file { '/home/gerrit2/review_site/static/jquery.js':
     ensure  => present,
-    source  => '/usr/share/javascript/jquery/jquery.min.js',
-    require => [Class['::gerrit'],
-                Package['libjs-jquery']],
-    notify => Exec['reload_gerrit_header'],
+    source  => '/usr/share/javascript/jquery/jquery.js',
+    require     => [
+        File['/home/gerrit2/review_site/static'],
+        Class['::gerrit'],
+        Package['libjs-jquery'],
+      ],
+    refreshonly => true,
+    subscribe   => Package['libjs-jquery'],
+  }
+
+  exec { 'compress_jquery':
+    command     => 'yui-compressor -o /home/gerrit2/review_site/static/jquery.min.js /usr/share/javascript/jquery/jquery.js',
+    path        => 'bin:/usr/bin',
+    require     => [
+        File['/home/gerrit2/review_site/static'],
+        Class['::gerrit'],
+        Package['libjs-jquery'],
+        Package['yui-compressor'],
+      ],
+    refreshonly => true,
+    subscribe   => Package['libjs-jquery'],
   }
 
   file { '/home/gerrit2/review_site/static/hideci.js':
