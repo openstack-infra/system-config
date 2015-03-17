@@ -1083,4 +1083,11 @@ node 'codesearch.openstack.org' {
   }
 }
 
+node /.*wheel-mirror-.*\.openstack\.org/ {
+    include openstack_project
+    class { 'openstack_project::wheel_mirror_slave':
+        jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
