@@ -49,4 +49,11 @@ class openstack_project::proposal_slave (
     require => File['/home/jenkins/.ssh'],
     content => $proposal_ssh_public_key,
   }
+
+  file { '/home/jenkins/.ssh/known_hosts':
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/wheel_mirror/known_hosts.erb')
+  }
 }
