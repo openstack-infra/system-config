@@ -72,12 +72,12 @@ Groups
 ------
 
 A number of system-wide groups are configured in Gerrit (rather than
-via Puppet).  When installing a new Gerrit you should create these by
+via Puppet).  When installing a new Gerrit, you should create these by
 hand (and capture their UUID - you will need them to setup the ACLs
 later).
 
 The `Project Bootstrappers` group grants all the permissions needed to
-set up a new project.  Normally the OpenStack Project Creater account
+set up a new project.  Normally, the OpenStack Project Creater account
 is the only member of this group, but members of the `Administrators`
 group may temporarily add themselves in order to correct problems with
 automatic project creation.
@@ -116,7 +116,7 @@ using::
 GitHub Integration
 ==================
 
-Gerrit replicate to GitHub by pushing to a standard Git remote.  The
+Gerrit replicates to GitHub by pushing to a standard Git remote.  The
 GitHub projects are configured to allow only the Gerrit user to push.
 
 Pull requests can not be disabled for a project in Github, so instead
@@ -125,7 +125,7 @@ with instructions to use Gerrit.
 
 These are both handled automatically by :ref:`jeepyb`.
 
-Note that the user running gerrit will need to accept the github host
+Note that the user running Gerrit will need to accept the GitHub host
 keys. e.g.::
 
   sudo su - gerrit2
@@ -136,14 +136,14 @@ Auto Review Expiry
 ==================
 
 Puppet automatically installs a daily cron job called ``expire-old-reviews``
-onto the gerrit servers.  This script follows two rules:
+onto the Gerrit servers.  This script follows two rules:
 
  #. If the review hasn't been touched in 2 weeks, mark as abandoned.
  #. If there is a negative review and it hasn't been touched in 1 week, mark as
     abandoned.
 
-If your review gets touched by either of these rules it is possible to
-unabandon a review on the gerrit web interface.
+If your review gets touched by either of these rules, it is possible to
+unabandon a review on the Gerrit web interface.
 
 This process is managed by the :ref:`jeepyb` openstack-infra project.
 
@@ -214,9 +214,9 @@ projects are reparented to the "API-Projects" meta-project instead of
 "All-Projects".  This causes them to inherit permissions from the
 API-Projects project (which, in turn, inherits from All-Projects).
 
-The global gerrit permissions set out the high level goals (and
+The global Gerrit permissions set out the high level goals (and
 manage-projects can then override this on a per project basis as
-needed). To setup the global permissions first create the groups
+needed). To setup the global permissions, first create the groups
 covered above under Groups.
 
 You need to grant yourself enough access to replace the ACLs over ssh (we use
@@ -237,7 +237,7 @@ Then... we need to fetch the All-Projects ACLs, update them, then push the
 updates back into Gerrit::
 
   export USER=$your_gerrit_user
-  export HOST=$your_gerrit_hos
+  export HOST=$your_gerrit_host
   cd $anywhereyoulike
   mkdir All-Projects-ACLs
   cd All-Projects-ACLs
@@ -248,7 +248,7 @@ updates back into Gerrit::
 
 There will be two interesting files, `groups` and `project.config`.
 `groups` contains UUIDs and names of groups that will be referenced
-in `project.config`. UUIDs can be found on the group page in gerrit.
+in `project.config`. UUIDs can be found on the group page in Gerrit.
 Next, edit `project.config` to look like::
 
   [access "refs/*"]
@@ -426,25 +426,25 @@ To rename a project:
      set dest_project_name = "openstack/NEW", created_on = created_on
      where dest_project_name = "openstack/OLD";
 
-#. Move both the git repository and the mirror on
+#. Move both the Git repository and the mirror on
    review.openstack.org::
 
      sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
      sudo mv /opt/lib/git/openstack/{OLD,NEW}.git
 
-#. Reindex the lucene search index on review.openstack.org::
+#. Reindex the Lucene search index on review.openstack.org::
 
      sudo su - gerrit2
      cp -ax review_site/index index.backup.`date +%s`
      java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 
-#. Move the git repository on git{01-05}.openstack.org (while the
-   lucene reindex is running)::
+#. Move the Git repository on git{01-05}.openstack.org (while the
+   Lucene reindex is running)::
 
      sudo mv /var/lib/git/openstack/{OLD,NEW}.git
 
 #. Rename the project or transfer ownership in GitHub (while the
-   lucene reindex is running).
+   Lucene reindex is running).
 
 #. Start Gerrit on review.openstack.org::
 
