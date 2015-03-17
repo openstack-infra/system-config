@@ -273,7 +273,7 @@ class openstack_project::gerrit (
 
   file { '/home/gerrit2/review_site/static/jquery.min.js':
     ensure  => present,
-    source  => '/usr/share/javascript/jquery/jquery.min.js',
+    source  => '/usr/share/javascript/jquery/jquery.js',
     require => [Class['::gerrit'],
                 Package['libjs-jquery']],
     notify => Exec['reload_gerrit_header'],
