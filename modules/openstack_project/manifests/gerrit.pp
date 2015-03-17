@@ -268,6 +268,13 @@ class openstack_project::gerrit (
     notify => Exec['reload_gerrit_header'],
   }
 
+  file { '/home/gerrit2/review_site/static/wip.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/wip.png',
+    require => Class['::gerrit'],
+    notify => Exec['reload_gerrit_header'],
+  }
+
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
@@ -304,6 +311,20 @@ class openstack_project::gerrit (
     notify => Exec['reload_gerrit_header'],
     require => [ File['/home/gerrit2/review_site/static'],
                  Class['::gerrit'] ]
+  }
+
+  file { '/home/gerrit2/review_site/static/main.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/main.js',
+    require => Class['::gerrit'],
+    notify  => Exec['reload_gerrit_header'],
+  }
+
+  file { '/home/gerrit2/review_site/static/custom_icons.js':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/custom_icons.js',
+    require => Class['::gerrit'],
+    notify  => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/static/hideci.js':
