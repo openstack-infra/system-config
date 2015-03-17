@@ -298,6 +298,22 @@ var ci_page_loaded = function() {
     }
 };
 
+var replace_wip_icon = function() {
+    var tds = document.getElementsByTagName('td');
+    for (var i = 0; i < tds.length; i++) {
+        var class_name = tds[i].className;
+        var title = tds[i].title;
+        if (title.indexOf("Workflow") > -1 || class_name=="approvalscore rightmost") {
+            var images = tds[i].getElementsByTagName('img');
+            var deny_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAo0lEQVR42mNgGPrg8+7d/191dPwnWePPu3f/XxEUBGNk8bczZ/6/yMAAFgepwWkrSBEIw2x/Vl4OFwPhB6GhuF11XUkJrvBxWhqcDbIV5AK8Tv925gxYIbJtt4yN//959464cAA5GVkzQRux+RsZ33Vx+f9h1ar/RNkIcjrICyBNyIaAwgTDCyB/IStCjmuQs0GGgTSCDMSwFWQazBayEgndAQAqW6dvdnJ0RwAAAABJRU5ErkJggg==';
+            for (var j = 0; j < images.length; j++) {
+                if (images[j].src.indexOf(deny_image) !== -1) {
+                    images[j].src = images[j].src.replace(deny_image, "static/wip.png");
+                }
+            }
+        }
+    }
+};
 
 window.onload = function() {
     var input = document.createElement("input");
@@ -322,6 +338,7 @@ window.onload = function() {
                 mutation.attributeName === "style" &&
                 (!(span.is(":visible:")))) {
                 ci_page_loaded();
+                replace_wip_icon();
             }
         });
     });
