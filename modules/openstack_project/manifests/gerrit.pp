@@ -268,6 +268,13 @@ class openstack_project::gerrit (
     notify => Exec['reload_gerrit_header'],
   }
 
+  file { '/home/gerrit2/review_site/static/wip.png':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/gerrit/wip.png',
+    require => Class['::gerrit'],
+    notify => Exec['reload_gerrit_header'],
+  }
+
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
