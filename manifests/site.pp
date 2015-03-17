@@ -748,6 +748,12 @@ node 'translate-dev.openstack.org' {
     mysql_host              => hiera('translate_dev_mysql_host', 'localhost'),
     mysql_password          => hiera('translate_dev_mysql_password', 'XXX'),
   }
+
+node /.*wheel-mirror-.*\.openstack\.org/ {
+    include openstack_project
+    class { 'openstack_project::wheel_mirror_slave':
+        jenkins_ssh_public_key  => $openstack_project::jenkins_ssh_key,
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
