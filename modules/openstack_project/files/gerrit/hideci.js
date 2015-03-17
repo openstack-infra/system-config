@@ -507,8 +507,7 @@ var ci_zuul_for_change = function(comments) {
     })();
 };
 
-
-window.onload = function() {
+var add_toggle_ci_button = function() {
     var input = document.createElement("input");
     input.id = "toggleci";
     input.type = "button";
@@ -522,30 +521,4 @@ window.onload = function() {
         ci_toggle_visibility(null, !showOrHide);
     };
     document.body.appendChild(input);
-
-    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-    var observer = new MutationObserver(function(mutations, observer) {
-        var span = $("span.rpcStatus");
-        $.each(mutations, function(i, mutation) {
-            if (mutation.target === span[0] &&
-                mutation.attributeName === "style" &&
-                (!(span.is(":visible:")))) {
-                ci_page_loaded();
-            }
-        });
-    });
-    observer.observe(document, {
-        subtree: true,
-        attributes: true
-    });
-
-    $(document).on({
-        'show.visibility': function() {
-            window.zuul_enable_status_updates = true;
-            ci_page_loaded();
-        },
-        'hide.visibility': function() {
-            window.zuul_enable_status_updates = false;
-        }
-    });
 };
