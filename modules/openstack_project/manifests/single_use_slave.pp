@@ -53,4 +53,28 @@ class openstack_project::single_use_slave (
     }
   }
 
+  package { 'cloud-init':
+    ensure => 'absent',
+  }
+
+  case $::operatingsystem {
+    'Fedora': {
+      $ssh_user = 'fedora'
+    }
+    'Ubuntu': {
+      $ssh_user = 'ubuntu'
+    }
+    'CentOS': {
+      $ssh_user = 'root'
+     }
+  }
+
+  ssh_authorized_key { 'nodepool-static-2015-03-19':
+    ensure  => present,
+    user    => $ssh_user,
+    type    => 'ssh-rsa',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC6WutNHfM+YdnjeNFeaIpvxqt+9aDn95Ykpmc+fASSjlDZJtOrueH3ch/v08wkE4WQKg03i+t8VonqEwMGmApYA3VzFsURUQbxzlSz5kHlBQSqgz5JTwUmnt1RH5sePL5pkuJ6JgqJ8PxJod6fiD7YDjaKJW/wBzXGnGg2EkgqrkBQXYL4hyaPuSwsQF0Gdwg3QFqXl+R/GrM6FscUkkJzbjqGKI2GhLT8mf2BIMEAiMFhF5Wl4FFrbvhTfPfW+9VdcsiMxCXaxp00n1x1+Y7OqR5AZ/id0Lkz9ZoFVGS901OB/L4xXrvUtI2y+kIYeF6hxfmAl/zhY0eWzwo9lDPz',
+    require => File['/root/.ssh'],
+  }
+
 }
