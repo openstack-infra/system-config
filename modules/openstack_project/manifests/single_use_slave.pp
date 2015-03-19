@@ -54,7 +54,7 @@ class openstack_project::single_use_slave (
   }
 
   package { 'cloud-init':
-    ensure => 'absent',
+    ensure => 'purged',
   }
 
 }
