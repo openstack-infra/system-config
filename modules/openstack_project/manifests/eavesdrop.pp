@@ -51,6 +51,7 @@ class openstack_project::eavesdrop (
         '#openstack-cinder',
         '#openstack-community',
         '#openstack-containers',
+        '#openstack-cue',
         '#openstack-dev',
         '#openstack-dns',
         '#openstack-doc',
