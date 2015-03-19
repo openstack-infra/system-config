@@ -53,6 +53,16 @@ function is_opensuse {
 #
 
 function setup_puppet_fedora {
+    # grubby on f20 can eat the "default" line of extlinux.conf when
+    # updating the kernel and create an unbootable system.  There is
+    # an unresolved bug [1], but just install the latest -- which
+    # seems to get around this -- before we update.
+    # [1] https://bugzilla.redhat.com/show_bug.cgi?id=964178
+    if grep -q 'Fedora release 20' /etc/redhat-release; then
+        sudo yum install -y fedora-release-rawhide
+        sudo yum install -y grubby --enablerepo rawhide
+    fi
+
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets
