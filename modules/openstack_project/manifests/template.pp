@@ -16,6 +16,13 @@ class openstack_project::template (
   $enable_unbound            = true,
   $afs                       = false,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
 ) {
 
   ###########################################################
@@ -185,7 +192,10 @@ class openstack_project::template (
   ###########################################################
   # Manage  python/pip
 
-  include pip
+  class { '::pip':
+    index_url     => $pypi_index_url,
+    trusted_hosts => $pypi_trusted_hosts,
+  }
   $desired_virtualenv = '1.11.4'
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
