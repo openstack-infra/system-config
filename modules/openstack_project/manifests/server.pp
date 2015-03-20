@@ -12,6 +12,13 @@ class openstack_project::server (
   $ca_server                 = undef,
   $afs                       = false,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -23,6 +30,8 @@ class openstack_project::server (
     ca_server                 => $ca_server,
     puppetmaster_server       => $puppetmaster_server,
     afs                       => $afs,
+    pypi_index_url            => $pypi_index_url,
+    pypi_trusted_hosts        => $pypi_trusted_hosts,
   }
   class { 'exim':
     sysadmins => $sysadmins,
