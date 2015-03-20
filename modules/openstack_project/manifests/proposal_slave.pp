@@ -10,6 +10,7 @@ class openstack_project::proposal_slave (
   $transifex_password = '',
   $transifex_username = 'openstackci',
 ) {
+  include zanata::client
 
   class { 'openstack_project::slave':
     ssh_key => $jenkins_ssh_public_key,
