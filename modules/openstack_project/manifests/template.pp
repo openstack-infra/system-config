@@ -15,6 +15,13 @@ class openstack_project::template (
   $ca_server                 = undef,
   $enable_unbound            = true,
   $afs                       = false,
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
 ) {
   include ntp
   include ssh
@@ -50,10 +57,12 @@ class openstack_project::template (
   }
 
   class { 'openstack_project::base':
-    install_users => $install_users,
-    certname      => $certname,
-    pin_puppet    => $pin_puppet,
-    ca_server     => $ca_server,
+    install_users      => $install_users,
+    certname           => $certname,
+    pin_puppet         => $pin_puppet,
+    ca_server          => $ca_server,
+    pypi_index_url     => $pypi_index_url,
+    pypi_trusted_hosts => $pypi_trusted_hosts,
   }
 
   package { 'lvm2':

@@ -1,0 +1,6 @@
+[global]
+index-url = <%= @pypi_index_url %>https://pypi.python.org/simple
+trusted-host = 
+<% @pypi_trusted_hosts.each do |trusted_host| -%>
+<%= trusted_host %>
+<% end -%>
