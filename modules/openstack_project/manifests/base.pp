@@ -6,6 +6,13 @@ class openstack_project::base(
   $pin_puppet            = '3.',
   $ca_server             = undef,
   $puppetmaster_server   = 'puppetmaster.openstack.org',
+  $pypi_index_url        = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
 ) {
   if ($::osfamily == 'Debian') {
     include apt
@@ -77,7 +84,7 @@ class openstack_project::base(
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/pip.conf',
+    content => template('openstack_project/pip.conf.erb'),
     replace => true,
   }
 
