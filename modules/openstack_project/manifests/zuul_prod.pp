@@ -31,7 +31,7 @@ class openstack_project::zuul_prod(
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
+    iptables_public_tcp_ports => [80, 443],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => $sysadmins,
