@@ -28,6 +28,11 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     AllowOverride None
     Order allow,deny
     allow from all
+    Satisfy Any
+  </Directory>
+  <Directory /usr/local/lib/python2.7/dist-packages/os_loganalyze>
+    Allow from all
+    Satisfy Any
   </Directory>
 
   <Directory <%= @docroot %>/*/*/*/*/*-tempest-dsvm*/*>
