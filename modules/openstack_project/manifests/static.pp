@@ -151,6 +151,15 @@ class openstack_project::static (
     require => File['/etc/os_loganalyze'],
   }
 
+  file { '/etc/os_loganalyze/footers.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'www-data',
+    mode    => '0440',
+    content => template('openstack_project/os-loganalyze-footers.yaml.erb'),
+    require => File['/etc/os_loganalyze'],
+  }
+
   file { '/srv/static/logs/help':
     ensure  => directory,
     recurse => true,
