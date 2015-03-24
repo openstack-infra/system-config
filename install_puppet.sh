@@ -48,31 +48,11 @@ function is_opensuse {
         cat /etc/os-release | grep -q -e "openSUSE"
 }
 
-function is_rackspace {
-    if [ ! -f /usr/bin/xenstore-ls ]; then
-        return 1
-    fi
-
-    /usr/bin/xenstore-ls vm-data | grep -q "Rackspace"
-}
-
 #
 # Distro specific puppet installs
 #
 
 function setup_puppet_fedora {
-    # grubby on the rax f20 images can eat the "default" line of
-    # extlinux.conf when updating the kernel and create an unbootable
-    # system.  There is an unresolved bug [1], but just install the
-    # latest -- which seems to get around this -- before we update.
-    # [1] https://bugzilla.redhat.com/show_bug.cgi?id=964178
-    if grep -q 'Fedora release 20' /etc/redhat-release; then
-        if is_rackspace; then
-            sudo yum install -y fedora-release-rawhide
-            sudo yum install -y grubby --enablerepo rawhide
-        fi
-    fi
-
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets
