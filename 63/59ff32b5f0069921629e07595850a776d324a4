@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Paul Belanger <paul.belanger@polybeacon.com>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 24 Mar 2015 00:40:24 +0000
+Reviewed-on: https://review.openstack.org/166404
+Project: openstack-infra/system-config
+Branch: refs/heads/master
