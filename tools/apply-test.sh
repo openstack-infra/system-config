@@ -15,7 +15,7 @@
 # under the License.
 
 ROOT=$(readlink -fn $(dirname $0)/..)
-MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
+export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
 export PUPPET_INTEGRATION_TEST=1
 
@@ -91,10 +91,13 @@ echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
 sudo mkdir -p /var/run/puppet
+sudo mkdir -p out
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        ./tools/test_puppet_apply.sh filearg
+
+cat out/*
