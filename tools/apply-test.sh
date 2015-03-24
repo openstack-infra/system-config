@@ -14,6 +14,12 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+function applytest () {
+    file=$1
+    cat $file
+    sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file
+}
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
@@ -97,4 +103,4 @@ echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        applytest filearg > /dev/null
