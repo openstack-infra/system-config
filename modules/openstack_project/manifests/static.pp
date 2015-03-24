@@ -151,16 +151,37 @@ class openstack_project::static (
     require => File['/etc/os_loganalyze'],
   }
 
+  vcsrepo { '/opt/devstack-gate':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/devstack-gate',
+  }
+
   file { '/srv/static/logs/help':
     ensure  => directory,
-    recurse => true,
-    purge   => true,
-    force   => true,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/logs/help',
     require => File['/srv/static/logs'],
+  }
+
+  file { '/srv/static/logs/help/tempest-logs.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/devstack-gate/help/tempest-logs.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
+  }
+
+  file { '/srv/static/logs/help/tempest-overview.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/devstack-gate/help/tempest-overview.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
   }
 
   file { '/usr/local/sbin/log_archive_maintenance.sh':
