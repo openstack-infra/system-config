@@ -43,7 +43,7 @@ class openstack_project::pypi_mirror (
   }
 
   package { 'bandersnatch':
-    ensure   => 'present',
+    ensure   => 'latest',
     provider => 'pip',
   }
 
