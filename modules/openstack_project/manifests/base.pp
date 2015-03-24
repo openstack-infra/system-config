@@ -61,15 +61,9 @@ class openstack_project::base(
   }
 
   include pip
-  $desired_virtualenv = '1.11.4'
 
-  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
-    $virtualenv_ensure = $desired_virtualenv
-  } else {
-    $virtualenv_ensure = present
-  }
   package { 'virtualenv':
-    ensure   => $virtualenv_ensure,
+    ensure   => latest,
     provider => pip,
     require  => Class['pip'],
   }
