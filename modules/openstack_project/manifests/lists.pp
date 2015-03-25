@@ -280,7 +280,16 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'foundation-testing-standards':
+   maillist { 'openstack-internships':
+    ensure      => present,
+    admin       => 'stefano@openstack.org',
+    password    => $listpassword,
+    description => 'List to coordinate mentors and interns of OpenStack programs.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
+ maillist { 'foundation-testing-standards':
     ensure      => present,
     admin       => 'seanroberts66@gmail.com',
     password    => $listpassword,
