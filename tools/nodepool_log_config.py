@@ -126,6 +126,11 @@ def _get_providers_and_images(config_file):
         for image in provider['images']:
             ret.append((provider['name'], image['name']))
     logging.debug("Added %d providers & images" % len(ret))
+
+    # diskimages have a special provider
+    for diskimage in config['diskimages']:
+        ret.append(('dib', diskimage['name']))
+
     return ret
 
 
@@ -135,10 +140,12 @@ def _generate_logger_and_handler(image_log_dir, provider, image):
         'title': '%s_%s' % (provider, image),
         'filename': '%s.%s.log' % (provider, image),
     }
+
     logger = _IMAGE_LOGGER % {
         'title': '%s_%s' % (provider, image),
         'handler': '%s_%s' % (provider, image),
-        'qualname': '%s.%s' % (provider, image),
+        'qualname': '%s%s' % (provider+"." if provider != 'dib' else '',
+                              image),
     }
 
     return {
@@ -175,6 +182,8 @@ def generate_log_config(config, log_dir, image_log_dir, output):
 
     Will result in log files (in `image_log_dir`) of foo.image1.log,
     foo.image2.log, moo.image1.log, moo.image2.log
+
+    diskimage-builder built images will have special provider "dib"
 
     :param config: input config file
     :param log_dir: directory for main log file
