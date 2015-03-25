@@ -18,7 +18,9 @@ class openstack_project::template (
   $puppetmaster_server       = 'puppetmaster.openstack.org',
 ) {
   include ntp
-  include ssh
+  class { 'ssh':
+      trusted_ssh_source => $puppetmaster_server,
+  }
   include snmpd
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
