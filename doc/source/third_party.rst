@@ -268,6 +268,15 @@ should configure as follows::
     Type: Path
     Pattern: **
 
+To properly format the results message sent back to Gerrit, the trick is to
+configure the ``URL to post`` parameter (under the ``Gerrit Reporting Values``
+section) for each job. The correct value for this paramater is literally:
+
+  \* $JOB_NAME $BUILD_URL
+
+The two ``$ENV_VAR`` will be replaced dynamically when the ``<BUILDS_STATS>``
+parameter will be evaluated.
+
 This job will now automatically trigger when a new patchset is
 uploaded and will report the results to Gerrit automatically.
 
