@@ -268,6 +268,16 @@ should configure as follows::
     Type: Path
     Pattern: **
 
+To format the result's message in a way that works with the current OpenStack
+Gerrit GUI parser, configure the ``URL to post`` parameter (under the
+``Gerrit Reporting Values`` section) for each job. The correct value for this
+paramater is:
+
+  \* $JOB_NAME $BUILD_URL
+
+The two ``$ENV_VAR`` will be replaced dynamically when the ``<BUILDS_STATS>``
+parameter will be evaluated.
+
 This job will now automatically trigger when a new patchset is
 uploaded and will report the results to Gerrit automatically.
 
