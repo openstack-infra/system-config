@@ -79,6 +79,8 @@ function setup_puppet_fedora {
     # See upstream issue:
     #  https://tickets.puppetlabs.com/browse/PUP-1082
     ln -fs /usr/bin/pip /usr/bin/pip-python
+    # Wipe out templatedir so we don't get warnings about it
+    sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_rhel7 {
@@ -106,6 +108,8 @@ EOF
 
     # see comments in setup_puppet_fedora
     ln -s /usr/bin/pip /usr/bin/pip-python
+    # Wipe out templatedir so we don't get warnings about it
+    sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_rhel6 {
@@ -144,6 +148,8 @@ EOF
 
     # see comments in setup_puppet_fedora
     ln -s /usr/bin/pip /usr/bin/pip-python
+    # Wipe out templatedir so we don't get warnings about it
+    sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_ubuntu {
@@ -188,6 +194,8 @@ EOF
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes install -y --force-yes puppet git $rubypkg
+    # Wipe out templatedir so we don't get warnings about it
+    sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_opensuse {
@@ -195,6 +203,8 @@ function setup_puppet_opensuse {
     zypper ar http://download.opensuse.org/repositories/systemsmanagement:/puppet/openSUSE_${version}/systemsmanagement:puppet.repo
     zypper -v --gpg-auto-import-keys --no-gpg-checks -n ref
     zypper --non-interactive in --force-resolution puppet
+    # Wipe out templatedir so we don't get warnings about it
+    sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 #
