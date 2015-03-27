@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+1: Dan Prince <dprince@redhat.com>
+Code-Review+1: Derek Higgins <derekh@redhat.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 27 Mar 2015 13:39:15 +0000
+Reviewed-on: https://review.openstack.org/168196
+Project: openstack-infra/system-config
+Branch: refs/heads/master
