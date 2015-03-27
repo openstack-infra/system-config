@@ -63,10 +63,8 @@ class openstack_project::template (
     $all_udp = $iptables_public_udp_ports
   }
 
-  if ($install_users) {
-    package { $::openstack_project::params::user_packages:
-      ensure => present
-    }
+  class {'openstack_project::users_install':
+    install_users => $install_users
   }
 
   if ($enable_unbound) {
