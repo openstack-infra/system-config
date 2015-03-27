@@ -23,11 +23,14 @@ class openstack_project::template (
 
   include ntp
   include snmpd
-  include ssh
   include sudoers
 
   include openstack_project::params
   include openstack_project::users
+
+  class { 'ssh':
+    trusted_ssh_source => $puppetmaster_server,
+  }
 
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
