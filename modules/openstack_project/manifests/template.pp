@@ -67,6 +67,14 @@ class openstack_project::template (
     package { $::openstack_project::params::user_packages:
       ensure => present
     }
+    realize (
+      User::Virtual::Localuser['mordred'],
+      User::Virtual::Localuser['corvus'],
+      User::Virtual::Localuser['clarkb'],
+      User::Virtual::Localuser['fungi'],
+      User::Virtual::Localuser['slukjanov'],
+      User::Virtual::Localuser['elizabeth'],
+    )
   }
 
   if ($enable_unbound) {
