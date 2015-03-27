@@ -510,6 +510,11 @@ node 'zuul.openstack.org' {
     gerrit_server                  => 'review.openstack.org',
     gerrit_user                    => 'jenkins',
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
+    gerrit_ssh_host_identity       => [
+      'review.openstack.org',
+      '23.253.232.87',
+      '2001:4800:7815:104:3bc3:d7f6:ff03:bf5d',
+    ],
     zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents', 'XXX'),
     url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     swift_authurl                  => 'https://identity.api.rackspacecloud.com/v2.0/',
@@ -554,12 +559,17 @@ node 'zuul.openstack.org' {
 node /^zm\d+\.openstack\.org$/ {
   $group = "zuul-merger"
   class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    sysadmins            => hiera('sysadmins', []),
+    gearman_server           => 'zuul.openstack.org',
+    gerrit_server            => 'review.openstack.org',
+    gerrit_user              => 'jenkins',
+    gerrit_ssh_host_key      => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
+    gerrit_ssh_host_identity => [
+      'review.openstack.org',
+      '23.253.232.87',
+      '2001:4800:7815:104:3bc3:d7f6:ff03:bf5d',
+    ],
+    zuul_ssh_private_key     => hiera('zuul_ssh_private_key_contents', 'XXX'),
+    sysadmins                => hiera('sysadmins', []),
   }
 }
 
@@ -567,16 +577,21 @@ node /^zm\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server        => 'review-dev.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
-    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    zuul_url             => 'http://zuul-dev.openstack.org/p',
-    sysadmins            => hiera('sysadmins', []),
-    statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [
+    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
+    gerrit_server            => 'review-dev.openstack.org',
+    gerrit_user              => 'jenkins',
+    gerrit_ssh_host_key      => hiera('gerrit_dev_ssh_rsa_pubkey_contents', 'XXX'),
+    gerrit_ssh_host_identity => [
+      'review-dev.openstack.org',
+      '23.253.78.13',
+      '2001:4800:7817:101:be76:4eff:fe04',
+    ],
+    zuul_ssh_private_key     => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
+    url_pattern              => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url                 => 'http://zuul-dev.openstack.org/p',
+    sysadmins                => hiera('sysadmins', []),
+    statsd_host              => 'graphite.openstack.org',
+    gearman_workers          => [
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
       'jenkins02.openstack.org',

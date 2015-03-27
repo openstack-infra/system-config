@@ -6,6 +6,7 @@ class openstack_project::zuul_prod(
   $gerrit_server = '',
   $gerrit_user = '',
   $gerrit_ssh_host_key = '',
+  $gerrit_ssh_host_identity = [],
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $zuul_url = '',
@@ -26,9 +27,12 @@ class openstack_project::zuul_prod(
   $statsd_host = '',
   $gearman_workers = [],
   $project_config_repo = '',
+  $git_email = 'jenkins@openstack.org',
+  $git_name = 'OpenStack Jenkins',
 ) {
   # Turn a list of hostnames into a list of iptables rules
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+  $gerrit_ssh_ident = inline_template("<%= (@gerrit_ssh_host_identity).join(',') %> <%= @gerrit_ssh_host_key %>")
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
@@ -52,8 +56,8 @@ class openstack_project::zuul_prod(
     job_name_in_report             => true,
     status_url                     => $status_url,
     statsd_host                    => $statsd_host,
-    git_email                      => 'jenkins@openstack.org',
-    git_name                       => 'OpenStack Jenkins',
+    git_email                      => $git_email,
+    git_name                       => $git_name,
     swift_authurl                  => $swift_authurl,
     swift_auth_version             => $swift_auth_version,
     swift_user                     => $swift_user,
@@ -86,7 +90,7 @@ class openstack_project::zuul_prod(
       owner   => 'zuul',
       group   => 'zuul',
       mode    => '0600',
-      content => "review.openstack.org,104.130.159.134,2001:4800:7818:102:be76:4eff:fe05:9b12 ${gerrit_ssh_host_key}",
+      content => $gerrit_ssh_ident,
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
