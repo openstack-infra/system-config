@@ -518,6 +518,7 @@ node 'zuul.openstack.org' {
     zuul_url                       => 'http://zuul.openstack.org/p',
     sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.openstack.org',
+    gerrit_ident                   => 'review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d',
     gearman_workers                => [
       'nodepool.openstack.org',
       'jenkins.openstack.org',
@@ -551,6 +552,7 @@ node /^zm\d+\.openstack\.org$/ {
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
     sysadmins            => hiera('sysadmins', []),
+    gerrit_ident         => 'review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d',
   }
 }
 
@@ -567,6 +569,7 @@ node 'zuul-dev.openstack.org' {
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
     statsd_host          => 'graphite.openstack.org',
+    gerrit_ident         => 'review-dev.openstack.org,23.253.78.13,2001:4800:7817:101:be76:4eff:fe04',
     gearman_workers      => [
       'jenkins.openstack.org',
       'jenkins01.openstack.org',
