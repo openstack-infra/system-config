@@ -9,7 +9,12 @@ class openstack_project::zuul_merger(
   $zuul_ssh_private_key = '',
   $zuul_url = "http://${::fqdn}/p",
   $sysadmins = [],
+  $git_email = 'jenkins@openstack.org',
+  $git_name = 'OpenStack Jenkins',
+  $gerrit_ident = 'review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d',
 ) {
+
+  $gerrit_ssh_ident = "${gerrit_ident} ${gerrit_ssh_host_key}"
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -23,8 +28,8 @@ class openstack_project::zuul_merger(
     gerrit_user          => $gerrit_user,
     zuul_ssh_private_key => $zuul_ssh_private_key,
     zuul_url             => $zuul_url,
-    git_email            => 'jenkins@openstack.org',
-    git_name             => 'OpenStack Jenkins',
+    git_email            => $git_email,
+    git_name             => $git_name,
   }
 
   class { '::zuul::merger': }
@@ -42,7 +47,7 @@ class openstack_project::zuul_merger(
       owner   => 'zuul',
       group   => 'zuul',
       mode    => '0600',
-      content => "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
+      content => $gerrit_ssh_ident,
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
