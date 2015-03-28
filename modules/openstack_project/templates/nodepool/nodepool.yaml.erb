@@ -222,12 +222,7 @@ labels:
 providers:
   - name: rax-dfw
     region-name: 'DFW'
-    service-type: 'compute'
-    service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
-    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    cloud: rax
     api-timeout: 60
     boot-timeout: 120
     max-servers: 184
@@ -297,12 +292,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-ord
     region-name: 'ORD'
-    service-type: 'compute'
-    service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
-    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    cloud: rax
     api-timeout: 60
     boot-timeout: 120
     max-servers: 55
@@ -372,12 +362,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: rax-iad
     region-name: 'IAD'
-    service-type: 'compute'
-    service-name: 'cloudServersOpenStack'
-    username: '<%= rackspace_username %>'
-    password: '<%= rackspace_password %>'
-    project-id: '<%= rackspace_project %>'
-    auth-url: 'https://identity.api.rackspacecloud.com/v2.0/'
+    cloud: rax
     api-timeout: 60
     boot-timeout: 120
     max-servers: 85
@@ -454,12 +439,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-region-a
     region-name: 'region-a.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-a.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     boot-timeout: 120
     max-servers: 0
     rate: 0.1
@@ -472,12 +452,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b1
     region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     api-timeout: 60
     boot-timeout: 120
     max-servers: 100
@@ -556,12 +531,7 @@ providers:
 
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     api-timeout: 60
     boot-timeout: 120
     max-servers: 100
@@ -639,12 +609,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     api-timeout: 60
     boot-timeout: 120
     max-servers: 100
@@ -722,12 +687,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b4
     region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     api-timeout: 60
     boot-timeout: 120
     max-servers: 100
@@ -806,12 +766,7 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
-    service-type: 'compute'
-    service-name: 'Compute'
-    username: '<%= hpcloud_username %>'
-    password: '<%= hpcloud_password %>'
-    project-id: '<%= hpcloud_project %>'
-    auth-url: 'https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0'
+    cloud: hpcloud
     api-timeout: 60
     boot-timeout: 120
     max-servers: 100
@@ -890,12 +845,7 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-rh1
-    service-type: 'compute'
-    service-name: 'nova'
-    username: '<%= tripleo_username %>'
-    password: '<%= tripleo_password %>'
-    project-id: '<%= tripleo_project %>'
-    auth-url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
+    cloud: tripleo-test-cloud-rh1
     boot-timeout: 120
     max-servers: 75
     rate: 0.001
