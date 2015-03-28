@@ -24,6 +24,7 @@ class openstack_project::nodepool_prod(
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
   $project_config_repo = '',
+  $clouds_yaml_template = 'openstack_project/nodepool/clouds.yaml.erb',
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -56,6 +57,36 @@ class openstack_project::nodepool_prod(
     content => template($nodepool_template),
     require => [
       File['/etc/nodepool'],
+      User['nodepool'],
+    ],
+  }
+
+  file { '/home/nodepool/.config':
+    ensure => directory,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => [
+      User['nodepool'],
+    ],
+  }
+
+  file { '/home/nodepool/.config/openstack':
+    ensure => directory,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => [
+      File['/home/nodepool/.config'],
+    ],
+  }
+
+  file { '/home/nodepool/.config/openstack/clouds.yaml':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0400',
+    content => template($clouds_yaml_template),
+    require => [
+      File['/home/nodepool/.config/openstack'],
       User['nodepool'],
     ],
   }
