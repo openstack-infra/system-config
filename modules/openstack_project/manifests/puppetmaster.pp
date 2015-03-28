@@ -7,6 +7,7 @@ class openstack_project::puppetmaster (
   $ca_server = undef,
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
+  $puppetmaster_server = undef,
 ) {
   include logrotate
   include openstack_project::params
@@ -16,6 +17,7 @@ class openstack_project::puppetmaster (
     sysadmins                 => $sysadmins,
     pin_puppet                => $version,
     ca_server                 => $ca_server,
+    puppetmaster_server       => $puppetmaster_server,
   }
 
   file {'/etc/puppet/environments':
