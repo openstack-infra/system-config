@@ -70,6 +70,15 @@ class openstack_project::nodepool_prod(
     ],
   }
 
+  file { 'home/nodepool/.cache':
+    ensure => directory,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    require => [
+      User['nodepool'],
+    ],
+  }
+
   file { '/home/nodepool/.config/openstack':
     ensure => directory,
     owner   => 'nodepool',
