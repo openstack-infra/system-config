@@ -1,3 +1,8 @@
+cache:
+  class: dogpile.cache.dbm
+  max_age: 3600
+  arguments:
+    filename: /home/nodepool/.cache/nodepool/openstack.dbm
 clouds:
   rax:
     cloud: rackspace
