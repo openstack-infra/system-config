@@ -737,4 +737,15 @@ node 'ask.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'translate-dev.openstack.org' {
+  class { 'openstack_project::translate_dev':
+    sysadmins               => hiera('sysadmins', []),
+    openid_url              => 'https://openstackid-dev.openstack.org',
+    ssl_cert_file_contents  => hiera('translate_dev_ssl_cert_file_contents', 'XXX'),
+    ssl_key_file_contents   => hiera('translate_dev_ssl_key_file_contents', 'XXX'),
+    ssl_chain_file_contents => hiera('translate_dev_ssl_chain_file_contents', 'XXX'),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
