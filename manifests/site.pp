@@ -737,4 +737,13 @@ node 'ask.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'translate-dev.openstack.org' {
+  class { 'openstack_project::translate_dev':
+    sysadmins               => hiera('sysadmins', []),
+    openid_url              => 'https://openstackid-dev.openstack.org',
+    mysql_password          => hiera('translate_dev_mysql_password', 'XXX'),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
