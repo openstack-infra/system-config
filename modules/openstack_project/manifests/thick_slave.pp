@@ -23,6 +23,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::language_fonts_packages,
     $::openstack_project::jenkins_params::libcurl_dev_package,
     $::openstack_project::jenkins_params::ldap_dev_package,
+    $::openstack_project::jenkins_params::libcap_dev_package, # for python-prctl, used by neutron
     $::openstack_project::jenkins_params::librrd_dev_package, # for python-rrdtool, used by kwapi
     $::openstack_project::jenkins_params::libtidy_package, # for python-tidy, used by sphinxcontrib-docbookrestapi
     $::openstack_project::jenkins_params::libsasl_dev, # for keystone ldap auth integration
