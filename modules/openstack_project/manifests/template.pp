@@ -42,7 +42,7 @@ class openstack_project::template (
 
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
-      origins => ["Puppetlabs:${lsbdistcodename}"],
+      origins => ["Puppetlabs:${::lsbdistcodename}"],
     }
   }
 
@@ -178,6 +178,9 @@ class openstack_project::template (
         ensure => present,
       }
     }
+
+    default: {
+    }
   }
 
   ###########################################################
@@ -256,7 +259,7 @@ class openstack_project::template (
       $pin_puppetdb = '2.'
     }
     default: {
-      fail("Puppet version not supported")
+      fail('Puppet version not supported')
     }
   }
 

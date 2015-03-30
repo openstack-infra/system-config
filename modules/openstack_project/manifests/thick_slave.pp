@@ -136,6 +136,9 @@ class openstack_project::thick_slave(
         ensure => present,
       }
     }
+
+    default: {
+    }
   }
   package { 'rake':
     ensure   => '10.1.1',
