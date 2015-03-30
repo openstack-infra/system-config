@@ -348,8 +348,8 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
   class { 'openstack_project::subunit_worker':
     sysadmins             => hiera('sysadmins', []),
-    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
+    subunit2sql_db_host   => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass   => hiera('subunit2sql_db_password', ''),
   }
 }
 
@@ -445,7 +445,7 @@ node 'storyboard.openstack.org' {
       $::fqdn,
       'docs-draft.openstack.org',
     ],
-    cors_allowed_origins     => [
+    cors_allowed_origins    => [
       "https://${::fqdn}",
       'http://docs-draft.openstack.org',
     ],

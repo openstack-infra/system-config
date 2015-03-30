@@ -262,7 +262,7 @@ class openstack_project::gerrit (
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack.png',
     require => Class['::gerrit'],
-    notify => Exec['reload_gerrit_header'],
+    notify  => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
@@ -276,22 +276,22 @@ class openstack_project::gerrit (
   }
 
   file { '/home/gerrit2/review_site/static/jquery.js':
-    ensure  => present,
-    source  => '/usr/share/javascript/jquery/jquery.js',
-    require     => [
-        File['/home/gerrit2/review_site/static'],
-        Class['::gerrit'],
-        Package['libjs-jquery'],
-      ],
-    subscribe   => Package['libjs-jquery'],
-    notify      => Exec['reload_gerrit_header'],
+    ensure    => present,
+    source    => '/usr/share/javascript/jquery/jquery.js',
+    require   => [
+                  File['/home/gerrit2/review_site/static'],
+                  Class['::gerrit'],
+                  Package['libjs-jquery'],
+                  ],
+    subscribe => Package['libjs-jquery'],
+    notify    => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/static/hideci.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/hideci.js',
     require => Class['::gerrit'],
-    notify => Exec['reload_gerrit_header'],
+    notify  => Exec['reload_gerrit_header'],
   }
 
   file { '/home/gerrit2/review_site/etc/GerritSite.css':

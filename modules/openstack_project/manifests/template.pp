@@ -25,6 +25,7 @@ class openstack_project::template (
 
   include ntp
   include snmpd
+  include ssh
   include sudoers
 
   include openstack_project::params
