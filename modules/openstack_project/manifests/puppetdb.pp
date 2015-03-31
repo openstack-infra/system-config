@@ -31,7 +31,7 @@ class openstack_project::puppetdb (
     sysadmins                 => $sysadmins,
   }
 
-  class { 'puppetdb::database::postgresql':
+  class { '::puppetdb::database::postgresql':
     require         => [User['postgres'],
       Class['openstack_project::template'],],
   }
