@@ -14,6 +14,7 @@ if (now.getMonth() == 3) {
   if (now.getDate() == 1){
     clippy.load('Clippy', function(agent) {
       // Do anything with the loaded agent
+      $("#gwt-uid-21").change($.proxy(function(agent) { agent.speak("I noticed you Workflow +1'd this change. Are you sure you want to merge it?"); }, agent));
       agent.show();
       agent.animate();
     });
