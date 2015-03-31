@@ -12,6 +12,7 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', 's
 var now = new Date();
 if (now.getMonth() == 3) {
   if (now.getDate() == 1){
+    clippy.Animator.prototype._playSound = function() { }
     clippy.load('Clippy', function(agent) {
       // Do anything with the loaded agent
       agent.show();
