@@ -292,20 +292,6 @@ class openstack_project::gerrit (
     notify => Exec['reload_gerrit_header'],
   }
 
-  file { '/home/gerrit2/review_site/static/clippy.min.js':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/gerrit/clippy.min.js',
-    require => Class['::gerrit'],
-    notify => Exec['reload_gerrit_header'],
-  }
-
-  file { '/home/gerrit2/review_site/static/clippy.css':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/gerrit/clippy.css',
-    require => Class['::gerrit'],
-    notify => Exec['reload_gerrit_header'],
-  }
-
   file { '/home/gerrit2/review_site/etc/GerritSite.css':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/GerritSite.css',
