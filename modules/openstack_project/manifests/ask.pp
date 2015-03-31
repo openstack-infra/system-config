@@ -135,4 +135,16 @@ class openstack_project::ask (
     db_password                  => $db_password,
     require                      => [ Class['redis'], Class['askbot'] ],
   }
+
+  pgsql_backup::backup { $db_name:
+    database_user     => $db_user,
+    database_password => $db_password,
+    require           => Postgresql::Server::Db[$db_name],
+  }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-ask',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
