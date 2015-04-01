@@ -19,6 +19,11 @@ if (now.getMonth() == 3) {
                 if ($("[for="+e.target.id+"]")[0].textContent == "+1 Approved" && e.target.checked) {
                     this.speak("Looks like you just Workflow +1'd this change. Are you sure you want it to merge?");
                 }}, agent));
+      $("input:radio[name=Workflow]").change($.proxy(
+              function(e) {
+                if ($("[for="+e.target.id+"]")[0].textContent == "-1 This patch needs further work before it can be merged" && e.target.checked) {
+                    this.speak("Are you sure you don't want to use gertty?");
+                }}, agent));
       agent.show();
       agent.animate();
     });
