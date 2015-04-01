@@ -29,7 +29,7 @@ var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 // The url to full status information on running jobs
 var zuulStatusURL = 'http://status.openstack.org/zuul';
 // The json URL to check for running jobs
-var zuulStatusJSON = 'http://zuul.openstack.org/status.json';
+var zuulStatusJSON = 'https://zuul.openstack.org/status.json';
 
 function format_time(ms, words) {
     if (ms == null) {
