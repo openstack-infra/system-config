@@ -405,7 +405,7 @@ node /^pypi\..*\.openstack\.org$/ {
 
 # A machine to run ODSREG in preparation for summits.
 # Node-OS: precise
-node 'summit.openstack.org' {
+node 'design-summit-prep.openstack.org' {
   class { 'openstack_project::summit':
     sysadmins => hiera('sysadmins', []),
   }
