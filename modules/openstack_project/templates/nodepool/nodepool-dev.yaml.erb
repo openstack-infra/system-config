@@ -1,5 +1,5 @@
 script-dir: /etc/nodepool/scripts
-dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
+dburi: 'mysql+pymysql://nodepool:<%= mysql_password %>@localhost/nodepool'
 
 cron:
   cleanup: '*/5 * * * *'

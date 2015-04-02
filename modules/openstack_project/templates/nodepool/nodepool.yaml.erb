@@ -1,7 +1,7 @@
 script-dir: /etc/nodepool/scripts
 elements-dir: /etc/nodepool/elements
 images-dir: /opt/nodepool_dib
-dburi: 'mysql://nodepool:<%= mysql_password %>@localhost/nodepool'
+dburi: 'mysql+pymysql://nodepool:<%= mysql_password %>@localhost/nodepool'
 
 cron:
   cleanup: '*/1 * * * *'
