@@ -2,7 +2,6 @@
 #
 class openstack_project::jenkins_dev (
   $jenkins_ssh_private_key = '',
-  $sysadmins = [],
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
@@ -21,10 +20,6 @@ class openstack_project::jenkins_dev (
 
   include openstack_project
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => $sysadmins,
-  }
   include bup
   bup::site { 'rs-ord':
     backup_user   => 'bup-jenkins-dev',
