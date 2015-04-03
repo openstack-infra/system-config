@@ -188,10 +188,15 @@ Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
 
-    puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-    wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
-    dpkg -i $puppet_deb
-    rm $puppet_deb
+    # if running on an architecture (currently aarch64/arm64) that puppet labs does
+    # not provide .deb for, then don't retrieve/install the package from puppet labs
+    arch=`uname -i`
+    if [ $arch != 'aarch64' ] ; then
+        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+        wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+        dpkg -i $puppet_deb
+        rm $puppet_deb
+    fi
 
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
