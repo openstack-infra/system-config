@@ -117,6 +117,7 @@ node 'review-dev.openstack.org' {
 node 'jenkins.openstack.org' {
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+    puppetmaster_server     => 'puppetmaster.openstack.org',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents', 'XXX'),
@@ -133,6 +134,7 @@ node 'jenkins.openstack.org' {
 node /^jenkins\d+\.openstack\.org$/ {
   $group = "jenkins"
   class { 'openstack_project::jenkins':
+    puppetmaster_server     => 'puppetmaster.openstack.org',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
@@ -148,6 +150,7 @@ node /^jenkins\d+\.openstack\.org$/ {
 # Node-OS: precise
 node 'jenkins-dev.openstack.org' {
   class { 'openstack_project::jenkins_dev':
+    puppetmaster_server      => 'puppetmaster.openstack.org',
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
     sysadmins                => hiera('sysadmins', []),
     mysql_password           => hiera('nodepool_dev_mysql_password', 'XXX'),
