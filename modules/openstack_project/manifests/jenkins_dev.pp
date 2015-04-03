@@ -13,6 +13,7 @@ class openstack_project::jenkins_dev (
   $hpcloud_password ='',
   $hpcloud_project ='',
   $nodepool_template ='nodepool-dev.yaml.erb',
+  $puppetmaster_server = 'puppetmaster.openstack.org',
 ) {
 
   realize (
@@ -24,6 +25,7 @@ class openstack_project::jenkins_dev (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
+    puppetmaster_server       => $puppetmaster_server,
   }
   include bup
   bup::site { 'rs-ord':

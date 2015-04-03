@@ -18,6 +18,7 @@ class openstack_project::jenkins (
   $zmq_event_receivers = [],
   $sysadmins = [],
   $project_config_repo = '',
+  $puppetmaster_server = 'puppetmaster.openstack.org',
 ) inherits openstack_project {
   include openstack_project
 
@@ -27,6 +28,7 @@ class openstack_project::jenkins (
     iptables_rules6           => $iptables_rule,
     iptables_rules4           => $iptables_rule,
     sysadmins                 => $sysadmins,
+    puppetmaster_server       => $puppetmaster_server,
   }
 
   # Set defaults here because they evaluate variables which you cannot
