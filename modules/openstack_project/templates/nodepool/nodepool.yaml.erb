@@ -103,6 +103,19 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: centos-6
+    image: centos-6
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: devstack-trusty-2-node
     image: devstack-trusty
     ready-script: multinode_setup.sh
@@ -249,6 +262,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        base-image: 'CentOS 6 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
         min-ram: 8192
@@ -317,6 +337,13 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        base-image: 'CentOS 6 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
         min-ram: 8192
@@ -383,6 +410,13 @@ providers:
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        base-image: 'CentOS 6 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-precise-check
@@ -482,6 +516,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        min-ram: 30720
+        diskimage: centos-6
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
@@ -562,6 +601,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        min-ram: 30720
+        diskimage: centos-6
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
@@ -639,6 +683,11 @@ providers:
         base-image: 'CentOS 6.3 Server 64-bit 20130116'
         min-ram: 30720
         setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        min-ram: 30720
+        diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
@@ -721,6 +770,11 @@ providers:
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        min-ram: 30720
+        diskimage: centos-6
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
         base-image: 'Fedora 20 Server 64-bit 20140407 - Partner Image'
         min-ram: 30720
@@ -800,6 +854,11 @@ providers:
         base-image: 'CentOS 6.3 Server 64-bit 20130116'
         min-ram: 30720
         setup: prepare_node_bare.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: centos-6
+        min-ram: 30720
+        diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f20
@@ -904,6 +963,18 @@ targets:
       credentials-id: '<%= jenkins_credentials_id %>'
 
 diskimages:
+  - name: centos-6
+    elements:
+      - centos
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-trusty
     elements:
       - ubuntu
