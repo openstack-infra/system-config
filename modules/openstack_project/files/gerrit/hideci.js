@@ -28,7 +28,7 @@ var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 // The url to full status information on running jobs
 var zuulStatusURL = 'http://status.openstack.org/zuul';
 // The json URL to check for running jobs
-var zuulStatusJSON = 'https://zuul.openstack.org/status.json';
+var zuulStatusJSON = 'https://zuul.openstack.org/status/change/';
 
 // This is a variable to determine if we're in debugging mode, which
 // lets you globally set it to see what's going on in the flow.
@@ -443,18 +443,6 @@ var ci_zuul_process_changes = function(data, change_psnum) {
     }
 };
 
-var ci_zuul_inner_loop = function(change_psnum) {
-    var current = ci_current_change();
-    if (current && change_psnum.indexOf(current) != 0) {
-        // window url is dead
-        return;
-    }
-    $.getJSON(zuulStatusJSON, function(data) {
-        ci_zuul_process_changes(data, change_psnum);
-    });
-    setTimeout(function() {ci_zuul_inner_loop(change_psnum);}, 10000);
-};
-
 var ci_zuul_for_change = function(comments) {
     if (!comments) {
         comments = ci_parse_comments();
@@ -462,8 +450,34 @@ var ci_zuul_for_change = function(comments) {
     var change = ci_current_change();
     var psnum = ci_latest_patchset(comments);
     var change_psnum = change + "," + psnum;
-    ci_zuul_inner_loop(change_psnum);
+
+    // do the loop recursively in ajax
+    (function poll() {
+        $.ajax({
+            url: zuulStatusJSON + change_psnum,
+            type: "GET",
+            success: function(data) {
+                console.log("I succeeded " + change_psnum);
+                ci_zuul_process_changes(data, change_psnum);
+            },
+            dataType: "json",
+            complete: setTimeout(function() {
+                if (window.zuul_enable_status_updates == false) {
+                    return;
+                }
+                var current = ci_current_change();
+                if (current && change_psnum.indexOf(current) != 0) {
+                    // window url is dead, so don't schedule any more future
+                    // updates for this url.
+                    return;
+                }
+                poll();
+            }, 15000),
+            timeout: 5000
+        });
+    })();
 };
+
 
 window.onload = function() {
     var input = document.createElement("input");
@@ -494,5 +508,15 @@ window.onload = function() {
     observer.observe(document, {
         subtree: true,
         attributes: true
+    });
+
+    $(document).on({
+        'show.visibility': function() {
+            window.zuul_enable_status_updates = true;
+            ci_page_loaded();
+        },
+        'hide.visibility': function() {
+            window.zuul_enable_status_updates = false;
+        }
     });
 };
