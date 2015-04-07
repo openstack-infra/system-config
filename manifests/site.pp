@@ -115,6 +115,7 @@ node 'review-dev.openstack.org' {
 
 # Node-OS: precise
 node 'jenkins.openstack.org' {
+  $group = "jenkins"
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
