@@ -3,21 +3,42 @@
 # A template host with no running services
 #
 class openstack_project::template (
-  $iptables_public_tcp_ports = [],
-  $iptables_public_udp_ports = [],
-  $iptables_rules4           = [],
-  $iptables_rules6           = [],
-  $pin_puppet                = '3.',
-  $install_users             = true,
-  $install_resolv_conf       = true,
-  $automatic_upgrades        = true,
-  $certname                  = $::fqdn,
-  $ca_server                 = undef,
-  $enable_unbound            = true,
-  $afs                       = false,
-  $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $iptables_public_tcp_ports    = [],
+  $iptables_public_udp_ports    = [],
+  $iptables_rules4              = [],
+  $iptables_rules6              = [],
+  $pin_puppet                   = '3.',
+  $install_users                = true,
+  $install_resolv_conf          = true,
+  $automatic_upgrades           = true,
+  $certname                     = $::fqdn,
+  $ca_server                    = undef,
+  $enable_unbound               = true,
+  $afs                          = false,
+  $puppetmaster_server          = 'puppetmaster.openstack.org',
   $manage_exim               = false,
   $sysadmins                 = [],
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
+  $enable_puppet                = false,
+  $puppet_http_proxy            = undef,
+  $puppet_https_proxy           = undef,
+  $puppet_agent_http_proxy_host = undef,
+  $puppet_agent_http_proxy_port = undef,
+  $puppet_dns_alt_names         = undef,
+  $puppet_environment_path      = '/etc/puppet/environments',
+  $puppet_basemodule_path       = '/etc/puppet/modules',
+  $puppet_environment_timeout   = 0,
+  $puppet_store_configs         = true,
+  $puppet_store_backend         = 'puppetdb',
+  $puppet_reports               = 'store,puppetdb',
+  $puppet_agent_runinterval     = 600,
+  $puppet_release               = $::lsbdistcodename,
 ) {
 
   ###########################################################
@@ -257,116 +278,25 @@ class openstack_project::template (
 
   ###########################################################
   # Manage Puppet
-  # possible TODO: break this into openstack_project::puppet
-
-  case $pin_puppet {
-    '2.7.': {
-      $pin_facter = '1.'
-      $pin_puppetdb = '1.'
-    }
-    /^3\./: {
-      $pin_facter = '2.'
-      $pin_puppetdb = '2.'
-    }
-    default: {
-      fail("Puppet version not supported")
-    }
+  class { ::puppet:
+    pin_puppet            => $pin_puppet,
+    enable_puppet         => $enable_puppet,
+    http_proxy            => $puppet_http_proxy,
+    agent_http_proxy_host => $puppet_agent_http_proxy_host,
+    agent_http_proxy_port => $puppet_agent_http_proxy_port,
+    https_proxy           => $puppet_https_proxy,
+    certname              => $certname,
+    puppetmaster_server   => $puppetmaster_server,
+    puppet_ca_server      => $ca_server,
+    dns_alt_names         => $puppet_dns_alt_names,
+    environment_path      => $puppet_environment_path,
+    basemodule_path       => $puppet_basemodule_path,
+    environment_timeout   => $puppet_environment_timeout,
+    store_configs         => $puppet_store_configs,
+    store_backend         => $puppet_store_backend,
+    reports               => $puppet_reports,
+    agent_runinterval     => $puppet_agent_runinterval,
+    puppet_release        => $puppet_release,
   }
-
-  if ($::operatingsystem == 'Fedora') {
-
-    package { 'hiera':
-      ensure   => latest,
-      provider => 'gem',
-    }
-
-    exec { 'symlink hiera modules' :
-      command     => 'ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/',
-      path        => '/bin:/usr/bin',
-      subscribe   => Package['hiera'],
-      refreshonly => true,
-    }
-
-  }
-
-  # Which Puppet do I take?
-  # Take $puppet_version and pin to that version
-  if ($::osfamily == 'Debian') {
-    apt::source { 'puppetlabs':
-      location   => 'http://apt.puppetlabs.com',
-      repos      => 'main',
-      key        => '4BD6EC30',
-      key_server => 'pgp.mit.edu',
-    }
-
-    file { '/etc/apt/apt.conf.d/80retry':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/80retry',
-      replace => true,
-    }
-
-    file { '/etc/apt/apt.conf.d/90no-translations':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/90no-translations',
-      replace => true,
-    }
-
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      content => template('openstack_project/00-puppet.pref.erb'),
-      replace => true,
-    }
-
-    file { '/etc/default/puppet':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/puppet.default',
-      replace => true,
-    }
-
-  }
-
-  if ($::operatingsystem == 'CentOS') {
-    file { '/etc/yum.repos.d/puppetlabs.repo':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
-      replace => true,
-    }
-    file { '/etc/yum.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/yum.conf',
-      replace => true,
-    }
-  }
-
-  $puppet_version = $pin_puppet
-  file { '/etc/puppet/puppet.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template('openstack_project/puppet.conf.erb'),
-    replace => true,
-  }
-
-  service { 'puppet':
-    ensure => stopped,
-  }
-  ###########################################################
 
 }

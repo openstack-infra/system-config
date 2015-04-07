@@ -121,8 +121,6 @@ The minimum set of things to port across is:
 
 * modules/openstack_project/manifests/puppetmaster.pp
 
-* modules/openstack_project/templates/puppet.conf.erb
-
 * The default node definition in site.pp
 
 * The puppetmaster definition in site.pp
