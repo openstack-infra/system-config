@@ -73,3 +73,35 @@ Then the previous image, 168655, will become the current image and
 nodepool will use it when creating new nodes.  When nodepool next
 creates an image, it will still retain 168655 since it will still be
 considered the next-most-recent image.
+
+vhd-util
+========
+
+Creating images for Rackspace requires a patched version of vhd-util to convert
+the images into the appropriate VHD format. A package is manaually managed
+at `ppa:openstack-ci-core/vhd-util` and is based on a git repo at
+https://github.com/emonty/vhd-util
+
+Updating vhd-util
+-----------------
+
+Should it become required to update vhd-util before Infra has a proper
+packaging repo or solution in place, one should clone from the git repo::
+
+  $ git clone git://github.com/emonty/vhd-util
+  $ cd vhd-util
+
+Then perform whatever updates and packaging work are needed. The repo is
+formatted as a git-buildpackage repo with `--pristine-tar`. When you're ready
+to upload a new verion, commit, create a source package and a tag::
+
+  $ git-buildpackage --git-tag --git-sign-tags -S
+
+This will make a source package in the parent directory. Upload it to
+launchpad::
+
+  $ cd ..
+  $ dput ppa:openstack-ci-core/vhd-util vhd-util_$version_source.changes
+
+Then probably pushing the repo to github and submitting a pull request so that
+we can keep up with the change is not a terrible idea.
