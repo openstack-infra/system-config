@@ -18,7 +18,8 @@ class openstack_project::single_use_slave (
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) inherits openstack_project {
-  class { 'openstack_project::template':
+
+  class { 'openstack_project::server':
     certname            => $certname,
     automatic_upgrades  => $automatic_upgrades,
     install_users       => $install_users,
@@ -37,6 +38,7 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8004 -s 172.24.4.0/23 -j ACCEPT',
         '-m limit --limit 2/min -j LOG --log-prefix "iptables dropped: "',
       ],
+    manage_exim         => false,
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
