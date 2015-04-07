@@ -109,6 +109,8 @@ EOF
     yum --enablerepo=epel-bootstrap -y install epel-release
     rm -f /etc/yum.repos.d/epel-bootstrap.repo
 
+    yum update -y
+
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git puppet
 
