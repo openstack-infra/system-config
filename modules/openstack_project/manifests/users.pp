@@ -140,4 +140,12 @@ class openstack_project::users {
     gid      => 2015,
   }
 
+  @user::virtual::localuser { 'aevseev':
+    realname => 'Alexander Evseev',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC6K5hhmmt+EkZV2JoMlK2RcD2g9Zh7sBLTdRzPs4U9KrNdiI4Qu/m1SLLH8KKyZM5Kd15OdCIiwRxP5R/sTrWCjKrTrwHECUNuJS/AzZTRhP2a0Pxmj/5gjRgAaSdUw22tYvxUwWLjXSL44qUDtJIHtfNWpxhDxIIE/HzmIm+JV+aiaWS5klHECZS/c5sTlGboXrmlRUDBkEEHKCvYXm6xX8eGr9jT9tz4aTK6V/OQoxVW6wuuNDKH+P7+F3qY0KFaTnwKI0dSxfNIslps0AzHL3iDi8JqRzr3K9SJMjVPN0oSDWNgaF/YBZdmVDQS3rOaaQCA2f87S+XR7MLJAqoX',
+    key_id   => 'aevseev@mirantis.com',
+    uid      => 2016,
+    gid      => 2016,
+  }
+
 }
