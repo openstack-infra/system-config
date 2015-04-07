@@ -97,7 +97,7 @@ class openstack_project::ask (
   vcsrepo { "/srv/askbot-sites/${slot_name}/themes":
     ensure   => latest,
     provider => git,
-    revision => 'master',
+    revision => 'f9f4bfa085b8c4b9fbf6c71766f7042793de12b9',
     source   => 'https://git.openstack.org/openstack-infra/askbot-theme',
     require  => [
       Class['askbot'], File["/srv/askbot-sites/${slot_name}"],
