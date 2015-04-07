@@ -34,6 +34,18 @@ openID provider. The code provides authentication via OpenID and
 authentication + authorization via OAuth2. More details about
 OpenStackID server are on the wiki.
 
+Servers
+=======
+
+openstackid-dev.openstack.org is configured to deploy
+http://tarballs.openstack.org/openstackid/openstackid-latest.tar.gz
+which is the automatically generated per-commit tarball of the master
+branch.  No action is necessary to update the deployment of
+openstackid-dev to the latest merged commit in master.
+
+openstackid.openstack.org is configured to deploy a specific tag.  To
+update this deployment, tag the repo to create a release, and then
+update puppet to point to that release name.
 
 Configuration
 =============
