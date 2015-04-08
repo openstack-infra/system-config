@@ -55,15 +55,19 @@ class openstack_project::ask (
     require => File['/usr/share/solr/core-en/conf'],
   }
 
-  # deploy smartcn Chinese analyzer from solr contrib/analysys-extras
-  file { "/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar":
-    ensure  => present,
-    replace => 'no',
-    source  => "/tmp/solr-${solr_version}/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-${solr_version}.jar",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    require => Exec['copy-solr'],
+  # deploy smartcn Chinese analyzer from solr contrib/analysys-extras, if target
+  # file not exists.
+  $a = file("/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar", '/dev/null')
+  if ($a == '') {
+    file { "/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar":
+      ensure  => present,
+      replace => 'no',
+      content => "/tmp/solr-${solr_version}/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-${solr_version}.jar",
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      require => Exec['copy-solr'],
+    }
   }
 
   # postgresql database
