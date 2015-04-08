@@ -404,6 +404,9 @@ class openstack_project::gerrit (
       source  => $projects_file,
       replace => true,
       require => Class['::gerrit'],
+      notify  => [
+          Exec['jeepyb::manage_projects::jeepyb_manage_projects'],
+      ],
     }
 
     file { '/home/gerrit2/projects.ini':
@@ -426,38 +429,20 @@ class openstack_project::gerrit (
       purge   => true,
       force   => true,
       source  => $acls_dir,
-      require => Class['::gerrit']
+      require => Class['::gerrit'],
+      notify  => [
+          Exec['jeepyb::manage_projects::jeepyb_manage_projects'],
+      ],
     }
 
     if ($testmode == false) {
-      exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects -v >> /var/log/manage_projects.log 2>&1',
-        timeout     => 900, # 15 minutes
-        subscribe   => [
+      class { 'jeepyb::manage_projects':
+        timeout => 900,
+        before  => [
             File['/home/gerrit2/projects.yaml'],
             File['/home/gerrit2/acls'],
           ],
-        refreshonly => true,
-        logoutput   => true,
-        require     => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-            Class['jeepyb'],
-          ],
-      }
-
-      include logrotate
-      logrotate::file { 'manage_projects.log':
-        log     => '/var/log/manage_projects.log',
-        options => [
-          'compress',
-          'missingok',
-          'rotate 30',
-          'daily',
-          'notifempty',
-          'copytruncate',
-        ],
-        require => Exec['manage_projects'],
+        logfile => '/var/log/manage_projects.log',
       }
     }
   }
