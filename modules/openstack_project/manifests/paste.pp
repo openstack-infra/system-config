@@ -3,13 +3,19 @@
 class openstack_project::paste (
   $db_password,
   $mysql_root_password,
+  $db_user            = 'openstack',
+  $port               = '5000',
+  $image              = 'header-bg2.png',
+  $vhost_name         = $::fqdn,
 ) {
   include lodgeit
   lodgeit::site { 'openstack':
-    db_host     => 'localhost',
+    port        => $port,
     db_password => $db_password,
-    port        => '5000',
-    image       => 'header-bg2.png',
+    db_host     => 'localhost',
+    db_user     => $db_user,
+    vhost_name  => $vhost_name,
+    image       => $image,
     require     => mysql::db['openstack'],
   }
 
@@ -23,7 +29,7 @@ class openstack_project::paste (
 
   include mysql::server::account_security
   mysql::db { 'openstack':
-    user     => 'openstack',
+    user     => $db_user,
     password => $db_password,
     host     => 'localhost',
     grant    => ['all'],
