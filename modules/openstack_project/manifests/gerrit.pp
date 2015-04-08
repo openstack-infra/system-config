@@ -420,7 +420,8 @@ class openstack_project::gerrit (
       mode    => '0444',
       source  => $projects_file,
       replace => true,
-      require => Class['::gerrit'],
+      require => [Class['::gerrit'], Class['::jeepyb::manage_projects']],
+      notify  => $jeepyb_notify,
     }
 
     file { $jeepyb_cache_dir:
@@ -450,7 +451,8 @@ class openstack_project::gerrit (
       purge   => true,
       force   => true,
       source  => $acls_dir,
-      require => Class['::gerrit']
+      require => [Class['::gerrit'], Class['::jeepyb::manage_projects']],
+      notify  => $jeepyb_notify,
     }
 
     if ($testmode == false) {
