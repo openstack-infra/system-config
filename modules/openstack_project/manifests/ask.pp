@@ -56,6 +56,7 @@ class openstack_project::ask (
   }
 
   # deploy smartcn Chinese analyzer from solr contrib/analysys-extras
+  Exec['copy-solr'] ~> File["/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar"]
   file { "/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar":
     ensure  => present,
     replace => 'no',
