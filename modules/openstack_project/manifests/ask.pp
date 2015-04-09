@@ -10,7 +10,7 @@ class openstack_project::ask (
   $slot_name = 'slot0',
   $redis_enabled = true,
   $redis_port = '6378',
-  $redis_max_memory = '256m',
+  $redis_max_memory = '512m',
   $redis_bind = '127.0.0.1',
   $redis_password = undef,
   $site_ssl_enabled = true,
