@@ -129,6 +129,16 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-n-cell-child.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*cells.*'
+  - name: logs/screen-n-cell-region.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*cells.*'
   - name: logs/screen-n-cond.txt
     tags:
       - screen
