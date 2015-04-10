@@ -28,6 +28,7 @@ class openstack_project::translate_dev(
   $ssl_cert_file_contents = '', # If left empty puppet will not create file.
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
+  $listeners = [],
   ) {
 
   class { 'openstack_project::server':
@@ -41,6 +42,7 @@ class openstack_project::translate_dev(
     zanata_db_username         => $mysql_user,
     zanata_db_password         => $mysql_password,
     zanata_openid_provider_url => $openid_url,
+    zanata_listeners           => $listeners,
     require                    => [
                                    Class['openstack_project::server']
                                    ],

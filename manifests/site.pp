@@ -742,6 +742,7 @@ node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
     openid_url              => 'https://openstackid-dev.openstack.org',
+    listeners               => ['ajp'],
     mysql_host              => hiera('translate_dev_mysql_host', 'localhost'),
     mysql_password          => hiera('translate_dev_mysql_password', 'XXX'),
   }
