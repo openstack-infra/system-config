@@ -2,23 +2,11 @@
 #
 class openstack_project::puppetmaster (
   $root_rsa_key = 'xxx',
-  $sysadmins = [],
-  $version   = '3.',
-  $ca_server = undef,
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
-  $puppetmaster_server = 'puppetmaster.openstack.org',
 ) {
   include logrotate
   include openstack_project::params
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [4505, 4506, 8140],
-    sysadmins                 => $sysadmins,
-    pin_puppet                => $version,
-    ca_server                 => $ca_server,
-    puppetmaster_server       => $puppetmaster_server,
-  }
 
   file {'/etc/puppet/environments':
     ensure => directory,
