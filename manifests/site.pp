@@ -743,6 +743,7 @@ node 'translate-dev.openstack.org' {
     sysadmins               => hiera('sysadmins', []),
     openid_url              => 'https://openstackid-dev.openstack.org',
     listeners               => ['ajp'],
+    from_address            => 'noreply@openstack.org',
     mysql_host              => hiera('translate_dev_mysql_host', 'localhost'),
     mysql_password          => hiera('translate_dev_mysql_password', 'XXX'),
   }
