@@ -19,6 +19,7 @@ class openstack_project::translate_dev(
   $mysql_port = '3306',
   $mysql_user = 'zanata',
   $mysql_password,
+  $admin_users = '',
   $sysadmins = [],
   $openid_url = '',
   $vhost_name = $::fqdn,
@@ -43,6 +44,7 @@ class openstack_project::translate_dev(
     zanata_db_password         => $mysql_password,
     zanata_openid_provider_url => $openid_url,
     zanata_listeners           => $listeners,
+    zanata_admin_users         => $admin_users,
     require                    => [
                                    Class['openstack_project::server']
                                    ],
