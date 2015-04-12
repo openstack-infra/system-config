@@ -71,6 +71,7 @@ class openstack_project::cacti (
   }
 
   $cacti_hosts = [
+    'ask.openstack.org',
     'afs01.dfw.openstack.org',
     'afs01.ord.openstack.org',
     'afsdb01.openstack.org',
