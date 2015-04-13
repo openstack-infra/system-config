@@ -738,6 +738,19 @@ node 'ask.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'ask-staging.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::ask_staging':
+    db_password                  => hiera('ask_staging_db_password', 'XXX'),
+    redis_password               => hiera('ask_staging_redis_password', 'XXX'),
+  }
+}
+
+# Node-OS: trusty
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
