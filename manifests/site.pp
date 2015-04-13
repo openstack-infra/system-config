@@ -539,7 +539,7 @@ node 'status.openstack.org' {
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
   class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
+    sysadmins                    => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
 
