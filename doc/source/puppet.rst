@@ -78,7 +78,9 @@ the puppet master:
 
 .. code-block:: bash
 
-  sudo apt-get install puppet
+   sudo su -
+   wget https://git.openstack.org/cgit/openstack-infra/system-config/plain/install_puppet.sh
+   bash -x install_puppet.sh
 
 The node then needs to be configured to set a fixed hostname and the
 hostname of the puppet master with the following additions to
