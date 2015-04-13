@@ -737,6 +737,19 @@ node 'ask.openstack.org' {
   }
 }
 
+# Node-OS: precise
+node 'ask-staging.openstack.org' {
+  class { 'openstack_project::ask':
+    sysadmins                    => hiera('sysadmins', []),
+    db_user                      => hiera('ask_staging_db_user', 'ask'),
+    db_password                  => hiera('ask_staging_db_password', 'XXX'),
+    redis_password               => hiera('ask_staging_redis_password', 'XXX'),
+    site_ssl_cert_file_contents  => hiera('ask_staging_site_ssl_cert_file_contents', undef),
+    site_ssl_key_file_contents   => hiera('ask_staging_site_ssl_key_file_contents', undef),
+    site_ssl_chain_file_contents => hiera('ask_staging_site_ssl_chain_file_contents', undef),
+  }
+}
+
 # Node-OS: trusty
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
