@@ -484,7 +484,6 @@ node 'nodepool.openstack.org' {
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
-    sysadmins                => hiera('sysadmins', []),
     statsd_host              => 'graphite.openstack.org',
     jenkins_api_user         => hiera('jenkins_api_user', 'username'),
     jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),
@@ -498,6 +497,11 @@ node 'nodepool.openstack.org' {
     tripleo_username         => hiera('nodepool_tripleo_username', 'username'),
     tripleo_password         => hiera('nodepool_tripleo_password', 'XXX'),
     tripleo_project          => hiera('nodepool_tripleo_project', 'project'),
+  }
+
+  class { 'openstack_project::server':
+    sysadmins                 => $sysadmins,
+    iptables_public_tcp_ports => [80],
   }
 }
 
