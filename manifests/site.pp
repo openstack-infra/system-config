@@ -583,6 +583,10 @@ node 'nodepool.openstack.org' {
     tripleo_password         => hiera('nodepool_tripleo_password', 'XXX'),
     tripleo_project          => hiera('nodepool_tripleo_project', 'project'),
   }
+  class { 'openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    iptables_public_tcp_ports => [80],
+  }
 }
 
 # Node-OS: precise
