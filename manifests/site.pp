@@ -206,8 +206,10 @@ node 'puppetmaster.openstack.org' {
 
 # Node-OS: precise
 node 'puppetdb.openstack.org' {
-  class { 'openstack_project::puppetdb':
-    sysadmins => hiera('sysadmins', []),
+  include openstack_project::puppetdb
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => $open_ports,
+    sysadmins                 => hiera('sysadmins', []),
   }
 }
 
