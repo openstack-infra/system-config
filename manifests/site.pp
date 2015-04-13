@@ -542,7 +542,6 @@ node 'nodepool.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
-
   class { 'openstack_project::nodepool_prod':
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
