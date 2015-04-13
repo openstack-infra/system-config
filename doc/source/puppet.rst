@@ -73,12 +73,18 @@ file should have mode 0600.
 Adding a node
 -------------
 
-On the new server connecting (for example, review.openstack.org) to
-the puppet master:
+For adding a new node to your puppet master, you can either use the
+``/opt/system-config/production/launch/launch-node.py`` script
+(see :file:`launch/README` for full details) or bootstrap puppet manually.
+
+For manual bootstrap, you need to run on the new server connecting
+(for example, review.openstack.org) to the puppet master:
 
 .. code-block:: bash
 
-  sudo apt-get install puppet
+   sudo su -
+   wget https://git.openstack.org/cgit/openstack-infra/system-config/plain/install_puppet.sh
+   bash -x install_puppet.sh
 
 The node then needs to be configured to set a fixed hostname and the
 hostname of the puppet master with the following additions to
