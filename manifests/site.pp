@@ -738,6 +738,15 @@ node 'ask.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'ask-staging.openstack.org' {
+  class { 'openstack_project::ask_staging':
+    sysadmins                    => hiera('sysadmins', []),
+    db_password                  => hiera('ask_staging_db_password', undef),
+    redis_password               => hiera('ask_staging_redis_password', undef),
+  }
+}
+
+# Node-OS: trusty
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
