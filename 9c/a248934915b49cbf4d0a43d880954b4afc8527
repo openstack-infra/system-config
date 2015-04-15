@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Wed, 15 Apr 2015 18:04:51 +0000
+Reviewed-on: https://review.openstack.org/174008
+Project: openstack-infra/system-config
+Branch: refs/heads/master
