@@ -196,6 +196,12 @@ class openstack_project::template (
     provider => pip,
     require  => Class['pip'],
   }
+  file { '/usr/bin/virtualenv':
+    ensure  => 'link',
+    target  => '/usr/local/bin/virtualenv',
+    replace => false,
+  }
+
   file { '/etc/pip.conf':
     owner   => 'root',
     group   => 'root',
