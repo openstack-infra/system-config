@@ -299,4 +299,14 @@ class openstack_project::static (
     serveraliases => ['*.devstack.org'],
     template      => 'openstack_project/devstack.vhost.erb',
   }
+
+  ###########################################################
+  # legacy ci.openstack.org site redirect
+
+  apache::vhost { 'ci.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/ci.vhost.erb',
+  }
 }
