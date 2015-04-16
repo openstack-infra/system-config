@@ -62,20 +62,13 @@ class openstack_project::static (
   }
 
   ###########################################################
-  # CI
+  # legacy ci.openstack.org site redirect
 
   apache::vhost { 'ci.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/ci',
-    require  => File['/srv/static/ci'],
-  }
-
-  file { '/srv/static/ci':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => User['jenkins'],
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/ci.vhost.erb',
   }
 
   ###########################################################
