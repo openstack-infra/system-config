@@ -67,7 +67,7 @@ Image 168655 is the previous image and 168696 is the current image
 (they are both marked as ``ready`` and the current image is simply the
 image with the shortest age.  Delete the problematic image with::
 
-  $ sudo nodepool delete-image 168696
+  $ sudo nodepool image-delete 168696
 
 Then the previous image, 168655, will become the current image and
 nodepool will use it when creating new nodes.  When nodepool next
