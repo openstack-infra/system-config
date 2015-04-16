@@ -37,6 +37,43 @@ $elasticsearch_clients = [
   'logstash-worker20.openstack.org',
   'subunit-worker01.openstack.org',
 ]
+$zuul_gearman_workers = [
+  'nodepool.openstack.org',
+  'jenkins.openstack.org',
+  'jenkins01.openstack.org',
+  'jenkins02.openstack.org',
+  'jenkins03.openstack.org',
+  'jenkins04.openstack.org',
+  'jenkins05.openstack.org',
+  'jenkins06.openstack.org',
+  'jenkins07.openstack.org',
+  'jenkins-dev.openstack.org',
+  'zm01.openstack.org',
+  'zm02.openstack.org',
+  'zm03.openstack.org',
+  'zm04.openstack.org',
+  'zm05.openstack.org',
+  'zm06.openstack.org',
+  'zm07.openstack.org',
+  'zm08.openstack.org',
+]
+$zuul_iptables_rules = regsubst ($zuul_gearman_workers,
+                                '^(.*)$',
+                                '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+$zuul_dev_gearman_workers = [
+  'jenkins.openstack.org',
+  'jenkins01.openstack.org',
+  'jenkins02.openstack.org',
+  'jenkins03.openstack.org',
+  'jenkins04.openstack.org',
+  'jenkins05.openstack.org',
+  'jenkins06.openstack.org',
+  'jenkins07.openstack.org',
+  'jenkins-dev.openstack.org',
+]
+$zuul_dev_iptables_rules = regsubst ($zuul_dev_gearman_workers,
+                                     '^(.*)$',
+                                     '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
 #
 # Default: should at least behave like an openstack server
@@ -507,6 +544,12 @@ node 'nodepool.openstack.org' {
 # Node-OS: precise
 # Node-OS: trusty
 node 'zuul.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $zuul_iptables_rules,
+    iptables_rules4           => $zuul_iptables_rules,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::zuul_prod':
     project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server                  => 'review.openstack.org',
@@ -526,28 +569,7 @@ node 'zuul.openstack.org' {
     proxy_ssl_key_file_contents    => hiera('zuul_ssl_key_file_contents', 'XXX'),
     proxy_ssl_chain_file_contents  => hiera('zuul_ssl_chain_file_contents', 'XXX'),
     zuul_url                       => 'http://zuul.openstack.org/p',
-    sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.openstack.org',
-    gearman_workers                => [
-      'nodepool.openstack.org',
-      'jenkins.openstack.org',
-      'jenkins01.openstack.org',
-      'jenkins02.openstack.org',
-      'jenkins03.openstack.org',
-      'jenkins04.openstack.org',
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
-      'zm01.openstack.org',
-      'zm02.openstack.org',
-      'zm03.openstack.org',
-      'zm04.openstack.org',
-      'zm05.openstack.org',
-      'zm06.openstack.org',
-      'zm07.openstack.org',
-      'zm08.openstack.org',
-    ],
   }
 }
 
@@ -555,19 +577,28 @@ node 'zuul.openstack.org' {
 # Node-OS: trusty
 node /^zm\d+\.openstack\.org$/ {
   $group = "zuul-merger"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    sysadmins            => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    iptables_rules6           => $zuul_dev_iptables_rules,
+    iptables_rules4           => $zuul_dev_iptables_rules,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::zuul_dev':
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server        => 'review-dev.openstack.org',
@@ -576,19 +607,7 @@ node 'zuul-dev.openstack.org' {
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
-    sysadmins            => hiera('sysadmins', []),
     statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [
-      'jenkins.openstack.org',
-      'jenkins01.openstack.org',
-      'jenkins02.openstack.org',
-      'jenkins03.openstack.org',
-      'jenkins04.openstack.org',
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
-    ],
   }
 }
 
