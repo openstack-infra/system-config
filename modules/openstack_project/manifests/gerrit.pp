@@ -157,7 +157,7 @@ class openstack_project::gerrit (
       {
         name  => 'blueprint',
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
-        link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
+        link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2&show=complete',
       },
       {
         name  => 'testresult',
