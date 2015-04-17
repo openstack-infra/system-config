@@ -5,6 +5,8 @@ class openstack_project::slave (
   $certname = $::fqdn,
   $ssh_key = '',
   $sysadmins = [],
+  $jenkins_gitfullname = 'OpenStack Jenkins',
+  $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
 
   include openstack_project
@@ -19,6 +21,8 @@ class openstack_project::slave (
 
   class { 'jenkins::slave':
     ssh_key      => $ssh_key,
+    gitfullname  => $jenkins_gitfullname,
+    gitemail     => $jenkins_gitemail,
   }
 
   include jenkins::cgroups
