@@ -405,62 +405,21 @@ To rename a project:
    not currently in progress.  When it finishes, make sure the entry
    has not been added back to the crontab.
 
-#. Gracefully stop Zuul on zuul.openstack.org::
+#. Prepare a yaml file called repos.yaml that has a single dictionary called
+   `repos` with a list of dictionaries each having an old and new entry.
+   Optionally also add a `gerrit_groups` dict of the same form::
 
-     sudo kill -USR1 $(cat /var/run/zuul/zuul.pid)
-     rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
+     repos:
+     - old: stackforge/awesome-repo
+       new: openstack/awesome-repo
+     gerrit_groups:
+     - old: old-core-group
+       new: new-core-group
 
-#. Stop Gerrit on review.openstack.org::
+#. Run the ansible rename repos playbook, passing in the path to your yaml
+   file::
 
-     sudo invoke-rc.d gerrit stop
-
-#. Update the database on review.openstack.org::
-
-     sudo -H mysql reviewdb
-
-     update account_project_watches
-     set project_name = "openstack/NEW"
-     where project_name = "openstack/OLD";
-
-     update changes
-     set dest_project_name = "openstack/NEW", created_on = created_on
-     where dest_project_name = "openstack/OLD";
-
-#. Move both the Git repository and the mirror on
-   review.openstack.org::
-
-     sudo mv ~gerrit2/review_site/git/openstack/{OLD,NEW}.git
-     sudo mv /opt/lib/git/openstack/{OLD,NEW}.git
-
-#. Reindex the Lucene search index on review.openstack.org::
-
-     sudo su - gerrit2
-     cp -ax review_site/index index.backup.`date +%s`
-     java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
-
-#. Move the Git repository on git{01-05}.openstack.org (while the
-   Lucene reindex is running)::
-
-     sudo mv /var/lib/git/openstack/{OLD,NEW}.git
-
-#. Rename the project or transfer ownership in GitHub (while the
-   Lucene reindex is running).
-
-#. Start Gerrit on review.openstack.org::
-
-     sudo invoke-rc.d gerrit start
-
-#. Start Zuul on zuul.openstack.org::
-
-     sudo invoke-rc.d zuul start
-
-#. Rename any associated groups whose names may have changed::
-
-     ssh -p 29418 review.openstack.org gerrit rename-group OLDNAME NEWNAME
-
-#. If renamed/transfered projects using StoryBoard, update the db:
-
-     update projects set name='stackforge/NEW' where name='openstack/OLD';
+     sudo ansible-playbook -f 10 /etc/ansible/playbooks/rename_repos.yaml --extra-vars "repolist=PATH_TO_REPOLIST_YAML_FILE"
 
 #. Merge the prepared Puppet configuration change, removing the
    original Jenkins jobs via the Jenkins WebUI later if needed.
@@ -468,12 +427,6 @@ To rename a project:
 #. Re-enable puppet runs on the puppetmaster::
 
      sudo crontab -u root -e
-
-#. If this is an org move and the project name itself is not
-   changing, gate jobs may fail due to outdated remote URLs. Clear
-   the workspaces on persistent Jenkins slaves to mitigate this::
-
-     sudo ansible-playbook -f 10 /etc/ansible/playbooks/clean_workspaces.yaml --extra-vars "project=PROJECTNAME"
 
 #. Submit a change that updates .gitreview with the new location of the
    project.

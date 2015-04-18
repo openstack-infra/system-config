@@ -1,0 +1,73 @@
+---
+- hosts: zuul.openstack.org
+  gather_facts: False
+  remote_user: root
+  sudo: yes
+  tasks:
+  - shell: kill -USR1 $(cat /var/run/zuul/zuul.pid)
+  - shell: rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
+- hosts: review.openstack.org
+  gather_facts: False
+  remote_user: root
+  sudo: yes
+  tasks:
+  - shell: invoke-rc.d gerrit stop
+  - include_vars: "{{ repolist }}"
+  - shell: echo 'update account_project_watches set project_name = "{{ item.new }}" where project_name = "{{ item.old }}";' | mysql reviewdb
+    with_items: repos
+  - shell: echo 'update changes set dest_project_name = "{{ item.new }}", created_on = created_on where dest_project_name = "{{ item.old }}";' | mysql reviewdb
+    with_items: repos
+  - cmd: mv {{ item[0] }}{{ item[1].old }} {{ item[0]{{ item[1].new }}
+    with_nested:
+    - repos
+    - [ '~gerrit2/review_site/git/', '/opt/lib/git' ]
+- hosts: 'git0*'
+  gather_facts: False
+  tasks:
+  - include_vars: "{{ repolist }}"
+  - cmd: mv {{ item[0] }}{{ item[1].old }} {{ item[0]{{ item[1].new }}
+    with_nested:
+    - repos
+    - [ '/var/lib/git' ]
+- hosts: storyboard.openstack.org
+  gather_facts: False
+  remote_user: root
+  sudo: yes
+  tasks:
+  - include_vars: "{{ repolist }}"
+  - shell: echo 'update projects set name="{{ item.new }}" where name="{{ item.old }}";' | mysql storyboard
+- hosts: review.openstack.org
+  gather_facts: False
+  remote_user: gerrit2
+  sudo: yes
+  tasks:
+  - shell: cp -ax /home/gerrit2/review_site/index /home/gerrit2/index.backup.$(date +%s)
+  - shell: java -jar /home/gerrit2/review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
+- hosts: review.openstack.org
+  gather_facts: False
+  remote_user: root
+  sudo: yes
+  tasks:
+  - shell: invoke-rc.d gerrit start
+- hosts: zuul.openstack.org
+  gather_facts: False
+  remote_user: root
+  sudo: yes
+  tasks:
+  - shell: invoke-rc.d zuul start
+- hosts: review.openstack.org
+  gather_facts: False
+  remote_user: gerrit2
+  sudo: yes
+  tasks:
+    - include_vars: "{{ repolist }}"
+    - shell: ssh -p 29418 review.openstack.org gerrit rename-group {{ item.old }} {{ item.new }}
+      with_items: "{{ gerrit_groups|default([])"
+- hosts: '*.slave.openstack.org'
+  remote_user: root
+  sudo: yes
+  gather_facts: False
+  tasks:
+    - include_vars: "{{ repolist }}"
+    - shell: 'rm -rf ~jenkins/workspace/*{{ item.old | basename }}*'
+      with_items: repos
