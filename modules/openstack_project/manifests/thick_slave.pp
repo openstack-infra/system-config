@@ -136,6 +136,9 @@ class openstack_project::thick_slave(
         ensure => present,
       }
     }
+    default: {
+      fail("Unsupported osfamily: ${::osfamily} The 'thick_slave' module only supports osfamily Debian or RedHat (slaves only).")
+    }
   }
   package { 'rake':
     ensure   => '10.1.1',

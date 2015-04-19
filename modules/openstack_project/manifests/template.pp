@@ -45,7 +45,7 @@ class openstack_project::template (
 
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
-      origins => ["Puppetlabs:${lsbdistcodename}"],
+      origins => ["Puppetlabs:${::lsbdistcodename}"],
     }
   }
 
@@ -181,6 +181,9 @@ class openstack_project::template (
         ensure => present,
       }
     }
+    default: {
+      fail("Unsupported osfamily: ${::osfamily} The 'template' module only supports osfamily Debian or RedHat (slaves only).")
+    }
   }
 
   ###########################################################
@@ -259,7 +262,7 @@ class openstack_project::template (
       $pin_puppetdb = '2.'
     }
     default: {
-      fail("Puppet version not supported")
+      fail("Puppet version ${pin_puppet} not supported")
     }
   }
 

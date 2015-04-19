@@ -48,8 +48,8 @@ class openstack_project::translate_dev(
     zanata_admin_users          => $admin_users,
     zanata_default_from_address => $from_address,
     require                     => [
-                                   Class['openstack_project::server']
-                                   ],
+      Class['openstack_project::server']
+    ],
   }
 
   class { '::zanata::apache':
