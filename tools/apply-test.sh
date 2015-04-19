@@ -19,6 +19,16 @@ MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
 export PUPPET_INTEGRATION_TEST=1
 
+# If PUPPET_GEM_VERSION is set, run tests from puppet as installed by bundler
+if [ -z $PUPPET_GEM_VERSION ]; then
+    PUPPET_CMD='puppet apply'
+else
+    export GEM_HOME=$(pwd)/.bundled_gems
+    mkdir -p $GEM_HOME
+    bundle install
+    PUPPET_CMD='-E bundle exec puppet apply'
+fi
+
 cat > clonemap.yaml <<EOF
 clonemap:
   - name: openstack-infra/project-config
@@ -97,4 +107,4 @@ echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        sudo ${PUPPET_CMD} --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
