@@ -11,6 +11,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::ant_package, # for building buck
     $::openstack_project::jenkins_params::awk_package, # for building extract_docs.awk to work correctly
     $::openstack_project::jenkins_params::asciidoc_package, # for building gerrit/building openstack docs
+    $::openstack_project::jenkins_params::bundler_package, # for building ruby projects with local depends
     $::openstack_project::jenkins_params::curl_package,
     $::openstack_project::jenkins_params::dvipng_package, # for generating image (ie: math) in docs
     $::openstack_project::jenkins_params::docbook_xml_package, # for building openstack docs
@@ -139,29 +140,6 @@ class openstack_project::thick_slave(
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'thick_slave' module only supports osfamily Debian or RedHat (slaves only).")
     }
-  }
-  package { 'rake':
-    ensure   => '10.1.1',
-    provider => gem,
-    before   => Package['puppetlabs_spec_helper'],
-    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
-  }
-
-  package { 'puppet-lint':
-    ensure   => '0.3.2',
-    provider => gem,
-    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
-  }
-
-  $gem_packages = [
-    'bundler',
-    'puppetlabs_spec_helper',
-  ]
-
-  package { $gem_packages:
-    ensure   => latest,
-    provider => gem,
-    require  => Package[$::openstack_project::jenkins_params::rubygems_package],
   }
 
   if ($::in_chroot) {
