@@ -1,8 +1,16 @@
 ---
 :hierarchy:
-  - "%{::operatingsystem}"
+  - fqdn/"%{::fqdn}"
+  - group/"%{group}" # no :: because group is set at nodescope
   - common
 :backends:
   - yaml
 :yaml:
   :datadir: "/etc/puppet/hieradata/%{environment}"
+
+
+# File directory structure
+# /etc/puppet/hieradata/production/
+# /etc/puppet/hieradata/production/fqdn/afs01.openstack.org.yaml  #highest priority
+# /etc/puppet/hieradata/production/group/afs.yaml                 #middle priority
+# /etc/puppet/hieradata/production/common.yaml                    #lowest priority
