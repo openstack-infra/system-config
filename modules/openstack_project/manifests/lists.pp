@@ -298,4 +298,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist { 'analyst-relations':
+    ensure      => present,
+    admin       => 'lauren@openstack.org',
+    password    => $listpassword,
+    description => 'Coordination of Analyst Relations Working Group.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
