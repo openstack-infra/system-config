@@ -275,8 +275,6 @@ repository ``https://git.openstack.org/openstack-infra/system-config``. This
 tool is run from a checkout on the puppetmaster - please see :file:`launch/README`
 for detailed instructions.
 
-.. _cinder:
-
 Disable/Enable Puppet
 =====================
 
@@ -291,6 +289,8 @@ server to disable puppet::
 When you are ready for puppet to run again, use::
 
   sudo puppet agent --enable
+
+.. _cinder:
 
 Cinder Volume Management
 ========================
