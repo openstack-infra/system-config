@@ -30,12 +30,7 @@ class openstack_project::zuul_dev(
     sysadmins                 => $sysadmins,
   }
 
-  class { 'project_config':
-    url  => $project_config_repo,
-    base => 'dev/',
-  }
-
-  class { '::zuul':
+  class { 'openstackci::zuul_scheduler':
     vhost_name           => $vhost_name,
     gearman_server       => $gearman_server,
     gerrit_server        => $gerrit_server,
@@ -46,16 +41,13 @@ class openstack_project::zuul_dev(
     job_name_in_report   => true,
     status_url           => $status_url,
     statsd_host          => $statsd_host,
-    git_email            => 'jenkins@openstack.org',
-    git_name             => 'OpenStack Jenkins',
+    project_config_repo  => $project_config_repo,
+    project_config_base  => 'dev/',
   }
 
-  class { '::zuul::server':
-    layout_dir => $::project_config::zuul_layout_dir,
-    require    => $::project_config::config_dir,
+  class { 'openstackci::zuul_merger':
+    manage_common_zuul => false,
   }
-
-  class { '::zuul::merger': }
 
   if $gerrit_ssh_host_key != '' {
     file { '/home/zuul/.ssh':
@@ -74,22 +66,5 @@ class openstack_project::zuul_dev(
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
-  }
-
-  file { '/etc/zuul/logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/logging.conf',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/gearman-logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/merger-logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
   }
 }
