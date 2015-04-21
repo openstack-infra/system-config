@@ -1,0 +1,14 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Kurt Taylor <kurt.r.taylor@gmail.com>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Ramy Asselin <ramy.asselin@hp.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 21 Apr 2015 21:47:55 +0000
+Reviewed-on: https://review.openstack.org/170776
+Project: openstack-infra/system-config
+Branch: refs/heads/master
