@@ -88,7 +88,16 @@ class openstack_project::slave_common(
           $header_packages = [ "linux-headers-${::kernelrelease}", ]
       }
       else {
-        $header_packages = ['linux-headers-virtual', 'linux-headers-generic']
+        if ($::lsbdistcodename == 'precise') {
+          $header_packages = ['linux-headers-virtual', 'linux-headers-generic']
+        }
+        else {
+          # In trusty (and later), linux-headers-virtual is a transitional package that
+          # simply depends on linux-headers-generic, so there is no need to specify it
+          # any more.  Specifying it when installing on an arm64 host causes an error,
+          # as linux-headers-virtual does not exist for arm64/aarch64.
+          $header_packages = ['linux-headers-generic']
+        }
       }
     }
     default: {
