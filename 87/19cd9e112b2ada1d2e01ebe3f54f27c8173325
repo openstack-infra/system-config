@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Sergey Skripnick <sskripnick@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 21 Apr 2015 00:13:15 +0000
+Reviewed-on: https://review.openstack.org/175365
+Project: openstack-infra/system-config
+Branch: refs/heads/master
