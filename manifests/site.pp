@@ -653,6 +653,9 @@ node 'proposal.slave.openstack.org' {
     jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents', 'XXX'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents', 'XXX'),
+    zanata_server_url        => 'https://translate-dev.openstack.org',
+    zanata_server_user       => hiera('proposal_zanata_user', 'XXX'),
+    zanata_server_api_key    => hiera('proposal_zanata_api_key', 'XXX'),
   }
 }
 
