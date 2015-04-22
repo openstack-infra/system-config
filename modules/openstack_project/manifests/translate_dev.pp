@@ -30,7 +30,7 @@ class openstack_project::translate_dev(
   $ssl_key_file_contents = '', # If left empty puppet will not create file.
   $ssl_chain_file_contents = '', # If left empty puppet will not create file.
   $listeners = [],
-  $from_address = '',
+  $from_address,
   ) {
 
   class { 'openstack_project::server':
