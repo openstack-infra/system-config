@@ -59,10 +59,15 @@ if [[ ! -d applytest ]] ; then
     mkdir applytest
 fi
 
-csplit -sf applytest/puppetapplytest manifests/site.pp '/^$/' {*}
+# First split the variables at the beginning of the file
+csplit -sf applytest/prep manifests/site.pp '/^$/' {0}
+# Then split the class defs.
+csplit -sf applytest/puppetapplytest applytest/prep01 '/^}$/' {*}
+# Comment out anything that doesn't begin with a space.
+# This gives us the node {} internal contents.
 sed -i -e 's/^[^][:space:]$]/#&/g' applytest/puppetapplytest*
 sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/puppetapplytest*
-mv applytest/*00 applytest/head  # These are the top-level variables defined in site.pp
+mv applytest/prep00 applytest/head  # These are the top-level variables defined in site.pp
 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
     if [[ `lsb_release -r -s` =~ '6' ]]; then
