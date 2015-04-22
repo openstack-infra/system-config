@@ -11,8 +11,16 @@ class openstack_project::proposal_slave (
   $transifex_username = 'openstackci',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $zanata_server_url,
+  $zanata_server_user,
+  $zanata_server_api_key,
 ) {
-  include zanata::client
+
+  class { '::zanata::client':
+    server_url => $zanata_server_url,
+    server_user => $zanata_server_user,
+    server_api_key => $zanata_server_api_key,
+  }
 
   class { 'openstack_project::slave':
     ssh_key             => $jenkins_ssh_public_key,
