@@ -499,6 +499,22 @@ source-files:
       - screen
       - apachecombined
     job-filter: '.*grenade.*'
+# multinode  subnode logs
+  - name: logs/subnode-1/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-1/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-1/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
 # tripleo logs
   - name: logs/get_state_from_host.txt
     tags:
