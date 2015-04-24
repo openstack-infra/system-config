@@ -52,6 +52,10 @@ source-files:
     tags:
       - console
       - console.html
+  - name: logs/screen-barbican.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-c-api.txt
     tags:
       - screen
