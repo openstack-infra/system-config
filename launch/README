@@ -50,6 +50,15 @@ will want to pass --server puppetmaster.example.com otherwise the
 new node wil try to register with puppetmaster.openstack.org - and
 fail hilariously.
 
+In order for Ansible to be able to send out the Puppet updates,
+you also need the puppetmaster to accept the root SSH key for the
+new server. So as root on the puppetmaster:
+
+  ssh root@$FQDN
+
+Verify the fingerprint of the new server and type "yes" to accept.
+Then you can log out.
+
 Add DNS Records
 ===============
 
