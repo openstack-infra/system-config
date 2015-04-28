@@ -7,19 +7,17 @@ class openstack_project::pypi_mirror (
 
   include apache
 
-  if ! defined(File['/srv/static']) {
-    file { '/srv/static':
-      ensure => directory,
-    }
-  }
+  ensure_resource('file', '/srv/static', {
+    'ensure' => 'directory',
+  })
 
-  file { '/srv/static/mirror':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-  }
+  ensure_resource('file', '/srv/static/mirror', {
+    'ensure'  => 'directory',
+    'owner'   => 'root',
+    'group'   => 'root',
+  })
 
-  file { '/srv/static/mirror/web':
+  file { '/srv/static/mirror/pypi':
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
@@ -29,17 +27,17 @@ class openstack_project::pypi_mirror (
   apache::vhost { $vhost_name:
     port     => 80,
     priority => '50',
-    docroot  => '/srv/static/mirror/web',
-    require  => File['/srv/static/mirror/web'],
+    docroot  => '/srv/static/mirror/pypi',
+    require  => File['/srv/static/mirror/pypi'],
   }
 
-  file { '/srv/static/mirror/web/robots.txt':
+  file { '/srv/static/mirror/pypi/robots.txt':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/mirror/web'],
+    require => File['/srv/static/mirror/pypi'],
   }
 
   package { 'bandersnatch':
