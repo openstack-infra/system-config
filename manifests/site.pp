@@ -404,6 +404,10 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
+# Mirror nodes
+# Note: Pypi & rubygems mirrors manifests have been writtent to be able to
+# run on the same node without dupplicated resource.
+#
 # Machines in each region to run PyPI mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
@@ -412,7 +416,13 @@ node /^pypi\..*\.openstack\.org$/ {
     sysadmins               => hiera('sysadmins', []),
   }
 }
-
+# Machines in each region to run rubygems mirrors.
+# Node-OS: precise
+node /^rubygems\..*\.openstack\.org$/ {
+  class { 'openstack_project::rubygems':
+    sysadmins               => hiera('sysadmins', []),
+  }
+}
 # A machine to run ODSREG in preparation for summits.
 # Node-OS: trusty
 node 'design-summit-prep.openstack.org' {
