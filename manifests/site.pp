@@ -404,12 +404,15 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
-# Machines in each region to run PyPI mirrors.
+# Machines in each region to run PyPI & rubygems mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
   $group = "pypi"
   class { 'openstack_project::pypi':
-    sysadmins               => hiera('sysadmins', []),
+    sysadmins => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::rubygems_mirror':
+    vhost_name => $::fqdn,
   }
 }
 
