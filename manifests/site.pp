@@ -404,13 +404,15 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
-# Machines in each region to run PyPI mirrors.
+# Machines in each region to run PyPI & rubygems mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
-  $group = "pypi"
-  class { 'openstack_project::pypi':
-    sysadmins               => hiera('sysadmins', []),
+  $group = "mirror"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80],
+    sysadmins                 => hiera('sysadmins', []),
   }
+  include openstack_project::mirror
 }
 
 # A machine to run ODSREG in preparation for summits.
