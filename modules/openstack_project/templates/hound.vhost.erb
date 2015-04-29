@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("openstack_project::hound::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("openstack_project::hound::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("openstack_project::hound::vhost_name") %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("openstack_project::hound::vhost_name") %>-access.log combined
+
+  <IfModule mod_proxy.c>
+      RewriteEngine on
+
+      RewriteRule ^/(.*)$ http://localhost:6080/$1 [P]
+      ProxyPassReverse / http://localhost:6080/
+  </IfModule>
+
+
+</VirtualHost>

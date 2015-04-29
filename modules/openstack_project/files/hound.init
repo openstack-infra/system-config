@@ -1,0 +1,67 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          hound
+# Required-Start:    $network $local_fs
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Hound Source Code Indexer
+#### END INIT INFO
+
+NAME=hound
+USER=hound
+GROUP=hound
+CMD_DIR="/home/hound"
+CMD="houndd"
+CMD_ARGS=""
+
+########## Common
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:$PATH
+SSD=start-stop-daemon
+PID=/var/run/${NAME}.pid
+
+start () {
+    echo -n "Start $NAME"
+    $SSD --start --pidfile $PID --make-pidfile -u $USER -g $GROUP --background --exec "$CMD_DIR/$CMD" -- $CMD_ARGS
+    RETVAL=$?
+    echo
+    return $RETVAL
+}
+
+stop () {
+    echo -n "Stop $NAME"
+    $SSD --stop --oknodo --pidfile $PID --signal INT
+    RETVAL=$?
+    echo
+    return $RETVAL
+}
+
+restart () {
+    stop
+    sleep 1
+    start
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+
+  stop)
+    stop
+    ;;
+
+  status)
+    echo "not supported"
+    ;;
+
+  restart)
+    restart
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+esac
+
+exit $RETVAL
