@@ -94,14 +94,6 @@ class openstack_project::jenkins_dev (
     version => '1.5.1',
   }
 
-  file { '/etc/default/jenkins':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
-  }
-
   class { '::nodepool':
     mysql_root_password      => $mysql_root_password,
     mysql_password           => $mysql_password,
