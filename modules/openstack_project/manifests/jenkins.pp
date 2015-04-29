@@ -131,13 +131,5 @@ class openstack_project::jenkins (
       config_dir   => $::project_config::jenkins_job_builder_config_dir,
       require      => $::project_config::config_dir,
     }
-
-    file { '/etc/default/jenkins':
-      ensure => present,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-      source => 'puppet:///modules/openstack_project/jenkins/jenkins.default',
-    }
   }
 }
