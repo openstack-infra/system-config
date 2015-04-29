@@ -753,4 +753,12 @@ node 'translate-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'hound.openstack.org' {
+  class { 'openstack_project::hound':
+    sysadmins           => hiera('sysadmins', []),
+    project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
