@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+  ServerName <%= scope.lookupvar("hound::apache::vhost_name") %>
+  ServerAdmin <%= scope.lookupvar("hound::apache::serveradmin") %>
+
+  ErrorLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("hound::apache::vhost_name") %>-error.log
+
+  LogLevel warn
+
+  CustomLog ${APACHE_LOG_DIR}/<%= scope.lookupvar("hound::apache::vhost_name") %>-access.log combined
+
+  <IfModule mod_proxy.c>
+      RewriteEngine on
+
+      RewriteRule ^/(.*)$ http://localhost:<%= scope.lookupvar("hound::hound_port") %>/$1 [P]
+      ProxyPassReverse / http://localhost:<%= scope.lookupvar("hound::hound_port") %>/
+  </IfModule>
+
+
+</VirtualHost>

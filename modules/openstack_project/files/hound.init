@@ -1,0 +1,22 @@
+# hound
+#
+# Copied from http://cookbook.logstash.net/recipes/using-upstart/
+
+description     "hound search engine"
+
+start on virtual-filesystems
+stop on runlevel [06]
+
+# Respawn it if the process exits
+respawn
+respawn limit 5 30
+expect fork
+
+chdir /home/hound
+
+script
+
+  su -s /bin/sh -c 'exec "$0" "$@"' hound -- /home/hound/bin/houndd
+  emit hound-running
+end script
+
