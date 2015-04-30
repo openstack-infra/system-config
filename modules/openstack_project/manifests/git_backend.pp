@@ -17,7 +17,6 @@
 # == Class: openstack_project::git_backend
 class openstack_project::git_backend (
   $vhost_name = $::fqdn,
-  $sysadmins = [],
   $git_gerrit_ssh_key = '',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
@@ -32,11 +31,6 @@ class openstack_project::git_backend (
 
   class { 'project_config':
     url  => $project_config_repo,
-  }
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [4443, 8080, 29418],
-    sysadmins                 => $sysadmins,
   }
 
   include jeepyb
