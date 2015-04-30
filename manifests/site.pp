@@ -115,6 +115,21 @@ node 'review-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'grafana.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::grafana':
+    mysql_host          => hiera('grafana_mysql_host', 'localhost'),
+    mysql_name          => hiera('grafana_mysql_name', 'XXX'),
+    mysql_password      => hiera('grafana_mysql_password', 'XXX'),
+    mysql_root_password => hiera('grafana_mysql_root_password', 'XXX'),
+    mysql_user          => hiera('grafana_mysql_user', 'username'),
+  }
+}
+
 # Node-OS: precise
 node 'jenkins.openstack.org' {
   $group = "jenkins"
