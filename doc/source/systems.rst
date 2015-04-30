@@ -8,6 +8,7 @@ Major Systems
 
    cacti
    gerrit
+   grafana
    jenkins
    zuul
    jjb
