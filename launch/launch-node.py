@@ -201,7 +201,7 @@ def main():
     parser.add_argument("--flavor", dest="flavor", default='1GB',
                         help="name (or substring) of flavor")
     parser.add_argument("--image", dest="image",
-                        default="Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)",
+                        default="Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)",
                         help="image name")
     parser.add_argument("--environment", dest="environment",
                         default="production",
