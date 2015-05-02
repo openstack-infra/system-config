@@ -116,6 +116,16 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: ubuntu-trusty
+    image: ubuntu-trusty
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: devstack-trusty-2-node
     image: devstack-trusty
     ready-script: multinode_setup.sh
@@ -490,6 +500,11 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
+        min-ram: 30720
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -569,6 +584,11 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
+        min-ram: 30720
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -645,6 +665,11 @@ providers:
       - name: centos-6
         min-ram: 30720
         diskimage: centos-6
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
+        min-ram: 30720
+        diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -726,6 +751,11 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
+        min-ram: 30720
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -804,6 +834,11 @@ providers:
       - name: centos-6
         min-ram: 30720
         diskimage: centos-6
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
+        min-ram: 30720
+        diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
@@ -910,6 +945,18 @@ diskimages:
       - puppet
       - nodepool-base
       - node-devstack
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+  - name: ubuntu-trusty
+    elements:
+      - ubuntu-minimal
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: trusty
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
