@@ -120,13 +120,18 @@ propagate=0
 
 
 def _get_providers_and_images(config_file):
-    ret = []
+    snapshots = []
+    diskimages = []
     config = yaml.load(config_file)
     for provider in config['providers']:
         for image in provider['images']:
-            ret.append((provider['name'], image['name']))
-    logging.debug("Added %d providers & images" % len(ret))
-    return ret
+            if 'diskimage' not in image:
+                snapshots.append((provider['name'], image['name']))
+    logging.debug("Added %d providers & images" % len(snapshots))
+    for image in config['diskimages']:
+        diskimages.append(image['name'])
+    logging.debug("Added %d diskimages" % len(diskimages))
+    return (snapshots, diskimages)
 
 
 def _generate_logger_and_handler(image_log_dir, provider, image):
@@ -144,6 +149,26 @@ def _generate_logger_and_handler(image_log_dir, provider, image):
     return {
         'handler_title': '%s_%s' % (provider, image),
         'logger_title': '%s_%s' % (provider, image),
+        'handler': handler,
+        'logger': logger,
+    }
+
+
+def _generate_diskimage_logger_and_handler(image_log_dir, image):
+    handler = _IMAGE_HANDLER % {
+        'image_log_dir': image_log_dir,
+        'title': image,
+        'filename': '%s.log' % image,
+    }
+    logger = _IMAGE_LOGGER % {
+        'title': image,
+        'handler': image,
+        'qualname': image,
+    }
+
+    return {
+        'handler_title': image,
+        'logger_title': image,
         'handler': handler,
         'logger': logger,
     }
@@ -185,9 +210,13 @@ def generate_log_config(config, log_dir, image_log_dir, output):
 
     loggers_and_handlers = []
     logging.debug("Reading config file %s" % config.name)
-    for (provider, image) in _get_providers_and_images(config):
+    (snapshots, diskimages) = _get_providers_and_images(config)
+    for (provider, image) in snapshots:
         loggers_and_handlers.append(
             _generate_logger_and_handler(image_log_dir, provider, image))
+    for image in diskimages:
+        loggers_and_handlers.append(
+            _generate_diskimage_logger_and_handler(image_log_dir, image))
 
     logger_titles = []
     handler_titles = []
