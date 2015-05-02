@@ -26,6 +26,24 @@ var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
 // this regex matches the pipeline markup
 var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 
+// This is a variable to determine if we're in debugging mode, which
+// lets you globally set it to see what's going on in the flow.
+var hide_ci_debug = false;
+
+/**
+ dbg(...) - prints a list of items out to the javascript
+ console.log. This allows us to leave tracing in this file which is a
+ no-op by default, but can be triggered if you enter a javascript
+ console and set hide_ci_debug = true.
+*/
+function dbg () {
+    if (hide_ci_debug == true) {
+        for (var i = 0; i < arguments.length; i++) {
+            console.log(arguments[i]);
+        }
+    }
+}
+
 var ci_parse_is_merge_conflict = function($panel) {
     return (mergeFailedRegex.exec($panel.html()) !== null);
 };
@@ -144,6 +162,7 @@ var ci_parse_comments = function() {
             comment.is_ci = (ciRegex.exec(comment.name) !== null);
             comment.is_trusted_ci = (trustedCIRegex.exec(comment.name) !== null);
             comment.ref = top;
+            dbg("Found comment", comment);
             comments.push(comment);
         }
     });
@@ -286,6 +305,7 @@ var ci_hide_ci_comments = function(comments) {
 
 var ci_page_loaded = function() {
     if (hashRegex.test(window.location.hash)) {
+        dbg("Searching for ci results on " + window.location.hash);
         $("#toggleci").show();
         var comments = ci_parse_comments();
         ci_display_results(comments);
