@@ -285,6 +285,21 @@ class openstack_project::gerrit (
     notify      => Exec['reload_gerrit_header'],
   }
 
+  vcsrepo { '/opt/jquery-visibility':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  }
+
+  file { '/home/gerrit2/review_site/static/jquery-visibility.js':
+    ensure => present,
+    source => '/opt/jquery-visibility/jquery-visibility.js',
+    subscribe => Vcsrepo['/opt/jquery-visibility'],
+    require => [ File['/home/gerrit2/review_site/static'],
+                 Class['::gerrit'] ]
+  }
+
   file { '/home/gerrit2/review_site/static/hideci.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/hideci.js',
