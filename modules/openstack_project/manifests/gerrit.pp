@@ -285,6 +285,26 @@ class openstack_project::gerrit (
     notify      => Exec['reload_gerrit_header'],
   }
 
+  package { 'yui-compressor':
+    ensure => present,
+  }
+
+  vcsrepo { '/opt/jquery-visibility':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://github.com/mathiasbynens/jquery-visibility.git',
+  }
+
+  exec { 'install-jquery-visibility':
+    command     => 'yui-compressor -o /home/gerrit2/review_site/static/jquery-visibility.min.js /opt/jquery-visibility/jquery-visibility.js',
+    path        => 'bin:/usr/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/jquery-visibility'],
+    require     => [Package['yui-compressor'],
+                    Vcsrepo['/opt/jquery-visibility']],
+  }
+
   file { '/home/gerrit2/review_site/static/hideci.js':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/gerrit/hideci.js',
