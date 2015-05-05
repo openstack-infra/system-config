@@ -33,10 +33,9 @@ var zuulStatusJSON = 'https://zuul.openstack.org/status/change/';
 // This is a variable to determine if we're in debugging mode, which
 // lets you globally set it to see what's going on in the flow.
 var hideci_debug = false;
-// This is a variable to enable zuul integration, we default it off so
-// that it creates no additional load, and that it's easy to turn off
-// the feature.
-var zuul_inline = false;
+// This is a variable to enable zuul integration. This provides a way
+// to globally turn off this feature easily should it case problems.
+var zuul_inline = true;
 
 /**
  dbg(...) - prints a list of items out to the javascript
