@@ -77,126 +77,15 @@ class openstack_project::static (
 
   ###########################################################
   # Logs
-
-  apache::vhost { 'logs.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/logs',
-    require  => File['/srv/static/logs'],
-    template => 'openstack_project/logs.vhost.erb',
-  }
-
-  apache::vhost { 'logs-dev.openstack.org':
-    port     => 80,
-    priority => '51',
-    docroot  => '/srv/static/logs',
-    require  => File['/srv/static/logs'],
-    template => 'openstack_project/logs-dev.vhost.erb',
-  }
-
-  file { '/srv/static/logs':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => User['jenkins'],
-  }
-
-  file { '/srv/static/logs/robots.txt':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/logs'],
-  }
-
-  package { 'keyring':
-    ensure   => 'latest',
-    provider => 'pip',
-  }
-
-  vcsrepo { '/opt/os-loganalyze':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/os-loganalyze',
-    require  => Package['keyring'],
-  }
-
-  exec { 'install_os-loganalyze':
-    command     => 'python setup.py install',
-    cwd         => '/opt/os-loganalyze',
-    path        => '/bin:/usr/bin',
-    refreshonly => true,
-    subscribe   => Vcsrepo['/opt/os-loganalyze'],
-  }
-
-  file { '/etc/os_loganalyze':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => Vcsrepo['/opt/os-loganalyze'],
-  }
-
-  file { '/etc/os_loganalyze/wsgi.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'www-data',
-    mode    => '0440',
-    content => template('openstack_project/os-loganalyze-wsgi.conf.erb'),
-    require => File['/etc/os_loganalyze'],
-  }
-
-  vcsrepo { '/opt/devstack-gate':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/devstack-gate',
-  }
-
-  file { '/srv/static/logs/help':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => File['/srv/static/logs'],
-  }
-
-  file { '/srv/static/logs/help/tempest-logs.html':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'file:///opt/devstack-gate/help/tempest-logs.html',
-    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
-  }
-
-  file { '/srv/static/logs/help/tempest-overview.html':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'file:///opt/devstack-gate/help/tempest-overview.html',
-    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
-  }
-
-  file { '/usr/local/sbin/log_archive_maintenance.sh':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0744',
-    source => 'puppet:///modules/openstack_project/log_archive_maintenance.sh',
-  }
-
-  cron { 'gziprmlogs':
-    user        => 'root',
-    minute      => '0',
-    hour        => '7',
-    weekday     => '6',
-    command     => 'bash /usr/local/sbin/log_archive_maintenance.sh',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
+  class { 'openstackci::logserver':
+    jenkins_ssh_key         => $openstack_project::jenkins_ssh_key,
+    domain                  => 'openstack.org',
+    swift_authurl           => $swift_authurl,
+    swift_user              => $swift_user,
+    swift_key               => $swift_key,
+    swift_tenant_name       => $swift_tenant_name,
+    swift_region_name       => $swift_region_name,
+    swift_default_container => $swift_default_container,
   }
 
   ###########################################################
