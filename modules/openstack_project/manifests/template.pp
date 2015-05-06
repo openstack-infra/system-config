@@ -16,6 +16,7 @@ class openstack_project::template (
   $enable_unbound            = true,
   $afs                       = false,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $manage_exim               = false,
 ) {
 
   ###########################################################
@@ -42,6 +43,12 @@ class openstack_project::template (
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
+
+  if $manage_exim {
+    class { 'exim':
+      sysadmins => $sysadmins,
+    }
+  }
 
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
