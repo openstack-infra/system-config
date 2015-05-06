@@ -1,16 +1,9 @@
 # AFS Fileserver/BOS
 class openstack_project::afsfs (
   $cell = 'openstack.org',
-  $sysadmins = [],
 ) {
 
-  class { 'openstack_project::server':
-    iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
-    sysadmins                 => $sysadmins,
-    afs                       => true,
-  }
-
-  class { 'openafs::fileserver':
+  class { '::openafs::fileserver':
     cell         => $cell,
     dbservers    => [
       {
