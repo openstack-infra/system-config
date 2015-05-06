@@ -44,8 +44,8 @@ class openstack_project::git_backend (
 
   class { '::cgit':
     vhost_name              => $vhost_name,
-    ssl_cert_file           => '/etc/pki/tls/certs/git.openstack.org.pem',
-    ssl_key_file            => '/etc/pki/tls/private/git.openstack.org.key',
+    ssl_cert_file           => '/etc/pki/tls/certs/${vhost_name}.pem',
+    ssl_key_file            => '/etc/pki/tls/private/${vhost_name}.key',
     ssl_chain_file          => '/etc/pki/tls/certs/intermediate.pem',
     ssl_cert_file_contents  => $ssl_cert_file_contents,
     ssl_key_file_contents   => $ssl_key_file_contents,
