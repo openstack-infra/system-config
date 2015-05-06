@@ -27,6 +27,7 @@ Contents:
    test-infra-requirements
    sysadmin
    systems
+   infra-cloud
 
 .. toctree::
    :hidden:
