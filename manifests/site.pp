@@ -392,10 +392,14 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
 node /^git\d+\.openstack\.org$/ {
   $group = "git-server"
   include openstack_project
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [4443, 8080, 29418],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::git_backend':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     vhost_name              => 'git.openstack.org',
-    sysadmins               => hiera('sysadmins', []),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents', 'XXX'),
