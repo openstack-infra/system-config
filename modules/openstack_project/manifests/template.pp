@@ -104,6 +104,7 @@ class openstack_project::template (
     group   => 'root',
     mode    => '0644',
     notify  => $rsyslog_notify,
+    require => Package['rsyslog'],
   }
 
   # We don't like byobu
@@ -123,6 +124,7 @@ class openstack_project::template (
         'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
       replace => true,
       notify  => $rsyslog_notify,
+      require => Package['rsyslog'],
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
