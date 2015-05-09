@@ -41,6 +41,7 @@ class openstack_project::review (
   $mysql_host = '',
   $mysql_password = '',
   $email_private_key = '',
+  $token_private_key = '',
   # Register an IRC bot and supply it's password here.
   $gerritbot_password = '',
   $gerritbot_ssh_rsa_key_contents = '',
@@ -131,6 +132,7 @@ class openstack_project::review (
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
+    token_private_key                   => $token_private_key,
     sysadmins                           => $sysadmins,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
