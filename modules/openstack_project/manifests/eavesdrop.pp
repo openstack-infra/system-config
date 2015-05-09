@@ -39,6 +39,7 @@ class openstack_project::eavesdrop (
     channels    => [
         '#dox',
         '#heat',
+        '#kolla',
         '#magnetodb',
         '#murano',
         '#openstack',
