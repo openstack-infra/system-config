@@ -441,8 +441,11 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 # Node-OS: centos6
 node /^git(-fe\d+)?\.openstack\.org$/ {
   $group = "git-loadbalancer"
-  class { 'openstack_project::git':
-    sysadmins               => hiera('sysadmins', []),
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 9418],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'cgit::lb':
     balancer_member_names   => [
       'git01.openstack.org',
       'git02.openstack.org',
