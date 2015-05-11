@@ -45,20 +45,21 @@ class openstack_project::git_backend (
     ssl_key_file_contents   => $ssl_key_file_contents,
     ssl_chain_file_contents => $ssl_chain_file_contents,
     behind_proxy            => $behind_proxy,
+    cgitrc_settings         => {
+        'clone_prefix'  => 'git://git.openstack.org https://git.openstack.org',
+        'commit-filter' => '/usr/local/bin/commit-filter.sh',
+        'css'           => '/static/openstack.css',
+        'favicon'       => '/static/favicon.ico',
+        'logo'          => '/static/openstack.png',
+        'root-title'    => 'OpenStack git repository browser',
+    },
+    manage_cgitrc           => true,
   }
 
   # We don't actually use these variables in this manifest, but jeepyb
   # requires them to exist.
   $local_git_dir = '/var/lib/git'
   $ssh_project_key = ''
-
-  file { '/etc/cgitrc':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/git/cgitrc'
-  }
 
   file { '/home/cgit/.ssh/':
     ensure  => directory,
