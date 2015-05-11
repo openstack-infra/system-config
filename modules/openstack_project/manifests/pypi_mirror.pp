@@ -1,21 +1,9 @@
 # == Class: openstack_project::pypi_mirror
 #
 class openstack_project::pypi_mirror (
-  $vhost_name,
   $cron_frequency = '*/5',
 ) {
 
-  include apache
-
-  ensure_resource('file', '/srv/static', {
-    'ensure' => 'directory',
-  })
-
-  ensure_resource('file', '/srv/static/mirror', {
-    'ensure'  => 'directory',
-    'owner'   => 'root',
-    'group'   => 'root',
-  })
 
   file { '/srv/static/mirror/pypi':
     ensure  => directory,
@@ -29,13 +17,6 @@ class openstack_project::pypi_mirror (
     owner   => 'root',
     group   => 'root',
     require => File['/srv/static/mirror/pypi'],
-  }
-
-  apache::vhost { $vhost_name:
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/mirror/pypi/web',
-    require  => File['/srv/static/mirror/pypi/web'],
   }
 
   file { '/srv/static/mirror/pypi/web/robots.txt':

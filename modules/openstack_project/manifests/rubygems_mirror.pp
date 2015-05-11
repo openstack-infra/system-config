@@ -1,36 +1,16 @@
 # == Class: openstack_project::rubygems_mirror
 #
 class openstack_project::rubygems_mirror (
-  $vhost_name,
   $parallelism      = '10',
   $destination_path = '/srv/static/mirror/rubygems',
   $cron_frequency   = '*/5',
 ) {
-
-  include ::apache
-
-  ensure_resource('file', '/srv/static', {
-    'ensure' => 'directory',
-  })
-
-  ensure_resource('file', '/srv/static/mirror', {
-    'ensure'  => 'directory',
-    'owner'   => 'root',
-    'group'   => 'root',
-  })
 
   file { '/srv/static/mirror/rubygems':
     ensure  => directory,
     owner   => 'rubygems',
     group   => 'root',
     require => [File['/srv/static/mirror'],User['rubygems']],
-  }
-
-  apache::vhost { $vhost_name:
-    port     => 80,
-    priority => '50',
-    docroot  => $destination_path,
-    require  => File[$destination_path],
   }
 
   user { 'rubygems':
