@@ -82,65 +82,69 @@ class openstack_project::ask (
     redis_password   => $redis_password,
   }
 
-  # apache http server
-  include apache
-
-  # askbot
-  class { 'askbot':
-    redis_enabled        => $redis_enabled,
-    db_provider          => 'pgsql',
-    require              => Postgresql::Server::Db[$db_name],
-  }
-
-  # custom askbot theme from openstack-infra/askbot-theme repo
-
-  vcsrepo { "/srv/askbot-sites/${slot_name}/themes":
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/askbot-theme',
-    require  => [
-      Class['askbot'], File["/srv/askbot-sites/${slot_name}"],
-      Package['git']
-    ],
-    notify   => [
-      Exec["theme-bundle-install-${slot_name}"],
-      Exec["theme-bundle-compile-${slot_name}"],
-    ],
-  }
-
-  askbot::compass { $slot_name:
-  }
-
-  askbot::site { $site_name:
-    slot_name                    => $slot_name,
-    askbot_debug                 => false,
-    custom_theme_enabled         => true,
-    custom_theme_name            => 'os',
-    redis_enabled                => $redis_enabled,
-    redis_port                   => $redis_port,
-    redis_max_memory             => $redis_max_memory,
-    redis_bind                   => $redis_bind,
-    redis_password               => $redis_password,
-    site_ssl_enabled             => true,
-    site_ssl_cert_file_contents  => $site_ssl_cert_file_contents,
-    site_ssl_key_file_contents   => $site_ssl_key_file_contents,
-    site_ssl_chain_file_contents => $site_ssl_chain_file_contents,
-    site_ssl_cert_file           => $site_ssl_cert_file,
-    site_ssl_key_file            => $site_ssl_key_file,
-    site_ssl_chain_file          => $site_ssl_chain_file,
-    db_provider                  => 'pgsql',
-    db_name                      => $db_name,
-    db_user                      => $db_user,
-    db_password                  => $db_password,
-    require                      => [ Class['redis'], Class['askbot'] ],
-  }
-
-  pgsql_backup::backup { $db_name:
-    database_user     => $db_user,
-    database_password => $db_password,
-    require           => Postgresql::Server::Db[$db_name],
-  }
+  # Notice:
+  #  Disable all puppet-askbot related resources until refactored
+  #  askbot modules not approved.
+  #
+  # # apache http server
+  # include apache
+  #
+  # # askbot
+  # class { 'askbot':
+  #   redis_enabled        => $redis_enabled,
+  #   db_provider          => 'pgsql',
+  #   require              => Postgresql::Server::Db[$db_name],
+  # }
+  #
+  # # custom askbot theme from openstack-infra/askbot-theme repo
+  #
+  # vcsrepo { "/srv/askbot-sites/${slot_name}/themes":
+  #   ensure   => latest,
+  #   provider => git,
+  #   revision => 'master',
+  #   source   => 'https://git.openstack.org/openstack-infra/askbot-theme',
+  #   require  => [
+  #     Class['askbot'], File["/srv/askbot-sites/${slot_name}"],
+  #     Package['git']
+  #   ],
+  #   notify   => [
+  #     Exec["theme-bundle-install-${slot_name}"],
+  #     Exec["theme-bundle-compile-${slot_name}"],
+  #   ],
+  # }
+  #
+  # askbot::compass { $slot_name:
+  # }
+  #
+  # askbot::site { $site_name:
+  #   slot_name                    => $slot_name,
+  #   askbot_debug                 => false,
+  #   custom_theme_enabled         => true,
+  #   custom_theme_name            => 'os',
+  #   redis_enabled                => $redis_enabled,
+  #   redis_port                   => $redis_port,
+  #   redis_max_memory             => $redis_max_memory,
+  #   redis_bind                   => $redis_bind,
+  #   redis_password               => $redis_password,
+  #   site_ssl_enabled             => true,
+  #   site_ssl_cert_file_contents  => $site_ssl_cert_file_contents,
+  #   site_ssl_key_file_contents   => $site_ssl_key_file_contents,
+  #   site_ssl_chain_file_contents => $site_ssl_chain_file_contents,
+  #   site_ssl_cert_file           => $site_ssl_cert_file,
+  #   site_ssl_key_file            => $site_ssl_key_file,
+  #   site_ssl_chain_file          => $site_ssl_chain_file,
+  #   db_provider                  => 'pgsql',
+  #   db_name                      => $db_name,
+  #   db_user                      => $db_user,
+  #   db_password                  => $db_password,
+  #   require                      => [ Class['redis'], Class['askbot'] ],
+  # }
+  #
+  # pgsql_backup::backup { $db_name:
+  #   database_user     => $db_user,
+  #   database_password => $db_password,
+  #   require           => Postgresql::Server::Db[$db_name],
+  # }
 
   include bup
   bup::site { 'rs-ord':
