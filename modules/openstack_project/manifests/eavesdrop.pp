@@ -52,6 +52,7 @@ class openstack_project::eavesdrop (
         '#openstack-community',
         '#openstack-containers',
         '#openstack-cue',
+        '#openstack-defcore',
         '#openstack-dev',
         '#openstack-dns',
         '#openstack-doc',
