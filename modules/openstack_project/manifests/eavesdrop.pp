@@ -60,6 +60,7 @@ class openstack_project::eavesdrop (
         '#openstack-glance',
         '#openstack-horizon',
         '#openstack-infra',
+        '#openstack-infra-incident',
         '#openstack-ironic',
         '#openstack-keystone',
         '#openstack-ko',
