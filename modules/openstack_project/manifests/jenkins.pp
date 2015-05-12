@@ -18,6 +18,8 @@ class openstack_project::jenkins (
   $zmq_event_receivers = [],
   $sysadmins = [],
   $project_config_repo = '',
+  $serveradmin = 'webmaster@openstack.org',
+  $logo = 'openstack.png',
 ) inherits openstack_project {
   include openstack_project
 
@@ -46,8 +48,8 @@ class openstack_project::jenkins (
 
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
-    serveradmin             => 'webmaster@openstack.org',
-    logo                    => 'openstack.png',
+    serveradmin             => $serveradmin,
+    logo                    => $logo,
     ssl_cert_file           => $prv_ssl_cert_file,
     ssl_key_file            => $prv_ssl_key_file,
     ssl_chain_file          => $ssl_chain_file,
