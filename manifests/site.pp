@@ -87,6 +87,12 @@ node 'review.openstack.org' {
     swift_username                      => hiera('swift_store_user', 'username'),
     swift_password                      => hiera('swift_store_key', 'XXX'),
   }
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418],
+    sysadmins                 => $sysadmins,
+    afs                       => false,
+  }
 }
 
 # Node-OS: trusty
