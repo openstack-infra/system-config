@@ -10,7 +10,7 @@ class openstack_project::paste (
     db_password => $db_password,
     port        => '5000',
     image       => 'header-bg2.png',
-    require     => mysql::db['openstack'],
+    require     => Mysql::Db['openstack'],
   }
 
   class { 'mysql::server':
