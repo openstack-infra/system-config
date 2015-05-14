@@ -23,8 +23,7 @@ class openstack_project::server (
     ca_server                 => $ca_server,
     puppetmaster_server       => $puppetmaster_server,
     afs                       => $afs,
-  }
-  class { 'exim':
+    manage_exim               => true,
     sysadmins => $sysadmins,
   }
 }
