@@ -12,12 +12,12 @@ either in agent or apply mode.
 These puppet modules require puppet 2.7 or greater. Additionally, the
 site.pp manifest assumes the existence of hiera.
 
-See http://ci.openstack.org for more information.
+See http://docs.openstack.org/infra/system-config for more information.
 
 Documentation
 ==============
 
-The documentation presented at http://ci.openstack.org comes from
+The documentation presented at http://docs.openstack.org/infra/system-config comes from
 git://git.openstack.org/openstack-infra/system-config repo's docs/source.  To
 build the documentation use
 

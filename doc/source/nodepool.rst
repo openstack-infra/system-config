@@ -26,7 +26,7 @@ At a Glance
 :Bugs:
   * https://storyboard.openstack.org/#!/project/668
 :Resources:
-  * `Nodepool Reference Manual <http://ci.openstack.org/nodepool>`_
+  * `Nodepool Reference Manual <http://docs.openstack.org/infra/nodepool>`_
 
 Overview
 ========

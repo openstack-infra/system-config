@@ -284,7 +284,7 @@ uploaded and will report the results to Gerrit automatically.
 The Zuul Gerrit Trigger Way
 ---------------------------
 
-`Zuul <http://ci.openstack.org/zuul.html>`_ is a tool that determines what jobs are run when.
+`Zuul <http://docs.openstack.org/infra/system-config/zuul.html>`_ is a tool that determines what jobs are run when.
 Zuul listens to the Gerrit event stream, and first tries to match each event to one or more pipelines.
 Zuul’s pipelines are configured in a single file called layout.yaml.
 Here’s a snippet from that file that constructs the ``check`` pipeline taken from this
@@ -312,7 +312,7 @@ patch set created. The matching event will invoke the configured Jenkins job(s)
 to Gerrit with a ``verified +1`` vote, and if any one fails, with a ``verified -1``.
 
 The sample includes other possible configurations, or you can configure your own by
-following the `Zuul layout documentation <http://ci.openstack.org/zuul/zuul.html#layout-yaml>`_
+following the `Zuul layout documentation <http://docs.openstack.org/infra/zuul/zuul.html#layout-yaml>`_
 
 After a Gerrit event matches a pipeline, Zuul will look at the project identified
 in that Gerrit event and invoke the Jenkins jobs specified in the ``projects`` section
@@ -343,7 +343,7 @@ and project-pipeline-job definitions.
 Managing Jenkins Jobs
 ---------------------
 When code is pushed to Gerrit, a series of jobs are triggered that run a series
-of tests against the proposed code. `Jenkins <http://ci.openstack.org/jenkins.html>`_
+of tests against the proposed code. `Jenkins <http://docs.openstack.org/infra/system-config/jenkins.html>`_
 is the server that executes and
 manages these jobs. It is a Java application with an extensible architecture
 that supports plugins that add functionality to the base server.
@@ -354,15 +354,15 @@ You may manually edit a Jenkins job as an administrator in Jenkins. However,
 in a testing platform as large as the upstream OpenStack CI system,
 doing so manually would be virtually impossible and fraught with errors.
 Luckily, there is a helper tool called `Jenkins Job Builder (JJB)
-<http://ci.openstack.org/jenkins-job-builder/>`_ that
+<http://docs.openstack.org/infra/jenkins-job-builder/>`_ that
 constructs and manages these XML configuration files after reading a
 set of YAML files and job templating rules. These references provide more details:
 
 * `A basic overview of using JJB to define projects, templates, and jobs in yaml
-  format is available here. <http://ci.openstack.org/jjb.html>`_
+  format is available here. <http://docs.openstack.org/infra/system-config/jjb.html>`_
 
 * `The official documentation to define Jenkins jobs using JJB is here.
-  <http://ci.openstack.org/jenkins-job-builder/definition.html>`_
+  <http://docs.openstack.org/infra/jenkins-job-builder/definition.html>`_
 
 * `The JJB description of all jobs used by OpenStack are defined in this folder.
   <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_

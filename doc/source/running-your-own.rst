@@ -52,7 +52,7 @@ Initial setup
    For more details on the config repo split, read the following spec:
    http://specs.openstack.org/openstack-infra/infra-specs/specs/config-repo-split.html.
 
-#. Follow http://ci.openstack.org/puppet.html#id2 and use your repository
+#. Follow http://docs.openstack.org/infra/system-config/puppet.html#id2 and use your repository
    in addition to the OpenStack CI repository. This is appropriate to stay in
    sync with OpenStack Infra team rolling out new functionality and at the same
    time applying the necessary customizations through the config overrides.
@@ -354,7 +354,7 @@ which get the most load (as they run jobs from anyone).
 
 #. Update hiera with the relevant parameters.
    You'll need to get the jenkins_jobs_password from Jenkins (see
-   `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`)
+   `http://docs.openstack.org/infra/jenkins-job-builder/installation.html#configuration-file`)
    after Jenkins is up - start with it set to ''.  You can use your own user or
    make a dedicated user.
 
