@@ -94,8 +94,8 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'pabelanger':
     realname => 'Paul Belanger',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAv0YOn34s5fMC/VTw6tn2Js/7jXqWzee9Kbf4NNJ+WiBZ7rtV0F2Jhz9OjfRdja7d8X3M01NFoufPJm5hpMEAvguxSoL0/lm44dcZ7QKT9tfmreAXIbc/2yBEMb7F+ljDldjDmR8Y6+UvTReRoO4lhvYgppH8E2Yo6g+UtS3710u5wqUwl0B5CZmT0j4FbQCMJp4KuscI6zFbuipVw8I10kXv6G/xaIWt/ZdIJRpFo9NVsDreUEeZoi6aRg2YisdzGFcJawy3OKgRh9WyZ7R+lPdvtTAqOnX6m6CS2I4LM3+xuTegiOEPzMCYY7UGx8nKNPQXzBEtGAegfQMwMP+MUQ==',
-    key_id   => 'paul.belanger@polybeacon.com',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDIdkI92kJyePsy8MSCgH9VcG5FBdHg+mX8jUniGnxzp2BJ9O+ZVUQLgDIneK/NIoTIs1WIRy5yTuSpqKuX/fZCXdLCfHdHlmNLw5/iF98X9h+c1E5/ZtEuZrfQstP5EHdLxTKD+AEvBSTin9Ptorn+tI1tQf/9hC4flJzOmiFrvhGKhmVd9DToZqMPy2JviajiVu9e/OXdPIcV2hlsm/Db03/zc9Ohkbw6oST/w+ZslvUMCvFUKPAlYG7db4TN+RfWfeWEd3u82beO320zqCPiEHmn2wYAppSXQ+f6beFL6FwejFYgH8F7hEfNyN2Z3V1eR73uSnxfYTGHqgJNAN2Vbl3EmNEhQ60gwuKTXlMpQf5Wny2nJGz7zYCReDbgQH/Zoejw3+Nfk4PcTZtso5Bjti1s+ChGNu3qpS6d7gkEYqcKRtA9If0tP5X5LqUqZw+66BKTBUiXGeip9XCeStN00OdFBcQJZ3h/8xIZsKmkpnBK9uB6NRrFAcxTj9SmpYMUjFOt1nI/b36vCnrcHinSIpWpYAxuySoca5CIJaisQVzG/DzYp801tjCSViKQ0kfMH0cBw0MZOEPYy+itkvDa6chq+gFfmChNJdI4oSqDId8ID60G8eZPDcIKFQAW5kAmdtss11kdwWmszi6KTjdCmbYABfPnt8UGud3WLn5Mew==',
+    key_id   => 'pabelanger@redhat.com',
     uid      => 2010,
     gid      => 2010,
   }
