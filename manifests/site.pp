@@ -749,8 +749,13 @@ node /^afs.*\..*\.openstack\.org$/ {
 
 # Node-OS: precise
 node 'ask.openstack.org' {
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::ask':
-    sysadmins                    => hiera('sysadmins', []),
     db_user                      => hiera('ask_db_user', 'ask'),
     db_password                  => hiera('ask_db_password', 'XXX'),
     redis_password               => hiera('ask_redis_password', 'XXX'),
