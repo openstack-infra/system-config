@@ -23,7 +23,7 @@ At a Glance
 :Bugs:
   * https://storyboard.openstack.org/#!/project/723
 :Resources:
-  * `Reference Manual <http://ci.openstack.org/jenkins-job-builder>`_
+  * `Reference Manual <http://docs.openstack.org/infra/jenkins-job-builder>`_
 
 Overview
 ========
@@ -237,7 +237,7 @@ it finds the XML is different then it will proceed to send this
 to Jenkins, otherwise it is skipped. If a job is accidentally deleted
 then this file should be modified or removed.
 
-.. _cache: http://ci.openstack.org/jenkins-job-builder/installation.html#running
+.. _cache: http://docs.openstack.org/infra/jenkins-job-builder/installation.html#running
 
 Sending a Job to Jenkins
 ------------------------

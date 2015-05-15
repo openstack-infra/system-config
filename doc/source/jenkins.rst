@@ -116,7 +116,7 @@ hand:
 #. Setup matrix security: add the 'authenticated' pseudo user and
    grant Admin access to your own user.
 
-#. Setup one account per `http://ci.openstack.org/jenkins-job-builder/installation.html#configuration-file`
+#. Setup one account per `http://docs.openstack.org/infra/jenkins-job-builder/installation.html#configuration-file`
    and grab the API token for it.
 
 #. Configure the number of executors you want on the Jenkins Master

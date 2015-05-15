@@ -26,7 +26,7 @@ At a Glance
 :Bugs:
   * https://storyboard.openstack.org/#!/project/679
 :Resources:
-  * `Zuul Reference Manual <http://ci.openstack.org/zuul>`_
+  * `Zuul Reference Manual <http://docs.openstack.org/infra/zuul>`_
 
 Overview
 ========

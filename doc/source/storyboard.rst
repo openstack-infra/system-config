@@ -29,7 +29,7 @@ At a Glance
 :Bugs:
   * https://storyboard.openstack.org/#!/project/456
 :Resources:
-  * `StoryBoard Documentation <http://ci.openstack.org/storyboard/>`_
+  * `StoryBoard Documentation <http://docs.openstack.org/infra/storyboard/>`_
   * `StoryBoard Wiki <https://wiki.openstack.org/wiki/StoryBoard>`_
   * `StoryBoard Roadmap <https://wiki.openstack.org/wiki/StoryBoard/Roadmap>`_
 
