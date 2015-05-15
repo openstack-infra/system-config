@@ -27,9 +27,7 @@ class openstack_project::zuul_merger(
     git_name             => 'OpenStack Jenkins',
   }
 
-  class { '::zuul::merger':
-    manage_log_conf => true,
-  }
+  class { '::zuul::merger': }
 
   if $gerrit_ssh_host_key != '' {
     file { '/home/zuul/.ssh':

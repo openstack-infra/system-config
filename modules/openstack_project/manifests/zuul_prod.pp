@@ -70,7 +70,6 @@ class openstack_project::zuul_prod(
 
   class { '::zuul::server':
     layout_dir      => $::project_config::zuul_layout_dir,
-    manage_log_conf => true,
     require         => $::project_config::config_dir,
   }
 
