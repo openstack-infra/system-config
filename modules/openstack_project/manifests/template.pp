@@ -34,6 +34,23 @@ class openstack_project::template (
     trusted_ssh_source => $puppetmaster_server,
   }
 
+  if ( $afs ) {
+    $all_udp = concat(
+      $iptables_public_udp_ports, [7001])
+
+    class { 'openafs::client':
+      cell         => 'openstack.org',
+      realm        => 'OPENSTACK.ORG',
+      admin_server => 'kdc.openstack.org',
+      kdcs         => [
+        'kdc01.openstack.org',
+        'kdc02.openstack.org',
+      ],
+    }
+  } else {
+    $all_udp = $iptables_public_udp_ports
+  }
+
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
     public_udp_ports => $all_udp,
@@ -55,23 +72,6 @@ class openstack_project::template (
     class { 'openstack_project::automatic_upgrades':
       origins => ["Puppetlabs:${lsbdistcodename}"],
     }
-  }
-
-  if ( $afs ) {
-    $all_udp = concat(
-      $iptables_public_udp_ports, [7001])
-
-    class { 'openafs::client':
-      cell         => 'openstack.org',
-      realm        => 'OPENSTACK.ORG',
-      admin_server => 'kdc.openstack.org',
-      kdcs         => [
-        'kdc01.openstack.org',
-        'kdc02.openstack.org',
-      ],
-    }
-  } else {
-    $all_udp = $iptables_public_udp_ports
   }
 
   class {'openstack_project::users_install':
