@@ -2,7 +2,6 @@
 
 class openstack_project::eavesdrop (
   $nickpass = '',
-  $sysadmins = [],
   $statusbot_nick = '',
   $statusbot_password = '',
   $statusbot_server = '',
@@ -16,10 +15,6 @@ class openstack_project::eavesdrop (
   $accessbot_password = '',
   $project_config_repo = '',
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => $sysadmins
-  }
   include apache
   include meetbot
 
