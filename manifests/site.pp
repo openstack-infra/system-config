@@ -490,12 +490,16 @@ node 'status.openstack.org' {
 
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
+  class { 'openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    iptables_public_tcp_ports => [80],
+  }
+
   class { 'openstack_project::nodepool_prod':
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
-    sysadmins                => hiera('sysadmins', []),
     statsd_host              => 'graphite.openstack.org',
     jenkins_api_user         => hiera('jenkins_api_user', 'username'),
     jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),

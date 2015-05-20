@@ -7,7 +7,6 @@ class openstack_project::nodepool_prod(
   $nodepool_template = 'openstack_project/nodepool/nodepool.yaml.erb',
   $nodepool_logging_template = 'openstack_project/nodepool/nodepool.logging.conf.erb',
   $vhost_name = 'nodepool.openstack.org',
-  $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
   $jenkins_api_key ='',
@@ -26,11 +25,6 @@ class openstack_project::nodepool_prod(
   $project_config_repo = '',
   $clouds_yaml_template = 'openstack_project/nodepool/clouds.yaml.erb',
 ) {
-  class { 'openstack_project::server':
-    sysadmins                 => $sysadmins,
-    iptables_public_tcp_ports => [80],
-  }
-
   class { 'project_config':
     url  => $project_config_repo,
   }
