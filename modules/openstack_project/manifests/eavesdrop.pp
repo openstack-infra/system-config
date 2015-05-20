@@ -126,4 +126,11 @@ class openstack_project::eavesdrop (
     channel_file  => $::project_config::accessbot_channels_yaml,
     require       => $::project_config::config_dir,
   }
+
+  # Needed to allow Jenkins jobs to publish meeting info to
+  # the eavesdrop server.
+  include openstack_project
+  class { 'jenkins::jenkinsuser':
+    ssh_key     => $openstack_project::jenkins_ssh_key,
+  }
 }
