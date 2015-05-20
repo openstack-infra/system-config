@@ -8,14 +8,8 @@ class openstack_project::etherpad (
   $ssl_chain_file_contents = '',
   $mysql_host = 'localhost',
   $mysql_user = 'eplite',
-  $mysql_db_name = 'etherpad-lite',
-  $sysadmins = []
+  $mysql_db_name = 'etherpad-lite'
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => $sysadmins
-  }
-
   class { 'etherpad_lite':
     ep_ensure      => 'latest',
     eplite_version => '24b0712d77abb91ebea2d67f06f565861ec008f0',

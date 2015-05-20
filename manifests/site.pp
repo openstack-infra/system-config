@@ -281,6 +281,11 @@ node 'eavesdrop.openstack.org' {
 
 # Node-OS: precise
 node 'etherpad.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::etherpad':
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents', 'XXX'),
@@ -288,17 +293,20 @@ node 'etherpad.openstack.org' {
     mysql_host              => hiera('etherpad_db_host', 'localhost'),
     mysql_user              => hiera('etherpad_db_user', 'username'),
     mysql_password          => hiera('etherpad_db_password', 'XXX'),
-    sysadmins               => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
 node 'etherpad-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::etherpad_dev':
     mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
     mysql_user          => hiera('etherpad-dev_db_user', 'username'),
     mysql_password      => hiera('etherpad-dev_db_password', 'XXX'),
-    sysadmins           => hiera('sysadmins', []),
   }
 }
 
