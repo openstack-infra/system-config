@@ -22,13 +22,23 @@ class openstack_project::cacti (
     ensure => present,
   }
 
-  file { '/etc/apache2/conf.d/cacti.conf':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/cacti/apache.conf',
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
-    require => Package['cacti'],
+  if ($::lsbdistcodename == 'precise') {
+    file { '/etc/apache2/conf.d/cacti.conf':
+      ensure  => present,
+      source  => 'puppet:///modules/openstack_project/cacti/apache.conf',
+      mode    => '0644',
+      owner   => 'root',
+      group   => 'root',
+      require => Package['cacti'],
+    }
+  } else {
+    file { '/etc/apache2/conf-available/cacti.conf':
+      ensure  => present,
+      source  => 'puppet:///modules/openstack_project/cacti/apache.conf',
+      mode    => '0644',
+      owner   => 'root',
+      group   => 'root',
+      require => Package['cacti'],
   }
 
   file { '/usr/local/share/cacti/resource/snmp_queries':
