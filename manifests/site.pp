@@ -314,12 +314,21 @@ node 'wiki.openstack.org' {
 }
 
 # Node-OS: precise
+$iptables_es_rule = regsubst($elasticsearch_nodes,
+                    '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+$iptables_gm_rule = regsubst($elasticsearch_clients,
+                    '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+$logstach_iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
 node 'logstash.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 3306],
+    iptables_rules6           => $logstach_iptables_rule,
+    iptables_rules4           => $logstach_iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::logstash':
-    sysadmins               => hiera('sysadmins', []),
-    elasticsearch_nodes     => $elasticsearch_nodes,
-    gearman_workers         => $elasticsearch_clients,
-    discover_nodes          => [
+    discover_nodes      => [
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
       'elasticsearch04.openstack.org:9200',
@@ -327,18 +336,24 @@ node 'logstash.openstack.org' {
       'elasticsearch06.openstack.org:9200',
       'elasticsearch07.openstack.org:9200',
     ],
-    subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass     => hiera('subunit2sql_db_password', ''),
+    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
   }
 }
 
 # Node-OS: precise
+$logstash_worker_iptables_rule = regsubst(flatten([$elasticsearch_nodes, $elasticsearch_clients]),
+                                 '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
 node /^logstash-worker\d+\.openstack\.org$/ {
-  $group = "logstash-worker"
+  $group = 'logstash-worker'
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    iptables_rules6           => $logstash_worker_iptables_rule,
+    iptables_rules4           => $logstash_worker_iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::logstash_worker':
-    sysadmins             => hiera('sysadmins', []),
-    elasticsearch_nodes   => $elasticsearch_nodes,
-    elasticsearch_clients => $elasticsearch_clients,
     discover_node         => 'elasticsearch02.openstack.org',
   }
 }
