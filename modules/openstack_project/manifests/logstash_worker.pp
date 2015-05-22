@@ -15,19 +15,8 @@
 # Logstash indexer worker glue class.
 #
 class openstack_project::logstash_worker (
-  $elasticsearch_nodes = [],
-  $elasticsearch_clients = [],
   $discover_node = 'elasticsearch01.openstack.org',
-  $sysadmins = []
 ) {
-  $iptables_rule = regsubst (flatten([$elasticsearch_nodes, $elasticsearch_clients]) , '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
-    sysadmins                 => $sysadmins,
-  }
-
   file { '/etc/default/logstash-indexer':
     ensure => present,
     owner  => 'root',
