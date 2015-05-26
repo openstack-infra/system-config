@@ -124,7 +124,8 @@ def _get_providers_and_images(config_file):
     config = yaml.load(config_file)
     for provider in config['providers']:
         for image in provider['images']:
-            ret.append((provider['name'], image['name']))
+            if 'diskimage' not in image:
+                ret.append((provider['name'], image['name']))
     logging.debug("Added %d providers & images" % len(ret))
 
     # diskimages have a special provider
