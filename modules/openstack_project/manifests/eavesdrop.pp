@@ -134,4 +134,23 @@ class openstack_project::eavesdrop (
   class { 'jenkins::jenkinsuser':
     ssh_key     => $openstack_project::jenkins_ssh_key,
   }
+
+  file { '/srv/yaml2ical':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  file { '/srv/meetbot-openstack/index.html':
+    ensure  => link,
+    target  => '/srv/yaml2ical/index.html',
+    require => File['/srv/yaml2ical'],
+  }
+
+  file { '/srv/meetbot-openstack/irc-meetigs.ical':
+    ensure  => link,
+    target  => '/srv/yaml2ical/irc-meetings.ical',
+    require => File['/srv/yaml2ical'],
+  }
 }
