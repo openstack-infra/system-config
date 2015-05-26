@@ -19,6 +19,7 @@ class openstack_project::single_use_slave (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $pkg = false,
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname            => $certname,
@@ -57,4 +58,7 @@ class openstack_project::single_use_slave (
     }
   }
 
+  if ($pkg) {
+    class { 'openstack_project::slave_pkg': }
+  }
 }
