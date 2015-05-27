@@ -1,7 +1,6 @@
 # == Class: openstack_project::status
 #
 class openstack_project::status (
-  $sysadmins = [],
   $gerrit_host,
   $gerrit_ssh_host_key,
   $reviewday_ssh_public_key = '',
@@ -18,11 +17,6 @@ class openstack_project::status (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => $sysadmins,
-  }
 
   include openstack_project
   class { 'jenkins::jenkinsuser':
