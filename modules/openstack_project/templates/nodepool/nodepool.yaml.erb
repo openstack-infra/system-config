@@ -277,6 +277,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: false
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
@@ -348,6 +351,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: false
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
@@ -419,6 +425,9 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: false
       - name: devstack-precise-check
         base-image: 'Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
         min-ram: 8192
