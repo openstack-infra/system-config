@@ -203,6 +203,16 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-fedora22-dib
+    image: devstack-fedora21-dib
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 8
@@ -540,6 +550,11 @@ providers:
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora22-dib
+        min-ram: 30720
+        diskimage: devstack-fedora22-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
 
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
@@ -619,6 +634,12 @@ providers:
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora22-dib
+        min-ram: 30720
+        diskimage: devstack-fedora22-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -697,6 +718,12 @@ providers:
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora22-dib
+        min-ram: 30720
+        diskimage: devstack-fedora22-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
   - name: hpcloud-b4
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -776,6 +803,12 @@ providers:
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora22-dib
+        min-ram: 30720
+        diskimage: devstack-fedora22-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -856,6 +889,12 @@ providers:
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-fedora22-dib
+        min-ram: 30720
+        diskimage: devstack-fedora22-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+
   - name: tripleo-test-cloud-rh1
     cloud: tripleo-test-cloud-rh1
     boot-timeout: 120
@@ -1002,6 +1041,19 @@ diskimages:
       - nodepool-base
       - node-devstack
     release: 21
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+  - name: devstack-fedora22-dib
+    elements:
+      - fedora
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: 22
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
