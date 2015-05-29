@@ -38,6 +38,7 @@ class openstack_project::eavesdrop (
     vhost_extra  => $vhost_extra,
     manage_index => false,
     channels     => [
+        '#akanda',
         '#dox',
         '#heat',
         '#magnetodb',
