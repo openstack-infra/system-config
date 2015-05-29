@@ -89,6 +89,7 @@ class openstack_project::eavesdrop (
         '#openstack-swift',
         '#openstack-trove',
         '#openstack-zaqar',
+        '#puppet-openstack',
         '#storyboard',
         '#tripleo',
     ],
