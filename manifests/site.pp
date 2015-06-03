@@ -773,4 +773,11 @@ node 'translate-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'apps.openstack.org' {
+  class { 'openstack_project::apps_site':
+    commit => 'master',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
