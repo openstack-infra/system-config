@@ -773,4 +773,15 @@ node 'translate-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'apps.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::apps_site':
+    commit => 'master',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
