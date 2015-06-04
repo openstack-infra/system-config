@@ -1,21 +1,21 @@
 clouds:
   rax:
     cloud: rackspace
-    region-name: DFW,ORD,IAD
+    region_name: DFW,ORD,IAD
     auth:
       username: '<%= rackspace_username %>'
       password: '<%= rackspace_password %>'
-      project-id: '<%= rackspace_project %>'
+      project_id: '<%= rackspace_project %>'
   hpcloud:
     cloud: hp
-    region-name: region-a.geo-1,region-b.geo-1
+    region_name: region-a.geo-1,region-b.geo-1
     auth:
       username: '<%= hpcloud_username %>'
       password: '<%= hpcloud_password %>'
-      project-id: '<%= hpcloud_project %>'
+      project_id: '<%= hpcloud_project %>'
   tripleo-test-cloud-rh1:
     auth:
       username: '<%= tripleo_username %>'
       password: '<%= tripleo_password %>'
-      project-id: '<%= tripleo_project %>'
-      auth-url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
+      project_id: '<%= tripleo_project %>'
+      auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
