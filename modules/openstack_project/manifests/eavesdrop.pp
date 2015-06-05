@@ -76,6 +76,7 @@ class openstack_project::eavesdrop (
         '#openstack-monasca',
         '#openstack-neutron',
         '#openstack-neutron-ovn',
+        '#openstack-neutron-release',
         '#openstack-nova',
         '#openstack-operators',
         '#openstack-oslo',
