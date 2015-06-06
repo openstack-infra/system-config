@@ -31,6 +31,42 @@ class openstack_project::logstash_worker (
 
   include log_processor
 
+  log_processor::worker { 'A':
+    gearman_host  => 'logstash.openstack.org',
+    gearman_port  => 4730,
+    output_host   => localhost,
+    output_port   => 9999,
+    output_mode   => tcp,
+    crm114_enable => true,
+  }
+
+  log_processor::worker { 'B':
+    gearman_host  => 'logstash.openstack.org',
+    gearman_port  => 4730,
+    output_host   => localhost,
+    output_port   => 9999,
+    output_mode   => tcp,
+    crm114_enable => true,
+  }
+
+  log_processor::worker { 'C':
+    gearman_host  => 'logstash.openstack.org',
+    gearman_port  => 4730,
+    output_host   => localhost,
+    output_port   => 9999,
+    output_mode   => tcp,
+    crm114_enable => true,
+  }
+
+  log_processor::worker { 'D':
+    gearman_host  => 'logstash.openstack.org',
+    gearman_port  => 4730,
+    output_host   => localhost,
+    output_port   => 9999,
+    output_mode   => tcp,
+    crm114_enable => true,
+  }
+
   class { '::elasticsearch':
     es_template_config => {
       'gateway.recover_after_nodes'          => '5',
