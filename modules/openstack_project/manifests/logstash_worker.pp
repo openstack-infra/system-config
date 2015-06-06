@@ -30,18 +30,6 @@ class openstack_project::logstash_worker (
   }
 
   include log_processor
-  log_processor::worker { 'A':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-  }
-  log_processor::worker { 'B':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-  }
-  log_processor::worker { 'C':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-  }
-  log_processor::worker { 'D':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
-  }
 
   class { '::elasticsearch':
     es_template_config => {
