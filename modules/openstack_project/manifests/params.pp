@@ -12,7 +12,14 @@ class openstack_project::params {
     }
     'Debian': {
       $packages = ['puppet', 'wget']
-      $user_packages = ['byobu', 'emacs23-nox', 'vim-nox']
+      case $::operatingsystemrelease {
+        '15.04': {
+          $user_packages = ['byobu', 'emacs24-nox', 'vim-nox']
+	}
+	default: {
+          $user_packages = ['byobu', 'emacs23-nox', 'vim-nox']
+        }
+      }
       $update_pkg_list_cmd = 'apt-get update >/dev/null 2>&1;'
       $login_defs = 'puppet:///modules/openstack_project/login.defs.debian'
     }
