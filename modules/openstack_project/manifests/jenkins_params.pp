@@ -18,6 +18,7 @@ class openstack_project::jenkins_params {
       $graphviz_package = 'graphviz'
       $libcurl_dev_package = 'libcurl-devel'
       $ldap_dev_package = 'openldap-devel'
+      # $libjerasure_dev_package = 'jerasure-devel' not yet available
       $librrd_dev_package = 'rrdtool-devel'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
@@ -105,6 +106,7 @@ class openstack_project::jenkins_params {
       $graphviz_package = 'graphviz'
       $libcurl_dev_package = 'libcurl4-gnutls-dev'
       $ldap_dev_package = 'libldap2-dev'
+      $libjerasure_dev_package = 'jerasure-dev'
       $librrd_dev_package = 'librrd-dev'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
