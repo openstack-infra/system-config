@@ -50,6 +50,8 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::xslt_package, # for building openstack docs
     $::openstack_project::jenkins_params::xvfb_package, # for selenium tests
     $::openstack_project::jenkins_params::php5_cli_package, # for community portal build
+
+    $::openstack_project::jenkins_params::uuid_dev,
   ]
 
   package { $packages:

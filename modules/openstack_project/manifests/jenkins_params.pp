@@ -90,6 +90,8 @@ class openstack_project::jenkins_params {
         $cgred_require = Package['cgroups']
         $dvipng_package = 'dvipng'
       }
+
+      $uuid_dev = "uuid-devel"
     }
     'Debian': {
       # packages needed by slaves
@@ -166,6 +168,8 @@ class openstack_project::jenkins_params {
         Package['cgroups'],
         File['/etc/init/cgred.conf'],
       ]
+
+      $uuid_dev = "uuid-devel"
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
