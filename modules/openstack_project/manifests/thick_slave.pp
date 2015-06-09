@@ -94,11 +94,15 @@ class openstack_project::thick_slave(
       ensure => present,
     }
 
+    # for pyeclib, used by swift, not available before Trusty
+    package { $::openstack_project::jenkins_params::libjerasure_dev_package:
+      ensure => present,
+    }
+
     # Don't install the Ruby Gems profile script on Trusty
     file { '/etc/profile.d/rubygems.sh':
       ensure => absent,
     }
-
   } else {
 
     file { '/etc/profile.d/rubygems.sh':
