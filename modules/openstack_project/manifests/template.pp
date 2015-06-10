@@ -18,6 +18,13 @@ class openstack_project::template (
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = false,
   $sysadmins                 = [],
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dwf.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
 ) {
 
   ###########################################################
@@ -196,8 +203,11 @@ class openstack_project::template (
   ###########################################################
   # Manage  python/pip
 
-  include pip
   $desired_virtualenv = '13.1.0'
+  class { '::pip':
+    index_url     => $pypi_index_url,
+    trusted_hosts => $pypi_trusted_hosts,
+  }
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
     $virtualenv_ensure = $desired_virtualenv
@@ -208,13 +218,6 @@ class openstack_project::template (
     ensure   => $virtualenv_ensure,
     provider => pip,
     require  => Class['pip'],
-  }
-  file { '/etc/pip.conf':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/pip.conf',
-    replace => true,
   }
 
   ###########################################################
