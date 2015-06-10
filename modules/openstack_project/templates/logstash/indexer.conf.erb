@@ -20,7 +20,7 @@ filter {
       negate => true
       pattern => "^%{TIMESTAMP_ISO8601} \|"
       what => "previous"
-      stream_identity => "%{host}.%{filename}"
+      stream_identity => "%{build_node}.%{filename}"
     }
     grok {
       # Do multiline matching as the above mutliline filter may add newlines
@@ -33,13 +33,13 @@ filter {
       negate => true
       pattern => "^%{TIMESTAMP_ISO8601} "
       what => "previous"
-      stream_identity => "%{host}.%{filename}"
+      stream_identity => "%{build_node}.%{filename}"
     }
     multiline {
       negate => false
       pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?TRACE"
       what => "previous"
-      stream_identity => "%{host}.%{filename}"
+      stream_identity => "%{build_node}.%{filename}"
     }
     grok {
       # Do multiline matching as the above mutliline filter may add newlines
