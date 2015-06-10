@@ -51,11 +51,14 @@ class openstack_project::zuul_dev(
   }
 
   class { '::zuul::server':
-    layout_dir => $::project_config::zuul_layout_dir,
-    require    => $::project_config::config_dir,
+    layout_dir      => $::project_config::zuul_layout_dir,
+    manage_log_conf => true,
+    require         => $::project_config::config_dir,
   }
 
-  class { '::zuul::merger': }
+  class { '::zuul::merger':
+    manage_log_conf => true,
+  }
 
   if $gerrit_ssh_host_key != '' {
     file { '/home/zuul/.ssh':
@@ -74,22 +77,5 @@ class openstack_project::zuul_dev(
       replace => true,
       require => File['/home/zuul/.ssh'],
     }
-  }
-
-  file { '/etc/zuul/logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/logging.conf',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/gearman-logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/gearman-logging.conf',
-    notify => Exec['zuul-reload'],
-  }
-
-  file { '/etc/zuul/merger-logging.conf':
-    ensure => present,
-    source => 'puppet:///modules/openstack_project/zuul/merger-logging.conf',
   }
 }
