@@ -52,6 +52,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::php5_cli_package, # for community portal build
 
     $::openstack_project::jenkins_params::uuid_dev, # for oslo.messaging pyngus/proton
+    $::openstack_project::jenkins_params::swig, # for oslo.messaging pyngus/proton
   ]
 
   package { $packages:

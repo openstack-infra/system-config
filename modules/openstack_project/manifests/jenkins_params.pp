@@ -93,6 +93,7 @@ class openstack_project::jenkins_params {
       }
 
       $uuid_dev = "uuid-devel"
+      $swig = "swig"
     }
     'Debian': {
       # packages needed by slaves
@@ -172,6 +173,7 @@ class openstack_project::jenkins_params {
       ]
 
       $uuid_dev = "uuid-dev"
+      $swig = "swig"
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
