@@ -102,6 +102,8 @@ sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
+set -e
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg
+
