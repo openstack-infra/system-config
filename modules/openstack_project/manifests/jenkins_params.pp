@@ -92,7 +92,7 @@ class openstack_project::jenkins_params {
         $dvipng_package = 'dvipng'
       }
 
-      $uuid_dev = "uuid-devel"
+      $uuid_dev = "libuuid-devel"
       $swig = "swig"
     }
     'Debian': {
