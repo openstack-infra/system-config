@@ -6,6 +6,9 @@ class openstack_project::users {
   include openstack_project::params
   file { '/etc/login.defs':
     ensure => present,
+    group  => 'root',
+    mode   => '0644',
+    owner  => 'root',
     source => $::openstack_project::params::login_defs,
   }
   User::Virtual::Localuser {
