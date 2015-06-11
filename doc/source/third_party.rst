@@ -63,12 +63,14 @@ Requirements
 
   * Environment details
 
+    * All project configuration files (e.g. ``/etc/nova/*``, ``localrc``,
+      ``local.conf``)
     * This must include a utc timestamp of the test run
   * Test configuration
 
     * Skipped tests
     * logs should include a trace of the commands used
-  * OpenStack logs
+  * OpenStack logs ( such as ``screen-*.log`` files)
   * Tempest logs (including ``testr_results.html.gz``)
 
     * logs must be browsable; logs requiring download, installation or login
