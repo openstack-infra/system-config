@@ -21,6 +21,7 @@ Major Systems
    paste
    planet
    puppet
+   stackalytics
    static
    bandersnatch
    lists
