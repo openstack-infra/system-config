@@ -150,6 +150,7 @@ class openstack_project::cacti (
     'release.slave.openstack.org',
     'review-dev.openstack.org',
     'review.openstack.org',
+    'stackalytics.openstack.org',
     'static.openstack.org',
     'subunit-worker01.openstack.org',
     'translate.openstack.org',
