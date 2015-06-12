@@ -143,6 +143,7 @@ class openstack_project::cacti (
     'pypi.region-b.geo-1.openstack.org',
     'review.openstack.org',
     'review-dev.openstack.org',
+    'stackalytics.openstack.org',
     'static.openstack.org',
     'subunit-worker01.openstack.org',
     'wiki.openstack.org',
