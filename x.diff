@@ -1,0 +1,118 @@
+diff --git a/manifests/init.pp b/manifests/init.pp
+index d6b68ea..7e3c768 100644
+--- a/manifests/init.pp
++++ b/manifests/init.pp
+@@ -18,14 +18,7 @@
+ class stackalytics (
+   $stackalytics_ssh_private_key,
+   $vhost_name = $::fqdn,
+-  $stackalytics_git_source_repo = 'https://git.openstack.org/stackforge/stackalytics/',
+-  $stackalytics_revision = 'master',
+-  $default_data_uri = 'https://git.openstack.org/cgit/stackforge/stackalytics/plain/etc/default_data.json',
+-  $corrections_uri = 'https://git.openstack.org/cgit/stackforge/stackalytics/plain/etc/corrections.json',
+-  $review_uri = 'gerrit://review.openstack.org',
+-  $git_base = 'git://git.openstack.org',
+-  $gerrit_ssh_user = 'stackalytics',
+-  $program_list_uri = 'https://git.openstack.org/cgit/openstack/governance/plain/reference/programs.yaml',
++  $gerrit_ssh_user = 'ufuktron',
+   $memcached_port = '11211',
+ ) {
+ 
+@@ -34,6 +27,7 @@ class stackalytics (
+   include pip
+ 
+   $packages = [
++    'libapache2-mod-proxy-uwsgi',
+     'libapache2-mod-uwsgi',
+     'uwsgi',
+     'uwsgi-plugin-python',
+@@ -121,7 +115,7 @@ class stackalytics (
+     ensure  => present,
+     owner   => 'stackalytics',
+     mode    => '0444',
+-    content => template('stackalytics/stackalytics.conf.erb'),
++    content => template('/opt/stackalytics/etc/stackalytics.conf'),
+     notify  => Exec['stackalytics-reload'],
+     require => [
+       File['/etc/stackalytics'],
+@@ -151,7 +145,6 @@ class stackalytics (
+     docroot  => 'MEANINGLESS ARGUMENT',
+     priority => '50',
+     template => 'stackalytics/stackalytics.vhost.erb',
+-    require  => Class['httpd'],
+     ssl      => true,
+   }
+ 
+@@ -162,4 +155,38 @@ class stackalytics (
+   httpd_mod { 'proxy_http':
+     ensure => present,
+   }
++
++  httpd_mod { 'proxy_uwsgi':
++    ensure => present,
++  }
++
++  ini_setting { 'sources_root':
++    ensure  => present,
++    notify  => Exec['stackalytics-reload'],
++    path    => '/etc/stackalytics/stackalytics.conf',
++    require => File['/etc/stackalytics/stackalytics.conf'],
++    section => 'DEFAULT',
++    setting => 'sources_root',
++    value   => '/var/lib/git',
++  }
++
++  ini_setting { 'ssh_key_filename':
++    ensure  => present,
++    notify  => Exec['stackalytics-reload'],
++    path    => '/etc/stackalytics/stackalytics.conf',
++    require => File['/etc/stackalytics/stackalytics.conf'],
++    section => 'DEFAULT',
++    setting => 'ssh_key_filename',
++    value   => '/home/stackalytics/.ssh/zuul.id_rsa',
++  }
++
++  ini_setting { 'ssh_username':
++    ensure  => present,
++    notify  => Exec['stackalytics-reload'],
++    path    => '/etc/stackalytics/stackalytics.conf',
++    require => File['/etc/stackalytics/stackalytics.conf'],
++    section => 'DEFAULT',
++    setting => 'ssh_username',
++    value   => $gerrit_ssh_user,
++  }
+ }
+diff --git a/templates/stackalytics.vhost.erb b/templates/stackalytics.vhost.erb
+index fad2371..2237dbb 100644
+--- a/templates/stackalytics.vhost.erb
++++ b/templates/stackalytics.vhost.erb
+@@ -1,6 +1,4 @@
+ <VirtualHost <%= @vhost_name %>:80>
+-  ServerAdmin <%= @serveradmin %>
+-
+   ErrorLog ${APACHE_LOG_DIR}/stackalytics-error.log
+ 
+   LogLevel warn
+@@ -8,8 +6,7 @@
+   CustomLog ${APACHE_LOG_DIR}/stackalytics-access.log combined
+ 
+   <Directory /usr/local/lib/python2.7/dist-packages/stackalytics/dashboard>
+-    Order deny,allow
+-    Allow from all
++    Require all granted
+   </Directory>
+ 
+   ProxyPass /static !
+diff --git a/templates/uwsgi.ini.erb b/templates/uwsgi.ini.erb
+index 7bafc2f..ba00037 100644
+--- a/templates/uwsgi.ini.erb
++++ b/templates/uwsgi.ini.erb
+@@ -3,7 +3,7 @@ uid = stackalytics
+ gid = stackalytics
+ socket = 127.0.0.1:3031
+ pythonpath = /usr/local/lib/python2.7/dist-packages
+-module = stackalytics.dashboard.web:app()
++module = stackalytics.dashboard.web:app
+ processes = 4
+ threads = 1
+ stats = 127.0.0.1:9191
