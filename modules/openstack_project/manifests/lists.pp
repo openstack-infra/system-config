@@ -307,4 +307,14 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist { 'app-catalog-admin':
+    ensure      => present,
+    admin       => 'doc@aedo.net',
+    password    => $listpassword,
+    description => 'Coordinate admin details for OpenStack
+    Community App Catalog.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
