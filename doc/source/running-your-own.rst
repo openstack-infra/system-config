@@ -255,7 +255,7 @@ to use ``: |``::
 Launch a node - be sure to pass --flavor "10G" to get a flavor with at
 least 10G+ of RAM, as gerrit is configured for 8G of heap.
 
-Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
+Follow the :ref:`gerrit` documentation for instructions on getting gerrit
 configured once installed.
 
 Finally, you should be able to follow the `Project Creator’s Guide <http://docs.openstack.org/infra/manual/creators.html>`_ to setup a project at
