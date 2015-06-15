@@ -71,11 +71,12 @@ class openstack_project::cacti (
   }
 
   $cacti_hosts = [
-    'ask.openstack.org',
     'afs01.dfw.openstack.org',
     'afs01.ord.openstack.org',
     'afsdb01.openstack.org',
     'afsdb02.openstack.org',
+    'apps.openstack.org',
+    'ask.openstack.org',
     'eavesdrop.openstack.org',
     'elasticsearch01.openstack.org',
     'elasticsearch02.openstack.org',
