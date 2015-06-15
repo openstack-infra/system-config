@@ -70,8 +70,8 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'fungi':
     realname => 'Jeremy Stanley',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC1uFP7IuJLWZD12BJEHhakphaLfwe/rkvRJVM/JfywKuCZSXJo2HpRLw1dM8HAOlXfyrYRZ+O374rluw9RoL2KVyxWPo2Lac6XTKR4yacIgV3Mnx/j04hdHuNDZsVmONG1FDq+11pXuObYx5Of+yHDDQK35/7wDGRDv93QYhEwh8nYaW3Dol3HtqF0e4pjkAgQhjhqUk6A/+A4CQHgomQV8XkAxEdf0O37OhHZRCgTxmdgDykEZT72t3YbCXdmtnEmqEP9FzFM/CXryQ8nf9IWcfaw70bFbSgWFs12u1EeV7a3mubdy6HfC2E/OfxQnRI59CoqWVMOY8jCuTv7FdsX',
-    key_id   => 'fungi-openstack-2013',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQD3KnRBTH5QPpKjf4RWu4akzYt2gwp796cMkFl5vu8e7G/cHuh4979FeNJXMVP6F3rvZB+yXDHLCU5LBVLq0K+1GbAZT/hH38hpMOIvniwKIquvI6C/drkVPHO6YmVlapw/NI530PGnT/TAqCOycHBO5eF1bYsaqV1yZqvs9v7UZc6J4LukoLZwpmyWZ5P3ltAiiy8+FGq3SLCKWDMmv/Bjz4zTsaNbSWThJi0BydINjC1/0ze5Tyc/XgW1sDuxmmXJxgQp4EvLpronqb2hT60iA52kj8lrmoCIryRpgnbaRA7BrxKF8zIr0ZALHijxEUeWHhFJDIVRGUf0Ef0nrmBv',
+    key_id   => 'fungi-openstack-2015',
     uid      => 2007,
     gid      => 2007,
   }
