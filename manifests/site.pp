@@ -119,6 +119,17 @@ node 'review-dev.openstack.org' {
 # Node-OS: precise
 node 'jenkins.openstack.org' {
   $group = "jenkins"
+  $zmq_event_receivers = ['logstash.openstack.org',
+                          'nodepool.openstack.org']
+  $iptables_rule = regsubst ($zmq_event_receivers,
+                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+    puppetmaster_server       => 'puppetmaster.openstack.org',
+  }
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
@@ -126,34 +137,41 @@ node 'jenkins.openstack.org' {
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents', 'XXX'),
-    sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
   }
 }
 
 # Node-OS: precise
 node /^jenkins\d+\.openstack\.org$/ {
   $group = "jenkins"
+  $zmq_event_receivers = ['logstash.openstack.org',
+                          'nodepool.openstack.org']
+  $iptables_rule = regsubst ($zmq_event_receivers,
+                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+    puppetmaster_server       => 'puppetmaster.openstack.org',
+  }
   class { 'openstack_project::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
-    sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-    ],
   }
 }
 
 # Node-OS: precise
 node 'jenkins-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+    puppetmaster_server       => 'puppetmaster.openstack.org',
+  }
   class { 'openstack_project::jenkins_dev':
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
-    sysadmins                => hiera('sysadmins', []),
     mysql_password           => hiera('nodepool_dev_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_dev_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
