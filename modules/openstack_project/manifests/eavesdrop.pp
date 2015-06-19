@@ -47,6 +47,7 @@ class openstack_project::eavesdrop (
         '#openstack',
         '#openstack-ansible',
         '#openstack-api',
+        '#openstack-app-catalog',
         '#openstack-barbican',
         '#openstack-blazar',
         '#openstack-ceilometer',
