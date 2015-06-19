@@ -51,6 +51,21 @@ class openstack_project::git (
       'daemon'  => '',
       'stats'   => 'socket /var/lib/haproxy/stats user root group root mode 0600 level admin'
     },
+    defaults_options => {
+      'log'     => 'global',
+      'stats'   => 'enable',
+      'option'  => 'redispatch',
+      'retries' => '3',
+      'timeout' => [
+        'http-request 10s',
+        'queue 1m',
+        'connect 10s',
+        'client 2m',
+        'server 2m',
+        'check 10s',
+      ],
+      'maxconn' => '8000',
+    },
   }
   # The three listen defines here are what the world will hit.
   haproxy::listen { 'balance_git_http':
