@@ -53,6 +53,7 @@ class openstack_project::eavesdrop (
         '#openstack-ceilometer',
         '#openstack-chef',
         '#openstack-cinder',
+        '#openstack-cloudpulse',
         '#openstack-community',
         '#openstack-containers',
         '#openstack-cue',
