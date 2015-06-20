@@ -138,11 +138,23 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
 
 def build_server(
         client, name, image, flavor, cert, environment, puppetmaster, volume,
-        keep, net_label, floating_ip_pool):
+        keep, net_label, floating_ip_pool, boot_from_volume):
     key = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name)
+
+    if boot_from_volume:
+        block_mapping = [{
+            'boot_index': '0',
+            'delete_on_termination': True,
+            'destination_type': 'volume',
+            'uuid': image.id,
+            'source_type': 'image',
+            'volume_size': '50',
+        }]
+        create_kwargs['image'] = None
+        create_kwargs['block_device_mapping_v2'] = block_mapping
 
     if net_label:
         nics = []
@@ -156,6 +168,7 @@ def build_server(
         print "Adding keypair"
         key, kp = utils.add_keypair(client, key_name)
         create_kwargs['key_name'] = key_name
+
     try:
         server = client.servers.create(**create_kwargs)
     except Exception:
@@ -214,6 +227,10 @@ def main():
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
+    parser.add_argument("--boot-from-volume", dest="boot_from_volume",
+                        help="Create a boot volume for the server and use it.",
+                        action='store_true',
+                        default=False)
     parser.add_argument("--keep", dest="keep",
                         help="Don't clean up or delete the server on error.",
                         action='store_true',
@@ -262,7 +279,8 @@ def main():
 
     build_server(client, options.name, image, flavor, cert,
                  options.environment, options.server, options.volume,
-                 options.keep, options.net_label, options.floating_ip_pool)
+                 options.keep, options.net_label, options.floating_ip_pool,
+                 options.boot_from_volume)
     dns.print_dns(client, options.name)
 
 if __name__ == '__main__':
