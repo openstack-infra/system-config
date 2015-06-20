@@ -88,6 +88,7 @@ class openstack_project::eavesdrop (
         '#openstack-relmgr-office',
         '#openstack-sahara',
         '#openstack-sdks',
+        '#openstack-searchlight',
         '#openstack-security',
         '#openstack-sprint',
         '#openstack-stable',
