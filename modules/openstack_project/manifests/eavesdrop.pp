@@ -6,7 +6,7 @@ class openstack_project::eavesdrop (
   $statusbot_nick = '',
   $statusbot_password = '',
   $statusbot_server = '',
-  $statusbot_channels = '',
+  $statusbot_channels = [],
   $statusbot_auth_nicks = '',
   $statusbot_wiki_user = '',
   $statusbot_wiki_password = '',
