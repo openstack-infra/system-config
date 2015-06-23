@@ -8,9 +8,6 @@ class openstack_project::users {
     ensure => present,
     source => $::openstack_project::params::login_defs,
   }
-  User::Virtual::Localuser {
-    require => File['/etc/login.defs']
-  }
 
   @user::virtual::localuser { 'mordred':
     realname => 'Monty Taylor',
