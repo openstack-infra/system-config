@@ -161,4 +161,10 @@ class openstack_project::eavesdrop (
     target  => '/srv/yaml2ical/irc-meetings.ical',
     require => File['/srv/yaml2ical'],
   }
+
+  file { '/srv/meetbot-openstack/calendars/':
+    ensure  => link,
+    target  => '/srv/yaml2ical/calendars/',
+    require => File['/srv/yaml2ical'],
+  }
 }
