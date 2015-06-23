@@ -99,6 +99,10 @@ class openstack_project::users {
     uid      => 2010,
     gid      => 2010,
   }
+  openstack_project::dotfiles { 'pabelanger':
+    email    => 'pabelanger@redhat.com',
+    realname => 'Paul Belanger',
+  }
 
   @user::virtual::localuser { 'mkiss':
     realname => 'Marton Kiss',

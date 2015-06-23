@@ -23,6 +23,7 @@ class openstack_project::template (
   ###########################################################
   # Classes for all hosts
 
+  include ::git
   include ntp
   include snmpd
   include sudoers
@@ -162,10 +163,6 @@ class openstack_project::template (
   }
 
   package { 'rsyslog':
-    ensure => present,
-  }
-
-  package { 'git':
     ensure => present,
   }
 
