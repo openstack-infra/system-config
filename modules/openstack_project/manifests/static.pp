@@ -228,4 +228,22 @@ class openstack_project::static (
     serveraliases => ['*.devstack.org'],
     template      => 'openstack_project/devstack.vhost.erb',
   }
+
+  ###########################################################
+  # Trystack
+
+  apache::vhost { 'trystack.openstack.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/opt/trystack',
+    template => 'openstack_project/trystack.vhost.erb',
+    require  => Vcsrepo['/opt/trystack'],
+  }
+
+  vcsrepo { '/opt/trystack':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/trystack-site',
+  }
 }
