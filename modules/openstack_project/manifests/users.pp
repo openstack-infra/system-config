@@ -11,9 +11,6 @@ class openstack_project::users {
     owner  => 'root',
     source => $::openstack_project::params::login_defs,
   }
-  User::Virtual::Localuser {
-    require => File['/etc/login.defs']
-  }
 
   @user::virtual::localuser { 'mordred':
     realname => 'Monty Taylor',
