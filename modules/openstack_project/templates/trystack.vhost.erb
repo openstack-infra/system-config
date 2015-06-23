@@ -1,0 +1,17 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+
+  DocumentRoot <%= @docroot %>
+  <Directory <%= @docroot %>>
+    Require all granted
+  </Directory>
+
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
+  ServerSignature Off
+</VirtualHost> 

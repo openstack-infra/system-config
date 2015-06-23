@@ -116,6 +116,16 @@ node 'review-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'trystack.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::trystack':
+  }
+}
+
 # Node-OS: precise
 node 'jenkins.openstack.org' {
   $group = "jenkins"
