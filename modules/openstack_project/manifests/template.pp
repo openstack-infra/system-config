@@ -58,6 +58,12 @@ class openstack_project::template (
     rules6           => $iptables_rules6,
   }
 
+  ###########################################################
+  # Add Stages
+  # https://docs.puppetlabs.com/puppet/latest/reference/lang_run_stages.html
+  # some stages are declared in stdlib
+
+  include stdlib
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
@@ -75,7 +81,8 @@ class openstack_project::template (
   }
 
   class {'openstack_project::users_install':
-    install_users => $install_users
+    install_users => $install_users,
+    stage         => 'setup',
   }
 
   if ($enable_unbound) {
