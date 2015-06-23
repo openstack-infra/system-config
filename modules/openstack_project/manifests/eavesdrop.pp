@@ -151,6 +151,13 @@ class openstack_project::eavesdrop (
     require => User['jenkins'],
   }
 
+  file { '/srv/yaml2ical/calendars':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => File['/srv/yaml2ical'],
+  }
+
   file { '/srv/meetbot-openstack/index.html':
     ensure  => link,
     target  => '/srv/yaml2ical/index.html',
@@ -160,6 +167,12 @@ class openstack_project::eavesdrop (
   file { '/srv/meetbot-openstack/irc-meetings.ical':
     ensure  => link,
     target  => '/srv/yaml2ical/irc-meetings.ical',
+    require => File['/srv/yaml2ical'],
+  }
+
+  file { '/srv/meetbot-openstack/calendars/':
+    ensure  => link,
+    target  => '/srv/yaml2ical/calendars/',
     require => File['/srv/yaml2ical'],
   }
 }
