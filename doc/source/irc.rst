@@ -89,6 +89,21 @@ https://git.openstack.org/cgit/openstack-infra/meetbot. Manual installation of t
 plugin is straightforward and documented in that repository's README.
 OpenStack Infrastructure installs and configures Meetbot through Puppet.
 
+Starting a Meeting
+^^^^^^^^^^^^^^^^^^
+
+To start a meeting, use the command ``#startmeeting`` followed by the
+meeting name.  For instance, if you are having a meeting of the
+marketing committee use the command ``#startmeeting Marketing
+Committee``.  This will cause logs to automatically be placed in a
+meeting-specific directory on the eavesdrop log server.  The output
+directory will be automatically lowercased and non-alphanumeric
+characters translated to '_', so the above example will record to the
+``marketing_committee`` directory.  Be sure to use a consistent
+meeting name to ensure logs are recorded to the same location.
+
+This feature is specific to the OpenStack Infrastructure Meetbot fork.
+
 Voting
 ^^^^^^
 
