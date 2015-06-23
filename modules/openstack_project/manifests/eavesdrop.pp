@@ -153,13 +153,19 @@ class openstack_project::eavesdrop (
 
   file { '/srv/meetbot-openstack/index.html':
     ensure  => link,
-    target  => '/srv/yaml2ical/index.html',
+    target  => '/srv/yaml2ical/output/index.html',
     require => File['/srv/yaml2ical'],
   }
 
   file { '/srv/meetbot-openstack/irc-meetings.ical':
     ensure  => link,
-    target  => '/srv/yaml2ical/irc-meetings.ical',
+    target  => '/srv/yaml2ical/output/irc-meetings.ical',
+    require => File['/srv/yaml2ical'],
+  }
+
+  file { '/srv/meetbot-openstack/calendars/':
+    ensure  => link,
+    target  => '/srv/yaml2ical/output/calendars/',
     require => File['/srv/yaml2ical'],
   }
 }
