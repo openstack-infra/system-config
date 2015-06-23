@@ -157,9 +157,19 @@ def main():
     core_groups = ['infra-core']
     for project in projects:
         shortname = project.split('/')[1]
-        for suffix in ['-core', '-release']:
-            group = shortname + suffix
-            configure_group(gerrit, group, include_groups=['infra-core'])
+
+        group = shortname + '-core'
+        include_groups = ['infra-core']
+        if shortname.startswith('puppet-'):
+            include_groups.append('infra-puppet-core')
+        configure_group(gerrit, group, include_groups=include_groups)
+
+        group = shortname + '-release'
+        include_groups = ['infra-core']
+        if shortname.startswith('puppet-'):
+            include_groups.append('infra-puppet-release')
+        configure_group(gerrit, group, include_groups=include_groups)
+
         group = shortname + '-core'
         core_groups.append(group)
 
