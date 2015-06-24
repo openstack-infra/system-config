@@ -1,7 +1,6 @@
 # == Class: openstack_project::static
 #
 class openstack_project::static (
-  $sysadmins = [],
   $swift_authurl = '',
   $swift_user = '',
   $swift_key = '',
@@ -15,12 +14,6 @@ class openstack_project::static (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => $sysadmins,
-  }
-
   class { 'project_config':
     url  => $project_config_repo,
   }

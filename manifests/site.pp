@@ -476,9 +476,12 @@ node 'storyboard.openstack.org' {
 # A machine to serve static content.
 # Node-OS: precise
 node 'static.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::static':
     project_config_repo              => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins                        => hiera('sysadmins', []),
     swift_authurl                    => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user                       => 'infra-files-ro',
     swift_key                        => hiera('infra_files_ro_password', 'XXX'),
