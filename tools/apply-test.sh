@@ -14,6 +14,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+free
+cat /proc/loadavg
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
@@ -54,6 +57,8 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     openstack-infra/project-config \
     $project_names
 
+free
+cat /proc/loadavg
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
@@ -97,6 +102,9 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
+free
+cat /proc/loadavg
+
 sudo mkdir -p /var/run/puppet
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
@@ -104,4 +112,4 @@ echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg
