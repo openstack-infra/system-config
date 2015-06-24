@@ -14,6 +14,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+if [ -f /usr/bin/yum ]; then
+    sudo yum remove git -y
+    sudo yum install gcc zlib-devel curl-devel
+
+    wget https://www.kernel.org/pub/software/scm/git/git-1.8.3.4.tar.gz
+    tar zxvf git-*.tar.gz
+    cd git-*
+    ./configure --prefix=/usr
+    make
+    sudo make install
+    cd ..
+fi
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
@@ -53,7 +66,6 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     openstack-infra/project-config \
     $project_names
-
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
@@ -104,4 +116,4 @@ echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg
