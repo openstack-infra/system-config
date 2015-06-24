@@ -804,4 +804,97 @@ node 'apps.openstack.org' {
   }
 }
 
+node 'infra-cloud-baremetal0.localdomain' {
+  $group = 'baremetal'
+  $baremetal_rabbit_password = hiera('baremetal_rabbit_password', 'XXX')
+  $baremetal_mysql_password = hiera('baremetal_mysql_password', 'XXX')
+  $keystone_service_password = hiera('keystone_service_password', 'XXX')
+  include ::apt
+
+  class {'openstack_extras::repo::debian::ubuntu': }
+
+  class { '::mysql::server': }
+  class { '::rabbitmq':
+    delete_guest_user => true,
+  }
+  class { '::keystone::db::mysql':
+    password => $baremetal_mysql_password,
+  }
+  class { '::keystone':
+    database_connection => "mysql://keystone:${baremetal_mysql_password}@127.0.0.1/keystone",
+    catalog_type => 'sql',
+    admin_token => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+    service_name => 'httpd',
+  }
+  class { '::keystone::roles::admin':
+    email => 'postmaster@no.test',
+    password => $keystone_service_password,
+  }
+  keystone::resource::service_identity { 'keystone':
+    password => $keystone_service_password,
+    service_type => 'identity',
+    service_description => 'OpenStack Identity Service',
+    public_url => "http://${::fqdn}:5000/v2",
+    admin_url => "http://${::fqdn}:35357/v2",
+  }
+
+  include ::apache
+  class { '::keystone::wsgi::apache':
+    ssl => false,
+  }
+
+  keystone::resource::service_identity { 'ironic':
+    password => $keystone_service_password,
+    service_type => 'baremetal',
+    service_description => 'Baremetal Service',
+    public_url => "http://${::fqdn}:6385/",
+    admin_url => "http://${::fqdn}:6385/",
+  }
+
+  rabbitmq_user { 'baremetal':
+    admin => false,
+    password => $baremetal_rabbit_password,
+  }
+  rabbitmq_user_permissions { 'baremetal@/':
+    configure_permission => '.*',
+    read_permission => '.*',
+    write_permission => '.*',
+  }
+
+  class { '::ironic::db::mysql':
+    password      => $baremetal_mysql_password,
+    dbname        => 'ironic',
+    user          => 'baremetal',
+    host          => 'localhost',
+    allowed_hosts => ['controller'],
+  }
+
+  class { '::ironic':
+    database_connection => "mysql://baremetal:${baremetal_mysql_password}@localhost/ironic", 
+
+    rabbit_password     => $baremetal_rabbit_password,
+    rabbit_userid       => 'baremetal',
+    rabbit_hosts        => ['localhost:5672'],
+
+    glance_api_servers  => ['localhost:9292'],
+  }
+
+  class { '::ironic::api':
+    admin_password => hiera('ironic_admin_password', 'XXX'),
+  }
+
+  class { '::ironic::conductor': }
+  package { 'ipmitool':
+    ensure => 'installed',
+  }
+
+  class { '::ironic::drivers::ipmi': }
+
+  class { '::ironic::drivers::pxe':
+    deploy_kernel  => hiera('baremetal_deploy_kernel', 'glance://12345'),
+    deploy_ramdisk => hiera('baremetal_deploy_ramdisk', 'glance://987654321'),
+  }
+
+  class { '::ironic::client': }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
