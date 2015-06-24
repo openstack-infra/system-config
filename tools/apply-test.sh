@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+if [ -f /usr/bin/yum ]; then
+    sudo yum install -y http://people.redhat.com/~iwienand/git/git-1.7.1-3.el6.1.x86_64.rpm http://people.redhat.com/~iwienand/git/perl-Git-1.7.1-3.el6.1.noarch.rpm
+fi
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
@@ -53,7 +57,6 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     openstack-infra/project-config \
     $project_names
-
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
