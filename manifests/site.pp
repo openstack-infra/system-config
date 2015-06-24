@@ -804,4 +804,66 @@ node 'apps.openstack.org' {
   }
 }
 
+node 'infra-cloud-baremetal0.localdomain' {
+  $group = 'baremetal'
+  $baremetal_rabbit_password = hiera('baremetal_rabbit_password', 'XXX')
+  $baremetal_mysql_password = hiera('baremetal_mysql_password', 'XXX')
+
+  class { '::mysql::server': }
+  class { '::rabbitmq': }
+  class { '::keystone::db::mysql':
+    password => $baremetal_mysql_password,
+  }
+  class { '::keystone':
+    database_connection => "mysql://baremetal:${baremetal_mysql_password}@localhost/keystone",
+    catalog_type => 'sql',
+    admin_token => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+  }
+  keystone::resource::service_identity { 'keystone':
+    password => hiera('keystone_service_password', 'XXX'),
+    service_type => 'identity',
+    service_description => 'OpenStack Identity Service',
+  }
+
+  include ::apache
+  class { '::keystone::wsgi::apache':
+    ssl => false,
+  }
+
+  #rabbitmq_user { 'baremetal':
+  #  admin => false,
+  #  password => $baremetal_rabbit_password,
+  #}
+
+  class { '::ironic::db::mysql':
+    password      => $baremetal_mysql_password,
+    dbname        => 'ironic',
+    user          => 'baremetal',
+    host          => 'localhost',
+    allowed_hosts => ['controller'],
+  }
+
+  class { '::ironic':
+    database_connection => "mysql://baremetal:${baremetal_mysql_password}@localhost/ironic", 
+
+    rabbit_password     => $baremetal_rabbit_password,
+    rabbit_userid       => 'baremetal',
+    rabbit_hosts        => ['localhost:5672'],
+
+    glance_api_servers  => ['localhost:9292'],
+  }
+
+  class { '::ironic::api':
+    admin_password => hiera('ironic_admin_password', 'XXX'),
+  }
+
+  class { '::ironic::conductor': }
+
+  class { '::ironic::drivers::ipmi': }
+
+  class { '::ironic::drivers::pxe':
+    deploy_kernel  => hiera('baremetal_deploy_kernel', 'glance://12345'),
+    deploy_ramdisk => hiera('baremetal_deploy_ramdisk', 'glance://987654321'),
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
