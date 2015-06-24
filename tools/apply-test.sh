@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# Fix?
+sudo git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
@@ -50,10 +54,9 @@ for MOD in ${!INTEGRATION_MODULES[*]}; do
 done
 
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
-    git://git.openstack.org \
+    http://git.openstack.org \
     openstack-infra/project-config \
     $project_names
-
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
@@ -104,4 +107,4 @@ echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
-        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg > /dev/null
+        sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug filearg
