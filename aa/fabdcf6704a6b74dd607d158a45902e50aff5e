@@ -1,0 +1,11 @@
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Geoff Arnold <geoff@geoffarnold.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Fri, 26 Jun 2015 15:30:43 +0000
+Reviewed-on: https://review.openstack.org/194756
+Project: openstack-infra/system-config
+Branch: refs/heads/master
