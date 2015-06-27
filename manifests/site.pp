@@ -811,6 +811,13 @@ node 'infra-cloud-baremetal0.localdomain' {
   $glance_mysql_password = hiera('glance_mysql_password', 'XXX')
   $glance_admin_password = hiera('glance_admin_password', 'XXX')
   $keystone_service_password = hiera('keystone_service_password', 'XXX')
+  $neutron_rabbit_password = hiera('neutron_rabbit_password', 'XXX')
+  $neutron_mysql_password = hiera('neutron_mysql_password', 'XXX')
+  $neutron_admin_password = hiera('neutron_admin_password', 'XXX')
+
+  $keystone_auth_uri = "http://${::fqdn}:5000/v2.0"
+  $keystone_admin_uri = "http://${::fqdn}:35357/v2.0"
+
   include ::apt
 
   class {'openstack_extras::repo::debian::ubuntu': }
@@ -836,8 +843,8 @@ node 'infra-cloud-baremetal0.localdomain' {
     password => $keystone_service_password,
     service_type => 'identity',
     service_description => 'OpenStack Identity Service',
-    public_url => "http://${::fqdn}:5000/v2.0",
-    admin_url => "http://${::fqdn}:35357/v2.0",
+    public_url => $keystone_auth_uri,
+    admin_url => $keystone_admin_uri,
   }
 
   include ::apache
@@ -917,5 +924,47 @@ node 'infra-cloud-baremetal0.localdomain' {
     public_url => "http://${::fqdn}:9292/",
     admin_url => "http://${::fqdn}:9292/",
   }
+  rabbitmq_user { 'neutron':
+    admin => false,
+    password => $neutron_rabbit_password,
+  }
+  rabbitmq_user_permissions { 'neutron@/':
+    configure_permission => '.*',
+    read_permission => '.*',
+    write_permission => '.*',
+  }
+  class { '::neutron::db::mysql':
+    password => $neutron_mysql_password,
+  }
+  class { '::neutron':
+    core_plugin => 'ml2',
+    enabled => true,
+    rabbit_user => 'neutron',
+    rabbit_password => $neutron_rabbit_password,
+  }
+  keystone::resource::service_identity { 'neutron':
+    password => $neutron_admin_password,
+    service_type => 'network',
+    service_description => 'OpenStack Network Service',
+    public_url => "http://${::fqdn}:9696/",
+    admin_url => "http://${::fqdn}:9696/",
+  }
+  class { '::neutron::server':
+    auth_password => $neutron_admin_password,
+    #auth_uri => $keystone_auth_uri,
+    #identity_uri => $keystone_admin_uri,
+    database_connection => "mysql://neutron:${neutron_mysql_password}@127.0.0.1/neutron?charset=utf8",
+  } 
+  class { '::neutron::plugins::ml2':
+    type_drivers => ['flat'],
+    tenant_network_types => ['flat'],
+    mechanism_drivers => ['openvswitch'],
+    flat_networks => ['physnet1'],
+    network_vlan_ranges => ['physnet1'],
+  }
+  class { '::neutron::agents::ml2::ovs':
+    bridge_mappings => ['physnet1:br-eth2'],
+  }
+  class { '::neutron::client': }
 }
 # vim:sw=2:ts=2:expandtab:textwidth=79
