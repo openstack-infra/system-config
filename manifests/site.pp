@@ -808,6 +808,8 @@ node 'infra-cloud-baremetal0.localdomain' {
   $group = 'baremetal'
   $baremetal_rabbit_password = hiera('baremetal_rabbit_password', 'XXX')
   $baremetal_mysql_password = hiera('baremetal_mysql_password', 'XXX')
+  $glance_mysql_password = hiera('glance_mysql_password', 'XXX')
+  $glance_admin_password = hiera('glance_admin_password', 'XXX')
   $keystone_service_password = hiera('keystone_service_password', 'XXX')
   include ::apt
 
@@ -834,8 +836,8 @@ node 'infra-cloud-baremetal0.localdomain' {
     password => $keystone_service_password,
     service_type => 'identity',
     service_description => 'OpenStack Identity Service',
-    public_url => "http://${::fqdn}:5000/v2",
-    admin_url => "http://${::fqdn}:35357/v2",
+    public_url => "http://${::fqdn}:5000/v2.0",
+    admin_url => "http://${::fqdn}:35357/v2.0",
   }
 
   include ::apache
@@ -896,5 +898,24 @@ node 'infra-cloud-baremetal0.localdomain' {
   }
 
   class { '::ironic::client': }
+
+  class { '::glance::db::mysql':
+    password => $glance_mysql_password,
+  }
+  class { '::glance::api':
+    database_connection => "mysql://glance:${glance_mysql_password}@127.0.0.1/glance",
+    keystone_password => $glance_admin_password,
+  }
+  class { '::glance::registry':
+    database_connection => "mysql://glance:${glance_mysql_password}@127.0.0.1/glance",
+    keystone_password => $glance_admin_password,
+  }
+  keystone::resource::service_identity { 'glance':
+    password => $glance_admin_password,
+    service_type => 'image',
+    service_description => 'OpenStack Image Service',
+    public_url => "http://${::fqdn}:9292/",
+    admin_url => "http://${::fqdn}:9292/",
+  }
 }
 # vim:sw=2:ts=2:expandtab:textwidth=79
