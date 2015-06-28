@@ -397,6 +397,9 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
       'git03.openstack.org',
       'git04.openstack.org',
       'git05.openstack.org',
+      'git06.openstack.org',
+      'git07.openstack.org',
+      'git08.openstack.org',
     ],
     balancer_member_ips     => [
       '198.61.223.164',
@@ -404,6 +407,9 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
       '162.242.144.38',
       '166.78.46.164',
       '166.78.46.121',
+      '104.239.139.203',
+      '104.239.141.178',
+      '104.239.141.187',
     ],
   }
 }
