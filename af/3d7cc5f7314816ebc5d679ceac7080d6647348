@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Sun, 28 Jun 2015 15:44:56 +0000
+Reviewed-on: https://review.openstack.org/196444
+Project: openstack-infra/system-config
+Branch: refs/heads/master
