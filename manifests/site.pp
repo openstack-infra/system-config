@@ -417,6 +417,7 @@ node /^git\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4443, 8080, 29418],
     sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
   }
 
   class { 'openstack_project::git_backend':
