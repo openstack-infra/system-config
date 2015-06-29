@@ -11,6 +11,7 @@ class openstack_project::proposal_slave (
   $transifex_username = 'openstackci',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) {
   include zanata::client
 
@@ -18,6 +19,10 @@ class openstack_project::proposal_slave (
     ssh_key             => $jenkins_ssh_public_key,
     jenkins_gitfullname => $jenkins_gitfullname,
     jenkins_gitemail    => $jenkins_gitemail,
+  }
+
+  class { 'openstack_project::slave_common':
+    project_config_repo => $project_config_repo,
   }
 
   package { ['transifex-client', 'Babel']:
