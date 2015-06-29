@@ -654,6 +654,7 @@ node /^ci-backup-.*\.openstack\.org$/ {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
