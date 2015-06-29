@@ -226,8 +226,11 @@ node 'graphite.openstack.org' {
 
 # Node-OS: precise
 node 'groups.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::groups':
-    sysadmins                    => hiera('sysadmins', []),
     site_admin_password          => hiera('groups_site_admin_password', 'XXX'),
     site_mysql_host              => hiera('groups_site_mysql_host', 'localhost'),
     site_mysql_password          => hiera('groups_site_mysql_password', 'XXX'),
@@ -240,8 +243,11 @@ node 'groups.openstack.org' {
 
 # Node-OS: precise
 node 'groups-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::groups_dev':
-    sysadmins                    => hiera('sysadmins', []),
     site_admin_password          => hiera('groups_dev_site_admin_password', 'XXX'),
     site_mysql_host              => hiera('groups_dev_site_mysql_host', 'localhost'),
     site_mysql_password          => hiera('groups_dev_site_mysql_password', 'XXX'),

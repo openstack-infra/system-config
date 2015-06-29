@@ -19,7 +19,6 @@ class openstack_project::groups_dev (
   $site_mysql_host     = '',
   $site_mysql_password = '',
   $conf_cron_key = '',
-  $sysadmins = [],
   $site_ssl_cert_file_contents = undef,
   $site_ssl_key_file_contents = undef,
   $site_ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
@@ -31,11 +30,6 @@ class openstack_project::groups_dev (
   )
 
 #  include drupal
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => $sysadmins,
-  }
 
   vcsrepo { '/srv/groups-static-pages':
     ensure   => latest,
