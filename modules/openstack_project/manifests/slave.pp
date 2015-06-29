@@ -7,6 +7,7 @@ class openstack_project::slave (
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) {
 
   include openstack_project
@@ -34,7 +35,9 @@ class openstack_project::slave (
     limit_value  => '256'
   }
 
-  include openstack_project::slave_common
+  class { 'openstack_project::slave_common':
+    project_config_repo => $project_config_repo,
+  }
 
   if (! $thin) {
     include openstack_project::thick_slave
