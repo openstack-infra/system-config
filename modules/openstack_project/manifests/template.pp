@@ -292,11 +292,15 @@ class openstack_project::template (
   # Which Puppet do I take?
   # Take $puppet_version and pin to that version
   if ($::osfamily == 'Debian') {
-    apt::source { 'puppetlabs':
-      location   => 'http://apt.puppetlabs.com',
-      repos      => 'main',
-      key        => '4BD6EC30',
-      key_server => 'pgp.mit.edu',
+    # Note(JR): Puppetlabs does not support Ubuntu Vivid currently, but it
+    # also seems that distro packages are recent enough
+    if ($::operatingsystemrelease != '15.04') {
+      apt::source { 'puppetlabs':
+        location   => 'http://apt.puppetlabs.com',
+        repos      => 'main',
+        key        => '4BD6EC30',
+        key_server => 'pgp.mit.edu',
+      }
     }
 
     file { '/etc/apt/apt.conf.d/80retry':
