@@ -414,7 +414,7 @@ var ci_zuul_display_status = function(status) {
     }
     $(zuul_table).empty();
     $(zuul_table).show();
-    $(zuul_table).append("<tr><td class='header'>Review currently being tested (<a href='" + zuulStatusURL + "'>full status</a>)</td></tr>");
+    $(zuul_table).append("<tr><td class='header'>Change currently being tested (<a href='" + zuulStatusURL + "'>full status</a>)</td></tr>");
     for (var i = 0; i < status.length; i++) {
         var item = status[i];
         var pipeline = item.jobs[0].pipeline;
