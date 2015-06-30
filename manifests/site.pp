@@ -814,6 +814,9 @@ node 'infra-cloud-baremetal0.localdomain' {
   $neutron_rabbit_password = hiera('neutron_rabbit_password', 'XXX')
   $neutron_mysql_password = hiera('neutron_mysql_password', 'XXX')
   $neutron_admin_password = hiera('neutron_admin_password', 'XXX')
+  $nova_rabbit_password = hiera('nova_rabbit_password', 'XXX')
+  $nova_mysql_password = hiera('nova_mysql_password', 'XXX')
+  $nova_admin_password = hiera('nova_admin_password', 'XXX')
 
   $keystone_auth_uri = "http://${::fqdn}:5000/v2.0"
   $keystone_admin_uri = "http://${::fqdn}:35357/v2.0"
@@ -968,5 +971,54 @@ node 'infra-cloud-baremetal0.localdomain' {
   }
   class { '::neutron::agents::dhcp': }
   class { '::neutron::client': }
+
+  rabbitmq_user { 'nova':
+    admin => false,
+    password => $nova_rabbit_password,
+  }
+  rabbitmq_user_permissions { 'nova@/':
+    configure_permission => '.*',
+    read_permission => '.*',
+    write_permission => '.*',
+  }
+  class { '::nova::db::mysql':
+    password => $nova_mysql_password,
+    host => '127.0.0.1',
+  }
+  keystone::resource::service_identity { 'nova':
+    password => $nova_admin_password,
+    service_type => 'compute',
+    service_description => 'OpenStack Compute Service',
+    public_url => "http://${::fqdn}:8774/v2",
+    admin_url => "http://${::fqdn}:8774/v2",
+  }
+
+  class { '::nova':
+    database_connection => "mysql://nova:${nova_mysql_password}@127.0.0.1/nova?charset=utf8",
+    rabbit_userid => 'nova',
+    rabbit_password => $nova_rabbit_password,
+    glance_api_servers => 'localhost:9292',
+  }
+  class { '::nova::network::neutron':
+    neutron_admin_password => $neutron_admin_password,
+  }
+
+  class { 'nova::compute':
+    enabled => true,
+  }
+  class { 'nova::api':
+    enabled => true,
+    enabled_apis => 'osapi_compute,metadata',
+    admin_password => $nova_admin_password,
+  }
+  class { 'nova::conductor':
+    enabled => true,
+  }
+  class { 'nova::scheduler':
+    enabled => true,
+  }
+  class { 'nova::compute::ironic':
+    admin_passwd => $nova_admin_password,
+  }
 }
 # vim:sw=2:ts=2:expandtab:textwidth=79
