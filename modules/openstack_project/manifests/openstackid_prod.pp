@@ -82,4 +82,16 @@ class openstack_project::openstackid_prod (
     redis_password   => $redis_password,
   }
 
+  mysql_backup::backup_remote { $id_db_name:
+    database_host     => $id_mysql_host,
+    database_user     => $id_mysql_user,
+    database_password => $id_mysql_password,
+  }
+
+  mysql_backup::backup_remote { $ss_db_name:
+    database_host     => $ss_mysql_host,
+    database_user     => $ss_mysql_user,
+    database_password => $ss_mysql_password,
+    num_backups       => 2, # big and presumably also backed up by www.o.o
+  }
 }
