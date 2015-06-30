@@ -6,7 +6,7 @@ class openstack_project::params {
   case $::osfamily {
     'RedHat': {
       $packages = ['puppet', 'wget']
-      $user_packages = ['emacs-nox', 'vim-minimal']
+      $user_packages = ['emacs-nox', 'vim-enhanced']
       $update_pkg_list_cmd = ''
       $login_defs = 'puppet:///modules/openstack_project/login.defs.redhat'
     }
