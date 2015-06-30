@@ -127,7 +127,6 @@ labels:
       - name: hpcloud-b4
       - name: hpcloud-b5
       - name: rax-dfw
-      - name: rax-ord
       - name: rax-iad
   - name: devstack-trusty-2-node
     image: devstack-trusty
@@ -345,15 +344,6 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-      - name: ubuntu-trusty
-        min-ram: 8192
-        diskimage: ubuntu-trusty
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-        config-drive: true
-        meta:
-          vm_mode: hvm
-          xenapi_use_agent: 'false'
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
