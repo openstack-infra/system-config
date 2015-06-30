@@ -1,0 +1,12 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Paul Belanger <pabelanger@redhat.com>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Code-Review+1: Jens Rosenboom <j.rosenboom@x-ion.de>
+Submitted-by: Jenkins
+Submitted-at: Tue, 30 Jun 2015 16:29:10 +0000
+Reviewed-on: https://review.openstack.org/194751
+Project: openstack-infra/system-config
+Branch: refs/heads/master
