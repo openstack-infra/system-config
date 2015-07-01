@@ -75,6 +75,7 @@ class openstack_project::cacti (
     'afs01.ord.openstack.org',
     'afsdb01.openstack.org',
     'afsdb02.openstack.org',
+    'apps.openstack.org',
     'ask.openstack.org',
     'eavesdrop.openstack.org',
     'elasticsearch01.openstack.org',
