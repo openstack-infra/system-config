@@ -28,6 +28,9 @@ class openstack_project::release_slave (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $npm_username,
+  $npm_userpassword,
+  $npm_userurl,
 ) {
   class { 'openstack_project::slave':
     ssh_key             => $jenkins_ssh_public_key,
@@ -50,12 +53,25 @@ class openstack_project::release_slave (
     require  => Class['pip'],
   }
 
+  package { ['nodejs', 'nodejs-legacy', 'npm']:
+    ensure   => latest
+  }
+
   file { '/home/jenkins/.pypirc':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
     content => template('openstack_project/pypirc.erb'),
+    require => File['/home/jenkins'],
+  }
+
+  file { '/home/jenkins/.npmrc':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/npmrc.erb'),
     require => File['/home/jenkins'],
   }
 
