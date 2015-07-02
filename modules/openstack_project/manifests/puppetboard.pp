@@ -12,7 +12,7 @@ class openstack_project::puppetboard(
   class { 'apache::mod::wsgi': }
 
   class { '::puppetboard':
-    unresponsive => '.5',
+    unresponsive => '1.5',
     enable_query => 'False', # This being a python false
   }
 
