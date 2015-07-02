@@ -1,0 +1,17 @@
+Origin: Canonical
+Label: uca
+Suite: trusty-updates
+Codename: trusty-updates/kilo
+Architectures: source i386 amd64
+Components: main
+Update: uca
+#SignWith: yes
+
+Origin: Openstack-Infra
+Label: uca-overlay
+Suite: trusty-kilo
+Codename: trusty-kilo/overlay
+Architectures: source i386 amd64
+Components: main
+Description: OpenStack Kilo messy archive for Ubuntu 14.04 LTS
+#SignWith: yes
