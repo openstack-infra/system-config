@@ -1,0 +1,6 @@
+[Service]
+Type=simple
+User=debrepo
+Group=debrepo
+Restart=on-failure
+ExecStart=/usr/bin/inoticoming --foreground /srv/debrepo/incoming/ --suffix '.changes' --chdir /srv/debrepo /usr/bin/reprepro -b /srv/debrepo --outdir "+b/pub/uca" processincoming overlay-incoming {} \;
