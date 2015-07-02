@@ -1,0 +1,7 @@
+Name: overlay-incoming
+IncomingDir: /srv/debrepo/incoming
+LogDir: /srv/debrepo/logs/incoming
+TempDir: /srv/debrepo/tmp
+Allow: trusty-updates/kilo>trusty-kilo/overlay trusty>trusty-kilo/overlay trusty-kilo/overlay>trusty-kilo/overlay
+MorgueDir: /srv/debrepo/morgue
+Cleanup: on_deny on_error

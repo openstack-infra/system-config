@@ -820,4 +820,12 @@ node 'apps.openstack.org' {
   }
 }
 
+# Node-OS: jessie
+node 'debrepo.openstack.org' {
+  class { 'openstack_project::debrepo':
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
