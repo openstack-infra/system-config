@@ -685,6 +685,8 @@ node 'pypi.slave.openstack.org' {
     mavencentral_password  => hiera('mavencentral_org_password', 'XXX'),
     puppet_forge_username  => hiera('puppet_forge_username', 'username'),
     puppet_forge_password  => hiera('puppet_forge_password', 'XXX'),
+    npm_username           => hiera('npm_user_name', 'XXX'),
+    npm_userpassword       => hiera('npm_user_password', 'XXX'),
   }
 }
 
