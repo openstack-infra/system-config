@@ -672,22 +672,6 @@ node 'proposal.slave.openstack.org' {
   }
 }
 
-# Node-OS: precise
-node 'pypi.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::release_slave':
-    pypi_username          => 'openstackci',
-    pypi_password          => hiera('pypi_password', 'XXX'),
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
-    jenkinsci_username     => hiera('jenkins_ci_org_user', 'username'),
-    jenkinsci_password     => hiera('jenkins_ci_org_password', 'XXX'),
-    mavencentral_username  => hiera('mavencentral_org_user', 'username'),
-    mavencentral_password  => hiera('mavencentral_org_password', 'XXX'),
-    puppet_forge_username  => hiera('puppet_forge_username', 'username'),
-    puppet_forge_password  => hiera('puppet_forge_password', 'XXX'),
-  }
-}
-
 # Node-OS: trusty
 node 'release.slave.openstack.org' {
   include openstack_project
