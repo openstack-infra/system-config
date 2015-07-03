@@ -197,7 +197,7 @@ class openstack_project::template (
   # Manage  python/pip
 
   include pip
-  $desired_virtualenv = '13.0.3'
+  $desired_virtualenv = '13.1.0'
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
     $virtualenv_ensure = $desired_virtualenv
