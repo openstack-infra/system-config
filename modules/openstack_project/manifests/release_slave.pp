@@ -12,10 +12,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 #
-# Class to install dependencies for uploading python packages to pypi and
-# maven repositories
+# Class to install dependencies for uploading releases to pypi, maven and
+# similar external repositories
 #
-class openstack_project::pypi_slave (
+class openstack_project::release_slave (
   $pypi_password,
   $jenkins_ssh_public_key,
   $pypi_username = 'openstackci',
