@@ -33,4 +33,4 @@ if [ ! -d /srv ] ; then
     mkdir -p /srv
 fi
 echo "${DEV}  /srv  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
-mount -a
+mount -v -a
