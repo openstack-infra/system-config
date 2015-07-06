@@ -5,7 +5,7 @@ class openstack_project::pypi_mirror (
   $cron_frequency = '*/5',
 ) {
 
-  include apache
+  include httpd
 
   if ! defined(File['/srv/static']) {
     file { '/srv/static':
@@ -26,7 +26,7 @@ class openstack_project::pypi_mirror (
     require => File['/srv/static/mirror'],
   }
 
-  apache::vhost { $vhost_name:
+  httpd::vhost { $vhost_name:
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/mirror/web',
