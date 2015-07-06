@@ -12,9 +12,9 @@ class openstack_project::cacti (
     sysadmins                 => $sysadmins,
   }
 
-  include apache
+  include httpd
 
-  a2mod { 'rewrite':
+  httpd_mod { 'rewrite':
     ensure => present,
   }
 
