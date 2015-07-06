@@ -459,6 +459,14 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'refstack.org' {
+  class { 'openstack_project::refstack':
+    sysadmins           => hiera('sysadmins', []),
+    mysql_user_password => hiera('refstack_mysql_password', 'XXX'),
+  }
+}
+
 # A machine to run Storyboard
 # Node-OS: precise
 node 'storyboard.openstack.org' {
