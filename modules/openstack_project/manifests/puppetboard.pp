@@ -7,9 +7,9 @@ class openstack_project::puppetboard(
   $port    = '80',
 ) inherits ::puppetboard::params {
 
-  include apache
+  include httpd
 
-  class { 'apache::mod::wsgi': }
+  class { '::httpd::mod::wsgi': }
 
   class { '::puppetboard':
     unresponsive => '1.5',
@@ -35,7 +35,7 @@ class openstack_project::puppetboard(
   # - $group
   # - $port
   #
-  apache::vhost { $::fqdn:
+  httpd::vhost { $::fqdn:
     port     => 80,
     docroot  => $docroot,
     priority => '50',
