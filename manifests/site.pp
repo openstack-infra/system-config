@@ -459,6 +459,17 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'refstack.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'refstack':
+    mysql_user_password => hiera('refstack_mysql_password', 'XXX'),
+  }
+}
+
 # A machine to run Storyboard
 # Node-OS: precise
 node 'storyboard.openstack.org' {
