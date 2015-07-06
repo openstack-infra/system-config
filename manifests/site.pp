@@ -515,6 +515,21 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'refstack.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'refstack':
+    mysql_user_password => hiera('refstack_mysql_password', 'XXX'),
+    ssl_cert_content    => hiera('refstack_ssl_cert_file_contents', 'XXX'),
+    ssl_key_content     => hiera('refstack_ssl_key_file_contents', 'XXX'),
+    ssl_ca_content      => hiera('refstack_ssl_chain_file_contents', 'XXX'),
+    protocol            => 'https',
+  }
+}
+
 # A machine to run Storyboard
 # Node-OS: precise
 node 'storyboard.openstack.org' {
