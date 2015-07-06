@@ -87,7 +87,7 @@ class openstack_project::ask (
   #  askbot modules not approved.
   #
   # # apache http server
-  # include apache
+  # include httpd
   #
   # # askbot
   # class { 'askbot':
