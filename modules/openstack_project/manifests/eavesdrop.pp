@@ -20,7 +20,7 @@ class openstack_project::eavesdrop (
     iptables_public_tcp_ports => [80],
     sysadmins                 => $sysadmins
   }
-  include apache
+  include httpd
   include meetbot
 
   $vhost_extra = '
@@ -121,7 +121,7 @@ class openstack_project::eavesdrop (
     require => Class['statusbot'],
   }
 
-  a2mod { 'headers':
+  httpd_mod { 'headers':
     ensure => present,
   }
 
