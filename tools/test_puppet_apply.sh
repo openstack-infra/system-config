@@ -18,7 +18,9 @@ file=$1
 fileout=${file}.out
 echo "##" > $fileout
 cat $file > $fileout
-sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file >/dev/null 2>> $fileout
+set +e
+sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file > $fileout
 ret=$?
+set -e
 cat $fileout
 exit $ret
