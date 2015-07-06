@@ -25,15 +25,15 @@ class openstack_project::status (
     gitemail    => $jenkins_gitemail,
   }
 
-  include apache
+  include ::httpd
 
-  a2mod { 'rewrite':
+  httpd_mod { 'rewrite':
     ensure => present,
   }
-  a2mod { 'proxy':
+  httpd_mod { 'proxy':
     ensure => present,
   }
-  a2mod { 'proxy_http':
+  httpd_mod { 'proxy_http':
     ensure => present,
   }
 
@@ -44,7 +44,7 @@ class openstack_project::status (
   ###########################################################
   # Status - Index
 
-  apache::vhost { 'status.openstack.org':
+  ::httpd::vhost { 'status.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/status',
