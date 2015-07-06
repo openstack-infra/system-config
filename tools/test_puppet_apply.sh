@@ -19,6 +19,7 @@ fileout=${file}.out
 echo "##" > $fileout
 cat $file > $fileout
 sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file >/dev/null 2>> $fileout
+cat $fileout
 ret=$?
 cat $fileout
 exit $ret
