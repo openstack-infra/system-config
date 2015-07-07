@@ -53,6 +53,7 @@ node default {
 # Node-OS: precise
 # Node-OS: trusty
 node 'review.openstack.org' {
+  notice ("I am a puppet catalog")
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
