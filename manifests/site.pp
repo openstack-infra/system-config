@@ -53,6 +53,7 @@ node default {
 # Node-OS: precise
 # Node-OS: trusty
 node 'review.openstack.org' {
+  fail ("I am a failed catalog")
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
