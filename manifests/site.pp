@@ -675,7 +675,7 @@ node 'proposal.slave.openstack.org' {
 # Node-OS: precise
 node 'pypi.slave.openstack.org' {
   include openstack_project
-  class { 'openstack_project::pypi_slave':
+  class { 'openstack_project::release_slave':
     pypi_username          => 'openstackci',
     pypi_password          => hiera('pypi_password', 'XXX'),
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
