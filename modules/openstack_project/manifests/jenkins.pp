@@ -55,7 +55,7 @@ class openstack_project::jenkins (
       url  => $project_config_repo,
     }
 
-    class { '::jenkins::job_builder':
+    class { '::openstackci::jenkins_job_builder':
       jenkins_jobs_update_timeout => 1200,
       url                         => "https://${vhost_name}/",
       username                    => $jenkins_jobs_username,
