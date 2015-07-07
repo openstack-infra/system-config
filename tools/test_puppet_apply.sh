@@ -20,4 +20,10 @@ echo "##" > $fileout
 cat $file > $fileout
 sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file >/dev/null 2>> $fileout
 ret=$?
+
+#(pabelanger): Cheap way to look for errors in puppet.
+if grep "Error: " $fileout; then
+    ret=1
+fi
+
 exit $ret
