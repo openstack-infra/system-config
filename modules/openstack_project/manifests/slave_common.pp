@@ -108,4 +108,21 @@ class openstack_project::slave_common(
   package { $header_packages:
     ensure => present
   }
+
+  file { '/etc/zuul-env-reqs.txt':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0444',
+    source => 'puppet:///modules/openstack_project/zuul-env-reqs.txt',
+  }
+
+  python::virtualenv { '/usr/zuul-env':
+    ensure       => present,
+    requirements => '/etc/zuul-env-reqs.txt',
+    owner        => 'root',
+    group        => 'root',
+    timeout      => 0,
+    require      => File['/etc/zuul-env-reqs.txt'],
+  }
 }
