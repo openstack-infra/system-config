@@ -105,5 +105,3 @@ find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
         ./tools/test_puppet_apply.sh filearg
-
-cat applytest/*.out
