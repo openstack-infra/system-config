@@ -3,7 +3,6 @@
 # ask.openstack.org Q&A support website
 #
 class openstack_project::ask (
-  $sysadmins = [],
   $db_name = 'askbotdb',
   $db_user = undef,
   $db_password = undef,
@@ -23,11 +22,6 @@ class openstack_project::ask (
   $site_name = 'ask.openstack.org',
   $solr_version = '4.7.2',
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => $sysadmins,
-  }
-
   # solr search engine
   class { 'solr':
     mirror  => 'http://apache.mesi.com.ar/lucene/solr',
