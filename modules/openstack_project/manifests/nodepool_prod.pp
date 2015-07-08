@@ -12,6 +12,7 @@ class openstack_project::nodepool_prod(
   $jenkins_api_user ='',
   $jenkins_api_key ='',
   $jenkins_credentials_id ='',
+  $jenkins_masters = [],
   $rackspace_username ='',
   $rackspace_password ='',
   $rackspace_project ='',
@@ -47,6 +48,7 @@ class openstack_project::nodepool_prod(
     elements_dir              => $::project_config::nodepool_elements_dir,
     require                   => $::project_config::config_dir,
     logging_conf_template     => $nodepool_logging_template,
+    jenkins_masters           => $jenkins_masters,
   }
 
   file { '/etc/nodepool/nodepool.yaml':
