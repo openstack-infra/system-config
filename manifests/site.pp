@@ -288,10 +288,14 @@ node 'planet.openstack.org' {
 
 # Node-OS: precise
 node 'eavesdrop.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::eavesdrop':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     nickpass                => hiera('openstack_meetbot_password', 'XXX'),
-    sysadmins               => hiera('sysadmins', []),
     statusbot_nick          => hiera('statusbot_nick', 'username'),
     statusbot_password      => hiera('statusbot_nick_password', 'XXX'),
     statusbot_server        => 'chat.freenode.net',
