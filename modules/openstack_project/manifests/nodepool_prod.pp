@@ -12,6 +12,8 @@ class openstack_project::nodepool_prod(
   $jenkins_api_user ='',
   $jenkins_api_key ='',
   $jenkins_credentials_id ='',
+  $jenkins_masters = [],
+  $jenkins_test_job = '',
   $rackspace_username ='',
   $rackspace_password ='',
   $rackspace_project ='',
@@ -55,6 +57,19 @@ class openstack_project::nodepool_prod(
     group   => 'root',
     mode    => '0400',
     content => template($nodepool_template),
+    require => [
+      File['/etc/nodepool'],
+      User['nodepool'],
+    ],
+  }
+
+  validate_array($jenkins_masters)
+  file { '/etc/nodepool/secure.conf':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'root',
+    mode    => '0400',
+    content => template('openstack_project/nodepool/secure.conf.erb'),
     require => [
       File['/etc/nodepool'],
       User['nodepool'],
