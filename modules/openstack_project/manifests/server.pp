@@ -12,6 +12,7 @@ class openstack_project::server (
   $ca_server                 = undef,
   $afs                       = false,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $manage_exim               = true,
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -23,8 +24,7 @@ class openstack_project::server (
     ca_server                 => $ca_server,
     puppetmaster_server       => $puppetmaster_server,
     afs                       => $afs,
-  }
-  class { 'exim':
-    sysadmins => $sysadmins,
+    manage_exim               => $manage_exim,
+    sysadmins                 => $sysadmins,
   }
 }
