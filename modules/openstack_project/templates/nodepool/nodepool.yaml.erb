@@ -888,47 +888,12 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
 targets:
   - name: jenkins01
-    jenkins:
-      url: 'https://jenkins01.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins02
-    jenkins:
-      url: 'https://jenkins02.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins03
-    jenkins:
-      url: 'https://jenkins03.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins04
-    jenkins:
-      url: 'https://jenkins04.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins05
-    jenkins:
-      url: 'https://jenkins05.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins06
-    jenkins:
-      url: 'https://jenkins06.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
   - name: jenkins07
-    jenkins:
-      url: 'https://jenkins07.openstack.org/'
-      user: '<%= jenkins_api_user %>'
-      apikey: '<%= jenkins_api_key %>'
-      credentials-id: '<%= jenkins_credentials_id %>'
 
 diskimages:
   - name: centos-6
