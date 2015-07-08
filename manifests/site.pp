@@ -533,9 +533,6 @@ node 'nodepool.openstack.org' {
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     sysadmins                => hiera('sysadmins', []),
     statsd_host              => 'graphite.openstack.org',
-    jenkins_api_user         => hiera('jenkins_api_user', 'username'),
-    jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),
-    jenkins_credentials_id   => hiera('jenkins_credentials_id', 'XXX'),
     jenkins_masters          => [
       {
         name        => 'jenkins01',
