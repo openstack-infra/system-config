@@ -121,6 +121,12 @@ EOF
     yum --enablerepo=epel-bootstrap -y install epel-release
     rm -f /etc/yum.repos.d/epel-bootstrap.repo
 
+    # This git package includes a small work-around for slow https
+    # cloning performance, as discussed in redhat bz#1237395.  Should
+    # be fixed in 6.8
+    curl -o /etc/yum.repos.d/git-1237395.repo \
+        https://copr.fedoraproject.org/coprs/iwienand/git-1237395/repo/epel-6/iwienand-git-1237395-epel-6.repo
+
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git puppet
 
