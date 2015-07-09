@@ -395,8 +395,18 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 # Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
+  $iptables_nodes_rule = regsubst ($elasticsearch_nodes,
+                                   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_clients_rule = regsubst ($elasticsearch_clients,
+                                     '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$iptables_nodes_rule, $iptables_clients_rule])
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::elasticsearch_node':
-    sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
     elasticsearch_clients => $elasticsearch_clients,
     discover_nodes        => $elasticsearch_nodes,
