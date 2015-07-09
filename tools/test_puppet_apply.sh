@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/bin/bash -ux
 
 # Copyright 2015 Hewlett-Packard Development Company, L.P.
 #
