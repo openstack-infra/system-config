@@ -144,20 +144,23 @@ class openstack_project::slave_common(
     }
   }
 
+  # To be removed in due course
   file { '/etc/zuul-env-reqs.txt':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0444',
-    source => 'puppet:///modules/openstack_project/zuul-env-reqs.txt',
+    ensure => absent
   }
 
   python::virtualenv { '/usr/zuul-env':
     ensure       => present,
-    requirements => '/etc/zuul-env-reqs.txt',
     owner        => 'root',
     group        => 'root',
     timeout      => 0,
-    require      => File['/etc/zuul-env-reqs.txt'],
   }
+
+  python::pip { 'zuul' :
+    pkgname      => 'zuul',
+    virtualenv   => '/usr/zuul-env',
+    owner        => 'root',
+    install_args => ['-e'],
+    url          => 'git+https://git.openstack.org/openstack-infra/zuul',
+   }
 }
