@@ -15,24 +15,11 @@
 # Logstash web frontend glue class.
 #
 class openstack_project::logstash (
-  $elasticsearch_nodes = [],
-  $gearman_workers = [],
   $discover_nodes = ['elasticsearch01.openstack.org:9200'],
   $statsd_host = 'graphite.openstack.org',
-  $sysadmins = [],
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
 ) {
-  $iptables_es_rule = regsubst ($elasticsearch_nodes, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
-  $iptables_gm_rule = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-  $iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 3306],
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
-    sysadmins                 => $sysadmins,
-  }
-
   class { 'logstash::web':
     frontend            => 'kibana',
     discover_nodes      => $discover_nodes,
