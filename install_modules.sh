@@ -84,7 +84,7 @@ for MOD in ${!MODULES[*]} ; do
     fi
 done
 
-MODULE_LIST=`puppet module list`
+MODULE_LIST=`puppet module list --color=false`
 
 # Make a second pass, just installing modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
