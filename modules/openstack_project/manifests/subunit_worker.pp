@@ -15,15 +15,9 @@
 # subunit2sql worker glue class.
 #
 class openstack_project::subunit_worker (
-  $sysadmins = [],
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
-    sysadmins                 => $sysadmins,
-  }
-
   include subunit2sql
   subunit2sql::worker { 'A':
     config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
