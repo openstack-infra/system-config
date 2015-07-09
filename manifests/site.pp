@@ -354,8 +354,18 @@ node 'wiki.openstack.org' {
 
 # Node-OS: precise
 node 'logstash.openstack.org' {
+  $iptables_es_rule = regsubst ($elasticsearch_nodes,
+                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_gm_rule = regsubst ($gearman_workers,
+                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 3306],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::logstash':
-    sysadmins               => hiera('sysadmins', []),
     elasticsearch_nodes     => $elasticsearch_nodes,
     gearman_workers         => $elasticsearch_clients,
     discover_nodes          => [
@@ -374,19 +384,27 @@ node 'logstash.openstack.org' {
 # Node-OS: precise
 node /^logstash-worker\d+\.openstack\.org$/ {
   $group = "logstash-worker"
+  $iptables_rule = regsubst (flatten([$elasticsearch_nodes, $elasticsearch_clients]) ,
+                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::logstash_worker':
-    sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
-    elasticsearch_clients => $elasticsearch_clients,
-    discover_node         => 'elasticsearch02.openstack.org',
   }
 }
 
 # Node-OS: trusty
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::subunit_worker':
-    sysadmins             => hiera('sysadmins', []),
     subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
   }
@@ -395,8 +413,18 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 # Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
+  $iptables_nodes_rule = regsubst ($elasticsearch_nodes,
+                                   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_clients_rule = regsubst ($elasticsearch_clients,
+                                     '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$iptables_nodes_rule, $iptables_clients_rule])
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::elasticsearch_node':
-    sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
     elasticsearch_clients => $elasticsearch_clients,
     discover_nodes        => $elasticsearch_nodes,
