@@ -36,6 +36,7 @@ class openstack_project::eavesdrop (
         '#akanda',
         '#cloudkitty',
         '#dox',
+        '#fuel-library',
         '#heat',
         '#kolla',
         '#magnetodb',
