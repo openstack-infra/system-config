@@ -84,8 +84,6 @@ for MOD in ${!MODULES[*]} ; do
     fi
 done
 
-MODULE_LIST=`puppet module list`
-
 # Make a second pass, just installing modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
     # get the name of the module directory
