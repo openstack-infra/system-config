@@ -17,6 +17,19 @@ class openstack_project::slave_common(
     url  => $project_config_repo,
   }
 
+  file { '/usr/local/jenkins/common_data':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    require => [File['/usr/local/jenkins'],
+                $::project_config::jenkins_data_dir],
+    source  => $::project_config::jenkins_data_dir,
+  }
+
   file { '/usr/local/jenkins/slave_scripts':
     ensure  => directory,
     owner   => 'root',
