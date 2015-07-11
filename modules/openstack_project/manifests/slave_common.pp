@@ -26,7 +26,7 @@ class openstack_project::slave_common(
     purge   => true,
     force   => true,
     require => [File['/usr/local/jenkins'],
-                $::project_config::config_dir],
+                File[$::project_config::jenkins_scripts_dir]],
     source  => $::project_config::jenkins_scripts_dir,
   }
 
