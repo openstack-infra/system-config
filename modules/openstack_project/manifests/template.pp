@@ -169,6 +169,10 @@ class openstack_project::template (
     ensure => present,
   }
 
+  package { 'rsync':
+    ensure => present,
+  }
+
   package { $::openstack_project::params::packages:
     ensure => present
   }
