@@ -95,6 +95,7 @@ class openstack_project::eavesdrop (
         '#openstack-zaqar',
         '#puppet-openstack',
         '#refstack',
+        '#senlin',
         '#storyboard',
         '#tripleo',
     ],
