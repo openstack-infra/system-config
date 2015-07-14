@@ -37,7 +37,9 @@ filter {
     }
     multiline {
       negate => false
-      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?TRACE"
+      # NOTE(mriedem): oslo.log 1.2.0 changed the logging_exception_prefix
+      # config option from using TRACE to ERROR so we have to handle both.
+      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?(TRACE|ERROR)"
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
