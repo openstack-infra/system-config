@@ -162,6 +162,8 @@ running only nova-compute and supporting services.
   * The cloud will run keystone v3 and glance v2 APIs because these are the
     versions upstream recommends using.
 
+  * The cloud will run keystone on port 443.
+
   * The cloud will not use the glance task API for image uploads, it will use
     the PUT interface because the task API does not function and we are not
     expecting a wide user base to be uploading many images simultaneously.
