@@ -499,6 +499,7 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -510,6 +511,7 @@ providers:
         diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -527,11 +529,13 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -549,12 +553,13 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-
+        config-drive: true
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -578,6 +583,7 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -589,6 +595,7 @@ providers:
         diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -606,11 +613,13 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -628,11 +637,13 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -656,6 +667,7 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -667,6 +679,7 @@ providers:
         diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -684,11 +697,13 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -706,11 +721,13 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b4
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -735,6 +752,7 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -746,6 +764,7 @@ providers:
         diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -763,11 +782,13 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -785,11 +806,13 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -815,6 +838,7 @@ providers:
         diskimage: devstack-precise
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-precise
         base-image: 'Ubuntu Server 12.04.5 LTS (amd64 20150127) - Partner Image'
         min-ram: 30720
@@ -826,6 +850,7 @@ providers:
         diskimage: devstack-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: bare-trusty
         base-image: 'Ubuntu Server 14.04.1 LTS (amd64 20140927) - Partner Image'
         min-ram: 30720
@@ -843,11 +868,13 @@ providers:
         diskimage: centos-6
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -865,11 +892,13 @@ providers:
         diskimage: devstack-centos7-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: tripleo-test-cloud-rh1
     cloud: tripleo-test-cloud-rh1
     boot-timeout: 120
