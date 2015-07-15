@@ -13,6 +13,10 @@ class openstack_project::ask_staging (
   $solr_version     = '4.10.4'
 ) {
 
+  realize (
+    User::Virtual::Localuser['mkiss'],
+  )
+
   # solr search engine
   class { 'solr':
     mirror  => 'http://apache.mesi.com.ar/lucene/solr',
