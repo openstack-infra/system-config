@@ -538,8 +538,12 @@ node 'static.openstack.org' {
 # A machine to serve various project status updates.
 # Node-OS: precise
 node 'status.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::status':
-    sysadmins                     => hiera('sysadmins', []),
     gerrit_host                   => 'review.openstack.org',
     gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents', 'XXX'),
