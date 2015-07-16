@@ -59,6 +59,7 @@ class openstack_project::eavesdrop (
         '#openstack-dns',
         '#openstack-doc',
         '#openstack-fr',
+        '#openstack-freezer',
         '#openstack-glance',
         '#openstack-horizon',
         '#openstack-infra',
