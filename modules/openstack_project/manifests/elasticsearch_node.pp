@@ -58,12 +58,4 @@ class openstack_project::elasticsearch_node (
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
-  cron { 'optimize_old_es_indices':
-    ensure      => absent,
-    user        => 'root',
-    hour        => '13',
-    minute      => '0',
-    command     => 'curl -sS -XPOST "http://localhost:9200/logstash-`date -d yesterday +\%Y.\%m.\%d`/_optimize?max_num_segments=2" > /dev/null',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-  }
 }
