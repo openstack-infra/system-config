@@ -211,3 +211,45 @@ Gerritbot's configuration is in :config:`gerritbot/channels.yaml`
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
+
+Basic Channel Operator Commands
+===============================
+
+This is not a comprehensive overview of commands available to individuals
+running IRC channels on Freenode, but a basic overview of some of the common
+commands which may be required for channel operators.
+
+Operator status is required to perform certain commands in your channel like
+inviting users, changing the topic through your client and removing disruptive
+users. To give yourself operator status in a channel, use the following
+command:
+
+  /msg chanserv op #channel
+
+On some networks, the preferred mechanism for removing a user from a channel is
+a kick. Freenode also supports the "remove" command which is a gentler way to
+simply send a part-like command to the user's client. In most cases, this will
+signal the client not to try to rejoin. Syntax for the removal command is as
+follows (you must be an operator):
+
+  /quote remove #channel nickname :Reason goes here
+
+Note the colon in the syntax, if this is omitted only the first word will
+accompany the removal message.
+
+Banning of disruptive users is also available with the /ban command, see your
+client documentation for syntax.
+
+You don't need to become an operator to change the topic, this can be done
+via Chanserv:
+
+  /msg chanserv topic #channel New topic goes here.
+
+If you are curious as to who has access to a channel, you can issue this
+command:
+
+  /msg chanserv access #channel list
+
+Visit the `Freenode Channel Guidelines
+http://freenode.net/channel_guidelines.shtml`_ for more information about
+recommended strategies for running channels on Freenode.
