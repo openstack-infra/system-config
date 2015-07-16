@@ -162,8 +162,8 @@ for full details)::
 Stage 3 - gerrit
 ~~~~~~~~~~~~~~~~
 
-Gerrit is combined master repository management and code review system. See
-:file:`doc/source/gerrit.rst` for the common operational tasks for it.
+Gerrit is a combined master repository management and code review system. See
+the :ref:`gerrit` documentation for the common operational tasks for it.
 
 To set it up, you'll need a small png 167px x 56x with a project logo for
 branding and a 485px × 161px png as the top of page background. You can of
@@ -255,7 +255,7 @@ to use ``: |``::
 Launch a node - be sure to pass --flavor "10G" to get a flavor with at
 least 10G+ of RAM, as gerrit is configured for 8G of heap.
 
-Follow the :file:`doc/source/gerrit.rst` for instructions on getting gerrit
+Follow the :ref:`gerrit` documentation for instructions on getting gerrit
 configured once installed.
 
 Finally, you should be able to follow the `Project Creator’s Guide <http://docs.openstack.org/infra/manual/creators.html>`_ to setup a project at
