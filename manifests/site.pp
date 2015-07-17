@@ -859,7 +859,7 @@ node 'ask-staging.openstack.org' {
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
-    admin_users             => 'infra,lyz,stevenk',
+    admin_users             => 'camunoz,daisyycguo,infra,jaegerandi,lyz,stevenk',
     openid_url              => 'https://openstackid.org',
     listeners               => ['ajp'],
     from_address            => 'noreply@openstack.org',
