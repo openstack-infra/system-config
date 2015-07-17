@@ -98,8 +98,8 @@ class openstack_project::git (
     mode             => 'tcp',
     collect_exported => false,
     options          => {
-      'maxconn' => '32',
-      'backlog' => '64',
+      'maxconn' => '256',
+      'backlog' => '256',
       'balance' => 'leastconn',
       'option'  => [
         'tcplog',
