@@ -227,6 +227,7 @@ class openstack_project::gerrit (
       require          => Class['::gerrit']
     }
   }
+  include gerrit::logrotate
 
   file { '/home/gerrit2/review_site/static/cla.html':
     ensure  => present,
