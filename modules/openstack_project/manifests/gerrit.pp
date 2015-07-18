@@ -219,6 +219,7 @@ class openstack_project::gerrit (
 
   if ($testmode == false) {
     include gerrit::cron
+    include gerrit::logrotate
     class { 'github':
       username         => $github_username,
       project_username => $github_project_username,
