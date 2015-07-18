@@ -1,0 +1,14 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: greghaynes <greg@greghaynes.net>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Sat, 18 Jul 2015 23:24:10 +0000
+Reviewed-on: https://review.openstack.org/202116
+Project: openstack-infra/system-config
+Branch: refs/heads/master
