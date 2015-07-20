@@ -77,6 +77,9 @@ if [[ `lsb_release -i -s` == 'CentOS' ]]; then
     fi
 elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
     CODENAME=`lsb_release -c -s`
+elif [[ `lsb_release -i -s` == 'Fedora' ]]; then
+    REL=`lsb_release -r -s`
+    CODENAME="fedora$REL"
 fi
 
 FOUND=0
