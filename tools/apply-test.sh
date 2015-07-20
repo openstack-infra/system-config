@@ -74,6 +74,8 @@ mv applytest/prep00 applytest/head  # These are the top-level variables defined 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
     if [[ `lsb_release -r -s` =~ '6' ]]; then
         CODENAME='centos6'
+    elif [[ `lsb_release -r -s` =~ '7' ]]; then
+        CODENAME='centos7'
     fi
 elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
     CODENAME=`lsb_release -c -s`
