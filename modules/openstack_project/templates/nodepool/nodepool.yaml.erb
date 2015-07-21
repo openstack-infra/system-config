@@ -129,6 +129,19 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: ubuntu-vivid
+    image: ubuntu-vivid
+    ready-script: configure_mirror.sh
+    min-ready: 0
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: ubuntu-trusty-2-node
     image: ubuntu-trusty
     ready-script: multinode_setup.sh
@@ -294,6 +307,15 @@ providers:
         meta:
           vm_mode: hvm
           xenapi_use_agent: 'false'
+      - name: ubuntu-vivid
+        min-ram: 8192
+        diskimage: ubuntu-vivid
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: 'false'
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
@@ -368,6 +390,15 @@ providers:
         meta:
           vm_mode: hvm
           xenapi_use_agent: 'false'
+      - name: ubuntu-vivid
+        min-ram: 8192
+        diskimage: ubuntu-vivid
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: 'false'
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
         min-ram: 8192
@@ -436,6 +467,15 @@ providers:
       - name: ubuntu-trusty
         min-ram: 8192
         diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+        meta:
+          vm_mode: hvm
+          xenapi_use_agent: 'false'
+      - name: ubuntu-vivid
+        min-ram: 8192
+        diskimage: ubuntu-vivid
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
@@ -536,6 +576,12 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+      - name: ubuntu-vivid
+        min-ram: 30720
+        diskimage: ubuntu-vivid
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -617,6 +663,12 @@ providers:
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+      - name: ubuntu-vivid
+        min-ram: 30720
+        diskimage: ubuntu-vivid
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
@@ -704,6 +756,12 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+      - name: ubuntu-vivid
+        min-ram: 30720
+        diskimage: ubuntu-vivid
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-f21
         base-image: 'Fedora 21 Cloud Base 64-bit 20141203 - Partner Image'
         min-ram: 30720
@@ -786,6 +844,12 @@ providers:
       - name: ubuntu-trusty
         min-ram: 30720
         diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+      - name: ubuntu-vivid
+        min-ram: 30720
+        diskimage: ubuntu-vivid
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
@@ -995,6 +1059,20 @@ diskimages:
       - node-devstack
       - cache-bindep
     release: trusty
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_DISABLE_APT_CLEANUP: '1'
+  - name: ubuntu-vivid
+    elements:
+      - ubuntu-minimal
+      - vm
+      - simple-init
+      - openstack-repos
+      - nodepool-base
+      - node-devstack
+      - cache-bindep
+    release: vivid
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
