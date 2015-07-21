@@ -46,7 +46,7 @@ class openstack_project::git_backend (
     ssl_chain_file_contents => $ssl_chain_file_contents,
     behind_proxy            => $behind_proxy,
     cgitrc_settings         => {
-        'clone_prefix'  => 'git://git.openstack.org https://git.openstack.org',
+        'clone-prefix'  => 'git://git.openstack.org https://git.openstack.org',
         'commit-filter' => '/usr/local/bin/commit-filter.sh',
         'css'           => '/static/openstack.css',
         'favicon'       => '/static/favicon.ico',
