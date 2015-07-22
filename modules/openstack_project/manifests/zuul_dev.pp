@@ -2,7 +2,7 @@
 #
 class openstack_project::zuul_dev(
   $vhost_name = $::fqdn,
-  $gearman_server = '127.0.0.1',
+  $gearman_server = '0.0.0.0',
   $gerrit_server = '',
   $gerrit_user = '',
   $gerrit_ssh_host_key = '',
