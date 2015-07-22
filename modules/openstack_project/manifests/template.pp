@@ -221,6 +221,13 @@ class openstack_project::template (
     replace => true,
   }
 
+  if $::osfamily == 'RedHat' {
+    file { '/usr/bin/pip-python':
+      ensure => link,
+      target => '/usr/bin/pip',
+    }
+  }
+
   ###########################################################
   # Manage Root ssh
 
