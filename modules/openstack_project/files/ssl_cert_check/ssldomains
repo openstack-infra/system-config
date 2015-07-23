@@ -3,7 +3,6 @@ etherpad.openstack.org 443
 git.openstack.org 443
 groups.openstack.org 443
 groups-dev.openstack.org 443
-jenkins.openstack.org 443
 openstackid.org 443
 openstackid-dev.openstack.org 443
 review.openstack.org 443
