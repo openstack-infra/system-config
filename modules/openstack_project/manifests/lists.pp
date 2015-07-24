@@ -1,3 +1,6 @@
+#
+# Class to configure mailing lists
+#
 # == Class: openstack_project::lists
 #
 class openstack_project::lists(
