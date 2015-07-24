@@ -14,6 +14,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+ls -la /etc/puppet/
+ls -la /etc/puppet/modules
+
+exit 1
+
 ROOT=$(readlink -fn $(dirname $0)/..)
 export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
