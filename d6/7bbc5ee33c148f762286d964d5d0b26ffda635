@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Workflow+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Submitted-by: Jenkins
+Submitted-at: Fri, 24 Jul 2015 07:15:34 +0000
+Reviewed-on: https://review.openstack.org/205368
+Project: openstack-infra/system-config
+Branch: refs/heads/master
