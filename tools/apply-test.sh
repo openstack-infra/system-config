@@ -21,8 +21,6 @@ export PUPPET_INTEGRATION_TEST=1
 
 cat > clonemap.yaml <<EOF
 clonemap:
-  - name: openstack-infra/project-config
-    dest: /etc/project-config
   - name: '(.*?)/puppet-(.*)'
     dest: '/etc/puppet/modules/\2'
 EOF
@@ -51,7 +49,6 @@ done
 
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
-    openstack-infra/project-config \
     $project_names
 
 
