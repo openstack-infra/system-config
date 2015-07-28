@@ -116,6 +116,11 @@ EOF
 sudo cp /tmp/hiera.yaml /etc/hiera.yaml
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 
+# debug hirea
+find /opt/hiera
+hiera -d elasticsearch_nodes environment=production
+
+
 
 sudo mkdir -p /var/run/puppet
 sudo -E bash -x ./install_modules.sh
