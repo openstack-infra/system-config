@@ -304,14 +304,21 @@ Here’s a snippet from that file that constructs the ``check`` pipeline taken f
           gerrit:
             verified: 1
         failure:
-         gerrit:
+          gerrit:
             verified: -1
+        merge-failure:
+          smtp:
+            to: third_party_ci@sample.com
+            from: zuul@sample.com
+            subject: Upstream change {change} has a merge failure
 
 
 This pipeline is configured to trigger on any Gerrit event that represents a new
 patch set created. The matching event will invoke the configured Jenkins job(s)
 (discussed next). If all the Jenkins jobs are successful, Zuul will add a comment
 to Gerrit with a ``verified +1`` vote, and if any one fails, with a ``verified -1``.
+In case of merge failure Third Party CI should not post a comment, but can notify the
+owner about the issue.
 
 The sample includes other possible configurations, or you can configure your own by
 following the `Zuul layout documentation <http://docs.openstack.org/infra/zuul/zuul.html#layout-yaml>`_
