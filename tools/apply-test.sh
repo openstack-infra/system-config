@@ -97,8 +97,25 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
-sudo mkdir -p /var/run/puppet
+# manage hiera
+mkdir -p /opt/system-config
+cp -r hiera /opt/
+cat > /etc/hiera.yaml <<EOF
+---
+:hierarchy:
+  # Public Hieradata Only
+  - "hiera/%{::environment}/fqdn/%{::fqdn}"
+  - "hiera/%{::environment}/group/%{group}" # no :: because group is set at nodescope
+  - "hiera/%{::environment}/common"
+:backends:
+  - yaml
+:yaml:
+  :datadir: "/opt/"
+EOF
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
+
+
+sudo mkdir -p /var/run/puppet
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
