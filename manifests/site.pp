@@ -5,38 +5,8 @@
 # in between any two variables in order for them to be correctly parsed and
 # passed around in test.sh
 #
-$elasticsearch_nodes = [
-  'elasticsearch02.openstack.org',
-  'elasticsearch03.openstack.org',
-  'elasticsearch04.openstack.org',
-  'elasticsearch05.openstack.org',
-  'elasticsearch06.openstack.org',
-  'elasticsearch07.openstack.org',
-]
-$elasticsearch_clients = [
-  'logstash.openstack.org',
-  'logstash-worker01.openstack.org',
-  'logstash-worker02.openstack.org',
-  'logstash-worker03.openstack.org',
-  'logstash-worker04.openstack.org',
-  'logstash-worker05.openstack.org',
-  'logstash-worker06.openstack.org',
-  'logstash-worker07.openstack.org',
-  'logstash-worker08.openstack.org',
-  'logstash-worker09.openstack.org',
-  'logstash-worker10.openstack.org',
-  'logstash-worker11.openstack.org',
-  'logstash-worker12.openstack.org',
-  'logstash-worker13.openstack.org',
-  'logstash-worker14.openstack.org',
-  'logstash-worker15.openstack.org',
-  'logstash-worker16.openstack.org',
-  'logstash-worker17.openstack.org',
-  'logstash-worker18.openstack.org',
-  'logstash-worker19.openstack.org',
-  'logstash-worker20.openstack.org',
-  'subunit-worker01.openstack.org',
-]
+$elasticsearch_nodes = hiera_array('elasticsearch_nodes')
+$elasticsearch_clients = hiera_array('elasticsearch_clients')
 
 #
 # Default: should at least behave like an openstack server
