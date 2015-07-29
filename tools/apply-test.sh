@@ -107,8 +107,17 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
+# Manage hiera
+sudo mkdir -p /opt/system-config
+sudo ln -s $(pwd) /opt/system-config/production
+sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/hiera.yaml
+sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/puppet/hiera.yaml
+
+# Demonstrate that hiera lookups are functioning
+find /opt/system-config/production/hiera
+hiera -c /etc/puppet/hiera.yaml -d elasticsearch_nodes environment=production
+
 sudo mkdir -p /var/run/puppet
-sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
