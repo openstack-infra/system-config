@@ -92,22 +92,22 @@ Management
  * A "Ironic Controller" machine is installed by hand into each site. That
    machine is enrolled into the puppet/ansible infrastructure.
 
- * An all-in-one one node OpenStack cloud with Ironic as the Nova driver
-   is installed on each Ironic Controller node. The OpenStack Cloud
-   produced by this installation will be referred to as "Ironic Cloud
-   $site". In order to keep things simpler, these do not share anything
-   with the cloud that nodepool will make use of.
+ * The "Ironic Controller" will have bifrost installed on it. All of the
+   other machines in that site will be enrolled in the Ironic that bifrost
+   manages. bifrost will be responsible for booting base OS with IP address
+   and ssh key for each machine.
 
- * Each additional machine in a site will be enrolled into the Ironic Cloud
-   as a bare metal resource.
+ * The machines will all be added to a manual ansible inventory file adjacent
+   to the dynamic inventory that ansible currently uses to run puppet. Any
+   metadata that the ansible infrastructure for running puppet needs that
+   would have come from OpenStack infrastructure will simply be put into
+   static ansible group_vars.
 
- * Each Ironic Cloud $site will be added to the list of available clouds that
-   launch_node.py or the ansible replacement for it can use to spin up long
-   lived servers.
+ * The static inventory should be put into puppet so that it is public, with
+   the IPMI passwords in hiera.
 
  * An OpenStack Cloud with KVM as the hypervisor will be installed using
-   launch_node and the OpenStack puppet modules as per normal infra
-   installation of services.
+   OpenStack puppet modules as per normal infra installation of services.
 
  * As with all OpenStack services, metrics will be collected in public
    cacti and graphite services. The particular metrics are TBD.
