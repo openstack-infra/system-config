@@ -20,7 +20,7 @@ class openstack_project::template (
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $pypi_trusted_hosts        = [
-      'pypi.dwf.openstack.org',
+      'pypi.dfw.openstack.org',
       'pypi.iad.openstack.org',
       'pypi.ord.openstack.org',
       'pypi.region-b.geo-1.openstack.org',
