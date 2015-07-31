@@ -62,6 +62,7 @@ class openstack_project::eavesdrop (
         '#openstack-freezer',
         '#openstack-glance',
         '#openstack-horizon',
+        '#openstack-i18n',
         '#openstack-infra',
         '#openstack-infra-incident',
         '#openstack-ironic',
