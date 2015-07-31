@@ -7,7 +7,6 @@
 #
 class openstack_project::grafana (
   $mysql_password,
-  $mysql_root_password,
   $admin_password = '',
   $admin_user = 'admin',
   $grafana_cfg = {},
@@ -51,25 +50,8 @@ class openstack_project::grafana (
 
   $grafana_cfg_merged = merge($grafana_cfg_defaults, $grafana_cfg)
 
-  class { 'mysql::server':
-    config_hash => {
-      'bind_address'   => $mysql_host,
-      'default_engine' => 'InnoDB',
-      'root_password'  => $mysql_root_password,
-    }
-  }
-
-  mysql::db { $mysql_name:
-    grant    => ['all'],
-    host     => $mysql_host,
-    password => $mysql_password,
-    user     => $mysql_user,
-    require  => Class['mysql::server'],
-  }
-
   class { '::grafana':
-    cfg     => $grafana_cfg_merged,
-    require => Mysql::Db[$mysql_name],
+    cfg => $grafana_cfg_merged,
   }
 
   apache::vhost { $vhost_name:
