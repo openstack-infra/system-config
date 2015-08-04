@@ -51,7 +51,9 @@ class openstack_project::grafana (
   $grafana_cfg_merged = merge($grafana_cfg_defaults, $grafana_cfg)
 
   class { '::grafana':
-    cfg => $grafana_cfg_merged,
+    cfg            => $grafana_cfg_merged,
+    install_method => 'repo',
+    version        => '2.1.0',
   }
 
   apache::vhost { $vhost_name:
