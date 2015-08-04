@@ -882,6 +882,9 @@ node 'translate-dev.openstack.org' {
     from_address            => 'noreply@openstack.org',
     mysql_host              => hiera('translate_dev_mysql_host', 'localhost'),
     mysql_password          => hiera('translate_dev_mysql_password', 'XXX'),
+    zanata_server_user      => hiera('proposal_zanata_user', 'XXX'),
+    zanata_server_api_key   => hiera('proposal_zanata_api_key', 'XXX'),
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
   }
 }
 
