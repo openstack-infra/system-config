@@ -304,10 +304,12 @@ class openstack_project::template (
     # also seems that distro packages are recent enough
     if ($::operatingsystemrelease != '15.04') {
       apt::source { 'puppetlabs':
-        location   => 'http://apt.puppetlabs.com',
-        repos      => 'main',
-        key        => '4BD6EC30',
-        key_server => 'pgp.mit.edu',
+        location => 'http://apt.puppetlabs.com',
+        repos    => 'main',
+        key      => {
+          'id'     => '4BD6EC30',
+          'server' => 'pgp.mit.edu',
+        },
       }
     }
 
