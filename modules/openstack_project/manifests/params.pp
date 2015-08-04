@@ -5,13 +5,13 @@
 class openstack_project::params {
   case $::osfamily {
     'RedHat': {
-      $packages = ['puppet', 'wget', 'iputils']
+      $packages = ['parted', 'puppet', 'wget', 'iputils']
       $user_packages = ['emacs-nox', 'vim-enhanced']
       $update_pkg_list_cmd = ''
       $login_defs = 'puppet:///modules/openstack_project/login.defs.redhat'
     }
     'Debian': {
-      $packages = ['puppet', 'wget', 'iputils-ping']
+      $packages = ['parted', 'puppet', 'wget', 'iputils-ping']
       case $::operatingsystemrelease {
         /^(12|14)\.(04|10)$/: {
           $user_packages = ['emacs23-nox', 'vim-nox']
