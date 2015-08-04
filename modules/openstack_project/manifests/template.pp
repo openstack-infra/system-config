@@ -307,7 +307,7 @@ class openstack_project::template (
         location => 'http://apt.puppetlabs.com',
         repos    => 'main',
         key      => {
-          'id'     =>'4BD6EC30',
+          'id'     => '4BD6EC30',
           'server' => 'pgp.mit.edu',
         },
       }
