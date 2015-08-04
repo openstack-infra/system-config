@@ -96,7 +96,6 @@ class openstack_project::gerrit (
       'openstack-dev/devstack',
     ],
     container      => 'rss',
-    feed           => 'openstackwatch.xml',
     json_url       => 'https://review.openstack.org/query?q=status:open',
     swift_username => $swift_username,
     swift_password => $swift_password,
