@@ -895,4 +895,41 @@ node 'apps.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /ironic/ {
+  # stolen from https://review.openstack.org/#/c/202025/7
+  # I don't have the real list of hosts
+  $baremetal_json_hosts = '
+    "ironic-bm-test.bifrost.example": {
+      "ansible_ssh_host": "1.1.1.1",
+      "uuid": "11111111-1111-1111-1111-111111111111",
+      "driver_info": {
+        "power": {
+          "ipmi_address": "10.0.0.1",
+          "ipmi_username": "admin",
+          "ipmi_password": "pass"
+        },
+      },
+      "nics": [
+        {
+          "mac": "ff:ff:ff:ff:ff:ff"
+        }
+      ],
+      "driver": "agent_ipmitool",
+      "ipv4_address": "1.1.1.1",
+      "properties": {
+        "cpu_arch": "x86_64",
+        "ram": null,
+         "disk_size": null,
+         "cpus": null
+      },
+      "name": "ironic-bm-test.bifrost.example"
+    }
+  '
+  class { '::openstack_project::bifrost':
+    baremetal_json_hosts => $baremetal_json_hosts,
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
