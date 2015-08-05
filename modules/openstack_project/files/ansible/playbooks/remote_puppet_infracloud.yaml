@@ -1,0 +1,8 @@
+---
+- hosts: ~openstacky-hosts~
+    environment:
+      MODULE_FILE: /opt/system-config/openstack-modules.env
+    tasks:
+      - git: repo=https://git.openstack.org/openstack-infra/system-config dest=/opt/system-config
+      # replace with puppet-apply role
+      - shell: /opt/system-config/run_puppet.sh
