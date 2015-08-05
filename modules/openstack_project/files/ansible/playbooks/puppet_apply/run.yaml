@@ -1,0 +1,36 @@
+---
+- git:
+    repo: https://git.openstack.org/openstack-infra/system-config
+    dest: /opt/system-config
+# Only copy the fqdn hiera data if it exists
+# secret
+- local_action: stat path=/opt/system-config/hieradata/production/fqdn/{{ inventory_hostname }}.yaml
+  register: result
+- include: copy_hiera.yaml path=hieradata/production/fqdn hierarchy={{ inventory_hostname }}
+  when: result.stat.exists == True
+# public
+- local_action: stat path=/opt/system-config/production/hiera/fqdn/{{ inventory_hostname }}.yaml
+  register: result
+- include: copy_hiera.yaml path=production/hiera/fqdn hierarchy={{ inventory_hostname }}
+  when: result.stat.exists == True
+# Only copy the group hiera data if it exists
+# secret
+- local_action: stat path=/opt/system-config/hieradata/production/group/{{ hiera_group }}.yaml
+  register: result
+- include: copy_hiera.yaml path=hieradata/production/group hierarchy={{ hiera_group }}
+  when: result.stat.exists == True
+# public
+- local_action: stat path=/opt/system-config/production/hiera/group/{{ hiera_group }}.yaml
+  register: result
+- include: copy_hiera.yaml path=hieradata/production/group hierarchy={{ hiera_group }}
+  when: result.stat.exists == True
+# Always copy secret common.yaml and error if it isn't there
+- include: copy_hiera.yaml path=hieradata/production hierarchy=common
+# Only copy public common.yaml if it exists
+- local_action: stat path=/opt/system-config/production/hiera/common.yaml
+  register: result
+- include: copy_hiera.yaml path=production/hiera hierarchy=common
+  when: result.stat.exists == True
+- shell: /opt/system-config/run_puppet.sh /opt/system-config
+  environment:
+    MODULE_FILE: modules.env

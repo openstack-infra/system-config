@@ -1,0 +1,7 @@
+---
+- hosts: controller
+  tasks:
+    - include: puppet_apply/run.yaml
+- hosts: compute
+  tasks:
+    - include: puppet_apply/run.yaml
