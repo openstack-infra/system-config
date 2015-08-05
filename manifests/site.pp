@@ -1104,4 +1104,22 @@ node 'codesearch.openstack.org' {
   }
 }
 
+#Node-OS: trusty
+node /^baremetal..\.hpuswest\.ic\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    iptables_public_udp_ports => [69],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::baremetal':
+    ironic_db_password => hiera('ironic_db_password'),
+    mysql_password     => hiera('bifrost_mysql_password'),
+    region             => 'hpuswest',
+    ipmi_passwords     => hiera('ipmi_west_passwords')
+    ssh_private_key    => hiera('bifrost_hpuswest_ssh_private_key')
+    ssh_public_key     => hiera('bifrost_hpuswest_ssh_public_key')
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
