@@ -1101,4 +1101,22 @@ node 'codesearch.openstack.org' {
   }
 }
 
+node /^baremetal..\.hpuswest\.ic\.openstack\.org$/ {
+  class { '::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+    region               => 'hpuswest',
+    ipmi_passwords       => hiera('ipmi_west_passwords', {})
+  }
+}
+
+node /^baremetal..\.hpuseast\.ic\.openstack\.org$/ {
+  class { '::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+    region               => 'hpuseast',
+    ipmi_passwords       => hiera('ipmi_east_passwords', {})
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
