@@ -1109,4 +1109,39 @@ node 'codesearch.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+# Upgrade-Modules
+node 'controller00.hpuswest.ic.openstack.org' {
+  $group = 'infracloud-controller'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { '::infracloud::controller':
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    root_mysql_password              => hiera('infracloud_mysql_password'),
+    keystone_mysql_password          => hiera('keystone_mysql_password'),
+    glance_mysql_password            => hiera('glance_mysql_password'),
+    neutron_mysql_password           => hiera('neutron_mysql_password'),
+    nova_mysql_password              => hiera('nova_mysql_password'),
+    keystone_admin_password          => hiera('keystone_admin_password'),
+    glance_admin_password            => hiera('glance_admin_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    nova_admin_password              => hiera('nova_admin_password'),
+    keystone_admin_token             => hiera('keystone_admin_token'),
+    ssl_chain_file_contents          => hiera('ssl_chain_file_contents'),
+    keystone_ssl_key_file_contents   => hiera('keystone_ssl_key_file_contents'),
+    keystone_ssl_cert_file_contents  => hiera('keystone_ssl_cert_file_contents'),
+    glance_ssl_key_file_contents     => hiera('glance_ssl_key_file_contents'),
+    glance_ssl_cert_file_contents    => hiera('glance_ssl_cert_file_contents'),
+    neutron_ssl_key_file_contents    => hiera('neutron_ssl_key_file_contents'),
+    neutron_ssl_cert_file_contents   => hiera('neutron_ssl_cert_file_contents'),
+    nova_ssl_key_file_contents       => hiera('nova_ssl_key_file_contents'),
+    nova_ssl_cert_file_contents      => hiera('nova_ssl_cert_file_contents'),
+    controller_public_address        => $::fqdn,
+    controller_management_address    => '10.10.16.154',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
