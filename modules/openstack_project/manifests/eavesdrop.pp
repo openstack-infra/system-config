@@ -15,7 +15,7 @@ class openstack_project::eavesdrop (
   $accessbot_password = '',
   $project_config_repo = '',
 ) {
-  include apache
+  include ::httpd
   include meetbot
 
   $vhost_extra = '
@@ -121,7 +121,7 @@ class openstack_project::eavesdrop (
     require => Class['statusbot'],
   }
 
-  a2mod { 'headers':
+  httpd_mod { 'headers':
     ensure => present,
   }
 

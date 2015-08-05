@@ -25,16 +25,16 @@ class openstack_project::static (
     gitemail    => $jenkins_gitemail,
   }
 
-  include apache
-  include apache::mod::wsgi
+  include ::httpd
+  include ::httpd::mod::wsgi
 
-  a2mod { 'rewrite':
+  httpd_mod { 'rewrite':
     ensure => present,
   }
-  a2mod { 'proxy':
+  httpd_mod { 'proxy':
     ensure => present,
   }
-  a2mod { 'proxy_http':
+  httpd_mod { 'proxy_http':
     ensure => present,
   }
 
@@ -47,7 +47,7 @@ class openstack_project::static (
   ###########################################################
   # Tarballs
 
-  apache::vhost { 'tarballs.openstack.org':
+  ::httpd::vhost { 'tarballs.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',
@@ -64,7 +64,7 @@ class openstack_project::static (
   ###########################################################
   # legacy ci.openstack.org site redirect
 
-  apache::vhost { 'ci.openstack.org':
+  ::httpd::vhost { 'ci.openstack.org':
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
@@ -87,7 +87,7 @@ class openstack_project::static (
   ###########################################################
   # Docs-draft
 
-  apache::vhost { 'docs-draft.openstack.org':
+  ::httpd::vhost { 'docs-draft.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/docs-draft',
@@ -113,7 +113,7 @@ class openstack_project::static (
   ###########################################################
   # Security
 
-  apache::vhost { 'security.openstack.org':
+  ::httpd::vhost { 'security.openstack.org':
     port       => 443, # Is required despite not being used.
     docroot    => '/srv/static/security',
     priority   => '50',
@@ -151,7 +151,7 @@ class openstack_project::static (
     mode    => '0644',
     content => $security_ssl_cert_file_contents,
     require => File['/etc/ssl/certs'],
-    before  => Apache::Vhost['security.openstack.org'],
+    before  => Httpd::Vhost['security.openstack.org'],
   }
 
   file { '/etc/ssl/private/security.openstack.org.key':
@@ -161,7 +161,7 @@ class openstack_project::static (
     mode    => '0600',
     content => $security_ssl_key_file_contents,
     require => File['/etc/ssl/private'],
-    before  => Apache::Vhost['security.openstack.org'],
+    before  => Httpd::Vhost['security.openstack.org'],
   }
 
   file { '/etc/ssl/certs/security.openstack.org_intermediate.pem':
@@ -171,13 +171,13 @@ class openstack_project::static (
     mode    => '0644',
     content => $security_ssl_chain_file_contents,
     require => File['/etc/ssl/certs'],
-    before  => Apache::Vhost['security.openstack.org'],
+    before  => Httpd::Vhost['security.openstack.org'],
   }
 
   ###########################################################
   # Governance
 
-  apache::vhost { 'governance.openstack.org':
+  ::httpd::vhost { 'governance.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/governance',
@@ -194,7 +194,7 @@ class openstack_project::static (
   ###########################################################
   # Specs
 
-  apache::vhost { 'specs.openstack.org':
+  ::httpd::vhost { 'specs.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/specs',
@@ -211,7 +211,7 @@ class openstack_project::static (
   ###########################################################
   # legacy summit.openstack.org site redirect
 
-  apache::vhost { 'summit.openstack.org':
+  ::httpd::vhost { 'summit.openstack.org':
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
@@ -221,7 +221,7 @@ class openstack_project::static (
   ###########################################################
   # legacy devstack.org site redirect
 
-  apache::vhost { 'devstack.org':
+  ::httpd::vhost { 'devstack.org':
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
@@ -232,7 +232,7 @@ class openstack_project::static (
   ###########################################################
   # Trystack
 
-  apache::vhost { 'trystack.openstack.org':
+  ::httpd::vhost { 'trystack.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/opt/trystack',
