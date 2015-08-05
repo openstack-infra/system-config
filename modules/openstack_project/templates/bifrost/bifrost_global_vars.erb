@@ -1,0 +1,18 @@
+network_interface: eth2.25
+node_default_network_interface: eth2
+node_network_info: "{}"
+inventory_dhcp: true
+ipv4_subnet_mask: 255.255.255.192
+ipv4_gateway: 10.10.16.131
+ipv4_nameserver: 8.8.8.8
+dhcp_pool_start: 10.10.16.144
+dhcp_pool_end: 10.10.16.190
+dib_os_element: "ubuntu-minimal"
+dib_packages: "openssh-server,vlan,vim,less"
+dib_trace: true
+extra_dib_elements: "devuser"
+mysql_password: <%= @mysql_password %>
+dib_env_vars:
+  DIB_INSTALLTYPE_simple_init: repo
+  DIB_DEV_USER_PASSWORD: devuser
+  DIB_DEV_USER_PWDLESS_SUDO: "Y"
