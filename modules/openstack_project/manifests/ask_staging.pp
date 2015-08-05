@@ -17,11 +17,28 @@ class openstack_project::ask_staging (
     User::Virtual::Localuser['mkiss'],
   )
 
+  file { '/srv/dist':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
   # solr search engine
+  file { '/srv/dist/solr':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/srv/dist'],
+  }
+
   class { 'solr':
-    mirror  => 'http://apache.mesi.com.ar/lucene/solr',
-    version => $solr_version,
-    cores   => [ 'core-default', 'core-en', 'core-zh' ],
+    mirror    => 'http://apache.mesi.com.ar/lucene/solr',
+    version   => $solr_version,
+    cores     => [ 'core-default', 'core-en', 'core-zh' ],
+    dist_root => '/srv/dist/solr',
+    require   => File['/srv/dist/solr'],
   }
 
   file { '/usr/share/solr/core-en/conf/schema.xml':
@@ -48,7 +65,7 @@ class openstack_project::ask_staging (
   file { "/usr/share/solr/WEB-INF/lib/lucene-analyzers-smartcn-${solr_version}.jar":
     ensure  => present,
     replace => 'no',
-    source  => "/tmp/solr-${solr_version}/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-${solr_version}.jar",
+    source  => "/srv/dist/solr/solr-${solr_version}/contrib/analysis-extras/lucene-libs/lucene-analyzers-smartcn-${solr_version}.jar",
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
