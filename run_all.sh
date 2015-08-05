@@ -42,3 +42,5 @@ ansible-playbook -f 10 /etc/ansible/playbooks/remote_puppet_git.yaml
 ansible-playbook -f 1 /etc/ansible/playbooks/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
 ansible-playbook -f 20 /etc/ansible/playbooks/remote_puppet_else.yaml
+# Run infracloud
+ansible-playbook -f 10 -i /etc/ansible/infracloud-inventory /etc/ansible/playbooks/remote_puppet_infracloud.yaml
