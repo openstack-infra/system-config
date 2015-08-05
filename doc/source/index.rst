@@ -19,6 +19,7 @@ Contents:
    * :doc:`third_party`
    * :doc:`stackforge`
    * :doc:`running-your-own`
+   * :doc:`contribute-cloud`
 
 .. toctree::
    :maxdepth: 2
@@ -35,6 +36,7 @@ Contents:
    running-your-own
    stackforge
    third_party
+   contribute-cloud
 
 
 Indices and tables
