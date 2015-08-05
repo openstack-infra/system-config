@@ -36,4 +36,16 @@ class openstack_project::server (
     pypi_index_url            => $pypi_index_url,
     pypi_trusted_hosts        => $pypi_trusted_hosts,
   }
+
+  logrotate::file { 'manifest.log':
+    log => '/var/log/manifest.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+  }
 }

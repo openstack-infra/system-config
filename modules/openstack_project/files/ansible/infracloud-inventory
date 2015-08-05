@@ -1,0 +1,16 @@
+[baremetal]
+baremetal01.hpuswest.ic.openstack.org
+
+[controller]
+controller01.hpuswest.ic.openstack.org
+
+[compute]
+compute[001:046].hpuswest.ic.openstack.org
+
+[infracloud:children]
+baremetal
+controller
+compute
+
+[infracloud:vars]
+hiera_group=infracloud
