@@ -16,7 +16,7 @@ class openstack_project::grafana (
   $secret_key = '',
   $vhost_name = $::fqdn,
 ) {
-  include apache
+  include ::httpd
 
   $grafana_cfg_defaults = {
     # NOTE(pabelanger): app_mode must be the first key!
@@ -54,20 +54,20 @@ class openstack_project::grafana (
     cfg => $grafana_cfg_merged,
   }
 
-  apache::vhost { $vhost_name:
+  ::httpd::vhost { $vhost_name:
     docroot  => 'MEANINGLESS ARGUMENT',
     port     => 80,
     priority => '50',
     template => 'openstack_project/grafana.vhost.erb',
   }
 
-  a2mod { 'rewrite':
+  httpd_mod { 'rewrite':
     ensure => present,
   }
-  a2mod { 'proxy':
+  httpd_mod { 'proxy':
     ensure => present,
   }
-  a2mod { 'proxy_http':
+  httpd_mod { 'proxy_http':
     ensure => present,
   }
 }
