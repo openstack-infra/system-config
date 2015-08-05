@@ -919,4 +919,11 @@ node 'apps.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /bifrost/ {
+  class { '::openstack_project::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
