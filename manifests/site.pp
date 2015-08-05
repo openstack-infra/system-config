@@ -1104,4 +1104,71 @@ node 'codesearch.openstack.org' {
   }
 }
 
+node /controller..\.hpuswest.ic.openstack.org/ {
+  $group = 'infracloud-controller'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::infracloud_controller':
+    neutron_rabbit_password          => hiera('neutron_rabbit_password', 'XXX'),
+    nova_rabbit_password             => hiera('nova_rabbit_password', 'XXX'),
+    root_mysql_password              => hiera('infracloud_mysql_password', 'XXX'),
+    keystone_mysql_password          => hiera('keystone_mysql_password', 'XXX'),
+    glance_mysql_password            => hiera('glance_mysql_password', 'XXX'),
+    neutron_mysql_password           => hiera('neutron_mysql_password', 'XXX'),
+    nova_mysql_password              => hiera('nova_mysql_password', 'XXX'),
+    keystone_admin_password          => hiera('keystone_admin_password', 'XXX'),
+    glance_admin_password            => hiera('glance_admin_password', 'XXX'),
+    neutron_admin_password           => hiera('neutron_admin_password', 'XXX'),
+    nova_admin_password              => hiera('nova_admin_password', 'XXX'),
+    keystone_admin_token             => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+    ssl_chain_file_contents          => hiera('ssl_chain_file_contents'),
+    keystone_ssl_key_file_contents   => hiera('keystone_ssl_key_file_contents'),
+    keystone_ssl_cert_file_contents  => hiera('keystone_ssl_cert_file_contents'),
+    glance_ssl_key_file_contents     => hiera('glance_ssl_key_file_contents'),
+    glance_ssl_cert_file_contents    => hiera('glance_ssl_cert_file_contents'),
+    neutron_ssl_key_file_contents    => hiera('neutron_ssl_key_file_contents'),
+    neutron_ssl_cert_file_contents   => hiera('neutron_ssl_cert_file_contents'),
+    nova_ssl_key_file_contents       => hiera('nova_ssl_key_file_contents'),
+    nova_ssl_cert_file_contents      => hiera('nova_ssl_cert_file_contents'),
+    controller_public_address        => 'controller01.hpuswest.ic.openstack.org',
+    controller_management_address    => '10.10.16.154',
+  }
+}
+
+# Node-OS: trusty
+node /controller..\.hpuseast.ic.openstack.org/ {
+  $group = 'infracloud-controller'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::infracloud_controller':
+    neutron_rabbit_password          => hiera('neutron_rabbit_password', 'XXX'),
+    nova_rabbit_password             => hiera('nova_rabbit_password', 'XXX'),
+    root_mysql_password              => hiera('infracloud_mysql_password', 'XXX'),
+    keystone_mysql_password          => hiera('keystone_mysql_password', 'XXX'),
+    glance_mysql_password            => hiera('glance_mysql_password', 'XXX'),
+    neutron_mysql_password           => hiera('neutron_mysql_password', 'XXX'),
+    nova_mysql_password              => hiera('nova_mysql_password', 'XXX'),
+    keystone_admin_password          => hiera('keystone_admin_password', 'XXX'),
+    glance_admin_password            => hiera('glance_admin_password', 'XXX'),
+    neutron_admin_password           => hiera('neutron_admin_password', 'XXX'),
+    nova_admin_password              => hiera('nova_admin_password', 'XXX'),
+    keystone_admin_token             => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+    ssl_chain_file_contents          => hiera('ssl_chain_file_contents'),
+    keystone_ssl_key_file_contents   => hiera('keystone_ssl_key_file_contents'),
+    keystone_ssl_cert_file_contents  => hiera('keystone_ssl_cert_file_contents'),
+    glance_ssl_key_file_contents     => hiera('glance_ssl_key_file_contents'),
+    glance_ssl_cert_file_contents    => hiera('glance_ssl_cert_file_contents'),
+    neutron_ssl_key_file_contents    => hiera('neutron_ssl_key_file_contents'),
+    neutron_ssl_cert_file_contents   => hiera('neutron_ssl_cert_file_contents'),
+    nova_ssl_key_file_contents       => hiera('nova_ssl_key_file_contents'),
+    nova_ssl_cert_file_contents      => hiera('nova_ssl_cert_file_contents'),
+    controller_public_address        => 'controller01.hpuseast.ic.openstack.org',
+    controller_management_address    => 'xx.xx.xx.xx',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
