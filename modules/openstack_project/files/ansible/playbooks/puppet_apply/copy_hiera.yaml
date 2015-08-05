@@ -1,0 +1,7 @@
+---
+- file:
+    path: /opt/system-config/{{ path}}
+    state: directory
+- copy:
+    src: /opt/system-config/{{ path }}/{{ hierarchy }}.yaml
+    dest: /opt/system-config/{{ path }}/{{ hierarchy }}.yaml
