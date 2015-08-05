@@ -1,0 +1,25 @@
+"ironic-bm-test.bifrost.example": {
+  "ansible_ssh_host": "1.1.1.1",
+  "uuid": "11111111-1111-1111-1111-111111111111",
+  "driver_info": {
+    "power": {
+      "ipmi_address": "10.0.0.1",
+      "ipmi_username": "admin",
+      "ipmi_password": "pass"
+    },
+  },
+  "nics": [
+    {
+      "mac": "ff:ff:ff:ff:ff:ff"
+    }
+  ],
+  "driver": "agent_ipmitool",
+  "ipv4_address": "1.1.1.1",
+  "properties": {
+    "cpu_arch": "x86_64",
+    "ram": null,
+     "disk_size": null,
+     "cpus": null
+  },
+  "name": "ironic-bm-test.bifrost.example"
+}
