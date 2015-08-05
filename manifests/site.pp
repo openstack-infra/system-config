@@ -1027,4 +1027,13 @@ node 'odsreg.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /^baremetal..\.hpuswest\.ic\.openstack\.org$/ {
+  class { '::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+    region               => 'hpuswest',
+    ipmi_passwords       => hiera('ipmi_passwords', {})
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
