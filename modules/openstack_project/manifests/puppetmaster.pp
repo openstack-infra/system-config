@@ -181,4 +181,12 @@ class openstack_project::puppetmaster (
   file { '/etc/ansible/clean_workspaces.yaml':
     ensure => absent,
   }
+
+# Infracloud Inventory
+
+  file { '/etc/ansible/infracloud-inventory':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/ansible/infracloud-inventory',
+    require => Class['::ansible'],
+  }
 }
