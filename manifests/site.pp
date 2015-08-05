@@ -785,17 +785,35 @@ node 'openstackid-dev.openstack.org' {
 }
 
 # Node-OS: centos6
-# Node-OS: centos7
 # Node-OS: precise
 # Node-OS: trusty
 # This is not meant to be an actual node that connects to the master.
 # This is a dummy node definition to trigger a test of the code path used by
 # nodepool's prepare_node scripts in the apply tests
-node 'single-use-slave' {
+# NOTE(pabelanger): These are the settings we currently use for bare-* nodes.
+# It includes thick_slave.pp.
+node 'single-use-slave-bare' {
   class { 'openstack_project::single_use_slave':
     # Test non-default values from prepare_node_bare.sh
     sudo => true,
     thin => false,
+  }
+}
+
+# Node-OS: centos6
+# Node-OS: centos7
+# Node-OS: fedora21
+# Node-OS: precise
+# Node-OS: trusty
+# This is not meant to be an actual node that connects to the master.
+# This is a dummy node definition to trigger a test of the code path used by
+# nodepool's prepare_node scripts in the apply tests
+# NOTE(pabelanger): These are the current settings we use for devstack-* nodes.
+node 'single-use-slave-devstack' {
+  class { 'openstack_project::single_use_slave':
+    # Test non-default values from prepare_node_bare.sh
+    sudo => true,
+    thin => true,
   }
 }
 
