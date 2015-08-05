@@ -1,0 +1,7 @@
+---
+- hosts: infracloud-controller
+  tasks:
+    include: run-puppet-apply.yaml
+- hosts: infracloud-compute
+  tasks:
+    include: run-puppet-apply.yaml
