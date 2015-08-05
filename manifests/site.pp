@@ -842,7 +842,7 @@ node /^afs.*\..*\.openstack\.org$/ {
   include openstack_project::afsfs
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'ask.openstack.org' {
 
   class { 'openstack_project::server':
