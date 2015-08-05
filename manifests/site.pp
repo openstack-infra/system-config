@@ -919,4 +919,31 @@ node 'apps.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /infracloud-controller/ {
+  $group = 'infracloud-controller'
+  class { '::openstack_project::infracloud::controller':
+    baremetal_rabbit_password => hiera('baremetal_rabbit_password', 'XXX'),
+    baremetal_mysql_password  => hiera('baremetal_mysql_password', 'XXX'),
+    glance_mysql_password     => hiera('glance_mysql_password', 'XXX'),
+    glance_admin_password     => hiera('glance_admin_password', 'XXX'),
+    keystone_service_password => hiera('keystone_service_password', 'XXX'),
+    neutron_rabbit_password   => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_mysql_password    => hiera('neutron_mysql_password', 'XXX'),
+    neutron_admin_password    => hiera('neutron_admin_password', 'XXX'),
+    nova_rabbit_password      => hiera('nova_rabbit_password', 'XXX'),
+    nova_mysql_password       => hiera('nova_mysql_password', 'XXX'),
+    nova_admin_password       => hiera('nova_admin_password', 'XXX'),
+    keystone_admin_token      => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+    keystone_ssl_key          => hiera('keystone_ssl_key', 'XXX'),
+    keystone_ssl_cert         => hiera('keystone_ssl_cert', 'XXX'),
+    keystone_ssl_chain        => hiera('keystone_ssl_chain', 'XXX'),
+    glance_ssl_key            => hiera('glance_ssl_key', 'XXX'),
+    glance_ssl_cert           => hiera('glance_ssl_cert', 'XXX'),
+    neutron_ssl_key           => hiera('neutron_ssl_key', 'XXX'),
+    neutron_ssl_cert          => hiera('neutron_ssl_cert', 'XXX'),
+    nova_ssl_key              => hiera('nova_ssl_key', 'XXX'),
+    nova_ssl_cert             => hiera('nova_ssl_cert', 'XXX'),
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
