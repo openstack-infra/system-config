@@ -902,4 +902,25 @@ node /bifrost/ {
     mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
   }
 }
+# Node-OS: trusty
+node /infracloud-controller/ {
+  $group = 'baremetal'
+  class { '::openstack_project::infracloud::controller':
+    baremetal_rabbit_password => hiera('baremetal_rabbit_password', 'XXX'),
+    baremetal_mysql_password  => hiera('baremetal_mysql_password', 'XXX'),
+    glance_mysql_password     => hiera('glance_mysql_password', 'XXX'),
+    glance_admin_password     => hiera('glance_admin_password', 'XXX'),
+    keystone_service_password => hiera('keystone_service_password', 'XXX'),
+    neutron_rabbit_password   => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_mysql_password    => hiera('neutron_mysql_password', 'XXX'),
+    neutron_admin_password    => hiera('neutron_admin_password', 'XXX'),
+    nova_rabbit_password      => hiera('nova_rabbit_password', 'XXX'),
+    nova_mysql_password       => hiera('nova_mysql_password', 'XXX'),
+    nova_admin_password       => hiera('nova_admin_password', 'XXX'),
+    keystone_admin_token      => hiera('keystone_admin_token', 'admin_token_xxx1234'),
+    ironic_admin_password     => hiera('ironic_admin_password', 'XXX'),
+    baremetal_deploy_kernel   => hiera('baremetal_deploy_kernel', 'glance://12345'),
+    baremetal_deploy_ramdisk  => hiera('baremetal_deploy_ramdisk', 'glance://987654321'),
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
