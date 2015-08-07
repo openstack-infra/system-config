@@ -71,13 +71,32 @@ HP1
 ~~~
 
 The HP1 site has 48 machines. Each machine has 96G of RAM, 1.8TiB of disk and
-24 Cores of Intel Xeon X5650 @ 2.67GHz processors.
+24 Cores of Intel Xeon X5650 @ 2.67GHz processors. Externally routable
+addresses are only avaialable on 802.1Q vlan 25. See "Vlans" below.
 
 HP2
 ~~~
 
 The HP2 site has 100 machines. Each machine has 96G of RAM, 1.8TiB of disk and
-32 Cores of Intel Xeon E5-2670 0 @ 2.60GHz processors.
+32 Cores of Intel Xeon E5-2670 0 @ 2.60GHz processors. Externally routable
+addresses are only avaialable on 802.1Q vlan 25. See "Vlans" below.
+
+Vlans
+~~~~~
+
+In sites which have an untagged internal network, and a tagged external
+network, like `HP1` and `HP2`, we won't be able to reach in and configure
+things via SSH from an external site until the routable vlan is setup. The
+most future-proof way to do this would be to support the spec that adds
+vlan information to config-drive. [vlan-config-drive]_
+
+Since we are using `Bifrost`, we can use that spec even though Nova and
+Neutron are still debating how and when to inject that information into
+configdrive. We can simply do that in bifrost. This will require some
+minor patches to `Bifrost`, or we can even add our own playbooks that
+operate on the nodes after enrolling to add this info.
+
+.. [vlan-config-drive] http://specs.openstack.org/openstack/nova-specs/specs/liberty/approved/metadata-service-network-info.html
 
 Software
 --------
