@@ -399,18 +399,20 @@ class openstack_project::gerrit (
 
   if ($projects_file != 'UNDEF') {
     if ($replicate_local) {
-      file { $local_git_dir:
-        ensure  => directory,
-        owner   => 'gerrit2',
-        require => Class['::gerrit'],
-      }
-      cron { 'mirror_repack':
-        user        => 'gerrit2',
-        weekday     => '0',
-        hour        => '4',
-        minute      => '7',
-        command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \\;",
-        environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+      if (!defined(File[$local_git_dir])) {
+        file { $local_git_dir:
+          ensure  => directory,
+          owner   => 'gerrit2',
+          require => Class['::gerrit'],
+        }
+        cron { 'mirror_repack':
+          user        => 'gerrit2',
+          weekday     => '0',
+          hour        => '4',
+          minute      => '7',
+          command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \\;",
+          environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+        }
       }
     }
 
