@@ -39,6 +39,12 @@ class openstack_project::release_slave (
     project_config_repo => $project_config_repo,
   }
 
+  schedule { 'once_daily':
+    range  => '0-1',
+    period => daily,
+    repeat => 1,
+  }
+
   include pip
 
   package { 'twine':
@@ -54,7 +60,14 @@ class openstack_project::release_slave (
   }
 
   package { ['nodejs', 'nodejs-legacy', 'npm']:
-    ensure   => latest
+    ensure => latest,
+    before => Exec['upgrade npm'],
+  }
+
+  exec { 'upgrade npm':
+    command  => 'npm install npm -g --upgrade',
+    path     => '/usr/local/bin:/usr/bin',
+    schedule => 'once_daily',
   }
 
   file { '/home/jenkins/.pypirc':
