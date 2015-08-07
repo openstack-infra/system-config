@@ -424,6 +424,13 @@ class openstack_project::gerrit (
       require => Class['::gerrit'],
     }
 
+    file { $jeepyb_cache_dir:
+      ensure => 'directory',
+      owner  => 'gerrit2',
+      group  => 'gerrit2',
+      mode   => '0755',
+    }
+
     file { '/home/gerrit2/projects.ini':
       ensure  => present,
       owner   => 'gerrit2',
