@@ -54,7 +54,14 @@ class openstack_project::release_slave (
   }
 
   package { ['nodejs', 'nodejs-legacy', 'npm']:
-    ensure   => latest
+    ensure => latest,
+    before => Exec['upgrade npm'],
+  }
+
+  exec { 'upgrade npm':
+    command  => 'npm install npm -g --upgrade',
+    path     => '/usr/local/bin:/usr/bin',
+    onlyif   => '[ `npm view npm version` != `npm --version` ]'
   }
 
   file { '/home/jenkins/.pypirc':
