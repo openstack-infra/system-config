@@ -90,6 +90,44 @@ node 'review.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'seurity-review.openstack.org' {
+  class { 'openstack_project::security_review':
+    project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
+    github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
+    github_project_username             => hiera('github_project_username', 'username'),
+    github_project_password             => hiera('github_project_password', 'XXX'),
+    mysql_host                          => hiera('gerrit_security_mysql_host', 'localhost'),
+    mysql_password                      => hiera('gerrit_security_mysql_password', 'XXX'),
+    email_private_key                   => hiera('gerrit_security_email_private_key', 'XXX'),
+    token_private_key                   => hiera('gerrit_security_rest_token_private_key', 'XXX'),
+    gerritbot_password                  => '',
+    gerritbot_ssh_rsa_key_contents      => '',
+    gerritbot_ssh_rsa_pubkey_contents   => '',
+    ssl_cert_file_contents              => hiera('gerrit_security_ssl_cert_file_contents', 'XXX'),
+    ssl_key_file_contents               => hiera('gerrit_security_ssl_key_file_contents', 'XXX'),
+    ssl_chain_file_contents             => hiera('gerrit_security_ssl_chain_file_contents', 'XXX'),
+    ssh_dsa_key_contents                => hiera('gerrit_security_ssh_dsa_key_contents', 'XXX'),
+    ssh_dsa_pubkey_contents             => hiera('gerrit_security_ssh_dsa_pubkey_contents', 'XXX'),
+    ssh_rsa_key_contents                => hiera('gerrit_security_ssh_rsa_key_contents', 'XXX'),
+    ssh_rsa_pubkey_contents             => hiera('gerrit_security_ssh_rsa_pubkey_contents', 'XXX'),
+    ssh_project_rsa_key_contents        => hiera('gerrit_security_project_ssh_rsa_key_contents', 'XXX'),
+    ssh_project_rsa_pubkey_contents     => hiera('gerrit_security_project_ssh_rsa_pubkey_contents', 'XXX'),
+    ssh_welcome_rsa_key_contents        => '',
+    ssh_welcome_rsa_pubkey_contents     => '',
+    ssh_replication_rsa_key_contents    => hiera('gerrit_replication_ssh_rsa_key_contents', 'XXX'),
+    ssh_replication_rsa_pubkey_contents => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
+    lp_sync_consumer_key                => '',
+    lp_sync_token                       => '',
+    lp_sync_secret                      => '',
+    contactstore_appsec                 => '',
+    contactstore_pubkey                 => '',
+    sysadmins                           => hiera('sysadmins', ['admins']),
+    swift_username                      => '',
+    swift_password                      => '',
+  }
+}
+
+# Node-OS: trusty
 node 'review-dev.openstack.org' {
   class { 'openstack_project::review_dev':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',

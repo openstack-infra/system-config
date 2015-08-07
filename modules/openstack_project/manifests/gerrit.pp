@@ -72,6 +72,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $private_reviews = false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -218,12 +219,14 @@ class openstack_project::gerrit (
 
   if ($testmode == false) {
     include gerrit::cron
-    class { 'github':
-      username         => $github_username,
-      project_username => $github_project_username,
-      project_password => $github_project_password,
-      oauth_token      => $github_oauth_token,
-      require          => Class['::gerrit']
+    if ($private_reviews == false) {
+      class { 'github':
+        username         => $github_username,
+        project_username => $github_project_username,
+        project_password => $github_project_password,
+        oauth_token      => $github_oauth_token,
+        require          => Class['::gerrit']
+      }
     }
   }
 
