@@ -72,6 +72,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $for_security_reviews = false,
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -79,29 +80,31 @@ class openstack_project::gerrit (
     afs                       => $afs,
   }
 
-  class { 'jeepyb::openstackwatch':
-    projects       => [
-      'openstack/ceilometer',
-      'openstack/cinder',
-      'openstack/glance',
-      'openstack/heat',
-      'openstack/horizon',
-      'openstack/infra',
-      'openstack/keystone',
-      'openstack/nova',
-      'openstack/oslo',
-      'openstack/neutron',
-      'openstack/swift',
-      'openstack/tempest',
-      'openstack-dev/devstack',
-    ],
-    container      => 'rss',
-    feed           => 'openstackwatch.xml',
-    json_url       => 'https://review.openstack.org/query?q=status:open',
-    swift_username => $swift_username,
-    swift_password => $swift_password,
-    swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
-    auth_version   => '1.0',
+  if ($for_security_reviews == false) {
+    class { 'jeepyb::openstackwatch':
+      projects       => [
+        'openstack/ceilometer',
+        'openstack/cinder',
+        'openstack/glance',
+        'openstack/heat',
+        'openstack/horizon',
+        'openstack/infra',
+        'openstack/keystone',
+        'openstack/nova',
+        'openstack/oslo',
+        'openstack/neutron',
+        'openstack/swift',
+        'openstack/tempest',
+        'openstack-dev/devstack',
+      ],
+      container      => 'rss',
+      feed           => 'openstackwatch.xml',
+      json_url       => 'https://review.openstack.org/query?q=status:open',
+      swift_username => $swift_username,
+      swift_password => $swift_password,
+      swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
+      auth_version   => '1.0',
+    }
   }
 
   class { '::gerrit':
@@ -219,12 +222,14 @@ class openstack_project::gerrit (
 
   if ($testmode == false) {
     include gerrit::cron
-    class { 'github':
-      username         => $github_username,
-      project_username => $github_project_username,
-      project_password => $github_project_password,
-      oauth_token      => $github_oauth_token,
-      require          => Class['::gerrit']
+    if ($for_security_reviews == false) {
+      class { 'github':
+        username         => $github_username,
+        project_username => $github_project_username,
+        project_password => $github_project_password,
+        oauth_token      => $github_oauth_token,
+        require          => Class['::gerrit']
+      }
     }
   }
 
