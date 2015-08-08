@@ -96,6 +96,7 @@ class openstack_project::cacti (
     'git06.openstack.org',
     'git07.openstack.org',
     'git08.openstack.org',
+    'grafana.openstack.org',
     'graphite.openstack.org',
     'groups-dev.openstack.org',
     'groups.openstack.org',
