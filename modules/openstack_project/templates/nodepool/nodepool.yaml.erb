@@ -1001,6 +1001,7 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
       DIB_DISABLE_APT_CLEANUP: '1'
   - name: devstack-trusty
     elements:
@@ -1014,6 +1015,7 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
       DIB_DISABLE_APT_CLEANUP: '1'
       QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-precise
@@ -1028,6 +1030,7 @@ diskimages:
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
+      DIB_APT_LOCAL_CACHE: '0'
       DIB_DISABLE_APT_CLEANUP: '1'
       QEMU_IMG_OPTIONS: compat=0.10
   - name: devstack-centos7-dib
