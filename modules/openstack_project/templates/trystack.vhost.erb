@@ -5,6 +5,17 @@
 NameVirtualHost <%= @vhost_name %>:<%= @port %>
 <VirtualHost <%= @vhost_name %>:<%= @port %>>
   ServerName <%= @srvname %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+<% end -%>
+
+  # NOTE(pabelanger): Rewrite requests for trystack.org to trystack.o.o.
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{HTTP_HOST} !<% @vhost_name %>$ [NC]
+  RewriteRule ^(.*)$ http://<% @vhost_name %>/$1 [L,R=301]
 
   DocumentRoot <%= @docroot %>
   <Directory <%= @docroot %>>
