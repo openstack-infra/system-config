@@ -184,6 +184,14 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: devstack-f22
+    image: devstack-f22
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
   - name: devstack-centos7
     image: devstack-centos7
     ready-script: configure_mirror.sh
@@ -302,6 +310,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f22
+        base-image: 'Fedora 22 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
       - name: devstack-centos7
         base-image: 'CentOS 7 (PVHVM)'
         min-ram: 8192
@@ -372,6 +386,13 @@ providers:
           xenapi_use_agent: 'false'
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f22
+        base-image: 'Fedora 22 (PVHVM)'
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
@@ -454,6 +475,13 @@ providers:
         private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-f21
         base-image: 'Fedora 21 (PVHVM)'
+        min-ram: 8192
+        name-filter: 'Performance'
+        setup: prepare_node_devstack.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: devstack-f22
+        base-image: 'Fedora 22 (PVHVM)'
         min-ram: 8192
         name-filter: 'Performance'
         setup: prepare_node_devstack.sh
