@@ -233,11 +233,12 @@ class openstack_project::static (
   # Trystack
 
   ::httpd::vhost { 'trystack.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/opt/trystack',
-    template => 'openstack_project/trystack.vhost.erb',
-    require  => Vcsrepo['/opt/trystack'],
+    port          => 80,
+    priority      => '50',
+    docroot       => '/opt/trystack',
+    template      => 'openstack_project/trystack.vhost.erb',
+    serveraliases => ['trystack.org'],
+    require       => Vcsrepo['/opt/trystack'],
   }
 
   vcsrepo { '/opt/trystack':
