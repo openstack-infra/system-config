@@ -15,10 +15,21 @@
 # under the License.
 
 file=$1
+set +x
 fileout=${file}.out
 echo "##" > $fileout
 cat $file > $fileout
 sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file >/dev/null 2>> $fileout
 ret=$?
-cat $fileout
-exit $ret
+if [ $ret -ne 0 ]; then
+    echo FAILURE
+    echo =======
+    cat $fileout
+    echo =======
+    echo Errors that are possibly responsible, most likely at the top
+    echo =======
+    cat $fileout | sed -r "s/\x1B\[([0-9]{1,3}((;[0-9]{1,3})*)?)?[m|K]//g" | grep ^Error:
+    echo =======
+    exit $ret
+fi
+echo SUCCESS
