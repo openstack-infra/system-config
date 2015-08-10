@@ -56,6 +56,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-c-bak.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-c-sch.txt
     tags:
       - screen
@@ -253,6 +257,11 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-bak.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
   - name: logs/new/screen-c-sch.txt
     tags:
       - screen
@@ -375,6 +384,11 @@ source-files:
     job-filter: '.*grenade.*'
 # Grenade old logs below
   - name: logs/old/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-bak.txt
     tags:
       - screen
       - oslofmt
