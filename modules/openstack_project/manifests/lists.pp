@@ -235,6 +235,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'admin-cert-wg':
+    ensure      => present,
+    admin       => 'heidi@openstack.org',
+    password    => $listpassword,
+    description => 'Collaboration workspace for members of the Certified OpenStack Administrator Working Group of the User Commitee/Board.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'enterprise-wg':
     ensure      => present,
     admin       => 'carol.l.barrett@intel.com',
