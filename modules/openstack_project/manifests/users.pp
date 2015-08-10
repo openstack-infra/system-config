@@ -134,8 +134,8 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'slukjanov':
     realname => 'Sergey Lukjanov',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDHGuIVB/WxBd7k1R8x2FyfqT6KxRnoM7lE5RE8gvBk2r8cQeH5k1c+P5JrBvWpmqXv4satoivYOBiIb7JXEgIxx62YUx/JQ0J7k3w+av6h4iFe2OhOtEOjMF5F8/wO8a/95OeTZPzBZlUfA3hx754kuw3Q/aBKQUOHWxJOIedGyVHeJc7XiFj3RXIufFuUfng9+p4Z3q6d2/WpuKqs00WI0CLF17PkU4i8P9CraJR1dmsWW6zoxMT2G+DwMFI7ZMS3xrVBRuLwrLlbylVLW2kOJ0JeyjHnRh7X1kR7KG3cGOOjA1YQ0e+mXvremcO3/3o6Iop/N1AtqVuYCKlZc7Y9',
-    key_id   => 'slukjanov@mirantis.com',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDK++ZJSEyzmW0fRO66bVUd1YlA2TsruJt/FsEEYXrOxKY/0b3EQPNwJKGCop/lXI1z9Ku9CU0O10Y3yFrMeMikeOqHmnNiWi9gxiq24NFLzU9spbJUPwHv891JO7BvoMI+122e1IReqOgAj+PSobEu7uG4jhOonIkdETjAnEPDZA1oT2+v0PSmTNFv15qLT2ah+24dIm7wnjoXwWZXlFaTJ7oZ7tLi6b4QgiVrvsVERXh2tzUpwt670CQrNtIui4A7V+/q07hQTAfpYH5J8CtWVRKY8kgbHVQEiVs8X8woKo4808cOvxAdN0v6eg/LzSOwIGBMc/POeoTzd29K3hA6Z/sDs46+n+gBoPZ1q+a5mYNGUBgkERK8eUSapZIk1gXEnbPTFR9GBuQ6f2u48FcprJ5kcJh3d9oVUSxdfIm41iIHOpgTJY3n3H8BH8vSH1gDmwmdN0rFhHz0BEXrFFhFVXzp6xLFh/HPwNzdTps4g6xhWuhILTef+QOgv2GmmRxr8WIrvCm1R8KVrwO1i7EM+dX5iO/VAS4+EwanreiS2X0sjzzga+x1kNMCMrZX1zwngqyasQr1KiId4EDcjv97g+tlF8OPo5OVrvjW7HNXx+kJF1c7vcC9pubPKAcd1JeeabuUlqnKwwSqSGqk1FcSaXF7p2vdO9erwMAW4AUlEQ==',
+    key_id   => 'openstack-infra@slukjanov.name',
     uid      => 2014,
     gid      => 2014,
   }
