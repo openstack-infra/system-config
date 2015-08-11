@@ -52,6 +52,9 @@ class openstack_project::grafana (
 
   class { '::grafana':
     cfg            => $grafana_cfg_merged,
+    # Note that we can't use archive because this class requires
+    # the camptocamp-archive module than we have puppetcommunity-archive
+    # in modules.env
     install_method => 'repo',
     version        => '2.1.0',
   }
