@@ -295,6 +295,16 @@ class openstack_project::template (
       refreshonly => true,
     }
 
+    if (versioncmp($::lsbdistrelease, '22') >= 0) {
+      file { '/etc/dnf/dnf.conf':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        source  => 'puppet:///modules/openstack_project/dnf.conf',
+        replace => true,
+      }
+    }
   }
 
   # Which Puppet do I take?
