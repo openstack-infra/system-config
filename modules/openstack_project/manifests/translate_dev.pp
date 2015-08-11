@@ -21,6 +21,9 @@ class openstack_project::translate_dev(
   $mysql_password,
   $admin_users = '',
   $sysadmins = [],
+  $zanata_server_user = '',
+  $zanata_server_api_key = '',
+  $project_config_repo = '',
   $openid_url = '',
   $vhost_name = $::fqdn,
   $ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem',
@@ -36,6 +39,10 @@ class openstack_project::translate_dev(
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
+  }
+
+  class { 'project_config':
+    url  => $project_config_repo,
   }
 
   class { '::zanata':
@@ -78,5 +85,47 @@ class openstack_project::translate_dev(
                 'maxage 30',
                 ],
     require => Service['wildfly'],
+  }
+
+  file { '/home/wildfly/projects.yaml':
+    ensure  => present,
+    owner   => 'wildfly',
+    group   => 'wildfly',
+    mode    => '0444',
+    source  => $::project_config::jeepyb_project_file,
+    replace => true,
+    require => User['wildfly'],
+  }
+
+  include jeepyb
+  exec { 'register-zanata-projects':
+    command     => '/usr/local/bin/register-zanata-projects >> /var/log/register-zanata-projects.log 2>&1',
+    timeout     => 900, # 15 minutes
+    subscribe   => File['/home/wildfly/projects.yaml'],
+    refreshonly => true,
+    logoutput   => true,
+    environment => [
+        "PROJECTS_YAML=/home/wildfly/projects.yaml",
+        "ZANATA_URL=https://${vhost_name}/",
+        "ZANATA_USER=${zanata_server_user}",
+        "ZANATA_KEY=${zanata_server_api_key}",
+    ],
+    require     => [
+        File['/home/wildfly/projects.yaml'],
+        Class['jeepyb'],
+      ],
+  }
+
+  logrotate::file { 'register-zanata-projects.log':
+    log     => '/var/log/register-zanata-projects.log',
+    options => [
+      'compress',
+      'missingok',
+      'rotate 30',
+      'daily',
+      'notifempty',
+      'copytruncate',
+    ],
+    require => Exec['register-zanata-projects'],
   }
 }
