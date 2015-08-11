@@ -52,6 +52,8 @@ class openstack_project::grafana (
 
   class { '::grafana':
     cfg            => $grafana_cfg_merged,
+    # Note that we can't use 'archive' because this class requires
+    # a different 'archive' module than we have
     install_method => 'repo',
     version        => '2.1.0',
   }
