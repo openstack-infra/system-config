@@ -13,3 +13,4 @@ openstack_infra_config.egg-info/
 tools/invite2summit/settings.py
 tools/invite2summit/done*
 *.egg
+Vagrantfile
