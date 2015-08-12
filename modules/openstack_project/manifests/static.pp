@@ -25,8 +25,8 @@ class openstack_project::static (
     gitemail    => $jenkins_gitemail,
   }
 
-  include ::httpd
-  include ::httpd::mod::wsgi
+  include ::apache
+  include ::apache::mod::wsgi
 
   httpd_mod { 'rewrite':
     ensure => present,
