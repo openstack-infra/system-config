@@ -20,7 +20,7 @@ class openstack_project::users_install (
   $install_users = false,
 ) {
 
-  include openstack_project::users
+  include ::openstack_project::users
 
   ## TODO: this should be it's own manifest.
   if ( $install_users == true ) {
