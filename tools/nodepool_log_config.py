@@ -129,8 +129,9 @@ def _get_providers_and_images(config_file):
     logging.debug("Added %d providers & images" % len(ret))
 
     # diskimages have a special provider
-    for diskimage in config['diskimages']:
-        ret.append(('dib', diskimage['name']))
+    if 'diskimages' in config:
+        for diskimage in config['diskimages']:
+            ret.append(('dib', diskimage['name']))
 
     return ret
 
