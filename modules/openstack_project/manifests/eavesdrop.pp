@@ -60,6 +60,7 @@ class openstack_project::eavesdrop (
         '#openstack-doc',
         '#openstack-fr',
         '#openstack-freezer',
+        '#openstack-fwaas',
         '#openstack-glance',
         '#openstack-horizon',
         '#openstack-i18n',
