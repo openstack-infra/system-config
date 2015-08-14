@@ -237,7 +237,7 @@ class openstack_project::static (
     priority      => '50',
     docroot       => '/opt/trystack',
     template      => 'openstack_project/trystack.vhost.erb',
-    serveraliases => ['trystack.org'],
+    serveraliases => ['trystack.org', 'www.trystack.org'],
     require       => Vcsrepo['/opt/trystack'],
   }
 
