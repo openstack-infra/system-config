@@ -99,7 +99,7 @@ class openstack_project::translate_dev(
 
   include jeepyb
   exec { 'register-zanata-projects':
-    command     => '/usr/local/bin/register-zanata-projects >> /var/log/register-zanata-projects.log 2>&1',
+    command     => '/usr/local/bin/register-zanata-projects -v -l /var/log/register-zanata-projects.log',
     timeout     => 900, # 15 minutes
     subscribe   => File['/home/wildfly/projects.yaml'],
     refreshonly => true,
