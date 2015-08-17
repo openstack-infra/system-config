@@ -189,3 +189,26 @@ host will be attached to. That VLAN will get a publicly routable /23. Also,
 there should be a second VLAN that is connected only to the NIC of the
 Ironic Cloud and is routed to the IPMI management network of all of the other
 nodes. Whether we use LinuxBridge or Open vSwitch is still TBD.
+
+DNS
+~~~
+
+Each region will have a DNS sub-domain associated.
+
+  * HP1 - `hpuswest.ic.openstack.org`
+  * HP2 - `hpuseast.ic.openstack.org`
+
+Addresses
+~~~~~~~~~
+
+These should be the public subnets for each region.
+
+  * HP1 public - 15.184.52.0/22
+
+    * HP1 control plane - 15.184.52.0/24 (`hpuswest.ic.openstack.org`)
+
+    * HP1 vms0 - 15.184.53.0/24
+
+    * HP1 vms1 - 15.184.54.0/24
+
+    * HP1 vms2 - 15.184.55.0/24
