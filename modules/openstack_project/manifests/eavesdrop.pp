@@ -74,6 +74,7 @@ class openstack_project::eavesdrop (
         '#openstack-meeting-alt',
         '#openstack-meeting-3',
         '#openstack-meeting-4',
+        '#openstack-mistral',
         '#openstack-monasca',
         '#openstack-neutron',
         '#openstack-neutron-ovn',
