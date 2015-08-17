@@ -1,0 +1,11 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Workflow+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Renat Akhmerov <rakhmerov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 17 Aug 2015 04:02:52 +0000
+Reviewed-on: https://review.openstack.org/212550
+Project: openstack-infra/system-config
+Branch: refs/heads/master
