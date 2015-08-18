@@ -946,4 +946,16 @@ node /infracloud-controller/ {
     nova_ssl_cert_file_contents      => hiera('nova_ssl_cert_file_contents', 'XXX'),
   }
 }
+
+# Node-OS: trusty
+node /infracloud-compute/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password    => hiera('nova_rabbit_password', 'XXX'),
+    nova_mysql_password     => hiera('nova_mysql_password', 'XXX'),
+    neutron_rabbit_password => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_admin_password  => hiera('neutron_admin_password', 'XXX'),
+    controller_address      => 'infracloud-controller',
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
