@@ -120,6 +120,35 @@ Management
    to be accessible across machine boundaries will employ per-IP iptables
    rules rather then relying on a squishy middle.
 
+Adding Inventory
+~~~~~~~~~~~~~~~~
+
+The Bifrost dynamic inventory can be assembled in various ways, and
+sometimes must be hand-curated from external sources. However, once in the
+Bifrost dynamic inventory format, we can turn this into a template and a
+YAML hash for hiera to read the secrets from. The procedure is as follows.
+
+ * Obtain inventory of machines in Bifrost format as a json file. This
+   will be called `raw-inventory.json` for this example.
+
+ * Rename hosts in inventory to match hostnaming scheme by running
+   tools/make-infracloud-dns.py. If I want to run it with 10 compute
+   nodes, and a domain of `hpuswest.ic.openstack.org` I would run this::
+
+     python3 tools/make-infracloud-dns.py --computes raw-inventory.json > dns-inventory.json
+
+ * Turn into erb template and hiera yaml::
+
+     python tools/make-infracloud-hiera.py dns-inventory.json inventory.yaml > inventory.json.erb
+
+ * inventory.yaml needs to then be copied onto the puppetmaster
+   by a member of `infra-root`. inventory.json.erb
+   needs to be added to system-config under
+   modules/openstack_project/files/bifrost/${region}.json.erb. The
+   bifrost nodes will then have the 'region' variable set to whatever
+   you have selected there, and this will drive building the inventory
+   and running bifrost.
+
 Architecture
 ------------
 

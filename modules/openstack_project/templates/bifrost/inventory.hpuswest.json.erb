@@ -1,0 +1,962 @@
+{
+  "baremetal00.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.21",
+        "ipmi_password": "<%= @ipmi_passwords['baremetal00.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.2",
+    "name": "baremetal00.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:24:31:5d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "0090edd1-d3b6-4b6b-b3e4-b2bb09665d7b"
+  },
+  "baremetal01.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.7",
+        "ipmi_password": "<%= @ipmi_passwords['baremetal01.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.3",
+    "name": "baremetal01.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:99:bd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "476b4113-6378-470f-834d-181017b8f1a8"
+  },
+  "compute000.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.42",
+        "ipmi_password": "<%= @ipmi_passwords['compute000.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.100",
+    "name": "compute000.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:05"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "0fdfbf53-fe80-4602-83fd-ed6119ad16d4"
+  },
+  "compute001.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.23",
+        "ipmi_password": "<%= @ipmi_passwords['compute001.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.101",
+    "name": "compute001.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:24:98:0c"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "d1d4232d-91ec-41d9-9f9b-80350ae9f048"
+  },
+  "compute002.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.41",
+        "ipmi_password": "<%= @ipmi_passwords['compute002.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.102",
+    "name": "compute002.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9b:2d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "ad9e12c5-f74d-449c-96ea-db7ad44cd52c"
+  },
+  "compute003.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.48",
+        "ipmi_password": "<%= @ipmi_passwords['compute003.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.103",
+    "name": "compute003.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:fd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "fce5f6df-ad12-42d4-ad9a-1f0642eba21a"
+  },
+  "compute004.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.34",
+        "ipmi_password": "<%= @ipmi_passwords['compute004.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.104",
+    "name": "compute004.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:95:25"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "6d76f9b9-5655-4363-b383-110f74b45aaf"
+  },
+  "compute005.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.33",
+        "ipmi_password": "<%= @ipmi_passwords['compute005.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.105",
+    "name": "compute005.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:22:95:ed"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "945a6ae1-de7c-4f9b-8642-a0aef1ce9c45"
+  },
+  "compute006.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.18",
+        "ipmi_password": "<%= @ipmi_passwords['compute006.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.106",
+    "name": "compute006.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9b:45"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "c3a35603-ed63-4801-afce-8d8d3df762b1"
+  },
+  "compute007.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.38",
+        "ipmi_password": "<%= @ipmi_passwords['compute007.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.107",
+    "name": "compute007.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:22:95:fd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "7889d9ff-5c17-4f2f-9ac8-8f7b9e8f3bac"
+  },
+  "compute008.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.27",
+        "ipmi_password": "<%= @ipmi_passwords['compute008.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.108",
+    "name": "compute008.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:21:66:75"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "88df2eb2-8ec5-4601-8ea6-04288193b966"
+  },
+  "compute009.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.39",
+        "ipmi_password": "<%= @ipmi_passwords['compute009.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.109",
+    "name": "compute009.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:99:d5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "183df9cb-35c4-4e83-97d6-76d41680a045"
+  },
+  "compute010.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.51",
+        "ipmi_password": "<%= @ipmi_passwords['compute010.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.110",
+    "name": "compute010.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:90:0d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "d1a88893-abe2-4523-9144-2039e600f839"
+  },
+  "compute011.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.26",
+        "ipmi_password": "<%= @ipmi_passwords['compute011.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.111",
+    "name": "compute011.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9a:e5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "116dfbc8-74e1-4b48-b08e-a338b0981887"
+  },
+  "compute012.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.17",
+        "ipmi_password": "<%= @ipmi_passwords['compute012.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.112",
+    "name": "compute012.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:e5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "cd8accf6-8d39-40b9-b5fa-cb14e5744750"
+  },
+  "compute013.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.50",
+        "ipmi_password": "<%= @ipmi_passwords['compute013.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.113",
+    "name": "compute013.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:d5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "f002f9a1-e75b-40fe-8ead-31009eb4d997"
+  },
+  "compute014.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.19",
+        "ipmi_password": "<%= @ipmi_passwords['compute014.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.114",
+    "name": "compute014.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:24:32:8d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "2793d114-8855-4243-8a60-98303610a2ab"
+  },
+  "compute015.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.35",
+        "ipmi_password": "<%= @ipmi_passwords['compute015.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.115",
+    "name": "compute015.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:21:5d:55"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "3e00f75a-958e-4034-bd0a-4a0ba9e2df4d"
+  },
+  "compute016.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.6",
+        "ipmi_password": "<%= @ipmi_passwords['compute016.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.116",
+    "name": "compute016.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:97:cd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "98d141a3-7efc-4df3-84a6-e3d8cdff3025"
+  },
+  "compute017.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.10",
+        "ipmi_password": "<%= @ipmi_passwords['compute017.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.117",
+    "name": "compute017.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:25:01:d5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "2e251e9d-0b00-477c-9069-f9dbe966b5e3"
+  },
+  "compute018.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.44",
+        "ipmi_password": "<%= @ipmi_passwords['compute018.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.118",
+    "name": "compute018.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:94:15"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "0a4da2d7-2420-4201-8714-c78c71c2f17b"
+  },
+  "compute019.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.16",
+        "ipmi_password": "<%= @ipmi_passwords['compute019.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.119",
+    "name": "compute019.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:dd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "b9b47664-c5d0-472c-b232-8c1a4ef22fd0"
+  },
+  "compute020.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.46",
+        "ipmi_password": "<%= @ipmi_passwords['compute020.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.120",
+    "name": "compute020.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:92:fd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "4ae583ec-60ae-4027-9a95-f6c132e7a509"
+  },
+  "compute021.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.31",
+        "ipmi_password": "<%= @ipmi_passwords['compute021.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.121",
+    "name": "compute021.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:94:fd"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "272215ce-baf3-4d80-a0c9-c0997b204b2d"
+  },
+  "compute022.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.36",
+        "ipmi_password": "<%= @ipmi_passwords['compute022.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.122",
+    "name": "compute022.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:95:6d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "ac81d1fe-b6be-4677-ba0e-259227ec0e9d"
+  },
+  "compute023.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.45",
+        "ipmi_password": "<%= @ipmi_passwords['compute023.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.123",
+    "name": "compute023.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:95:d5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "9b4711f0-0fd4-4630-9495-649c64b0f071"
+  },
+  "compute024.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.15",
+        "ipmi_password": "<%= @ipmi_passwords['compute024.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.124",
+    "name": "compute024.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:62:95"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "e9220599-54a6-4bc7-ae4a-60d61fd47bb8"
+  },
+  "compute025.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.30",
+        "ipmi_password": "<%= @ipmi_passwords['compute025.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.125",
+    "name": "compute025.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:99:0d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "4c717b30-c2d1-43be-b499-eeddeb760576"
+  },
+  "compute026.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.8",
+        "ipmi_password": "<%= @ipmi_passwords['compute026.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.126",
+    "name": "compute026.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:21:8b:14"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "5519d63e-edb5-44b8-a3d2-5291d52811b6"
+  },
+  "compute027.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.11",
+        "ipmi_password": "<%= @ipmi_passwords['compute027.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.127",
+    "name": "compute027.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:61:0d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "dbd6cbdf-cee3-4deb-8918-47120610400e"
+  },
+  "compute028.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.9",
+        "ipmi_password": "<%= @ipmi_passwords['compute028.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.128",
+    "name": "compute028.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:15"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "3334a4a2-3ba8-440f-930c-32eceb6974e5"
+  },
+  "compute029.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.49",
+        "ipmi_password": "<%= @ipmi_passwords['compute029.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.129",
+    "name": "compute029.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:92:f5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "f32b231c-7643-4231-a4cb-d2d4e35fecf3"
+  },
+  "compute030.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.14",
+        "ipmi_password": "<%= @ipmi_passwords['compute030.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.130",
+    "name": "compute030.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:63:75"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "fef8db84-d7cf-476b-a883-48ba79675c5c"
+  },
+  "compute031.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.37",
+        "ipmi_password": "<%= @ipmi_passwords['compute031.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.131",
+    "name": "compute031.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9a:2d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "fc6861a4-95f6-4e5a-b303-6d43a4d21dfa"
+  },
+  "compute032.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.29",
+        "ipmi_password": "<%= @ipmi_passwords['compute032.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.132",
+    "name": "compute032.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9d:9d"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "0cb0676c-cd26-4ebc-ad78-1a0d6aa26808"
+  },
+  "compute033.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.47",
+        "ipmi_password": "<%= @ipmi_passwords['compute033.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.133",
+    "name": "compute033.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:92:ed"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "49d5d5ba-a249-4d65-8bb0-749765a3a5bb"
+  },
+  "compute034.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.22",
+        "ipmi_password": "<%= @ipmi_passwords['compute034.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.134",
+    "name": "compute034.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:98:05"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "6dbfed9d-d4d0-4a13-93bb-8c3ab26f7004"
+  },
+  "controller00.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.20",
+        "ipmi_password": "<%= @ipmi_passwords['controller00.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.4",
+    "name": "controller00.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:93:f5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "42fe827f-e567-4c17-8b74-4c28f93728d4"
+  },
+  "controller01.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.4",
+        "ipmi_password": "<%= @ipmi_passwords['controller01.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.5",
+    "name": "controller01.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:95:65"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": 96676
+    },
+    "uuid": "1d937491-56b6-4eb9-bc73-720a8af1c788"
+  },
+  "gateway.hpuswest.ic.openstack.org": {
+    "driver": "agent_ipmitool",
+    "driver_info": {
+      "power": {
+        "ipmi_address": "10.10.16.24",
+        "ipmi_password": "<%= @ipmi_passwords['gateway.hpuswest.ic.openstack.org'] %>",
+        "ipmi_username": "Administrator"
+      }
+    },
+    "ipv4_address": "15.184.52.1",
+    "name": "gateway.hpuswest.ic.openstack.org",
+    "nics": [
+      {
+        "mac": "78:e7:d1:23:9b:b5"
+      }
+    ],
+    "properties": {
+      "cpu_arch": "x86_64",
+      "cpus": "24",
+      "disk_size": "1800",
+      "ram": "96676"
+    },
+    "uuid": "1f38e82d-0836-4cf1-9351-f76b9a16efa7"
+  }
+}
