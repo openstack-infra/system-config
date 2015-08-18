@@ -29,13 +29,13 @@ function is_fedora {
 
 function is_rhel6 {
     [ -f /usr/bin/yum ] && \
-        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" && \
+        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" -e "CloudLinux" && \
         cat /etc/*release | grep -q 'release 6'
 }
 
 function is_rhel7 {
     [ -f /usr/bin/yum ] && \
-        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" && \
+        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" -e "CloudLinux" && \
         cat /etc/*release | grep -q 'release 7'
 }
 
