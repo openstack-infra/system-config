@@ -937,4 +937,15 @@ node /infracloud-controller/ {
     keystone_admin_token      => hiera('keystone_admin_token', 'admin_token_xxx1234'),
   }
 }
+
+# Node-OS: trusty
+node /infracloud-compute/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password => hiera('nova_rabbit_password', 'XXX'),
+    nova_mysql_password  => hiera('nova_mysql_password', 'XXX'),
+    neutron_rabbit_password   => hiera('neutron_rabbit_password', 'XXX'),
+    controller_address   => 'infracloud-controller',
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
