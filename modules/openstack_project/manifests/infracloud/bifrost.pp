@@ -15,6 +15,7 @@
 class openstack_project::infracloud::bifrost (
   $ironic_db_password,
   $mysql_password,
+  $region,
 ) {
 
   include ::ansible
@@ -31,7 +32,7 @@ class openstack_project::infracloud::bifrost (
 
   file { '/opt/stack/baremetal.json':
     ensure  => file,
-    source  => 'puppet:///modules/openstack_project/bifrost/baremetal.json', # contains dummy data at the moment
+    content => template("bifrost/inventory.${region}.json.erb"),
     require => Class['::ironic::bifrost'],
   }
 
