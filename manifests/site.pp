@@ -947,4 +947,16 @@ node 'controller01.hpuswest.ic.openstack.org' {
     controller_management_address    => '10.10.16.154',
   }
 }
+
+# Node-OS: trusty
+node /^compute..\.hpuswest\.ic\.openstack\.org$/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password', 'XXX'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_admin_password           => hiera('neutron_admin_password', 'XXX'),
+    controller_public_address        => 'controller01.hpuswest.ic.openstack.org',
+    controller_management_address    => '10.10.16.154',
+  }
+}
 # vim:sw=2:ts=2:expandtab:textwidth=79
