@@ -37,7 +37,11 @@ class openstack_project::openstackid_dev (
   $id_environment = 'dev',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = ''
+  $ssl_chain_file_contents = '',
+  $id_recaptcha_public_key = '',
+  $id_recaptcha_private_key = '',
+  $app_url = '',
+  $app_key = '',
 ) {
 
   realize (
@@ -75,6 +79,8 @@ class openstack_project::openstackid_dev (
     ssl_cert_file_contents   => $ssl_cert_file_contents,
     ssl_key_file_contents    => $ssl_key_file_contents,
     ssl_chain_file_contents  => $ssl_chain_file_contents,
+    app_url                  => $app_url,
+    app_key                  => $app_key,
   }
 
   # redis (custom module written by tipit)
