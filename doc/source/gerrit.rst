@@ -263,6 +263,7 @@ Next, edit `project.config` to look like::
   pushTag = group Project Bootstrappers
   pushTag = group Release Managers
   read = group Anonymous Users
+  editTopicName = group Registered Users
 
   [access "refs/drafts/*"]
   push = block group Registered Users
