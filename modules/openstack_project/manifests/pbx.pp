@@ -18,6 +18,7 @@
 class openstack_project::pbx (
   $sysadmins = [],
   $sip_providers = [],
+  $selinux_mode = 'enforcing'
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -31,7 +32,7 @@ class openstack_project::pbx (
 
   if ($::osfamily == 'RedHat') {
     class { 'selinux':
-      mode => 'enforcing'
+      mode => $selinux_mode
     }
   }
 
