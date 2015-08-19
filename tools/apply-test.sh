@@ -19,6 +19,8 @@ export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
 export PUPPET_INTEGRATION_TEST=1
 
+rm -rf /etc/puppet/modules/*
+
 cat > clonemap.yaml <<EOF
 clonemap:
   - name: '(.*?)/puppet-(.*)'
