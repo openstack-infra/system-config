@@ -441,7 +441,7 @@ function update_zuul_info(data) {
 function update() {
     var html = '';
 
-    $.getJSON('http://zuul.openstack.org/status.json', function(data) {
+    $.getJSON("<%= @zuul_status_url %>", function(data) {
         update_zuul_info(data);
 
         if ('message' in data) {

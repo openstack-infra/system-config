@@ -14,6 +14,7 @@ class openstack_project::status (
   $status_base_url = 'http://status.openstack.org/',
   $status_title = 'OpenStack',
   $graphite_render_url = 'http://graphite.openstack.org/render/',
+  $zuul_status_url = 'http://zuul.openstack.org/status.json',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
