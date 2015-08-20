@@ -13,6 +13,7 @@ class openstack_project::etherpad (
   class { 'etherpad_lite':
     ep_ensure      => 'latest',
     eplite_version => '2bf16fe09fe9a6af804666d15ff4704620369d9f',
+    nodejs_version => 'system',
   }
 
   class { 'etherpad_lite::apache':
