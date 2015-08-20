@@ -327,7 +327,7 @@ node 'eavesdrop.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'etherpad.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
