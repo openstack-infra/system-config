@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+    - name: Install modules
+      shell: sudo ./install_modules.sh
+      args:
+        chdir: "{{workspace}}/{{project}}"
+    - name: Run puppet
+      shell: sudo ./run_puppet.sh
+      args:
+        chdir: "{{workspace}}/{{project}}"

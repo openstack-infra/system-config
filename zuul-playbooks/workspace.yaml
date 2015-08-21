@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: Install zuul-cloner from pip
+      shell: pip install zuul --user
+    - name: Clone project repo
+      shell: "~/.local/bin/zuul-cloner -v --workspace={{ workspace }} git://git.openstack.org {{ project }}"
