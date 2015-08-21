@@ -1,0 +1,3 @@
+---
+project: openstack-infra/system-config
+workspace: /tmp/workspace

@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+    - name: Install modules
+      shell: sudo ./install_modules.sh
+      args:
+        chdir: "{{workspace}}/{{project}}"
+    - name: Run puppet
+      shell: sudo puppet apply --verbose --modulepath=/etc/puppet/modules:modules manifests/site.pp --certname=grafana.openstack.org
+      args:
+        chdir: "{{workspace}}/{{project}}"
