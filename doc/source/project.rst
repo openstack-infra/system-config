@@ -197,3 +197,37 @@ Infrastructure Root Team
   Some individuals may need root access to individual servers; in
   these cases the infra-core group may grant root access on a limited
   basis.
+
+Review Criteria
+===============
+
+We review each others changes before they are merged.  This helps us
+improve the quality of the code we produce as well as ensure that we
+are working together as a team.  Generally we expect at least two
+members of the core review team to approve a change before it is
+merged, but we are flexible in this requirement -- typo fixes, or
+other simple changes may be approved with less formality.
+
+The primary purpose of change review is to catch substantial errors
+before they are merged.  In order to keep this process useful and
+avoid frustration for both authors and reviewers, please do not leave
+negative reviews for insubstantial faults or potential improvements.
+The purpose is not to make someone else's code match your vision of
+perfection, but to enable all of us to work together on a project.
+
+Please use discretion when deciding what is important enough for
+someone to spend the time to rework and for you to spend the time
+re-reviewing.  Sometimes minor things are important, such as
+consistent use of hyphens versus underscores in a configuration
+language.  Sometimes they are not, such as whitespace in
+documentation.
+
+If you would like to mention minor improvements such as this, feel
+free to do so, but please do not leave a negative score on the review.
+If you mention them along with other more substantial criticisms,
+please note them in a review, for example, with "(nit)" or "(not a
+-1)" or "you may want to fix this if you are updating the patch
+anyway".
+
+Please also see the section in the Infrastructure Manual on `peer review
+<http://docs.openstack.org/infra/manual/developers.html#peer-review>`_.
