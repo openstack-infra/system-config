@@ -47,7 +47,6 @@ fi
 
 remove_module "gearman" #remove old saz-gearman
 remove_module "limits" # remove saz-limits (required by saz-gearman)
-remove_module "apache"
 
 # load modules.env to populate MODULES[*] and SOURCE_MODULES[*]
 # for processing.
