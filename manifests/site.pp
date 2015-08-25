@@ -230,14 +230,24 @@ node 'puppetdb.openstack.org' {
 
 # Node-OS: precise
 node 'graphite.openstack.org' {
+  $statsd_hosts = ['logstash.openstack.org',
+                   'nodepool.openstack.org',
+                   'zuul.openstack.org']
+
+  # Turn a list of hostnames into a list of iptables rules
+  $rules = regsubst ($statsd_hosts, '^(.*)$', '-m udp -p udp -s \1 --dport 8125 -j ACCEPT')
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $rules,
+    iptables_rules4           => $rules,
+    sysadmins                 => hiera('sysadmins', [])
+  }
+
   class { 'openstack_project::graphite':
-    sysadmins               => hiera('sysadmins', []),
     graphite_admin_user     => hiera('graphite_admin_user', 'username'),
     graphite_admin_email    => hiera('graphite_admin_email', 'email@example.com'),
     graphite_admin_password => hiera('graphite_admin_password', 'XXX'),
-    statsd_hosts            => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-                                'zuul.openstack.org'],
   }
 }
 
