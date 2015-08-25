@@ -1011,4 +1011,15 @@ node 'odsreg.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'codesearch.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::codesearch':
+    project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
