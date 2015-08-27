@@ -15,6 +15,7 @@ class openstack_project::single_use_slave (
   $automatic_upgrades = false,
   $all_mysql_privs = false,
   $enable_unbound = true,
+  $manage_pip_conf = true,
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
@@ -26,6 +27,7 @@ class openstack_project::single_use_slave (
     install_users       => $install_users,
     install_resolv_conf => $install_resolv_conf,
     enable_unbound      => $enable_unbound,
+    manage_pip_conf     => $manage_pip_conf,
     iptables_rules4     =>
       [
         # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
