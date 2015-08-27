@@ -19,6 +19,14 @@ class openstack_project::single_use_slave (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $pypi_index_url            = 'https://pypi.python.org/simple',
+  $pypi_trusted_hosts        = [
+      'pypi.dfw.openstack.org',
+      'pypi.iad.openstack.org',
+      'pypi.ord.openstack.org',
+      'pypi.region-b.geo-1.openstack.org',
+  ],
+  $manage_pip_conf           = true,
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname            => $certname,
@@ -39,6 +47,9 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8004 -s 172.24.4.0/23 -j ACCEPT',
         '-m limit --limit 2/min -j LOG --log-prefix "iptables dropped: "',
       ],
+    pypi_index_url      => $pypi_index_url,
+    pypi_trusted_hosts  => $pypi_trusted_hosts
+    manage_pip_conf     => $manage_pip_conf,
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
