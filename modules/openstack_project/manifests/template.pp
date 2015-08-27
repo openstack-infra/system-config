@@ -25,6 +25,7 @@ class openstack_project::template (
       'pypi.ord.openstack.org',
       'pypi.region-b.geo-1.openstack.org',
   ],
+  $manage_pip_conf           = true,
 ) {
 
   ###########################################################
@@ -211,7 +212,7 @@ class openstack_project::template (
   class { '::pip':
     index_url       => $pypi_index_url,
     trusted_hosts   => $pypi_trusted_hosts,
-    manage_pip_conf => true,
+    manage_pip_conf => $manage_pip_conf,
   }
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
