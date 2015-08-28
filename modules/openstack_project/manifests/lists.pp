@@ -326,3 +326,12 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 }
+
+  maillist { 'openstack-ux':
+    ensure      => present,
+    admin       => 'julim@redhat.com',
+    password    => $listpassword,
+    description => 'A group of designers, researchers, developers, writers and users that are working on the user experience for OpenStack.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
