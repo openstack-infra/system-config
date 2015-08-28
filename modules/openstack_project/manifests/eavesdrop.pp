@@ -101,6 +101,7 @@ class openstack_project::eavesdrop (
         '#refstack',
         '#senlin',
         '#storyboard',
+        '#tacker',
         '#tripleo',
     ],
   }
