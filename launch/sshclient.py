@@ -23,6 +23,12 @@ import sys
 import paramiko
 
 
+class SSHException(Exception):
+    def __init__(self, message, rc):
+        super(SSHException, self).__init__(message)
+        self.rc = rc
+
+
 class SSHClient(object):
     def __init__(self, ip, username, password=None, pkey=None):
         client = paramiko.SSHClient()
@@ -41,7 +47,7 @@ class SSHClient(object):
         ret = stdout.channel.recv_exit_status()
         print stderr.read()
         if (not error_ok) and ret:
-            raise Exception("Unable to %s" % command)
+            raise SSHException("Unable to %s" % command, ret)
         return ret, output
 
     def scp(self, source, dest):

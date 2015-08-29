@@ -133,7 +133,15 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
         "--certname %s" % (environment, puppetmaster, certname), error_ok=True)
     utils.interpret_puppet_exitcodes(rc, output)
 
-    ssh_client.ssh("reboot")
+    try:
+        ssh_client.ssh("reboot")
+    except Exception as e:
+        # Some init system kill the connection too fast after reboot.
+        # Deal with it by ignoring ssh errors when rebooting.
+        if e.rc == -1:
+            pass
+        else:
+            raise
 
 
 def build_server(
