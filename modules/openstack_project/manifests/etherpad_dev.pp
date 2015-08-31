@@ -5,7 +5,8 @@ class openstack_project::etherpad_dev (
   $mysql_db_name = 'etherpad-lite'
 ) {
   class { 'etherpad_lite':
-    ep_ensure => 'latest',
+    ep_ensure      => 'latest',
+    nodejs_version => 'system',
   }
 
   class { 'etherpad_lite::apache':
