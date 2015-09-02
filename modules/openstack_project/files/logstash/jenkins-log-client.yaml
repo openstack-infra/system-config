@@ -125,6 +125,18 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-m-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-m-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-m-shr.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-n-api.txt
     tags:
       - screen
