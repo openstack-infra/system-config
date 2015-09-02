@@ -74,7 +74,7 @@ class openstack_project::git (
     mode             => 'tcp',
     collect_exported => false,
     options          => {
-      'balance' => 'leastconn',
+      'balance' => 'source',
       'option'  => [
         'tcplog',
       ],
@@ -86,7 +86,7 @@ class openstack_project::git (
     mode             => 'tcp',
     collect_exported => false,
     options          => {
-      'balance' => 'leastconn',
+      'balance' => 'source',
       'option'  => [
         'tcplog',
       ],
@@ -100,7 +100,7 @@ class openstack_project::git (
     options          => {
       'maxconn' => '256',
       'backlog' => '256',
-      'balance' => 'leastconn',
+      'balance' => 'source',
       'option'  => [
         'tcplog',
       ],
