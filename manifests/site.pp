@@ -468,7 +468,7 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
 
 # CentOS machines to run cgit and git daemon. Will be
 # load balanced by git.openstack.org.
-# Node-OS: centos6
+# Node-OS: centos7
 node /^git\d+\.openstack\.org$/ {
   $group = "git-server"
   include openstack_project
