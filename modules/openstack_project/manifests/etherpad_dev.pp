@@ -13,6 +13,7 @@ class openstack_project::etherpad_dev (
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file   => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
+    wstunnel       => true,
   }
 
   class { 'etherpad_lite::site':
