@@ -72,6 +72,8 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $secondary_index = true,
   $afs = false,
+  $report_bug_text = 'Get Help',
+  $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
@@ -207,6 +209,8 @@ class openstack_project::gerrit (
     testmode                            => $testmode,
     secondary_index                     => $secondary_index,
     require                             => Class[openstack_project::server],
+    report_bug_text                     => $report_bug_text,
+    report_bug_url                      => $report_bug_url,
   }
 
   mysql_backup::backup_remote { 'gerrit':
