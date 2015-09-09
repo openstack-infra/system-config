@@ -96,6 +96,7 @@ class openstack_project::eavesdrop (
         '#openstack-swift',
         '#openstack-tailgate',
         '#openstack-trove',
+        '#openstack-vmware-nsx',
         '#openstack-zaqar',
         '#puppet-openstack',
         '#refstack',
