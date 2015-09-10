@@ -83,6 +83,7 @@ class openstack_project::openstackid_dev (
     redis_max_memory => $redis_max_memory,
     redis_bind       => $redis_bind,
     redis_password   => $redis_password,
+    version          => '2.8.4',
   }
 
 }

@@ -80,6 +80,7 @@ class openstack_project::openstackid_prod (
     redis_max_memory => $redis_max_memory,
     redis_bind       => $redis_bind,
     redis_password   => $redis_password,
+    version          => '2.8.4',
   }
 
   mysql_backup::backup_remote { $id_db_name:
