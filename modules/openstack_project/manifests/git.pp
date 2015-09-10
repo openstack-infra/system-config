@@ -18,7 +18,8 @@
 class openstack_project::git (
   $sysadmins = [],
   $balancer_member_names = [],
-  $balancer_member_ips = []
+  $balancer_member_ips = [],
+  $selinux_mode = 'enforcing'
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 9418],
@@ -27,7 +28,7 @@ class openstack_project::git (
 
   if ($::osfamily == 'RedHat') {
     class { 'selinux':
-      mode => 'enforcing'
+      mode => $selinux_mode
     }
   }
 
