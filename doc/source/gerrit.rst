@@ -408,8 +408,10 @@ To rename a project:
 
 #. Gracefully stop Zuul on zuul.openstack.org::
 
-     sudo kill -USR1 $(cat /var/run/zuul/zuul.pid)
-     rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
+     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org gate >gate.sh
+     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org check >check.sh
+     sudo /etc/init.d/zuul stop
+     sudo rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
 
 #. Stop Gerrit on review.openstack.org::
 
@@ -454,6 +456,8 @@ To rename a project:
 #. Start Zuul on zuul.openstack.org::
 
      sudo invoke-rc.d zuul start
+     bash gate.sh
+     bash check.sh
 
 #. Rename any associated groups whose names may have changed::
 
