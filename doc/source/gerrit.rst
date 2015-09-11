@@ -395,7 +395,10 @@ in-progress changes do not need to be merged before the move.
 To rename a project:
 
 #. Prepare a change to the Puppet configuration which updates
-   projects.yaml/ACLs and jenkins-job-builder for the new name.
+   projects.yaml/ACLs and jenkins-job-builder for the new name. Also
+   add changes to update projects.txt in all branches of the
+   requirements repo and devstack-vm-gate-wrap.sh in the devstack-gate
+   repo if necessary.
 
 #. Stop puppet runs on the puppetmaster to prevent early application
    of configuration changes::
