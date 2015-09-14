@@ -198,6 +198,11 @@ Note you should also subscribe to the `third-party-announce
 list to keep on top of announcements there which can include account
 disablement notices.
 
+In addition, if you use the openstack-infra CI tooling (such as zuul, or
+nodepool), you should subscribe to the
+`OpenStack-Infra <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_
+list to keep on top of announcements there.
+
 It would also be a good idea to contact the `Third Party Coordinators
 <https://review.openstack.org/#/admin/groups/440>`_ asking to add your account
 to the `Third Party CI mail filter list
