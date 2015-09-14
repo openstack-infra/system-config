@@ -52,13 +52,22 @@ function is_opensuse {
 # Distro specific puppet installs
 #
 
+function _systemd_update {
+    # there is a bug (rhbz#1261747) where systemd can fail to enable
+    # services due to selinux errors after upgrade.  A work-around is
+    # to install the latest version here and restart the daemon after
+    # it is upgraded.
+    yum install -y systemd
+    systemctl daemon-reload
+}
+
 function setup_puppet_fedora {
+    _systemd_update
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets
     # lsbdistcodename
     yum install -y redhat-lsb-core git puppet
-
 
     mkdir -p /etc/puppet/modules/
 
@@ -74,7 +83,6 @@ function setup_puppet_fedora {
 }
 
 function setup_puppet_rhel7 {
-
     local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
 
     # install a bootstrap epel repo to install latest epel-release
@@ -91,6 +99,7 @@ EOF
     yum --enablerepo=epel-bootstrap -y install epel-release
     rm -f /etc/yum.repos.d/epel-bootstrap.repo
 
+    _systemd_update
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
