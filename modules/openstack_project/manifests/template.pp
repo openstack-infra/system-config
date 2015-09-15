@@ -350,12 +350,21 @@ class openstack_project::template (
   }
 
   if ($::operatingsystem == 'CentOS') {
+    if ($::operatingsystemmajrelease == '6') {
+      puppet_repo_source_path =
+        'puppet:///modules/openstack_project/centos6-puppetlabs.repo'
+      custom_cgit = present
+    } elsif ($::operatingsystemmajrelease == '7') {
+      puppet_repo_source_path =
+        'puppet:///modules/openstack_project/centos7-puppetlabs.repo'
+      custom_cgit = absent
+    }
     file { '/etc/yum.repos.d/puppetlabs.repo':
       ensure  => present,
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
+      source  => $puppet_repo_source_path,
       replace => true,
     }
 
@@ -363,7 +372,7 @@ class openstack_project::template (
     # cloning performance, as discussed in redhat bz#1237395.  Should
     # be fixed in 6.8
     file { '/etc/yum.repos.d/git-1237395.repo':
-      ensure  => present,
+      ensure  => $custom_cgit,
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
