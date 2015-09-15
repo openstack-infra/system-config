@@ -1,14 +1,19 @@
 clouds:
   rax:
     profile: rackspace
-    region_name: DFW,ORD,IAD
+    regions:
+      - DFW
+      - ORD
+      - IAD
     auth:
       username: '<%= rackspace_username %>'
       password: '<%= rackspace_password %>'
       project_id: <%= rackspace_project %>
   hpcloud:
     profile: hp
-    region_name: region-a.geo-1,region-b.geo-1
+    regions:
+      - region-a.geo-1
+      - region-b.geo-1
     auth:
       username: '<%= hpcloud_username %>'
       password: '<%= hpcloud_password %>'
