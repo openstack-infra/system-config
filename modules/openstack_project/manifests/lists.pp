@@ -325,4 +325,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist { 'storlets-dev':
+    ensure      => present,
+    admin       => 'cdoron@il.ibm.com',
+    password    => $listpassword,
+    description => 'Discussions of the OpenStack Storlets project developers.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
