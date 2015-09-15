@@ -995,4 +995,14 @@ node 'apps.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'odsreg.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { '::odsreg':
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
