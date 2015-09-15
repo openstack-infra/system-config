@@ -152,7 +152,9 @@ def main():
     gerrit = Gerrit(gconfig['url'], gconfig['username'], gconfig['password'])
 
     pyaml = yaml.load(requests.get(PROJECTS_YAML, stream=True).raw)
-    projects = [x['repo'] for x in pyaml['Infrastructure']['projects']]
+    projects = []
+    for deliverable in pyaml['Infrastructure']['deliverables'].values():
+        projects += deliverable['repos']
 
     core_groups = ['infra-core']
     for project in projects:
