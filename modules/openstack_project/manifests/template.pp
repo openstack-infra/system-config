@@ -350,25 +350,41 @@ class openstack_project::template (
   }
 
   if ($::operatingsystem == 'CentOS') {
-    file { '/etc/yum.repos.d/puppetlabs.repo':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/centos-puppetlabs.repo',
-      replace => true,
-    }
+    if ($::operatingsystemmajrelease == '7') {
+      file { '/etc/yum.repos.d/puppetlabs.repo':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        source  =>
+          'puppet:///modules/openstack_project/centos7-puppetlabs.repo',
+        replace => true,
+      }
+      file { '/etc/yum.repos.d/git-1237395.repo':
+        ensure  => absent,
+      }
+    } elsif ($::operatingsystemmajrelease == '6') {
+      file { '/etc/yum.repos.d/puppetlabs.repo':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        source  =>
+          'puppet:///modules/openstack_project/centos6-puppetlabs.repo',
+        replace => true,
+      }
 
-    # This git package includes a small work-around for slow https
-    # cloning performance, as discussed in redhat bz#1237395.  Should
-    # be fixed in 6.8
-    file { '/etc/yum.repos.d/git-1237395.repo':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/git-1237395.repo',
-      replace => true,
+      # This git package includes a small work-around for slow https
+      # cloning performance, as discussed in redhat bz#1237395.  Should
+      # be fixed in 6.8
+      file { '/etc/yum.repos.d/git-1237395.repo':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0444',
+        source  => 'puppet:///modules/openstack_project/git-1237395.repo',
+        replace => true,
+      }
     }
 
     file { '/etc/yum.conf':
