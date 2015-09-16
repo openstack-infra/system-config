@@ -325,4 +325,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist { 'openstack-ansible':
+    ensure      => present,
+    admin       => 'kevin.carter@rackspace.com',
+    password    => $listpassword,
+    description => 'Collaboration workspace for members of the OpenStack Ansible team.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
