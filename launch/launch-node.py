@@ -67,7 +67,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     else:
         ssh_kwargs['password'] = admin_pass
 
-    for username in ['root', 'ubuntu', 'centos']:
+    for username in ['root', 'ubuntu', 'centos', 'admin']:
         ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
         if ssh_client:
             break

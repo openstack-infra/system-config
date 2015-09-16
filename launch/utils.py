@@ -179,6 +179,8 @@ def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
         except socket.error as e:
             print "While testing ssh access:", e
             time.sleep(5)
+        except paramiko.ssh_exception.AuthenticationException:
+            return None
 
     ret, out = client.ssh("echo access okay")
     if "access okay" in out:
