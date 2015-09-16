@@ -129,6 +129,11 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+  - name: ubuntu-trusty-check
+    image: ubuntu-trusty-check
+    min-ready: 1
+    providers:
+      - name: ovh-gra1
   - name: ubuntu-trusty-2-node
     image: ubuntu-trusty
     ready-script: multinode_setup.sh
@@ -902,6 +907,21 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+  - name: ovh-gra1
+    region-name: 'gra1'
+    cloud: ovh
+    api-timeout: 60
+    boot-timeout: 120
+    max-servers: 50
+    rate: 0.1
+    image-type: raw
+    images:
+      - name: ubuntu-trusty-check
+        min-ram: 8000
+        name-filter: 'ssd-osFoundation'
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-rh1
     cloud: tripleo-test-cloud-rh1
     boot-timeout: 120
