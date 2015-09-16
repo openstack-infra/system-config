@@ -16,6 +16,7 @@ class openstack_project::server (
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $pypi_trusted_hosts        = [
       'pypi.dfw.openstack.org',
+      'pypi.gra1.openstack.org',
       'pypi.iad.openstack.org',
       'pypi.ord.openstack.org',
       'pypi.region-b.geo-1.openstack.org',
