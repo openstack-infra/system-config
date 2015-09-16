@@ -36,9 +36,9 @@ labels:
       - name: rax-iad
   - name: devstack-precise-check
     image: devstack-precise-check
-    min-ready: 0
+    min-ready: 1
     providers:
-      - name: rax-iad
+      - name: ord-gra1
   - name: bare-precise
     image: bare-precise
     ready-script: configure_mirror.sh
@@ -902,6 +902,20 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+  - name: ovh-gra1
+    region-name: 'gra1'
+    cloud: ovh
+    api-timeout: 60
+    boot-timeout: 120
+    max-servers: 50
+    rate: 0.1
+    images:
+      - name: devstack-precise-check
+        min-ram: 8000
+        name-filter: 'ssd-osFoundation'
+        diskimage: devstack-precise
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
   - name: tripleo-test-cloud-rh1
     cloud: tripleo-test-cloud-rh1
     boot-timeout: 120
