@@ -89,6 +89,9 @@ def get_flavor(client, min_ram):
 
 
 def get_public_ip(server, version=4, floating_ip_pool=None):
+    for addr in server.addresses.get('Ext-Net', []):
+        if addr.get('version') == version:  # OVH
+            return addr['addr']
     if 'os-floating-ips' in get_extensions(server.manager.api):
         for addr in server.manager.api.floating_ips.list():
             if addr.instance_id == server.id:
