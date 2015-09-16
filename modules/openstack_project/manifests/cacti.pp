@@ -142,6 +142,7 @@ class openstack_project::cacti (
     'puppetdb.openstack.org',
     'puppetmaster.openstack.org',
     'pypi.dfw.openstack.org',
+    'pypi.gra1.openstack.org',
     'pypi.iad.openstack.org',
     'pypi.openstack.org',
     'pypi.ord.openstack.org',
