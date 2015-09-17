@@ -56,8 +56,9 @@ def get_client():
 
 
 def bootstrap_server(server, admin_pass, key, cert, environment, name,
-                     puppetmaster, volume, floating_ip_pool):
+                     puppetmaster, floating_ip_pool):
     ip = utils.get_public_ip(server, floating_ip_pool=floating_ip_pool)
+
     if not ip:
         raise Exception("Unable to find public ip of server")
 
@@ -93,11 +94,6 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'make_swap.sh'),
                    'make_swap.sh')
     ssh_client.ssh('bash -x make_swap.sh')
-
-    if volume:
-        ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'mount_volume.sh'),
-                       'mount_volume.sh')
-        ssh_client.ssh('bash -x mount_volume.sh')
 
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
@@ -145,9 +141,9 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
             raise
 
 
-def build_server(
-        client, name, image, flavor, cert, environment, puppetmaster, volume,
-        keep, net_label, floating_ip_pool, boot_from_volume):
+def build_server(client, name, image, flavor, cert, environment,
+                 puppetmaster, keep, net_label, floating_ip_pool,
+                 boot_from_volume):
     key = None
     server = None
 
@@ -191,14 +187,8 @@ def build_server(
     try:
         admin_pass = server.adminPass
         server = utils.wait_for_resource(server)
-        if volume:
-            vobj = client.volumes.create_server_volume(
-                server.id, volume, None)
-            if not vobj:
-                raise Exception("Couldn't attach volume")
-
         bootstrap_server(server, admin_pass, key, cert, environment, name,
-                         puppetmaster, volume, floating_ip_pool)
+                         puppetmaster, floating_ip_pool)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -233,9 +223,6 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="puppetmaster.openstack.org")
-    parser.add_argument("--volume", dest="volume",
-                        help="UUID of volume to attach to the new server.",
-                        default=None)
     parser.add_argument("--boot-from-volume", dest="boot_from_volume",
                         help="Create a boot volume for the server and use it.",
                         action='store_true',
@@ -287,8 +274,8 @@ def main():
     print "Found image", image
 
     build_server(client, options.name, image, flavor, cert,
-                 options.environment, options.server, options.volume,
-                 options.keep, options.net_label, options.floating_ip_pool,
+                 options.environment, options.server, options.keep,
+                 options.net_label, options.floating_ip_pool,
                  options.boot_from_volume)
     dns.print_dns(client, options.name)
 
