@@ -55,8 +55,9 @@ function is_opensuse {
 function _systemd_update {
     # there is a bug (rhbz#1261747) where systemd can fail to enable
     # services due to selinux errors after upgrade.  A work-around is
-    # to install the latest version here and restart the daemon after
-    # it is upgraded.
+    # to install the latest version of selinux and systemd here and
+    # restart the daemon for good measure after it is upgraded.
+    yum install selinux-policy
     yum install -y systemd
     systemctl daemon-reload
 }
