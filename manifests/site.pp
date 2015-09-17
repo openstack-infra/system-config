@@ -321,7 +321,11 @@ node 'eavesdrop.openstack.org' {
     statusbot_wiki_user     => hiera('statusbot_wiki_username', 'username'),
     statusbot_wiki_password => hiera('statusbot_wiki_password', 'XXX'),
     statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
+    # https://wiki.openstack.org/wiki/Infrastructure_Status
     statusbot_wiki_pageid   => '1781',
+    # https://wiki.openstack.org/wiki/Successes
+    statusbot_wiki_successpageid => '7717',
+    statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
     accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password', 'XXX'),
   }
