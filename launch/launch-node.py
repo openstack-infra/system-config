@@ -286,6 +286,11 @@ def main():
     image = images[0]
     print "Found image", image
 
+    if options.volume:
+        print "The --volume option does not support cinder; until it does"
+        print "it should not be used."
+        sys.exit(1)
+
     build_server(client, options.name, image, flavor, cert,
                  options.environment, options.server, options.volume,
                  options.keep, options.net_label, options.floating_ip_pool,
