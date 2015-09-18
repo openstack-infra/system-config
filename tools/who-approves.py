@@ -17,7 +17,7 @@
 
 # Description: When run using OpenStack's Gerrit server, this builds
 # JSON and YAML representations of repos with information on the
-# official owning project if any, integration status, and groups
+# official owning project team if any, deliverable tags, and groups
 # with approve rights listing the members of each along with their
 # Gerrit preferred E-mail addresses and usernames when available.
 
@@ -59,21 +59,22 @@
 #     ...
 #     >>> p = yaml.load(open('approvers.yaml'))
 #     >>> print('Total repos: %s' % len(p))
-#     Total repos: 659
+#     Total repos: 751
 #     >>> print('Total approvers: %s' % len(get_approvers(p)))
-#     Total approvers: 756
+#     Total approvers: 849
 #     >>>
-#     >>> o = {k: v for k, v in p.iteritems() if 'project' in v}
-#     >>> print('Repos in official projects: %s' % len(o))
-#     Repos in official projects: 275
+#     >>> o = {k: v for k, v in p.iteritems() if 'team' in v}
+#     >>> print('Repos for official teams: %s' % len(o))
+#     Repos for official teams: 380
 #     >>> print('OpenStack repo approvers: %s' % len(get_approvers(o)))
-#     OpenStack repo approvers: 339
+#     OpenStack repo approvers: 456
 #     >>>
-#     >>> i = {k: v for k, v in p.iteritems() if 'integrated' in v}
-#     >>> print('Repos in the integrated release: %s' % len(i))
-#     Repos in the integrated release: 15
-#     >>> print('Integrated repo approvers: %s' % len(get_approvers(i)))
-#     Integrated repo approvers: 154
+#     >>> i = {k: v for k, v in p.iteritems() if 'tags' in v
+#     ...      and 'release:managed' in v['tags']}
+#     >>> print('Repos under release management: %s' % len(i))
+#     Repos under release management: 77
+#     >>> print('Managed release repo approvers: %s' % len(get_approvers(i)))
+#     Managed release repo approvers: 245
 
 import getpass
 import json
@@ -111,17 +112,17 @@ for repo in repos_dump:
             repos[repo]['approvers'][aprv_group] = []
         if aprv_group not in aprv_groups:
             aprv_groups[aprv_group] = []
-for project in projects:
-    if 'projects' in projects[project]:
-        for repo in projects[project]['projects']:
-            if repo['repo'] in repos:
-                repos[repo['repo']]['project'] = project
-                # TODO (fungi): This could be expanded for
-                # additional tags.
-                if 'tags' in repo:
-                    for tag in repo['tags']:
-                        if tag['name'] == 'integrated-release':
-                            repos[repo['repo']]['integrated'] = True
+for team in projects:
+    if 'deliverables' in projects[team]:
+        for deli in projects[team]['deliverables']:
+            if 'repos' in projects[team]['deliverables'][deli]:
+                drepos = projects[team]['deliverables'][deli]['repos']
+                for repo in drepos:
+                    if repo in repos:
+                        repos[repo]['team'] = team
+                        if 'tags' in projects[team]['deliverables'][deli]:
+                            repos[repo]['tags'] = \
+                                projects[team]['deliverables'][deli]['tags']
 for aprv_group in aprv_groups.keys():
     aprv_groups[aprv_group] = json.loads(requests.get(
         gerrit_url + group_path % all_groups[aprv_group]['id'],

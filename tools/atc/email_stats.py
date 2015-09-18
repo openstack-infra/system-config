@@ -164,9 +164,10 @@ def repo_stats(repo, output, begin, end, keyfile, user):
 def get_repos(url):
     projects_yaml = yaml.load(requests.get(url).text)
     repos = []
-    for project in projects_yaml:
-        for repo in projects_yaml[project]['projects']:
-            repos.append(repo['repo'])
+    for team in projects_yaml:
+        for deliver in projects_yaml[team]['deliverables']:
+            for repo in projects_yaml[team]['deliverables'][deliver]['repos']:
+                repos.append(repo)
     return repos
 
 
