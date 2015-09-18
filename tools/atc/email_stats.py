@@ -161,13 +161,25 @@ def repo_stats(repo, output, begin, end, keyfile, user):
     print
 
 
-def get_repos(url):
+def get_repos(url, keyfile, user):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    client.load_system_host_keys()
+    client.connect(
+        'review.openstack.org', port=29418,
+        key_filename=os.path.expanduser(keyfile), username=user)
+    stdin, stdout, stderr = client.exec_command('gerrit ls-projects')
+    gerrit_repos = [x.strip() for x in stdout]
+
     projects_yaml = yaml.load(requests.get(url).text)
     repos = []
     for team in projects_yaml:
         for deliver in projects_yaml[team]['deliverables']:
             for repo in projects_yaml[team]['deliverables'][deliver]['repos']:
-                repos.append(repo)
+                for r in gerrit_repos:
+                    if re.search('/%s$' % repo.split('/')[1], r):
+                        repos.append(r)
+                        break
     return repos
 
 
@@ -206,7 +218,7 @@ def main():
         projects_url = PROJECTS_URL
         extra_atcs_url = EXTRA_ATCS_URL
 
-    for repo in get_repos(projects_url):
+    for repo in get_repos(projects_url, options.keyfile, options.user):
         output = 'out/%s.csv' % repo.split('/')[-1]
         repo_stats(repo, output, options.begin, options.end,
                    options.keyfile, options.user)
