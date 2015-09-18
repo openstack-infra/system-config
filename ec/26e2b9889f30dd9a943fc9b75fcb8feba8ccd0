@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jenkins
+Submitted-at: Fri, 18 Sep 2015 02:21:30 +0000
+Reviewed-on: https://review.openstack.org/210125
+Project: openstack-infra/system-config
+Branch: refs/heads/master
