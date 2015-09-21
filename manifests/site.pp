@@ -772,8 +772,6 @@ node /^ci-backup-.*\.openstack\.org$/ {
 node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
-    transifex_username       => 'openstackjenkins',
-    transifex_password       => hiera('transifex_password', 'XXX'),
     jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents', 'XXX'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents', 'XXX'),
