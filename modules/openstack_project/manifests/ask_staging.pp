@@ -109,6 +109,7 @@ class openstack_project::ask_staging (
     site_ssl_enabled      => true,
     site_ssl_cert_file    => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     site_ssl_key_file     => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    template_settings     => 'openstack_project/askbot/settings.py-staging.erb',
   }
 
   # askbot-theme openstack theme
