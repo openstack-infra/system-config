@@ -23,6 +23,7 @@ At a Glance
   * :file:`modules/openstack_project/manifests/review.pp`
 :Configuration:
   * :config:`gerritbot/channels.yaml`
+  * :config:`accessbot/channels.yaml`
 :Projects:
   * http://wiki.debian.org/MeetBot
   * http://sourceforge.net/projects/supybot/
@@ -53,6 +54,9 @@ control and is a requirement if you want any of the project bots in
 your channel.
 
 Join #openstack-infra if you have any trouble with any of these commands.
+
+NOTE: Channel admin should issue the access commands above BEFORE adding
+channel to gerritbot and accessbot, otherwise Jenkins will fail tests.
 
 Meetbot
 =======
@@ -211,6 +215,24 @@ Gerritbot's configuration is in :config:`gerritbot/channels.yaml`
 Teams can add their channel and go through the standard code review process to
 get the bot added to their channel. The configuration is organized by channel,
 with each project that a channel is interested in listed under the channel.
+
+.. _accessbot:
+
+Accessbot
+=========
+
+Accessbot defines access that should apply to all channels. Teams can add new
+channel to accessbot/channels.yaml and optionally keep channel operator
+permissions to the channel by specifying the full_mask option.
+
+Accessbot's configuration is in :config:`accessbot/channels.yaml`
+
+Example:
+
+::
+
+  - name: openstack-third-party-ci
+    mask: full_mask
 
 Basic Channel Operator Commands
 ===============================
