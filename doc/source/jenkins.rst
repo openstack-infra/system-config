@@ -97,7 +97,7 @@ Sysadmin
 ========
 
 Jenkins is largely hidden, and has no sensitive data exposed
-publically, so we use self-signed certs for Jenkins masters.
+publicly, so we use self-signed certs for Jenkins masters.
 
 After bringing up a jenkins node (16G memory instance if you use the
 stock jenkins.default) with puppet, log in and configure Jenkins by
