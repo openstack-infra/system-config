@@ -66,7 +66,7 @@ class openstack_project::release_slave (
     onlyif   => '[ `npm --version | cut -c 1` = "1" ]',
     require  => [
       Package['npm'],
-      File['/etc/npmrc'],
+      File['/usr/etc/npmrc'],
     ],
   }
 
@@ -95,12 +95,20 @@ class openstack_project::release_slave (
     require => File['/home/jenkins'],
   }
 
-  file { '/etc/npmrc':
+  file { '/usr/etc':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0666',
+  }
+
+  file { '/usr/etc/npmrc':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0666',
     content => template('openstack_project/npmrc_global.erb'),
+    require => File['/usr/etc']
   }
 
   file { '/home/jenkins/.jenkinsci-curl':
