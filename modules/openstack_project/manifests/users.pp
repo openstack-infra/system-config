@@ -164,4 +164,12 @@ class openstack_project::users {
     gid      => 2017,
   }
 
+  @user::virtual::localuser { 'yolanda':
+    realname => 'Yolanda Robla',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSR2NmJC8PSanHUpKJuaMmohG80COO2IPkE3Mxhr7US8P1B3p1c6lOrT6M1txRzBY8FlbxfOinGtutP+ADCB2taXfpO8UiaG9eOqojAT/PeP2Y2ov72rVMSWupLozUv2uAR5yyFVFHOjKPYGAa01aJtfzfJujSak8dM0ifFeFwgp/8RBGEfC7atq+45TdrfAURRcEgcOLiF5Aq6fprCOwpllnrH6VoId9YS7u/5xF2/zBjr9PuOP7jEgCaL/+FNqu7jgj87aG5jiZPlweb7GTLJON9H6eFpyfpoJE0sZ1yR9Q+e9FAqQIA44Zi748qKBlFKbLxzoC4mc0SbNUAleEL',
+    key_id   => 'yolanda@infra',
+    uid      => 2018,
+    gid      => 2018,
+  }
+
 }
