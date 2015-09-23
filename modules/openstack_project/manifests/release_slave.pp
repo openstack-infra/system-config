@@ -55,13 +55,26 @@ class openstack_project::release_slave (
 
   package { ['nodejs', 'nodejs-legacy', 'npm']:
     ensure => latest,
-    before => Exec['upgrade npm'],
+    before => [
+      Exec['upgrade npm']
+    ]
+  }
+
+  exec { 'assert npm@2':
+    command  => 'npm install npm@2 -g --upgrade',
+    path     => '/usr/local/bin:/usr/bin',
+    onlyif   => '[ `npm --version | cut -c 1` = "1" ]',
+    require  => [
+      Package['npm'],
+      File['/etc/npmrc'],
+    ],
   }
 
   exec { 'upgrade npm':
     command  => 'npm install npm -g --upgrade',
     path     => '/usr/local/bin:/usr/bin',
-    onlyif   => '[ `npm view npm version` != `npm --version` ]'
+    onlyif   => '[ `npm view npm version` != `npm --version` ]',
+    require  => Exec['assert npm@2'],
   }
 
   file { '/home/jenkins/.pypirc':
@@ -78,8 +91,16 @@ class openstack_project::release_slave (
     owner   => 'jenkins',
     group   => 'jenkins',
     mode    => '0600',
-    content => template('openstack_project/npmrc.erb'),
+    content => template('openstack_project/npmrc_jenkins.erb'),
     require => File['/home/jenkins'],
+  }
+
+  file { '/etc/npmrc':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0666',
+    content => template('openstack_project/npmrc_global.erb'),
   }
 
   file { '/home/jenkins/.jenkinsci-curl':
