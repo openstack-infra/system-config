@@ -16,6 +16,12 @@
 
 ROOT=$(readlink -fn $(dirname $0)/..)
 export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
+# MODULE_ENV_FILE sets the list of modules to read from and install and can be
+# overridden by setting it outside the script.
+export MODULE_ENV_FILE=${MODULE_ENV_FILE:-modules.env}
+# PUPPET_MANIFEST sets the manifest that is being tested and can be overridden
+# by setting it outside the script.
+export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
 
 export PUPPET_INTEGRATION_TEST=1
 
@@ -40,7 +46,9 @@ declare -A INTEGRATION_MODULES
 
 
 project_names=""
-source modules.env
+
+source $MODULE_ENV_FILE
+
 for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_scope=$(basename `dirname $MOD`)
     repo_name=`basename $MOD`
@@ -57,7 +65,7 @@ if [[ ! -d applytest ]] ; then
 fi
 
 # First split the variables at the beginning of the file
-csplit -sf applytest/prep manifests/site.pp '/^$/' {0}
+csplit -sf applytest/prep $PUPPET_MANIFEST '/^$/' {0}
 # Then split the class defs.
 csplit -sf applytest/puppetapplytest applytest/prep01 '/^}$/' {*}
 # Remove } header left by csplit
