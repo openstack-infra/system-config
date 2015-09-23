@@ -156,4 +156,19 @@ class openstack_project::users {
     gid      => 2016,
   }
 
+  @user::virtual::localuser { 'nibz':
+    realname => 'Spencer Krum',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDTDia7zLp6NB/DdzhGW/4MDgaQ1yemfF+fGFctrSbBZzP2Aj3RUlBh4Mut3bTIqp/PKNMXVZQbvig5nqF3sB87ZPvmk+7WluFFcQN1RIZnvkYXjF64C+G5PkEZOQW9nqEeElSCV2lXgK98FPrGtK6HgQlYxH5RJa6cufRwYLXLsAwfKRcS3P5oRU2KDORNm6uBfUuX0TyPgtEjYsjCWcffoW+E8kvZbx1DKxF4+u0mWSdkg0P40aAY10mHACtJ4hnu7xNa5Z9Oru1rA1KWL5NHISgy9t5zC1/0jWfYi+tqToBgUCyB8stWgNpHh+QJrpS8CoCDzQLBar0ynnOxBfHH2+s9xJapQNi6ZOC3khWkoxUJn2Gs9FXqow3zGSmEuEKbbUvaGC58U4S0xFcZzF+sOzjRJtw66wE2pQN5Pj/Qw09w6gt05g4nxoxkRVCwMLdnyoIY1oFmywJX3xC1Utu2oCNfgZSn78rqVkE9e11LczPNGvYjl6xQo1r254E0w3QBgo+LaTK5FBRCAbJ76n0IBJ8SZe9foPWjKTGlbCevM6KO8lm58/0m0EfMf9457ZM9KhyXwYvnb+iR7huGC+pwgGemJ4D6vjeE9EUNGSq6igg+v+cl1DHOxVb0s0Tx2T6DMh3usB4C1uoNCR303cmzrNZ94KLXRICQArSClQI7OQ==',
+    key_id   => 'nibz@hertz',
+    uid      => 2017,
+    gid      => 2017,
+  }
+
+  @user::virtual::localuser { 'yolanda':
+    realname => 'Yolanda Robla',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDjsI78RL3dd+VCzywsoZDlEMfHLgDVGZMSP3J1zPL5xoM/cT4ZdoKLx5UnogDJGruLNKr5GJn6UfXPIt2usGn2BXZQ4I/ivLJXi9M+7ugowGCcfLdEwjDoW4pvDFccgY6FxQjhV+ceSdFl9RQKgRkbRvnK48W6bgf92bWSbil/Wzf4Oo7ut3SRmVF9f6DKSkizHbMJUhnObfdlRQCMlr3FP8rNqtWoobnw8STB1gDVYBH4E3MYB4gqbKEA5hmtfQ1HwPdwOjHSzXwPG/5y8du8iqFrS4LGVK4uVm3mwF7uPL+8tD7Z6JU+kH4em88GZL0qABXVvplRxaY3gyIzupX7',
+    key_id   => 'yolanda@infra',
+    uid      => 2018,
+    gid      => 2018,
+  }
 }
