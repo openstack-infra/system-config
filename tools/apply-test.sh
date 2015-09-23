@@ -40,7 +40,10 @@ declare -A INTEGRATION_MODULES
 
 
 project_names=""
-source modules.env
+
+export MODULE_ENV_FILE=${MODULE_ENV_FILE:-modules.env}
+source $MODULE_ENV_FILE
+
 for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_scope=$(basename `dirname $MOD`)
     repo_name=`basename $MOD`
@@ -56,8 +59,9 @@ if [[ ! -d applytest ]] ; then
     mkdir applytest
 fi
 
+export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
 # First split the variables at the beginning of the file
-csplit -sf applytest/prep manifests/site.pp '/^$/' {0}
+csplit -sf applytest/prep $PUPPET_MANIFEST '/^$/' {0}
 # Then split the class defs.
 csplit -sf applytest/puppetapplytest applytest/prep01 '/^}$/' {*}
 # Remove } header left by csplit
