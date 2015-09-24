@@ -30,7 +30,7 @@ class openstack_project::proposal_slave (
     project_config_repo => $project_config_repo,
   }
 
-  package { ['transifex-client', 'Babel']:
+  package { ['transifex-client', 'Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
