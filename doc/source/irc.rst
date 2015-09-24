@@ -164,7 +164,9 @@ of logging channel activity, not just meetings. Standard channel logs
 are sent to http://eavesdrop.openstack.org/irclogs/
 
 The configuration for specific channel logging can be found in
-:file:`modules/openstack_project/manifests/eavesdrop.pp`.
+:file:`modules/openstack_project/manifests/eavesdrop.pp`. To enable
+logging in your channel, you need to add the channel name to this
+configuration file.
 
 .. _statusbot:
 
