@@ -7,8 +7,6 @@ class openstack_project::proposal_slave (
   $jenkins_ssh_public_key,
   $proposal_ssh_public_key,
   $proposal_ssh_private_key,
-  $transifex_password = '',
-  $transifex_username = 'openstackci',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
@@ -30,19 +28,10 @@ class openstack_project::proposal_slave (
     project_config_repo => $project_config_repo,
   }
 
-  package { ['transifex-client', 'Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1']:
+  package { ['Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
-  }
-
-  file { '/home/jenkins/.transifexrc':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0600',
-    content => template('openstack_project/transifexrc.erb'),
-    require => User['jenkins'],
   }
 
   file { '/home/jenkins/.ssh/id_rsa':
