@@ -82,6 +82,7 @@ class openstack_project::eavesdrop (
         '#openstack-neutron-release',
         '#openstack-nova',
         '#openstack-operators',
+        '#openstack-opw',
         '#openstack-oslo',
         '#openstack-qa',
         '#openstack-rally',
