@@ -38,7 +38,6 @@ class openstack_project::eavesdrop (
         '#dox',
         '#heat',
         '#kolla',
-        '#magnetodb',
         '#murano',
         '#openstack',
         '#openstack-ansible',
