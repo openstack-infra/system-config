@@ -112,6 +112,10 @@ EOF
     ln -s /usr/bin/pip /usr/bin/pip-python
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+
+    # install RDO repo as well; this covers a few things like
+    # openvswitch that aren't available for EPEL
+    yum install -y https://rdoproject.org/repos/rdo-release.rpm
 }
 
 function setup_puppet_rhel6 {
