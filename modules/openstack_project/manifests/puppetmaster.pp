@@ -1,6 +1,7 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
+  $jenkins_api_key,
   $root_rsa_key = 'xxx',
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
@@ -155,6 +156,16 @@ class openstack_project::puppetmaster (
       puppetdb_soft_write_failure  => true,
       manage_storeconfigs          => false,
     }
+  }
+
+# Jenkins master management
+  cron { 'restartjenkinsmasters':
+    user        => 'root',
+    # Run through all masters onces a week.
+    day         => '6',
+    hour        => '0',
+    minute      => '15',
+    command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /etc/ansible/playbooks/restart_jenkins_masters.yaml --extra-vars 'password=${jenkins_api_key}'",
   }
 
 # Playbooks

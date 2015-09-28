@@ -1,0 +1,18 @@
+---
+- hosts: 'jenkins0*.openstack.org'
+  # Treat any errors as fatal so that we don't stop all the jenkins
+  # masters.
+  any_errors_fatal: true
+  tasks:
+    - shell: '/usr/local/jenkins/bin/safe_jenkins_shutdown --url https://{{ ansible_fqdn }}/ --user hudson-openstack --password {{ password }}'
+      notify:
+        - stop jenkins
+        - really stop jenkins
+        - start jenkins
+    - handlers:
+        - name: stop jenkins
+          service: name=jenkins state=stopped
+        - name: really stop jenkins
+          shell: 'pkill -9 -U jenkins'
+        - name: start jenkins
+          service: name=jenkins state=started
