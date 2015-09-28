@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Submitted-by: Jenkins
+Submitted-at: Mon, 28 Sep 2015 23:33:16 +0000
+Reviewed-on: https://review.openstack.org/98029
+Project: openstack-infra/system-config
+Branch: refs/heads/master
