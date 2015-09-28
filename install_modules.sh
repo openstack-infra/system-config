@@ -68,11 +68,6 @@ fi
 
 MODULE_LIST=`puppet module list --color=false`
 
-# Transition away from old things
-if [ -d /etc/puppet/modules/vcsrepo/.git ]; then
-    rm -rf /etc/puppet/modules/vcsrepo
-fi
-
 # Install all the modules
 for MOD in ${!MODULES[*]} ; do
     # If the module at the current version does not exist upgrade or install it.
