@@ -53,28 +53,25 @@ class openstack_project::release_slave (
     require  => Class['pip'],
   }
 
-  package { ['nodejs', 'nodejs-legacy', 'npm']:
-    ensure => latest,
-    before => [
-      Exec['upgrade npm']
-    ]
+  exec { 'uninstall /usr/local/bin/npm':
+    command => 'npm uninstall npm --prefix=/usr/local -g',
+    onlyif  => 'test -d /usr/local/lib/node_modules',
+    path    => '/usr/local/bin:/usr/bin',
   }
 
-  exec { 'assert npm@2':
-    command  => 'npm install npm@2 -g --upgrade',
-    path     => '/usr/local/bin:/usr/bin',
-    onlyif   => '[ `npm --version | cut -c 1` = "1" ]',
-    require  => [
-      Package['npm'],
-      File['/etc/npmrc'],
-    ],
+  package { ['npm', 'nodejs', 'nodejs-legacy']:
+    ensure  => purged,
+    require => Exec['uninstall /usr/local/bin/npm'],
   }
 
-  exec { 'upgrade npm':
-    command  => 'npm install npm -g --upgrade',
-    path     => '/usr/local/bin:/usr/bin',
-    onlyif   => '[ `npm view npm version` != `npm --version` ]',
-    require  => Exec['assert npm@2'],
+  file { ['/usr/share/npm',
+    '/usr/lib/node_modules',
+    '/root/.npm',
+    '/etc/npmrc',
+    '/home/jenkins/.npmrc']:
+    ensure  => absent,
+    force   => true,
+    require => Package['npm']
   }
 
   file { '/home/jenkins/.pypirc':
@@ -84,23 +81,6 @@ class openstack_project::release_slave (
     mode    => '0600',
     content => template('openstack_project/pypirc.erb'),
     require => File['/home/jenkins'],
-  }
-
-  file { '/home/jenkins/.npmrc':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0600',
-    content => template('openstack_project/npmrc_jenkins.erb'),
-    require => File['/home/jenkins'],
-  }
-
-  file { '/etc/npmrc':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0666',
-    content => template('openstack_project/npmrc_global.erb'),
   }
 
   file { '/home/jenkins/.jenkinsci-curl':
