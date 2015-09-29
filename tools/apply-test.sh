@@ -47,7 +47,22 @@ for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_names+=" $project_scope/$repo_name"
 done
 
-sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
+zuul_cloner_timed() {
+    local cmd="sudo -E /usr/zuul-env/bin/zuul-cloner"
+    local count=0
+    local timeout=${ZUUL_CLONER_TIMEOUT:-"2m"}
+    until timeout -s SIGINT ${timeout} $cmd "$@"; do
+        count=$(($count + 1))
+        echo "timeout ${count} for zuul-cloner call: [$cmd $@]"
+        if [ $count -eq 3 ]; then
+            echo $LINENO "Maximum of 3 zuul-cloner retries reached"
+            exit 1
+        fi
+        sleep 5
+    done
+}
+
+zuul_cloner_timed -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     $project_names
 
