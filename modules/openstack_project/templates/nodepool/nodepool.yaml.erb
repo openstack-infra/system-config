@@ -222,6 +222,16 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+  - name: fedora-22
+    image: fedora-22
+    ready-script: configure_mirror.sh
+    min-ready: 1
+    providers:
+      - name: hpcloud-b1
+      - name: hpcloud-b2
+      - name: hpcloud-b3
+      - name: hpcloud-b4
+      - name: hpcloud-b5
   - name: tripleo-precise
     image: tripleo-precise
     min-ready: 8
@@ -568,6 +578,12 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+      - name: fedora-22
+        min-ram: 30720
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b2
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -652,6 +668,12 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+      - name: fedora-22
+        min-ram: 30720
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b3
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -733,6 +755,12 @@ providers:
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+      - name: fedora-22
+        min-ram: 30720
+        diskimage: fedora-22
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
@@ -821,6 +849,12 @@ providers:
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
+      - name: fedora-22
+        min-ram: 30720
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
   - name: hpcloud-b5
     region-name: 'region-b.geo-1'
     cloud: hpcloud
@@ -904,6 +938,12 @@ providers:
       - name: devstack-fedora21-dib
         min-ram: 30720
         diskimage: devstack-fedora21-dib
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
+      - name: fedora-22
+        min-ram: 30720
+        diskimage: fedora-22
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
         config-drive: true
@@ -1075,6 +1115,19 @@ diskimages:
       - node-devstack
       - cache-bindep
     release: 21
+    env-vars:
+      TMPDIR: /opt/dib_tmp
+      DIB_IMAGE_CACHE: /opt/dib_cache
+      QEMU_IMG_OPTIONS: compat=0.10
+  - name: fedora-22
+    elements:
+      - fedora
+      - vm
+      - openstack-repos
+      - puppet
+      - nodepool-base
+      - node-devstack
+    release: 22
     env-vars:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
