@@ -22,7 +22,7 @@ At a Glance
   * :config:`nodepool/scripts/`
   * :config:`nodepool/elements/`
 :Projects:
-  * https://git.openstack.org/openstack-infra/nodepool
+  * https://git.openstack.org/cgit/openstack-infra/nodepool
 :Bugs:
   * https://storyboard.openstack.org/#!/project/668
 :Resources:
