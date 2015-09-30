@@ -1,0 +1,12 @@
+<%
+   require 'base64'
+%>
+init.author.name=<%= jenkins_gitfullname %>
+init.author.email=<%= jenkins_gitemail %>
+init.author.url=<%= npm_userurl %>
+tag-version-prefix=
+sign-git-tag=true
+
+//registry.npmjs.org/:username=<%= npm_username %>
+//registry.npmjs.org/:_password=<%= Base64.encode64(npm_userpassword) %>
+//registry.npmjs.org/:email=<%= jenkins_gitemail %>
