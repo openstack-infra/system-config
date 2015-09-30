@@ -53,25 +53,17 @@ class openstack_project::release_slave (
     require  => Class['pip'],
   }
 
-  exec { 'uninstall /usr/local/bin/npm':
-    command => 'npm uninstall npm --prefix=/usr/local -g',
-    onlyif  => 'test -d /usr/local/lib/node_modules',
-    path    => '/usr/local/bin:/usr/bin',
+  class { '::nodejs':
+    repo_url_suffix => 'node_0.12',
   }
 
-  package { ['npm', 'nodejs', 'nodejs-legacy']:
-    ensure  => purged,
-    require => Exec['uninstall /usr/local/bin/npm'],
-  }
-
-  file { ['/usr/share/npm',
-    '/usr/lib/node_modules',
-    '/root/.npm',
-    '/etc/npmrc',
-    '/home/jenkins/.npmrc']:
-    ensure  => absent,
-    force   => true,
-    require => Package['npm']
+  file { '/home/jenkins/.npmrc':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/npmrc.erb'),
+    require => File['/home/jenkins'],
   }
 
   file { '/home/jenkins/.pypirc':
