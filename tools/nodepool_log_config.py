@@ -65,7 +65,7 @@ handlers=debug,normal
 qualname=nodepool
 
 [logger_image]
-level=INFO
+level=DEBUG
 handlers=image
 qualname=nodepool.image.build
 propagate=0
@@ -89,7 +89,7 @@ formatter=simple
 args=('%(log_dir)s/nodepool.log', 'H', 8, 30,)
 
 [handler_image]
-level=INFO
+level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('%(image_log_dir)s/image.log', 'H', 8, 30,)
@@ -104,7 +104,7 @@ datefmt=
 
 _IMAGE_HANDLER = """
 [handler_%(title)s]
-level=INFO
+level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('%(image_log_dir)s/%(filename)s', 'H', 8, 30,)
@@ -112,7 +112,7 @@ args=('%(image_log_dir)s/%(filename)s', 'H', 8, 30,)
 
 _IMAGE_LOGGER = """
 [logger_%(title)s]
-level=INFO
+level=DEBUG
 handlers=%(handler)s
 qualname=nodepool.image.build.%(qualname)s
 propagate=0
