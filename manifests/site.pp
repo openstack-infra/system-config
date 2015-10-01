@@ -999,10 +999,13 @@ node 'translate-dev.openstack.org' {
 # Node-OS: trusty
 node 'apps.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { '::apps_site':
+    ssl_cert_file_contents  => hiera('apps_ssl_cert_file_contents', 'XXX'),
+    ssl_key_file_contents   => hiera('apps_ssl_key_file_contents', 'XXX'),
+    ssl_chain_file_contents => hiera('apps_ssl_chain_file_contents', 'XXX'),
   }
 }
 
