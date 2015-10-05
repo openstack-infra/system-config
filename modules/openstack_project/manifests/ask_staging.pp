@@ -92,36 +92,37 @@ class openstack_project::ask_staging (
 
   # askbot site
   class { 'askbot':
-    db_provider           => 'pgsql',
-    db_name               => $db_name,
-    db_user               => $db_user,
-    db_password           => $db_password,
-    redis_enabled         => true,
-    redis_port            => $redis_port,
-    redis_max_memory      => $redis_max_memory,
-    redis_bind            => $redis_bind,
-    redis_password        => $redis_password,
-    custom_theme_enabled  => true,
-    custom_theme_name     => 'os',
-    site_name             => 'ask-staging.openstack.org',
-    askbot_debug          => true,
-    solr_enabled          => true,
-    site_ssl_enabled      => true,
-    site_ssl_cert_file    => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-    site_ssl_key_file     => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    db_provider          => 'pgsql',
+    db_name              => $db_name,
+    db_user              => $db_user,
+    db_password          => $db_password,
+    redis_enabled        => true,
+    redis_port           => $redis_port,
+    redis_max_memory     => $redis_max_memory,
+    redis_bind           => $redis_bind,
+    redis_password       => $redis_password,
+    custom_theme_enabled => true,
+    custom_theme_name    => 'os',
+    site_name            => 'ask-staging.openstack.org',
+    askbot_debug         => true,
+    solr_enabled         => true,
+    site_ssl_enabled     => true,
+    site_ssl_cert_file   => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    site_ssl_key_file    => '/etc/ssl/private/ssl-cert-snakeoil.key',
   }
 
   # askbot-theme openstack theme
-  vcsrepo { '/srv/askbot-site/themes':
-    ensure   => latest,
-    provider => git,
-    revision => 'feature/development',
-    source   => 'https://git.openstack.org/openstack-infra/askbot-theme',
-    require  => [
+  git { 'askbot-theme':
+    ensure  => present,
+    path    => '/srv/askbot-site/themes',
+    branch  => 'feature/development',
+    origin  => 'https://git.openstack.org/openstack-infra/askbot-theme',
+    latest  => true,
+    require => [
       File['/srv/askbot-site'], Package['git']
     ],
-    before   => Exec['askbot-syncdb'],
-    notify   => [
+    before  => Exec['askbot-syncdb'],
+    notify  => [
       Exec['theme-bundle-install-os'],
       Exec['theme-bundle-compile-os'],
       Exec['askbot-static-generate'],
@@ -129,7 +130,7 @@ class openstack_project::ask_staging (
   }
 
   askbot::theme::compass { 'os':
-    require => Vcsrepo['/srv/askbot-site/themes'],
+    require => Git['askbot-theme'],
     before  => Exec['askbot-static-generate'],
   }
 }
