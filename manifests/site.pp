@@ -1104,4 +1104,52 @@ node 'codesearch.openstack.org' {
   }
 }
 
+node /^baremetal..\.hpuswest\.ic\.openstack\.org$/ {
+  class { '::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+    region               => 'hpuswest',
+    ipmi_passwords       => hiera('ipmi_west_passwords', {})
+  }
+}
+
+node /^baremetal..\.hpuseast\.ic\.openstack\.org$/ {
+  class { '::infracloud::bifrost':
+    ironic_db_password   => hiera('ironic_db_password', 'XXX'),
+    mysql_password       => hiera('bifrost_mysql_password', 'XXX'),
+    region               => 'hpuseast',
+    ipmi_passwords       => hiera('ipmi_east_passwords', {})
+  }
+}
+
+# Node-OS: trusty
+node /^compute...\.hpuswest\.ic\.openstack\.org$/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::infracloud_compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password', 'XXX'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_admin_password           => hiera('neutron_admin_password', 'XXX'),
+    controller_public_address        => 'controller01.hpuswest.ic.openstack.org',
+    controller_management_address    => '10.10.16.154',
+  }
+}
+
+# Node-OS: trusty
+node /^compute...\.hpuseast\.ic\.openstack\.org$/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::infracloud_compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password', 'XXX'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password', 'XXX'),
+    neutron_admin_password           => hiera('neutron_admin_password', 'XXX'),
+    controller_public_address        => 'controller01.hpuseast.ic.openstack.org',
+    controller_management_address    => 'xx.xx.xx.xx',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
