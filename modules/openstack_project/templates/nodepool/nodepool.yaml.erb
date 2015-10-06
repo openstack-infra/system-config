@@ -129,6 +129,7 @@ labels:
       - name: rax-dfw
       - name: rax-ord
       - name: rax-iad
+      - name: ovh-gra1
   - name: ubuntu-trusty-check
     image: ubuntu-trusty-check
     min-ready: 1
@@ -148,6 +149,7 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
+      - name: ovh-gra1
   - name: devstack-trusty-2-node
     image: devstack-trusty
     ready-script: multinode_setup.sh
@@ -952,11 +954,17 @@ providers:
     cloud: ovh
     api-timeout: 60
     boot-timeout: 120
-    max-servers: 50
+    max-servers: 2
     rate: 0.1
     image-type: raw
     images:
       - name: ubuntu-trusty-check
+        min-ram: 8000
+        name-filter: 'ssd-osFoundation'
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: ubuntu-trusty
         min-ram: 8000
         name-filter: 'ssd-osFoundation'
         diskimage: ubuntu-trusty
