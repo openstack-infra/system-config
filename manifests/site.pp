@@ -1103,4 +1103,20 @@ node 'codesearch.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /^compute...\.hpuswest\.ic\.openstack\.org$/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    controller_public_address        => 'controller00.hpuswest.ic.openstack.org',
+    controller_management_address    => '10.10.16.146',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
