@@ -25,6 +25,8 @@ export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
 
 export PUPPET_INTEGRATION_TEST=1
 
+sudo rm -rf /etc/puppet/modules/*
+
 cat > clonemap.yaml <<EOF
 clonemap:
   - name: '(.*?)/puppet-(.*)'
