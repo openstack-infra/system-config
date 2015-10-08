@@ -23,9 +23,11 @@
   # only is guarenteed.
   SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!AES256:!aNULL:!eNULL:!MD5:!DSS:!PSK:!SRP
   SSLHonorCipherOrder on
-  SSLCertificateFile /etc/ssl/certs/<%= @vhost_name %>.pem
-  SSLCertificateKeyFile /etc/ssl/private/<%= @vhost_name %>.key
-  SSLCertificateChainFile /etc/ssl/certs/<%= @vhost_name %>_intermediate.pem
+  SSLCertificateFile <%= scope['openstack_project::static::cert_file'] %>
+  SSLCertificateKeyFile <%= scope['openstack_project::static::key_file'] %>
+<% if scope['openstack_project::static::chain_file'] != '' %>
+  SSLCertificateChainFile <%= scope['openstack_project::static::chain_file'] %>
+<% end %>
   <Directory <%= @docroot %>>
     Allow from all
     Satisfy Any
