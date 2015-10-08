@@ -23,8 +23,6 @@ class openstack_project::translate(
   $zanata_server_user = '',
   $zanata_server_api_key = '',
   $zanata_wildfly_version = '',
-  $zanata_url = '',
-  $zanata_checksum = '',
   $project_config_repo = '',
   $openid_url = '',
   $vhost_name = $::fqdn,
@@ -52,8 +50,6 @@ class openstack_project::translate(
     zanata_admin_users          => $admin_users,
     zanata_default_from_address => $from_address,
     zanata_wildfly_version      => $wildfly_version,
-    zanata_url                  => $zanata_url,
-    zanata_checksum             => $zanata_checksum,
   }
 
   class { '::zanata::apache':
