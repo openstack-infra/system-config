@@ -8,9 +8,12 @@ class openstack_project::static (
   $swift_region_name = '',
   $swift_default_container = '',
   $project_config_repo = '',
-  $security_ssl_cert_file_contents = '',
-  $security_ssl_key_file_contents = '',
-  $security_ssl_chain_file_contents = '',
+  $ssl_cert_file = '/etc/ssl/certs/static.openstack.org.pem',
+  $ssl_cert_file_contents = '',
+  $ssl_key_file = '/etc/ssl/private/static.openstack.org.key',
+  $ssl_key_file_contents = '',
+  $ssl_chain_file = '/etc/ssl/certs/static.openstack.org_intermediate.pem',
+  $ssl_chain_file_contents = '',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
@@ -42,6 +45,47 @@ class openstack_project::static (
     file { '/srv/static':
       ensure => directory,
     }
+  }
+
+  file { '/etc/ssl/certs':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { '/etc/ssl/private':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+
+  file { $ssl_cert_file:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $ssl_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+
+  file { $ssl_key_file:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $ssl_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+
+  file { $ssl_chain_file:
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $ssl_chain_file_contents,
+    require => File['/etc/ssl/certs'],
   }
 
   ###########################################################
@@ -120,7 +164,12 @@ class openstack_project::static (
     ssl        => true,
     template   => 'openstack_project/security.vhost.erb',
     vhost_name => 'security.openstack.org',
-    require    => File['/srv/static/security'],
+    require    => [
+      File['/srv/static/security'],
+      File[$ssl_cert_file],
+      File[$ssl_key_file],
+      File[$ssl_chain_file],
+    ],
   }
 
   file { '/srv/static/security':
@@ -130,48 +179,15 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
-  file { '/etc/ssl/certs':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-
-  file { '/etc/ssl/private':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0700',
-  }
-
+  #TODO(fungi) this cleanup can be removed once puppet has deleted them
   file { '/etc/ssl/certs/security.openstack.org.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => $security_ssl_cert_file_contents,
-    require => File['/etc/ssl/certs'],
-    before  => Httpd::Vhost['security.openstack.org'],
+    ensure  => absent,
   }
-
   file { '/etc/ssl/private/security.openstack.org.key':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    content => $security_ssl_key_file_contents,
-    require => File['/etc/ssl/private'],
-    before  => Httpd::Vhost['security.openstack.org'],
+    ensure  => absent,
   }
-
   file { '/etc/ssl/certs/security.openstack.org_intermediate.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => $security_ssl_chain_file_contents,
-    require => File['/etc/ssl/certs'],
-    before  => Httpd::Vhost['security.openstack.org'],
+    ensure  => absent,
   }
 
   ###########################################################
