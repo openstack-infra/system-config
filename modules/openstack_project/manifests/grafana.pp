@@ -10,9 +10,12 @@ class openstack_project::grafana (
   $admin_password = '',
   $admin_user = 'admin',
   $grafana_cfg = {},
+  $http_host = '127.0.0.1',
+  $http_port = '8080',
   $mysql_host = '127.0.0.1',
   $mysql_name = 'grafana',
   $mysql_user = 'grafana',
+  $project_config_repo = '',
   $secret_key = '',
   $vhost_name = $::fqdn,
 ) {
@@ -40,8 +43,8 @@ class openstack_project::grafana (
       secret_key     => $secret_key,
     },
     'server'   => {
-      http_addr => '127.0.0.1',
-      http_port => 8080,
+      http_addr => $http_host,
+      http_port => $http_port,
     },
     'users'    => {
       allow_sign_up => false,
@@ -75,5 +78,15 @@ class openstack_project::grafana (
   }
   httpd_mod { 'proxy_http':
     ensure => present,
+  }
+
+  class { '::project_config':
+    url  => $project_config_repo,
+  }
+
+  class { '::grafyaml':
+    config_dir  => $::project_config::grafana_dashboards_dir,
+    grafana_url => "http://${admin_user}:${admin_password}@${http_host}:${http_port}",
+    require     => Class['grafana'],
   }
 }
