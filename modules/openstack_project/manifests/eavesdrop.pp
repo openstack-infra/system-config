@@ -11,6 +11,8 @@ class openstack_project::eavesdrop (
   $statusbot_wiki_password = '',
   $statusbot_wiki_url = '',
   $statusbot_wiki_pageid = '',
+  $statusbot_wiki_successpageid = '',
+  $statusbot_irclogs_url = '',
   $accessbot_nick = '',
   $accessbot_password = '',
   $project_config_repo = '',
@@ -118,6 +120,8 @@ class openstack_project::eavesdrop (
     wiki_password => $statusbot_wiki_password,
     wiki_url      => $statusbot_wiki_url,
     wiki_pageid   => $statusbot_wiki_pageid,
+    wiki_successpageid => $statusbot_wiki_successpageid,
+    irclogs_url   => $statusbot_irclogs_url,
   }
 
   file { '/srv/meetbot-openstack/alert':

@@ -174,8 +174,9 @@ Statusbot
 Statusbot is used to distribute urgent information from the
 Infrastructure team to OpenStack channels.  It updates the
 `Infrastructure Status wiki page
-<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.  It
-supports the following public message commands when issued by
+<https://wiki.openstack.org/wiki/Infrastructure_Status>`_.
+
+It supports the following public message commands when issued by
 authenticated and whitelisted users from the channels the bot is
 listening to, including #openstack-infra:
 
@@ -196,6 +197,13 @@ listening to, including #openstack-infra:
   Remove alert box and restore channel topics, optionally announcing
   and logging an "okay" message.
 
+It supports the following commands when issued by any IRC user from
+the channels the bot is listening to:
+
+#success [MESSAGE]
+  Log a message of success to the "Successes" wiki page. This is meant
+  as a collection mechanism for little celebration of small successes
+  in OpenStack development.
 
 .. _gerritbot:
 
