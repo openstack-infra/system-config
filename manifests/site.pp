@@ -613,15 +613,15 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
-  class { 'openstack_project::nodepool_prod':
+  class { '::openstackci::nodepool':
+    vhost_name               => 'nodepool.openstack.org',
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
-    nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
+    environment              => {
+      'NODEPOOL_SSH_KEY' => hiera('jenkins_ssh_private_key_contents', 'XXX'),
+    },
     statsd_host              => 'graphite.openstack.org',
-    jenkins_api_user         => hiera('jenkins_api_user', 'username'),
-    jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),
-    jenkins_credentials_id   => hiera('jenkins_credentials_id', 'XXX'),
     jenkins_masters          => [
       {
         name        => 'jenkins01',
@@ -673,6 +673,9 @@ node 'nodepool.openstack.org' {
         credentials => hiera('jenkins_credentials_id', 'XXX'),
       },
     ],
+  }
+
+  class { 'openstack_project::nodepool_prod':
     rackspace_username       => hiera('nodepool_rackspace_username', 'username'),
     rackspace_password       => hiera('nodepool_rackspace_password', 'XXX'),
     rackspace_project        => hiera('nodepool_rackspace_project', 'project'),
