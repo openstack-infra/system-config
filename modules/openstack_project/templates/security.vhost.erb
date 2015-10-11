@@ -29,7 +29,10 @@
   SSLCertificateChainFile <%= scope['openstack_project::static::chain_file'] %>
 <% end %>
   <Directory <%= @docroot %>>
-    Allow from all
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    Order allow,deny
+    allow from all
     Satisfy Any
   </Directory>
   LogLevel warn
