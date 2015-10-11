@@ -229,17 +229,6 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
-  #TODO(fungi) this cleanup can be removed once puppet has deleted them
-  file { '/etc/ssl/certs/security.openstack.org.pem':
-    ensure  => absent,
-  }
-  file { '/etc/ssl/private/security.openstack.org.key':
-    ensure  => absent,
-  }
-  file { '/etc/ssl/certs/security.openstack.org_intermediate.pem':
-    ensure  => absent,
-  }
-
   ###########################################################
   # Governance
 
