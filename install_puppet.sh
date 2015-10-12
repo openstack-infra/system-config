@@ -196,7 +196,7 @@ Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
 
-    puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+    puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
     wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
     dpkg -i $puppet_deb
     rm $puppet_deb
