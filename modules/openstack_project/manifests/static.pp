@@ -143,10 +143,17 @@ class openstack_project::static (
   # Tarballs
 
   ::httpd::vhost { 'tarballs.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/tarballs',
-    require  => File['/srv/static/tarballs'],
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/tarballs',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'tarballs.openstack.org',
+    require    => [
+      File['/srv/static/tarballs'],
+      File[$cert_file],
+      File[$key_file],
+    ],
   }
 
   file { '/srv/static/tarballs':
