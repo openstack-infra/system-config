@@ -1,0 +1,3 @@
+gearman-host: logstash.openstack.org
+gearman-port: 4730
+config: /etc/logstash/subunit2sql.conf

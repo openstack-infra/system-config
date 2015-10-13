@@ -1,0 +1,72 @@
+body {color: #000 !important; background: url("static/openstack-page-bkg.jpg") no-repeat scroll 0 0 white !important; position: static}
+a,a:visited {color: #264D69 !important; text-decoration: none;}
+a:hover {color: #000 !important; text-decoration: underline}
+
+a.gwt-InlineHyperlink {background: none !important}
+
+#gerrit_header {display: block !important; position: relative; top: -60px; margin-bottom: -60px; width: 200px; padding-left: 17px}
+#gerrit_header h1 {font-family: 'PT Sans', sans-serif; font-weight: normal; letter-spacing: -1px}
+
+#gerrit_topmenu {background: none; position:relative; top: 0px; left: 200px; margin-right: 200px}
+
+#gerrit_topmenu tbody tr td table {border: 0}
+
+#gerrit_topmenu tbody tr td table.gwt-TabBar {color: #353535; border-bottom: 1px solid #C5E2EA;}
+#gerrit_topmenu .gwt-Button {padding: 3px 6px}
+.gwt-TabBarItem-selected {color: #CF2F19 !important; border-bottom: 3px solid #CF2F19;}
+.gwt-TabBarItem {color: #353535; border-right: 0 !important}
+.gwt-TabBar .gwt-TabBarItem, .gwt-TabBar .gwt-TabBarRest, .gwt-TabPanelBottom {background: 0 !important;}
+
+#gerrit_topmenu .gwt-TextBox {width: 250px}
+
+.comment_test_name {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  width: auto !important;
+  width: 25em;
+  min-width: 20em;
+  padding-bottom: 2pt;
+}
+
+.comment_test_result {
+}
+
+.result_SUCCESS {
+    color: #007f00;
+}
+.result_FAILURE {
+    color: #cf2f19;
+}
+.result_UNSTABLE {
+    color: #e39f00;
+}
+.result_LOST {
+    color: #e39f00;
+}
+li.comment_test {list-style-type: none; }
+
+/* this is for support of 'Display Person Name In Review Category' */
+.cAPPROVAL {
+    max-width: 100px;
+    overflow: hidden;
+}
+/* fixes to make this like old gerrit */
+.changeTable td.dataCell {
+    height: 1em;
+}
+
+/* don't make the non voting stand out more than the voting */
+table.infoTable td.notVotable,
+.changeTable td.dataCell.labelNotApplicable {
+    background: inherit;
+}
+
+.addMemberTextBox {
+    width: 20em;
+}
+
+/* css attribute selector to make -1s show up red in new screen */
+[title="This patch needs further work before it can be merged"] {
+    color: red;
+}

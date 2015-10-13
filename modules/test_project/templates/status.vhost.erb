@@ -1,0 +1,61 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+  ServerName <%= @srvname %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+<% end -%>
+  DocumentRoot <%= @docroot %>
+
+  Alias /bugday /srv/static/bugdaystats
+  <Directory /srv/static/bugdaystats>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
+  Alias /reviews /srv/static/reviewday
+  <Directory /srv/static/reviewday>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
+  Alias /release /srv/static/release
+
+  <Directory <%= @docroot %>>
+    Options <%= @options %>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+
+  # Sample elastic-recheck config file, adjust prefixes
+  # per your local configuration. Because these are nested
+  # we need the more specific one first.
+  Alias /elastic-recheck/data /var/lib/elastic-recheck
+  <Directory /var/lib/elastic-recheck>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
+  RedirectMatch permanent ^/rechecks(.*) /elastic-recheck
+  Alias /elastic-recheck /usr/local/share/elastic-recheck
+  <Directory /usr/local/share/elastic-recheck>
+      AllowOverride None
+      Order allow,deny
+      allow from all
+  </Directory>
+
+
+  ErrorLog /var/log/apache2/<%= @name %>_error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/<%= @name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>

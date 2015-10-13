@@ -1,0 +1,117 @@
+input {
+  tcp {
+    host => "localhost"
+    port => 9999
+    codec => json_lines {}
+    type => "jenkins"
+  }
+}
+
+# You can check grok patterns at http://grokdebug.herokuapp.com/
+filter {
+  if "screen" in [tags] and [message] =~ "^\+ " {
+    drop {}
+  }
+  if "console" in [tags] or "console.html" in [tags] {
+    if [message] == "<pre>" or [message] == "</pre>" {
+      drop {}
+    }
+    multiline {
+      negate => true
+      pattern => "^%{TIMESTAMP_ISO8601} \|"
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate} \| %{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "oslofmt" in [tags] {
+    multiline {
+      negate => true
+      pattern => "^%{TIMESTAMP_ISO8601} "
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    multiline {
+      negate => false
+      # NOTE(mriedem): oslo.log 1.2.0 changed the logging_exception_prefix
+      # config option from using TRACE to ERROR so we have to handle both.
+      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?(TRACE|ERROR)"
+      what => "previous"
+      stream_identity => "%{host}.%{filename}"
+    }
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      # TODO move the LOGLEVELs into a proper grok pattern.
+      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "apachecombined" in [tags] {
+    grok {
+      match => { "message" => "%{COMBINEDAPACHELOG}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+      add_field => { "logdate" => "%{timestamp}" }
+      add_field => { "logmessage" => "%{verb} %{request} %{response}" }
+    }
+  } else if "apacheerror" in [tags] {
+    grok {
+      match => { "message" => "\[(?<logdate>%{DAY} %{MONTH} %{MONTHDAY} %{TIME} %{YEAR}%{SPACE}%{TZ}?)\]%{SPACE}\[%{LOGLEVEL:loglevel}\]%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "libvirt" in [tags] {
+    grok {
+      # libvirtd grok filter adapted from
+      # https://github.com/OpenStratus/openstack-logstash/blob/master/agent.conf
+      match => { "message" => "%{TIMESTAMP_ISO8601:logdate}:%{SPACE}%{NUMBER:pid}:%{SPACE}%{LOGLEVEL:loglevel}%{SPACE}:%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  } else if "syslog" in [tags] {
+    grok {
+      # Syslog grok filter adapted from
+      # http://cookbook.logstash.net/recipes/syslog-pri/syslog.conf
+      match => { "message" => "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
+  }
+
+  # Filters below here should be consistent for all Jenkins log formats.
+  # Remove DEBUG logs to reduce the amount of data that needs to be processed.
+  if [loglevel] == "DEBUG" {
+    drop {}
+  }
+
+  if ! ("_grokparsefailure" in [tags]) {
+    date {
+      match => [ "logdate",
+                 "yyyy-MM-dd HH:mm:ss.SSS",
+                 "yyyy-MM-dd HH:mm:ss,SSS",
+                 "yyyy-MM-dd HH:mm:ss",
+                 "MMM  d HH:mm:ss",
+                 "MMM dd HH:mm:ss",
+                 "dd/MMM/yyyy:HH:mm:ss Z",
+                 "yyyy-MM-dd HH:mm:ss.SSSZ",
+                 "E MMM dd HH:mm:ss yyyy Z",
+                 "E MMM dd HH:mm:ss yyyy"
+               ]
+      timezone => "UTC"
+    }
+    mutate {
+      replace => { "message" => "%{logmessage}" }
+    }
+    mutate {
+      remove_field => [ "logdate", "logmessage" ]
+    }
+  }
+}
+
+output {
+  elasticsearch_http {
+    host => "localhost"
+    manage_template => false
+    flush_size => 1024
+  }
+}

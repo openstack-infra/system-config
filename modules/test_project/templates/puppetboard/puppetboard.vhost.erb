@@ -1,0 +1,13 @@
+<VirtualHost *:<%= @port %>>
+    ServerName <%= @fqdn %>
+
+    WSGIDaemonProcess puppetboard user=<%= @user %> group=<%= @group %> threads=5
+    WSGIScriptAlias / <%= @docroot %>/wsgi.py
+
+    <Directory <%= @docroot %>>
+        WSGIProcessGroup <%= @group %>
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>

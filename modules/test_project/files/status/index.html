@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+<style type="text/css">
+#blurb-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+.blurb {
+    float: left;
+    width: 25em;
+    height: 22ex;
+    padding: 4px;
+}
+</style>
+
+    <TITLE>OpenStack Project Status</TITLE>
+    
+    <script type="text/javascript"
+            src="http://status.openstack.org/common.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+    
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+    
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://www.openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    
+    <!-- OpenStack Specific CSS -->
+    
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://www.openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+	
+    <link rel="stylesheet" type="text/css" href="http://www.openstack.org/themes/openstack/css/main.css" />
+  </HEAD>
+
+  <BODY>
+    <script type="text/javascript">header('Status');</script>
+
+    <div id="blurb-container">
+    <h1>OpenStack Infrastructure and Project Status</h1>
+
+    <div id="message-container">
+      <div class="container">
+	<div class="span-24 last">
+	  <p id="message"/>
+	</div>
+      </div>
+    </div>
+
+      <div class="blurb">
+	<h2 class="subhead"><a href="/zuul/">Zuul</a></h2>
+	<p>
+	  Zuul is the project gating and automation system that tests
+	  and merges changes as well as publishing releases and
+	  documentation.
+	  </p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/elastic-recheck/">Rechecks</a></h2>
+	<p>
+	  When the cause of a test failure is nondeterministic,
+	  developers can request that it be retested by leaving a
+	  comment in Gerrit of the form "recheck bug #".  This page
+	  collects those comments and displays graphs indicating
+	  the timing and frequency of these bugs.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/release/">Release</a></h2>
+	<p>
+	  Blueprints targeted for the next release are tracked on this
+	  page along with overall progress toward completion.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/reviews/">Reviews</a></h2>
+	<p>
+	  Important reviews are ranked according to blueprint and bug
+	  priority.
+	</p>
+      </div>
+      <div class="blurb">
+	<h2 class="subhead"><a href="/bugday/">Bugday</a></h2>
+	<p>
+	  During official bug days, this page is updated with real-time
+	  stats.
+	</p>
+      </div>
+
+    </div>
+
+    <script type="text/javascript">footer();</script>
+
+  </BODY>
+</html>
