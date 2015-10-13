@@ -1,0 +1,7 @@
+gearman-host: logstash.openstack.org
+gearman-port: 4730
+output-host: localhost
+output-port: 9999
+output-mode: tcp
+crm114-script: /usr/local/bin/classify-log.crm
+crm114-data: /var/lib/crm114

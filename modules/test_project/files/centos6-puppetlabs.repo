@@ -1,0 +1,7 @@
+[puppetlabs-products]
+name=Puppet Labs Products El 6 - $basearch
+baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
+enabled=1
+gpgcheck=1
+exclude=puppet-4* facter-3* puppetdb-3* puppetdb-terminus-3*

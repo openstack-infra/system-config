@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Use timeout to kill any process running longer than 10 minutes.
+timeout -k 2m 10m /usr/local/bin/update-bug change-abandoned "$@"

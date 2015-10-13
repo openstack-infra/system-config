@@ -1,0 +1,614 @@
+source-url: http://logs.openstack.org
+
+# List of zmq event inputs.
+zmq-publishers:
+  - tcp://jenkins.openstack.org:8888
+  - tcp://jenkins01.openstack.org:8888
+  - tcp://jenkins02.openstack.org:8888
+  - tcp://jenkins03.openstack.org:8888
+  - tcp://jenkins04.openstack.org:8888
+  - tcp://jenkins05.openstack.org:8888
+  - tcp://jenkins06.openstack.org:8888
+  - tcp://jenkins07.openstack.org:8888
+
+subunit-files:
+  - name: logs/testrepository.subunit
+    retry-get: True
+    job-filter: 'gate-(tempest|grenade)-dsvm.*'
+    build-queue-filter: 'gate'
+  - name: logs/old/testrepository.subunit
+    job-filter: 'gate-grenade-dsvm.*'
+    build-queue-filter: 'gate'
+
+# List of files to source logs from.
+source-files:
+  - name: console.html
+    retry-get: True
+    tags:
+      - console
+  - name: logs/devstack-gate-cleanup-host.txt
+    tags:
+      - console
+      - console.html
+  - name: logs/devstack-gate-setup-host.txt
+    tags:
+      - console
+      - console.html
+  - name: logs/devstack-gate-setup-workspace-new.txt
+    tags:
+      - console
+      - console.html
+  - name: logs/devstack-gate-setup-workspace-old.txt
+    tags:
+      - console
+      - console.html
+    job-filter: '.*grenade.*'
+  - name: logs/grenade.sh.txt
+    tags:
+      - console
+      - console.html
+    job-filter: '.*grenade.*'
+  - name: logs/devstacklog.txt
+    tags:
+      - console
+      - console.html
+  - name: logs/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-bak.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-designate-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
+  - name: logs/screen-designate-central.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
+  - name: logs/screen-designate-sink.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '-designate-*'
+  - name: logs/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-api-cfn.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-api-cw.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-h-eng.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-ir-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-ir-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-key.txt
+    tags:
+      - screen
+      - oslofmt
+    # even though keystone is going through apache, it modifies log
+    # format to oslo format
+  - name: logs/apache/keystone.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-m-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-m-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-m-shr.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cell-child.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*cells.*'
+  - name: logs/screen-n-cell-region.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*cells.*'
+  - name: logs/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-cpu-1.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-n-sch.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-metering.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-q-vpn.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+  - name: logs/screen-sahara.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-tr-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-tr-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-tr-tmgr.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/apache/horizon_error.txt
+    tags:
+      - apacheerror
+# TODO(clarkb) Add swift proxy logs here.
+  - name: logs/syslog.txt
+    tags:
+      - syslog
+  - name: logs/libvirtd.txt
+    tags:
+      - libvirt
+  - name: logs/tempest.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/javelin.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+
+# Grenade new logs below
+  - name: logs/new/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-bak.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-key.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/new/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-n-sched.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-metering.txt
+    job-filter: '.*grenade.*'
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-q-vpn.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/new/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+# Grenade old logs below
+  - name: logs/old/screen-c-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-bak.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-sch.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-c-vol.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-g-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-g-reg.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-key.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/old/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-crt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-obj.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-n-sched.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-agt.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-l3.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-lbaas.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-metering.txt
+    job-filter: '.*grenade.*'
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-svc.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-q-vpn.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-account.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-container.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+  - name: logs/old/screen-s-object.txt
+    tags:
+      - screen
+      - apachecombined
+    job-filter: '.*grenade.*'
+# multinode  subnode logs
+  - name: logs/subnode-2/screen-n-api-meta.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-n-cpu.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+# tripleo logs
+  - name: logs/get_state_from_host.txt
+    tags:
+      - console
+      - tripleo
+    job-filter: '.*-tripleo-.*'
+  # tripleo-seed
+  - name: logs/seed_logs/host-info.txt
+    tags:
+      - console
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/os-collect-config.txt
+    tags:
+      - syslog
+      - seed
+    job-filter: '.*-tripleo-.*'
+  # tripleo-seed-state-logs
+  - name: logs/seed_logs/mnt/mysql/error.txt
+    tags:
+      - console
+      - seed
+    job-filter: '.*-tripleo-.*'
+  - name: logs/seed_logs/mnt/mysql/mysql-slow.txt
+    tags:
+      - console
+      - seed
+    job-filter: '.*-tripleo-.*'
+  # tripleo-undercloud
+  - name: logs/undercloud-undercloud_logs/host-info.txt
+    tags:
+      - console
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/os-collect-config.txt
+    tags:
+      - syslog
+      - uc-controller
+  # tripleo-undercloud-state-logs
+  - name: logs/undercloud-undercloud_logs/mnt/mysql/error.txt
+    tags:
+      - console
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/undercloud-undercloud_logs/mnt/mysql/mysql-slow.txt
+    tags:
+      - console
+      - uc-controller
+    job-filter: '.*-tripleo-.*'
+  # tripleo-overcloud
+  - name: logs/overcloud-controller0_logs/host-info.txt
+    tags:
+      - console
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud-controller0_logs/os-collect-config.txt
+    tags:
+      - syslog
+      - oc-controller
+    job-filter: '.*-tripleo-.*'
+  # tripleo-overcloud-state-logs
+  - name: logs/overcloud_controller0_logs/mnt/mysql/error.txt
+    tags:
+      - console
+      - overcloud
+    job-filter: '.*-tripleo-.*'
+  - name: logs/overcloud_controller0_logs/mnt/mysql/mysql-slow.txt
+    tags:
+      - console
+      - overcloud
+    job-filter: '.*-tripleo-.*'

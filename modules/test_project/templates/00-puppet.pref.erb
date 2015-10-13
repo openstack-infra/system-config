@@ -1,0 +1,11 @@
+Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
+Pin: version <%= @pin_puppet %>*
+Pin-Priority: 501
+
+Package: puppetdb puppetdb-terminus
+Pin: version <%= @pin_puppetdb %>*
+Pin-Priority: 501
+
+Package: facter
+Pin: version <%= @pin_facter %>*
+Pin-Priority: 501

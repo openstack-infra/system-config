@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      lang="en">
+  <HEAD>
+    <TITLE></TITLE>
+
+    <script type="text/javascript"
+        src="http://status.openstack.org/common.js"></script>
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin' rel='stylesheet' type='text/css'/>
+
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
+    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/blueprint/print.css" type="text/css" media="print"/>
+
+    <!-- IE CSS -->
+    <!--[if lt IE 8]><link rel="stylesheet" href="http://openstack.org/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <!-- OpenStack Specific CSS -->
+
+    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/dropdown.css" type="text/css" media="screen, projection, print"/>
+
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://openstack.org/themes/openstack/css/home.css" type="text/css" media="screen, projection, print"/>
+
+    <link rel="stylesheet" type="text/css" href="http://openstack.org/themes/openstack/css/main.css" />
+    <style type="text/css">
+      h3.subhead {
+          border: none;
+          margin-bottom: 0.2em;
+          padding-top: 1.5em;
+      }
+    </style>
+
+ </HEAD>
+
+  <BODY>
+    <script type="text/javascript">header('Rechecks');</script>
+
+    <div class="container">
+    <h1>Bugs Causing Rechecks</h1>
+    <div py:for="bug in bugs">
+      <h3 class="subhead">
+	<a href="https://code.launchpad.net/bugs/${bug['number']}">
+	  Bug ${bug.number}: ${bug.title}</a>
+         <py:if test="bug.is_closed()">(closed)</py:if>
+      </h3>
+      First seen: ${bug.first_seen.strftime("%Y-%m-%d %H:%M:%S")} UTC<br/>
+      Last seen: ${bug.last_seen.strftime("%Y-%m-%d %H:%M:%S")} UTC<br/>
+      Rechecks: ${len(bug.hits)}<br/>
+      Affecting projects: ${', '.join(bug.projects)}<br/>
+      Affecting changes:
+      <span py:for="i, change in enumerate(bug.changes)">
+        <a href="https://review.openstack.org/${change}"
+           >${change}</a><span py:if="i+1 != len(bug.changes)" py:replace="','"/>
+      </span>
+    </div>
+    </div>
+    <script type="text/javascript">footer();</script>
+  </BODY>
+</html>
