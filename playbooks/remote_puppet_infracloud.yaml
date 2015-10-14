@@ -1,0 +1,13 @@
+---
+- hosts: baremetal*.ic.openstack.org
+  roles:
+    - role: puppet
+      manifest: /opt/system-config/production/manifests/site.pp
+- hosts: controller*.ic.openstack.org
+  roles:
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
+- hosts: compute*.ic.openstack.org
+  roles:
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
