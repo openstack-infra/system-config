@@ -90,6 +90,13 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
         exit 1
     fi
     MODULE_NAME=`echo $MOD | awk -F- '{print $NF}'`
+
+    # NOTE(mtreinish): hack around incorrectly named openstack-health,
+    # remove after the gerrit rename
+    if [[ $MODULE_NAME == "puppet-openstack-health" ]]; then
+        MODULE_NAME="puppet-openstack_health"
+    fi
+
     # set up git base command to use the correct path
     GIT_CMD_BASE="git --git-dir=${MODULE_PATH}/${MODULE_NAME}/.git --work-tree ${MODULE_PATH}/${MODULE_NAME}"
     # treat any occurrence of the module as a match
