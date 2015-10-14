@@ -1,7 +1,3 @@
-# this disables infracloud until we are ready
-[disabled:children]
-infracloud
-
 [infracloud]
 controller00.hpuswest.ic.openstack.org
 compute000.hpuswest.ic.openstack.org
@@ -49,3 +45,5 @@ compute038.hpuswest.ic.openstack.org
 compute041.hpuswest.ic.openstack.org
 compute042.hpuswest.ic.openstack.org
 compute043.hpuswest.ic.openstack.org
+
+#TODO Add baremetal controller host here
