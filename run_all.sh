@@ -42,5 +42,6 @@ ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
+ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_infracloud.yaml
 # Run everything else. We do not care if the other things worked
 ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml

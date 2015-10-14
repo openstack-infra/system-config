@@ -1,4 +1,4 @@
-- hosts: '!review.openstack.org:!git0*:!afs*'
+- hosts: '!review.openstack.org:!git0*:!afs*:!baremetal*:!controller:!compute'
   gather_facts: false
   roles:
   - role: puppet
