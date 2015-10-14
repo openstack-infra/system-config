@@ -89,7 +89,13 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
         echo "Remote repos of the form repo.git are not supported: ${MOD}"
         exit 1
     fi
-    MODULE_NAME=`echo $MOD | awk -F- '{print $NF}'`
+    # NOTE(mtreinish): hack around incorrectly named openstack-health,
+    # remove after the gerrit rename
+    if [[ `echo $MOD | grep -c 'openstack-health'` -eq 1 ]]; then
+        MODULE_NAME="openstack_health"
+    else
+        MODULE_NAME=`echo $MOD | awk -F- '{print $NF}'`
+    fi
     # set up git base command to use the correct path
     GIT_CMD_BASE="git --git-dir=${MODULE_PATH}/${MODULE_NAME}/.git --work-tree ${MODULE_PATH}/${MODULE_NAME}"
     # treat any occurrence of the module as a match
@@ -107,6 +113,7 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
             git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
         fi
     fi
+
     # fetch the latest refs from the repo
     $GIT_CMD_BASE remote update
     # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
