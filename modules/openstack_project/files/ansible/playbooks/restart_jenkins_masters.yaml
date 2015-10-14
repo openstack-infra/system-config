@@ -9,4 +9,4 @@
       # This is necessary because stopping Jenkins is not reliable.
       # We allow return code 1 which means no processes found.
     - shell: 'pkill -9 -U jenkins || [ $? -eq "1" ]'
-    - service: name=jenkins state=started
+    - service: name=jenkins state=restarted
