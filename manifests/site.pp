@@ -133,6 +133,16 @@ node 'grafana.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'openstack-health.openstack.org' {
+  class { 'openstack_project::openstack_health_api':
+    sysadmins           => hiera("sysadmins", []),
+    subunit2sql_db_host => hiera("subunit2sql_db_host", "localhost"),
+    hostname            => "openstack-health.openstack.org",
+  }
+}
+
+
 # Node-OS: precise
 node 'jenkins.openstack.org' {
   $group = "jenkins"
