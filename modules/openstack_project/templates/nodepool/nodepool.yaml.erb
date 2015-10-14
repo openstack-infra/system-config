@@ -137,6 +137,7 @@ labels:
     min-ready: 1
     providers:
       - name: ovh-gra1
+      - name: bluebox-sjc1
   - name: ubuntu-trusty-2-node
     image: ubuntu-trusty
     ready-script: multinode_setup.sh
@@ -1003,6 +1004,20 @@ providers:
       - name: ubuntu-trusty
         min-ram: 8000
         name-filter: 'ssd-osFoundation'
+        diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+  - name: bluebox-sjc1
+    region-name: 'RegionOne'
+    cloud: bluebox-sjc1
+    api-timeout: 60
+    boot-timeout: 120
+    max-servers: 0
+    rate: 0.001
+    images:
+      - name: ubuntu-trusty-check
+        min-ram: 8000
+        name-filter: 'nodepool'
         diskimage: ubuntu-trusty
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
