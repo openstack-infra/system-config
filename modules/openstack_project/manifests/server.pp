@@ -20,6 +20,7 @@ class openstack_project::server (
       'pypi.iad.openstack.org',
       'pypi.ord.openstack.org',
       'pypi.region-b.geo-1.openstack.org',
+      'pypi.sjc1.openstack.org',
   ],
 ) {
   class { 'openstack_project::template':
