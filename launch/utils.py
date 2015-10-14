@@ -115,6 +115,8 @@ def get_public_ip(server, version=4, floating_ip_pool=None):
 
 
 def get_href(server):
+    if not hasattr(server, 'links'):
+        return None
     for link in server.links:
         if link['rel'] == 'self':
             return link['href']
