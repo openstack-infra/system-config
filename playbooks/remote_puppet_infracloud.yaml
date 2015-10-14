@@ -1,0 +1,18 @@
+---
+- hosts: baremetal*.ic.openstack.org
+  roles:
+    - role: applyprep
+    - role: puppet
+      manifest: /opt/system-config/production/manifests/site.pp
+- hosts: controller*.ic.openstack.org
+  roles:
+    - role: applyprep
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
+      manifest: /opt/system-config/production/manifests/site.pp
+- hosts: compute*.ic.openstack.org
+  roles:
+    - role: applyprep
+    - role: puppet
+      puppetmaster: puppetmaster.openstack.org
+      manifest: /opt/system-config/production/manifests/site.pp
