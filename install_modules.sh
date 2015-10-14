@@ -107,6 +107,12 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
             git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
         fi
     fi
+    # NOTE(mtreinish): hack around incorrectly named openstack-health,
+    # remove after the gerrit rename
+    if [[ $MODULE_NAME == "puppet-openstack-health" ]]; then
+        mv "${MODULE_PATH}/${MODULE_NAME}" "${MODULE_PATH}/puppet-openstack_health"
+    fi
+
     # fetch the latest refs from the repo
     $GIT_CMD_BASE remote update
     # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
