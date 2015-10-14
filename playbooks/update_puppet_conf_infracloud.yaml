@@ -1,0 +1,44 @@
+---
+- hosts: controller*.ic.openstack.org
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - lineinfile:
+      dest: /etc/puppet/puppet.conf
+      regexp: "^basemodulepath = "
+      line: "basemodulepath = /etc/puppet/modules"
+      insertafter: "^factpath"
+  - lineinfile:
+      dest: /etc/puppet/puppet.conf
+      regexp: "^environmentpath = "
+      line: "environmentpath = /etc/puppet/environments"
+      insertafter: "^basemodulepath"
+  - file: path=/etc/puppet/environments/production state=directory owner=root group=root mode=0755
+  - copy:
+     dest: /etc/puppet/environments/production/environment.conf
+     content: "modulepath = $basemodulepath:modules:/opt/system-config/production/modules"
+     group: root
+     owner: root
+     mode: 0755
+- hosts: compute*.ic.openstack.org
+  remote_user: root
+  gather_facts: true
+  tasks:
+  - lineinfile:
+      dest: /etc/puppet/puppet.conf
+      regexp: "^basemodulepath = "
+      line: "basemodulepath = /etc/puppet/modules"
+      insertafter: "^factpath"
+  - lineinfile:
+      dest: /etc/puppet/puppet.conf
+      regexp: "^environmentpath = "
+      line: "environmentpath = /etc/puppet/environments"
+      insertafter: "^basemodulepath"
+  - file: path=/etc/puppet/environments/production state=directory owner=root group=root mode=0755
+  - copy:
+     dest: /etc/puppet/environments/production/environment.conf
+     content: "modulepath = $basemodulepath:modules:/opt/system-config/production/modules"
+     group: root
+     owner: root
+     mode: 0755
+
