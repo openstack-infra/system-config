@@ -185,7 +185,7 @@ var ci_parse_comments = function() {
             var name = top.attr("name");
             if (!name) {
                 // new change screen
-                name = $(this).parent().prev().children()[0].innerHTML;
+                name = $(this).parent().parent().parent().children().children()[0].innerHTML
             }
             var comment = {};
             comment.name = name;
@@ -196,7 +196,7 @@ var ci_parse_comments = function() {
                 comment.date = date_cell.attr("title");
             } else {
                 // new change screen
-                comment.date = $(this).parent().prev().children()[2].innerHTML;
+                comment.date = $(this).parent().parent().parent().children().children()[2].innerHTML
             }
             var comment_panel = $(this).parent();
             comment.psnum = psnum;
