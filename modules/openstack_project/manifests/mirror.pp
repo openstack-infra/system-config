@@ -11,6 +11,7 @@ class openstack_project::mirror (
   $base = '/srv/static'
   $docroot = "${base}/docroot"
   $pypi_docroot = "${base}/mirror"
+  $npm_docroot = "${base}/npm"
 
   if ! defined(File[$base]) {
     file { $base:
@@ -43,6 +44,15 @@ class openstack_project::mirror (
     require => File[$docroot],
   }
 
+  file { "${docroot}/npm":
+    ensure  => 'link',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    target  => $npm_docroot,
+    require => File[$docroot],
+  }
+
   ::httpd::vhost { $vhost_name:
     port     => 80,
     priority => '50',
@@ -53,6 +63,12 @@ class openstack_project::mirror (
 
   class { 'openstack_project::pypi_mirror':
     data_directory => $pypi_docroot,
+    require        => File[$base],
+  }
+
+  class { 'openstack_project::npm_mirror':
+    uri_rewrite    => "${vhost_name}/npm",
+    data_directory => $npm_docroot,
     require        => File[$base],
   }
 }
