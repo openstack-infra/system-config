@@ -508,8 +508,9 @@ node /^git\d+\.openstack\.org$/ {
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
   $group = "pypi"
-  class { 'openstack_project::pypi':
-    sysadmins               => hiera('sysadmins', []),
+
+  class { 'openstack_project::mirror':
+    sysadmins                 => hiera('sysadmins', []),
   }
 }
 

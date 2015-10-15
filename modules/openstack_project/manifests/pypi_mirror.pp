@@ -1,36 +1,21 @@
 # == Class: openstack_project::pypi_mirror
 #
 class openstack_project::pypi_mirror (
-  $vhost_name,
   $cron_frequency = '*/5',
+  $data_directory,
 ) {
 
-  include ::httpd
-
-  if ! defined(File['/srv/static']) {
-    file { '/srv/static':
-      ensure => directory,
-    }
-  }
-
-  file { '/srv/static/mirror':
+  file { $data_directory:
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
   }
 
-  file { '/srv/static/mirror/web':
+  file { "${data_directory}/web":
     ensure  => directory,
     owner   => 'root',
     group   => 'root',
-    require => File['/srv/static/mirror'],
-  }
-
-  ::httpd::vhost { $vhost_name:
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/mirror/web',
-    require  => File['/srv/static/mirror/web'],
+    require => File[$data_directory],
   }
 
   file { '/srv/static/mirror/web/robots.txt':
@@ -39,7 +24,7 @@ class openstack_project::pypi_mirror (
     group   => 'root',
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/mirror/web'],
+    require => File["${data_directory}/web"],
   }
 
   package { 'bandersnatch':
