@@ -113,16 +113,17 @@ class openstack_project::ask_staging (
   }
 
   # askbot-theme openstack theme
-  vcsrepo { '/srv/askbot-site/themes':
-    ensure   => latest,
-    provider => git,
-    revision => 'feature/development',
-    source   => 'https://git.openstack.org/openstack-infra/askbot-theme',
-    require  => [
+  git { 'askbot-theme':
+    ensure  => present,
+    path    => '/srv/askbot-site/themes',
+    branch  => 'feature/development',
+    origin  => 'https://git.openstack.org/openstack-infra/askbot-theme',
+    latest  => true,
+    require => [
       File['/srv/askbot-site'], Package['git']
     ],
-    before   => Exec['askbot-syncdb'],
-    notify   => [
+    before  => Exec['askbot-syncdb'],
+    notify  => [
       Exec['theme-bundle-install-os'],
       Exec['theme-bundle-compile-os'],
       Exec['askbot-static-generate'],
@@ -130,7 +131,7 @@ class openstack_project::ask_staging (
   }
 
   askbot::theme::compass { 'os':
-    require => Vcsrepo['/srv/askbot-site/themes'],
+    require => Git['askbot-theme'],
     before  => Exec['askbot-static-generate'],
   }
 }
