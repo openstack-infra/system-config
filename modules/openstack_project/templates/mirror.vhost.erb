@@ -24,6 +24,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 
     # Alias to the pypi mirror root
     Alias /pypi <%= @pypi_docroot %>/web
+    Alias /npm <%= @npm_docroot %>
+
+    DirectoryIndex index.html index.json
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
