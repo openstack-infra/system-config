@@ -496,10 +496,10 @@ node /^git\d+\.openstack\.org$/ {
   class { 'openstack_project::git_backend':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     vhost_name              => 'git.openstack.org',
-    git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
-    ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents', 'XXX'),
-    ssl_key_file_contents   => hiera('git_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('git_ssl_chain_file_contents', 'XXX'),
+    git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents'),
+    ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
     behind_proxy            => true,
   }
 }
