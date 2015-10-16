@@ -531,10 +531,10 @@ node 'refstack.openstack.org' {
     mysql_host          => hiera('refstack_mysql_host', 'localhost'),
     mysql_database      => hiera('refstack_mysql_db_name', 'refstack'),
     mysql_user          => hiera('refstack_mysql_user', 'refstack'),
-    mysql_user_password => hiera('refstack_mysql_password', 'XXX'),
-    ssl_cert_content    => hiera('refstack_ssl_cert_file_contents', 'XXX'),
-    ssl_key_content     => hiera('refstack_ssl_key_file_contents', 'XXX'),
-    ssl_ca_content      => hiera('refstack_ssl_chain_file_contents', 'XXX'),
+    mysql_user_password => hiera('refstack_mysql_password'),
+    ssl_cert_content    => hiera('refstack_ssl_cert_file_contents'),
+    ssl_key_content     => hiera('refstack_ssl_key_file_contents'),
+    ssl_ca_content      => hiera('refstack_ssl_chain_file_contents'),
     protocol            => 'https',
   }
 }
