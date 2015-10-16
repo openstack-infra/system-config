@@ -123,14 +123,14 @@ node 'grafana.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::grafana':
-    admin_password      => hiera('grafana_admin_password', 'XXX'),
+    admin_password      => hiera('grafana_admin_password'),
     admin_user          => hiera('grafana_admin_user', 'username'),
     mysql_host          => hiera('grafana_mysql_host', 'localhost'),
-    mysql_name          => hiera('grafana_mysql_name', 'XXX'),
-    mysql_password      => hiera('grafana_mysql_password', 'XXX'),
+    mysql_name          => hiera('grafana_mysql_name'),
+    mysql_password      => hiera('grafana_mysql_password'),
     mysql_user          => hiera('grafana_mysql_user', 'username'),
     project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
-    secret_key          => hiera('grafana_secret_key', 'XXX'),
+    secret_key          => hiera('grafana_secret_key'),
   }
 }
 
