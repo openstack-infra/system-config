@@ -1027,11 +1027,11 @@ node 'apps.openstack.org' {
   }
   class { '::apps_site':
     ssl_cert_file           => '/etc/ssl/certs/apps.openstack.org.pem',
-    ssl_cert_file_contents  => hiera('apps_ssl_cert_file_contents', 'XXX'),
+    ssl_cert_file_contents  => hiera('apps_ssl_cert_file_contents'),
     ssl_key_file            => '/etc/ssl/private/apps.openstack.org.key',
-    ssl_key_file_contents   => hiera('apps_ssl_key_file_contents', 'XXX'),
+    ssl_key_file_contents   => hiera('apps_ssl_key_file_contents'),
     ssl_chain_file          => '/etc/ssl/certs/apps.openstack.org_intermediate.pem',
-    ssl_chain_file_contents => hiera('apps_ssl_chain_file_contents', 'XXX'),
+    ssl_chain_file_contents => hiera('apps_ssl_chain_file_contents'),
   }
 }
 
