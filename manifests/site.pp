@@ -249,7 +249,7 @@ node 'graphite.openstack.org' {
   class { '::graphite':
     graphite_admin_user     => hiera('graphite_admin_user', 'username'),
     graphite_admin_email    => hiera('graphite_admin_email', 'email@example.com'),
-    graphite_admin_password => hiera('graphite_admin_password', 'XXX'),
+    graphite_admin_password => hiera('graphite_admin_password'),
   }
 }
 
