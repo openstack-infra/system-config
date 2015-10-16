@@ -16,6 +16,7 @@ class openstack_project::status (
   $graphite_render_url = 'http://graphite.openstack.org/render/',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $openstack_health_api_endpoint = 'http://openstack-health.openstack.org',
 ) {
 
   include openstack_project
@@ -253,5 +254,14 @@ class openstack_project::status (
     serveradmin => 'webmaster@openstack.org',
     httproot    => '/srv/static/bugdaystats',
     configfile  => '/var/lib/bugdaystats/config.js',
+  }
+  ###########################################################
+  # Status - openstack-health
+
+  include 'openstack_health'
+
+  openstack_health::site { 'openstack-health':
+    httproot     => '/srv/static/openstack-health',
+    api_endpoint => $openstack_health_api_endpoint
   }
 }
