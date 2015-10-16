@@ -836,19 +836,19 @@ node 'release.slave.openstack.org' {
 node 'openstackid.org' {
   class { 'openstack_project::openstackid_prod':
     sysadmins               => hiera('sysadmins', []),
-    site_admin_password     => hiera('openstackid_site_admin_password', 'XXX'),
+    site_admin_password     => hiera('openstackid_site_admin_password'),
     id_mysql_host           => hiera('openstackid_id_mysql_host', 'localhost'),
-    id_mysql_password       => hiera('openstackid_id_mysql_password', 'XXX'),
+    id_mysql_password       => hiera('openstackid_id_mysql_password'),
     id_mysql_user           => hiera('openstackid_id_mysql_user', 'username'),
-    id_db_name              => hiera('openstackid_id_db_name', 'XXX'),
+    id_db_name              => hiera('openstackid_id_db_name'),
     ss_mysql_host           => hiera('openstackid_ss_mysql_host', 'localhost'),
-    ss_mysql_password       => hiera('openstackid_ss_mysql_password', 'XXX'),
+    ss_mysql_password       => hiera('openstackid_ss_mysql_password'),
     ss_mysql_user           => hiera('openstackid_ss_mysql_user', 'username'),
     ss_db_name              => hiera('openstackid_ss_db_name', 'username'),
-    redis_password          => hiera('openstackid_redis_password', 'XXX'),
-    ssl_cert_file_contents  => hiera('openstackid_ssl_cert_file_contents', 'XXX'),
-    ssl_key_file_contents   => hiera('openstackid_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('openstackid_ssl_chain_file_contents', 'XXX'),
+    redis_password          => hiera('openstackid_redis_password'),
+    ssl_cert_file_contents  => hiera('openstackid_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('openstackid_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('openstackid_ssl_chain_file_contents'),
   }
 }
 
@@ -857,18 +857,18 @@ node 'openstackid.org' {
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
     sysadmins               => hiera('sysadmins', []),
-    site_admin_password     => hiera('openstackid_dev_site_admin_password', 'XXX'),
+    site_admin_password     => hiera('openstackid_dev_site_admin_password'),
     id_mysql_host           => hiera('openstackid_dev_id_mysql_host', 'localhost'),
-    id_mysql_password       => hiera('openstackid_dev_id_mysql_password', 'XXX'),
+    id_mysql_password       => hiera('openstackid_dev_id_mysql_password'),
     id_mysql_user           => hiera('openstackid_dev_id_mysql_user', 'username'),
     ss_mysql_host           => hiera('openstackid_dev_ss_mysql_host', 'localhost'),
-    ss_mysql_password       => hiera('openstackid_dev_ss_mysql_password', 'XXX'),
+    ss_mysql_password       => hiera('openstackid_dev_ss_mysql_password'),
     ss_mysql_user           => hiera('openstackid_dev_ss_mysql_user', 'username'),
     ss_db_name              => hiera('openstackid_dev_ss_db_name', 'username'),
-    redis_password          => hiera('openstackid_dev_redis_password', 'XXX'),
-    ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents', 'XXX'),
-    ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('openstackid_dev_ssl_chain_file_contents', 'XXX'),
+    redis_password          => hiera('openstackid_dev_redis_password'),
+    ssl_cert_file_contents  => hiera('openstackid_dev_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('openstackid_dev_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('openstackid_dev_ssl_chain_file_contents'),
   }
 }
 
