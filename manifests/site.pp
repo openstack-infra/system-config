@@ -596,15 +596,15 @@ node 'status.openstack.org' {
 
   class { 'openstack_project::status':
     gerrit_host                   => 'review.openstack.org',
-    gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents', 'XXX'),
-    reviewday_ssh_private_key     => hiera('reviewday_rsa_key_contents', 'XXX'),
-    releasestatus_ssh_public_key  => hiera('releasestatus_rsa_pubkey_contents', 'XXX'),
-    releasestatus_ssh_private_key => hiera('releasestatus_rsa_key_contents', 'XXX'),
-    recheck_ssh_public_key        => hiera('elastic-recheck_gerrit_ssh_public_key', 'XXX'),
-    recheck_ssh_private_key       => hiera('elastic-recheck_gerrit_ssh_private_key', 'XXX'),
+    gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents'),
+    reviewday_ssh_private_key     => hiera('reviewday_rsa_key_contents'),
+    releasestatus_ssh_public_key  => hiera('releasestatus_rsa_pubkey_contents'),
+    releasestatus_ssh_private_key => hiera('releasestatus_rsa_key_contents'),
+    recheck_ssh_public_key        => hiera('elastic-recheck_gerrit_ssh_public_key'),
+    recheck_ssh_private_key       => hiera('elastic-recheck_gerrit_ssh_private_key'),
     recheck_bot_nick              => 'openstackrecheck',
-    recheck_bot_passwd            => hiera('elastic-recheck_ircbot_password', 'XXX'),
+    recheck_bot_passwd            => hiera('elastic-recheck_ircbot_password'),
   }
 }
 
