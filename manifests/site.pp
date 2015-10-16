@@ -292,7 +292,7 @@ node 'groups-dev.openstack.org' {
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins   => hiera('listadmins', []),
-    listpassword => hiera('listpassword', 'XXX'),
+    listpassword => hiera('listpassword'),
   }
 }
 
