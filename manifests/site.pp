@@ -324,14 +324,14 @@ node 'eavesdrop.openstack.org' {
 
   class { 'openstack_project::eavesdrop':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    nickpass                => hiera('openstack_meetbot_password', 'XXX'),
+    nickpass                => hiera('openstack_meetbot_password'),
     statusbot_nick          => hiera('statusbot_nick', 'username'),
-    statusbot_password      => hiera('statusbot_nick_password', 'XXX'),
+    statusbot_password      => hiera('statusbot_nick_password'),
     statusbot_server        => 'chat.freenode.net',
     statusbot_channels      => 'edeploy, fuel-dev, heat, kolla, murano, openstack, openstack-101, openstack-ansible, openstack-anvil, openstack-bacon, openstack-barbican, openstack-blazar, openstack-board, openstack-ceilometer, openstack-chef, openstack-cinder, openstack-cloudkeep, openstack-community, openstack-containers, openstack-defcore, openstack-dev, openstack-dns, openstack-doc, openstack-entropy, openstack-foundation, openstack-gantt, openstack-gate, openstack-glance, openstack-heat-translator, openstack-horizon, openstack-hyper-v, openstack-i18n, openstack-infra, openstack-infra-incident, openstack-ironic, openstack-keystone, openstack-manila, openstack-meeting, openstack-meeting-3, openstack-meeting-4, openstack-meeting-alt, openstack-meniscus, openstack-merges, openstack-metering, openstack-monasca, openstack-neutron, openstack-nova, openstack-opw, openstack-oslo, openstack-qa, openstack-raksha, openstack-rally, openstack-rating, openstack-relmgr-office, openstack-sahara, openstack-sdks, openstack-sprint, openstack-stable, openstack-state-management, openstack-swift, openstack-trove, openstack-zaqar, packstack-dev, refstack, storyboard, syscompass, tripleo',
     statusbot_auth_nicks    => 'jeblair, ttx, fungi, mordred, clarkb, sdague, SergeyLukjanov, jhesketh, lifeless, pleia2',
     statusbot_wiki_user     => hiera('statusbot_wiki_username', 'username'),
-    statusbot_wiki_password => hiera('statusbot_wiki_password', 'XXX'),
+    statusbot_wiki_password => hiera('statusbot_wiki_password'),
     statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
     # https://wiki.openstack.org/wiki/Infrastructure_Status
     statusbot_wiki_pageid   => '1781',
@@ -339,7 +339,7 @@ node 'eavesdrop.openstack.org' {
     statusbot_wiki_successpageid => '7717',
     statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
     accessbot_nick          => hiera('accessbot_nick', 'username'),
-    accessbot_password      => hiera('accessbot_nick_password', 'XXX'),
+    accessbot_password      => hiera('accessbot_nick_password'),
   }
 }
 
