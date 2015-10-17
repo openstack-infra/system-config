@@ -19,11 +19,17 @@ provide assistance as resources allow, but should not be relied on.
 What StackForge is not:
 
 * Official endorsement of a project by OpenStack.
-* Access to a GitHub organization (StackForge projects are mirrored to
-  GitHub, this is all the GitHub org is used for).
-* A guarantee of eventual OpenStack incubation (Though it is a good
-  first step in that process as it exposes the project to the OpenStack
-  way of doing things).
+* A guarantee of eventual OpenStack incubation (though it is a good
+  first step in that process as it exposes the project to the
+  OpenStack way of doing things).
+
+Note that StackForge and official OpenStack projects were previously
+segregated into two separate git namespaces (stackforge/ and
+openstack/).  They now both occupy the openstack/ namespace though
+this does not indicate that all such projects are official OpenStack
+projects; it merely indicates that they are developed within the
+OpenStack project infrastructure.  Projects must apply to the
+Technical Committee to become official OpenStack projects.
 
 Audience
 ********
