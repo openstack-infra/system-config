@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Sat, 17 Oct 2015 21:15:19 +0000
+Reviewed-on: https://review.openstack.org/236041
+Project: openstack-infra/system-config
+Branch: refs/heads/master
