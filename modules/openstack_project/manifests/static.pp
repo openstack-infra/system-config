@@ -213,7 +213,7 @@ class openstack_project::static (
     docroot    => '/srv/static/security',
     priority   => '50',
     ssl        => true,
-    template   => 'openstack_project/security.vhost.erb',
+    template   => 'openstack_project/static-https-redirect.vhost.erb',
     vhost_name => 'security.openstack.org',
     require    => [
       File['/srv/static/security'],
