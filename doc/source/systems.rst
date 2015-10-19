@@ -35,6 +35,7 @@ Major Systems
    askbot
    apps_site
    translate
+   openstack-health
    refstack
 
 .. NOTE(dhellmann): These projects were not listed above, or in any
