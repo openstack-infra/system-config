@@ -36,6 +36,7 @@ Major Systems
    askbot
    apps_site
    translate
+   openstack-health
    refstack
    codesearch
 
