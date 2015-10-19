@@ -63,6 +63,7 @@ class openstack_project::eavesdrop (
         '#openstack-freezer',
         '#openstack-glance',
         '#openstack-gslb',
+        '#openstack-ha',
         '#openstack-heat-translator',
         '#openstack-horizon',
         '#openstack-i18n',
