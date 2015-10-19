@@ -134,6 +134,18 @@ node 'grafana.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'health.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::openstack_health_api':
+    subunit2sql_db_host => hiera('subunit2sql_db_host', 'localhost'),
+  }
+}
+
+
 # Node-OS: precise
 node 'jenkins.openstack.org' {
   $group = "jenkins"
