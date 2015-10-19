@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: venkatamahesh <venkatamaheshkotha@gmail.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Mon, 19 Oct 2015 06:49:52 +0000
+Reviewed-on: https://review.openstack.org/236241
+Project: openstack-infra/system-config
+Branch: refs/heads/master
