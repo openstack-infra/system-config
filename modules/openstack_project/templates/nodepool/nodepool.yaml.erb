@@ -232,6 +232,9 @@ labels:
     ready-script: configure_mirror.sh
     min-ready: 1
     providers:
+      - name: rax-dfw
+      - name: rax-ord
+      - name: rax-iad
       - name: hpcloud-b1
       - name: hpcloud-b2
       - name: hpcloud-b3
@@ -312,6 +315,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: fedora-22
+        min-ram: 8192
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-centos7
         base-image: 'CentOS 7 (PVHVM)'
         min-ram: 8192
@@ -387,6 +396,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: fedora-22
+        min-ram: 8192
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-centos7
         base-image: 'CentOS 7 (PVHVM)'
         min-ram: 8192
@@ -469,6 +484,12 @@ providers:
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+      - name: fedora-22
+        min-ram: 8192
+        diskimage: fedora-22
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+        config-drive: true
       - name: devstack-centos7
         base-image: 'CentOS 7 (PVHVM)'
         min-ram: 8192
@@ -1091,12 +1112,13 @@ diskimages:
       QEMU_IMG_OPTIONS: compat=0.10
   - name: fedora-22
     elements:
-      - fedora
+      - fedora-minimal
       - vm
+      - simple-init
       - openstack-repos
-      - puppet
       - nodepool-base
       - node-devstack
+      - puppet
     release: 22
     env-vars:
       TMPDIR: /opt/dib_tmp
