@@ -1,0 +1,12 @@
+---
+- hosts: 'elasticsearch02.openstack.org'
+  tasks:
+      # This command is inverse of the curl command above using the newer
+      # version syntax.
+    - shell: >
+        curl -XPUT localhost:9200/_cluster/settings -d '{
+          "persistent" : {
+            "cluster.routing.allocation.disable_allocation": false,
+            "cluster.routing.allocation.enable" : "all"
+          }
+        }'

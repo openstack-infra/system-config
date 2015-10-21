@@ -1,0 +1,22 @@
+---
+- hosts: 'elasticsearch0*.openstack.org'
+  tasks:
+    - shell: 'puppet agent --disable'
+      # make double sure entire cluster is off before upgrading.
+    - service: name=elasticsearch state=stopped enabled=no
+    - shell: 'reboot'
+      # wait for hosts to reboot
+    - wait_for: host={{ inventory_hostname }} delay=30 port=22
+      connection: local
+      # make double sure entire cluster is off before upgrading.
+    - service: name=elasticsearch state=stopped enabled=no
+- hosts: 'elasticsearch0*.openstack.org'
+  tasks:
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb -O /tmp/elasticsearch-1.7.3.deb'
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb.sha1.txt -O /tmp/elasticsearch-1.7.3.deb.sha1.txt'
+    - shell: >
+        [ "`sha1sum /tmp/elasticsearch-1.7.3.deb | cut -d ' ' -f 1`" = "`cat /tmp/elasticsearch-1.7.3.deb.sha1.txt| cut -d ' ' -f 1 `" ]
+      # This will probably start the service but we are explicit about it below
+      # anyways.
+    - apt: deb=/tmp/elasticsearch-1.7.3.deb
+    - service: name=elasticsearch state=started enabled=yes
