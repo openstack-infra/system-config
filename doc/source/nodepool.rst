@@ -14,11 +14,10 @@ At a Glance
 :Hosts:
   * nodepool.openstack.org
 :Puppet:
-  * https://git.openstack.org/cgit/openstack-infra/puppet-nodepool/tree/
-  * :file:`modules/openstack_project/manifests/nodepool_prod.pp`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/nodepool.pp
   * :file:`modules/openstack_project/manifests/single_use_slave.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/nodepool/nodepool.yaml.erb`
+  * :config:`nodepool/nodepool.yaml`
   * :config:`nodepool/scripts/`
   * :config:`nodepool/elements/`
 :Projects:

@@ -24,11 +24,12 @@ builds and applys some sensible rotation defaults.
 
 import argparse
 import logging
+import requests
 import yaml
 
 # default paths and outputs
 MODULES_PATH = '../modules/openstack_project/templates/nodepool'
-CONFIG_FILE = MODULES_PATH + '/nodepool.yaml.erb'
+CONFIG_FILE = 'https://git.openstack.org/cgit/openstack-infra/project-config/plain/nodepool/nodepool.yaml'
 LOGGING_CONFIG_FILE = MODULES_PATH + '/nodepool.logging.conf.erb'
 LOG_DIR = '/var/log/nodepool'
 IMAGE_LOG_DIR = '<%= @image_log_document_root %>'
@@ -195,7 +196,6 @@ def generate_log_config(config, log_dir, image_log_dir, output):
     """
 
     loggers_and_handlers = []
-    logging.debug("Reading config file %s" % config.name)
     for (provider, image) in _get_providers_and_images(config):
         loggers_and_handlers.append(
             _generate_logger_and_handler(image_log_dir, provider, image))
@@ -228,9 +228,8 @@ def main():
     parser.add_argument('-d', '--debug', action='store_true',
                         help="Enable debugging")
     parser.add_argument('-c', '--config', default=CONFIG_FILE,
-                        help="Config file to read in "
-                        "(default: %s)" % CONFIG_FILE,
-                        type=argparse.FileType('r'))
+                        help="Config file url to read in "
+                        "(default: %s)" % CONFIG_FILE)
     parser.add_argument('-o', '--output', default=LOGGING_CONFIG_FILE,
                         help="Output file "
                         "(default: %s)" % LOGGING_CONFIG_FILE,
@@ -245,7 +244,9 @@ def main():
 
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
 
-    generate_log_config(args.config,
+
+    nodepoolyaml = requests.get(args.config)
+    generate_log_config(nodepoolyaml.content,
                         args.log_dir,
                         args.image_log_dir,
                         args.output)
