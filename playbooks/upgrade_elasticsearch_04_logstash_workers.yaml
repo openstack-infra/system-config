@@ -1,0 +1,20 @@
+---
+- hosts: 'logstash-worker*.openstack.org'
+  tasks:
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb -O /tmp/elasticsearch-1.7.3.deb'
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb.sha1.txt -O /tmp/elasticsearch-1.7.3.deb.sha1.txt'
+    - shell:>
+        [ "`sha1sum /tmp/elasticsearch-1.7.3.deb | cut -d " " -f 1`" = "`cat /tmp/elasticsearch-1.7.3.deb.sha1.txt | cut -d ' ' -f 1`" ]
+      # This will probably start the service but we are explicit about it below
+      # anyways.
+    - apt: deb=/tmp/elasticsearch-1.7.3.deb
+    - service: name=elasticsearch state=started
+    - service: name=logstash-indexer state=restarted
+    - service: name=jenkins-log-worker-A state=restarted
+    - service: name=jenkins-log-worker-B state=restarted
+    - service: name=jenkins-log-worker-C state=restarted
+    - service: name=jenkins-log-worker-D state=restarted
+
+# We don't restart puppet because we need to make sure that puppet won't try
+# to reinstall older ES version. That should be done once the change to
+# enforce the above is in place.

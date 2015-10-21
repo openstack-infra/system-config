@@ -1,0 +1,12 @@
+---
+- hosts: 'elasticsearch02.openstack.org'
+  tasks:
+      # This speeds up the full cluster restart because the cluster
+      # won't try to immediate recover as we take down and bring up
+      # the nodes.
+    - shell: >
+        curl -XPUT localhost:9200/_cluster/settings -d '{
+          "persistent" : {
+            "cluster.routing.allocation.disable_allocation" : true
+          }
+        }'
