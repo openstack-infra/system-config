@@ -442,7 +442,7 @@ To rename a project:
 
      sudo su - gerrit2
      cp -ax review_site/index index.backup.`date +%s`
-     java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
+     java -jar review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site --threads 4
 
 #. Move the Git repository on git{01-08}.openstack.org (while the
    Lucene reindex is running)::
