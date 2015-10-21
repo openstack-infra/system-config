@@ -1,0 +1,15 @@
+---
+- hosts: 'logstash-worker*.openstack.org'
+  tasks:
+    - shell: 'puppet agent --disable'
+      # Stop the log workers so that we queue jobs in the geard
+      # server. This prevents us from losing job data while we
+      # upgrade elasticsearch
+    - service: name=jenkins-log-worker-A state=stopped
+    - service: name=jenkins-log-worker-B state=stopped
+    - service: name=jenkins-log-worker-C state=stopped
+    - service: name=jenkins-log-worker-D state=stopped
+      # Stop the logstash and elasticsearch daemons to prevent
+      # other work from happening while we upgrade.
+    - service: name=logstash-indexer state=stopped
+    - service: name=elasticsearch state=stopped
