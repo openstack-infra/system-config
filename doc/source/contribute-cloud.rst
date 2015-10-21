@@ -66,5 +66,5 @@ would be very much appreciated.  You are welcome to contact the
 Infrastructure team on our public mailing list at
 <openstack-infra@lists.openstack.org>, or in our IRC channel,
 `#openstack-infra` on Freenode.  You are also welcome to contact the
-Infrastructure Project Team lead privately at <corvus@inaugust.com> or
-`jeblair` on Freenode.
+Infrastructure Project Team lead privately at <fungi@yuggoth.org> or
+`fungi` on Freenode.
