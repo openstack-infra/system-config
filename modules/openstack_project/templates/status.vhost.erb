@@ -28,6 +28,13 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 
   Alias /release /srv/static/release
 
+  Alias /openstack-health /srv/static/openstack-health
+  <Directory /srv/static/openstack-health>
+    AllowOverride None
+    Order allow,deny
+    allow from all
+  </Directory>
+
   <Directory <%= @docroot %>>
     Options <%= @options %>
     AllowOverride None
