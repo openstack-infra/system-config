@@ -1,0 +1,77 @@
+---
+- hosts: 'logstash-worker*.openstack.org'
+  tasks:
+    - shell: 'puppet agent --disable'
+      # Stop the log workers so that we queue jobs in the geard
+      # server. This prevents us from losing job data while we
+      # upgrade elasticsearch
+    - service: name=jenkins-log-worker-A state=stopped
+    - service: name=jenkins-log-worker-B state=stopped
+    - service: name=jenkins-log-worker-C state=stopped
+    - service: name=jenkins-log-worker-D state=stopped
+      # Stop the logstash and elasticsearch daemons to prevent
+      # other work from happening while we upgrade.
+    - service: name=logstash-indexer state=stopped
+    - service: name=elasticsearch state=stopped
+- hosts: 'elasticsearch02.openstack.org'
+  tasks:
+      # This speeds up the full cluster restart because the cluster
+      # won't try to immediate recover as we take down and bring up
+      # the nodes.
+    - shell: >
+        curl -XPUT localhost:9200/_cluster/settings -d '{
+          "persistent" : {
+            "cluster.routing.allocation.disable_allocation" : true
+          }
+        }'
+- hosts: 'elasticsearch0*.openstack.org'
+  tasks:
+    - shell: 'puppet agent --disable'
+      # make double sure entire cluster is off before upgrading.
+    - service: name=elasticsearch state=stopped
+- hosts: 'elasticsearch0*.openstack.org'
+  tasks:
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb -O /tmp/elasticsearch-1.7.3.deb'
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb.sha1.txt -O /tmp/elasticsearch-1.7.3.deb.sha1.txt'
+    - shell: '[ "`sha1sum /tmp/elasticsearch-1.7.3.deb`" = "`cat /tmp/elasticsearch-1.7.3.deb.sha1.txt`" ]'
+      # This will probably start the service but we are explicit about it below
+      # anyways.
+    - apt: deb=/tmp/elasticsearch-1.7.3.deb
+    - service: name=elasticsearch state=started
+- hosts: 'elasticsearch02.openstack.org'
+  tasks:
+      # This command is inverse of the curl command above using the newer
+      # version syntax.
+    - shell: >
+        curl -XPUT localhost:9200/_cluster/settings -d '{
+          "persistent" : {
+            "cluster.routing.allocation.disable_allocation": false,
+            "cluster.routing.allocation.enable" : "all"
+          }
+        }'
+- hosts: 'elasticsearch02.openstack.org'
+  # We want to stop here and make sure that elasticsearch is happy
+  # before pushing work back onto it.
+  vars_prompt:
+    - name: 'unused_var_just_want_to_stop_here'
+      prompt: 'Enter text here when you are ready to restart gearman jobs. Else ^C'
+  tasks:
+    - shell: 'echo "Continue"'
+- hosts: 'logstash-worker*.openstack.org'
+  tasks:
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb -O /tmp/elasticsearch-1.7.3.deb'
+    - shell: 'wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb.sha1.txt -O /tmp/elasticsearch-1.7.3.deb.sha1.txt'
+    - shell: '[ "`sha1sum /tmp/elasticsearch-1.7.3.deb`" = "`cat /tmp/elasticsearch-1.7.3.deb.sha1.txt`" ]'
+      # This will probably start the service but we are explicit about it below
+      # anyways.
+    - apt: deb=/tmp/elasticsearch-1.7.3.deb
+    - service: name=elasticsearch state=started
+    - service: name=logstash-indexer state=restarted
+    - service: name=jenkins-log-worker-A state=restarted
+    - service: name=jenkins-log-worker-B state=restarted
+    - service: name=jenkins-log-worker-C state=restarted
+    - service: name=jenkins-log-worker-D state=restarted
+
+# We don't restart puppet because we need to make sure that puppet won't try
+# to reinstall older ES version. That should be done once the change to
+# enforce the above is in place.
