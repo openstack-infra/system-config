@@ -100,6 +100,7 @@ class openstack_project::cacti (
     'graphite.openstack.org',
     'groups-dev.openstack.org',
     'groups.openstack.org',
+    'health.openstack.org',
     'jenkins-dev.openstack.org',
     'jenkins.openstack.org',
     'jenkins01.openstack.org',
