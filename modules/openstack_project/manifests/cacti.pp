@@ -152,6 +152,7 @@ class openstack_project::cacti (
     'review-dev.openstack.org',
     'review.openstack.org',
     'static.openstack.org',
+    'status.openstack.org',
     'subunit-worker01.openstack.org',
     'translate.openstack.org',
     'translate-dev.openstack.org',
