@@ -316,12 +316,18 @@ class openstack_project::static (
   # Trystack
 
   ::httpd::vhost { 'trystack.openstack.org':
-    port          => 80,
-    priority      => '50',
+    port          => 443, # Is required despite not being used.
     docroot       => '/opt/trystack',
-    template      => 'openstack_project/trystack.vhost.erb',
+    priority      => '50',
+    ssl           => true,
+    template      => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name    => 'trystack.openstack.org',
     serveraliases => ['trystack.org', 'www.trystack.org'],
-    require       => Vcsrepo['/opt/trystack'],
+    require       => [
+      Vcsrepo['/opt/trystack'],
+      File[$cert_file],
+      File[$key_file],
+    ],
   }
 
   vcsrepo { '/opt/trystack':
