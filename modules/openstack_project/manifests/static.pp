@@ -47,18 +47,22 @@ class openstack_project::static (
     }
   }
 
-  file { '/etc/ssl/certs':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+  if ! defined(File['/etc/ssl/certs']) {
+    file { '/etc/ssl/certs':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
   }
 
-  file { '/etc/ssl/private':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0700',
+  if ! defined(File['/etc/ssl/private']) {
+    file { '/etc/ssl/private':
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0700',
+    }
   }
 
   # To use the standard ssl-certs package snakeoil certificate, leave both
@@ -184,6 +188,10 @@ class openstack_project::static (
     swift_tenant_name       => $swift_tenant_name,
     swift_region_name       => $swift_region_name,
     swift_default_container => $swift_default_container,
+    ssl                     => true,
+    ssl_cert_file           => $cert_file,
+    ssl_key_file            => $key_file,
+    ssl_chain_file          => $chain_file,
   }
 
   ###########################################################
