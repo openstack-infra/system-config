@@ -4,6 +4,15 @@
 
 <VirtualHost *:80>
   ServerName <%= @vhost_name %>
+<% if @serveraliases.is_a? Array -%>
+  # Permanently redirect these ServerAlias entries to ServerName
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} !<%= @vhost_name %>$ [NC]
+  RewriteRule ^/(.*)$ http://<%= @vhost_name %>/$1 [L,R=301]
+<% end -%>
   DocumentRoot <%= @docroot %>
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
