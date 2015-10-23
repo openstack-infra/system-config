@@ -31,6 +31,24 @@ class openstack_project::mirror (
     require => File[$base],
   }
 
+  file { "${docroot}/robots.txt":
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
+    require => File[$docroot],
+  }
+
+  file { "${docroot}/pypi":
+    ensure  => 'link',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    target  => "$pypi_docroot/web",
+    require => File[$docroot],
+  }
+
   ::httpd::vhost { $vhost_name:
     port     => 80,
     priority => '50',
