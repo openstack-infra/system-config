@@ -20,12 +20,12 @@ class openstack_project::template (
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $pypi_trusted_hosts        = [
-      'pypi.dfw.openstack.org',
-      'pypi.gra1.openstack.org',
-      'pypi.iad.openstack.org',
-      'pypi.ord.openstack.org',
-      'pypi.region-b.geo-1.openstack.org',
-      'pypi.sjc1.openstack.org',
+      'mirror.dfw.openstack.org',
+      'mirror.gra1.openstack.org',
+      'mirror.iad.openstack.org',
+      'mirror.ord.openstack.org',
+      'mirror.region-b.geo-1.openstack.org',
+      'mirror.sjc1.openstack.org',
   ],
 ) {
 
