@@ -22,13 +22,8 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
         </IfVersion>
     </Directory>
 
-    # Arranged in decreasing order of specificity
-    Alias /local-stats <%= @pypi_docroot %>/web/local-stats
-    Alias /packages <%= @pypi_docroot %>/web/packages
+    # Alias to the pypi mirror root
     Alias /pypi <%= @pypi_docroot %>/web
-    Alias /robots.txt <%= @pypi_docroot %>/web/robots.txt
-    Alias /simple <%= @pypi_docroot %>/web/simple
-    Alias / <%= @pypi_docroot %>/web
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
