@@ -162,8 +162,8 @@ node 'jenkins.openstack.org' {
   }
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    jenkins_password        => hiera('jenkins_jobs_password', 'XXX'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
+    jenkins_password        => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
@@ -185,8 +185,8 @@ node /^jenkins\d+\.openstack\.org$/ {
     puppetmaster_server       => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins':
-    jenkins_password        => hiera('jenkins_jobs_password', 'XXX'),
-    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
+    jenkins_password        => hiera('jenkins_jobs_password'),
+    jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
