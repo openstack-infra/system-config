@@ -15,7 +15,6 @@ At a Glance
   * http://logs.openstack.org
   * http://docs-draft.openstack.org
   * http://status.openstack.org
-  * http://pypi.openstack.org
   * http://specs.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
