@@ -201,16 +201,16 @@ node 'jenkins-dev.openstack.org' {
     puppetmaster_server       => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins_dev':
-    jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
-    mysql_password           => hiera('nodepool_dev_mysql_password', 'XXX'),
-    mysql_root_password      => hiera('nodepool_dev_mysql_root_password', 'XXX'),
-    nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
+    jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents'),
+    mysql_password           => hiera('nodepool_dev_mysql_password'),
+    mysql_root_password      => hiera('nodepool_dev_mysql_root_password'),
+    nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
     jenkins_api_user         => hiera('jenkins_dev_api_user', 'username'),
-    jenkins_api_key          => hiera('jenkins_dev_api_key', 'XXX'),
-    jenkins_credentials_id   => hiera('jenkins_dev_credentials_id', 'XXX'),
+    jenkins_api_key          => hiera('jenkins_dev_api_key'),
+    jenkins_credentials_id   => hiera('jenkins_dev_credentials_id'),
     hpcloud_username         => hiera('nodepool_hpcloud_username', 'username'),
-    hpcloud_password         => hiera('nodepool_hpcloud_password', 'XXX'),
-    hpcloud_project          => hiera('nodepool_hpcloud_project', 'XXX'),
+    hpcloud_password         => hiera('nodepool_hpcloud_password'),
+    hpcloud_project          => hiera('nodepool_hpcloud_project'),
   }
 }
 
