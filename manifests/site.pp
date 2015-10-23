@@ -553,12 +553,27 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
-# Machines in each region to run PyPI mirrors.
+# Legacy machines in each region to run pypi package mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
   $group = "pypi"
   class { 'openstack_project::pypi':
     sysadmins               => hiera('sysadmins', []),
+  }
+}
+
+# Machines in each region to run unified package mirrors.
+# Node-OS: trusty
+node /^mirror\..*\.openstack\.org$/ {
+  $group = "mirror"
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::mirror':
+    vhost_name => $::fqdn,
   }
 }
 
