@@ -519,7 +519,7 @@ node /^git\d+\.openstack\.org$/ {
 
 # Machines in each region to run package mirrors.
 # Node-OS: precise
-node /^(pypi|mirror)\..*\.openstack\.org$/ {
+node /^mirror\..*\.openstack\.org$/ {
   $group = "mirror"
   class { 'openstack_project::mirror':
     sysadmins               => hiera('sysadmins', []),
