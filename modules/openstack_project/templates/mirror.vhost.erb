@@ -1,0 +1,37 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+    ServerName <%= @srvname %>
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
+    DocumentRoot <%= @docroot %>
+    <Directory <%= @docroot %>>
+        Options <%= @options %>
+        AllowOverride None
+        Order allow,deny
+        allow from all
+        Satisfy any
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+    </Directory>
+
+    # Arranged in decreasing order of specificity
+    Alias /local-stats <%= @pypi_docroot %>/web/local-stats
+    Alias /packages <%= @pypi_docroot %>/web/packages
+    Alias /pypi <%= @pypi_docroot %>/web
+    Alias /robots.txt <%= @pypi_docroot %>/web/robots.txt
+    Alias /simple <%= @pypi_docroot %>/web/simple
+    Alias / <%= @pypi_docroot %>/web
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
+    ServerSignature Off
+</VirtualHost>
