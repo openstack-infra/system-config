@@ -3,7 +3,7 @@
 class openstack_project::users {
   # Make sure we have our UID/GID account minimums for dynamic users set higher
   # than we'll use for static assignments, so as to avoid future conflicts.
-  include openstack_project::params
+  include ::openstack_project::params
   file { '/etc/login.defs':
     ensure => present,
     group  => 'root',
