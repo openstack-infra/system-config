@@ -797,7 +797,7 @@ node 'pbx.openstack.org' {
         provider => 'voipms',
         hostname => 'dallas.voip.ms',
         username => hiera('voipms_username', 'username'),
-        password => hiera('voipms_password', 'XXX'),
+        password => hiera('voipms_password'),
         outgoing => false,
       },
     ],
