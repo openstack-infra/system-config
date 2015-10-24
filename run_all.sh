@@ -19,6 +19,7 @@
 # expect.
 set -e
 export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
+ANSIBLE_PLAYBOOKS=/etc/ansible/playbooks
 
 cd /opt/system-config/production
 git fetch -a && git reset -q --hard @{u}
@@ -36,9 +37,9 @@ set +e
 
 # First run the git/gerrit sequence, since it's important that they all work
 # together
-ansible-playbook -f 10 /etc/ansible/playbooks/remote_puppet_git.yaml
+ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
-ansible-playbook -f 1 /etc/ansible/playbooks/remote_puppet_afs.yaml
+ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
-ansible-playbook -f 20 /etc/ansible/playbooks/remote_puppet_else.yaml
+ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
