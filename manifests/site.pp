@@ -364,12 +364,12 @@ node 'etherpad.openstack.org' {
   }
 
   class { 'openstack_project::etherpad':
-    ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents', 'XXX'),
-    ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents', 'XXX'),
+    ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
     mysql_host              => hiera('etherpad_db_host', 'localhost'),
     mysql_user              => hiera('etherpad_db_user', 'username'),
-    mysql_password          => hiera('etherpad_db_password', 'XXX'),
+    mysql_password          => hiera('etherpad_db_password'),
   }
 }
 
@@ -383,7 +383,7 @@ node 'etherpad-dev.openstack.org' {
   class { 'openstack_project::etherpad_dev':
     mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
     mysql_user          => hiera('etherpad-dev_db_user', 'username'),
-    mysql_password      => hiera('etherpad-dev_db_password', 'XXX'),
+    mysql_password      => hiera('etherpad-dev_db_password'),
   }
 }
 
