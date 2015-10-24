@@ -448,8 +448,11 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    sysadmins                 => hiera('sysadmins', []),
+  }
   class { 'openstack_project::subunit_worker':
-    sysadmins           => hiera('sysadmins', []),
     subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
   }
