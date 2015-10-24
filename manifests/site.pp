@@ -970,8 +970,8 @@ node 'ask.openstack.org' {
 
   class { 'openstack_project::ask':
     db_user                      => hiera('ask_db_user', 'ask'),
-    db_password                  => hiera('ask_db_password', 'XXX'),
-    redis_password               => hiera('ask_redis_password', 'XXX'),
+    db_password                  => hiera('ask_db_password'),
+    redis_password               => hiera('ask_redis_password'),
     site_ssl_cert_file_contents  => hiera('ask_site_ssl_cert_file_contents', undef),
     site_ssl_key_file_contents   => hiera('ask_site_ssl_key_file_contents', undef),
     site_ssl_chain_file_contents => hiera('ask_site_ssl_chain_file_contents', undef),
@@ -986,8 +986,8 @@ node 'ask-staging.openstack.org' {
   }
 
   class { 'openstack_project::ask_staging':
-    db_password                  => hiera('ask_staging_db_password', 'XXX'),
-    redis_password               => hiera('ask_staging_redis_password', 'XXX'),
+    db_password                  => hiera('ask_staging_db_password'),
+    redis_password               => hiera('ask_staging_redis_password'),
   }
 }
 
