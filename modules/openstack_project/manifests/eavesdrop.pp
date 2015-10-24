@@ -96,6 +96,7 @@ class openstack_project::eavesdrop (
         '#openstack-security',
         '#openstack-sprint',
         '#openstack-stable',
+        '#openstack-storlets',
         '#openstack-swift',
         '#openstack-tailgate',
         '#openstack-trove',
