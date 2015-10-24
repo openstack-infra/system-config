@@ -12,10 +12,12 @@ At a Glance
 
 :Hosts:
   * https://ask.openstack.org
+  * https://ask-staging.openstack.org
 :Puppet:
-  * :file:`modules/askbot`
-  * :file:`modules/solr`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-askbot/tree/
+  * https://github.com/vamsee/puppet-solr
   * :file:`modules/openstack_project/manifests/ask.pp`
+  * :file:`modules/openstack_project/manifests/ask-staging.pp`
 :Projects:
   * https://askbot.com
   * http://lucene.apache.org/solr
@@ -27,6 +29,12 @@ Overview
 The site ask.openstack.org based on the officially released askbot pip distribution.
 The stable deployment is extended with a custom OpenStack theme available at
 https://git.openstack.org/cgit/openstack-infra/askbot-theme.
+
+The ask-staging.openstack.org site based on master branch of
+https://github.com/askbot/askbot-devel repository, and deploys askbot
+directly from github and consume the openstack theme from
+openstack-infra/askbot-theme repository. The staging site is using
+python virtualenv for proper pip dependency handling.
 
 System Architecture
 ===================
@@ -107,13 +115,15 @@ Solr schema templates can be found at:
 * :file:`modules/askbot/templates/solr/schema.cn.xml.erb`
 
 Operational notes
------------------
+=================
 
 The askbot website contains a ``surprisingly`` askbot based support forum,
 and a lot of operational related information is available there. Additional
 maintenance commands:
 
+* activate virtualenv: ``source /usr/askbot-env/bin/activate``
 * synchronize db schema: ``python manage.py syncdb``
 * migrate database between upgrades: ``python manage.py migrate``
 * rebuild solr index: ``python manage.py askbot_rebuild_index -l <language-code>``
 * assign administrator right to a user: ``python manage.py add_admin <user-id>``
+* update site url setting in askbot database: ``update livesettings_setting set value = '<site-url>' where "group" = 'QA_SITE_SETTINGS' and key = 'APP_URL';``
