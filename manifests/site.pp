@@ -755,8 +755,8 @@ node /^zm\d+\.openstack\.org$/ {
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins', []),
   }
 }
