@@ -316,8 +316,8 @@ node 'paste.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::paste':
-    db_password         => hiera('paste_db_password', 'XXX'),
-    mysql_root_password => hiera('paste_mysql_root_password', 'XXX'),
+    db_password         => hiera('paste_db_password'),
+    mysql_root_password => hiera('paste_mysql_root_password'),
   }
 }
 
