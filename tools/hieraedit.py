@@ -20,6 +20,21 @@ import yaml
 import tempfile
 import pwd
 import grp
+from collections import OrderedDict
+
+# from:
+# http://stackoverflow.com/questions/5121931/in-python-how-can-you-load-yaml-mappings-as-ordereddicts flake8: noqa
+_mapping_tag = yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG
+
+def dict_representer(dumper, data):
+    return dumper.represent_dict(data.iteritems())
+
+def dict_constructor(loader, node):
+    return OrderedDict(loader.construct_pairs(node))
+
+yaml.add_representer(OrderedDict, dict_representer)
+yaml.add_constructor(_mapping_tag, dict_constructor)
+# end from
 
 # from:
 # http://stackoverflow.com/questions/8640959/how-can-i-control-what-scalar-form-pyyaml-uses-for-my-data  flake8: noqa
@@ -58,6 +73,7 @@ parser.add_argument('-f', dest='file', help='file to read in as value')
 
 args = parser.parse_args()
 data = yaml.load(open(args.yaml))
+assert type(data) == OrderedDict # OrderedDict object
 
 changed = False
 if args.value:
