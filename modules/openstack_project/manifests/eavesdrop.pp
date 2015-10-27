@@ -86,6 +86,7 @@ class openstack_project::eavesdrop (
         '#openstack-operators',
         '#openstack-opw',
         '#openstack-oslo',
+        '#openstack-pandaman',
         '#openstack-qa',
         '#openstack-rally',
         '#openstack-rating',
