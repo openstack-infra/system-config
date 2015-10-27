@@ -1055,6 +1055,7 @@ diskimages:
       DIB_IMAGE_CACHE: /opt/dib_cache
       DIB_APT_LOCAL_CACHE: '0'
       DIB_DISABLE_APT_CLEANUP: '1'
+      DIB_INSTALLTYPE_pip_and_virtualenv: source
   - name: devstack-trusty
     elements:
       - ubuntu
@@ -1124,3 +1125,4 @@ diskimages:
       TMPDIR: /opt/dib_tmp
       DIB_IMAGE_CACHE: /opt/dib_cache
       QEMU_IMG_OPTIONS: compat=0.10
+      DIB_INSTALLTYPE_pip_and_virtualenv: source
