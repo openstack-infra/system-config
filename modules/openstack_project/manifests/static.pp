@@ -240,10 +240,17 @@ class openstack_project::static (
   # Governance
 
   ::httpd::vhost { 'governance.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/governance',
-    require  => File['/srv/static/governance'],
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/governance',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'governance.openstack.org',
+    require    => [
+      File['/srv/static/governance'],
+      File[$cert_file],
+      File[$key_file],
+    ],
   }
 
   file { '/srv/static/governance':
