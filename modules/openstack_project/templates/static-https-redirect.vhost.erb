@@ -4,6 +4,11 @@
 
 <VirtualHost *:80>
   ServerName <%= @vhost_name %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+<% end -%>
   RewriteEngine On
   RewriteRule ^/(.*) https://<%= @vhost_name %>/$1 [last,redirect=permanent]
   LogLevel warn
