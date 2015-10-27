@@ -264,10 +264,17 @@ class openstack_project::static (
   # Specs
 
   ::httpd::vhost { 'specs.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/specs',
-    require  => File['/srv/static/specs'],
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/specs',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'specs.openstack.org',
+    require    => [
+      File['/srv/static/specs'],
+      File[$cert_file],
+      File[$key_file],
+    ],
   }
 
   file { '/srv/static/specs':
