@@ -190,10 +190,17 @@ class openstack_project::static (
   # Docs-draft
 
   ::httpd::vhost { 'docs-draft.openstack.org':
-    port     => 80,
-    priority => '50',
-    docroot  => '/srv/static/docs-draft',
-    require  => File['/srv/static/docs-draft'],
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/docs-draft',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'docs-draft.openstack.org',
+    require    => [
+      File['/srv/static/docs-draft'],
+      File[$cert_file],
+      File[$key_file],
+    ],
   }
 
   file { '/srv/static/docs-draft':
