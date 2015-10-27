@@ -49,6 +49,14 @@ class openstack_project::etherpad (
     backup_user   => 'bup-etherpad',
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
+
+  include ulimit
+  ulimit::conf { 'unlimit_etherpad_files':
+    limit_domain => 'www-data',
+    limit_type   => 'hard',
+    limit_item   => 'nofile',
+    limit_value  => '10000'
+  }
 }
 
 # vim:sw=2:ts=2:expandtab:textwidth=79
