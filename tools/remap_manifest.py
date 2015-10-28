@@ -42,6 +42,33 @@ common = []
 current = None
 current_keys = None
 
+# from:
+# http://stackoverflow.com/questions/8640959/how-can-i-control-what-scalar-form-pyyaml-uses-for-my-data  flake8: noqa
+def should_use_block(value):
+    for c in u"\u000a\u000d\u001c\u001d\u001e\u0085\u2028\u2029":
+        if c in value:
+            return True
+    return False
+
+def my_represent_scalar(self, tag, value, style=None):
+    if style is None:
+        if should_use_block(value):
+             style='|'
+        else:
+            style = self.default_style
+
+    node = yaml.representer.ScalarNode(tag, value, style=style)
+    if self.alias_key is not None:
+        self.represented_objects[self.alias_key] = node
+    return node
+
+yaml.representer.BaseRepresenter.represent_scalar = my_represent_scalar
+# end from
+# from: http://pyyaml.org/ticket/64
+class MyDumper(yaml.Dumper):
+    def increase_indent(self, flow=False, indentless=False):
+        return super(MyDumper, self).increase_indent(flow, False)
+#end from
 manifest_path = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..', 'manifests/site.pp'))
 
@@ -63,7 +90,10 @@ with open(manifest_path, 'r') as manifest:
                 fqdns[name] = current
             continue
         if '$group' in line:
-            name = line.split('"')[1]
+            if '"' in line:
+                name = line.split('"')[1]
+            elif "'" in line:
+                name = line.split("'")[1]
             current['group'] = name
         if 'hiera' in line:
             key = line.split("'")[1]
@@ -97,9 +127,13 @@ def write_values(reverse_map, target, input_dict, source_vaues, root):
         output_dict = {}
         for name in value['keys']:
             reverse_map[name].append(dict(target=target, key=key))
-            output_dict[name] = source_values[name]
+            if name in source_values:
+                output_dict[name] = source_values[name]
+            else:
+                print "Requested key not in common.yaml", name
         with open(os.path.join(outdir, '%s.yaml' % key), 'w') as outfile:
-            outfile.write(yaml.dump(output_dict, default_flow_style=False))
+            outfile.write(yaml.dump(
+                output_dict, default_flow_style=False, Dumper=MyDumper))
     return reverse_map
 
 
