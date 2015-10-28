@@ -1,0 +1,10 @@
+---
+:hierarchy:
+  # Public Hieradata Only
+  - "hiera/%{::environment}/fqdn/%{::fqdn}"
+  - "hiera/%{::environment}/group/%{group}" # no :: because group is set at nodescope
+  - "hiera/%{::environment}/common"
+:backends:
+  - yaml
+:yaml:
+  :datadir: 'hiera'
