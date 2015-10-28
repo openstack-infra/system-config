@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Chris Hoge <chris@openstack.org>
+Code-Review+1: Anderson Mesquita <andersonvom@gmail.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Wed, 28 Oct 2015 02:49:53 +0000
+Reviewed-on: https://review.openstack.org/239795
+Project: openstack-infra/system-config
+Branch: refs/heads/master
