@@ -18,7 +18,7 @@ file=$1
 fileout=${file}.out
 echo "##" > $fileout
 cat $file > $fileout
-sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file >/dev/null 2>> $fileout
+sudo puppet apply --modulepath=${MODULE_PATH} --color=false --noop --verbose --debug $file --hiera_config tools/hiera.yaml >/dev/null 2>> $fileout
 ret=$?
 cat $fileout
 exit $ret

@@ -78,8 +78,6 @@ sed -i -e '/^\}$/d' applytest/puppetapplytest*
 # Comment out anything that doesn't begin with a space.
 # This gives us the node {} internal contents.
 sed -i -e 's/^[^][:space:]$]/#&/g' applytest/prep00 applytest/puppetapplytest*
-sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/prep00 applytest/puppetapplytest*
-sed -i -e "s@hiera(.\([^.]*\).)@'\1NoDefault'@" applytest/prep00 applytest/puppetapplytest*
 mv applytest/prep00 applytest/head  # These are the top-level variables defined in site.pp
 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
@@ -112,30 +110,6 @@ grep -v 127.0.1.1 /etc/hosts >/tmp/hosts
 HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
-
-# Manage hiera
-sudo cp -r hiera /opt/
-# Using /tmp because heredocs and sudo
-cat > /tmp/hiera.yaml <<EOF
----
-:hierarchy:
-  # Public Hieradata Only
-  - "hiera/%{::environment}/fqdn/%{::fqdn}"
-  - "hiera/%{::environment}/group/%{group}" # no :: because group is set at nodescope
-  - "hiera/%{::environment}/common"
-:backends:
-  - yaml
-:yaml:
-  :datadir: "/opt/"
-EOF
-sudo cp /tmp/hiera.yaml /etc/hiera.yaml
-sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
-
-# Demonstrate that hiera lookups are functioning
-find /opt/hiera
-hiera -d elasticsearch_nodes environment=production
-
-
 
 sudo mkdir -p /var/run/puppet
 sudo -E bash -x ./install_modules.sh
