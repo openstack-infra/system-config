@@ -50,8 +50,7 @@ class MyDumper(yaml.Dumper):
 #end from
 
 parser = argparse.ArgumentParser(description='Edit hiera yaml.')
-parser.add_argument('--yaml', help='the path to the hira yaml file',
-                    default='/etc/puppet/hieradata/production/common.yaml')
+parser.add_argument('--yaml', help='the path to the hiera yaml file')
 parser.add_argument('key', help='the key')
 parser.add_argument('value', help='the value', nargs='?')
 parser.add_argument('-f', dest='file', help='file to read in as value')
