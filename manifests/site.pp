@@ -426,7 +426,7 @@ node 'logstash.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
 
-  class { 'openstack_project::logstash':
+  class { 'openstackci::logstash':
     discover_nodes      => [
       'elasticsearch02.openstack.org:9200',
       'elasticsearch03.openstack.org:9200',
@@ -435,8 +435,10 @@ node 'logstash.openstack.org' {
       'elasticsearch06.openstack.org:9200',
       'elasticsearch07.openstack.org:9200',
     ],
-    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
+    statsd_host          => 'graphite.openstack.org',
+    subunit2sql_db_host  => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass  => hiera('subunit2sql_db_password', ''),
+    log_processor_config => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
   }
 }
 
@@ -453,8 +455,18 @@ node /^logstash-worker\d+\.openstack\.org$/ {
     sysadmins                 => hiera('sysadmins', []),
   }
 
-  class { 'openstack_project::logstash_worker':
-    discover_node         => 'elasticsearch02.openstack.org',
+  class { 'openstackci::logstash_worker':
+  elasticsearch_nodes           => $elasticsearch_nodes,
+  log_processor_config          => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+  es_heap_size                  => '1g',
+  es_version                    => '0.90.9',
+  indexer_java_args             => '-Xmx2g',
+  indexer_conf_template         => 'openstack_project/logstash/indexer.conf.erb',
+  log_processor_workers         => ['A', 'B', 'C', 'D',],
+  es_gw_recover_after_nodes     => '5',
+  es_gw_recover_after_time      => '5m',
+  es_gw_expected_nodes          => '6',
+  es_discovery_min_master_nodes => '5',
   }
 }
 
@@ -465,9 +477,10 @@ node /^subunit-worker\d+\.openstack\.org$/ {
     iptables_public_tcp_ports => [22],
     sysadmins                 => hiera('sysadmins', []),
   }
-  class { 'openstack_project::subunit_worker':
-    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
+  class { 'openstackci::subunit_worker':
+    subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass     => hiera('subunit2sql_db_password', ''),
+    subunit2sql_config_file => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
   }
 }
 
@@ -485,8 +498,17 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
     iptables_rules4           => $iptables_rule,
     sysadmins                 => hiera('sysadmins', []),
   }
-  class { 'openstack_project::elasticsearch_node':
-    discover_nodes        => $elasticsearch_nodes,
+  class { 'openstackci::elasticsearch_node':
+    discover_nodes                => $elasticsearch_nodes,
+    es_heap_size                  => '30g',
+    es_version                    => '0.90.9',
+    es_gw_recover_after_nodes     => '5',
+    es_gw_recover_after_time      => '5m',
+    es_gw_expected_nodes          => '6',
+    es_discovery_min_master_nodes => '4',
+    es_indices_cleanup_hour       => '2',
+    es_indices_cleanup_minute     => '0',
+    es_indices_cleanup_period     => '10 days ago',
   }
 }
 
