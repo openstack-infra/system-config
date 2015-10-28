@@ -123,14 +123,14 @@ node 'grafana.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::grafana':
-    admin_password      => hiera('grafana_admin_password', 'XXX'),
+    admin_password      => hiera('grafana_admin_password'),
     admin_user          => hiera('grafana_admin_user', 'username'),
     mysql_host          => hiera('grafana_mysql_host', 'localhost'),
-    mysql_name          => hiera('grafana_mysql_name', 'XXX'),
-    mysql_password      => hiera('grafana_mysql_password', 'XXX'),
+    mysql_name          => hiera('grafana_mysql_name'),
+    mysql_password      => hiera('grafana_mysql_password'),
     mysql_user          => hiera('grafana_mysql_user', 'username'),
     project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
-    secret_key          => hiera('grafana_secret_key', 'XXX'),
+    secret_key          => hiera('grafana_secret_key'),
   }
 }
 
@@ -390,11 +390,11 @@ node 'etherpad-dev.openstack.org' {
 # Node-OS: precise
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
-    mysql_root_password     => hiera('wiki_db_password', 'XXX'),
+    mysql_root_password     => hiera('wiki_db_password'),
     sysadmins               => hiera('sysadmins', []),
-    ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents', 'XXX'),
-    ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents', 'XXX'),
-    ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents', 'XXX'),
+    ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents'),
   }
 }
 
@@ -841,16 +841,16 @@ node 'release.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::release_slave':
     pypi_username          => 'openstackci',
-    pypi_password          => hiera('pypi_password', 'XXX'),
+    pypi_password          => hiera('pypi_password'),
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
     jenkinsci_username     => hiera('jenkins_ci_org_user', 'username'),
-    jenkinsci_password     => hiera('jenkins_ci_org_password', 'XXX'),
+    jenkinsci_password     => hiera('jenkins_ci_org_password'),
     mavencentral_username  => hiera('mavencentral_org_user', 'username'),
-    mavencentral_password  => hiera('mavencentral_org_password', 'XXX'),
+    mavencentral_password  => hiera('mavencentral_org_password'),
     puppet_forge_username  => hiera('puppet_forge_username', 'username'),
-    puppet_forge_password  => hiera('puppet_forge_password', 'XXX'),
+    puppet_forge_password  => hiera('puppet_forge_password'),
     npm_username           => 'openstackci',
-    npm_userpassword       => hiera('npm_user_password', 'XXX'),
+    npm_userpassword       => hiera('npm_user_password'),
     npm_userurl            => 'https://openstack.org',
   }
 }
