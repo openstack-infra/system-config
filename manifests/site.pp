@@ -647,17 +647,37 @@ node 'status.openstack.org' {
 
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
+  $rackspace_username   = hiera('nodepool_rackspace_username', 'username')
+  $rackspace_password   = hiera('nodepool_rackspace_password')
+  $rackspace_project    = hiera('nodepool_rackspace_project', 'project')
+  $hpcloud_username     = hiera('nodepool_hpcloud_username', 'username')
+  $hpcloud_password     = hiera('nodepool_hpcloud_password')
+  $hpcloud_project      = hiera('nodepool_hpcloud_project', 'project')
+  $ovh_username         = hiera('nodepool_ovh_username', 'username')
+  $ovh_password         = hiera('nodepool_ovh_password')
+  $ovh_project          = hiera('nodepool_ovh_project', 'project')
+  $tripleo_username     = hiera('nodepool_tripleo_username', 'username')
+  $tripleo_password     = hiera('nodepool_tripleo_password')
+  $tripleo_project      = hiera('nodepool_tripleo_project', 'project')
+  $clouds_yaml          = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
 
-  class { 'openstack_project::nodepool_prod':
+  class { '::openstackci::nodepool':
+    vhost_name               => 'nodepool.openstack.org',
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password'),
     mysql_root_password      => hiera('nodepool_mysql_root_password'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    oscc_file_contents       => $clouds_yaml,
+    image_log_document_root  => '/var/log/nodepool/image',
+    environment              => {
+      'NODEPOOL_SSH_KEY' => hiera('jenkins_ssh_private_key_contents'),
+    },
     statsd_host              => 'graphite.openstack.org',
+    logging_conf_template    => 'openstack_project/nodepool/nodepool.logging.conf.erb',
     jenkins_masters          => [
       {
         name        => 'jenkins01',
@@ -709,18 +729,6 @@ node 'nodepool.openstack.org' {
         credentials => hiera('jenkins_credentials_id'),
       },
     ],
-    rackspace_username       => hiera('nodepool_rackspace_username', 'username'),
-    rackspace_password       => hiera('nodepool_rackspace_password'),
-    rackspace_project        => hiera('nodepool_rackspace_project', 'project'),
-    hpcloud_username         => hiera('nodepool_hpcloud_username', 'username'),
-    hpcloud_password         => hiera('nodepool_hpcloud_password'),
-    hpcloud_project          => hiera('nodepool_hpcloud_project', 'project'),
-    ovh_username             => hiera('nodepool_ovh_username', 'username'),
-    ovh_password             => hiera('nodepool_ovh_password'),
-    ovh_project              => hiera('nodepool_ovh_project', 'project'),
-    tripleo_username         => hiera('nodepool_tripleo_username', 'username'),
-    tripleo_password         => hiera('nodepool_tripleo_password'),
-    tripleo_project          => hiera('nodepool_tripleo_project', 'project'),
   }
 }
 
