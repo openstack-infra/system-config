@@ -28,7 +28,8 @@ import yaml
 
 # default paths and outputs
 MODULES_PATH = '../modules/openstack_project/templates/nodepool'
-CONFIG_FILE = MODULES_PATH + '/nodepool.yaml.erb'
+# default the project-config repo path to the same folder as this repo
+CONFIG_FILE = '../../project-config/nodepool/nodepool.yaml'
 LOGGING_CONFIG_FILE = MODULES_PATH + '/nodepool.logging.conf.erb'
 LOG_DIR = '/var/log/nodepool'
 IMAGE_LOG_DIR = '<%= @image_log_document_root %>'
