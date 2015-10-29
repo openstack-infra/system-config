@@ -43,6 +43,7 @@ class openstack_project::nodepool_prod(
     require                   => $::project_config::config_dir,
     logging_conf_template     => $nodepool_logging_template,
     jenkins_masters           => $jenkins_masters,
+    builder_workers           => true,
   }
 
   file { '/etc/nodepool/nodepool.yaml':
