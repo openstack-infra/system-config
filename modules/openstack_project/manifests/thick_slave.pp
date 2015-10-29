@@ -23,6 +23,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::language_fonts_packages,
     $::openstack_project::jenkins_params::libcurl_dev_package,
     $::openstack_project::jenkins_params::libevent_dev_package, # for gevent egg
+    $::openstack_project::jenkins_params::libpcap_dev_package, # for pypcap egg
     $::openstack_project::jenkins_params::ldap_dev_package,
     $::openstack_project::jenkins_params::librrd_dev_package, # for python-rrdtool, used by kwapi
     $::openstack_project::jenkins_params::libtidy_package, # for python-tidy, used by sphinxcontrib-docbookrestapi
