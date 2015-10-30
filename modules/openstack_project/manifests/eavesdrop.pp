@@ -90,7 +90,7 @@ class openstack_project::eavesdrop (
         '#openstack-qa',
         '#openstack-rally',
         '#openstack-rating',
-        '#openstack-relmgr-office',
+        '#openstack-release',
         '#openstack-sahara',
         '#openstack-sdks',
         '#openstack-searchlight',
