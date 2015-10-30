@@ -46,7 +46,7 @@ class openstack_project::jenkins_dev (
     version => '2.3',
   }
   jenkins::plugin { 'gearman-plugin':
-    version => '0.1.3',
+    version => '0.1.1',
   }
   jenkins::plugin { 'git':
     version => '1.1.23',
@@ -64,6 +64,9 @@ class openstack_project::jenkins_dev (
 #  jenkins::plugin { 'scp':
 #    version => '1.9',
 #  }
+  jenkins::plugin { 'jobConfigHistory':
+    version => '1.13',
+  }
   jenkins::plugin { 'monitoring':
     version => '1.40.0',
   }
@@ -75,6 +78,9 @@ class openstack_project::jenkins_dev (
   }
   jenkins::plugin { 'openid':
     version => '1.5',
+  }
+  jenkins::plugin { 'postbuildscript':
+    version => '0.16',
   }
   jenkins::plugin { 'publish-over-ftp':
     version => '1.7',
@@ -118,8 +124,14 @@ class openstack_project::jenkins_dev (
     recurse => true,
     purge   => true,
     force   => true,
-    require => File['/etc/nodepool'],
-    source  => 'puppet:///modules/openstack_project/nodepool/scripts',
+    require => [File['/etc/nodepool'], Class['project_config']],
+    source  => '/etc/project_config/nodepool/scripts',
+  }
+
+  if ! defined(Class['project_config']) {
+    class { 'project_config':
+      url  => 'https://git.openstack.org/openstack-infra/project-config',
+    }
   }
 
 }
