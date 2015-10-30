@@ -179,6 +179,11 @@ class openstack_project::gerrit (
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
       },
+      {
+        name  => 'abbrevgitsha',
+        match => '(<p>|[\\s(])([0-9a-f]{7})(</p>|[\\s.,;:)])',
+        html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+      },
     ],
     trackingids                         => [
       {
