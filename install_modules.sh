@@ -1,4 +1,5 @@
 #!/bin/bash
+# Copyright 2015 IBM Cloud US
 # Copyright 2014 OpenStack Foundation.
 # Copyright 2014 Hewlett-Packard Development Company, L.P.
 #
@@ -66,7 +67,7 @@ if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
     exit 0
 fi
 
-MODULE_LIST=`puppet module list --color=false`
+MODULE_LIST=`${SCRIP_DIR}/tools/module_versions.sh`
 
 # Install all the modules
 for MOD in ${!MODULES[*]} ; do
@@ -80,7 +81,7 @@ for MOD in ${!MODULES[*]} ; do
     fi
 done
 
-MODULE_LIST=`puppet module list --color=false`
+MODULE_LIST=`${SCRIPT_DIR}/tools/module_versions.sh`
 
 # Make a second pass, just installing modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do

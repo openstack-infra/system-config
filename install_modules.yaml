@@ -1,0 +1,10 @@
+---
+- name: Install Puppet Modules
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Run install_modules
+      shell: ./install_modules.sh
+      

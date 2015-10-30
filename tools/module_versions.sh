@@ -14,11 +14,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
 
-
-for mod in $(ls /etc/puppet/modules/); do
+for mod in $(ls ${MODULE_PATH}); do
     echo -n "${mod}: "
-    cd /etc/puppet/modules/$mod
+    cd ${MODULE_PATH}/$mod
     branch=$(git rev-parse --abbrev-ref HEAD)
     if [[ $branch == "HEAD" ]]; then
         tag=$(git name-rev --name-only --tags $(git rev-parse HEAD))
