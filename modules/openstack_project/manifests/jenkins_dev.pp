@@ -1,6 +1,7 @@
 # == Class: openstack_project::jenkins_dev
 #
 class openstack_project::jenkins_dev (
+  $project_config_repo = '',
   $jenkins_ssh_private_key = '',
   $mysql_root_password,
   $mysql_password,
@@ -64,6 +65,9 @@ class openstack_project::jenkins_dev (
 #  jenkins::plugin { 'scp':
 #    version => '1.9',
 #  }
+  jenkins::plugin { 'jobConfigHistory':
+    version => '1.13',
+  }
   jenkins::plugin { 'monitoring':
     version => '1.40.0',
   }
@@ -75,6 +79,9 @@ class openstack_project::jenkins_dev (
   }
   jenkins::plugin { 'openid':
     version => '1.5',
+  }
+  jenkins::plugin { 'postbuildscript':
+    version => '0.16',
   }
   jenkins::plugin { 'publish-over-ftp':
     version => '1.7',
@@ -110,16 +117,24 @@ class openstack_project::jenkins_dev (
     ],
   }
 
-  file { '/etc/nodepool/scripts':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => File['/etc/nodepool'],
-    source  => 'puppet:///modules/openstack_project/nodepool/scripts',
+  if ! defined(Class['project_config']) {
+    class { 'project_config':
+      url  => $project_config_repo,
+    }
+    file { '/etc/nodepool/scripts':
+      ensure  => directory,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      recurse => true,
+      purge   => true,
+      force   => true,
+      require => [
+        File['/etc/nodepool'],
+        Class['project_config'],
+      ],
+      source  => $::project_config::nodepool_scripts_dir,
+    }
   }
 
 }
