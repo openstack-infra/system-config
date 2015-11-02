@@ -54,12 +54,20 @@ Our current providers are each donating around 600 instances of the
 above types.  Since there's a bit of setup and maintenance involved in
 adding a new provider, a minimum of 100 instances would be helpful.
 
+Benefits to Contributors
+########################
+
 Since we continuously use the OpenStack APIs and are familiar with how
 they should operate, we occasionally discover potential problems with
 contributing clouds before many of their other users (or occasionally
 even ops teams).  In these cases, we work with contacts on their
 operations teams to let them know and try to help fix problems before
 they become an issue for their customers.
+
+We collect numerous metrics about the performance of the clouds we
+utilize. If you would like, we can create a specific dashboard of your
+cloud's performance that your engineers can use to tune and improve
+the experience for your users.
 
 If this sounds interesting, and you have some capacity to spare, it
 would be very much appreciated.  You are welcome to contact the
