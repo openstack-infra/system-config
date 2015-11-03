@@ -70,6 +70,7 @@ class openstack_project::gerrit (
   $gitweb = true,
   $cgit = false,
   $web_repo_url = '',
+  $web_repo_url_encode = false,
   $secondary_index = true,
   $afs = false,
 ) {
@@ -204,6 +205,7 @@ class openstack_project::gerrit (
     gitweb                              => $gitweb,
     cgit                                => $cgit,
     web_repo_url                        => $web_repo_url,
+    web_repo_url_encode                 => $web_repo_url_encode,
     testmode                            => $testmode,
     secondary_index                     => $secondary_index,
     require                             => Class[openstack_project::server],
