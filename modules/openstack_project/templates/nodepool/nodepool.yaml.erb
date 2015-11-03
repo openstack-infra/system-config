@@ -245,7 +245,11 @@ labels:
     min-ready: 16
     providers:
       - name: tripleo-test-cloud-rh1
-
+  - name: tripleo-f22
+    image: tripleo-f22
+    min-ready: 3
+    providers:
+      - name: tripleo-test-cloud-rh1
 providers:
   - name: rax-dfw
     region-name: 'DFW'
@@ -1013,6 +1017,13 @@ providers:
     images:
       - name: tripleo-f21
         base-image: 'Fedora 21 64-bit'
+        min-ram: 8192
+        name-filter: h1
+        setup: prepare_node_tripleo.sh
+        username: jenkins
+        private-key: /home/nodepool/.ssh/id_rsa
+      - name: tripleo-f22
+        base-image: 'Fedora 22 64-bit'
         min-ram: 8192
         name-filter: h1
         setup: prepare_node_tripleo.sh
