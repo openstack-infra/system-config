@@ -1018,6 +1018,23 @@ providers:
         setup: prepare_node_tripleo.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
+
+hostclouds:
+  - name: hpcloud:
+    - provider: hpcloud-region-a
+    - provider: hpcloud-b1
+    - provider: hpcloud-b2
+    - provider: hpcloud-b3
+    - provider: hpcloud-b4
+    - provider: hpcloud-b5
+  - name: rax:
+    - provider: rax-dfw
+    - provider: rax-ord
+    - provider: rax-iad
+  - name: ovh:
+    - provider: ovh-gra1
+# I have no idea what to do with tripleo-test-cloud-rh1
+
 targets:
   - name: jenkins01
   - name: jenkins02
