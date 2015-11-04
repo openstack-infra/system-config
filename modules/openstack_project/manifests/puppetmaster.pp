@@ -156,7 +156,7 @@ class openstack_project::puppetmaster (
     weekday     => '6',
     hour        => '0',
     minute      => '15',
-    command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /etc/ansible/playbooks/restart_jenkins_masters.yaml --extra-vars 'user=${jenkins_api_user} password=${jenkins_api_key}' >> /var/log/restart_jenkins_masters.log 2>&1",
+    command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /opt/system-config/playbooks/restart_jenkins_masters.yaml --extra-vars 'user=${jenkins_api_user} password=${jenkins_api_key}' >> /var/log/restart_jenkins_masters.log 2>&1",
   }
 
   logrotate::file { 'restartjenkinsmasters':
