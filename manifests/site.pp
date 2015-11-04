@@ -43,7 +43,19 @@ $elasticsearch_clients = [
 #
 node default {
   class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins', []),
+    sysadmins           => hiera('sysadmins', []),
+    puppetmaster_server => '*',
+  }
+}
+
+
+#
+# Testing: like default but without as much security, useful for testing
+# changes to this stuff
+#
+node /testing/ {
+  class { 'openstack_project::server':
+    sysadmins => ['ubuntu'],
   }
 }
 
