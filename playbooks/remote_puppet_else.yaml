@@ -1,4 +1,6 @@
 - hosts: '!review.openstack.org:!git0*:!afs*'
   gather_facts: false
   roles:
+  - applyprep
   - role: puppet
+    manifest: '/opt/system-config/production/manifests/site.pp'

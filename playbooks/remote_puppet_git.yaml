@@ -11,12 +11,16 @@
   gather_facts: false
   max_fail_percentage: 1
   roles:
+    - applyprep
     - role: puppet
+      manifest: '/opt/system-config/production/manifests/site.pp'
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
 - hosts: review.openstack.org
   gather_facts: false
   roles:
+    - applyprep
     - role: puppet
+      manifest: '/opt/system-config/production/manifests/site.pp'
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
