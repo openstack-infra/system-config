@@ -71,6 +71,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $web_repo_url_encode = false,
   $secondary_index = true,
+  $index_threads = '',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -202,6 +203,7 @@ class openstack_project::gerrit (
     testmode                            => $testmode,
     secondary_index                     => $secondary_index,
     require                             => Class[openstack_project::server],
+    index_threads                       => $index_threads,
   }
 
   mysql_backup::backup_remote { 'gerrit':
