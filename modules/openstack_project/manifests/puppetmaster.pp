@@ -194,4 +194,11 @@ class openstack_project::puppetmaster (
   file { '/etc/ansible/clean_workspaces.yaml':
     ensure => absent,
   }
+
+# Refresh local hiera data
+  cron { 'refreshlocalhieradata':
+    user        => 'root',
+    minute      => '*/15',
+    command     => "flock -n /var/run/puppet/copy_hiera.lock ansible-playbook -f 1 /opt/system-config/production/playbooks/copy_hiera.yaml >> /var/log/copy_hiera.log 2>&1",
+  }
 }
