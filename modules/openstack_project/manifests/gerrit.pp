@@ -73,6 +73,7 @@ class openstack_project::gerrit (
   $secondary_index = true,
   $report_bug_text = 'Get Help',
   $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
+  $index_threads = '1',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -206,6 +207,7 @@ class openstack_project::gerrit (
     require                             => Class[openstack_project::server],
     report_bug_text                     => $report_bug_text,
     report_bug_url                      => $report_bug_url,
+    index_threads                       => $index_threads,
   }
 
   mysql_backup::backup_remote { 'gerrit':
