@@ -414,6 +414,26 @@ class openstack_project::template (
     source  => 'puppet:///modules/openstack_project/puppet/hiera.yaml',
     replace => true,
   }
+
+  file {'/etc/puppet/environments':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+  file {'/etc/puppet/environments/production':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+  file {'/etc/puppet/environments/production/environment.conf':
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/openstack_project/puppet/production_environment.conf',
+  }
   ###########################################################
 
 }

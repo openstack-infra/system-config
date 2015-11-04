@@ -3,11 +3,9 @@ logdir=/var/log/puppet
 vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
-server=<%= @puppetmaster_server %>
-certname=<%= @certname.downcase %>
-pluginsync=true
+basemodulepath=/etc/puppet/modules
+environmentpath = /etc/puppet/environments
 data_binding_terminus = none
-
 
 [master]
 # These are needed when the puppetmaster is run by passenger
@@ -15,8 +13,6 @@ data_binding_terminus = none
 ssl_client_header = SSL_CLIENT_S_DN
 ssl_client_verify_header = SSL_CLIENT_VERIFY
 reports=store,puppetdb
-basemodulepath = /etc/puppet/modules
-environmentpath = /etc/puppet/environments
 environmenttimeout = 0
 <% if @ca_server -%>
 ca = false
@@ -27,3 +23,9 @@ ca_server = <%= @ca_server %>
 report=true
 splay=true
 runinterval=600
+server=<%= @puppetmaster_server %>
+certname=<%= @certname.downcase %>
+pluginsync=true
+
+[user]
+reports=puppetdb_file
