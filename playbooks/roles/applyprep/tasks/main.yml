@@ -1,0 +1,7 @@
+---
+- name: Create directory
+  file: path=/opt/system-config state=directory mode=0755
+- name: Checkout system-config
+  git: repo=git://git.openstack.org/openstack-infra/system-config.git dest=/opt/system-config/production clone=yes update=yes accept_hostkey=True
+- name: Run install_modules
+  shell: /opt/system-config/production/install_modules.sh
