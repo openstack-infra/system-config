@@ -3,11 +3,7 @@ logdir=/var/log/puppet
 vardir=/var/lib/puppet
 ssldir=/var/lib/puppet/ssl
 rundir=/var/run/puppet
-server=<%= @puppetmaster_server %>
-certname=<%= @certname.downcase %>
-pluginsync=true
 data_binding_terminus = none
-
 
 [master]
 # These are needed when the puppetmaster is run by passenger
@@ -27,3 +23,11 @@ ca_server = <%= @ca_server %>
 report=true
 splay=true
 runinterval=600
+server=<%= @puppetmaster_server %>
+certname=<%= @certname.downcase %>
+pluginsync=true
+
+[user]
+modulepath=/etc/puppet/modules:/opt/system-config/production/modules
+manifest=/opt/system-config/manifests/site.pp
+reports=puppetdb_file
