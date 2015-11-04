@@ -1,0 +1,8 @@
+---
+common_hierafiles:
+  - { path: "hieradata/production", hierarchy: "common" }
+  - { path: "production/hiera", hierarchy: "common" }
+fqdn_hierafiles:
+  - { path: "hieradata/production/fqdn", hierarchy: "{{ inventory_hostname }}" }
+  - { path: "production/hiera/fqdn", hierarchy: "{{ inventory_hostname }}" }
+

@@ -1,0 +1,59 @@
+---
+# This playbook puts hiera yaml files directly on the host as to avoid needing
+# to fetch the information they contain from a central repository during puppet
+# apply runs
+- name: Ensure hiera yaml exists locally
+  vars_files:
+    - vars/main.yml
+  hosts: localhost
+  connection: local
+  sudo: yes
+  tasks:
+    - name: Create missing directories
+      file:
+        path: /opt/system-config/{{ item.path }}
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+      with_flattened:
+        - common_hierafiles
+        - fqdn_hierafiles
+    - name: Create hiera yaml files on localhost
+      file:
+        path: /opt/system-config/{{ item.path }}/{{ item.hierarchy }}.yaml
+        state: touch
+        owner: root
+        group: root
+        mode: 0644
+      with_items: common_hierafiles
+- name: Copy hiera yaml onto host
+  vars_files:
+    - vars/main.yml
+  hosts: all
+  sudo: yes
+  tasks:
+    - name: Create missing directories
+      file:
+        path: /opt/system-config/{{ item.path }}
+        state: directory
+        mode: 0755
+      with_flattened:
+        - common_hierafiles
+        - fqdn_hierafiles
+    - name: Ensure fqdn hiera yaml files are on ansible host
+      local_action:
+        module: file
+        path: /opt/system-config/{{ item.path }}/{{ item.hierarchy }}.yaml
+        state: touch
+        owner: root
+        group: root
+        mode: 0644
+      with_items: fqdn_hierafiles
+    - name: Create hiera yaml files on host
+      copy:
+        src=/opt/system-config/{{ item.path }}/{{ item.hierarchy }}.yaml
+        dest=/opt/system-config/{{ item.path }}/{{ item.hierarchy }}.yaml
+      with_flattened:
+        - common_hierafiles
+        - fqdn_hierafiles
