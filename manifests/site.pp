@@ -1009,7 +1009,7 @@ node 'translate.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::translate':
-    admin_users             => 'camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
+    admin_users             => 'aeng,camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
     openid_url              => 'https://openstackid.org',
     listeners               => ['ajp'],
     from_address            => 'noreply@openstack.org',
@@ -1031,7 +1031,7 @@ node 'translate.openstack.org' {
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
-    admin_users             => 'camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
+    admin_users             => 'aeng,camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
     openid_url              => 'https://openstackid.org',
     listeners               => ['ajp'],
     from_address            => 'noreply@openstack.org',
