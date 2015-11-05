@@ -452,7 +452,7 @@ To rename a project:
    not currently in progress.  When it finishes, make sure the entry
    has not been added back to the crontab.
 
-#. Prepare a yaml file called repos.yaml that has a single dictionary called
+#. Prepare a yaml file called renames.list that has a single dictionary called
    `repos` with a list of dictionaries each having an old and new entry.
    Optionally also add a `gerrit_groups` dict of the same form::
 
