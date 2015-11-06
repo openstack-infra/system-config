@@ -89,13 +89,9 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
         echo "Remote repos of the form repo.git are not supported: ${MOD}"
         exit 1
     fi
-    # NOTE(mtreinish): hack around incorrectly named openstack-health,
-    # remove after the gerrit rename
-    if [[ `echo $MOD | grep -c 'openstack-health'` -eq 1 ]]; then
-        MODULE_NAME="openstack_health"
-    else
-        MODULE_NAME=`echo $MOD | awk -F- '{print $NF}'`
-    fi
+
+    MODULE_NAME=`echo $MOD | awk -F- '{print $NF}'`
+
     # set up git base command to use the correct path
     GIT_CMD_BASE="git --git-dir=${MODULE_PATH}/${MODULE_NAME}/.git --work-tree ${MODULE_PATH}/${MODULE_NAME}"
     # treat any occurrence of the module as a match

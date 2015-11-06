@@ -57,13 +57,9 @@ for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_names+=" $project_scope/$repo_name"
 done
 
-project_names+=" openstack-infra/puppet-openstack-health"
-
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     $project_names
-
-sudo mv /etc/puppet/modules/openstack-health /etc/puppet/modules/openstack_health
 
 if [[ ! -d applytest ]] ; then
     mkdir applytest
