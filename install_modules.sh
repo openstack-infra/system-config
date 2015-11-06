@@ -68,21 +68,7 @@ fi
 
 MODULE_LIST=`puppet module list --color=false`
 
-# Install all the modules
-for MOD in ${!MODULES[*]} ; do
-    # If the module at the current version does not exist upgrade or install it.
-    if ! echo $MODULE_LIST | grep "$MOD ([^v]*v${MODULES[$MOD]}" >/dev/null 2>&1 ; then
-        # Attempt module upgrade. If that fails try installing the module.
-        if ! puppet module upgrade $MOD --color=false --version ${MODULES[$MOD]} >/dev/null 2>&1 ; then
-            # This will get run in cron, so silence non-error output
-            puppet module install $MOD --color=false --version ${MODULES[$MOD]} >/dev/null
-        fi
-    fi
-done
-
-MODULE_LIST=`puppet module list --color=false`
-
-# Make a second pass, just installing modules from source
+# Install modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
     # get the name of the module directory
     if [ `echo $MOD | awk -F. '{print $NF}'` = 'git' ]; then
