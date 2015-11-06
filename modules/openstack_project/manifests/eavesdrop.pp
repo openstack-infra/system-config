@@ -35,7 +35,6 @@ class openstack_project::eavesdrop (
     vhost_extra  => $vhost_extra,
     manage_index => false,
     channels     => [
-        '#akanda',
         '#cloudkitty',
         '#dox',
         '#heat',
@@ -46,6 +45,7 @@ class openstack_project::eavesdrop (
         '#openstack-ansible',
         '#openstack-api',
         '#openstack-app-catalog',
+        '#openstack-astara',
         '#openstack-barbican',
         '#openstack-blazar',
         '#openstack-chef',
