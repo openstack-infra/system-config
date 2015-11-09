@@ -34,7 +34,7 @@ class openstack_project::elasticsearch_node (
       'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
     },
     heap_size          => $heap_size,
-    version            => '0.90.9',
+    version            => '1.7.3',
   }
 
   cron { 'delete_old_es_indices':

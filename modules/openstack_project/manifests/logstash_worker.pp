@@ -55,6 +55,6 @@ class openstack_project::logstash_worker (
       'node.data'                            => false,
     },
     heap_size          => '1g',
-    version            => '0.90.9',
+    version            => '1.7.3',
   }
 }
