@@ -22,7 +22,7 @@ subunit-files:
   - name: logs/testrepository.subunit
     retry-get: True
     build-queue-filter: 'periodic'
-    job-filter: 'gate-(tempest|grenade)-dsvm.*'
+    job-filter: '.*-(tempest|grenade)-dsvm.*'
 
 # List of files to source logs from.
 source-files:
