@@ -39,7 +39,12 @@ filter {
       negate => false
       # NOTE(mriedem): oslo.log 1.2.0 changed the logging_exception_prefix
       # config option from using TRACE to ERROR so we have to handle both.
-      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}?%{SPACE}?(TRACE|ERROR)"
+      #
+      # NOTE(sdague): stack traces always include process id, so
+      # NUMBER being required element here is important, otherwise
+      # ERROR messages just fold into the previous messages, which are
+      # typically INFO.
+      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}%{SPACE}(TRACE|ERROR)"
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
