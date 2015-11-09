@@ -213,6 +213,7 @@ node 'jenkins-dev.openstack.org' {
     puppetmaster_server       => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins_dev':
+    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents'),
     mysql_password           => hiera('nodepool_dev_mysql_password'),
     mysql_root_password      => hiera('nodepool_dev_mysql_root_password'),
