@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+1: Joshua Harlow <harlowja@yahoo-inc.com>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Sergey Lukjanov <slukjanov@mirantis.com>
+Workflow+1: Sergey Lukjanov <slukjanov@mirantis.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 09 Nov 2015 09:07:08 +0000
+Reviewed-on: https://review.openstack.org/240243
+Project: openstack-infra/system-config
+Branch: refs/heads/master
