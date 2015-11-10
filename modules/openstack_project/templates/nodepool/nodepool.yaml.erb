@@ -240,11 +240,6 @@ labels:
       - name: hpcloud-b3
       - name: hpcloud-b4
       - name: hpcloud-b5
-  - name: tripleo-f21
-    image: tripleo-f21
-    min-ready: 0
-    providers:
-      - name: tripleo-test-cloud-rh1
   - name: tripleo-f22
     image: tripleo-f22
     min-ready: 20
@@ -1015,13 +1010,6 @@ providers:
       - net-label: default-net
       - net-label: tripleo-bm-test
     images:
-      - name: tripleo-f21
-        base-image: 'Fedora 21 64-bit'
-        min-ram: 8192
-        name-filter: h1
-        setup: prepare_node_tripleo.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
       - name: tripleo-f22
         base-image: 'Fedora 22 64-bit'
         min-ram: 8192
