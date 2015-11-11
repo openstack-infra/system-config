@@ -43,16 +43,26 @@ If you have some capacity on an OpenStack cloud that you are able to
 contribute to the project, it would be a big help.  This is what we
 need:
 
- * Nova and Glance APIs
- * 8GB RAM, 8vCPU per test node (CPUs vary, the important thing is to
-   be able to run devstack and tempest in about 1 hour)
- * Public IP addresses
+ * Nova and Glance APIs (with the ability to upload images)
  * A single instance with 300GB of disk (via Cinder is okay) per cloud
    region for our region-local mirror
 
-Our current providers are each donating around 600 instances of the
-above types.  Since there's a bit of setup and maintenance involved in
-adding a new provider, a minimum of 100 instances would be helpful.
+Each test instance requires:
+
+ * 8GB RAM
+ * 8vCPU at 2.4GHz (or more or less vCPUs depending on speed)
+ * Public IP addresses (IPv4 and/or IPv6)
+ * 40GB of storage
+
+In a setting where our instances will be segregated, our usage
+patterns will cause us to be our own noisy neighbors at the worst
+times, so it would be best to plan for little or no overcommitment.
+In an unsegregrated public cloud setting, the distribution of our jobs
+over a larger number of hypervisors will allow for more
+overcommitment.
+
+Since there's a bit of setup and maintenance involved in adding a new
+provider, a minimum of 100 instances would be helpful.
 
 Since we continuously use the OpenStack APIs and are familiar with how
 they should operate, we occasionally discover potential problems with
