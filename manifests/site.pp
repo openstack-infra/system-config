@@ -647,9 +647,9 @@ node 'status.openstack.org' {
 
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
-  $bluebox_username     = hiera('nodepool_bluebox_username', 'username'),
-  $bluebox_password     = hiera('nodepool_bluebox_password'),
-  $bluebox_project      = hiera('nodepool_bluebox_project', 'project'),
+  $bluebox_username     = hiera('nodepool_bluebox_username', 'username')
+  $bluebox_password     = hiera('nodepool_bluebox_password')
+  $bluebox_project      = hiera('nodepool_bluebox_project', 'project')
   $rackspace_username   = hiera('nodepool_rackspace_username', 'username')
   $rackspace_password   = hiera('nodepool_rackspace_password')
   $rackspace_project    = hiera('nodepool_rackspace_project', 'project')
