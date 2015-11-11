@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Wed, 11 Nov 2015 22:22:54 +0000
+Reviewed-on: https://review.openstack.org/234483
+Project: openstack-infra/system-config
+Branch: refs/heads/master
