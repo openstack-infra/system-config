@@ -17,7 +17,7 @@ At a Glance
   * http://pypi.dfw.openstack.org
   * http://pypi.ord.openstack.org
   * http://pypi.region-b.geo-1.openstack.org
-  * http://pypi.sjc1.openstack.org
+  * http://pypi.regionone.openstack.org
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
 :Projects:
