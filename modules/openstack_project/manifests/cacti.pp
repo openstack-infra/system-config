@@ -148,7 +148,7 @@ class openstack_project::cacti (
     'pypi.openstack.org',
     'pypi.ord.openstack.org',
     'pypi.region-b.geo-1.openstack.org',
-    'pypi.sjc1.openstack.org',
+    'pypi.regionone.openstack.org',
     'release.slave.openstack.org',
     'review-dev.openstack.org',
     'review.openstack.org',
