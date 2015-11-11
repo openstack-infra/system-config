@@ -41,9 +41,6 @@ class openstack_project::review_dev (
   class { 'openstack_project::gerrit':
     vhost_name                          => 'review-dev.openstack.org',
     canonicalweburl                     => 'https://review-dev.openstack.org/',
-    ssl_cert_file                       => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
-    ssl_key_file                        => '/etc/ssl/private/ssl-cert-snakeoil.key',
-    ssl_chain_file                      => '',
     ssh_dsa_key_contents                => $ssh_dsa_key_contents,
     ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
     ssh_rsa_key_contents                => $ssh_rsa_key_contents,
