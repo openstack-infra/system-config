@@ -18,9 +18,7 @@ filter {
     }
     multiline {
       negate => true
-      # Special case ansible output here because it likes to go on its own
-      # line without a timestamp but isn't part of a mulitline event.
-      pattern => "(^%{TIMESTAMP_ISO8601} \||^%{WORD}%{SPACE}\|%{SPACE}%{WORD}%{SPACE}\|%{SPACE}rc=%{NUMBER}%{SPACE}>>$)"
+      pattern => "^%{TIMESTAMP_ISO8601} \|"
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
