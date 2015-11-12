@@ -100,6 +100,7 @@ class openstack_project::eavesdrop (
         '#openstack-sprint',
         '#openstack-stable',
         '#openstack-storlets',
+        '#openstack-swauth',
         '#openstack-swift',
         '#openstack-tailgate',
         '#openstack-trove',
