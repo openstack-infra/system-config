@@ -32,6 +32,8 @@ class openstack_project::elasticsearch_node (
       'discovery.zen.minimum_master_nodes'   => '4',
       'discovery.zen.ping.multicast.enabled' => false,
       'discovery.zen.ping.unicast.hosts'     => $discover_nodes,
+      'http.cors.enabled'                    => true,
+      'http.cors.allow-origin'               => '\'*\'',
     },
     heap_size          => $heap_size,
     version            => '1.7.3',
