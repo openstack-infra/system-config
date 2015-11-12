@@ -479,6 +479,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   class { 'openstack_project::subunit_worker':
     subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
+    subunit2sql_statsd_host => hiera('subunit2sql_statsd_host', 'graphite.openstack.org'),
   }
 }
 
