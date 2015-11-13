@@ -76,7 +76,6 @@ class openstack_project::review (
   $contactstore = true,
   $contactstore_appsec='',
   $contactstore_pubkey='',
-  $sysadmins = [],
   # For openstackwatch.
   $swift_username = '',
   $swift_password = '',
@@ -133,7 +132,6 @@ class openstack_project::review (
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
     token_private_key                   => $token_private_key,
-    sysadmins                           => $sysadmins,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
     replication_force_update            => true,
