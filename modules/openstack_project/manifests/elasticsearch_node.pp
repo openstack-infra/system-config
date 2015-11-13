@@ -25,6 +25,7 @@ class openstack_project::elasticsearch_node (
       'index.store.compress.stored'          => true,
       'index.store.compress.tv'              => true,
       'indices.memory.index_buffer_size'     => '33%',
+      'indices.breaker.fielddata.limit'      => '70%',
       'bootstrap.mlockall'                   => true,
       'gateway.recover_after_nodes'          => '5',
       'gateway.recover_after_time'           => '5m',
