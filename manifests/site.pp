@@ -53,6 +53,11 @@ node default {
 # Node-OS: precise
 # Node-OS: trusty
 node 'review.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token'),
@@ -83,7 +88,6 @@ node 'review.openstack.org' {
     lp_sync_secret                      => hiera('gerrit_lp_access_secret'),
     contactstore_appsec                 => hiera('gerrit_contactstore_appsec'),
     contactstore_pubkey                 => hiera('gerrit_contactstore_pubkey'),
-    sysadmins                           => hiera('sysadmins', []),
     swift_username                      => hiera('swift_store_user', 'username'),
     swift_password                      => hiera('swift_store_key'),
   }
@@ -91,6 +95,12 @@ node 'review.openstack.org' {
 
 # Node-OS: trusty
 node 'review-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418],
+    sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
+  }
+
   class { 'openstack_project::review_dev':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_dev_github_token'),
