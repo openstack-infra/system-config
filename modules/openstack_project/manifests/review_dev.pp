@@ -22,7 +22,6 @@ class openstack_project::review_dev (
   $lp_sync_consumer_key = '',
   $lp_sync_token = '',
   $lp_sync_secret = '',
-  $sysadmins = [],
   $swift_username = '',
   $swift_password = '',
   $project_config_repo = '',
@@ -71,7 +70,6 @@ class openstack_project::review_dev (
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
-    sysadmins                           => $sysadmins,
     gitweb                              => false,
     cgit                                => true,
     web_repo_url                        => 'https://git.openstack.org/cgit/',
@@ -104,7 +102,6 @@ class openstack_project::review_dev (
       },
     ],
     require                         => $::project_config::config_dir,
-    afs                             => true,
   }
 
   gerrit::plugin { 'javamelody':
