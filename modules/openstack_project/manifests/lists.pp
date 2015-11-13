@@ -36,6 +36,10 @@ class openstack_project::lists(
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
 
+  Maillist {
+    provider    => 'noaliasmailman',
+  }
+
   maillist { 'openstack-es':
     ensure      => present,
     admin       => 'flavio@redhat.com',
