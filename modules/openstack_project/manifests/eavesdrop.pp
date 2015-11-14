@@ -105,6 +105,7 @@ class openstack_project::eavesdrop (
         '#openstack-trove',
         '#openstack-ux',
         '#openstack-vmware-nsx',
+        '#openstack-watcher',
         '#openstack-zaqar',
         '#puppet-openstack',
         '#refstack',
