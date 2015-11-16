@@ -41,11 +41,16 @@ class openstack_project::elasticsearch_node (
   }
 
   cron { 'delete_old_es_indices':
+    ensure      => 'absent',
     user        => 'root',
     hour        => '2',
     minute      => '0',
     command     => 'curl -sS -XDELETE "http://localhost:9200/logstash-`date -d \'10 days ago\' +\%Y.\%m.\%d`/" > /dev/null',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  class { 'logstash::curator':
+    keep_for_days  => '10',
   }
 
 }
