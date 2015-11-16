@@ -29,6 +29,7 @@ class openstack_project::openstackid_dev (
   $redis_max_memory = '1gb',
   $redis_bind = '127.0.0.1',
   $redis_password = '',
+  $redis_version = '2.2.12',
   $id_recaptcha_public_key = '',
   $id_recaptcha_private_key = '',
   $id_recaptcha_template = '',
@@ -83,6 +84,7 @@ class openstack_project::openstackid_dev (
     redis_max_memory => $redis_max_memory,
     redis_bind       => $redis_bind,
     redis_password   => $redis_password,
+    version          => $redis_version ,
   }
 
 }
