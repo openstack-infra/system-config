@@ -38,17 +38,6 @@ declare -A SOURCE_MODULES
 # key:value is source location, revision to checkout
 declare -A INTEGRATION_MODULES
 
-
-#NOTE: if we previously installed kickstandproject-ntp we nuke it here
-# since puppetlabs-ntp and kickstandproject-ntp install to the same dir
-if grep kickstandproject-ntp /etc/puppet/modules/ntp/Modulefile &> /dev/null; then
-    remove_module "ntp"
-fi
-
-remove_module "gearman" #remove old saz-gearman
-remove_module "limits" # remove saz-limits (required by saz-gearman)
-remove_module "apache"
-
 # load modules.env to populate MODULES[*] and SOURCE_MODULES[*]
 # for processing.
 MODULE_ENV_FILE=${MODULE_FILE:-modules.env}
