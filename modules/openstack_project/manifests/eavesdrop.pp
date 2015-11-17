@@ -53,6 +53,7 @@ class openstack_project::eavesdrop (
         '#openstack-cloudpulse',
         '#openstack-community',
         '#openstack-containers',
+        '#openstack-cross-project',
         '#openstack-cue',
         '#openstack-defcore',
         '#openstack-dev',
