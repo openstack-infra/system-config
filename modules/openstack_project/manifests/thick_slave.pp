@@ -134,6 +134,20 @@ class openstack_project::thick_slave(
         package { $::openstack_project::jenkins_params::mysql_package:
             ensure => present,
         }
+        if ($::operatingsystemrelease >= 22) {
+          # For pyeclib, used by swift
+          package { $::openstack_project::jenkins_params::liberasurecode_dev_package:
+            ensure => present,
+          }
+        }
+      }
+      elsif ($::operatingsystem == 'CentOS') {
+        if ($::operatingsystemmajrelease == '7') {
+          # For pyeclib, used by swift
+          package { $::openstack_project::jenkins_params::liberasurecode_dev_package:
+            ensure => present,
+          }
+        }
       }
     }
     'Debian': {
@@ -144,6 +158,11 @@ class openstack_project::thick_slave(
 
       # For openstackid using php5-mcrypt for distro build
       package { $::openstack_project::jenkins_params::php5_mcrypt_package:
+        ensure => present,
+      }
+
+      # For pyeclib, used by swift
+      package { $::openstack_project::jenkins_params::liberasurecode_dev_package:
         ensure => present,
       }
     }
