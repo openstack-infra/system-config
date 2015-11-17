@@ -29,6 +29,7 @@ class openstack_project::jenkins_params {
       $libsasl_dev = 'cyrus-sasl-devel'
       $nspr_dev_package = 'nspr-devel'
       $sqlite_dev_package = 'sqlite-devel'
+      $liberasurecode_dev_package = 'liberasurecode-devel'
       $libevent_dev_package = 'libevent-devel'
       $libpcap_dev_package = 'libpcap-devel'
       $libvirt_dev_package = 'libvirt-devel'
@@ -115,6 +116,7 @@ class openstack_project::jenkins_params {
       $libevent_dev_package = 'libevent-dev'
       $libpcap_dev_package = 'libpcap-dev'
       $ldap_dev_package = 'libldap2-dev'
+      $liberasurecode_dev_package = 'liberasurecode-dev'
       $libjerasure_dev_package = 'libjerasure-dev'
       $librrd_dev_package = 'librrd-dev'
       # packages needed by document translation

@@ -22,6 +22,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::firefox_package, # for selenium tests
     $::openstack_project::jenkins_params::language_fonts_packages,
     $::openstack_project::jenkins_params::libcurl_dev_package,
+    $::openstack_project::jenkins_params::liberasurecode_dev_package, # for pyeclib, used by swift
     $::openstack_project::jenkins_params::libevent_dev_package, # for gevent egg
     $::openstack_project::jenkins_params::libpcap_dev_package, # for pypcap egg
     $::openstack_project::jenkins_params::ldap_dev_package,
