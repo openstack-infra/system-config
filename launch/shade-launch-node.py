@@ -148,13 +148,9 @@ def build_server(cloud, name, image, flavor, cert, environment,
         create_kwargs['image'] = None
         create_kwargs['block_device_mapping_v2'] = block_mapping
 
-    #TODO: use shade
-    #if net_label:
-    #    nics = []
-    #    for net in client.networks.list():
-    #        if net.label == net_label:
-    #            nics.append({'net-id': net.id})
-    #    create_kwargs['nics'] = nics
+    if net_label:
+        network = cloud.get_network(name_or_id=net_label)
+        create_kwargs['nics'] = [{'net-id': network['id']})]
 
     key_name = 'launch-%i' % (time.time())
     key = paramiko.RSAKey.generate(2048)
