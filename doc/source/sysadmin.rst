@@ -74,8 +74,12 @@ the node specifier).  It might look something like this::
 
   # local.pp
   class { 'openstack_project::etherpad':
-    database_password       => 'badpassword',
-    sysadmins               => ['user@example.org'],
+    ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
+    mysql_host              => hiera('etherpad_db_host', 'localhost'),
+    mysql_user              => hiera('etherpad_db_user', 'username'),
+    mysql_password          => hiera('etherpad_db_password'),
   }
 
 .. note::
