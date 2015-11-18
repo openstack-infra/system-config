@@ -23,6 +23,7 @@ class openstack_project::git_backend (
   $ssl_chain_file_contents = '',
   $behind_proxy = false,
   $project_config_repo = '',
+  $selinux_mode = 'enforcing',
 ) {
 
   package { 'lsof':
@@ -35,6 +36,12 @@ class openstack_project::git_backend (
 
   include jeepyb
   include pip
+
+  if ($::osfamily == 'RedHat') {
+    class { 'selinux':
+      mode => $selinux_mode
+    }
+  }
 
   class { '::cgit':
     vhost_name              => $vhost_name,
@@ -54,6 +61,7 @@ class openstack_project::git_backend (
         'root-title'    => 'OpenStack git repository browser',
     },
     manage_cgitrc           => true,
+    selinux_mode            => $selinux_mode
   }
 
   # We don't actually use these variables in this manifest, but jeepyb
@@ -106,12 +114,6 @@ class openstack_project::git_backend (
     ],
     subscribe   => File['/home/cgit/projects.yaml'],
     refreshonly => true,
-  }
-
-  if ($::osfamily == 'RedHat') {
-    class { 'selinux':
-      mode => 'enforcing'
-    }
   }
 
   cron { 'mirror_repack':

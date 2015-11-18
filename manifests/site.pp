@@ -538,6 +538,7 @@ node /^git\d+\.openstack\.org$/ {
     ssl_key_file_contents   => hiera('git_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('git_ssl_chain_file_contents'),
     behind_proxy            => true,
+    selinux_mode            => 'enforcing'
   }
 }
 
@@ -833,6 +834,7 @@ node 'pbx.openstack.org' {
         outgoing => false,
       },
     ],
+    selinux_mode  => 'enforcing'
   }
 }
 
