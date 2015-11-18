@@ -18,11 +18,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
+import argparse
 import os
+import subprocess
+import sys
+import tempfile
 import time
 import traceback
-import argparse
 
 import dns
 import utils
@@ -41,8 +43,8 @@ except:
     pass
 
 
-def bootstrap_server(server, key, cert, environment, name,
-                     puppetmaster, volume, floating_ip_pool):
+def bootstrap_server(server, key, name, volume):
+
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
 
@@ -79,6 +81,7 @@ def bootstrap_server(server, key, cert, environment, name,
                        'mount_volume.sh')
         ssh_client.ssh('bash -x mount_volume.sh')
 
+    # This next chunk should really exist as a playbook, but whatev
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
     ssh_client.ssh('bash -x install_puppet.sh')
@@ -91,35 +94,40 @@ def bootstrap_server(server, key, cert, environment, name,
     with ssh_client.open('/etc/hostname', 'w') as f:
         f.write('%s\n' % (shortname,))
     ssh_client.ssh("hostname %s" % (name,))
-    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
-    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
-    ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
-    ssh_client.ssh("chown -R puppet:root /var/lib/puppet/ssl")
-    ssh_client.ssh("chown -R puppet:puppet /var/lib/puppet/ssl/private_keys")
-    ssh_client.ssh("chmod 0771 /var/lib/puppet/ssl")
-    ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/certs")
-    ssh_client.ssh("chmod 0750 /var/lib/puppet/ssl/private_keys")
-    ssh_client.ssh("chmod 0755 /var/lib/puppet/ssl/public_keys")
 
-    for ssldir in ['/var/lib/puppet/ssl/certs/',
-                   '/var/lib/puppet/ssl/private_keys/',
-                   '/var/lib/puppet/ssl/public_keys/']:
-        ssh_client.scp(os.path.join(ssldir, cert),
-                       os.path.join(ssldir, cert))
+    # Remove the ansible inventory cache so that next run finds the new
+    # server and doesn't fail due to stale cache
+    # TODO(mordred) we should be using active rather than inventory-wide
+    #               caching, but let's do one thing at a time
+    os.unlink('/var/cache/ansible-inventory.json')
 
-    ssh_client.scp("/var/lib/puppet/ssl/crl.pem",
-                   "/var/lib/puppet/ssl/crl.pem")
-    ssh_client.scp("/var/lib/puppet/ssl/certs/ca.pem",
-                   "/var/lib/puppet/ssl/certs/ca.pem")
+    # Write out the private SSH key we generated
+    key_file = tempfile.NamedTemporaryFile()
+    key.write_private_key(key_file)
+    key_file.flush()
 
-    (rc, output) = ssh_client.ssh(
-        "puppet agent "
-        "--environment %s "
-        "--server %s "
-        "--detailed-exitcodes "
-        "--no-daemonize --verbose --onetime --pluginsync true "
-        "--certname %s" % (environment, puppetmaster, certname), error_ok=True)
-    utils.interpret_puppet_exitcodes(rc, output)
+    ansible_cmd = [
+        'ansible-playbook', '-l', server.id,
+        '--private-key={key}'.format(key=key_file.name),
+        "--ssh-common-args='-o StrictHostKeyChecking=no'",
+    ]
+
+    # Run the update puppet playbook limited to just this server
+    # we just created. Limit by server.id rather than name in case
+    # we're spinning up a replacement of the same name
+    print subprocess.check_output(
+        ansible_cmd + [
+            os.path.join(SCRIPT_DIR, '..', 'playbooks', 'update_puppet.yaml')],
+        stderr=subprocess.STDOUT)
+
+    # Run the remote puppet apply playbook limited to just this server
+    # we just created
+    print subprocess.check_output(
+        ansible_cmd + [
+            os.path.join(
+                SCRIPT_DIR, '..', 'playbooks',
+                'remote_puppet_adhoc.yaml')],
+        stderr=subprocess.STDOUT)
 
     try:
         ssh_client.ssh("reboot")
@@ -132,37 +140,17 @@ def bootstrap_server(server, key, cert, environment, name,
             raise
 
 
-def build_server(cloud, name, image, flavor, cert, environment,
-                 puppetmaster, volume, keep, net_label,
-                 floating_ip_pool, boot_from_volume,
-                 config_drive):
+def build_server(cloud, name, image, flavor,
+                 volume, keep, network, boot_from_volume, config_drive):
     key = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name,
-                         reuse_ips=False, wait=True, config_drive=config_drive)
-
-    #TODO: test with rax
-    #TODO: use shade
-    if boot_from_volume:
-        block_mapping = [{
-            'boot_index': '0',
-            'delete_on_termination': True,
-            'destination_type': 'volume',
-            'uuid': image.id,
-            'source_type': 'image',
-            'volume_size': '50',
-        }]
-        create_kwargs['image'] = None
-        create_kwargs['block_device_mapping_v2'] = block_mapping
-
-    #TODO: use shade
-    #if net_label:
-    #    nics = []
-    #    for net in client.networks.list():
-    #        if net.label == net_label:
-    #            nics.append({'net-id': net.id})
-    #    create_kwargs['nics'] = nics
+                         reuse_ips=False, wait=True,
+                         boot_from_volume=boot_from_volume,
+                         volumes=[volume],
+                         network=network,
+                         config_drive=config_drive)
 
     key_name = 'launch-%i' % (time.time())
     key = paramiko.RSAKey.generate(2048)
@@ -183,20 +171,10 @@ def build_server(cloud, name, image, flavor, cert, environment,
     try:
         cloud.delete_keypair(key_name)
 
-        # TODO: use shade
-        if volume:
-            raise Exception("not implemented")
-            #vobj = client.volumes.create_server_volume(
-            #    server.id, volume, None)
-            #if not vobj:
-            #    raise Exception("Couldn't attach volume")
-
         server = cloud.get_openstack_vars(server)
-        bootstrap_server(server, key, cert, environment, name,
-                         puppetmaster, volume, floating_ip_pool)
-        print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
-                                               server.accessIPv4,
-                                               server.accessIPv6))
+        bootstrap_server(server, key, name, volume)
+        print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
+            server.id, server.public_v4, server.public_v6))
     except Exception:
         try:
             if keep:
@@ -224,14 +202,6 @@ def main():
     parser.add_argument("--image", dest="image",
                         default="Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)",
                         help="image name")
-    parser.add_argument("--environment", dest="environment",
-                        default="production",
-                        help="puppet environment name")
-    parser.add_argument("--cert", dest="cert",
-                        help="name of signed puppet certificate file (e.g., "
-                        "hostname.example.com.pem)")
-    parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
-                        default="puppetmaster.openstack.org")
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
@@ -243,24 +213,13 @@ def main():
                         help="Don't clean up or delete the server on error.",
                         action='store_true',
                         default=False)
-    parser.add_argument("--net-label", dest="net_label", default='',
+    parser.add_argument("--network", dest="network", default=None,
                         help="network label to attach instance to")
-    parser.add_argument("--fip-pool", dest="floating_ip_pool", default=None,
-                        help="pool to assign floating IP from")
     parser.add_argument("--config-drive", dest="config_drive",
                         help="Boot with config_drive attached.",
                         action='store_true',
-                        default=False)
+                        default=True)
     options = parser.parse_args()
-
-    if options.cert:
-        cert = options.cert
-    else:
-        cert = options.name + ".pem"
-
-    if not os.path.exists(os.path.join("/var/lib/puppet/ssl/private_keys",
-                                       cert)):
-        raise Exception("Please specify the name of a signed puppet cert.")
 
     cloud_kwargs = {}
     if options.region:
@@ -288,16 +247,11 @@ def main():
             print i.name
         sys.exit(1)
 
-    if options.volume:
-        print "The --volume option does not support cinder; until it does"
-        print "it should not be used."
-        sys.exit(1)
-
-    server = build_server(cloud, options.name, image, flavor, cert,
-                          options.environment, options.server,
+    server = build_server(cloud, options.name, image, flavor,
+                          options.server,
                           options.volume, options.keep,
-                          options.net_label, options.floating_ip_pool,
-                          options.boot_from_volume, options.config_drive)
+                          options.network, options.boot_from_volume,
+                          options.config_drive)
     dns.shade_print_dns(server)
     # Remove the ansible inventory cache so that next run finds the new
     # server
