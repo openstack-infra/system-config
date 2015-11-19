@@ -1,0 +1,75 @@
+#!/usr/bin/python
+
+# Copyright (c) 2015 Hewlett-Packard Development Company, L.P.
+#
+# This module is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this software.  If not, see <http://www.gnu.org/licenses/>.
+
+import json
+import os
+import pipes
+import socket
+import stat
+
+DOCUMENTATION = '''
+---
+module: opt_in_to_module_upgrade
+short_description: Install upgraded modules on some nodes.
+description:
+  - Define nodes that should merge the standard modules list with a list of
+    modules to upgrade. Use the tag "Upgrade-Modules" in site.pp for nodes that
+    should opt-in to the upgrade list.
+options:
+  manifest:
+    description:
+      - Path to the manifest to read.
+    required: false
+    default: '/opt/system-config/production/manifests/site.pp'
+requirements: [ ]
+author: Colleen Murphy
+'''
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            manifest=dict(required=False,
+                 default='/opt/system-config/production/manifests/site.pp'
+            )
+        ),
+    )
+    p = module.params
+
+    # Expect system-config to be cloned already
+    opt_in_to_upgrade=False
+    nodes = []
+    node_pattern = re.compile('^node .*{')
+    upgrade_pattern = re.compile('# Upgrade-Modules')
+    hostname = socket.gethostname()
+    with open(p['manifest'], 'r') as f:
+        manifest = f.readlines()
+    for number,line in enumerate(manifest):
+        if node_pattern.match(line):
+            node = line.split()[1].strip("'").strip('/')
+            node_name = re.compile(node)
+            if node_name.match(hostname):
+                tag = manifest[number - 1]
+                if upgrade_pattern.match(tag):
+                    opt_in_to_upgrade=True
+                    break
+
+    module.exit_json(opt_in_to_upgrade=opt_in_to_upgrade)
+
+# import module snippets
+from ansible.module_utils.basic import *
+
+main()
