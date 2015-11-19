@@ -1,0 +1,51 @@
+#!/usr/bin/python
+
+# Copyright (c) 2015 Hewlett-Packard Development Company, L.P.
+#
+# This module is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this software.  If not, see <http://www.gnu.org/licenses/>.
+
+import json
+import os
+import pipes
+import stat
+
+DOCUMENTATION = '''
+---
+'''
+
+def main():
+    module = AnsibleModule(
+        argument_spec=dict(
+            manifest=dict(required=False,
+                 default='/opt/system-config/production/manifests/site.pp'
+            )
+        ),
+    )
+    p = module.params
+
+    # Expect system-config to be cloned already
+    opt_in_to_upgrade=False
+    with open(p['manifest'] as manifest:
+        # look for current node
+        # check if current node contains Upgrade-Modules
+        # if yes, opt_in_to_upgrade=True
+        pass
+
+    module.exit_json(
+        opt_in_to_upgrade=opt_in_to_upgrade
+    )
+# import module snippets
+from ansible.module_utils.basic import *
+
+main()
