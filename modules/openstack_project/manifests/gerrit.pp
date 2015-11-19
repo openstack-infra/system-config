@@ -64,7 +64,6 @@ class openstack_project::gerrit (
   $cla_id = '2',
   $cla_name = 'ICLA',
   $testmode = false,
-  $sysadmins = [],
   $swift_username = '',
   $swift_password = '',
   $gitweb = true,
@@ -72,13 +71,7 @@ class openstack_project::gerrit (
   $web_repo_url = '',
   $web_repo_url_encode = false,
   $secondary_index = true,
-  $afs = false,
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418],
-    sysadmins                 => $sysadmins,
-    afs                       => $afs,
-  }
 
   class { 'jeepyb::openstackwatch':
     projects       => [
