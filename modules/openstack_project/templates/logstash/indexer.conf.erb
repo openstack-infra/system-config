@@ -114,8 +114,8 @@ filter {
 }
 
 output {
-  elasticsearch_http {
-    host => "localhost"
+  elasticsearch {
+    hosts => ["localhost:9200"]
     manage_template => false
     flush_size => 1024
   }
