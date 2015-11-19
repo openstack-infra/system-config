@@ -465,7 +465,14 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 
   class { 'openstack_project::logstash_worker':
-    discover_node         => 'elasticsearch02.openstack.org',
+    discover_nodes => [
+      'elasticsearch02.openstack.org:9200',
+      'elasticsearch03.openstack.org:9200',
+      'elasticsearch04.openstack.org:9200',
+      'elasticsearch05.openstack.org:9200',
+      'elasticsearch06.openstack.org:9200',
+      'elasticsearch07.openstack.org:9200',
+    ],
   }
 }
 

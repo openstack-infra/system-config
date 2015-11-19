@@ -114,8 +114,8 @@ filter {
 }
 
 output {
-  elasticsearch_http {
-    host => "localhost"
+  elasticsearch {
+    hosts => <%= scope['openstack_project::logstash_worker::discover_nodes'].to_s %>
     manage_template => false
     flush_size => 1024
   }
