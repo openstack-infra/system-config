@@ -5,3 +5,9 @@
   git: repo=git://git.openstack.org/openstack-infra/system-config.git dest=/opt/system-config/production clone=yes update=yes accept_hostkey=True
 - name: Run install_modules
   shell: /opt/system-config/production/install_modules.sh
+- name: Check whether to upgrade certain modules
+  opt_in_to_upgrade_modules:
+  register: opt_in
+- name: Upgrade certain modules
+  shell: MODULE_FILE=upgrade-modules.env /opt/system-config/production/install_modules.sh
+  when: "{{ opt_in.opt_in_to_upgrade|bool }}"
