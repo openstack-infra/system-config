@@ -16,14 +16,20 @@
 
 ROOT=$(readlink -fn $(dirname $0)/..)
 export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
-# MODULE_ENV_FILE sets the list of modules to read from and install and can be
-# overridden by setting it outside the script.
-export MODULE_ENV_FILE=${MODULE_ENV_FILE:-modules.env}
+export MODULE_FILE=modules.env
 # PUPPET_MANIFEST sets the manifest that is being tested and can be overridden
 # by setting it outside the script.
 export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
 
 export PUPPET_INTEGRATION_TEST=1
+
+run_puppet() {
+  echo "Running apply test on these hosts:"
+  find applytest -name 'puppetapplytest*.final' -print0
+  find applytest -name 'puppetapplytest*.final' -print0 | \
+      xargs -0 -P $(nproc) -n 1 -I filearg \
+          ./tools/test_puppet_apply.sh filearg
+}
 
 sudo rm -rf /etc/puppet/modules/*
 
@@ -49,7 +55,7 @@ declare -A INTEGRATION_MODULES
 
 project_names=""
 
-source $MODULE_ENV_FILE
+source $MODULE_FILE
 
 for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_scope=$(basename `dirname $MOD`)
@@ -94,8 +100,10 @@ fi
 FOUND=0
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
     if grep -q "Node-OS: $CODENAME" $f; then
-        cat applytest/head $f > $f.final
-        FOUND=1
+        if ! grep 'Upgrade-Modules' $f; then
+          cat applytest/head $f > $f.final
+          FOUND=1
+        fi
     fi
 done
 
@@ -112,8 +120,23 @@ sudo mv /tmp/hosts /etc/hosts
 sudo mkdir -p /var/run/puppet
 sudo cp /etc/hiera.yaml /etc/puppet/hiera.yaml
 sudo -E bash -x ./install_modules.sh
-echo "Running apply test on these hosts:"
-find applytest -name 'puppetapplytest*.final' -print0
-find applytest -name 'puppetapplytest*.final' -print0 | \
-    xargs -0 -P $(nproc) -n 1 -I filearg \
-        ./tools/test_puppet_apply.sh filearg
+run_puppet
+
+# Test upgraded modules if relevant
+echo "Testing upgraded modules"
+if [ -f ./upgrade-modules.env ] ; then
+    rm applytest/*.final
+
+    for f in `find applytest -name 'puppetapplytest*' -print` ; do
+        if grep -q "Node-OS: $CODENAME" $f; then
+          if grep -q "Upgrade-Modules" $f; then
+              cat applytest/head $f > $f.final
+              FOUND=1
+          fi
+        fi
+    done
+
+    export MODULE_FILE=upgrade-modules.env
+    sudo -E bash -x ./install_modules.sh
+    run_puppet
+fi
