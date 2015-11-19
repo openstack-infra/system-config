@@ -59,6 +59,9 @@ class openstack_project::users {
     realname => 'Clark Boylan',
     sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCnfoVhOTkrY7uoebL8PoHXb0Fg4jJqGCbwkxUdNUdheIdbnfyjuRG3iL8WZnzf7nzWnD+IGo6kkAo8BkNMK9L0P0Y+5IjI8NH49KU22tQ1umij4EIf5tzLh4gsqkJmy6QLrlbf10m6UF4rLFQhKzOd4b2H2K6KbP00CIymvbW3BwvNDODM4xRE2uao387qfvXZBUkB0PpRD+7fWPoN58gpFUm407Eba3WwX5PCD+1DD+RVBsG8maIDXerQ7lvFLoSuyMswv1TfkvCj0ZFhSFbfTd2ZysCu6eryFfeixR7NY9SNcp9YTqG6LrxGA7Ci6wz+hycFHXlDrlBgfFJDe5At',
     key_id   => 'clark@work',
+    old_keys => [
+      'boylandcl@boylancl1',
+      ],
     uid      => 2005,
     gid      => 2005,
   }
