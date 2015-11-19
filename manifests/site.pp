@@ -1044,8 +1044,6 @@ node 'translate.openstack.org' {
     zanata_server_user      => hiera('proposal_zanata_user'),
     zanata_server_api_key   => hiera('proposal_zanata_api_key'),
     zanata_wildfly_version  => '9.0.1',
-    zanata_url              => 'https://sourceforge.net/projects/zanata/files/webapp/zanata-war-3.7.1.war',
-    zanata_checksum         => 'b741fac8cf7d11c9b15189e6899051eb',
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     ssl_cert_file_contents  => hiera('translate_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('translate_ssl_key_file_contents'),
