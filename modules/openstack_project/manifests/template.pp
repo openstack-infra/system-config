@@ -68,6 +68,10 @@ class openstack_project::template (
     rules6           => $iptables_rules6,
   }
 
+  class { 'timezone':
+    timezone => 'UTC',
+  }
+
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
