@@ -127,6 +127,14 @@ class openstack_project::git (
     options           => 'maxqueue 512',
   }
 
+  exec { 'haproxy_allow_bind_ports':
+    # If bool is already set don't set it again
+    onlyif  => 'bash -c \'getsebool haproxy_connect_any | grep -q off\'',
+    command => 'setsebool -P haproxy_connect_any 1',
+    path    => '/bin:/usr/sbin',
+    before  => Service['haproxy'],
+  }
+
   file { '/etc/rsyslog.d/haproxy.conf':
     ensure => present,
     owner  => 'root',
