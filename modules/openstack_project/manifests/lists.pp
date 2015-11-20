@@ -25,10 +25,12 @@ class openstack_project::lists(
   }
 
   realize (
-    User::Virtual::Localuser['oubiwann'],
-    User::Virtual::Localuser['rockstar'],
     User::Virtual::Localuser['smaffulli'],
   )
+
+  # Disable inactive admins
+  user::virtual::disable { 'oubiwann': }
+  user::virtual::disable { 'rockstar': }
 
   include bup
   bup::site { 'rs-ord':
