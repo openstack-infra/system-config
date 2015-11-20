@@ -355,6 +355,9 @@ The `layout.yaml <https://git.openstack.org/cgit/openstack-infra/project-config/
 used by OpenStack is a good reference for real world pipeline definitions,
 and project-pipeline-job definitions.
 
+The following documentation explains how to setup a 3rd party CI system using this approach.
+`OpenStack Third-Party CI <https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/contrib/README.md>`_
+
 Managing Jenkins Jobs
 ---------------------
 When code is pushed to Gerrit, a series of jobs are triggered that run a series
