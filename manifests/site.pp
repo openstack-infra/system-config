@@ -501,6 +501,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 
 # CentOS machines to load balance git access.
 # Node-OS: centos6
+# Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
   $group = "git-loadbalancer"
   class { 'openstack_project::git':
