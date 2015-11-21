@@ -69,7 +69,7 @@ class openstack_project::template (
   }
 
   class { 'timezone':
-    timezone => 'UTC',
+    timezone => 'Etc/UTC',
   }
 
 
