@@ -72,6 +72,7 @@ class openstack_project::eavesdrop (
         '#openstack-ironic',
         '#openstack-keystone',
         '#openstack-ko',
+        '#openstack-kuryr',
         '#openstack-lbaas',
         '#openstack-manila',
         '#openstack-meeting',
