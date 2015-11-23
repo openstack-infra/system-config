@@ -267,7 +267,8 @@ node 'puppetdb.openstack.org' {
 
 # Node-OS: precise
 node 'graphite.openstack.org' {
-  $statsd_hosts = ['logstash.openstack.org',
+  $statsd_hosts = ['git.openstack.org',
+                   'logstash.openstack.org',
                    'nodepool.openstack.org',
                    'zuul.openstack.org']
 
