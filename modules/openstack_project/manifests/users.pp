@@ -175,4 +175,12 @@ class openstack_project::users {
     gid      => 2018,
   }
 
+  @user::virtual::localuser { 'rcarrillocruz':
+    realname => 'Ricardo Carrillo Cruz',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDc8rWVoc94ir1fhdC1qK75ZHRXf3JsjrQAx8RZQivICSpZPOpJNCBLJslkKMaSkEIxPOphqgKzp5GusnN5L9/I7DjYuQkqzn4Isi3njym8kWlQR+oDXrB/e/5w0G+WLQKnF9YwvPyw3QXeaUvhAzi/tlj+O3S2ZzWUjA2a12ITG/LFAYVEoSNC4dRJ3eXqIzRiCEkLojC4X2oZfxRv8mxc1vkk1Hpsk3yd2BkqU/v+N76X3CA5OzDDrt/pR8oaQGuncma0G8DuKnRVNmxSgi8HaF9OBwtQ5wnqn7YFQt98T2/cifyC6xhrNkoz9xzDuvxLbMRGAEnG8Tky0cdDSz+x',
+    key_id   => 'rcarrillocruz@infra',
+    uid      => 2019,
+    gid      => 2019,
+  }
+
 }
