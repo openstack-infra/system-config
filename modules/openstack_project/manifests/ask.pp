@@ -143,6 +143,7 @@ class openstack_project::ask (
   pgsql_backup::backup { $db_name:
     database_user     => $db_user,
     database_password => $db_password,
+    dest_dir          => '/opt/pgsql_backups',
     require           => Postgresql::Server::Db[$db_name],
   }
 
