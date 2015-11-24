@@ -43,7 +43,7 @@ _BASIC_FILE = """
 #
 
 [loggers]
-keys=root,nodepool,requests,image,%(logger_titles)s
+keys=root,nodepool,requests,shade,image,%(logger_titles)s
 
 [handlers]
 keys=console,debug,normal,image,%(handler_titles)s
@@ -59,6 +59,11 @@ handlers=console
 level=WARNING
 handlers=debug,normal
 qualname=requests
+
+[logger_shade]
+level=WARNING
+handlers=debug,normal
+qualname=shade
 
 [logger_nodepool]
 level=DEBUG
