@@ -10,26 +10,6 @@ class openstack_project::puppetmaster (
   include logrotate
   include openstack_project::params
 
-  file {'/etc/puppet/environments':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-  file {'/etc/puppet/environments/production':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-  file {'/etc/puppet/environments/production/environment.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/openstack_project/puppetmaster/production_environment.conf',
-  }
-
   include ansible
 
   file { '/etc/ansible/hostfile':
