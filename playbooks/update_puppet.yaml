@@ -1,0 +1,10 @@
+---
+- hosts: '!puppetmaster.openstack.org'
+  gather_facts: false
+  tasks:
+  - synchronize:
+      src: /opt/system-config/production
+      dest: /opt/system-config
+  - synchronize:
+      src: /etc/puppet/modules
+      dest: /etc/puppet
