@@ -143,4 +143,39 @@ class openstack_project::git (
     source => 'puppet:///modules/openstack_project/git/rsyslog.haproxy.conf',
     notify => Service['rsyslog'],
   }
+
+  file { '/usr/local/bin/haproxy-statsd.py':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/openstack_project/git/haproxy-statsd.py',
+    notify  => Service['haproxy-statsd'],
+  }
+
+  file { '/etc/default/haproxy-statsd':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/haproxy-statsd.default',
+    require => File['/usr/local/bin/haproxy-statsd.py'],
+    notify  => Service['haproxy-statsd'],
+  }
+
+  file { '/etc/systemd/system/haproxy-statsd.service':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/openstack_project/git/haproxy-statsd.service',
+    require => File['/etc/default/haproxy-statsd'],
+    notify  => Service['haproxy-statsd'],
+  }
+
+  service { 'haproxy-statsd':
+    provider => systemd,
+    enable   => true,
+    require  => File['/etc/systemd/system/haproxy-statsd.service'],
+  }
 }
