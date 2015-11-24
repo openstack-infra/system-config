@@ -1,0 +1,10 @@
+[Unit]
+Description=haproxy-statsd
+After=haproxy.service
+
+[Service]
+ExecStart=/usr/local/bin/haproxy-statsd.py
+EnvironmentFile=/etc/default/haproxy-statsd
+
+[Install]
+WantedBy=multi-user.target
