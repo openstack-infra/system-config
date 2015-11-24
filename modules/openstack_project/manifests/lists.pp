@@ -331,4 +331,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist { 'openstack-opportunities':
+    ensure      => present,
+    admin       => 'jj@chef.io',
+    password    => $listpassword,
+    description => 'A list to post different opportunities or jobs for OpenStack.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
