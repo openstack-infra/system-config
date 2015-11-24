@@ -8,3 +8,7 @@
   - synchronize:
       src: /etc/puppet/modules
       dest: /etc/puppet
+  - file:
+      src: /etc/puppet/hieradata
+      dest: /opt/system-config/hieradata
+      state: link
