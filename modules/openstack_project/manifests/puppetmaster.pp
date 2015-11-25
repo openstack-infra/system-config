@@ -2,6 +2,7 @@
 #
 class openstack_project::puppetmaster (
   $jenkins_api_key,
+  $puppetmaster_clouds,
   $jenkins_api_user = 'hudson-openstack',
   $root_rsa_key = 'xxx',
   $puppetdb = true,
@@ -75,7 +76,22 @@ class openstack_project::puppetmaster (
     owner  => 'root',
     group  => 'admin',
     mode   => '0750',
-    }
+  }
+
+  file { '/etc/openstack':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'admin',
+    mode   => '0750',
+  }
+
+  file { '/etc/openstack/clouds.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
+  }
 
 # For puppet master apache serving.
   package { 'puppetmaster-passenger':
