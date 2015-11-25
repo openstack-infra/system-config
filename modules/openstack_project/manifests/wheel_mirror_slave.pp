@@ -17,11 +17,15 @@
 #
 class openstack_project::wheel_mirror_slave (
   $jenkins_ssh_public_key,
+  $pypi_mirror_bhs1_host_key,
   $pypi_mirror_dfw_host_key,
   $pypi_mirror_gra1_host_key,
   $pypi_mirror_iad_host_key,
+  $pypi_mirror_nyj01_host_key,
+  $pypi_mirror_openstack_host_key,
   $pypi_mirror_ord_host_key,
   $pypi_mirror_hp1_host_key,
+  $pypi_mirror_regionone_host_key,
   $wheel_mirror_ssh_public_key,
   $wheel_mirror_ssh_private_key,
   $sysadmins = [],
