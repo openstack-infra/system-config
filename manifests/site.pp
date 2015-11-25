@@ -152,7 +152,6 @@ node /^cacti\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140],
     sysadmins                 => hiera('sysadmins', []),
     pin_puppet                => '3.6.',
   }
