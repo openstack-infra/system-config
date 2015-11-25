@@ -183,13 +183,13 @@ class openstack_project::puppetmaster (
     ensure  => directory,
   }
 
-  file { '/etc/ansible/hosts/puppet':
+  file { '/etc/ansible/hosts/openstack':
     owner       => 'root',
     group       => 'root',
     mode        => '0755',
-    subscribe   => Class['::ansible'],
+    subscribe   => Vcsrepo['/opt/ansible'],
     refreshonly => true,
-    source      => '/usr/local/bin/puppet.py',
+    source      => '/opt/ansible/contrib/inventory/openstack.py',
     replace     => true,
   }
 
