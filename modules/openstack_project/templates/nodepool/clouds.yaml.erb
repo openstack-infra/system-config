@@ -20,7 +20,9 @@ clouds:
       project_name: '<%= hpcloud_project %>'
   ovh:
     profile: ovh
-    region_name: GRA1
+    regions:
+      - BHS1
+      - GRA1
     auth:
       username: '<%= ovh_username %>'
       password: '<%= ovh_password %>'

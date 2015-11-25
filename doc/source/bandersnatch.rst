@@ -12,6 +12,7 @@ At a Glance
 
 :Hosts:
   * http://pypi.openstack.org (deprecated)
+  * http://pypi.bhs1.openstack.org
   * http://pypi.dfw.openstack.org
   * http://pypi.gra1.openstack.org
   * http://pypi.iad.openstack.org

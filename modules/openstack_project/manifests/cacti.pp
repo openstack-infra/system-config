@@ -142,6 +142,7 @@ class openstack_project::cacti (
     'proposal.slave.openstack.org',
     'puppetdb.openstack.org',
     'puppetmaster.openstack.org',
+    'pypi.bhs1.openstack.org',
     'pypi.dfw.openstack.org',
     'pypi.gra1.openstack.org',
     'pypi.iad.openstack.org',
