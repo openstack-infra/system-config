@@ -142,22 +142,7 @@ Disabling Puppet on Nodes
 -------------------------
 
 In the case of needing to disable the running of puppet on a node, it's a
-simple matter of disabling the agent:
-
-.. code-block:: bash
-
-  sudo puppet agent --disable
-
-This will prevent any subsequent runs of the agent, including ones triggered
-globally by the run_all script. If, as an admin, you need to run puppet on
-a node where it has been disabled, you need to specify an alternate disable
-lock file which will allow your local run of puppet without allowing the
-globally orchestrated runs to occur:
-
-.. code-block:: bash
-
-  sudo puppet agent --test --agent_disabled_lockfile=/tmp/alt-lock-file
-
+simple matter of adding an entry to the ansible inventory "disabled" group.
 
 Important Notes
 ---------------
