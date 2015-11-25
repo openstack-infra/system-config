@@ -1,4 +1,6 @@
 [disabled]
+
+[disabled:children]
 ci-backup-hp-az1.openstack.org
 ci-backup-rs-ord.openstack.org
 jenkins-dev.openstack.org
@@ -8,5 +10,3 @@ pypi.region-b.geo-1.openstack.org
 pypi.sjc1.openstack.org
 review-dev.openstack.org
 subunit-worker01.openstack.org
-
-[disabled:children]
