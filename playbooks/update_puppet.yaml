@@ -1,5 +1,5 @@
 ---
-- hosts: '!puppetmaster.openstack.org'
+- hosts: '!puppetmaster.openstack.org:!disabled'
   gather_facts: false
   tasks:
   - synchronize:

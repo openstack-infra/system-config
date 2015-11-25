@@ -1,5 +1,5 @@
 ---
-- hosts: "afs*"
+- hosts: "afs*:!disabled"
   gather_facts: true
   roles:
   - role: puppet
