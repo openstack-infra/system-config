@@ -144,6 +144,7 @@ class openstack_project::ask (
     database_user     => $db_user,
     database_password => $db_password,
     require           => Postgresql::Server::Db[$db_name],
+    num_backups       => '10',
   }
 
   include bup
