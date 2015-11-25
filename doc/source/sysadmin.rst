@@ -306,6 +306,11 @@ instance by name, you need to put its name in `disabled:children`. If you want
 to refer to a single instance by UUID, or if there are statically defined
 hosts that need to be disabled, you should put those in `disabled`.
 
+Because of the way static and dynamic inventories get merged by ansible, the
+static file needs to stand alone. If you need to disable a dynamic host from
+OpenStack (pretty much all of our hosts) you need to not only add it to
+dynamic:children, you need to add an emtpy group into the static file too.
+
 Disabling puppet via ansible inventory does not disable puppet from being
 run directly on the host, it merely prevents the puppetmaster from causing
 puppet to be run. If you choose to run puppet manually on a host, take care
