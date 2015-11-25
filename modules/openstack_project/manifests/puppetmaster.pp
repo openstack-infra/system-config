@@ -11,7 +11,9 @@ class openstack_project::puppetmaster (
   include logrotate
   include openstack_project::params
 
-  include ansible
+  class { '::ansible':
+    ansible_hostfile => '/etc/ansible/hosts',
+  }
 
   file { '/etc/ansible/hostfile':
     ensure  => present,
@@ -119,19 +121,19 @@ class openstack_project::puppetmaster (
   }
 
 # For launch/launch-node.py.
-  package { ['python-cinderclient', 'python-novaclient']:
+  package { 'shade':
     ensure   => latest,
     provider => pip,
-    require  => [Package['python-lxml'], Package['libxslt1-dev']],
   }
   package { 'python-paramiko':
     ensure => present,
   }
+  # No longer needed with latest client libs
   package { 'python-lxml':
-    ensure => present,
+    ensure => absent,
   }
   package { 'libxslt1-dev':
-    ensure => present,
+    ensure => absent,
   }
 
 # Enable puppetdb
@@ -170,25 +172,38 @@ class openstack_project::puppetmaster (
     require => Cron['restartjenkinsmasters'],
   }
 
-# Playbooks
-#
-  file { '/etc/ansible/playbooks':
-    ensure  => absent,
+  vcsrepo { '/opt/ansible':
+    ensure   => latest,
+    provider => git,
+    revision => 'stable-2.0',
+    source   => 'https://github.com/ansible/ansbile',
   }
 
-  file { '/etc/ansible/remote_puppet.yaml':
-    ensure => absent,
+  file { '/etc/ansible/hosts':
+    ensure  => directory,
   }
-  file { '/etc/ansible/remote_puppet_afs.yaml':
-    ensure => absent,
+
+  file { '/etc/ansible/hosts/puppet':
+    owner       => 'root',
+    group       => 'root',
+    mode        => '0755',
+    subscribe   => Class['::ansible'],
+    refreshonly => true,
+    source      => '/usr/local/bin/puppet.py',
+    replace     => true,
   }
-  file { '/etc/ansible/remote_puppet_else.yaml':
-    ensure => absent,
+
+  file { '/etc/ansible/hosts/static':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/static-inventory',
   }
-  file { '/etc/ansible/remote_puppet_git.yaml':
-    ensure => absent,
-  }
-  file { '/etc/ansible/clean_workspaces.yaml':
-    ensure => absent,
+
+  file { '/etc/ansible/hosts/emergency':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
   }
 }
