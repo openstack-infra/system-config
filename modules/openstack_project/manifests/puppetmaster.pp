@@ -93,33 +93,20 @@ class openstack_project::puppetmaster (
     content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
   }
 
-# For puppet master apache serving.
   package { 'puppetmaster-passenger':
-    ensure => present,
+    ensure => absent,
   }
 
   file { '/etc/apache2/sites-available/puppetmaster.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    content => template('openstack_project/puppetmaster/puppetmaster_vhost.conf.erb'),
-    require => Package['puppetmaster-passenger'],
+    ensure  => absent,
   }
 
-# To set LANG to utf8, otherwise we get charset errors on manifests
-# with non-ascii chars
   file { '/etc/apache2/envvars':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/puppetmaster/envvars.debian',
-    require => Package['puppetmaster-passenger'],
+    ensure  => absent,
   }
 
-# For launch/launch-node.py.
-  package { ['python-cinderclient', 'python-novaclient']:
+# For launch/launch-node.py and ansible openstack inventory
+  package { 'shade':
     ensure   => latest,
     provider => pip,
     require  => [Package['python-lxml'], Package['libxslt1-dev']],
@@ -132,17 +119,6 @@ class openstack_project::puppetmaster (
   }
   package { 'libxslt1-dev':
     ensure => present,
-  }
-
-# Enable puppetdb
-
-  if $puppetdb {
-    class { 'puppetdb::master::config':
-      puppetdb_server              => $puppetdb_server,
-      puppet_service_name          => 'apache2',
-      puppetdb_soft_write_failure  => true,
-      manage_storeconfigs          => false,
-    }
   }
 
 # Jenkins master management
@@ -170,25 +146,4 @@ class openstack_project::puppetmaster (
     require => Cron['restartjenkinsmasters'],
   }
 
-# Playbooks
-#
-  file { '/etc/ansible/playbooks':
-    ensure  => absent,
-  }
-
-  file { '/etc/ansible/remote_puppet.yaml':
-    ensure => absent,
-  }
-  file { '/etc/ansible/remote_puppet_afs.yaml':
-    ensure => absent,
-  }
-  file { '/etc/ansible/remote_puppet_else.yaml':
-    ensure => absent,
-  }
-  file { '/etc/ansible/remote_puppet_git.yaml':
-    ensure => absent,
-  }
-  file { '/etc/ansible/clean_workspaces.yaml':
-    ensure => absent,
-  }
 }
