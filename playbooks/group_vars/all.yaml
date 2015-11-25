@@ -1,4 +1,5 @@
-puppetmaster: puppetmaster.openstack.org
 copy_hieradata: true
 copy_puppet: true
+manifest: /opt/system-config/production/manifests/site.pp
 manifest_base: /etc/system-config
+puppetdb: https://puppetdb.openstack.org:8081
