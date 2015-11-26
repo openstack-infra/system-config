@@ -255,6 +255,7 @@ node 'puppetmaster.openstack.org' {
     root_rsa_key     => hiera('puppetmaster_root_rsa_key'),
     jenkins_api_user => hiera('jenkins_api_user', 'username'),
     jenkins_api_key  => hiera('jenkins_api_key'),
+    crontab          => hiera('crontab'),
   }
 }
 
