@@ -6,6 +6,7 @@ class openstack_project::puppetmaster (
   $root_rsa_key = 'xxx',
   $puppetdb = true,
   $puppetdb_server = 'puppetdb.openstack.org',
+  $crontab = true,
 ) {
   include logrotate
   include openstack_project::params
@@ -20,33 +21,35 @@ class openstack_project::puppetmaster (
     require => Class['ansible'],
   }
 
-  cron { 'updatepuppetmaster':
-    user        => 'root',
-    minute      => '*/15',
-    command     => 'flock -n /var/run/puppet/puppet_run_all.lock bash /opt/system-config/production/run_all.sh',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-  }
+  if $crontab {
+    cron { 'updatepuppetmaster':
+      user        => 'root',
+      minute      => '*/15',
+      command     => 'flock -n /var/run/puppet/puppet_run_all.lock bash /opt/system-config/production/run_all.sh',
+      environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    }
 
-  logrotate::file { 'updatepuppetmaster':
-    ensure  => present,
-    log     => '/var/log/puppet_run_all.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['updatepuppetmaster'],
-  }
+    logrotate::file { 'updatepuppetmaster':
+      ensure  => present,
+      log     => '/var/log/puppet_run_all.log',
+      options => ['compress',
+        'copytruncate',
+        'delaycompress',
+        'missingok',
+        'rotate 7',
+        'daily',
+        'notifempty',
+      ],
+      require => Cron['updatepuppetmaster'],
+    }
 
-  cron { 'deleteoldreports':
-    user        => 'root',
-    hour        => '3',
-    minute      => '0',
-    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.yaml\' -mtime +7 -execdir rm {} \;',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    cron { 'deleteoldreports':
+      user        => 'root',
+      hour        => '3',
+      minute      => '0',
+      command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.yaml\' -mtime +7 -execdir rm {} \;',
+      environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    }
   }
 
   file { '/var/lib/puppet/reports':
@@ -130,28 +133,30 @@ class openstack_project::puppetmaster (
   }
 
 # Jenkins master management
-  cron { 'restartjenkinsmasters':
-    user        => 'root',
-    # Run through all masters onces a week.
-    weekday     => '6',
-    hour        => '0',
-    minute      => '15',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /opt/system-config/production/playbooks/restart_jenkins_masters.yaml --extra-vars 'user=${jenkins_api_user} password=${jenkins_api_key}' >> /var/log/restart_jenkins_masters.log 2>&1",
-  }
+  if $crontab {
+    cron { 'restartjenkinsmasters':
+      user        => 'root',
+      # Run through all masters onces a week.
+      weekday     => '6',
+      hour        => '0',
+      minute      => '15',
+      environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+      command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /opt/system-config/production/playbooks/restart_jenkins_masters.yaml --extra-vars 'user=${jenkins_api_user} password=${jenkins_api_key}' >> /var/log/restart_jenkins_masters.log 2>&1",
+    }
 
-  logrotate::file { 'restartjenkinsmasters':
-    ensure  => present,
-    log     => '/var/log/restart_jenkins_masters.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['restartjenkinsmasters'],
+    logrotate::file { 'restartjenkinsmasters':
+      ensure  => present,
+      log     => '/var/log/restart_jenkins_masters.log',
+      options => ['compress',
+        'copytruncate',
+        'delaycompress',
+        'missingok',
+        'rotate 7',
+        'daily',
+        'notifempty',
+      ],
+      require => Cron['restartjenkinsmasters'],
+    }
   }
 
 # Playbooks
