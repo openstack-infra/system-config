@@ -17,6 +17,7 @@
 MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
 SCRIPT_NAME=$(basename $0)
 SCRIPT_DIR=$(readlink -f "$(dirname $0)")
+JUST_CLONED=0
 
 function remove_module {
     local SHORT_MODULE_NAME=$1
@@ -25,6 +26,20 @@ function remove_module {
     else
         echo "ERROR: remove_module requires a SHORT_MODULE_NAME."
     fi
+}
+
+function git_clone {
+    local MOD=$1
+    local DEST=$2
+
+    JUST_CLONED=1
+    for attempt in $(seq 0 3); do
+        clone_error=0
+        git clone $MOD $DEST && break || true
+	rm -rf $DEST
+	clone_error=1
+    done
+    return $clone_error
 }
 
 # Array of modules to be installed key:value is module:version.
@@ -59,6 +74,7 @@ MODULE_LIST=`puppet module list --color=false`
 
 # Install modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
+    JUST_CLONED=0
     # get the name of the module directory
     if [ `echo $MOD | awk -F. '{print $NF}'` = 'git' ]; then
         echo "Remote repos of the form repo.git are not supported: ${MOD}"
@@ -72,21 +88,31 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
     # treat any occurrence of the module as a match
     if ! echo $MODULE_LIST | grep "${MODULE_NAME}" >/dev/null 2>&1; then
         # clone modules that are not installed
-        git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
+        git_clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
     else
         if [ ! -d ${MODULE_PATH}/${MODULE_NAME}/.git ]; then
             echo "Found directory ${MODULE_PATH}/${MODULE_NAME} that is not a git repo, deleting it and reinstalling from source"
             remove_module $MODULE_NAME
-            git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
+            git_clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
         elif [ `${GIT_CMD_BASE} remote show origin | grep 'Fetch URL' | awk -F'URL: ' '{print $2}'` != $MOD ]; then
             echo "Found remote in ${MODULE_PATH}/${MODULE_NAME} that does not match desired remote ${MOD}, deleting dir and re-cloning"
             remove_module $MODULE_NAME
-            git clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
+            git_clone $MOD "${MODULE_PATH}/${MODULE_NAME}"
         fi
     fi
 
     # fetch the latest refs from the repo
-    $GIT_CMD_BASE remote update
+    if [ ! $JUST_CLONED ] ; then
+	# If we just cloned the repo, we do not need to remote update
+        for attempt in $(seq 0 3); do
+            clone_error=0
+            $GIT_CMD_BASE remote update && break || true
+	    clone_error=1
+	done
+	if [ $clone_error ] ; then
+	    exit $clone_error
+	fi
+    fi
     # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
     if [ `${GIT_CMD_BASE} rev-list HEAD --max-count=1` != `${GIT_CMD_BASE} rev-list ${SOURCE_MODULES[$MOD]} --max-count=1` ]; then
         # checkout correct revision
