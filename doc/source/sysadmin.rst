@@ -194,7 +194,7 @@ Backups
 Off-site backups are made to two servers:
 
  * ci-backup-rs-ord.openstack.org
- * ci-backup-hp-az1.openstack.org
+ * TBD
 
 Puppet is used to perform the initial configuration of those machines,
 but to protect them from unauthorized access in case access to the
