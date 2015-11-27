@@ -9,6 +9,12 @@
       src: /etc/puppet/modules
       dest: /etc/puppet
   - file:
+      path: /etc/puppet/hieradata
+      state: directory
+      mode: 0700
+      owner: root
+      group: root
+  - file:
       src: /etc/puppet/hieradata
       dest: /opt/system-config/hieradata
       state: link
