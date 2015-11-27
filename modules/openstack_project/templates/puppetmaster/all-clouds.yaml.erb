@@ -1,0 +1,122 @@
+clouds:
+  admin-bluebox:
+    region_name: RegionOne
+    auth:
+      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0
+      username: <%= @puppetmaster_clouds['admin_bluebox_username'] %>
+      password: <%= @puppetmaster_clouds['admin_bluebox_password'] %>
+      project_name: <%= @puppetmaster_clouds['admin_bluebox_project_name'] %>
+  infra-files-ro:
+    profile: rackspace
+    auth:
+      username: <%= @puppetmaster_clouds['infra_files_ro_username'] %>
+      password: <%= @puppetmaster_clouds['infra_files_ro_password'] %>
+      project_name: <%= @puppetmaster_clouds['infra_files_ro_project_name'] %>
+    region_name: DFW
+  infra-files-rw:
+    profile: rackspace
+    auth:
+      username: <%= @puppetmaster_clouds['infra_files_rw_username'] %>
+      password: <%= @puppetmaster_clouds['infra_files_rw_password'] %>
+      project_name: <%= @puppetmaster_clouds['infra_files_rw_project_name'] %>
+    region_name: DFW
+  openstackci2-hpcloud:
+    profile: hp
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci2_hpcloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci2_hpcloud_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci2_hpcloud_project_name'] %>
+    regions:
+    - region-a.geo-1
+    - region-b.geo-1
+  openstackci-bluebox:
+    region_name: RegionOne
+    auth:
+      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0
+      username: <%= @puppetmaster_clouds['openstackci_bluebox_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_bluebox_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_bluebox_project_name'] %>
+  openstackci-internap:
+    region_name: nyj01
+    profile: internap
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_internap_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_internap_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_internap_project_name'] %>
+  openstackjenkins-internap:
+    region_name: nyj01
+    profile: internap
+    auth:
+      username: <%= @puppetmaster_clouds['openstackjenkins_internap_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_internap_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_internap_project_name'] %>
+  openstackci-ovh:
+    regions:
+    - GRA1
+    - SBG1
+    profile: ovh
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_ovh_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_ovh_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_ovh_project_name'] %>
+  openstackci-rax:
+    regions:
+    - DFW
+    - ORD
+    - IAD
+    profile: rackspace
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
+      project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
+  openstackjenkins-hpcloud:
+    profile: hp
+    auth:
+      username: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_project_name'] %>
+    regions:
+    - region-a.geo-1
+    - region-b.geo-1
+  openstackjenkins-bluebox:
+    region_name: RegionOne
+    auth:
+      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0
+      username: <%= @puppetmaster_clouds['openstackjenkins_bluebox_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_bluebox_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_bluebox_project_name'] %>
+  openstackjenkins-rax:
+    regions:
+    - DFW
+    - ORD
+    - IAD
+    profile: rackspace
+    auth:
+      username: <%= @puppetmaster_clouds['openstackjenkins_rax_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_rax_password'] %>
+      project_id: <%= @puppetmaster_clouds['openstackjenkins_rax_project_id'] %>
+  openstackjenkins-ovh:
+    regions:
+    - GRA1
+    - SBG1
+    profile: ovh
+    auth:
+      username: <%= @puppetmaster_clouds['openstackjenkins_ovh_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_ovh_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_ovh_project_name'] %>
+  openstack-rax:
+    regions:
+    - DFW
+    - ORD
+    - IAD
+    profile: rackspace
+    auth:
+      username: <%= @puppetmaster_clouds['openstack_rax_username'] %>
+      password: <%= @puppetmaster_clouds['openstack_rax_password'] %>
+      project_id: <%= @puppetmaster_clouds['openstack_rax_project_id'] %>
+  openstack-nodepool-tripleo:
+    auth:
+      auth_url: https://ci-overcloud.rh1.tripleo.org:13000/v2.0
+      username: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_username'] %>
+      password: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_project_name'] %>
