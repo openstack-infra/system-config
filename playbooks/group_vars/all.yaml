@@ -1,1 +1,2 @@
 puppetmaster: puppetmaster.openstack.org
+copy_hieradata: true
