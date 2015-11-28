@@ -22,15 +22,6 @@ export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
 SYSTEM_CONFIG=/opt/system-config/production
 ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
 
-cd $SYSTEM_CONFIG
-git fetch -a && git reset -q --hard @{u}
-./install_modules.sh
-ansible-galaxy install --force -r roles.yaml
-
-# One must touch manifests/site.pp to trick puppet into re-loading modules
-# some times
-touch manifests/site.pp
-
 # It's possible for connectivity to a server or manifest application to break
 # for indeterminate periods of time, so the playbooks should be run without
 # errexit
