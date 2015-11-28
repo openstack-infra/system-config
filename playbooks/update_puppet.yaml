@@ -1,4 +1,21 @@
 ---
+- hosts: 'puppetmaster.openstack.org'
+  gather_facts: false
+  tasks:
+  - git:
+     repo: git://git.openstack.org/openstack-infra/system-config
+     dest: /opt/system-config/production
+     force: yes
+     # This is stupid because we're not using ssh, but the git module
+     # complains if we don't have a hostkey for git.o.o and don't have
+     # this setting. I'll file a bug upstream if it's not fixed in 2.0
+     accept_hostkey: yes
+  - shell: ./install_modules.sh
+    args:
+      chdir: /opt/system-config/production
+  - shell: ansible-galaxy install --force -r roles.yaml
+    args:
+      chdir: /opt/system-config/production
 - hosts: '!puppetmaster.openstack.org'
   gather_facts: false
   tasks:
