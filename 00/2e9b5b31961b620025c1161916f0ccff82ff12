@@ -1,0 +1,10 @@
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Submitted-by: Jenkins
+Submitted-at: Sat, 28 Nov 2015 19:11:45 +0000
+Reviewed-on: https://review.openstack.org/250949
+Project: openstack-infra/system-config
+Branch: refs/heads/master
