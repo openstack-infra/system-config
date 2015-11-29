@@ -247,7 +247,7 @@ node 'cacti.openstack.org' {
 # Node-OS: precise
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [4505, 4506, 8140],
+    iptables_public_tcp_ports => [8140],
     sysadmins                 => hiera('sysadmins', []),
     pin_puppet                => '3.6.',
   }
