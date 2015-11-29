@@ -244,7 +244,7 @@ node 'cacti.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [8140],
