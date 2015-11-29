@@ -120,8 +120,8 @@ class openstack_project::puppetmaster (
     require => Package['puppetmaster-passenger'],
   }
 
-# For launch/launch-node.py.
-  package { 'shade':
+  # For launch/launch-node.py and general utility
+  package { ['shade', 'python-openstackclient']:
     ensure   => latest,
     provider => pip,
   }
