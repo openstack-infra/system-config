@@ -93,6 +93,7 @@ filter {
     date {
       match => [ "logdate",
                  "yyyy-MM-dd HH:mm:ss.SSS",
+                 "yyyy-MM-dd HH:mm:ss.SSSSSS",
                  "yyyy-MM-dd HH:mm:ss,SSS",
                  "yyyy-MM-dd HH:mm:ss",
                  "MMM  d HH:mm:ss",
@@ -100,7 +101,8 @@ filter {
                  "dd/MMM/yyyy:HH:mm:ss Z",
                  "yyyy-MM-dd HH:mm:ss.SSSZ",
                  "E MMM dd HH:mm:ss yyyy Z",
-                 "E MMM dd HH:mm:ss yyyy"
+                 "E MMM dd HH:mm:ss yyyy",
+                 "ISO8601"
                ]
       timezone => "UTC"
     }
