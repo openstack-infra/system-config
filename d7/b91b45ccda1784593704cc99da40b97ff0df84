@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Submitted-by: Jenkins
+Submitted-at: Mon, 30 Nov 2015 11:19:08 +0000
+Reviewed-on: https://review.openstack.org/251073
+Project: openstack-infra/system-config
+Branch: refs/heads/master
