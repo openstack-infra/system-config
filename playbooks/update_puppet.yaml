@@ -13,22 +13,3 @@
   - shell: ansible-galaxy install --force -r roles.yaml
     args:
       chdir: /opt/system-config/production
-- hosts: '!puppetmaster.openstack.org:!disabled'
-  gather_facts: false
-  tasks:
-  - synchronize:
-      src: /opt/system-config/production
-      dest: /opt/system-config
-  - synchronize:
-      src: /etc/puppet/modules
-      dest: /etc/puppet
-  - file:
-      path: /etc/puppet/hieradata
-      state: directory
-      mode: 0700
-      owner: root
-      group: root
-  - file:
-      src: /etc/puppet/hieradata
-      dest: /opt/system-config/hieradata
-      state: link
