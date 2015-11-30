@@ -1,2 +1,4 @@
 puppetmaster: puppetmaster.openstack.org
 copy_hieradata: true
+copy_puppet:true
+manifest_base: /etc/system-config

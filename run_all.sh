@@ -36,8 +36,6 @@ touch manifests/site.pp
 # errexit
 set +e
 
-# First, sync the puppet repos with all the machines
-ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/update_puppet.yaml
 # Run the git/gerrit sequence, since it's important that they all work together
 ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
