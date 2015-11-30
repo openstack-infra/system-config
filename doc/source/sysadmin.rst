@@ -299,7 +299,7 @@ puppet at times when landing a change to the puppet repo would be either
 unreasonable or impossible.
 
 There are two sections in each file, `disabled` and `disabled:children`. Due
-to te multi-cloud nature of the ansible inventory, a hostname cannot be counted
+to the multi-cloud nature of the ansible inventory, a hostname cannot be counted
 on to be unique, so each cloud instance is listed in the inventory by its
 UUID with a group created for its hostname. If you want to disable a cloud
 instance by name, you need to put its name in `disabled:children`. If you want
