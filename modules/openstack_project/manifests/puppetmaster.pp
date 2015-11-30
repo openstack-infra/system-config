@@ -207,6 +207,6 @@ class openstack_project::puppetmaster (
     ensure  => present,
     owner   => 'root',
     group   => 'root',
-    mode    => '0444',
+    mode    => '0644',
   }
 }

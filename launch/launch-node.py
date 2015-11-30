@@ -298,7 +298,8 @@ def main():
     dns.print_dns(client, options.name)
     # Remove the ansible inventory cache so that next run finds the new
     # server
-    os.unlink('/var/cache/ansible-inventory.json')
+    if os.path.exists('/var/cache/ansible-inventory/ansible-inventory.cache'):
+        os.unlink('/var/cache/ansible-inventory/ansible-inventory.cache')
 
 if __name__ == '__main__':
     main()
