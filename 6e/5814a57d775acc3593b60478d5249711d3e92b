@@ -1,0 +1,12 @@
+Verified+2: Jenkins
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+1: Dirk Mueller <dirk@dmllr.de>
+Code-Review+1: Haïkel Guémar <hguemar@fedoraproject.org>
+Code-Review+1: Muawia Khan <muawia@plumgrid.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 30 Nov 2015 11:32:48 +0000
+Reviewed-on: https://review.openstack.org/250340
+Project: openstack-infra/system-config
+Branch: refs/heads/master
