@@ -20,6 +20,11 @@
 <IfModule mod_ssl.c>
 <VirtualHost *:443>
   ServerName <%= @vhost_name %>
+<% if @serveraliases.is_a? Array -%>
+<% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
+<% elsif @serveraliases != '' -%>
+<%= " ServerAlias #{@serveraliases}" %>
+<% end -%>
   DocumentRoot <%= @docroot %>
   SSLEngine on
   SSLProtocol All -SSLv2 -SSLv3
