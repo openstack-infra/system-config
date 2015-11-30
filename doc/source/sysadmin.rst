@@ -285,14 +285,31 @@ Disable/Enable Puppet
 You should normally not make manual changes to servers, but instead,
 make changes through puppet.  However, under some circumstances, you
 may need to temporarily make a manual change to a puppet-managed
-resource on a server.  In that case, run the following command on that
-server to disable puppet::
+resource on a server.
 
-  sudo puppet agent --disable
+In the case of needing to disable the running of puppet on a node, it's a
+simple matter of adding an entry to the ansible inventory "disabled" group.
+There are two inventory files available for this, `/etc/ansible/hosts/static`
+and `/etc/ansible/hosts/emergency`. `/etc/ansible/hosts/static` is intended
+to be managed via git from the system-config repo in
+`modules/openstack_project/files/puppetmaster/static-inventory`.
+`/etc/ansible/hosts/emergency` is a file that should normally be empty, but
+the contents are not managed by puppet. It's purpose is to allow for disabling
+puppet at times when landing a change to the puppet repo would be either
+unreasonable or impossible.
 
-When you are ready for puppet to run again, use::
+There are two sections in each file, `disabled` and `disabled:children`. Due
+to te multi-cloud nature of the ansible inventory, a hostname cannot be counted
+on to be unique, so each cloud instance is listed in the inventory by its
+UUID with a group created for its hostname. If you want to disable a cloud
+instance by name, you need to put its name in `disabled:children`. If you want
+to refer to a single instance by UUID, or if there are statically defined
+hosts that need to be disabled, you should put those in `disabled`.
 
-  sudo puppet agent --enable
+Disabling puppet via ansible inventory does not disable puppet from being
+run directly on the host, it merely prevents the puppetmaster from causing
+puppet to be run. If you choose to run puppet manually on a host, take care
+to ensure that it has not been disabled at the puppetmaster level first.
 
 .. _cinder:
 
