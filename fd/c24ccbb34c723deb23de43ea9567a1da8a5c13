@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 30 Nov 2015 23:55:55 +0000
+Reviewed-on: https://review.openstack.org/251577
+Project: openstack-infra/system-config
+Branch: refs/heads/master
