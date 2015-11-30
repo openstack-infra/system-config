@@ -94,6 +94,7 @@ class openstack_project::eavesdrop (
         '#openstack-rally',
         '#openstack-rating',
         '#openstack-release',
+        '#openstack-rpm-packaging',
         '#openstack-sahara',
         '#openstack-sdks',
         '#openstack-searchlight',
