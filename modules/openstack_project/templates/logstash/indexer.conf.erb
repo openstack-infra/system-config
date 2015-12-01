@@ -64,7 +64,7 @@ filter {
     }
   } else if "apacheerror" in [tags] {
     grok {
-      match => { "message" => "\[(?<logdate>%{DAY} %{MONTH} %{MONTHDAY} %{TIME} %{YEAR}%{SPACE}%{TZ}?)\]%{SPACE}\[%{LOGLEVEL:loglevel}\]%{SPACE}%{GREEDYDATA:logmessage}" }
+      match => { "message" => "(?<logdate>%{TIMESTAMP_ISO8601}?)%{SPACE}(%{GREEDYDATA:deprecation_warning}%{LOGLEVEL:loglevel}:%{SPACE})?%{GREEDYDATA:logmessage}" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
   } else if "libvirt" in [tags] {
