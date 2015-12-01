@@ -188,7 +188,7 @@ class openstack_project::puppetmaster (
     group       => 'root',
     mode        => '0755',
     subscribe   => Class['::ansible'],
-    source      => '/usr/local/bin/puppet.py',
+    source      => '/usr/local/bin/puppet-inventory',
     replace     => true,
   }
 
