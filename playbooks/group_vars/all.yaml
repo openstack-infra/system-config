@@ -1,4 +1,3 @@
 copy_hieradata: true
 manifest: /opt/system-config/production/manifests/site.pp
 puppetdb: https://puppetdb.openstack.org:8081
-whoami: puppetmaster.openstack.org
