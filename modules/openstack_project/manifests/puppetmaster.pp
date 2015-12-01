@@ -95,6 +95,14 @@ class openstack_project::puppetmaster (
     content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
   }
 
+  file { '/etc/openstack/all-clouds.yaml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => template('openstack_project/puppetmaster/all-clouds.yaml.erb'),
+  }
+
 # For puppet master apache serving.
   package { 'puppetmaster-passenger':
     ensure => present,
