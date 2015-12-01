@@ -1,5 +1,7 @@
 [disabled]
 
+[ci-backup-rs-ord.openstack.org]
+
 [jenkins-dev.openstack.org]
 
 [hound.openstack.org]
