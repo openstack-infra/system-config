@@ -57,7 +57,7 @@ def get_account(accounts, num):
     return a
 
 
-def repo_stats(repo, output, begin, end, keyfile, user):
+def repo_stats(repo, output, begin, end, keyfile, user, query):
     accounts = {}
 
     for row in open('accounts.tab'):
@@ -96,7 +96,7 @@ def repo_stats(repo, output, begin, end, keyfile, user):
 
     atcs = []
 
-    QUERY = "project:%s status:merged" % repo
+    QUERY = " ".join(["project:%s" % repo, query])
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -204,6 +204,9 @@ def main():
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
     optparser.add_option(
+        '-q', '--query', default="status:merged",
+        help='Gerrit query string (default is "status:merged")')
+    optparser.add_option(
         '-r', '--ref', default='',
         help='governance git ref (e.g. sept-2014-elections')
     optparser.add_option(
@@ -221,7 +224,7 @@ def main():
     for repo in get_repos(projects_url, options.keyfile, options.user):
         output = 'out/%s.csv' % repo.split('/')[-1]
         repo_stats(repo, output, options.begin, options.end,
-                   options.keyfile, options.user)
+                   options.keyfile, options.user, options.query)
 
     writer = csv.writer(open('out/extra-atcs.csv', 'w'))
     for atc in get_extra_atcs(extra_atcs_url):
