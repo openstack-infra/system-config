@@ -64,12 +64,20 @@ overcommitment.
 Since there's a bit of setup and maintenance involved in adding a new
 provider, a minimum of 100 instances would be helpful.
 
+Benefits to Contributors
+########################
+
 Since we continuously use the OpenStack APIs and are familiar with how
 they should operate, we occasionally discover potential problems with
 contributing clouds before many of their other users (or occasionally
 even ops teams).  In these cases, we work with contacts on their
 operations teams to let them know and try to help fix problems before
 they become an issue for their customers.
+
+We collect numerous metrics about the performance of the clouds we
+utilize. All of the metrics are freely available on the internet. From
+these metrics, dashboards can be created to help providers see and
+debug performance issues.
 
 If this sounds interesting, and you have some capacity to spare, it
 would be very much appreciated.  You are welcome to contact the
