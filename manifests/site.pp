@@ -836,7 +836,7 @@ node 'zuul-dev.openstack.org' {
   }
 }
 
-# Node-OS: centos6
+# Node-OS: trusty
 node 'pbx.openstack.org' {
   class { 'openstack_project::pbx':
     sysadmins     => hiera('sysadmins', []),
@@ -849,7 +849,6 @@ node 'pbx.openstack.org' {
         outgoing => false,
       },
     ],
-    selinux_mode  => 'enforcing'
   }
 }
 

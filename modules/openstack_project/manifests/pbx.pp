@@ -18,7 +18,6 @@
 class openstack_project::pbx (
   $sysadmins = [],
   $sip_providers = [],
-  $selinux_mode = 'enforcing'
 ) {
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
@@ -42,7 +41,6 @@ class openstack_project::pbx (
   )
 
   class { 'asterisk':
-    asterisk_conf_source  => 'puppet:///modules/openstack_project/pbx/asterisk/asterisk.conf',
     modules_conf_source   => 'puppet:///modules/openstack_project/pbx/asterisk/modules.conf',
   }
 
