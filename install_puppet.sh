@@ -48,6 +48,13 @@ function is_opensuse {
         cat /etc/os-release | grep -q -e "openSUSE"
 }
 
+# dnf is a drop-in replacement for yum on Fedora>=22
+YUM=yum
+if is_fedora && [[ $(lsb_release -rs) -ge 22 ]]; then
+    YUM=dnf
+fi
+
+
 #
 # Distro specific puppet installs
 #
@@ -57,25 +64,25 @@ function _systemd_update {
     # services due to selinux errors after upgrade.  A work-around is
     # to install the latest version of selinux and systemd here and
     # restart the daemon for good measure after it is upgraded.
-    yum install -y selinux-policy
-    yum install -y systemd
+    $YUM install -y selinux-policy
+    $YUM install -y systemd
     systemctl daemon-reload
 }
 
 function setup_puppet_fedora {
     _systemd_update
-    yum update -y
+    $YUM update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets
     # lsbdistcodename
-    yum install -y redhat-lsb-core git puppet
+    $YUM install -y redhat-lsb-core git puppet
 
     # Fedora declares some global hardening flags, which distutils
     # pick up when building python modules.  This package provides the
     # required config options.  Really this should be a dependency of
     # python-devel (fix in the works, see
     # https://bugzilla.redhat.com/show_bug.cgi?id=1217376)
-    yum install -y redhat-rpm-config
+    $YUM install -y redhat-rpm-config
 
     mkdir -p /etc/puppet/modules/
 
