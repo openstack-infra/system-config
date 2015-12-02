@@ -83,6 +83,7 @@ class openstack_project::eavesdrop (
         '#openstack-meeting-cp',
         '#openstack-mistral',
         '#openstack-monasca',
+        '#openstack-net-bgpvpn',
         '#openstack-neutron',
         '#openstack-neutron-ovn',
         '#openstack-neutron-release',
