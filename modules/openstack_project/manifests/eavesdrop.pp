@@ -40,6 +40,7 @@ class openstack_project::eavesdrop (
         '#dox',
         '#heat',
         '#kolla',
+        '#midonet',
         '#murano',
         '#openstack',
         '#openstack-ansible',
