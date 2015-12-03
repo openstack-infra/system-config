@@ -99,6 +99,7 @@ class openstack_project::eavesdrop (
         '#openstack-sdks',
         '#openstack-searchlight',
         '#openstack-security',
+        '#openstack-smaug',
         '#openstack-sprint',
         '#openstack-stable',
         '#openstack-storlets',
