@@ -68,7 +68,16 @@ function setup_puppet_fedora {
 
     # NOTE: we preinstall lsb_release to ensure facter sets
     # lsbdistcodename
-    yum install -y redhat-lsb-core git puppet
+    #
+    # Fedora declares some global hardening flags, which distutils
+    # pick up when building python modules.  redhat-rpm-config
+    # provides the required config options.  Really this should be a
+    # dependency of python-devel (fix in the works, see
+    # https://bugzilla.redhat.com/show_bug.cgi?id=1217376) and can be
+    # removed when that is sorted out.
+
+    yum install -y redhat-lsb-core git puppet \
+        redhat-rpm-config
 
     mkdir -p /etc/puppet/modules/
 
