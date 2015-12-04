@@ -10,6 +10,7 @@ class openstack_project::mirror (
   $npm_root = "${mirror_root}/npm"
   $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
   $ceph_deb_jewel_root = "${mirror_root}/ceph-deb-jewel"
+  $gem_root = "${mirror_root}/gem"
 
   $www_base = '/var/www'
   $www_root = "${www_base}/mirror"
@@ -155,6 +156,16 @@ class openstack_project::mirror (
   file { "${www_root}/mariadb":
     ensure  => link,
     target  => "${mirror_root}/mariadb",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  file { "${www_root}/gem":
+    ensure  => link,
+    target  => "${gem_root}",
     owner   => root,
     group   => root,
     require => [
