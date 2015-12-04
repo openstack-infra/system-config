@@ -316,6 +316,37 @@ run directly on the host, it merely prevents the puppetmaster from causing
 puppet to be run. If you choose to run puppet manually on a host, take care
 to ensure that it has not been disabled at the puppetmaster level first.
 
+Examples
+--------
+
+To disable an OpenStack instance called `amazing.openstack.org` temporarily
+without landing a puppet change, ensure the following is in
+`/etc/ansible/hosts/emergency`
+
+::
+
+  [amazing.openstack.org]
+
+  [disabled:children]
+  amazing.openstack.org
+
+To disable one of the OpenStack instances called `git.openstack.org`
+temporarily without landing a puppet change but leaving the other running,
+find its UUID via OpenStack tools and ensure it's in the emerency file.
+
+::
+
+  [disabled]
+  811c5197-dba7-4d3a-a3f6-68ca5328b9a7
+
+To disable a staticly defined host that is not an OpenStack host, such as
+the Infra cloud controller hosts.
+
+::
+
+  [disabled]
+  controller.useast.openstack.org
+
 .. _cinder:
 
 Cinder Volume Management
