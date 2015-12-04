@@ -287,6 +287,17 @@ make changes through puppet.  However, under some circumstances, you
 may need to temporarily make a manual change to a puppet-managed
 resource on a server.
 
+OpenStack Infra uses a non-trivial combination of Dynamic and Static
+Inventory in Ansible to control execution of puppet. A full understanding
+of the concepts in
+`Ansible Inventory Introduction
+<http://docs.ansible.com/ansible/intro_inventory.html>`_
+and
+`Ansible Dynamic Inventory
+<http://docs.ansible.com/ansible/intro_dynamic_inventory.html>`_
+is essential for being able to make informed decisions about actions
+to take.
+
 In the case of needing to disable the running of puppet on a node, it's a
 simple matter of adding an entry to the ansible inventory "disabled" group.
 There are two inventory files available for this, `/etc/ansible/hosts/static`
@@ -315,6 +326,37 @@ Disabling puppet via ansible inventory does not disable puppet from being
 run directly on the host, it merely prevents the puppetmaster from causing
 puppet to be run. If you choose to run puppet manually on a host, take care
 to ensure that it has not been disabled at the puppetmaster level first.
+
+Examples
+--------
+
+To disable an OpenStack instance called `amazing.openstack.org` temporarily
+without landing a puppet change, ensure the following is in
+`/etc/ansible/hosts/emergency`
+
+::
+
+  [amazing.openstack.org]
+
+  [disabled:children]
+  amazing.openstack.org
+
+To disable one of the OpenStack instances called `git.openstack.org`
+temporarily without landing a puppet change but leaving the other running,
+find its UUID via OpenStack tools and ensure it's in the emergency file.
+
+::
+
+  [disabled]
+  811c5197-dba7-4d3a-a3f6-68ca5328b9a7
+
+To disable a staticly defined host that is not an OpenStack host, such as
+the Infra cloud controller hosts.
+
+::
+
+  [disabled]
+  controller.useast.openstack.org
 
 .. _cinder:
 
