@@ -17,6 +17,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
         Order allow,deny
         allow from all
         Satisfy any
+        DirectoryIndex index.html index.json
         <IfVersion >= 2.4>
             Require all granted
         </IfVersion>
