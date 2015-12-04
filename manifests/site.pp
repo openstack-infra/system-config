@@ -502,7 +502,6 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 }
 
 # CentOS machines to load balance git access.
-# Node-OS: centos6
 # Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
   $group = "git-loadbalancer"
@@ -941,7 +940,6 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
-# Node-OS: centos6
 # Node-OS: precise
 # Node-OS: trusty
 # This is not meant to be an actual node that connects to the master.
@@ -957,7 +955,6 @@ node 'single-use-slave-bare' {
   }
 }
 
-# Node-OS: centos6
 # Node-OS: centos7
 # Node-OS: fedora21
 # Node-OS: precise
