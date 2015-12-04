@@ -553,15 +553,6 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
-# Legacy machines in each region to run pypi package mirrors.
-# Node-OS: precise
-node /^pypi\..*\.openstack\.org$/ {
-  $group = "pypi"
-  class { 'openstack_project::pypi':
-    sysadmins               => hiera('sysadmins', []),
-  }
-}
-
 # Machines in each region to run unified package mirrors.
 # Node-OS: trusty
 node /^mirror\..*\.openstack\.org$/ {
