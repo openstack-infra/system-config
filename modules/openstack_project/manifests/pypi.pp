@@ -12,6 +12,8 @@ class openstack_project::pypi (
 
   $mirror_root = '/srv/static'
   $pypi_root = "${mirror_root}/mirror"
+  $www_root = "${pypi_root}/web"
+  $wheel_root = "${www_root}/wheel"
 
   if ! defined(File[$mirror_root]) {
     file { $mirror_root:
@@ -24,16 +26,28 @@ class openstack_project::pypi (
     require        => File[$mirror_root]
   }
 
+  class { 'openstack_project::wheel_mirror':
+    data_directory => "${wheel_root}",
+    require        => Class['Openstack_project::Pypi_mirror'],
+  }
+
   include ::httpd
+
+  if ! defined(Httpd::Mod['rewrite']) {
+    httpd::mod { 'rewrite':
+      ensure => present,
+    }
+  }
 
   ::httpd::vhost { $vhost_name:
     port     => 80,
     priority => '50',
-    docroot  => "${pypi_root}/web",
+    docroot  => $www_root,
     require  => Class['Openstack_project::Pypi_mirror'],
+    template => 'openstack_project/pypi.vhost.erb',
   }
 
-  file { "${pypi_root}/web/robots.txt":
+  file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
     group    => 'root',
