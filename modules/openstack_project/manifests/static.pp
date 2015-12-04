@@ -31,13 +31,13 @@ class openstack_project::static (
   include ::httpd
   include ::httpd::mod::wsgi
 
-  httpd_mod { 'rewrite':
+  httpd::mod { 'rewrite':
     ensure => present,
   }
-  httpd_mod { 'proxy':
+  httpd::mod { 'proxy':
     ensure => present,
   }
-  httpd_mod { 'proxy_http':
+  httpd::mod { 'proxy_http':
     ensure => present,
   }
 

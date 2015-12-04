@@ -14,7 +14,7 @@ class openstack_project::cacti (
 
   include ::httpd
 
-  httpd_mod { 'rewrite':
+  httpd::mod { 'rewrite':
     ensure => present,
   }
 
