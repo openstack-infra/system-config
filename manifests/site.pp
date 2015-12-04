@@ -838,8 +838,16 @@ node 'zuul-dev.openstack.org' {
 
 # Node-OS: trusty
 node 'pbx.openstack.org' {
+  class { 'openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    # SIP signaling is either TCP or UDP port 5060.
+    # RTP media (audio/video) uses a range of UDP ports.
+    iptables_public_tcp_ports => [5060],
+    iptables_public_udp_ports => [5060],
+    iptables_rules4           => ['-m udp -p udp --dport 10000:20000 -j ACCEPT'],
+    iptables_rules6           => ['-m udp -p udp --dport 10000:20000 -j ACCEPT'],
+  }
   class { 'openstack_project::pbx':
-    sysadmins     => hiera('sysadmins', []),
     sip_providers => [
       {
         provider => 'voipms',
