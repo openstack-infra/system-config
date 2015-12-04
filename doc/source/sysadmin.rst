@@ -320,7 +320,8 @@ hosts that need to be disabled, you should put those in `disabled`.
 Because of the way static and dynamic inventories get merged by ansible, the
 static file needs to stand alone. If you need to disable a dynamic host from
 OpenStack (pretty much all of our hosts) you need to not only add it to
-dynamic:children, you need to add an emtpy group into the static file too.
+disabled:children, you need to add an emtpy group into the inventory file
+(either `static` or `emergency` as appropriate) too.
 
 Disabling puppet via ansible inventory does not disable puppet from being
 run directly on the host, it merely prevents the puppetmaster from causing
