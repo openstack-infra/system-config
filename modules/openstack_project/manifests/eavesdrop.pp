@@ -140,8 +140,10 @@ class openstack_project::eavesdrop (
     require => Class['statusbot'],
   }
 
-  httpd_mod { 'headers':
-    ensure => present,
+  if ! defined(Httpd::Mod['headers']) {
+    httpd::mod { 'headers':
+        ensure => present,
+    }
   }
 
   class { 'project_config':
