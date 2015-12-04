@@ -27,12 +27,6 @@ function is_fedora {
     [ -f /usr/bin/yum ] && cat /etc/*release | grep -q -e "Fedora"
 }
 
-function is_rhel6 {
-    [ -f /usr/bin/yum ] && \
-        cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" -e "CloudLinux" && \
-        cat /etc/*release | grep -q 'release 6'
-}
-
 function is_rhel7 {
     [ -f /usr/bin/yum ] && \
         cat /etc/*release | grep -q -e "Red Hat" -e "CentOS" -e "CloudLinux" && \
@@ -127,52 +121,6 @@ EOF
     yum install -y https://rdoproject.org/repos/rdo-release.rpm
 }
 
-function setup_puppet_rhel6 {
-    local puppet_pkg="http://yum.puppetlabs.com/el/6/products/x86_64/puppetlabs-release-6-6.noarch.rpm"
-
-    # install a bootstrap epel repo to install latest epel-release
-    # package (which provides correct gpg keys, etc); then remove
-    # boostrap
-    cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
-[epel-bootstrap]
-name=Bootstrap EPEL
-mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=\$basearch
-failovermethod=priority
-enabled=0
-gpgcheck=0
-EOF
-    yum --enablerepo=epel-bootstrap -y install epel-release
-    rm -f /etc/yum.repos.d/epel-bootstrap.repo
-
-    # This git package includes a small work-around for slow https
-    # cloning performance, as discussed in redhat bz#1237395.  Should
-    # be fixed in 6.8
-    curl -o /etc/yum.repos.d/git-1237395.repo \
-        https://copr.fedoraproject.org/coprs/iwienand/git-1237395/repo/epel-6/iwienand-git-1237395-epel-6.repo
-
-    # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-    yum install -y redhat-lsb-core git puppet
-
-    rpm -ivh $puppet_pkg
-
-    # ensure we stick to supported puppet 2 versions
-    cat > /etc/yum.repos.d/puppetlabs.repo <<"EOF"
-[puppetlabs-products]
-name=Puppet Labs Products El 6 - $basearch
-baseurl=http://yum.puppetlabs.com/el/6/products/$basearch
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-puppetlabs
-enabled=1
-gpgcheck=1
-EOF
-
-    yum update -y
-
-    # see comments in setup_puppet_fedora
-    ln -s /usr/bin/pip /usr/bin/pip-python
-    # Wipe out templatedir so we don't get warnings about it
-    sed -i '/templatedir/d' /etc/puppet/puppet.conf
-}
-
 function setup_puppet_ubuntu {
     if ! which lsb_release > /dev/null 2<&1 ; then
         DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
@@ -252,11 +200,6 @@ function setup_pip {
         exit 1
     fi
 
-    if is_rhel6; then
-        yum erase -y python-setuptools
-        rm -rf /usr/lib/python2.6/site-packages/setuptools*
-    fi
-
     if is_opensuse; then
         zypper --non-interactive in --force-resolution python python-xml
     fi
@@ -270,8 +213,6 @@ setup_pip
 
 if is_fedora; then
     setup_puppet_fedora
-elif is_rhel6; then
-    setup_puppet_rhel6
 elif is_rhel7; then
     setup_puppet_rhel7
 elif is_ubuntu; then
