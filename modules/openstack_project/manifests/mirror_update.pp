@@ -14,11 +14,17 @@ class openstack_project::mirror_update (
     afs       => true,
   }
 
-  $data_directory = '/afs/.openstack.org/mirror/npm'
   $uri_rewrite    = 'localhost'
+  $npm_data_directory = '/afs/.openstack.org/mirror/npm'
   class { 'openstack_project::npm_mirror':
-    data_directory => $data_directory,
+    data_directory => $npm_data_directory,
     uri_rewrite    => $uri_rewrite,
+  }
+
+  $gem_data_directory = '/afs/.openstack.org/mirror/gem'
+  class { 'openstack_project::gem_mirror':
+    data_directory => $gem_data_directory,
+    require        => File[$mirror_root],
   }
 
   class { 'bandersnatch':
