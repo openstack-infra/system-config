@@ -5,6 +5,7 @@ class openstack_project::mirror_update (
   $bandersnatch_keytab = '',
   $reprepro_keytab = '',
   $admin_keytab = '',
+  $gem_keytab = '',
   $npm_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
@@ -24,6 +25,8 @@ class openstack_project::mirror_update (
     uri_rewrite    => $uri_rewrite,
   }
 
+  class { 'openstack_project::gem_mirror': }
+
   class { 'bandersnatch': }
 
   class { 'bandersnatch::mirror':
@@ -38,6 +41,14 @@ class openstack_project::mirror_update (
     group   => 'root',
     mode    => '0400',
     content => $bandersnatch_keytab,
+  }
+
+  file { '/etc/gem.keytab':
+    owner   => 'rubygems',
+    group   => 'root',
+    mode    => '0400',
+    content => $gem_keytab,
+    require  => Class['openstack_project::gem_mirror'],
   }
 
   file { '/etc/npm.keytab':
@@ -80,6 +91,18 @@ class openstack_project::mirror_update (
        File['/etc/afsadmin.keytab'],
        File['/etc/bandersnatch.keytab'],
        Class['bandersnatch::mirror']
+    ]
+  }
+
+  cron { 'rubygems-mirror':
+    user        => 'rubygems',
+    minute      => '*/5',
+    command     => 'flock -n /var/run/rubygems/mirror.lock timeout -k 2m 30m gem mirror >>/var/log/rubygems/mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+      File['/etc/afsadmin.keytab'],
+      File['/etc/gem.keytab'],
+      Class['openstack_project::gem_mirror'],
     ]
   }
 
