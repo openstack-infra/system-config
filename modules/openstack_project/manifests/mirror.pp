@@ -7,6 +7,7 @@ class openstack_project::mirror (
   $mirror_root = '/srv/static'
   $www_root = "${mirror_root}/www"
   $pypi_root = "${mirror_root}/pypi"
+  $npm_root = "${mirror_root}/npm"
 
   #####################################################
   # Build File Structure
@@ -35,6 +36,16 @@ class openstack_project::mirror (
       Class['Openstack_project::Pypi_mirror'],
     ]
   }
+  file { "${www_root}/npm":
+    ensure  => link,
+    target  => "${npm_root}",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+      Class['Openstack_project::Npm_mirror'],
+    ]
+  }
 
   file { "${www_root}/robots.txt":
     ensure   => present,
@@ -54,6 +65,11 @@ class openstack_project::mirror (
     require        => File[$mirror_root],
   }
 
+  class { 'openstack_project::npm_mirror':
+    data_directory => "${npm_root}",
+    require        => File[$mirror_root],
+    uri_rewrite    => "${vhost_name}/npm",
+  }
 
   #####################################################
   # Build VHost
