@@ -7,6 +7,7 @@ class openstack_project::mirror (
   $mirror_root = '/srv/static'
   $www_root = "${mirror_root}/www"
   $pypi_root = "${mirror_root}/pypi"
+  $wheel_root = "${mirror_root}/wheel"
 
   #####################################################
   # Build File Structure
@@ -35,6 +36,16 @@ class openstack_project::mirror (
       Class['Openstack_project::Pypi_mirror'],
     ]
   }
+  file { "${www_root}/wheel":
+    ensure  => link,
+    target  => "${wheel_root}",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+      Class['Openstack_project::Wheel_mirror'],
+    ]
+  }
 
   file { "${www_root}/robots.txt":
     ensure   => present,
@@ -54,6 +65,11 @@ class openstack_project::mirror (
     require        => File[$mirror_root],
   }
 
+  class { 'openstack_project::wheel_mirror':
+    data_directory => "${wheel_root}",
+    require        => File[$mirror_root],
+  }
+
 
   #####################################################
   # Build VHost
@@ -66,6 +82,7 @@ class openstack_project::mirror (
     template => 'openstack_project/mirror.vhost.erb',
     require  => [
       File["${www_root}"],
+      Class['Openstack_project::Wheel_mirror'],
       Class['Openstack_project::Pypi_mirror'],
     ]
   }
