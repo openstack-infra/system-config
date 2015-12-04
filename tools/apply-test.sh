@@ -79,9 +79,7 @@ sed -i -e "s@hiera(.\([^.]*\).)@'\1NoDefault'@" applytest/prep00 applytest/puppe
 mv applytest/prep00 applytest/head  # These are the top-level variables defined in site.pp
 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
-    if [[ `lsb_release -r -s` =~ '6' ]]; then
-        CODENAME='centos6'
-    elif [[ `lsb_release -r -s` =~ '7' ]]; then
+    if [[ `lsb_release -r -s` =~ '7' ]]; then
         CODENAME='centos7'
     fi
 elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
