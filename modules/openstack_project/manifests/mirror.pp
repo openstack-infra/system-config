@@ -8,6 +8,7 @@ class openstack_project::mirror (
   $www_root = "${mirror_root}/www"
   $pypi_root = "${mirror_root}/pypi"
   $npm_root = "${mirror_root}/npm"
+  $gem_root = "${mirror_root}/gem"
 
   #####################################################
   # Build File Structure
@@ -47,6 +48,17 @@ class openstack_project::mirror (
     ]
   }
 
+  file { "${www_root}/gem":
+    ensure  => link,
+    target  => "${gem_root}",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+      Class['Openstack_project::Gem_mirror'],
+    ]
+  }
+
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
@@ -69,6 +81,12 @@ class openstack_project::mirror (
     data_directory => "${npm_root}",
     require        => File[$mirror_root],
     uri_rewrite    => "${vhost_name}/npm",
+  }
+
+  class { 'openstack_project::gem_mirror':
+    data_directory => "${gem_root}",
+    require        => File[$mirror_root],
+    uri_rewrite    => "${vhost_name}/gem",
   }
 
   #####################################################
