@@ -12,6 +12,7 @@ class openstack_project::pypi (
 
   $mirror_root = '/srv/static'
   $pypi_root = "${mirror_root}/mirror"
+  $wheel_root = "${pypi_root}/web/wheel"
 
   if ! defined(File[$mirror_root]) {
     file { $mirror_root:
@@ -22,6 +23,11 @@ class openstack_project::pypi (
   class { 'openstack_project::pypi_mirror':
     data_directory => "${pypi_root}",
     require        => File[$mirror_root]
+  }
+
+  class { 'openstack_project::wheel_mirror':
+    data_directory => "${wheel_root}",
+    require        => Class['openstack_project::pypi_mirror'],
   }
 
   include ::httpd
