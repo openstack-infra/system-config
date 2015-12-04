@@ -38,7 +38,7 @@ a.gwt-InlineHyperlink {background: none !important}
 .result_FAILURE {
     color: #cf2f19;
 }
-.result_UNSTABLE {
+.result_UNSTABLE .result_WARNING {
     color: #e39f00;
 }
 .result_LOST {
