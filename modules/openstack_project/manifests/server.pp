@@ -16,14 +16,15 @@ class openstack_project::server (
   $manage_exim               = true,
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $pypi_trusted_hosts        = [
-      'pypi.bhs1.openstack.org',
-      'pypi.dfw.openstack.org',
-      'pypi.gra1.openstack.org',
-      'pypi.iad.openstack.org',
-      'pypi.nyj01.openstack.org',
-      'pypi.ord.openstack.org',
-      'pypi.region-b.geo-1.openstack.org',
-      'pypi.regionone.openstack.org',
+      'mirror.region-b.geo-1.hpcloud.openstack.org',
+      'mirror.dfw.rackspace.openstack.org',
+      'mirror.dfw.rax.openstack.org',
+      'mirror.iad.rax.openstack.org',
+      'mirror.ord.rax.openstack.org',
+      'mirror.gra1.ovh.openstack.org',
+      'mirror.bhs1.ovh.openstack.org',
+      'mirror.regionone.bluebox-sjc1.openstack.org',
+      'mirror.nyj01.internap.openstack.org',
   ],
 ) {
   class { 'openstack_project::template':
