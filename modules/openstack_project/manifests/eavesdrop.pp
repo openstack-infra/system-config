@@ -125,7 +125,7 @@ class openstack_project::eavesdrop (
     nick          => $statusbot_nick,
     password      => $statusbot_password,
     server        => $statusbot_server,
-    channels      => $statusbot_channels,
+    channels      => join($statusbot_channels, ", "),
     auth_nicks    => $statusbot_auth_nicks,
     wiki_user     => $statusbot_wiki_user,
     wiki_password => $statusbot_wiki_password,
