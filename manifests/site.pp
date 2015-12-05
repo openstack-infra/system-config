@@ -347,6 +347,7 @@ node 'eavesdrop.openstack.org' {
     statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
     accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password'),
+    meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
   }
 }
 
