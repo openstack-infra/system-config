@@ -84,6 +84,16 @@ function setup_puppet_fedora {
     ln -fs /usr/bin/pip /usr/bin/pip-python
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+
+    # upstream is currently looking for /run/systemd files to check
+    # for systemd.  This fails in a chroot where /run isn't mounted
+    # (like when using dib).  Comment out this confine as fedora
+    # always has systemd
+    #  see
+    #   https://github.com/puppetlabs/puppet/pull/4481
+    #   https://bugzilla.redhat.com/show_bug.cgi?id=1254616
+    sudo sed -i.bak  '/^[^#].*/ s|\(^.*confine :exists => \"/run/systemd/system\".*$\)|#\ \1|' \
+        /usr/share/ruby/vendor_ruby/puppet/provider/service/systemd.rb
 }
 
 function setup_puppet_rhel7 {
