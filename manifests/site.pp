@@ -586,6 +586,12 @@ node 'refstack.openstack.org' {
     ssl_ca_content      => hiera('refstack_ssl_chain_file_contents'),
     protocol            => 'https',
   }
+  class { 'mysql_backup::backup_remote':
+    database_host     => hiera('refstack_mysql_host', 'localhost'),
+    database_user     => hiera('refstack_mysql_user', 'refstack'),
+    database_password => hiera('refstack_mysql_password'),
+    require           => Class['refstack'],
+  }
 }
 
 # A machine to run Storyboard
