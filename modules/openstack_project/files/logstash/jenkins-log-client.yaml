@@ -14,10 +14,10 @@ zmq-publishers:
 subunit-files:
   - name: logs/testrepository.subunit
     retry-get: True
-    job-filter: 'gate-(tempest|grenade)-dsvm.*'
+    job-filter: '.*(tempest|grenade)-dsvm.*'
     build-queue-filter: 'gate'
   - name: logs/old/testrepository.subunit
-    job-filter: 'gate-grenade-dsvm.*'
+    job-filter: '.*grenade-dsvm.*'
     build-queue-filter: 'gate'
   - name: logs/testrepository.subunit
     retry-get: True
