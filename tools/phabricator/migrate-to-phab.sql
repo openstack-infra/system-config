@@ -59,7 +59,7 @@ BEGIN
     ), len);
 END //
 
--- We probably won't eventually use this, but this creates an apache style
+-- This is used to populate projectPathKey and creates an apache style
 -- 1000 md5s in a row password hash that we can use to seed the database
 -- with a bunch of passwords
 drop function if exists make_hash //
@@ -77,6 +77,8 @@ BEGIN
   return str;
 END //
 delimiter ;
+
+-- $hash = sha1(PHID, $raw_output = true);
 
 -- We're going to generate PHID values in each of the original tables
 -- so that we can inject via joins
@@ -145,7 +147,7 @@ insert into user
    select
      id as id,
      phid as phid,
-     email as userName,
+     storyboard.make_phid('') as userName,
      if(full_name is NULL, email, full_name) as realName,
      NULL as sex,
      NULL as translation,
@@ -177,6 +179,10 @@ update user
     'md5:', storyboard.make_hash(
         concat(username, 'password', phid, passwordSalt)));
 
+update user
+  set userName = replace(
+      userName, 'PHID--', '');
+
 insert into user_email
   select
     id, phid, email, 1, 1,
@@ -204,11 +210,10 @@ delete from maniphest_transaction_comment;
 -- stories with one task get collapsed in a single new task
 insert into maniphest_task
   select
-    s.id, -- id
-    s.phid, -- phid
-    if(s.creator_id is NULL, '', s.creator_id), -- second pass authorPHID
-    if(t.assignee_id is NULL, NULL, t.assignee_id),  -- second pass ownerPHID
-    '', -- attached
+    s.id as id,
+    s.phid as phid,
+    if(s.creator_id is NULL, '', s.creator_id) as authorPHID,
+    if(t.assignee_id is NULL, NULL, t.assignee_id) as ownerPHID,
     case t.status -- status
         when 'todo' then 'open'
         when 'inprogress' then 'inprogress'
@@ -216,26 +221,27 @@ insert into maniphest_task
         when 'review' then 'review'
         when 'merged' then 'merged'
         when 'invalid' then 'invalid'
-    end,
+    end as status,
     case t.priority -- priority
         when 'high' then 80
         when 'medium' then 50
         when 'low' then 25
         when 'wishlist' then 0
-    end,
-    s.title, -- title
-    s.title, -- originalTitle
-    s.description, -- description
-    unix_timestamp(s.created_at), -- dateCreated
-    if(t.updated_at is NULL, unix_timestamp(t.created_at), unix_timestamp(t.updated_at)), -- dateUpdated
-    '[]', -- update in second pass - projectPHIDs
-    storyboard.make_cert(20), -- mailKey
-    NULL,  -- ownerOrdering
-    NULL,  -- originalEmailSource
-    0, -- subpriority
-    'users', -- viewPolicy
-    'users',  -- editPolicy
-    NULL -- spacePHID
+    end as priority,
+    s.title as title,
+    s.title as originalTitle,
+    s.description as description,
+    unix_timestamp(s.created_at) as dateCreated,
+    if(t.updated_at is NULL, unix_timestamp(t.created_at), unix_timestamp(t.updated_at)) as dateModified,
+    storyboard.make_cert(20) as mailKey,
+    NULL as ownerOrdering,
+    NULL as originalEmailSource,
+    0 as subpriority,
+    'users' as viewPolicy,
+    'users' as editPolicy,
+    NULL as spacePHID,
+    ' ' as properties,
+    NULL as points
   from storyboard.stories s, storyboard.tasks t, storyboard.task_count c
   where s.id = t.story_id and c.story_id=s.id and c.count = 1;
 
@@ -423,45 +429,34 @@ use phabricator_project
 delete from project;
 insert into project
   select
-    id, -- id
-    name, -- name
-    phid, -- phid
-    @author_phid,
-    unix_timestamp(created_at),
-    if(updated_at is NULL, unix_timestamp(created_at), unix_timestamp(updated_at)),
-    0, -- status
-    '[]', -- subprojectPHIDs
-    concat(replace(lower(name), '/', '_'), '/'),
-    'users',
-    'users',
-    'users',
-    0,
-    NULL,
-    'fa-briefcase',
-    'blue',
-    '12345678901234567890' -- mailKey
+    (id + 1000) as id,
+    name as name,
+    phid as phid,
+    @author_phid as authorPHID,
+    created_at as dateCreated,
+    updated_at as dateModified,
+    0 as status,
+    'users' as viewPolicy,
+    'users' as editPolicy,
+    'users' as joinPolicy,
+    0 as isMembershipLocked,
+    NULL as profileImagePHID,
+    'fa-briefcase' as icon,
+    'blue' as color,
+    '12345678901234567890' as mailKey,
+    concat(replace(lower(name), '/', '_'), '/') as primarySlug,
+    NULL as parentProjectPHID,
+    0 as hasWorkboard,
+    0 as hasMilestones,
+    0 as hasSubprojects,
+    NULL as milestoneNumber,
+    NULL as projectPath,
+    NULL as projectDepth,
+    storyboard.make_cert(4) as projectPathKey,
+    NULL as properties
   from storyboard.projects;
-insert into project
-  select
-    id + 1000,
-    name,
-    phid,
-    @author_phid,
-    unix_timestamp(created_at),
-    if(updated_at is NULL, unix_timestamp(created_at), unix_timestamp(updated_at)),
-    0, -- status
-    '[]', -- subprojectPHIDs
-    concat(replace(lower(name), '/', '_'), '/'),
-    'users',
-    'users',
-    'users',
-    0,
-    NULL,
-    'fa-briefcase',
-    'blue',
-    '12345678901234567890' -- mailKey
-  from storyboard.projects;
-  from storyboard.project_groups;
+
+  -- $hash = sha1(PHID, $raw_output = true);
 
 delete from project_slug;
 insert into project_slug
@@ -473,25 +468,22 @@ insert into project_slug
     dateModified
   from project;
 
-
 -- insert into project_datasourcetoken (need to split name on - and do a row for each value) for typeahead search in boxes
 insert into project_datasourcetoken (projectID, token)
-    SELECT p.id, SUBSTRING_INDEX(SUBSTRING_INDEX(
-            p.name, '-', n.n), '-', -1) value
-      FROM project p CROSS JOIN (
-           SELECT a.N + b.N * 10 + 1 n
-           FROM
-                (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a,
-                (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
-           ORDER BY n
-      ) n
-    WHERE n.n <= 1 + (LENGTH(p.name) - LENGTH(REPLACE(p.name, '-', '')))
-    ORDER BY value;
+  select
+    id as projectID,
+    replace(lower(name), '/', '_') as token
+  from project;
 
 -- More DAG magic - this will map a project to a task in the projects DB
 insert into edge
   select
-    project_phid, 42, task_phid, 0, 0, NULL
+    project_phid as src,
+    42 as type,
+    task_phid as dst,
+    0 as dateCreated,
+    0 as seq,
+    NULL as dataID
   from storyboard.task_project;
 
 use phabricator_maniphest
@@ -499,15 +491,25 @@ use phabricator_maniphest
 -- We have projects now, so inject them into the name mapping table in the
 -- bug system
 insert into maniphest_nameindex
-  select id, phid, name from phabricator_project.project;
-update maniphest_task t, storyboard.task_project_grouping g
-  set t.projectPHIDs = g.phids
- where t.phid = g.task_phid;
+  select
+    id as id,
+    phid as indexedObjectPHID,
+    name as indexedObjectName
+  from phabricator_project.project;
+-- projectPHID appears to have been removed
+-- update maniphest_task t, storyboard.task_project_grouping g
+--   set t.projectPHIDs = g.phids
+--  where t.phid = g.task_phid;
 
 -- Associate tasks with projects from the task side
 insert into edge
   select
-    task_phid, 41, project_phid, 0, 0, NULL
+    task_phid as src,
+    41 as type,
+    project_phid as dst,
+    0 as dateCreated,
+    0 seq,
+    NULL as dataID
   from storyboard.task_project;
 
 -- Relationship
@@ -526,3 +528,41 @@ insert into edge
   select
     phid, 4, storyPHID, 0, 0, NULL
   from storyboard.task_subtask;
+
+-- Enable RemoteUser
+--  We need to populate phabricator_auth.auth_providerconfig with the following:
+
+use phabricator_auth
+
+insert into auth_providerconfig
+   select
+     1 as id,
+     storyboard.make_phid('AUTH') as phid,
+     'PhabricatorAuthProviderRemoteUser' as providerClass,
+     'RemoteUser' as providerType,
+     'self' as providerDomain,
+     1 as isEnabled,
+     1 as shouldAllowLogin,
+     1 as shouldAllowRegistration,
+     1 as shouldAllowLink,
+     1 as shouldAllowUnlink,
+     1 as shouldTrustEmails,
+     '[]' as properties,
+     unix_timestamp(now()) as dateCreated,
+     unix_timestamp(now()) as dateModified,
+     0 as shouldAutoLogin;
+
+-- Link external account
+-- We need to populate phabricator_user.user_externalaccount with the following:
+
+use phabricator_user
+
+insert into user_externalaccount (
+  phid, userPHID, accountType, accountDomain, accountID)
+  select
+    storyboard.make_phid('AUTH') as phid,
+    phid as userPHID,
+    'RemoteUser' as accountType,
+    'self' as accountDomain,
+    openid as accountID
+  from storyboard.users;
