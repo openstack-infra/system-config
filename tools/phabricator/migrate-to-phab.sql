@@ -423,45 +423,24 @@ use phabricator_project
 delete from project;
 insert into project
   select
-    id, -- id
-    name, -- name
-    phid, -- phid
-    @author_phid,
-    unix_timestamp(created_at),
-    if(updated_at is NULL, unix_timestamp(created_at), unix_timestamp(updated_at)),
-    0, -- status
-    '[]', -- subprojectPHIDs
-    concat(replace(lower(name), '/', '_'), '/'),
-    'users',
-    'users',
-    'users',
-    0,
-    NULL,
-    'fa-briefcase',
-    'blue',
-    '12345678901234567890' -- mailKey
+    (id + 1000) as id,
+    name as name,
+    phid as phid,
+    @author_phid as authorPHID,
+    created_at as dateCreated,
+    updated_at as dateModified,
+    0 as status,
+    '[]' as subprojectPHIDs,
+    concat(replace(lower(name), '/', '_'), '/') as phrictionSlug,
+    'users' as viewPolicy,
+    'users' as editPolicy,
+    'users' as joinPolicy,
+    0 as isMembershipLocked,
+    NULL as profileImagePHID,
+    'fa-briefcase' as icon,
+    'blue' as color,
+    '12345678901234567890' as mailKey
   from storyboard.projects;
-insert into project
-  select
-    id + 1000,
-    name,
-    phid,
-    @author_phid,
-    unix_timestamp(created_at),
-    if(updated_at is NULL, unix_timestamp(created_at), unix_timestamp(updated_at)),
-    0, -- status
-    '[]', -- subprojectPHIDs
-    concat(replace(lower(name), '/', '_'), '/'),
-    'users',
-    'users',
-    'users',
-    0,
-    NULL,
-    'fa-briefcase',
-    'blue',
-    '12345678901234567890' -- mailKey
-  from storyboard.projects;
-  from storyboard.project_groups;
 
 delete from project_slug;
 insert into project_slug
@@ -473,20 +452,12 @@ insert into project_slug
     dateModified
   from project;
 
-
 -- insert into project_datasourcetoken (need to split name on - and do a row for each value) for typeahead search in boxes
 insert into project_datasourcetoken (projectID, token)
-    SELECT p.id, SUBSTRING_INDEX(SUBSTRING_INDEX(
-            p.name, '-', n.n), '-', -1) value
-      FROM project p CROSS JOIN (
-           SELECT a.N + b.N * 10 + 1 n
-           FROM
-                (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a,
-                (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
-           ORDER BY n
-      ) n
-    WHERE n.n <= 1 + (LENGTH(p.name) - LENGTH(REPLACE(p.name, '-', '')))
-    ORDER BY value;
+  select
+    id as projectID,
+    replace(lower(name), '/', '_') as token
+  from project;
 
 -- More DAG magic - this will map a project to a task in the projects DB
 insert into edge
@@ -526,3 +497,24 @@ insert into edge
   select
     phid, 4, storyPHID, 0, 0, NULL
   from storyboard.task_subtask;
+
+-- Enable RemoteUser
+--  We need to populate phabricator_auth.auth_providerconfig with the following:
+use phabricator_auth
+insert into auth_providerconfig
+   select
+     1 as id,
+     storyboard.make_phid('AUTH') as phid,
+     'PhabricatorAuthProviderRemoteUser' as providerClass,
+     'RemoteUser' as providerType,
+     'self' as providerDomain,
+     1 as isEnabled,
+     1 as shouldAllowLogin,
+     1 as shouldAllowRegistration,
+     1 as shouldAllowLink,
+     1 as shouldAllowUnlink,
+     1 as shouldTrustEmails,
+     '[]' as properties,
+     unix_timestamp(now()) as dateCreated,
+     unix_timestamp(now()) as dateModified,
+     0 as shouldAutoLogin
