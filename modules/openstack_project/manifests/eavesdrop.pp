@@ -112,6 +112,7 @@ class openstack_project::eavesdrop (
         '#openstack-vmware-nsx',
         '#openstack-watcher',
         '#openstack-zaqar',
+        '#openstack-zephyr',
         '#puppet-openstack',
         '#refstack',
         '#senlin',
