@@ -1,0 +1,9 @@
+Verified+2: Jenkins
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Juan Antonio Osorio Robles <jaosorior@redhat.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 07 Dec 2015 11:11:13 +0000
+Reviewed-on: https://review.openstack.org/254098
+Project: openstack-infra/system-config
+Branch: refs/heads/master
