@@ -125,7 +125,7 @@ Subunit Gearman Worker
 Using the same mechanism as the Log pushers there is an additional class of
 gearman worker that takes the subunit output from test runs and stores them in
 a subunit2SQL database. Right now this is only done with the subunit output
-from gate queue tempest runs.
+from gate and periodic queue tempest runs.
 
 If you are interested in technical details the source of this script can be
 found at:
