@@ -279,10 +279,12 @@ class openstack_project::template (
     '2.7.': {
       $pin_facter = '1.'
       $pin_puppetdb = '1.'
+      $cfacter = false
     }
     /^3\./: {
       $pin_facter = '2.'
       $pin_puppetdb = '2.'
+      $cfacter = true
     }
     default: {
       fail("Puppet version not supported")
@@ -303,6 +305,12 @@ class openstack_project::template (
       refreshonly => true,
     }
 
+  }
+
+  if $cfacter {
+    package { 'cfacter':
+      ensure => latest,
+    }
   }
 
   # Which Puppet do I take?
