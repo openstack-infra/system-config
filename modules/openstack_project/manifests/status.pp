@@ -232,19 +232,6 @@ class openstack_project::status (
   }
 
   ###########################################################
-  # Status - releasestatus
-
-  class { 'releasestatus':
-    releasestatus_prvkey_contents => $releasestatus_ssh_private_key,
-    releasestatus_pubkey_contents => $releasestatus_ssh_public_key,
-    releasestatus_gerrit_ssh_key  => $gerrit_ssh_host_key,
-  }
-
-  releasestatus::site { 'releasestatus':
-    configfile => 'integrated.yaml',
-    httproot   => '/srv/static/release',
-  }
-  ###########################################################
   # Status - bugdaystats
 
   include bugdaystats

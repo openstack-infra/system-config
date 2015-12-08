@@ -26,8 +26,6 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       allow from all
   </Directory>
 
-  Alias /release /srv/static/release
-
   Alias /openstack-health /srv/static/openstack-health
   <Directory /srv/static/openstack-health>
     AllowOverride None
