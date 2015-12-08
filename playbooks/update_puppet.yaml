@@ -8,6 +8,12 @@
   - synchronize:
       src: /etc/puppet/modules
       dest: /etc/puppet
+  - name: Check whether to upgrade certain modules
+    opt_in_to_upgrade_modules:
+    register: opt_in
+  - name: Upgrade certain modules
+    shell: MODULE_FILE=upgrade-modules.env /opt/system-config/production/install_modules.sh
+    when: "{{ opt_in.opt_in_to_upgrade|bool }}"
   - file:
       path: /etc/puppet/hieradata
       state: directory
