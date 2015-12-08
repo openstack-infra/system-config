@@ -5,8 +5,6 @@ class openstack_project::status (
   $gerrit_ssh_host_key,
   $reviewday_ssh_public_key = '',
   $reviewday_ssh_private_key = '',
-  $releasestatus_ssh_public_key = '',
-  $releasestatus_ssh_private_key = '',
   $recheck_ssh_public_key,
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
@@ -232,18 +230,26 @@ class openstack_project::status (
   }
 
   ###########################################################
-  # Status - releasestatus
+  # Status - releasestatus (removed)
 
-  class { 'releasestatus':
-    releasestatus_prvkey_contents => $releasestatus_ssh_private_key,
-    releasestatus_pubkey_contents => $releasestatus_ssh_public_key,
-    releasestatus_gerrit_ssh_key  => $gerrit_ssh_host_key,
+  file { '/srv/static/release':
+    ensure => absent,
+    force  => yes,
   }
 
-  releasestatus::site { 'releasestatus':
-    configfile => 'integrated.yaml',
-    httproot   => '/srv/static/release',
+  file { '/var/lib/releasestatus':
+    ensure => absent,
+    force  => yes,
   }
+
+  user { 'releasestatus':
+    ensure => absent,
+  }
+
+  group { 'releasestatus':
+    ensure => absent,
+  }
+
   ###########################################################
   # Status - bugdaystats
 
