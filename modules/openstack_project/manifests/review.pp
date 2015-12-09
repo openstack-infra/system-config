@@ -94,7 +94,7 @@ class openstack_project::review (
     ssl_cert_file_contents              => $ssl_cert_file_contents,
     ssl_key_file_contents               => $ssl_key_file_contents,
     ssl_chain_file_contents             => $ssl_chain_file_contents,
-    ssh_dsa_key_contents                => $ssh_dsa_key_contents,
+    ssh_dsa_key_contents                => $ssh_wdsa_key_contents,
     ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
     ssh_rsa_key_contents                => $ssh_rsa_key_contents,
     ssh_rsa_pubkey_contents             => $ssh_rsa_pubkey_contents,
@@ -134,6 +134,7 @@ class openstack_project::review (
     token_private_key                   => $token_private_key,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    allow_drafts                        => false,
     replication_force_update            => true,
     replication                         => [
       {
