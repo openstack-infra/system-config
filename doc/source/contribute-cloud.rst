@@ -44,15 +44,15 @@ contribute to the project, it would be a big help.  This is what we
 need:
 
  * Nova and Glance APIs (with the ability to upload images)
- * A single instance with 300GB of disk (via Cinder is okay) per cloud
-   region for our region-local mirror
+ * A single instance with 500GB of disk (via Cinder is preferred,
+   local is okay) per cloud region for our region-local mirror
 
 Each test instance requires:
 
  * 8GB RAM
  * 8vCPU at 2.4GHz (or more or less vCPUs depending on speed)
  * A public IP address (IPv4 and/or IPv6)
- * 40GB of storage
+ * G0GB of storage
 
 In a setting where our instances will be segregated, our usage
 patterns will cause us to be our own noisy neighbors at the worst
@@ -75,9 +75,13 @@ operations teams to let them know and try to help fix problems before
 they become an issue for their customers.
 
 We collect numerous metrics about the performance of the clouds we
-utilize. All of the metrics are freely available on the internet. From
-these metrics, dashboards can be created to help providers see and
-debug performance issues.
+utilize. From these metrics we create dashboards which are freely
+accessible via the Internet to help providers see and debug
+performance issues.
+
+The OpenStack Foundation has identified Infrastructure Donors as a
+special category of sponsoring organization and prominately identifies
+them on this page: https://www.openstack.org/foundation/companies/
 
 If this sounds interesting, and you have some capacity to spare, it
 would be very much appreciated.  You are welcome to contact the
