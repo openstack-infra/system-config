@@ -94,7 +94,7 @@ class openstack_project::review (
     ssl_cert_file_contents              => $ssl_cert_file_contents,
     ssl_key_file_contents               => $ssl_key_file_contents,
     ssl_chain_file_contents             => $ssl_chain_file_contents,
-    ssh_dsa_key_contents                => $ssh_dsa_key_contents,
+    ssh_dsa_key_contents                => $ssh_wdsa_key_contents,
     ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
     ssh_rsa_key_contents                => $ssh_rsa_key_contents,
     ssh_rsa_pubkey_contents             => $ssh_rsa_pubkey_contents,
@@ -113,6 +113,7 @@ class openstack_project::review (
     core_packedgitwindowsize            => '16k',
     sshd_threads                        => '100',
     httpd_maxwait                       => '5000min',
+    allow_drafts                        => false,
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.8.4.19.4548330.war',
     contactstore                        => $contactstore,
@@ -134,6 +135,7 @@ class openstack_project::review (
     token_private_key                   => $token_private_key,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    allow_drafts                        => false,
     replication_force_update            => true,
     replication                         => [
       {
