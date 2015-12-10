@@ -47,6 +47,7 @@ class openstack_project::eavesdrop (
         '#openstack-api',
         '#openstack-app-catalog',
         '#openstack-barbican',
+        '#openstack-bareon',
         '#openstack-blazar',
         '#openstack-chef',
         '#openstack-cinder',
