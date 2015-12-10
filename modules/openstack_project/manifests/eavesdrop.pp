@@ -48,6 +48,7 @@ class openstack_project::eavesdrop (
         '#openstack-app-catalog',
         '#openstack-astara',
         '#openstack-barbican',
+        '#openstack-bareon',
         '#openstack-blazar',
         '#openstack-chef',
         '#openstack-cinder',
