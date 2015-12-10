@@ -37,6 +37,7 @@ class openstack_project::eavesdrop (
     channels     => [
         '#akanda',
         '#cloudkitty',
+        '#congress',
         '#dox',
         '#heat',
         '#kolla',
