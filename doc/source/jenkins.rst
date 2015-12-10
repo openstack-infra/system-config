@@ -165,3 +165,26 @@ slave is then:
 #. Set appropriate labels on it
 
 #. Profit!
+
+Safe Master Restarts
+====================
+
+Jenkins masters periodically leak threads reducing their job
+throughput and eventually leading to crashes. We work around this
+by performing weekly rolling restarts of the Jenkins masters with
+an ansible playbook.
+
+If you need to perform a safe restart against a single master you
+can do this by running the same playbook and limiting it to a
+specific jenkins master
+
+To do this::
+
+  root@puppetmaster# ansible-playbook -f1 --limit $server_fqdn \
+      /opt/system-config/production/playbooks/restart_jenkins_masters.yaml \
+      --extra-vars "user=hudson-openstack \
+      password=$(/opt/system-config/production/tools/hieraedit.py \
+      --yaml /etc/puppet/hieradata/production/fqdn/nodepool.openstack.org.yaml jenkins_api_key)"
+
+Consider running this in screen as the worst case run time is as
+long as our longest running job.
