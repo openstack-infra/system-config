@@ -188,3 +188,29 @@ To do this::
 
 Consider running this in screen as the worst case run time is as
 long as our longest running job.
+
+How to manually run jenkins job builder
+=======================================
+
+Jenkins job builder may need to be run manually under certain situations. If the expected
+jobs are not being created in jenkins masters, running jjb manually on the masters where
+it failed is suggested. To do this::
+
+  user@jenkins01# sudo -H jenkins-jobs --conf /etc/jenkins_jobs/jenkins_jobs.ini \
+      update --delete-old /etc/jenkins_jobs/config
+
+Consider running this in screen as the worst case run time can be of several hours.
+
+In the case of incorrect jobs configuration caused by some jjb malfunction, all jobs
+will need to be regenerated. As jjb uses a local cache, to force the regeneration
+of all jobs, the cache needs to be ignored. To do this::
+
+  user@jenkins01# sudo -H jenkins-jobs --ignore-cache --conf \
+      /etc/jenkins_jobs/jenkins_jobs.ini update --delete-old /etc/jenkins_jobs/config
+
+In order to speed up the massive job reconfiguration, it may be desired to set jenkins
+on shutdown mode, visiting this link::
+
+`https://jenkins[xx].openstack.org/quietDown`
+
+And make Jenkins alive again after job reconfiguration finishes.
