@@ -105,7 +105,7 @@ class openstack_project::review_dev (
   }
 
   gerrit::plugin { 'javamelody':
-    version => 'c1fe093',
+    version => 'e00d5af',
   }
 
   package { 'python-launchpadlib':
