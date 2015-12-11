@@ -104,6 +104,7 @@ class openstack_project::gerrit (
     vhost_name                          => $vhost_name,
     canonicalweburl                     => $canonicalweburl,
     # opinions
+    allow_drafts                        => false,
     enable_melody                       => true,
     melody_session                      => true,
     robots_txt_source                   => 'puppet:///modules/openstack_project/gerrit/robots.txt',
