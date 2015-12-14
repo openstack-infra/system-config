@@ -274,7 +274,7 @@ The above is good info for poking around in the Logstash logs, but
 one of your changes has a failing test and you want to know why. We
 can jumpstart the refining process with a simple query.
 
-``@fields.build_change:"$FAILING_CHANGE" AND @fields.build_patchset:"$FAILING_PATCHSET" AND @fields.build_name:"$FAILING_BUILD_NAME" AND @fields.build_number:"$FAILING_BUILD_NUMBER"``
+``build_change:"$FAILING_CHANGE" AND build_patchset:"$FAILING_PATCHSET" AND build_name:"$FAILING_BUILD_NAME" AND build_uuid:"$FAILING_BUILD_UUID"``
 
 This will show you all logs available from the patchset and build pair
 that failed. Chances are that this is still a significant number of
@@ -283,10 +283,10 @@ to the queriy using ``AND`` and ``OR`` and parentheses can be used to
 group sections of the query. Potential additions to the above query
 might be
 
-* ``AND @fields.filename:"logs/syslog.txt"`` to get syslog events.
-* ``AND @fields.filename:"logs/screen-n-api.txt"`` to get Nova API events.
-* ``AND @fields.loglevel:"ERROR"`` to get ERROR level events.
-* ``AND @message"error"`` to get events with error in their message.
+* ``AND tags:"syslog"`` to get syslog events.
+* ``AND tags:"screen-n-api.txt"`` to get Nova API events.
+* ``AND loglevel:"ERROR"`` to get ERROR level events.
+* ``AND message:"error"`` to get events with error in their message.
   and so on.
 
 General query tips:
@@ -295,7 +295,7 @@ General query tips:
   the things it ever knew about. Give it a window of time to look
   through. You can use the presets in the dropdown to select a window or
   use the ``foo`` to ``bar`` boxes above the frequency graph.
-* Only the @message field can have fuzzy searches performed on it. Other
+* Only the ``message`` field can have fuzzy searches performed on it. Other
   fields require specific information.
 * This system is growing fast and may not always keep up with the load.
   Be patient. If expected logs do not show up immediately after the
