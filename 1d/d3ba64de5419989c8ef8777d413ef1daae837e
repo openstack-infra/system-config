@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Thai Tran <tqtran@us.ibm.com>
+Submitted-by: Jenkins
+Submitted-at: Mon, 14 Dec 2015 17:13:49 +0000
+Reviewed-on: https://review.openstack.org/207519
+Project: openstack-infra/system-config
+Branch: refs/heads/master
