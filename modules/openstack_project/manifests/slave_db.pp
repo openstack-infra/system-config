@@ -7,19 +7,21 @@ class openstack_project::slave_db(
 
   if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 19) {
     class {'mysql::server':
-      config_hash    =>  {
-        'root_password'  => $root_db_password,
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
+      root_password    => $root_db_password,
+      override_options => {
+        'mysqld' => {
+          'default-storage-engine' => 'MyISAM',
+        }
       },
       package_name   => 'community-mysql-server',
     }
   } else {
     class {'mysql::server':
-      config_hash    =>  {
-        'root_password'  => $root_db_password,
-        'default_engine' => 'MyISAM',
-        'bind_address'   => '127.0.0.1',
+      root_password    => $root_db_password,
+      override_options => {
+        'mysqld' => {
+          'default-storage-engine' => 'MyISAM',
+        }
       },
     }
   }
@@ -41,27 +43,28 @@ class openstack_project::slave_db(
   # access to multiple databases and will fail if you try creating
   # a second DB with the same user. Create the DB directly as mysql::db
   # above is creating the user for us.
-  database { 'openstack_baremetal_citest':
+  mysql_database { 'openstack_baremetal_citest':
     ensure   => present,
     charset  => 'utf8',
-    provider => 'mysql',
     require  => [
       Class['mysql::server'],
       Class['mysql::server::account_security'],
     ],
   }
 
-  database_grant { 'openstack_citest@localhost/openstack_baremetal_citest':
+  mysql_grant { 'openstack_citest@localhost/openstack_baremetal_citest.*':
     privileges => ['all'],
-    provider   => 'mysql',
-    require    => Database_user['openstack_citest@localhost'],
+    user       => 'openstack_citest@localhost',
+    table      => 'openstack_baremetal_citest.*',
+    require    => Mysql_user['openstack_citest@localhost'],
   }
 
   if ($all_mysql_privs == true) {
-    database_grant { 'openstack_citest@localhost':
+    mysql_grant { 'openstack_citest@localhost/*.*':
       privileges => ['all'],
-      provider   => 'mysql',
-      require    => Database_user['openstack_citest@localhost'],
+      user       => 'openstack_citest@localhost',
+      table      => '*.*',
+      require    => Mysql_user['openstack_citest@localhost'],
     }
   }
 
