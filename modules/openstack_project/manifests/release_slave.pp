@@ -43,8 +43,6 @@ class openstack_project::release_slave (
 
   package { 'twine':
     ensure   => latest,
-    provider => pip,
-    require  => Class['pip'],
   }
 
   package { 'wheel':
