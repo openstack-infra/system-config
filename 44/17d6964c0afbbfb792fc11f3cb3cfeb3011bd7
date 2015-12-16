@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Verified+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Submitted-by: James E. Blair <corvus@inaugust.com>
+Submitted-at: Wed, 16 Dec 2015 16:59:49 +0000
+Reviewed-on: https://review.openstack.org/245457
+Project: openstack-infra/system-config
+Branch: refs/heads/master
