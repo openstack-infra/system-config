@@ -83,6 +83,15 @@ a.gwt-InlineHyperlink {background: none !important}
   border-right: 1px solid #eef3f5;
 }
 
+/* increase the middle info column to fill empty space (for wide
+monitors), but ensure there is a sufficient lower bound to kick in
+horiz scroll bar. This will relieve the preasure on the hideci test
+results. */
+.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-infoColumn {
+    width: 100%;
+    min-width: 400px;
+}
+
 /* Review history */
 .com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-cs2
     .com-google-gerrit-client-change-Message_BinderImpl_GenCss_style-name {
