@@ -283,3 +283,37 @@ command:
 Visit the `Freenode Channel Guidelines
 <http://freenode.net/channel_guidelines.shtml>`_ for more information about
 recommended strategies for running channels on Freenode.
+
+Renaming an IRC Channel
+=======================
+
+First, follow the procedure for creating a new channel, including submitting
+the appropriate changes to Gerrit for logging, accessbot, etc and adding the
+proper credentials for the openstackinfra account.
+
+The following commands start the process of renaming of the channel, they
+need to be run by a founder of the channels or a member of infra-root::
+
+  /MSG ChanServ op #openstack-project-old
+  /MSG ChanServ op #openstack-project-new
+  /TOPIC ##openstack-project-old We have moved to #openstack-project-new, please
+    /part and then type /join #openstack-project-new to get to us
+  /MSG ChanServ SET #openstack-project-old GUARD ON
+  /MSG ChanServ SET #openstack-project-old MLOCK +tnsmif #openstack-project-new
+  /MSG ChanServ SET #openstack-project-old TOPICLOCK ON
+  /MSG ChanServ SET #openstack-project-old PRIVATE ON
+
+Once that is complete, all new attempts to join the old channel will be
+automatically redirected to the new channel. No one can rejoin the old
+channel.
+
+Tips
+----
+
+ * Collect the list of users and send a message in channel to each of them
+   explaining that the channel has moved.
+ * Some folks simply won't leave and join the new channel, you can /kick
+   them after a bit of time (a day? a week?) to get their client to join
+   the new channel.
+ * Don't leave the channel until everything is done, it's non-trivial to
+   rejoin because you've set up a forward!
