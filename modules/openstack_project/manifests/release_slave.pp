@@ -39,16 +39,12 @@ class openstack_project::release_slave (
     project_config_repo => $project_config_repo,
   }
 
-  include pip
-
   package { 'twine':
     ensure   => present,
   }
 
-  package { 'wheel':
-    ensure   => latest,
-    provider => pip,
-    require  => Class['pip'],
+  package { 'python-wheel':
+    ensure   => present
   }
 
   class { '::nodejs':
