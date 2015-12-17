@@ -92,6 +92,18 @@ results. */
     min-width: 400px;
 }
 
+/* narrow the layout of the top three columns to progressively vertical */
+table.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-infoTable,
+table.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-infoTable > tbody,
+table.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-infoTable > tbody > tr
+{
+    display: block;
+}
+table.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-infoTable > tbody > tr > td
+{
+    display: inline;
+}
+
 /* Review history */
 .com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-cs2
     .com-google-gerrit-client-change-Message_BinderImpl_GenCss_style-name {
