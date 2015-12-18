@@ -97,6 +97,11 @@ results. */
     .com-google-gerrit-client-change-Message_BinderImpl_GenCss_style-name {
   font-weight: bold !important;
 }
+.com-google-gerrit-client-change-ChangeScreen_BinderImpl_GenCss_style-cs2
+    .com-google-gerrit-client-change-Message_BinderImpl_GenCss_style-messageBox {
+  width: inherit;
+  max-width: 1168px;
+}
 
 .comment_test_name {
   display: inline-block;
