@@ -146,6 +146,7 @@ table.infoTable td.notVotable,
 }
 
 /* css attribute selector to make -1s show up red in new screen */
+[title="Doesn't seem to work"],
 [title="This patch needs further work before it can be merged"] {
     color: red;
 }
