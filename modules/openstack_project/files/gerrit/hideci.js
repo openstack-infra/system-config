@@ -185,7 +185,8 @@ var ci_parse_comments = function() {
             var name = top.attr("name");
             if (!name) {
                 // new change screen
-                name = $(this).parent().parent().parent().children().children()[0].innerHTML
+                name = $(this).parent().parent().parent().children().children()[0].innerHTML;
+                top = $(this).parent().parent().parent().parent();
             }
             var comment = {};
             comment.name = name;
