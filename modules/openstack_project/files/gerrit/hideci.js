@@ -291,11 +291,18 @@ var ci_display_results = function(comments) {
         var last = pipelines[i][1].length - 1;
         var comment = pipeline_comments[last];
         var rechecks = "";
+        var header_class = "header";
         if (last > 0) {
             rechecks = " (" + last + " rechecks)";
+            // if we have > 3 rechecks on a CI system, we should
+            // probably expose that more.
+            if (last > 3) {
+                header_class += " many_rechecks";
+            }
         }
 
-        var header = $("<tr>").append($('<td class="header">' + comment.name + " " + pipeline_name + rechecks + '</td>'));
+        var header = $('<tr class="' + header_class + '">').append(
+            $('<td class="' + header_class + '">' + comment.name + " " + pipeline_name + rechecks + '</td>'));
         header.append('<td class="header ci_date">' + comment.date + '</td>');
         $(table).append(header);
         for (var j = 0; j < comment.results.length; j++) {
