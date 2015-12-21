@@ -26,14 +26,22 @@ class openstack_project::status (
 
   include ::httpd
 
-  httpd_mod { 'rewrite':
-    ensure => present,
+  if ! defined(Httpd::Mod['rewrite']) {
+    httpd::mod { 'rewrite':
+        ensure => present,
+    }
   }
-  httpd_mod { 'proxy':
-    ensure => present,
+
+  if ! defined(Httpd::Mod['proxy']) {
+    httpd::mod { 'proxy':
+        ensure => present,
+    }
   }
-  httpd_mod { 'proxy_http':
-    ensure => present,
+
+  if ! defined(Httpd::Mod['proxy_http']) {
+    httpd::mod { 'proxy_http':
+        ensure => present,
+    }
   }
 
   file { '/srv/static':
