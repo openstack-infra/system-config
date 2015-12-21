@@ -1188,6 +1188,39 @@ node 'controller00.hpuswest.ic.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'controller00.hpuseast.ic.openstack.org' {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::openstack_project::infracloud::controller':
+    keystone_rabbit_password         => hiera('keystone_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    root_mysql_password              => hiera('infracloud_mysql_password'),
+    keystone_mysql_password          => hiera('keystone_mysql_password'),
+    glance_mysql_password            => hiera('glance_mysql_password'),
+    neutron_mysql_password           => hiera('neutron_mysql_password'),
+    nova_mysql_password              => hiera('nova_mysql_password'),
+    keystone_admin_password          => hiera('keystone_admin_password'),
+    glance_admin_password            => hiera('glance_admin_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    nova_admin_password              => hiera('nova_admin_password'),
+    keystone_admin_token             => hiera('keystone_admin_token'),
+    ssl_key_file_contents            => hiera('ssl_key_file_contents'),
+    ssl_cert_file_contents           => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
+    br_name                          => 'br-vlan1598',
+    controller_public_address        => $::fqdn,
+    controller_management_address    => '15.126.48.53',
+    neutron_subnet_cidr              => '15.126.48.0/24',
+    neutron_subnet_gateway           => '15.126.48.1',
+    neutron_subnet_allocation_pools  => [ 'start=15.126.48.30,end=15.126.48.254' ],
+  }
+}
+
 node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
   $group = 'infracloud'
   class { '::openstack_project::server':
