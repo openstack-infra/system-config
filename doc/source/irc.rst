@@ -317,3 +317,28 @@ Tips
    the new channel.
  * Don't leave the channel until everything is done, it's non-trivial to
    rejoin because you've set up a forward!
+
+Troubleshooting
+===============
+
+Bots may stop responding, causing our IRC channels to malfunction. Common
+steps to troubleshoot the problem are:
+
+1. Check status of the bot, with:
+
+    sudo service xxxbot status
+
+If bot is stopped start it again. Restart the bot if you see it's running
+but not operating properly.
+
+2. On bot restart, it may show problems connecting to chat.freenode.net. If
+bot logs show it's stopped on connection, you can manually try with:
+
+    telnet chat.freenode.net 6667
+
+3. If you don't have connection to that port, check entries on /etc/hosts
+for chat.freenode.net, until you find one server that is operative. Switch
+the entries on /etc/hosts to choose the right one, and restart the service
+with:
+
+    sudo service xxxbot restart
