@@ -1188,4 +1188,20 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
   }
 }
 
+node /^compute\d{3}\.hpuseast\.ic\.openstack\.org$/ {
+  $group = 'infracloud-compute'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    controller_public_address        => 'controller00.hpuseast.ic.openstack.org',
+    controller_management_address    => '15.126.48.53',
+    ssl_cert_file_contents           => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
