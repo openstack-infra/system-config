@@ -183,4 +183,9 @@ class openstack_project::users {
     gid      => 2019,
   }
 
+  @user::virtual::localuser { 'krotscheck':
+    realname => 'Michaes Krotscheck',
+    uid      => 2020,
+    gid      => 2020,
+  }
 }
