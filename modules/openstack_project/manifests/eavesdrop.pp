@@ -36,6 +36,7 @@ class openstack_project::eavesdrop (
     manage_index => false,
     channels     => [
         '#cloudkitty',
+        '#congress',
         '#dox',
         '#heat',
         '#kolla',
