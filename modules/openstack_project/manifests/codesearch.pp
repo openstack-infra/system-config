@@ -29,7 +29,7 @@ class openstack_project::codesearch (
       $::project_config::config_dir,
       File['/home/hound'],
     ],
-    notify      => Service['hound']
+    notify      => Service['hound'],
+    subscribe   => Class['project_config'],
   }
-
 }
