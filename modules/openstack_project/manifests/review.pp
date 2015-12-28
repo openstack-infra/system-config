@@ -107,7 +107,7 @@ class openstack_project::review (
     email                               => 'review@openstack.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '150',
-    container_heaplimit                 => '8g',
+    container_heaplimit                 => '12g',
     core_packedgitopenfiles             => '4096',
     core_packedgitlimit                 => '400m',
     core_packedgitwindowsize            => '16k',
