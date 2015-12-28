@@ -10,6 +10,12 @@
 DB_USER=$1
 DB_PASS=$2
 
+if true ; then
+ echo "true"
+else
+     echo "nothing"
+fi
+
 # Fix the following errors:
 # Reindexing changes: projects: 37% (292/786), 23% (54540/234931)(-)[2015-10-21 18:14:26,609]
 #     ERROR com.google.gerrit.server.index.Schema : error getting field tr of
