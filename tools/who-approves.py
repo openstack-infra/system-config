@@ -102,7 +102,7 @@ repos_dump = json.loads(requests.get(
     gerrit_url + 'projects/?pp=0').text[4:])
 all_groups = json.loads(requests.get(gerrit_url + 'a/groups/',
                                      auth=gerrit_auth).text[4:])
-repos = {}
+repos={}
 aprv_groups = {}
 for repo in repos_dump:
     repos[repo.encode('utf-8')] = {'approvers': {}}
