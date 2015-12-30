@@ -167,8 +167,8 @@ The bot also has the ability to sit in a channel for the sole purpose
 of logging channel activity, not just meetings. Standard channel logs
 are sent to http://eavesdrop.openstack.org/irclogs/
 
-The configuration for specific channel logging can be found in
-:file:`modules/openstack_project/manifests/eavesdrop.pp`.
+The configuration for specific channel logging can be found in the
+public Hiera data file, :file:`hiera/common.yaml`.
 
 .. _statusbot:
 
@@ -208,6 +208,9 @@ the channels the bot is listening to:
   Log a message of success to the "Successes" wiki page. This is meant
   as a collection mechanism for little celebration of small successes
   in OpenStack development.
+
+A channel can be added to statusbot by editing the public Hiera data
+file, :file:`hiera/common.yaml`.
 
 .. _gerritbot:
 
