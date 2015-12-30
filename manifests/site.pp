@@ -210,7 +210,8 @@ node 'jenkins-dev.openstack.org' {
 node 'cacti.openstack.org' {
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
-    sysadmins => hiera('sysadmins', []),
+    sysadmins   => hiera('sysadmins', []),
+    cacti_hosts => hiera('cacti_hosts'),
   }
 }
 
