@@ -103,6 +103,7 @@ class openstack_project::eavesdrop (
         '#openstack-searchlight',
         '#openstack-security',
         '#openstack-smaug',
+        '#openstack-solar',
         '#openstack-sprint',
         '#openstack-stable',
         '#openstack-storlets',
