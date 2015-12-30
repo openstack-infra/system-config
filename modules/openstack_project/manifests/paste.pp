@@ -2,6 +2,7 @@
 #
 class openstack_project::paste (
   $db_password,
+  $db_host,
   $mysql_root_password,
   $vhost_name         = $::fqdn,
 ) {
@@ -9,7 +10,7 @@ class openstack_project::paste (
   lodgeit::site { 'openstack':
     port        => '5000',
     db_password => $db_password,
-    db_host     => 'localhost',
+    db_host     => $db_host,
     db_user     => 'openstack',
     vhost_name  => $vhost_name,
     image       => 'header-bg2.png',
