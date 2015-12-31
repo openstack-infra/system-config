@@ -48,7 +48,7 @@ class openstack_project::puppetmaster (
     user        => 'root',
     hour        => '3',
     minute      => '0',
-    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.yaml\' -mtime +7 -execdir rm {} \;',
+    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.yaml\' -mtime +5 -execdir rm {} \;',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
