@@ -18,7 +18,7 @@ At a Glance
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-refstack/
 :Projects:
-  * https://github.com/stackforge/refstack/
+  * https://git.openstack.org/cgit/openstack/refstack/
 :Bugs:
   * https://bugs.launchpad.net/refstack
 
