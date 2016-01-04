@@ -313,7 +313,6 @@ node 'paste.openstack.org' {
   class { 'openstack_project::paste':
     db_password         => hiera('paste_db_password'),
     db_host             => hiera('paste_db_host'),
-    mysql_root_password => hiera('paste_mysql_root_password'),
   }
 }
 
