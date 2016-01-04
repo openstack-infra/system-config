@@ -1,0 +1,11 @@
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 04 Jan 2016 05:15:05 +0000
+Reviewed-on: https://review.openstack.org/262321
+Project: openstack-infra/system-config
+Branch: refs/heads/master
