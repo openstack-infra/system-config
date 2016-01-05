@@ -38,6 +38,7 @@ class openstack_project::gerrit (
   $httpd_minthreads = '',
   $httpd_maxthreads = '',
   $httpd_maxwait = '',
+  $cache_diff_timeout = '',
   $war = '',
   $contactstore = false,
   $contactstore_appsec = '',
@@ -136,6 +137,7 @@ class openstack_project::gerrit (
     httpd_minthreads                    => $httpd_minthreads,
     httpd_maxthreads                    => $httpd_maxthreads,
     httpd_maxwait                       => $httpd_maxwait,
+    cache_diff_timeout                  => $diff_timeout,
     commentlinks                        => [
       {
         name  => 'bugheader',

@@ -114,6 +114,7 @@ class openstack_project::review (
     sshd_threads                        => '100',
     index_threads                       => 4,
     httpd_maxwait                       => '5000min',
+    cache_diff_timeout                  => '10sec',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.11.a14450f.war',
     contactstore                        => $contactstore,
