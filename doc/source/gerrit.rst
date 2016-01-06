@@ -316,6 +316,7 @@ Next, edit `project.config` to look like::
   priority = batch group Non-Interactive Users
   runAs = group Project Bootstrappers
   streamEvents = group Registered Users
+  viewAllAccounts = group Anonymous Users
 
   [contributor-agreement "ICLA"]
   accepted = group CLA Accepted - ICLA
