@@ -309,8 +309,10 @@ Next, edit `project.config` to look like::
   pushMerge = group Continuous Integration Tools
 
   [capability]
+  accessDatabase = group Administrators
   administrateServer = group Administrators
   createProject = group Project Bootstrappers
+  emailReviewers = deny group Third-Party CI
   priority = batch group Non-Interactive Users
   runAs = group Project Bootstrappers
   streamEvents = group Registered Users
