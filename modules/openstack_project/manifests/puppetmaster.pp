@@ -36,13 +36,27 @@ class openstack_project::puppetmaster (
     monthday    => $puppetmaster_update_cron_interval[day],
     month       => $puppetmaster_update_cron_interval[month],
     weekday     => $puppetmaster_update_cron_interval[weekday],
-    command     => 'flock -n /var/run/puppet/puppet_run_all.lock bash /opt/system-config/production/run_all.sh',
+    command     => 'flock -n /var/run/puppet/puppet_run_all.lock bash /opt/system-config/production/run_all.sh >> /var/log/puppet_run_all_cron.log 2>&1',
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
   logrotate::file { 'updatepuppetmaster':
     ensure  => present,
     log     => '/var/log/puppet_run_all.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updatepuppetmaster'],
+  }
+
+  logrotate::file { 'updatepuppetmastercron':
+    ensure  => present,
+    log     => '/var/log/puppet_run_all_cron.log',
     options => ['compress',
       'copytruncate',
       'delaycompress',
