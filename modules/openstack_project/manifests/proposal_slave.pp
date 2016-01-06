@@ -28,7 +28,8 @@ class openstack_project::proposal_slave (
     project_config_repo => $project_config_repo,
   }
 
-  package { ['Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1']:
+  package { ['Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1',
+             'requestsexceptions']:
     ensure   => latest,
     provider => pip,
     require  => Class['pip'],
