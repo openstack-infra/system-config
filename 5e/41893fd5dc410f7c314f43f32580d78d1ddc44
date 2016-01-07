@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 07 Jan 2016 20:03:58 +0000
+Reviewed-on: https://review.openstack.org/264357
+Project: openstack-infra/system-config
+Branch: refs/heads/master
