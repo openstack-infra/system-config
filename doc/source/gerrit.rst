@@ -656,3 +656,37 @@ When there is a change in HTML headers, or CSS, this can be applied
 without the need of restarting Gerrit. To do that, ssh in the Gerrit
 instance, and touch GerritSiteHeader.html and/or GerritSite.css,
 under /home/gerrit2/review_site/etc directory.
+
+Deactivating a Gerrit account
+-----------------------------
+
+To deactivate a Gerrit account (use case can be a failing Third Party CI), you
+must follow that steps:
+
+1. Identify the account ID of the Third Party CI you need to deactivate. Third-Party CI
+   members can be found on: https://review.openstack.org/#/admin/groups/270,members
+
+   {account-id} can be email address, username, full name or account ID.
+
+2. Mark the account as inactive using gerrit ssh api, with:
+   ssh -p 29418 review.openstack.org gerrit set-account --inactive {account-id}
+
+   Alternatively you can use REST API, sending a DELETE for:
+   curl -i -H "Accept: application/json" -X DELETE https://review.openstack.org/a/accounts/{account-id}/active
+
+3. Check if there are active gerrit ssh connections:
+   ssh -p 29418 review.openstack.org gerrit show-connections -n | grep {account-id}
+
+   And kill all of them with subsequent:
+   ssh -p 29418 review.openstack.org gerrit close-connection {connection-id}
+
+4. You can check if the account is properly marked as inactive using REST API,
+   sending a GET for:
+
+   curl -i -H "Accept: application/json" -X GET https://review.openstack.org/a/accounts/{account-id}/active
+
+   A 200 return code means the account is active, and 204 means account inactive.
+
+4. In the case of a failing Third Party CI, if the account caused a loop of comments in
+   a change, you can delete them with following query:
+    delete from change_messages where author_id={account-id} and change_id={change-id};
