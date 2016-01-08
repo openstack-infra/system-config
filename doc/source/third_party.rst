@@ -472,3 +472,36 @@ FAQ (Frequently Asked Questions)
           AddEncoding x-gzip gz
         </FilesMatch>
 
+
+Troubleshooting
+---------------
+
+To deactivate a failing third party CI you must follow that steps:
+
+1. Mark the account as inactive using gerrit ssh api, with:
+
+   ssh -p 29418 review.openstack.org gerrit set-account --inactive {username}
+
+   Alternatively you can use REST API, sending a DELETE for:
+
+   /a/accounts/{account-id}/active
+
+2. Check if there are active gerrit ssh connections:
+
+   ssh -p 29418 review.openstack.org gerrit show-connections -n | grep {account-id}
+   
+   And kill all of them with subsequent:
+
+   ssh -p 29418 review.openstack.org gerrit close-connection {connection-id}
+
+3. You can check if the account is properly marked as inactive using REST API,
+   sending a GET for:
+
+   /a/accounts/{account-id}/active
+
+   A 200 return code means the account is active, and 204 means account inactive.
+
+4. If the third party account caused a loop of comments in a change, you can delete
+   them with following query:
+
+    delete from change_messages where author_id={account-id} and change_id={change-id};
