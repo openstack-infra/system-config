@@ -32,7 +32,7 @@ class openstack_project::slave_db(
     user     => 'openstack_citest',
     password => 'openstack_citest',
     host     => 'localhost',
-    grant    => ['all'],
+    grant    => ['all', 'grant option'],
     require  => [
       Class['mysql::server'],
       Class['mysql::server::account_security'],
@@ -53,7 +53,7 @@ class openstack_project::slave_db(
   }
 
   mysql_grant { 'openstack_citest@localhost/openstack_baremetal_citest.*':
-    privileges => ['all'],
+    privileges => ['all', 'grant option'],
     user       => 'openstack_citest@localhost',
     table      => 'openstack_baremetal_citest.*',
     require    => Mysql_user['openstack_citest@localhost'],
@@ -61,7 +61,7 @@ class openstack_project::slave_db(
 
   if ($all_mysql_privs == true) {
     mysql_grant { 'openstack_citest@localhost/*.*':
-      privileges => ['all'],
+      privileges => ['all', 'grant option'],
       user       => 'openstack_citest@localhost',
       table      => '*.*',
       require    => Mysql_user['openstack_citest@localhost'],
