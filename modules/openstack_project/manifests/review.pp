@@ -108,8 +108,6 @@ class openstack_project::review (
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '150',
     container_heaplimit                 => '12g',
-    gc_start_time                       => '4:30',
-    gc_interval                         => '1 day',
     core_packedgitopenfiles             => '4096',
     core_packedgitlimit                 => '400m',
     core_packedgitwindowsize            => '16k',
