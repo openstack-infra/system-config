@@ -60,11 +60,14 @@ class openstack_project::slave_db(
   }
 
   if ($all_mysql_privs == true) {
-    mysql_grant { 'openstack_citest@localhost/*.*':
-      privileges => ['all'],
-      user       => 'openstack_citest@localhost',
-      table      => '*.*',
-      require    => Mysql_user['openstack_citest@localhost'],
+    # Note this this exec isn't guarded and will run every time puppet
+    # runs. This is ok because the all_mysql_privs option should only
+    # be used on single use slaves which only ever get puppet run once
+    # on them at image build time.
+    exec { 'mysql_grant_all_and_grant_option':
+      command => 'mysql -e "GRANT ALL ON *.* TO \'openstack_citest\'@\'localhost\' WITH GRANT OPTION"',
+      path    => '/bin:/usr/bin',
+      require => Mysql_user['openstack_citest@localhost'],
     }
   }
 
