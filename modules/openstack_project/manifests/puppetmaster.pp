@@ -233,4 +233,27 @@ class openstack_project::puppetmaster (
     group   => 'root',
     mode    => '0644',
   }
+
+  file { '/etc/ansible/groups.txt':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/groups.txt',
+    notify => Exec['expand_groups'],
+  }
+
+  file { '/usr/local/bin/expand-groups.sh':
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/openstack_project/puppetmaster/expand-groups.sh',
+    notify => Exec['expand_groups'],
+  }
+
+  exec { 'expand_groups':
+    command     => 'expand-groups.sh',
+    path        => '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    refreshonly => true,
+  }
+
 }
