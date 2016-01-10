@@ -300,6 +300,7 @@ def main():
     # server
     if os.path.exists('/var/cache/ansible-inventory/ansible-inventory.cache'):
         os.unlink('/var/cache/ansible-inventory/ansible-inventory.cache')
+    os.system('/usr/local/bin/expand-groups.sh')
 
 if __name__ == '__main__':
     main()
