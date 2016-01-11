@@ -62,6 +62,7 @@ class openstack_project::slave_db(
   if ($all_mysql_privs == true) {
     mysql_grant { 'openstack_citest@localhost/*.*':
       privileges => ['all'],
+      options    => ['GRANT'],
       user       => 'openstack_citest@localhost',
       table      => '*.*',
       require    => Mysql_user['openstack_citest@localhost'],
