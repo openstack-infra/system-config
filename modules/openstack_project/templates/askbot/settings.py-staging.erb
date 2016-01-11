@@ -97,6 +97,7 @@ SECRET_KEY = '44fb9b7219e3743bffabb6861cbc9a28'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'askbot.skins.loaders.Loader',
+    'askbot.skins.loaders.JinjaAppDirectoryLoader',
     'django.template.loaders.app_directories.Loader',
     'django.template.loaders.filesystem.Loader',
     #'django.template.loaders.eggs.load_template_source',
@@ -198,9 +199,12 @@ INSTALLED_APPS = (
     'followit',
     'tinymce',
     'group_messaging',
+    'captcha',
     #'avatar',#experimental use git clone git://github.com/ericflo/django-avatar.git$
 )
 
+
+NOCAPTCHA = True
 
 #setup memcached for production use!
 #see http://docs.djangoproject.com/en/1.1/topics/cache/ for details
@@ -398,7 +402,7 @@ GROUP_MESSAGING = {
     'BASE_URL_PARAMS': {'section': 'messages', 'sort': 'inbox'}
 }
 
-ASKBOT_MULTILINGUAL = True
+ASKBOT_LANGUAGE_MODE = 'url-lang'
 
 LANGUAGES = (
     ('en', 'English'),
@@ -418,6 +422,7 @@ if 'ASKBOT_CSS_DEVEL' in locals() and ASKBOT_CSS_DEVEL == True:
 COMPRESS_JS_FILTERS = []
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 JINJA2_EXTENSIONS = ('compressor.contrib.jinja2ext.CompressorExtension',)
+JINJA2_TEMPLATES = ('captcha',)
 
 # Use syncdb for tests instead of South migrations. Without this, some tests
 # fail spuriously in MySQL.

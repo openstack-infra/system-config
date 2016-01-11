@@ -92,6 +92,7 @@ class openstack_project::ask_staging (
 
   # askbot site
   class { 'askbot':
+    askbot_branch         => '0.7.x',
     db_provider           => 'pgsql',
     db_name               => $db_name,
     db_user               => $db_user,
