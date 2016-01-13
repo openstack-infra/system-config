@@ -206,6 +206,7 @@ cacti_hosts:
 - afsdb02.openstack.org
 - apps.openstack.org
 - ask.openstack.org
+- ci.backup.openstack.org
 - eavesdrop.openstack.org
 - elasticsearch01.openstack.org
 - elasticsearch02.openstack.org
