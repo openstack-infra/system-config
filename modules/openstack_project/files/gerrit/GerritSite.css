@@ -21,6 +21,7 @@ a.gwt-InlineHyperlink {background: none !important}
 
 #change_infoTable {
   border-collapse: collapse;
+  max-width: 600px;
 }
 
 #change_infoTable th {
