@@ -16,6 +16,7 @@
 #    under the License.
 
 import csv
+import email.utils
 import settings
 import smtplib
 import sys
@@ -66,9 +67,20 @@ if __name__ == '__main__':
         content = template.substitute(name=committer.name,
                                       code=code,
                                       signature=settings.EMAIL_SIGNATURE)
-        msg = "From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s" % (
-            settings.EMAIL_FROM, ','.join(committer.emails),
-            settings.EMAIL_SUBJECT, content)
+        msg = (
+            "From: %s\r\n"
+            "To: %s\r\n"
+            "Date: %s\r\n"
+            "Message-ID: %s\r\n"
+            "Subject: %s\r\n"
+            "%s"
+            % (
+                settings.EMAIL_FROM,
+                ','.join(committer.emails),
+                email.utils.formatdate(),
+                email.utils.make_msgid(),
+                settings.EMAIL_SUBJECT,
+                content))
 
         session.sendmail(settings.EMAIL_FROM, committer.emails, msg)
         print "%s,ATC,%s" % (code, committer.name)
