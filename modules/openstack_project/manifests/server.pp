@@ -41,5 +41,6 @@ class openstack_project::server (
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
     pypi_trusted_hosts        => $pypi_trusted_hosts,
+    purge_apt_sources         => true,
   }
 }
