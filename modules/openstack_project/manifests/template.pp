@@ -240,6 +240,9 @@ class openstack_project::template (
   class { '::pip':
     index_url       => $pypi_index_url,
     trusted_hosts   => $pypi_trusted_hosts,
+    optional_settings => {
+      'extra-index-url' => '',
+    },
     manage_pip_conf => true,
   }
 
