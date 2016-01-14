@@ -42,4 +42,14 @@ class openstack_project::server (
     pypi_index_url            => $pypi_index_url,
     pypi_trusted_hosts        => $pypi_trusted_hosts,
   }
+  if $::osfamily == 'Debian' {
+    include ::openstack_project::params
+    file { '/etc/apt/sources.list':
+      ensure => present,
+      group  => 'root',
+      mode   => '0644',
+      owner  => 'root',
+      source => $::openstack_project::params::sources_list,
+    }
+  }
 }
