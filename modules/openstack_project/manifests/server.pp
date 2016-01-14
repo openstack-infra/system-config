@@ -41,5 +41,16 @@ class openstack_project::server (
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
     pypi_trusted_hosts        => $pypi_trusted_hosts,
+    purge_apt_sources         => true,
+  }
+  if $::osfamily == 'Debian' {
+    include ::openstack_project::params
+    file { '/etc/apt/sources.list.d/openstack-infra.list':
+      ensure => present,
+      group  => 'root',
+      mode   => '0444',
+      owner  => 'root',
+      source => $::openstack_project::params::sources_list,
+    }
   }
 }
