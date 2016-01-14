@@ -20,6 +20,7 @@ class openstack_project::params {
           $user_packages = ['emacs-nox', 'vim-nox']
         }
       }
+      $sources_list = "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}"
       $update_pkg_list_cmd = 'apt-get update >/dev/null 2>&1;'
       $login_defs = 'puppet:///modules/openstack_project/login.defs.debian'
     }
