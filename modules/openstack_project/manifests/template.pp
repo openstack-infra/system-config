@@ -29,6 +29,7 @@ class openstack_project::template (
       'pypi.region-b.geo-1.openstack.org',
       'pypi.regionone.openstack.org',
   ],
+  $purge_apt_sources         = false,
 ) {
 
   ###########################################################
@@ -197,7 +198,18 @@ class openstack_project::template (
 
   case $::osfamily {
     'Debian': {
-      include apt
+      # Purge and augment existing /etc/apt/sources.list if requested
+      class { '::apt':
+        include ::openstack_project::params
+        purge => { 'sources.list' => $purge_apt_sources }
+        file { '/etc/apt/sources.list.d/openstack-infra.list':
+          ensure => present,
+          group  => 'root',
+          mode   => '0444',
+          owner  => 'root',
+          source => $::openstack_project::params::sources_list,
+        }
+      }
 
       # Make sure dig is installed
       package { 'dnsutils':
