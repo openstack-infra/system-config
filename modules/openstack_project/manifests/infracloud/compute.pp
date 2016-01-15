@@ -16,4 +16,10 @@ class openstack_project::infracloud::compute (
     controller_management_address => $controller_management_address,
     controller_public_address     => $controller_public_address,
   }
+
+  realize (
+    User::Virtual::Localuser['colleen'],
+    User::Virtual::Localuser['rcarrillocruz'],
+  )
+
 }
