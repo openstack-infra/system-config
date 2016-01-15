@@ -81,4 +81,9 @@ class openstack_project::infracloud::controller (
     password => $openstackjenkins_password,
     require  => Keystone_tenant['openstackjenkins'],
   }
+  realize (
+    User::Virtual::Localuser['krinkle'],
+    User::Virtual::Localuser['rcarrillocruz'],
+  )
+
 }
