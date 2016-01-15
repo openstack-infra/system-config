@@ -48,4 +48,10 @@ class openstack_project::infracloud::controller (
     controller_public_address        => $controller_public_address,
     controller_management_address    => $controller_management_address,
   }
+
+  realize (
+    User::Virtual::Localuser['krinkle'],
+    User::Virtual::Localuser['greghaynes'],
+  }
+
 }
