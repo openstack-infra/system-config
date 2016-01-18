@@ -25,7 +25,7 @@ for line in $(</etc/ansible/groups.txt); do
     name=$(echo $line | cut -f1 -d' ')
     pattern=$(echo $line | cut -f2 -d' ')
     echo "[${name}]" >> $outfile
-    ansible "~${pattern}" --list-hosts >> $outfile
+    ansible "~${pattern}" --list-hosts | grep -v 'hosts.*' >> $outfile
 done
 
 cp $outfile /etc/ansible/hosts/generated-groups
