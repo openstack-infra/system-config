@@ -10,6 +10,7 @@
   roles:
     - role: puppet
       copy_hieradata: False
+      copy_puppet: False
 - hosts: "git0*:!disabled"
   gather_facts: true
   max_fail_percentage: 1
