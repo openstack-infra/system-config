@@ -51,7 +51,9 @@ Each test instance requires:
 
  * 8GB RAM
  * 8vCPU at 2.4GHz (or more or less vCPUs depending on speed)
- * A public IP address (IPv4 and/or IPv6)
+ * A public IP address (IPv4 and/or IPv6), without NAT (that is, the
+   public IP address(es) in use on the instance should be used on the
+   instances themselves)
  * 80GB of storage
 
 In a setting where our instances will be segregated, our usage
