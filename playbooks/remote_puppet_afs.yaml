@@ -3,3 +3,5 @@
   gather_facts: true
   roles:
   - role: puppet
+    copy_hieradata: True
+    copy_puppet: True
