@@ -967,7 +967,7 @@ node 'kdc02.openstack.org' {
 node /^afsdb.*\.openstack\.org$/ {
   $group = "afsdb"
 
-  class { 'openstack_project::template':
+  class { 'openstack_project::server':
     iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
@@ -981,7 +981,7 @@ node /^afsdb.*\.openstack\.org$/ {
 node /^afs.*\..*\.openstack\.org$/ {
   $group = "afs"
 
-  class { 'openstack_project::template':
+  class { 'openstack_project::server':
     iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
