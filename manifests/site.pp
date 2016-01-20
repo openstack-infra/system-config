@@ -535,7 +535,23 @@ node 'mirror-update.openstack.org' {
   }
 }
 
-# Machines in each region to run PyPI mirrors.
+# Machines in each region to serve AFS mirrors.
+# Node-OS: trusty
+node /^mirror\..*\.openstack\.org$/ {
+  $group = "mirror"
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80],
+    sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
+  }
+
+  class { 'openstack_project::mirror':
+    vhost_name => $::fqdn,
+  }
+}
+
+# Legacy machines in each region to run pypi package mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
   $group = "pypi"
