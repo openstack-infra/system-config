@@ -24,6 +24,44 @@ class openstack_project::storyboard(
   class { 'openstack_project::server':
     sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
+    manage_exim               => false,
+  }
+
+  class { '::exim':
+    sysadmins => $sysadmins,
+    routers => [
+      {'storyboard_verp_router' => {
+        'driver'              => 'dnslookup',
+        # we only consider messages sent in through loopback
+        'condition' => '${if or{{eq{$sender_host_address}{127.0.0.1}}\
+                         {eq{$sender_host_address}{::1}}}{yes}{no}}',
+        # we do not do this for traffic going to the local machine
+        'domains'             => '!+local_domains',
+        'ignore_target_hosts' => '<; 0.0.0.0; 64.94.110.11; 127.0.0.0/8; \
+                                  ::1/128;fe80::/10;fec0::/10;ff00::/8',
+        # only the un-VERPed bounce addresses are handled
+        'senders'             => '"*-bounces@*"',
+        'transport'           => 'storyboard_verp_smtp',
+      }},
+      # Send bounces to /dev/null until storyboard supports them.
+      {'storyboard' => {
+        'driver'                     => 'redirect',
+        'local_parts'                => 'storyboard',
+        'local_part_suffix_optional' => true,
+        'local_part_suffix'          => '-bounces : -bounces+*',
+        'data'                       => ':blackhole:',
+      }}
+      ],
+    transports => [
+      {'storyboard_verp_smtp' => {
+        'driver'         => 'smtp',
+        'return_path'    => '${local_part:$return_path}+$local_part\
+                             =$domain@${domain:$return_path}'
+        'max_rcpt'       => '1',
+        'headers_remove' => 'Errors-To',
+        'headers_add'    => 'Errors-To: ${return_path}',
+      }}
+      ],
   }
 
   mysql_backup::backup_remote { 'storyboard':
