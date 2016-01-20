@@ -311,23 +311,22 @@ the contents are not managed by puppet. It's purpose is to allow for disabling
 puppet at times when landing a change to the puppet repo would be either
 unreasonable or impossible.
 
-There are two sections in each file, `disabled` and `disabled:children`. Due
-to the multi-cloud nature of the ansible inventory, a hostname cannot be counted
-on to be unique, so each cloud instance is listed in the inventory by its
-UUID with a group created for its hostname. If you want to disable a cloud
-instance by name, you need to put its name in `disabled:children`. If you want
-to refer to a single instance by UUID, or if there are statically defined
-hosts that need to be disabled, you should put those in `disabled`.
+There are two sections in each file, `disabled` and `disabled:children`.
+To disable a single host, put it in `disabled`. If you want to disable a group
+of hosts, put it in `disabled:children`. Any hosts we have that have more than
+one host with the same name (such as in the case of being in the midst of a
+migration) will show up as a group with the name of the hostname and the
+individual servers will be listed by UUID.
 
 Because of the way static and dynamic inventories get merged by ansible, the
-static file needs to stand alone. If you need to disable a dynamic host from
-OpenStack (pretty much all of our hosts) you need to not only add it to
-disabled:children, you need to add an emtpy group into the inventory file
-(either `static` or `emergency` as appropriate) too.
+static file needs to stand alone. If you need to disable a group of servers from
+OpenStack you need to not only add it to `disabled:children`, you need to addi
+an emtpy group into the inventory file (either `static` or `emergency` as
+appropriate) too.
 
 Disabling puppet via ansible inventory does not disable puppet from being
-run directly on the host, it merely prevents the puppetmaster from causing
-puppet to be run. If you choose to run puppet manually on a host, take care
+able to be run directly on the host, it merely prevents ansible from
+attempting to run it. If you choose to run puppet manually on a host, take care
 to ensure that it has not been disabled at the puppetmaster level first.
 
 Examples
@@ -339,9 +338,7 @@ without landing a puppet change, ensure the following is in
 
 ::
 
-  [amazing.openstack.org]
-
-  [disabled:children]
+  [disabled]
   amazing.openstack.org
 
 To disable one of the OpenStack instances called `git.openstack.org`
@@ -360,6 +357,13 @@ the Infra cloud controller hosts.
 
   [disabled]
   controller.useast.openstack.org
+
+To disable a group of hosts, such as all of the pypi hosts.
+
+::
+
+  [disabled:children]
+  pypi
 
 .. _cinder:
 
