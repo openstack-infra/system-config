@@ -221,10 +221,7 @@ class openstack_project::puppetmaster (
   }
 
   file { '/etc/ansible/hosts/static':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/puppetmaster/static-inventory',
+    ensure => absent,
   }
 
   file { '/etc/ansible/hosts/emergency':
