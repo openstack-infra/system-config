@@ -214,7 +214,7 @@ function setup_pip {
         zypper --non-interactive in --force-resolution python python-xml
     fi
 
-    python get-pip.py
+    python get-pip.py -c <(echo 'pip<8')
     rm get-pip.py
     pip install -U setuptools
 }
