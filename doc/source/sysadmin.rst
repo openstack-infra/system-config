@@ -301,33 +301,37 @@ is essential for being able to make informed decisions about actions
 to take.
 
 In the case of needing to disable the running of puppet on a node, it's a
-simple matter of adding an entry to the ansible inventory "disabled" group.
-There are two inventory files available for this, `/etc/ansible/hosts/static`
-and `/etc/ansible/hosts/emergency`. `/etc/ansible/hosts/static` is intended
-to be managed via git from the system-config repo in
-`modules/openstack_project/files/puppetmaster/static-inventory`.
+simple matter of adding an entry to the ansible inventory "disabled" group
+in `:file:modules/openstack_project/files/puppetmaster/groups.txt`. The
+disabled entry is an input to `ansible --list-hosts` so you can check your
+entry simply by running it with `ansible $hostlist --list-hosts` as root
+on the puppetmaster host and ensuring that the list of hosts returned is as
+expected. Globs, group names and server UUIDs should all be acceptable input.
+
+If you need to disable a host immediately without waiting for a patch to land
+to `system-config`, there is a file on the puppetmaster host,
+`/etc/ansible/hosts/emergency` that can be edited directly.
+
 `/etc/ansible/hosts/emergency` is a file that should normally be empty, but
 the contents are not managed by puppet. It's purpose is to allow for disabling
 puppet at times when landing a change to the puppet repo would be either
 unreasonable or impossible.
 
-There are two sections in each file, `disabled` and `disabled:children`. Due
-to the multi-cloud nature of the ansible inventory, a hostname cannot be counted
-on to be unique, so each cloud instance is listed in the inventory by its
-UUID with a group created for its hostname. If you want to disable a cloud
-instance by name, you need to put its name in `disabled:children`. If you want
-to refer to a single instance by UUID, or if there are statically defined
-hosts that need to be disabled, you should put those in `disabled`.
+There are two sections in the emergency file, `disabled` and
+`disabled:children`. To disable a single host, put it in `disabled`. If you
+want to disable a group of hosts, put it in `disabled:children`. Any hosts we
+have that have more than one host with the same name (such as in the case of
+being in the midst of a migration) will show up as a group with the name of
+the hostname and the individual servers will be listed by UUID.
 
 Because of the way static and dynamic inventories get merged by ansible, the
-static file needs to stand alone. If you need to disable a dynamic host from
-OpenStack (pretty much all of our hosts) you need to not only add it to
-disabled:children, you need to add an emtpy group into the inventory file
-(either `static` or `emergency` as appropriate) too.
+emergency file needs to stand alone. If you need to disable a group of servers
+from OpenStack you need to not only add it to `disabled:children`, you need to
+add an emtpy group into the emergency file too.
 
 Disabling puppet via ansible inventory does not disable puppet from being
-run directly on the host, it merely prevents the puppetmaster from causing
-puppet to be run. If you choose to run puppet manually on a host, take care
+able to be run directly on the host, it merely prevents ansible from
+attempting to run it. If you choose to run puppet manually on a host, take care
 to ensure that it has not been disabled at the puppetmaster level first.
 
 Examples
@@ -339,9 +343,7 @@ without landing a puppet change, ensure the following is in
 
 ::
 
-  [amazing.openstack.org]
-
-  [disabled:children]
+  [disabled]
   amazing.openstack.org
 
 To disable one of the OpenStack instances called `git.openstack.org`
@@ -353,13 +355,20 @@ find its UUID via OpenStack tools and ensure it's in the emergency file.
   [disabled]
   811c5197-dba7-4d3a-a3f6-68ca5328b9a7
 
-To disable a staticly defined host that is not an OpenStack host, such as
-the Infra cloud controller hosts.
+To disable a group of hosts in the emergency file, such as all of the pypi
+hosts.
 
 ::
 
-  [disabled]
-  controller.useast.openstack.org
+  [disabled:children]
+  pypi
+
+To disable a staticly defined host that is not an OpenStack host, such as
+the Infra cloud controller hosts, put the following in groups.txt.
+
+::
+
+  disabled controller.useast.openstack.org
 
 .. _cinder:
 
