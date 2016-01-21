@@ -6,6 +6,7 @@ class openstack_project::mirror (
 
   $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
+  $wheel_root = "${mirror_root}/wheel"
   $www_root = '/var/www/mirror'
 
   #####################################################
@@ -20,6 +21,17 @@ class openstack_project::mirror (
   file { "${www_root}/pypi":
     ensure  => link,
     target  => "${pypi_root}/web",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  # Create the symlink to wheel.
+  file { "${www_root}/wheel":
+    ensure  => link,
+    target  => "${wheel_root}",
     owner   => root,
     group   => root,
     require => [
