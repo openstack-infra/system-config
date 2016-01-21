@@ -56,8 +56,8 @@ The puppet config sets up slave propogation scripts and cron jobs to run them.
 
 .. _addprinc:
 
-Adding principals
------------------
+Adding A User Principal
+-----------------------
 
 First, ensure the user has an entry in puppet so they have a unix
 shell account on our hosts.  SSH access is not necessary, but keeping
@@ -74,3 +74,26 @@ puppet.  `OPENSTACK.ORG` should be capitalized.
 If you are adding an admin principal, use
 `username/admin@OPENSTACK.ORG`.  Admins should additionally have
 regular user principals.
+
+Adding A Service Principal
+--------------------------
+
+A service principal is one that corresponds to an application rather
+than a person.  There is no difference in their implementation, only
+in conventions around how they are created and used.  Service
+principals are created without passwords and keytab files are used
+instead for authentication.  The program `k5start` can use keytab
+files to automatically obtain kerberos credentials (and AFS if
+needed).
+
+Add the service principal to Kerberos using kadmin (while
+authenticated as a kerberos admin) or kadmin.local on the kdc::
+
+  kadmin: addprinc -randkey service/$NAME@OPENSTACK.ORG
+
+Where `$NAME` is the lower-case name of the service.  `OPENSTACK.ORG`
+should be capitalized.
+
+Then save the principal's keytab::
+
+  kadmin: ktadd -k /path/to/$NAME.keytab service/$NAME@OPENSTACK.ORG
