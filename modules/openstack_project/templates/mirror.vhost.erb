@@ -1,0 +1,37 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+NameVirtualHost <%= @vhost_name %>:<%= @port %>
+<VirtualHost <%= @vhost_name %>:<%= @port %>>
+    ServerName <%= @srvname %>
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
+    DocumentRoot <%= @docroot %>
+    <Directory <%= @docroot %>>
+        Options <%= @options %>
+        AllowOverride None
+        Order allow,deny
+        allow from all
+        Satisfy any
+        <IfVersion >= 2.4>
+            Require all granted
+        </IfVersion>
+    </Directory>
+
+    # Pypi URL's are:
+    # /pypi/simple/a/a/a-etc.whl
+    # /pypi/simple/a/abcd/abcd-etc.whl
+    # /pypi/simple/a/abcde/abcde-etc.whl
+    RewriteEngine On
+    RewriteRule ^/pypi/simple/([^/])([^/]*)$ /pypi/simple/$1/$1$2 [L]
+    RewriteRule ^/pypi/simple/([^/])([^/]*)/(.*)$ /pypi/simple/$1/$1$2/$3 [L]
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
+    ServerSignature Off
+</VirtualHost>
