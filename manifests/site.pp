@@ -525,6 +525,16 @@ node /^git\d+\.openstack\.org$/ {
   }
 }
 
+# A machine to drive AFS mirror updates.
+# Node-OS: trusty
+node 'mirror-update.openstack.org' {
+  class { 'openstack_project::mirror_update':
+    bandersnatch_keytab => hiera('bandersnatch_keytab'),
+    admin_keytab        => hiera('afsadmin_keytab'),
+    sysadmins           => hiera('sysadmins', []),
+  }
+}
+
 # Machines in each region to run PyPI mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
