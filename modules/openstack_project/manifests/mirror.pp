@@ -6,14 +6,24 @@ class openstack_project::mirror (
 
   $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
-  $www_root = '/var/www/mirror'
+  $www_base = '/var/www'
+  $www_root = "${www_base}/mirror"
 
   #####################################################
   # Build Apache Webroot
+  file { "${www_base}":
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+  }
+
   file { "${www_root}":
     ensure  => directory,
     owner   => root,
     group   => root,
+    require => [
+      File["${www_base}"],
+    ]
   }
 
   # Create the symlink to pypi.
