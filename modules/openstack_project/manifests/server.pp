@@ -25,7 +25,7 @@ class openstack_project::server (
     'pypi.region-b.geo-1.openstack.org',
     'pypi.regionone.openstack.org',
     'mirror.bhs1.ovh.openstack.org',
-    'mirror.dfw.rackspace.openstack.org',
+    'mirror.dfw.rax.openstack.org',
     'mirror.gra1.ovh.openstack.org',
     'mirror.iad.rax.openstack.org',
     'mirror.nyj01.internap.openstack.org',
