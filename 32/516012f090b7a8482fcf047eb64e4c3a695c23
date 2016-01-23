@@ -1,0 +1,11 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+1: Michael Krotscheck <krotscheck@gmail.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 23 Jan 2016 22:14:24 +0000
+Reviewed-on: https://review.openstack.org/270559
+Project: openstack-infra/system-config
+Branch: refs/heads/master
