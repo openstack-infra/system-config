@@ -1132,6 +1132,7 @@ node 'codesearch.openstack.org' {
 
 # Node-OS: trusty
 node /.*wheel-mirror-.*\.openstack\.org/ {
+  $group = 'wheel-mirror'
   include openstack_project
   class { 'openstack_project::wheel_mirror_slave':
     sysadmins                      => hiera('sysadmins', []),
