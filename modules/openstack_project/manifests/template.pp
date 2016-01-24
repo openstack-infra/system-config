@@ -15,6 +15,7 @@ class openstack_project::template (
   $ca_server                 = undef,
   $enable_unbound            = true,
   $afs                       = false,
+  $afs_cache_size            = 500000,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = false,
   $sysadmins                 = [],
@@ -62,6 +63,7 @@ class openstack_project::template (
       cell         => 'openstack.org',
       realm        => 'OPENSTACK.ORG',
       admin_server => 'kdc.openstack.org',
+      cache_size   => $afs_cache_size,
       kdcs         => [
         'kdc01.openstack.org',
         'kdc02.openstack.org',

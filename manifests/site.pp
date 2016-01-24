@@ -544,6 +544,7 @@ node /^mirror\..*\.openstack\.org$/ {
     iptables_public_tcp_ports => [22, 80],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
+    afs_cache_size            => 50000000,  # 50GB
   }
 
   class { 'openstack_project::mirror':
