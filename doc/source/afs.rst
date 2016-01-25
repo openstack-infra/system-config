@@ -145,6 +145,8 @@ superuser::
 
   bos adduser -server afsdb01.openstack.org -user $USERNAME.admin
   bos adduser -server afsdb02.openstack.org -user $USERNAME.admin
+  bos adduser -server afs01.dfw.openstack.org -user $USERNAME.admin
+  bos adduser -server afs01.ord.openstack.org -user $USERNAME.admin
   pts adduser -user $USERNAME.admin -group system:administrators
 
 Creating a Volume
