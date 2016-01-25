@@ -19,9 +19,9 @@ k5start -t -f /etc/bandersnatch.keytab service/bandersnatch -- timeout -k 2m 30m
 
 RET=$?
 
-if [ $RET ]; then
+if [ $RET -eq 0 ]; then
     echo "Bandersnatch completed successfully, running vos release."
-    k5start -t -f /etc/afsadmin.keytab service/afsafdmin -- vos release mirror.pypi
+    k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release mirror.pypi
 fi
 
 echo "Done."
