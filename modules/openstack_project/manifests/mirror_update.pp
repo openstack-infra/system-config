@@ -33,7 +33,7 @@ class openstack_project::mirror_update (
     owner   => 'root',
     group   => 'root',
     mode    => '0400',
-    content => $bandersnatch_keytab,
+    content => $admin_keytab,
   }
 
   file { '/usr/local/bin/bandersnatch-mirror-update':
