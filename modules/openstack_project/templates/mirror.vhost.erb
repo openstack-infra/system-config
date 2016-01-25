@@ -22,12 +22,15 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
         </IfVersion>
     </Directory>
 
-    # Pypi URL's are:
-    # /pypi/simple/a/a/a-etc.whl
-    # /pypi/simple/a/abcd/abcd-etc.whl
-    # /pypi/simple/a/abcde/abcde-etc.whl
     RewriteEngine On
-    RewriteRule ^/pypi/simple/([^/])([^/]*)$ /pypi/simple/$1/$1$2 [L]
+
+    # Pypi's bandersnatch URL's are:
+    # /pypi/simple/index.html
+    # /pypi/simple/a/a/(index.html)?
+    # /pypi/simple/a/a/a-etc.whl
+    # /pypi/simple/a/abcd/(index.html)?
+    # /pypi/simple/a/abcd/abcd-etc.whl
+    RewriteRule ^/pypi/simple/([^/])([^/]*)/$ /pypi/simple/$1/$1$2/ [L]
     RewriteRule ^/pypi/simple/([^/])([^/]*)/(.*)$ /pypi/simple/$1/$1$2/$3 [L]
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
