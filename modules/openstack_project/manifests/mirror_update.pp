@@ -3,6 +3,7 @@
 class openstack_project::mirror_update (
   $sysadmins = [],
   $bandersnatch_keytab = '',
+  $reprepro_keytab = '',
   $admin_keytab = '',
 ) {
 
@@ -46,7 +47,7 @@ class openstack_project::mirror_update (
 
   cron { 'bandersnatch':
     user        => $user,
-    minute      => '*/5',
+    hour        => '*/2',
     command     => 'flock -n /var/run/bandersnatch/mirror.lock bandersnatch-mirror-update >>/var/log/bandersnatch/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -54,6 +55,38 @@ class openstack_project::mirror_update (
        File['/etc/afsadmin.keytab'],
        File['/etc/bandersnatch.keytab'],
        Class['bandersnatch::mirror']
+    ]
+  }
+
+  class { '::openstack_project::reprepro':
+    ubuntu_releases => ['trusty'],
+  }
+
+  file { '/etc/reprepro.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $reprepro_keytab,
+  }
+
+  file { '/usr/local/bin/reprepro-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/reprepro/reprepro-mirror-update.sh',
+  }
+
+  cron { 'reprepro':
+    user        => $user,
+    minute      => '*/5',
+    command     => 'flock -n /var/run/reprepro/mirror.lock reprepro-mirror-update >>/var/log/reprepro/mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       Class['::openstack_project::reprepro']
     ]
   }
 }
