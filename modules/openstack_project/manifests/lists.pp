@@ -331,4 +331,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+   maillist {'openstack-bug-smash-a-thon':
+    ensure      => present,
+    admin       => 'shane.wang@intel.com',
+    password    => $listpassword,
+    description => 'Working group to prepare for and organize global OpenStack bug fest.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
