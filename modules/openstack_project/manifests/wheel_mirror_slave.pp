@@ -21,7 +21,18 @@ class openstack_project::wheel_mirror_slave (
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $wheel_keytab = undef,
 ) {
+
+  if( $wheel_keytab ) {
+    file { "/etc/wheel.keytab":
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0400',
+      content => $wheel_keytab,
+    }
+  }
+
   class { 'openstack_project::slave':
     sysadmins           => $sysadmins,
     ssh_key             => $jenkins_ssh_public_key,
