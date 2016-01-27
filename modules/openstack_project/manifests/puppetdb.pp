@@ -39,6 +39,7 @@ class openstack_project::puppetdb (
   class { '::puppetdb::server':
     database_host      => 'localhost',
     ssl_listen_address => '0.0.0.0', # works for ipv6 too
+    java_args          => { '-Xmx' => '512m', '-Xms' => '256m' },
     require            => [ User['postgres'],
       Class['puppetdb::database::postgresql'],],
   }
