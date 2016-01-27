@@ -216,6 +216,17 @@ function setup_pip {
 
     python get-pip.py -c <(echo 'pip<8')
     rm get-pip.py
+
+    # we are about to overwrite setuptools, but some packages we
+    # install later might depend on the python-setuptools package.  To
+    # avoid later conflicts, and because distro packages don't include
+    # enough info for pip to certain it can fully uninstall the old
+    # package, for saftey we clear it out by hand.
+    if is_rhel7 || is_fedora; then
+        yum install -y python-setuptools
+        rm -rf /usr/lib/python2.7/site-packages/setuptools*
+    fi
+
     pip install -U setuptools
 }
 

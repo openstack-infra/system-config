@@ -420,14 +420,6 @@ class openstack_project::template (
       replace => true,
     }
 
-    file { '/etc/yum.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/yum.conf',
-      replace => true,
-    }
   }
 
   $puppet_version = $pin_puppet
