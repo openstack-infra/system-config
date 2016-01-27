@@ -17,16 +17,7 @@
 #
 class openstack_project::wheel_mirror_slave (
   $jenkins_ssh_public_key,
-  $pypi_mirror_bhs1_host_key,
-  $pypi_mirror_dfw_host_key,
-  $pypi_mirror_gra1_host_key,
-  $pypi_mirror_iad_host_key,
-  $pypi_mirror_nyj01_host_key,
-  $pypi_mirror_ord_host_key,
-  $pypi_mirror_hp1_host_key,
-  $pypi_mirror_regionone_host_key,
-  $wheel_mirror_ssh_public_key,
-  $wheel_mirror_ssh_private_key,
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
@@ -37,29 +28,7 @@ class openstack_project::wheel_mirror_slave (
     jenkins_gitfullname => $jenkins_gitfullname,
     jenkins_gitemail    => $jenkins_gitemail,
     project_config_repo => $project_config_repo,
-  }
-
-  file { '/home/jenkins/.ssh/id_rsa':
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0400',
-    require => File['/home/jenkins/.ssh'],
-    content => $wheel_mirror_ssh_private_key,
-  }
-
-  file { '/home/jenkins/.ssh/id_rsa.pub':
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0400',
-    require => File['/home/jenkins/.ssh'],
-    content => $wheel_mirror_ssh_public_key,
-  }
-
-  file { '/home/jenkins/.ssh/known_hosts':
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0600',
-    content => template('openstack_project/wheel_mirror/known_hosts.erb')
+    afs                 => true,
   }
 
   # below follows a rough list of things required to build binary

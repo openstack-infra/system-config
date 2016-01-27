@@ -8,6 +8,7 @@ class openstack_project::slave (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $afs = false,
 ) {
 
   include openstack_project
@@ -18,6 +19,7 @@ class openstack_project::slave (
     iptables_public_udp_ports => [],
     certname                  => $certname,
     sysadmins                 => $sysadmins,
+    afs                       => $afs
   }
 
   class { 'jenkins::slave':
