@@ -962,7 +962,7 @@ node 'single-use-slave-bare' {
 }
 
 # Node-OS: centos7
-# Node-OS: fedora21
+# Node-OS: fedora23
 # Node-OS: precise
 # Node-OS: trusty
 # This is not meant to be an actual node that connects to the master.
