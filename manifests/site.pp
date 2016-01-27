@@ -1129,16 +1129,6 @@ node /.*wheel-mirror-.*\.openstack\.org/ {
   class { 'openstack_project::wheel_mirror_slave':
     sysadmins                      => hiera('sysadmins', []),
     jenkins_ssh_public_key         => $openstack_project::jenkins_ssh_key,
-    pypi_mirror_bhs1_host_key      => hiera('pypi_mirror_bhs1_host_key'),
-    pypi_mirror_dfw_host_key       => hiera('pypi_mirror_dfw_host_key'),
-    pypi_mirror_gra1_host_key      => hiera('pypi_mirror_gra1_host_key'),
-    pypi_mirror_iad_host_key       => hiera('pypi_mirror_iad_host_key'),
-    pypi_mirror_nyj01_host_key     => hiera('pypi_mirror_nyj01_host_key'),
-    pypi_mirror_ord_host_key       => hiera('pypi_mirror_ord_host_key'),
-    pypi_mirror_hp1_host_key       => hiera('pypi_mirror_hp1_host_key'),
-    pypi_mirror_regionone_host_key => hiera('pypi_mirror_regionone_host_key'),
-    wheel_mirror_ssh_public_key    => hiera('wheel_mirror_ssh_public_key_contents'),
-    wheel_mirror_ssh_private_key   => hiera('wheel_mirror_ssh_private_key_contents'),
   }
 }
 
