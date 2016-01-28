@@ -885,6 +885,7 @@ node 'release.slave.openstack.org' {
     npm_username           => 'openstackci',
     npm_userpassword       => hiera('npm_user_password'),
     npm_userurl            => 'https://openstack.org',
+    admin_keytab           => hiera('afsadmin_keytab'),
   }
 }
 
