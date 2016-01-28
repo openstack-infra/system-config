@@ -244,6 +244,7 @@ class openstack_project::template (
     trusted_hosts   => $pypi_trusted_hosts,
     optional_settings => {
       'extra-index-url' => '',
+      'timeout' => 60,
     },
     manage_pip_conf => true,
   }
