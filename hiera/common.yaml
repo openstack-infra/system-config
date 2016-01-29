@@ -307,3 +307,16 @@ cacti_hosts:
 - zm07.openstack.org
 - zm08.openstack.org
 - zuul.openstack.org
+statusbot_auth_nicks:
+- jeblair
+- ttx
+- fungi
+- mordred
+- clarkb
+- sdague
+- SergeyLukjanov
+- jhesketh
+- lifeless
+- pleia2
+- yolanda
+- nibalizer
