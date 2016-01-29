@@ -654,16 +654,17 @@ node 'nodepool.openstack.org' {
   }
 
   class { '::openstackci::nodepool':
-    vhost_name               => 'nodepool.openstack.org',
-    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
-    mysql_password           => hiera('nodepool_mysql_password'),
-    mysql_root_password      => hiera('nodepool_mysql_root_password'),
-    nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    oscc_file_contents       => $clouds_yaml,
-    image_log_document_root  => '/var/log/nodepool/image',
-    statsd_host              => 'graphite.openstack.org',
-    logging_conf_template    => 'openstack_project/nodepool/nodepool.logging.conf.erb',
-    jenkins_masters          => [
+    vhost_name                    => 'nodepool.openstack.org',
+    project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
+    mysql_password                => hiera('nodepool_mysql_password'),
+    mysql_root_password           => hiera('nodepool_mysql_root_password'),
+    nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
+    oscc_file_contents            => $clouds_yaml,
+    image_log_document_root       => '/var/log/nodepool/image',
+    statsd_host                   => 'graphite.openstack.org',
+    logging_conf_template         => 'openstack_project/nodepool/nodepool.logging.conf.erb',
+    builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
+    jenkins_masters               => [
       {
         name        => 'jenkins01',
         url         => 'https://jenkins01.openstack.org/',
