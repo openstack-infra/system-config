@@ -30,7 +30,7 @@ import yaml
 MODULES_PATH = '../modules/openstack_project/templates/nodepool'
 # default the project-config repo path to the same folder as this repo
 CONFIG_FILE = '../../project-config/nodepool/nodepool.yaml'
-LOGGING_CONFIG_FILE = MODULES_PATH + '/nodepool.logging.conf.erb'
+LOGGING_CONFIG_FILE = MODULES_PATH + '/nodepool-builder.logging.conf.erb'
 LOG_DIR = '/var/log/nodepool'
 IMAGE_LOG_DIR = '<%= @image_log_document_root %>'
 
@@ -86,13 +86,13 @@ args=(sys.stdout,)
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('%(log_dir)s/debug.log', 'H', 8, 30,)
+args=('%(log_dir)s/builder-debug.log', 'H', 8, 30,)
 
 [handler_normal]
 level=INFO
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('%(log_dir)s/nodepool.log', 'H', 8, 30,)
+args=('%(log_dir)s/nodepool-builder.log', 'H', 8, 30,)
 
 [handler_image]
 level=DEBUG
