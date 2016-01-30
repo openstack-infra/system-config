@@ -648,3 +648,11 @@ update queries for account_patch_reviews and starred_changes with:
 
 The other update queries can be ignored, since deleting them in many
 cases would result in loss of legitimate review history.
+
+Refreshing HTML and CSS configuration
+-------------------------------------
+
+When there is a change in HTML headers, or CSS, this can be applied
+without the need of restarting Gerrit. To do that, ssh in the Gerrit
+instance, and touch GerritSiteHeader.html and/or GerritSite.css,
+under /home/gerrit2/review_site/etc directory.
