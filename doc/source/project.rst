@@ -63,7 +63,7 @@ Bugs
 
 The infrastructure project maintains a bug list at:
 
-  https://storyboard.openstack.org/#!/project_group/detail/55
+  https://storyboard.openstack.org/#!/project_group/55
 
 Both defects and new features are tracked in the bug system.  A number
 of tags are used to indicate relevance to a particular subsystem.
