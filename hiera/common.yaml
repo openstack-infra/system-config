@@ -294,6 +294,7 @@ cacti_hosts:
 - stackalytics.openstack.org
 - static.openstack.org
 - status.openstack.org
+- storyboard.openstack.org
 - subunit-worker01.openstack.org
 - translate.openstack.org
 - translate-dev.openstack.org
