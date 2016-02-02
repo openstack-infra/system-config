@@ -97,8 +97,18 @@ class openstack_project::slave_common(
     }
     'Debian': {
       if ($::operatingsystem == 'Debian') {
-          # install depending on kernel release
-          $header_packages = [ "linux-headers-${::kernelrelease}", ]
+        # install depending on architecture
+        case $::architecture {
+          'amd64', 'x86_64': {
+            $header_packages = ['linux-headers-amd64']
+          }
+          'x86': {
+            $header_packages = ['linux-headers-686-pae']
+          }
+          default: {
+            $header_packages = [ "linux-headers-${::kernelrelease}", ]
+          }
+        }
       }
       else {
         if ($::lsbdistcodename == 'precise') {
