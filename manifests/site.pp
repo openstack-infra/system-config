@@ -1136,9 +1136,11 @@ node 'codesearch.openstack.org' {
 node /.*wheel-mirror-.*\.openstack\.org/ {
   $group = 'wheel-mirror'
   include openstack_project
+
   class { 'openstack_project::wheel_mirror_slave':
     sysadmins                      => hiera('sysadmins', []),
     jenkins_ssh_public_key         => $openstack_project::jenkins_ssh_key,
+    wheel_keytab                   => hiera("wheel_keytab"),
   }
 }
 
