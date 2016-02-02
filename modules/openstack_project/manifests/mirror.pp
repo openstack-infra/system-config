@@ -4,7 +4,7 @@ class openstack_project::mirror (
   $vhost_name = $::fqdn,
 ) {
 
-  $mirror_root = '/afs/.openstack.org/mirror'
+  $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
   $www_base = '/var/www'
   $www_root = "${www_base}/mirror"
