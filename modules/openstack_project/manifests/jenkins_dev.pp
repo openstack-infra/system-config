@@ -106,12 +106,13 @@ class openstack_project::jenkins_dev (
   }
 
   file { '/etc/nodepool/nodepool.yaml':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'root',
-    mode    => '0400',
-    content => template("openstack_project/nodepool/${nodepool_template}"),
-    require => [
+    ensure           => present,
+    owner            => 'nodepool',
+    group            => 'root',
+    mode             => '0400',
+    content          => template("openstack_project/nodepool/${nodepool_template}"),
+    use_dib_from_git => true,
+    require          => [
       File['/etc/nodepool'],
       User['nodepool'],
     ],
