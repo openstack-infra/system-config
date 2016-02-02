@@ -4,15 +4,6 @@ cache:
   expiration_time: 86400
   path: /var/cache/ansible-inventory
 clouds:
-  openstackci2-hpcloud:
-    profile: hp
-    auth:
-      username: <%= @puppetmaster_clouds['openstackci2_hpcloud_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci2_hpcloud_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci2_hpcloud_project_name'] %>
-    regions:
-    - region-a.geo-1
-    - region-b.geo-1
   openstackci-bluebox:
     region_name: RegionOne
     auth:
