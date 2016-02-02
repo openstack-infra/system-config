@@ -31,12 +31,21 @@ class openstack_project::release_slave (
   $npm_username,
   $npm_userpassword,
   $npm_userurl,
+  $admin_keytab = '',
 ) {
   class { 'openstack_project::slave':
     ssh_key             => $jenkins_ssh_public_key,
     jenkins_gitfullname => $jenkins_gitfullname,
     jenkins_gitemail    => $jenkins_gitemail,
     project_config_repo => $project_config_repo,
+    afs                 => true,
+  }
+
+  file { '/etc/afsadmin.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $admin_keytab,
   }
 
   package { 'twine':
