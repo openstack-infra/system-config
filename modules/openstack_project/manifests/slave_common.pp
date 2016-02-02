@@ -93,33 +93,57 @@ class openstack_project::slave_common(
   # install linux-headers depending on OS version
   case $::osfamily {
     'RedHat': {
-      $header_packages = ['kernel-devel', 'kernel-headers']
+
+      if ! defined(Package['kernel-devel']) {
+        package { 'kernel-devel':
+          ensure => present,
+        }
+      }
+
+      if ! defined(Package['kernel-headers']) {
+        package { 'kernel-headers':
+          ensure => present,
+        }
+      }
     }
     'Debian': {
       if ($::operatingsystem == 'Debian') {
-          # install depending on kernel release
-          $header_packages = [ "linux-headers-${::kernelrelease}", ]
+        # install depending on kernel release
+        if ! defined(Package["linux-headers-${::kernelrelease}"]) {
+          package { "linux-headers-${::kernelrelease}":
+            ensure => present,
+          }
+        }
       }
       else {
         if ($::lsbdistcodename == 'precise') {
-          $header_packages = ['linux-headers-virtual', 'linux-headers-generic']
+          if ! defined(Package['linux-headers-virtual']) {
+            package { 'linux-headers-virtual':
+              ensure => present,
+            }
+          }
+          if ! defined(Package['linux-headers-generic']) {
+            package { 'linux-headers-generic':
+              ensure => present,
+            }
+          }
         }
         else {
           # In trusty (and later), linux-headers-virtual is a transitional package that
           # simply depends on linux-headers-generic, so there is no need to specify it
           # any more.  Specifying it when installing on an arm64 host causes an error,
           # as linux-headers-virtual does not exist for arm64/aarch64.
-          $header_packages = ['linux-headers-generic']
+          if ! defined(Package['linux-headers-generic']) {
+            package { 'linux-headers-generic':
+              ensure => present,
+            }
+          }
         }
       }
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily}.")
     }
-  }
-
-  package { $header_packages:
-    ensure => present
   }
 
   file { '/etc/zuul-env-reqs.txt':
