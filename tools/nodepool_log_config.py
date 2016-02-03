@@ -24,6 +24,7 @@ builds and applys some sensible rotation defaults.
 
 import argparse
 import logging
+import textwrap
 import yaml
 
 # default paths and outputs
@@ -43,10 +44,12 @@ _BASIC_FILE = """
 #
 
 [loggers]
-keys=root,nodepool,requests,shade,image,%(logger_titles)s
+keys=root,nodepool,requests,shade,image,
+ %(logger_titles)s
 
 [handlers]
-keys=console,debug,normal,image,%(handler_titles)s
+keys=console,debug,normal,image,
+ %(handler_titles)s
 
 [formatters]
 keys=simple
@@ -217,8 +220,14 @@ def generate_log_config(config, log_dir, image_log_dir, output):
     final_output = _BASIC_FILE % {
         'log_dir': log_dir,
         'image_log_dir': image_log_dir,
-        'logger_titles': ','.join(logger_titles),
-        'handler_titles': ','.join(handler_titles),
+        'logger_titles': "\n".join(textwrap.wrap(', '.join(logger_titles),
+                                                 break_long_words=False,
+                                                 break_on_hyphens=False,
+                                                 subsequent_indent=' ')),
+        'handler_titles': "\n".join(textwrap.wrap(', '.join(handler_titles),
+                                                  break_long_words=False,
+                                                  break_on_hyphens=False,
+                                                  subsequent_indent=' ')),
         'image_loggers_and_handlers': image_loggers_and_handlers,
     }
 
