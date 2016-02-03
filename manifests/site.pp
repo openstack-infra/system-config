@@ -675,7 +675,17 @@ node 'nodepool.openstack.org' {
   $tripleo_username     = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password     = hiera('nodepool_tripleo_password')
   $tripleo_project      = hiera('nodepool_tripleo_project', 'project')
+  $omfracloud_username  = hiera('nodepool_omfracloud_username', 'username')
+  $omfracloud_password  = hiera('nodepool_omfracloud_password')
+  $omfracloud_project   = hiera('nodepool_omfracloud_project', 'project')
   $clouds_yaml          = template("openstack_project/nodepool/clouds.yaml.erb")
+  file { '/etc/openstack/omfra_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    source  => 'puppet:///openstack_project/puppetmaster/omfra_cacert.pem',
+  }
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
