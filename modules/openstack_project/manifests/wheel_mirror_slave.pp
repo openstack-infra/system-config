@@ -26,8 +26,8 @@ class openstack_project::wheel_mirror_slave (
 
   if( $wheel_keytab ) {
     file { "/etc/wheel.keytab":
-      owner   => 'root',
-      group   => 'root',
+      owner   => 'jenkins',
+      group   => 'jenkins',
       mode    => '0400',
       content => $wheel_keytab,
     }
