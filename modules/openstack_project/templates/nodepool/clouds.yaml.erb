@@ -46,3 +46,15 @@ clouds:
       username: '<%= internap_username %>'
       password: '<%= internap_password %>'
       project_name: '<%= internap_project %>'
+  omfracloud-west:
+    auth:
+      username: '<%= omfracloud_west_username %>'
+      password: '<%= omfracloud_west_password %>'
+      project_name: '<%= omfracloud_west_project %>'
+      user_domain_name: 'infra'
+      project_domain_name: 'infra'
+      auth_url: 'https://controller00.hpuswest.ic.openstack.org:35357/v3'
+    auth_type: 'v3password'
+    cacert: '/etc/openstack/omfra_cacert.pem'
+    identity_api_version: '3'
+    floating_ip_source: 'None'
