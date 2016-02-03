@@ -42,6 +42,15 @@ class openstack_project::wheel_mirror_slave (
     afs                 => true,
   }
 
+  # Create a working directory for the wheel slave, and give it to jenkins to
+  # work with
+  file { "/opt/wheel":
+    ensure => 'directory',
+    owner  => 'jenkins',
+    group  => 'jenkins',
+    mode   => '0750',
+  }
+
   # below follows a rough list of things required to build binary
   # wheels.
 
