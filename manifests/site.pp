@@ -528,6 +528,8 @@ node /^git\d+\.openstack\.org$/ {
 # A machine to drive AFS mirror updates.
 # Node-OS: trusty
 node 'mirror-update.openstack.org' {
+  $group = "afsadmin"
+
   class { 'openstack_project::mirror_update':
     bandersnatch_keytab => hiera('bandersnatch_keytab'),
     admin_keytab        => hiera('afsadmin_keytab'),
@@ -881,6 +883,8 @@ node 'proposal.slave.openstack.org' {
 
 # Node-OS: trusty
 node 'release.slave.openstack.org' {
+  $group = "afsadmin"
+
   include openstack_project
   class { 'openstack_project::release_slave':
     pypi_username          => 'openstackci',
