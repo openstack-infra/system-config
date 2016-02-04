@@ -80,7 +80,7 @@ accessible via the Internet to help providers see and debug
 performance issues.
 
 The OpenStack Foundation has identified Infrastructure Donors as a
-special category of sponsoring organization and prominately identifies
+special category of sponsoring organization and prominently identifies
 them on this page: https://www.openstack.org/foundation/companies/
 
 If this sounds interesting, and you have some capacity to spare, it

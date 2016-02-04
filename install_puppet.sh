@@ -229,7 +229,7 @@ function setup_pip {
     # install later might depend on the python-setuptools package.  To
     # avoid later conflicts, and because distro packages don't include
     # enough info for pip to certain it can fully uninstall the old
-    # package, for saftey we clear it out by hand (this seems to have
+    # package, for safety we clear it out by hand (this seems to have
     # been a problem with very old to new updates, e.g. centos6 to
     # current-era, but less so for smaller jumps).  There is a bit of
     # chicken-and-egg problem with pip in that it requires setuptools

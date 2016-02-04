@@ -52,7 +52,7 @@ Set up host principals for slave propogation::
 
 Copy the file `/etc/krb5.keytab` to the second kdc host.
 
-The puppet config sets up slave propogation scripts and cron jobs to run them.
+The puppet config sets up slave propagation scripts and cron jobs to run them.
 
 .. _addprinc:
 
