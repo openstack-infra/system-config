@@ -37,6 +37,7 @@ class openstack_project::gerrit (
   $httpd_acceptorthreads = '',
   $httpd_minthreads = '',
   $httpd_maxthreads = '',
+  $httpd_maxqueued = '',
   $httpd_maxwait = '',
   $war = '',
   $contactstore = false,
@@ -135,6 +136,7 @@ class openstack_project::gerrit (
     httpd_acceptorthreads               => $httpd_acceptorthreads,
     httpd_minthreads                    => $httpd_minthreads,
     httpd_maxthreads                    => $httpd_maxthreads,
+    httpd_maxqueued                     => $httpd_maxqueued,
     httpd_maxwait                       => $httpd_maxwait,
     commentlinks                        => [
       {
