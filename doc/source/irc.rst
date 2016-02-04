@@ -127,7 +127,7 @@ single argument, which should be one of the options listed for voting by the
 
 Note that you can vote multiple times, but only your last vote will count.
 
-One can check the current vote tallies useing the ``#showvote`` command, which
+One can check the current vote tallies using the ``#showvote`` command, which
 takes no arguments. This will list the number of votes and voters for each item
 that has votes.
 
