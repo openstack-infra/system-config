@@ -1122,6 +1122,32 @@ node 'translate.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'translate-checksite.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::translations_checksite':
+    zanata_server_user         => hiera('translations_checksite_zanata_user'),
+    zanata_server_api_key      => hiera('translations_checksite_zanata_api_key'),
+    zanata_project_version     => 'master', # change to mitaka if necessary
+    devstack_branch            => 'master', # change to mitaka if necessary
+    devstack_admin_password    => hiera('translations_checksite_admin_password'),
+    devstack_database_password => hiera('translations_checksite_database_password'),
+    devstack_rabbit_password   => hiera('translations_checksite_rabbit_password'),
+    devstack_service_password  => hiera('translations_checksite_service_password'),
+    devstack_service_token     => hiera('translations_checksite_service_token'),
+    devstack_swift_hash        => hiera('translations_checksite_swift_hash_password'),
+    devstack_ssh_pubkey        => hiera('translations_checksite_devstack_ssh_rsa_pubkey_contents'),
+    checksite_sync_hour        => '*',
+    checksite_sync_minute      => '00',
+    checksite_restack          => 1,
+    checksite_restack_hour     => '05',
+    checksite_restack_minute   => '00',
+  }
+}
+# Node-OS: trusty
 node 'translate-dev.openstack.org' {
   class { 'openstack_project::translate_dev':
     sysadmins               => hiera('sysadmins', []),
