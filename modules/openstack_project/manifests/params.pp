@@ -14,7 +14,7 @@ class openstack_project::params {
       $packages = ['parted', 'puppet', 'wget', 'iputils-ping']
       case $::operatingsystemrelease {
         /^(12|14)\.(04|10)$/: {
-          $user_packages = ['emacs23-nox', 'vim-nox']
+          $user_packages = ['emacs23-nox', 'vim-nox', 'iftop']
         }
         default: {
           $user_packages = ['emacs-nox', 'vim-nox']
