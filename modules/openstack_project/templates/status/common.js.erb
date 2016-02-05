@@ -16,11 +16,11 @@ function header(activeTabName) {
   tabsName = new Array();
   tabsLink = new Array();
   tabsName[0] = 'Status'; tabsLink[0] = '<%= @status_base_url %>';
-  tabsName[1] = 'Zuul'; tabsLink[1] = '<%= @status_base_url %>/zuul/';
-  tabsName[2] = 'Rechecks'; tabsLink[2] = '<%= @status_base_url %>/elastic-recheck/';
-  tabsName[3] = 'QA health'; tabsLink[3] = '<%= @status_base_url %>/openstack-health/';
-  tabsName[4] = 'Reviews'; tabsLink[4] = '<%= @status_base_url %>/reviews/';
-  tabsName[5] = 'Bugday'; tabsLink[5] = '<%= @status_base_url %>/bugday/';
+  tabsName[1] = 'Zuul'; tabsLink[1] = '<%= @status_base_url %>zuul/';
+  tabsName[2] = 'Rechecks'; tabsLink[2] = '<%= @status_base_url %>elastic-recheck/';
+  tabsName[3] = 'QA health'; tabsLink[3] = '<%= @status_base_url %>openstack-health/';
+  tabsName[4] = 'Reviews'; tabsLink[4] = '<%= @status_base_url %>reviews/';
+  tabsName[5] = 'Bugday'; tabsLink[5] = '<%= @status_base_url %>bugday/';
 
   document.write(
    '<div id="header" class="container">'+
@@ -90,4 +90,3 @@ function footer() {
   '</div>'+
   '</div>')
 }
-
