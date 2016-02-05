@@ -11,19 +11,18 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://pypi.openstack.org (deprecated)
-  * http://pypi.bhs1.openstack.org
-  * http://pypi.dfw.openstack.org
-  * http://pypi.gra1.openstack.org
-  * http://pypi.iad.openstack.org
-  * http://pypi.nyj01.openstack.org
-  * http://pypi.ord.openstack.org
-  * http://pypi.region-b.geo-1.openstack.org
-  * http://pypi.regionone.openstack.org
+  * http://mirror.bhs1.ovh.openstack.org/pypi
+  * http://mirror.dfw.rax.openstack.org/pypi
+  * http://mirror.gra1.ovh.openstack.org/pypi
+  * http://mirror.iad.rax.openstack.orgv
+  * http://mirror.nyj01.internap.openstack.org/pypi
+  * http://mirror.ord.rax.openstack.org/pypi
+  * http://mirror.regionone.bluebox-sjc1.openstack.org/pypi
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
 :Projects:
   * https://pypi.python.org/pypi/bandersnatch
+  * https://git.openstack.org/cgit/openstack-infra/puppet-bandersnatch
 :Documentation:
   * https://pypi.python.org/pypi/bandersnatch#configuration
 :Bugs:
