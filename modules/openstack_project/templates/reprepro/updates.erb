@@ -1,0 +1,67 @@
+<% @ubuntu_releases.each do |release| -%>
+Name: ubuntu-<%= release %>
+Method: http://us.archive.ubuntu.com/ubuntu
+Components: main universe restricted multiverse
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 437D05B5
+
+Name: ubuntu-<%= release %>-updates
+Method: http://us.archive.ubuntu.com/ubuntu
+Components: main universe restricted multiverse
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 437D05B5
+
+Name: ubuntu-<%= release %>-backports
+Method: http://us.archive.ubuntu.com/ubuntu
+Components: main universe restricted multiverse
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 437D05B5
+
+Name: ubuntu-<%= release %>-security
+Method: http://security.ubuntu.com/ubuntu
+Components: main universe restricted multiverse
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 437D05B5
+<% end -%>
+
+<% @debian_releases.each do |release| -%>
+Name: ubuntu-<%= release %>
+Method: http://ftp.us.debian.org/debian/
+Components: main non-free contrib
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 55BE302B
+
+Name: ubuntu-<%= release %>-updates
+Method: http://ftp.us.debian.org/debian/
+Components: main non-free contrib
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 55BE302B
+
+Name: ubuntu-<%= release %>-backports
+Method: http://ftp.us.debian.org/debian/
+Components: main non-free contrib
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 55BE302B
+
+Name: ubuntu-<%= release %>-security
+Method: http://security.debian.org/
+Components: main non-free contrib
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 55BE302B
+<% end -%>

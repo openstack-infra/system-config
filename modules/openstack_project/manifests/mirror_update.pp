@@ -58,7 +58,9 @@ class openstack_project::mirror_update (
     ]
   }
 
-  include ::openstack_project::reprepro
+  class { '::openstack_project::reprepro':
+    ubuntu_releases => ['trusty'],
+  }
 
   file { '/etc/reprepro.keytab':
     owner   => 'root',

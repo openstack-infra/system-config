@@ -6,6 +6,8 @@ class openstack_project::reprepro (
   $updates_file = 'puppet:///modules/openstack_project/reprepro/updates',
   $options_template = 'openstack_project/reprepro/options.erb',
   $distributions_template = 'openstack_project/reprepro/distributions.erb',
+  $ubuntu_releases = [],
+  $debian_releases = [],
 ) {
 
   package { 'reprepro':

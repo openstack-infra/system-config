@@ -1,39 +1,83 @@
+<% @ubuntu_releases.each do |release| -%>
 Origin: Ubuntu
-Codename: trusty
-Description: OpenStack Ubuntu Trusty mirror
+Codename: <%= release %>
+Description: OpenStack Ubuntu <%= release.capitalize %> mirror
 Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-trusty
-Log: <%= @logdir %>/ubuntu-trusty.log
+Update: ubuntu-<%= release %>
+Log: <%= @logdir %>/ubuntu-<%= release %>.log
 
 Origin: Ubuntu
-Codename: trusty-updates
-Description: OpenStack Ubuntu Trusty Updates mirror
+Codename: <%= release %>-updates
+Description: OpenStack Ubuntu <%= release.capitalize %> Updates mirror
 Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-trusty-updates
-Log: <%= @logdir %>/ubuntu-trusty-updates.log
+Update: ubuntu-<%= release %>-updates
+Log: <%= @logdir %>/ubuntu-<%= release %>-updates.log
 
 Origin: Ubuntu
-Codename: trusty-backports
-Description: OpenStack Ubuntu Trusty Backports mirror
+Codename: <%= release %>-backports
+Description: OpenStack Ubuntu <%= release.capitalize %> Backports mirror
 Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-trusty-backports
-Log: <%= @logdir %>/ubuntu-trusty-backports.log
+Update: ubuntu-<%= release %>-backports
+Log: <%= @logdir %>/ubuntu-<%= release %>-backports.log
 
 Origin: Ubuntu
-Codename: trusty-security
-Description: OpenStack Ubuntu Trusty Security mirror
+Codename: <%= release %>-security
+Description: OpenStack Ubuntu <%= release.capitalize %> Security mirror
 Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-trusty-security
-Log: <%= @logdir %>/ubuntu-trusty-security.log
+Update: ubuntu-<%= release %>-security
+Log: <%= @logdir %>/ubuntu-<%= release %>-security.log
+<% end -%>
+
+<% @debian_releases.each do |release| -%>
+Origin: Debian
+Codename: <%= release %>
+Description: OpenStack Debian <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main non-free contrib
+UDebComponents: main
+Contents: .gz
+Update: debian-<%= release %>
+Log: <%= @logdir %>/debian-<%= release %>.log
+
+Origin: Debian
+Codename: <%= release %>-updates
+Description: OpenStack Debian <%= release.capitalize %> Updates mirror
+Architectures: amd64
+Components: main non-free contrib
+UDebComponents: main
+Contents: .gz
+Update: debian-<%= release %>-updates
+Log: <%= @logdir %>/debian-<%= release %>-updates.log
+
+Origin: Debian
+Codename: <%= release %>-backports
+Description: OpenStack Debian <%= release.capitalize %> Backports mirror
+Architectures: amd64
+Components: main non-free contrib
+UDebComponents: main
+Contents: .gz
+Update: debian-<%= release %>-backports
+Log: <%= @logdir %>/debian-<%= release %>-backports.log
+
+Origin: Debian
+Codename: <%= release %>-security
+Description: OpenStack Debian <%= release.capitalize %> Security mirror
+Architectures: amd64
+Components: main non-free contrib
+UDebComponents: main
+Contents: .gz
+Update: debian-<%= release %>-security
+Log: <%= @logdir %>/debian-<%= release %>-security.log
+<% end -%>
