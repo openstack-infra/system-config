@@ -42,8 +42,8 @@ class openstack_project::release_slave (
   }
 
   file { '/etc/afsadmin.keytab':
-    owner   => 'root',
-    group   => 'root',
+    owner   => 'jenkins',
+    group   => 'jenkins',
     mode    => '0400',
     content => $admin_keytab,
   }
