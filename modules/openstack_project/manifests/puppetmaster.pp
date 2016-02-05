@@ -196,6 +196,9 @@ class openstack_project::puppetmaster (
     require => Cron['restartjenkinsmasters'],
   }
 
+  # Ansible mgmt
+  # TODO: Put this into its own class, maybe called bastion::ansible or something
+
   vcsrepo { '/opt/ansible':
     ensure   => latest,
     provider => git,
@@ -229,6 +232,14 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
+  }
+
+  file { '/etc/ansible/hosts/infracloud':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/infracloud',
   }
 
   file { '/etc/ansible/groups.txt':
