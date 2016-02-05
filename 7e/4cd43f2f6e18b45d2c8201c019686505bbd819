@@ -1,0 +1,10 @@
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Michael Krotscheck <krotscheck@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 05 Feb 2016 14:06:33 +0000
+Reviewed-on: https://review.openstack.org/276587
+Project: openstack-infra/system-config
+Branch: refs/heads/master
