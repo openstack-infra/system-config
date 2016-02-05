@@ -16,24 +16,6 @@ class openstack_project::server (
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = true,
   $pypi_index_url            = 'https://pypi.python.org/simple',
-  $pypi_trusted_hosts        = [
-    'pypi.bhs1.openstack.org',
-    'pypi.dfw.openstack.org',
-    'pypi.gra1.openstack.org',
-    'pypi.iad.openstack.org',
-    'pypi.nyj01.openstack.org',
-    'pypi.ord.openstack.org',
-    'pypi.region-b.geo-1.openstack.org',
-    'pypi.regionone.openstack.org',
-    'mirror.bhs1.ovh.openstack.org',
-    'mirror.dfw.rax.openstack.org',
-    'mirror.gra1.ovh.openstack.org',
-    'mirror.iad.rax.openstack.org',
-    'mirror.nyj01.internap.openstack.org',
-    'mirror.ord.rax.openstack.org',
-    'mirror.region-b.geo-1.hpcloud.openstack.org',
-    'mirror.regionone.bluebox-sjc1.openstack.org',
-  ],
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -50,7 +32,6 @@ class openstack_project::server (
     manage_exim               => $manage_exim,
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
-    pypi_trusted_hosts        => $pypi_trusted_hosts,
     purge_apt_sources         => true,
   }
 }
