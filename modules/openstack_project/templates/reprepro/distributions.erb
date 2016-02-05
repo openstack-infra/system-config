@@ -6,7 +6,7 @@ Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-<%= release %>
+Update: ubuntu
 Log: <%= @logdir %>/ubuntu-<%= release %>.log
 
 Origin: Ubuntu
@@ -16,7 +16,7 @@ Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-<%= release %>-updates
+Update: ubuntu
 Log: <%= @logdir %>/ubuntu-<%= release %>-updates.log
 
 Origin: Ubuntu
@@ -26,7 +26,7 @@ Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-<%= release %>-backports
+Update: ubuntu
 Log: <%= @logdir %>/ubuntu-<%= release %>-backports.log
 
 Origin: Ubuntu
@@ -36,7 +36,7 @@ Architectures: amd64
 Components: main universe restricted multiverse
 UDebComponents: main
 Contents: .gz
-Update: ubuntu-<%= release %>-security
+Update: ubuntu-security
 Log: <%= @logdir %>/ubuntu-<%= release %>-security.log
 <% end -%>
 
@@ -48,7 +48,7 @@ Architectures: amd64
 Components: main non-free contrib
 UDebComponents: main
 Contents: .gz
-Update: debian-<%= release %>
+Update: debian
 Log: <%= @logdir %>/debian-<%= release %>.log
 
 Origin: Debian
@@ -58,7 +58,7 @@ Architectures: amd64
 Components: main non-free contrib
 UDebComponents: main
 Contents: .gz
-Update: debian-<%= release %>-updates
+Update: debian
 Log: <%= @logdir %>/debian-<%= release %>-updates.log
 
 Origin: Debian
@@ -68,16 +68,16 @@ Architectures: amd64
 Components: main non-free contrib
 UDebComponents: main
 Contents: .gz
-Update: debian-<%= release %>-backports
+Update: debian
 Log: <%= @logdir %>/debian-<%= release %>-backports.log
 
 Origin: Debian
-Codename: <%= release %>-security
+Codename: <%= release %>/updates
 Description: OpenStack Debian <%= release.capitalize %> Security mirror
 Architectures: amd64
 Components: main non-free contrib
 UDebComponents: main
 Contents: .gz
-Update: debian-<%= release %>-security
+Update: debian-security
 Log: <%= @logdir %>/debian-<%= release %>-security.log
 <% end -%>
