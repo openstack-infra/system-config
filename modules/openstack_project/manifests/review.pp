@@ -21,6 +21,10 @@
 # http:
 #  //groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
 
+# httpd.maxQueued:
+# Default value is too low, should increase to new default.
+# https://gerrit-review.googlesource.com/#/c/70627
+
 # httpd.maxWait:
 # 12:07 <@spearce> httpd.maxwait defaults to 5 minutes and is how long gerrit
 #                  waits for an idle sshd.thread before aboring the http request
@@ -113,6 +117,7 @@ class openstack_project::review (
     core_packedgitwindowsize            => '16k',
     sshd_threads                        => '100',
     index_threads                       => 4,
+    httpd_maxqueued                     => '200',
     httpd_maxwait                       => '5000min',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.11.a14450f.war',
