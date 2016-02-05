@@ -344,4 +344,28 @@ class openstack_project::static (
     revision => 'master',
     source   => 'https://git.openstack.org/openstack-infra/trystack-site',
   }
+
+  ###########################################################
+  # Releases
+
+  ::httpd::vhost { 'releases.openstack.org':
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/releases',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'releases.openstack.org',
+    require    => [
+      File['/srv/static/releases'],
+      File[$cert_file],
+      File[$key_file],
+    ],
+  }
+
+  file { '/srv/static/releases':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
 }
