@@ -3,7 +3,7 @@ afsadmin mirror-update.openstack.org:release.slave.openstack.org
 afsdb afsdb*.openstack.org
 cacti ~cacti\d+\.openstack\.org
 ci-backup ci-backup-*.openstack.org
-disabled ci-backup-rs-ord.openstack.org:ask-staging.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
+disabled ci-backup-rs-ord.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
