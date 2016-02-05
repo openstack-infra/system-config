@@ -9,7 +9,7 @@ class openstack_project::status (
   $recheck_ssh_private_key,
   $recheck_bot_passwd,
   $recheck_bot_nick,
-  $status_base_url = 'http://status.openstack.org/',
+  $status_base_url = 'http://status.openstack.org',
   $status_title = 'OpenStack',
   $graphite_render_url = 'http://graphite.openstack.org/render/',
   $jenkins_gitfullname = 'OpenStack Jenkins',
