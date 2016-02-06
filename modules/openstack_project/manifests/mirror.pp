@@ -50,6 +50,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to apt.
+  file { "${www_root}/apt":
+    ensure  => link,
+    target  => "${mirror_root}/apt",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
