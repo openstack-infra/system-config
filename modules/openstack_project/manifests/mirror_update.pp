@@ -86,7 +86,13 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       Class['::openstack_project::reprepro']
+       Class['::openstack_project::reprepro'],
+       Openstack_project::Gpg_key['437D05B5'],
+       Openstack_project::Gpg_key['55BE302B'],
     ]
   }
+
+  openstack_project::gpg_key { '437D05B5': }
+  openstack_project::gpg_key { '55BE302B': }
+  
 }
