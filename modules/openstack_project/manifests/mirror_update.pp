@@ -86,7 +86,33 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       Class['::openstack_project::reprepro']
+       Class['::openstack_project::reprepro'],
     ]
+  }
+
+  include ::gnupg
+
+  gnupg_key { 'Ubuntu Archive':
+    ensure     => present,
+    key_id     => '40976EAF437D05B5',
+    user       => 'root',
+    key_server => 'hkp://keyserver.ubuntu.com',
+    key_type   => 'public',
+  }
+
+  gnupg_key { 'Debian Archive Jessie':
+    ensure     => present,
+    key_id     => '2B90D010',
+    user       => 'root',
+    key_server => 'hkp://pool.sks-keyservers.net',
+    key_type   => 'public',
+  }
+
+  gnupg_key { 'Debian Stable Release Jessie':
+    ensure     => present,
+    key_id     => '518E17E1',
+    user       => 'root',
+    key_server => 'hkp://pool.sks-keyservers.net',
+    key_type   => 'public',
   }
 }
