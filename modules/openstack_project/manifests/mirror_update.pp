@@ -86,7 +86,25 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       Class['::openstack_project::reprepro']
+       Class['::openstack_project::reprepro'],
     ]
+  }
+
+  include ::gnupg
+
+  gnupg_key { 'ubuntu_archive':
+    ensure     => present,
+    key_id     => '437D05B5',
+    user       => 'root',
+    key_server => 'hkp://keyserver.ubuntu.com',
+    key_type   => 'public',
+  }
+
+  gnupg_key { 'debian_archive':
+    ensure     => present,
+    key_id     => '55BE302B',
+    user       => 'root',
+    key_server => 'hkp://subkeys.pgp.net',
+    key_type   => 'public',
   }
 }
