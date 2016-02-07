@@ -1,7 +1,7 @@
 # == Class: openstack_project::mirror_update
 #
 class openstack_project::reprepro (
-  $outdir = '/afs/.openstack.org/mirror/apt',
+  $basedir = '/afs/.openstack.org/mirror/apt',
   $logdir = '/var/log/reprepro',
   $updates_file = 'puppet:///modules/openstack_project/reprepro/updates',
   $options_template = 'openstack_project/reprepro/options.erb',
