@@ -1,11 +1,12 @@
 # == Class: openstack_project::mirror_update
 #
 class openstack_project::reprepro (
-  $basedir = '/afs/.openstack.org/mirror/apt',
+  $confdir,
+  $basedir,
+  $distributions,
   $logdir = '/var/log/reprepro',
   $updates_file = 'puppet:///modules/openstack_project/reprepro/updates',
   $options_template = 'openstack_project/reprepro/options.erb',
-  $distributions_template = 'openstack_project/reprepro/distributions.erb',
   $ubuntu_releases = [],
   $debian_releases = [],
 ) {
@@ -22,11 +23,15 @@ class openstack_project::reprepro (
     ensure => directory,
   }
 
+  file { "$confdir":
+    ensure => directory,
+  }
+
   file { '/var/run/reprepro':
     ensure => directory,
   }
 
-  file { '/etc/reprepro/updates':
+  file { "${confdir}/updates":
     ensure => present,
     owner  => 'root',
     group  => 'root',
@@ -34,7 +39,7 @@ class openstack_project::reprepro (
     source => $updates_file,
   }
 
-  file { '/etc/reprepro/options':
+  file { "${confdir}/options":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -42,11 +47,11 @@ class openstack_project::reprepro (
     content => template($options_template),
   }
 
-  file { '/etc/reprepro/distributions':
+  file { "${confdir}/distributions":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template($distributions_template),
+    content => template($distributions),
   }
 }

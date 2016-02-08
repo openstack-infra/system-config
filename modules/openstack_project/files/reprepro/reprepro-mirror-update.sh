@@ -16,8 +16,11 @@
 
 set -e
 
+REPREPRO_CONFIG=$1
+MIRROR_VOLUME=$2
+
 UNREF_FILE=/var/run/reprepro/unreferenced-files
-REPREPRO='k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro --confdir /etc/reprepro'
+REPREPRO="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro --confdir $REPREPRO_CONFIG"
 
 echo "Obtaining reprepro tokens and running reprepro update"
 $REPREPRO update
@@ -35,6 +38,6 @@ $REPREPRO checkpool fast
 $REPREPRO check
 
 echo "reprepro completed successfully, running reprepro export."
-k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.apt
+k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
 
 echo "Done."
