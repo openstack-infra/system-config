@@ -28,11 +28,11 @@ if [ -f $UNREF_FILE ] ; then
 fi
 
 echo "Saving list of newly unreferenced files for next time"
-$REPREPRO dumpunreferenced > $UNREF_FILE
+k5start -t -f /etc/reprepro.keytab service/reprepro --$REPREPRO dumpunreferenced > $UNREF_FILE
 
 echo "Checking state of mirror"
-$REPREPRO checkpool fast
-$REPREPRO check
+k5start -t -f /etc/reprepro.keytab service/reprepro --$REPREPRO checkpool fast
+k5start -t -f /etc/reprepro.keytab service/reprepro --$REPREPRO check
 
 echo "reprepro completed successfully, running reprepro export."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.apt
