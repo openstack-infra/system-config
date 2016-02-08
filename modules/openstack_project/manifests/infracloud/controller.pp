@@ -14,7 +14,6 @@ class openstack_project::infracloud::controller (
   $ssl_key_file_contents,
   $ssl_cert_file_contents,
   $br_name,
-  $controller_management_address,
   $controller_public_address = $::fqdn,
 ) {
   class { '::infracloud::controller':
@@ -33,7 +32,6 @@ class openstack_project::infracloud::controller (
     ssl_key_file_contents            => $ssl_key_file_contents,
     ssl_cert_file_contents           => $ssl_cert_file_contents,
     br_name                          => $br_name,
-    controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
   }
 }
