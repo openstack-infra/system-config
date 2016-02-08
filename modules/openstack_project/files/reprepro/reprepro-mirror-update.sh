@@ -17,21 +17,22 @@
 set -e
 
 UNREF_FILE=/var/run/reprepro/unreferenced-files
+REPREPRO='reprepro --confdir /etc/reprepro'
 
 echo "Obtaining reprepro tokens and running reprepro update"
-k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro update
+k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m $REPREPRO update
 
 if [ -f $UNREF_FILE ] ; then
     echo "Cleaning up files made unreferenced on the last run"
-    k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro deleteifunreferenced < $UNREF_FILE
+    k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m $REPREPRO deleteifunreferenced < $UNREF_FILE
 fi
 
 echo "Saving list of newly unreferenced files for next time"
-reprepro dumpunreferenced > $UNREF_FILE
+$REPREPRO dumpunreferenced > $UNREF_FILE
 
 echo "Checking state of mirror"
-reprepro checkpool fast
-reprepro check
+$REPREPRO checkpool fast
+$REPREPRO check
 
 echo "reprepro completed successfully, running reprepro export."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.apt
