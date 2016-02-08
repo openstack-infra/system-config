@@ -51,9 +51,9 @@ class openstack_project::mirror (
   }
 
   # Create the symlink to apt.
-  file { "${www_root}/apt":
+  file { "${www_root}/ubuntu":
     ensure  => link,
-    target  => "${mirror_root}/apt",
+    target  => "${mirror_root}/ubuntu",
     owner   => root,
     group   => root,
     require => [
