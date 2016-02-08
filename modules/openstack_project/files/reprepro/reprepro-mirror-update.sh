@@ -31,7 +31,7 @@ if [ -f $UNREF_FILE ] ; then
 fi
 
 echo "Saving list of newly unreferenced files for next time"
-$REPREPRO dumpunreferenced > $UNREF_FILE
+k5start -t -f /etc/reprepro.keytab service/reprepro -- bash -c "reprepro --confdir $REPREPRO_CONFIG dumpunreferenced > $UNREF_FILE"
 
 echo "Checking state of mirror"
 $REPREPRO checkpool fast
