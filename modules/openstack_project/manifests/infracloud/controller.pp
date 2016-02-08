@@ -20,8 +20,9 @@ class openstack_project::infracloud::controller (
   $glance_ssl_cert_file_contents,
   $nova_ssl_key_file_contents,
   $nova_ssl_cert_file_contents,
+  $rabbitmq_ssl_key_file_contents,
+  $rabbitmq_ssl_cert_file_contents,
   $br_name,
-  $controller_management_address,
   $controller_public_address = $::fqdn,
 ) {
   class { '::infracloud::controller':
@@ -46,8 +47,9 @@ class openstack_project::infracloud::controller (
     neutron_ssl_cert_file_contents   => $glance_ssl_cert_file_contents,
     nova_ssl_key_file_contents       => $nova_ssl_key_file_contents,
     nova_ssl_cert_file_contents      => $nova_ssl_cert_file_contents,
+    rabbitmq_ssl_key_file_contents   => $rabbitmq_ssl_key_file_contents,
+    rabbitmq_ssl_cert_file_contents  => $rabbitmq_ssl_cert_file_contents,
     br_name                          => $br_name,
-    controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
   }
 }
