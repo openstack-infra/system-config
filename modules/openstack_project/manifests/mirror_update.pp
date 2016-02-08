@@ -59,7 +59,10 @@ class openstack_project::mirror_update (
   }
 
   class { '::openstack_project::reprepro':
-    ubuntu_releases => ['trusty'],
+    confdir       => '/etc/reprepro/ubuntu',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu.erb',
+    releases => ['trusty'],
   }
 
   file { '/etc/reprepro.keytab':
@@ -78,9 +81,13 @@ class openstack_project::mirror_update (
   }
 
   cron { 'reprepro':
+    ensure => absent,
+  }
+
+  cron { 'reprepro ubuntu':
     user        => $user,
     hour        => '*/2',
-    command     => 'flock -n /var/run/reprepro/mirror.lock reprepro-mirror-update >>/var/log/reprepro/mirror.log 2>&1',
+    command     => 'flock -n /var/run/reprepro/ubuntu.lock reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu >>/var/log/reprepro/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
        File['/usr/local/bin/reprepro-mirror-update'],
