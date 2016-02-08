@@ -1145,7 +1145,7 @@ node /.*wheel-mirror-.*\.openstack\.org/ {
 node 'controller00.hpuswest.ic.openstack.org' {
   $group = 'infracloud'
   class { '::openstack_project::server':
-    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    iptables_public_tcp_ports => [5000,5671,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
   }
@@ -1166,7 +1166,6 @@ node 'controller00.hpuswest.ic.openstack.org' {
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
     br_name                          => 'br-vlan25',
-    controller_management_address    => '10.10.16.146',
     controller_public_address        => $::fqdn,
   }
 }
@@ -1183,7 +1182,6 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
     neutron_admin_password           => hiera('neutron_admin_password'),
     ssl_cert_file_contents           => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
     br_name                          => 'br-vlan25',
-    controller_management_address    => '10.10.16.146',
     controller_public_address        => 'controller00.hpuswest.ic.openstack.org',
   }
 }
