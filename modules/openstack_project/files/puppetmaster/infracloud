@@ -1,13 +1,9 @@
 # this disables infracloud until we are ready
 [disabled:children]
-infracloud-west-compute
-infracloud-west-controller
+infracloud
 
-[infracloud-west-controller]
+[infracloud]
 controller00.hpuswest.ic.openstack.org
-
-
-[infracloud-west-compute]
 compute000.hpuswest.ic.openstack.org
 compute001.hpuswest.ic.openstack.org
 compute002.hpuswest.ic.openstack.org
@@ -53,4 +49,3 @@ compute038.hpuswest.ic.openstack.org
 compute041.hpuswest.ic.openstack.org
 compute042.hpuswest.ic.openstack.org
 compute043.hpuswest.ic.openstack.org
-
