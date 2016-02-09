@@ -1177,4 +1177,20 @@ node 'controller00.hpuswest.ic.openstack.org' {
   }
 }
 
+node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    br_name                          => 'br-vlan25',
+    controller_management_address    => '10.10.16.146',
+    controller_public_address        => 'controller00.hpuswest.ic.openstack.org',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
