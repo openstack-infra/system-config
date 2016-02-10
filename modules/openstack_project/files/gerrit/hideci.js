@@ -14,7 +14,7 @@
 // under the License.
 
 // this regex matches the hash part of review pages
-var hashRegex = /^\#\/c\/([\d]+)(\/(\d+)?\/?)?$/;
+var hashRegex = /^\#\/c\/([\d]+)((\/\d+)([.][.](\d+))?)?\/?$/;
 // this regex matches CI comments
 var ciRegex = /^(.* CI|Jenkins)$/;
 // this regex matches "Patch set #"
