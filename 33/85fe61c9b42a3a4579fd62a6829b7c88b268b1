@@ -1,0 +1,10 @@
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 10 Feb 2016 14:52:42 +0000
+Reviewed-on: https://review.openstack.org/261110
+Project: openstack-infra/system-config
+Branch: refs/heads/master
