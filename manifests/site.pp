@@ -1190,6 +1190,7 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
     br_name                          => 'br-vlan25',
     controller_management_address    => '10.10.16.146',
     controller_public_address        => 'controller00.hpuswest.ic.openstack.org',
+    ssl_chain_file_contents          => hiera('ssl_chain_file_contents'),
   }
 }
 

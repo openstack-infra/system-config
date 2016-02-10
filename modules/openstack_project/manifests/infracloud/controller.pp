@@ -24,6 +24,10 @@ class openstack_project::infracloud::controller (
   $controller_management_address,
   $controller_public_address = $::fqdn,
 ) {
+  class { '::infracloud::cacert':
+    cacert_content => $ssl_chain_file_contents,
+  }
+
   class { '::infracloud::controller':
     neutron_rabbit_password          => $neutron_rabbit_password,
     nova_rabbit_password             => $nova_rabbit_password,
