@@ -1,4 +1,5 @@
 class openstack_project::infracloud::controller (
+  $keystone_rabbit_password,
   $neutron_rabbit_password,
   $nova_rabbit_password,
   $root_mysql_password,
@@ -25,6 +26,7 @@ class openstack_project::infracloud::controller (
   $controller_public_address = $::fqdn,
 ) {
   class { '::infracloud::controller':
+    keystone_rabbit_password         => $keystone_rabbit_password,
     neutron_rabbit_password          => $neutron_rabbit_password,
     nova_rabbit_password             => $nova_rabbit_password,
     root_mysql_password              => $root_mysql_password,
