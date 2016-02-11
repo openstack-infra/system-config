@@ -76,6 +76,14 @@ class openstack_project::puppetmaster (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  cron { 'deleteoldreports-json':
+    user        => 'root',
+    hour        => '3',
+    minute      => '0',
+    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.json\' -mtime +5 -execdir rm {} \;',
+    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
   file { '/var/lib/puppet/reports':
     ensure => directory,
     owner  => 'puppet',
