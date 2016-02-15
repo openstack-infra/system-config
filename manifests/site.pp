@@ -1201,6 +1201,7 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
+<<<<<<< HEAD
 # Upgrade-Modules
 node /^baremetal\d{2}\.hpuswest\.ic\.openstack\.org$/ {
   $group = 'infracloud'
@@ -1221,6 +1222,28 @@ node /^baremetal\d{2}\.hpuswest\.ic\.openstack\.org$/ {
     ssh_public_key     => hiera('bifrost_hpuswest_ssh_public_key'),
     vlan               => 25,
     gateway_ip         => '15.184.52.1',
+  }
+}
+
+node /^baremetal\d{2}\.hpuseast\.ic\.openstack\.org$/ {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    iptables_public_udp_ports => [67,69],
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+
+  class { '::openstack_project::infracloud::baremetal':
+    ironic_inventory   => hiera('ironic_inventory_hpuseast', {}),
+    ironic_db_password => hiera('ironic_db_password'),
+    mysql_password     => hiera('bifrost_mysql_password'),
+    region             => 'hpuseast',
+    ipmi_passwords     => hiera('ipmi_east_passwords'),
+    ssh_private_key    => hiera('bifrost_hpuseast_ssh_private_key'),
+    ssh_public_key     => hiera('bifrost_hpuseast_ssh_public_key'),
+    vlan               => 1598,
+    gateway_ip         => '15.126.48.1',
   }
 }
 
