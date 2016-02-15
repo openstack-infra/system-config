@@ -1,10 +1,16 @@
 # Run JJB on all of the jenkins hosts.  Use this if JJB has exceeded
 # the default puppet timeout.  Be sure to use "-f <num>" to run it in
 # parallel.
+# Pass -e "ADDITIONAL_PARAMS=<more params" for passing parameters to jjb.
+# e.g. 
+# ansible-playbook -i <inv> -e "ADDITIONAL_PARAMS=--flush-cache" run_jjb.yaml  
+# that would flush cache along with the normal JJB update operation.
 ---
 - hosts: 'jenkins.openstack.org:~jenkins\d+.openstack.org'
+  vars:
+    additional_params: "{{ ADDITIONAL_PARAMS|default(omit) }}"
   tasks:
     - name: run jjb
-      shell: jenkins-jobs update --delete-old  /etc/jenkins_jobs/config
+      shell: jenkins-jobs update --delete-old {{ additional_params }} /etc/jenkins_jobs/config
       async: 7200
       poll: 30
