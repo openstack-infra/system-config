@@ -1193,4 +1193,78 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
   }
 }
 
+# Node-OS: trusty
+node /^baremetal.*\.hpuseast\.ic\.openstack\.org$/ {
+  $group = 'baremetal'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    iptables_public_udp_ports => [67, 69],
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+
+  class { '::openstack_project::infracloud::baremetal':
+    ironic_inventory   => hiera('ironic_inventory_hpuseast', {}),
+    ironic_db_password => hiera('ironic_db_password'),
+    mysql_password     => hiera('bifrost_mysql_password'),
+    region             => 'hpuseast',
+    ipmi_passwords     => hiera('ipmi_east_passwords'),
+    ssh_private_key    => hiera('bifrost_hpuseast_ssh_private_key'),
+    ssh_public_key     => hiera('bifrost_hpuseast_ssh_public_key'),
+    vlan               => '1598',
+  }
+}
+
+# Node-OS: trusty
+node 'controller00.hpuseast.ic.openstack.org' {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    iptables_public_tcp_ports => [5000,5672,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::openstack_project::infracloud::controller':
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    root_mysql_password              => hiera('infracloud_mysql_password'),
+    keystone_mysql_password          => hiera('keystone_mysql_password'),
+    glance_mysql_password            => hiera('glance_mysql_password'),
+    neutron_mysql_password           => hiera('neutron_mysql_password'),
+    nova_mysql_password              => hiera('nova_mysql_password'),
+    keystone_admin_password          => hiera('keystone_admin_password'),
+    glance_admin_password            => hiera('glance_admin_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    nova_admin_password              => hiera('nova_admin_password'),
+    keystone_admin_token             => hiera('keystone_admin_token'),
+    ssl_chain_file_contents          => hiera('ssl_chain_file_contents'),
+    keystone_ssl_key_file_contents   => hiera('keystone_ssl_key_file_contents'),
+    keystone_ssl_cert_file_contents  => hiera('keystone_ssl_cert_file_contents'),
+    glance_ssl_key_file_contents     => hiera('glance_ssl_key_file_contents'),
+    glance_ssl_cert_file_contents    => hiera('glance_ssl_cert_file_contents'),
+    neutron_ssl_key_file_contents    => hiera('neutron_ssl_key_file_contents'),
+    neutron_ssl_cert_file_contents   => hiera('neutron_ssl_cert_file_contents'),
+    nova_ssl_key_file_contents       => hiera('nova_ssl_key_file_contents'),
+    nova_ssl_cert_file_contents      => hiera('nova_ssl_cert_file_contents'),
+    br_name                          => 'br-vlan1598',
+    controller_public_address        => $::fqdn,
+    controller_management_address    => '15.126.48.53',
+  }
+}
+
+node /^compute\d{3}\.hpuseast\.ic\.openstack\.org$/ {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+  }
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    br_name                          => 'br-vlan1598',
+    controller_public_address        => 'controller00.hpuseast.ic.openstack.org',
+    controller_management_address    => '15.126.48.53',
+  }
+}
+
 # vim:sw=2:ts=2:expandtab:textwidth=79
