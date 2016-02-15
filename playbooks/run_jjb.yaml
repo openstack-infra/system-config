@@ -1,10 +1,19 @@
 # Run JJB on all of the jenkins hosts.  Use this if JJB has exceeded
 # the default puppet timeout.  Be sure to use "-f <num>" to run it in
 # parallel.
+# Pass -e "FLUSH_CACHE=yes" to ansible-playbook  if you want to flush cache.
 ---
 - hosts: 'jenkins.openstack.org:~jenkins\d+.openstack.org'
+  vars:
+    force_cache: "{{ FLUSH_CACHE|default(no) }}"
   tasks:
     - name: run jjb
       shell: jenkins-jobs update --delete-old  /etc/jenkins_jobs/config
       async: 7200
       poll: 30
+      when: not FLUSH_CACHE | bool
+    - name: run jjb
+      shell: jenkins-jobs update --flush_cache --delete-old  /etc/jenkins_jobs/config
+      async: 7200
+      poll: 30
+      when: FLUSH_CACHE | bool
