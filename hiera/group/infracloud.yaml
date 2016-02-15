@@ -827,3 +827,1851 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 1d937491-56b6-4eb9-bc73-720a8af1c788
+ironic_inventory_hpuseast:
+  controller00.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.53
+    ipv4_address: 15.126.48.53
+    provisioning_ipv4_address: 10.23.212.4
+    uuid: 30303536-3734-5355-4532-333745314C43
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.184
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:e2:78
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: controller00.hpuseast.ic.openstack.org
+  compute000.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.52
+    ipv4_address: 15.126.48.52
+    provisioning_ipv4_address: 10.23.212.5
+    uuid: 30303536-3734-5355-4532-333745314C41
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.183
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:83:e8
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute000.hpuseast.ic.openstack.org
+    new_hostname: compute000.hpuseast.ic.openstack.org
+  compute001.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.55
+    ipv4_address: 15.126.48.55
+    provisioning_ipv4_address: 10.23.212.6
+    uuid: 30303536-3834-5355-4532-333745314C36
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.186
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:d5:e0
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute001.hpuseast.ic.openstack.org
+    new_hostname: compute001.hpuseast.ic.openstack.org
+  compute002.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.54
+    ipv4_address: 15.126.48.54
+    provisioning_ipv4_address: 10.23.212.7
+    uuid: 30303536-3734-5355-4532-333745314C42
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.185
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:43:a8
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute002.hpuseast.ic.openstack.org
+    new_hostname: compute002.hpuseast.ic.openstack.org
+  compute003.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.49
+    ipv4_address: 15.126.48.49
+    provisioning_ipv4_address: 10.23.212.8
+    uuid: 34313036-3630-5355-4532-333644564d30
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.180
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:0D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute003.hpuseast.ic.openstack.org
+    new_hostname: compute003.hpuseast.ic.openstack.org
+  compute004.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.48
+    ipv4_address: 15.126.48.48
+    provisioning_ipv4_address: 10.23.212.9
+    uuid: 34313036-3630-5355-4532-333644564c59
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.179
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:19:4C:97
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute004.hpuseast.ic.openstack.org
+    new_hostname: compute004.hpuseast.ic.openstack.org
+  compute005.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.51
+    ipv4_address: 15.126.48.51
+    provisioning_ipv4_address: 10.23.212.10
+    uuid: 30303536-3734-5355-4532-333745314C39
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.182
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:b5:38
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute005.hpuseast.ic.openstack.org
+    new_hostname: compute005.hpuseast.ic.openstack.org
+  compute006.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.50
+    ipv4_address: 15.126.48.50
+    provisioning_ipv4_address: 10.23.212.11
+    uuid: 34313036-3630-5355-4532-333644564c57
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.181
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:64:C5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute006.hpuseast.ic.openstack.org
+    new_hostname: compute006.hpuseast.ic.openstack.org
+  compute007.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.57
+    ipv4_address: 15.126.48.57
+    provisioning_ipv4_address: 10.23.212.12
+    uuid: 30303536-3834-5355-4532-333745314C38
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.188
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:53:e8
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute007.hpuseast.ic.openstack.org
+    new_hostname: compute007.hpuseast.ic.openstack.org
+  compute008.hpuseast.ic.openstack.org:
+    ansible_ssh_host: 15.126.48.56
+    ipv4_address: 15.126.48.56
+    provisioning_ipv4_address: 10.23.212.13
+    uuid: 30303536-3834-5355-4532-333745314C37
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.187
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:92:90
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute008.hpuseast.ic.openstack.org
+    new_hostname: compute008.hpuseast.ic.openstack.org
+  compute017.hpuseast.ic.openstack.org:
+    new_hostname: compute017.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.19
+    ipv4_address: 15.126.48.19
+    provisioning_ipv4_address: 10.23.212.14
+    uuid: 34313036-3630-5355-4532-333745314b35
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.150
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:67:29
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute017.hpuseast.ic.openstack.org
+  compute009.hpuseast.ic.openstack.org:
+    new_hostname: compute009.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.20
+    ipv4_address: 15.126.48.20
+    provisioning_ipv4_address: 10.23.212.15
+    uuid: 34313036-3630-5355-4532-333745314b32
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.151
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:65:D5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size: 322122547200
+      cpus:
+    name: compute009.hpuseast.ic.openstack.org
+  compute010.hpuseast.ic.openstack.org:
+    new_hostname: compute010.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.21
+    ipv4_address: 15.126.48.21
+    provisioning_ipv4_address: 10.23.212.16
+    uuid: 34313036-3630-5355-4532-333745314b34
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.152
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:53:D1
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute010.hpuseast.ic.openstack.org
+  compute011.hpuseast.ic.openstack.org:
+    new_hostname: compute011.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.22
+    ipv4_address: 15.126.48.22
+    provisioning_ipv4_address: 10.23.212.17
+    uuid: 34313036-3630-5355-4532-333745314b33
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.153
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:65:55
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute011.hpuseast.ic.openstack.org
+  compute012.hpuseast.ic.openstack.org:
+    new_hostname: compute012.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.23
+    ipv4_address: 15.126.48.23
+    provisioning_ipv4_address: 10.23.212.18
+    uuid: 34313036-3630-5355-4532-333745314b50
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.154
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:15
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute012.hpuseast.ic.openstack.org
+  compute013.hpuseast.ic.openstack.org:
+    new_hostname: compute013.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.24
+    ipv4_address: 15.126.48.24
+    provisioning_ipv4_address: 10.23.212.19
+    uuid: 34313036-3630-5355-4532-333745314b53
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.155
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:65:1D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute013.hpuseast.ic.openstack.org
+  compute014.hpuseast.ic.openstack.org:
+    new_hostname: compute014.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.25
+    ipv4_address: 15.126.48.25
+    provisioning_ipv4_address: 10.23.212.20
+    uuid: 34313036-3630-5355-4532-333745314b52
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.156
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:5C:09
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute014.hpuseast.ic.openstack.org
+  compute015.hpuseast.ic.openstack.org:
+    new_hostname: compute015.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.26
+    ipv4_address: 15.126.48.26
+    provisioning_ipv4_address: 10.23.212.21
+    uuid: 34313036-3630-5355-4532-333745314b54
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.157
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:63:F5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute015.hpuseast.ic.openstack.org
+  compute016.hpuseast.ic.openstack.org:
+    new_hostname: compute016.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.27
+    ipv4_address: 15.126.48.27
+    provisioning_ipv4_address: 10.23.212.22
+    uuid: 34313036-3630-5355-4532-333745314b41
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.158
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:F1
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute016.hpuseast.ic.openstack.org
+  compute018.hpuseast.ic.openstack.org:
+    new_hostname: compute018.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.47
+    ipv4_address: 15.126.48.47
+    provisioning_ipv4_address: 10.23.212.23
+    uuid: 34313036-3630-5355-4532-333644564c58
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.178
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:A8:0F:41
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute018.hpuseast.ic.openstack.org
+  compute019.hpuseast.ic.openstack.org:
+    new_hostname: compute019.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.44
+    ipv4_address: 15.126.48.44
+    provisioning_ipv4_address: 10.23.212.24
+    uuid: 34313036-3630-5355-4532-333644564d50
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.175
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:18:9E:2B
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute019.hpuseast.ic.openstack.org
+  compute020.hpuseast.ic.openstack.org:
+    new_hostname: compute020.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.45
+    ipv4_address: 15.126.48.45
+    provisioning_ipv4_address: 10.23.212.25
+    uuid: 34313036-3630-5355-4532-333644564d53
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.176
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:69
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute020.hpuseast.ic.openstack.org
+  compute021.hpuseast.ic.openstack.org:
+    new_hostname: compute021.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.42
+    ipv4_address: 15.126.48.42
+    provisioning_ipv4_address: 10.23.212.26
+    uuid: 34313036-3630-5355-4532-333644564d34
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.173
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:A8:12:99
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute021.hpuseast.ic.openstack.org
+  compute022.hpuseast.ic.openstack.org:
+    new_hostname: compute022.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.40
+    ipv4_address: 15.126.48.40
+    provisioning_ipv4_address: 10.23.212.27
+    uuid: 34313036-3630-5355-4532-333644564d32
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.171
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:A7:F4:A1
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute022.hpuseast.ic.openstack.org
+  compute023.hpuseast.ic.openstack.org:
+    new_hostname: compute023.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.41
+    ipv4_address: 15.126.48.41
+    provisioning_ipv4_address: 10.23.212.28
+    uuid: 34313036-3630-5355-4532-333644564d31
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.172
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:67:19
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute023.hpuseast.ic.openstack.org
+  compute024.hpuseast.ic.openstack.org:
+    new_hostname: compute024.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.38
+    ipv4_address: 15.126.48.38
+    provisioning_ipv4_address: 10.23.212.29
+    uuid: 34313036-3630-5355-4532-333644564d57
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.169
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:AA:5E:81
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute024.hpuseast.ic.openstack.org
+  compute025.hpuseast.ic.openstack.org:
+    new_hostname: compute025.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.39
+    ipv4_address: 15.126.48.39
+    provisioning_ipv4_address: 10.23.212.30
+    uuid: 34313036-3630-5355-4532-333644564d33
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.170
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:5D:29
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute025.hpuseast.ic.openstack.org
+  compute026.hpuseast.ic.openstack.org:
+    new_hostname: compute026.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.46
+    ipv4_address: 15.126.48.46
+    provisioning_ipv4_address: 10.23.212.31
+    uuid: 34313036-3630-5355-4532-333644564d52
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.177
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:5C:B9
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute026.hpuseast.ic.openstack.org
+  compute028.hpuseast.ic.openstack.org:
+    new_hostname: compute028.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.18
+    ipv4_address: 15.126.48.18
+    provisioning_ipv4_address: 10.23.212.32
+    uuid: 34313036-3630-5355-4532-333644564632
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.149
+        ipmi_username: Administrator
+    nics:
+    - mac: 1C:C1:DE:1C:B2:F2
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size: 322122547200
+      cpus:
+    name: compute028.hpuseast.ic.openstack.org
+  compute029.hpuseast.ic.openstack.org:
+    new_hostname: compute029.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.71
+    ipv4_address: 15.126.48.71
+    provisioning_ipv4_address: 10.23.212.33
+    uuid: 34313036-3630-5355-4532-333644464a31
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.202
+        ipmi_username: headmin
+    nics:
+    - mac: 3C:4A:92:6F:ED:CB
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute029.hpuseast.ic.openstack.org
+  compute030.hpuseast.ic.openstack.org:
+    new_hostname: compute030.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.70
+    ipv4_address: 15.126.48.70
+    provisioning_ipv4_address: 10.23.212.34
+    uuid: 34313036-3630-5355-4532-333644464a32
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.201
+        ipmi_username: headmin
+    nics:
+    - mac: 3C:4A:92:72:1E:B5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute030.hpuseast.ic.openstack.org
+  compute031.hpuseast.ic.openstack.org:
+    new_hostname: compute031.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.69
+    ipv4_address: 15.126.48.69
+    provisioning_ipv4_address: 10.23.212.35
+    uuid: 34313036-3630-5355-4532-333644464a35
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.200
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:65:C9
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute031.hpuseast.ic.openstack.org
+  compute032.hpuseast.ic.openstack.org:
+    new_hostname: compute032.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.68
+    ipv4_address: 15.126.48.68
+    provisioning_ipv4_address: 10.23.212.36
+    uuid: 34313036-3630-5355-4532-333644464a34
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.199
+        ipmi_username: headmin
+    nics:
+    - mac: 98:4B:E1:06:E4:E7
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute032.hpuseast.ic.openstack.org
+  compute033.hpuseast.ic.openstack.org:
+    new_hostname: compute033.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.75
+    ipv4_address: 15.126.48.75
+    provisioning_ipv4_address: 10.23.212.37
+    uuid: 34313036-3630-5355-4532-333644464653
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.206
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C4:DB
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute033.hpuseast.ic.openstack.org
+  compute034.hpuseast.ic.openstack.org:
+    new_hostname: compute034.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.74
+    ipv4_address: 15.126.48.74
+    provisioning_ipv4_address: 10.23.212.38
+    uuid: 34313036-3630-5355-4532-333644464858
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.205
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:A9:6F:61
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute034.hpuseast.ic.openstack.org
+  compute035.hpuseast.ic.openstack.org:
+    new_hostname: compute035.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.73
+    ipv4_address: 15.126.48.73
+    provisioning_ipv4_address: 10.23.212.39
+    uuid: 34313036-3630-5355-4532-333644464859
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.204
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:31
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute035.hpuseast.ic.openstack.org
+  compute036.hpuseast.ic.openstack.org:
+    new_hostname: compute036.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.72
+    ipv4_address: 15.126.48.72
+    provisioning_ipv4_address: 10.23.212.40
+    uuid: 34313036-3630-5355-4532-333644464a30
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.203
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:53:ED
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute036.hpuseast.ic.openstack.org
+  compute039.hpuseast.ic.openstack.org:
+    new_hostname: compute039.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.3
+    ipv4_address: 15.126.48.3
+    provisioning_ipv4_address: 10.23.212.41
+    uuid: 30303536-3734-5355-4532-333644564833
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.132
+        ipmi_username: Administrator
+    nics:
+    - mac: 80:c1:6e:80:d4:18
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute039.hpuseast.ic.openstack.org
+  compute040.hpuseast.ic.openstack.org:
+    new_hostname: compute040.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.4
+    ipv4_address: 15.126.48.4
+    provisioning_ipv4_address: 10.23.212.42
+    uuid: 30303536-3734-5355-4532-333644564832
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.134
+        ipmi_username: Administrator
+    nics:
+    - mac: ac:16:2d:ab:78:38
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute040.hpuseast.ic.openstack.org
+  compute041.hpuseast.ic.openstack.org:
+    new_hostname: compute041.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.6
+    ipv4_address: 15.126.48.6
+    provisioning_ipv4_address: 10.23.212.98
+    uuid: 30303536-3834-5355-4532-333644564830
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.137
+        ipmi_username: Administrator
+    nics:
+    - mac: ac:16:2d:ab:a9:90
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute041.hpuseast.ic.openstack.org
+  compute038.hpuseast.ic.openstack.org:
+    new_hostname: compute038.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.76
+    ipv4_address: 15.126.48.76
+    provisioning_ipv4_address: 10.23.212.44
+    uuid: 34313036-3630-5355-4532-333644464650
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.207
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C4:71
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size: 
+      cpus:
+    name: compute038.hpuseast.ic.openstack.org
+  compute042.hpuseast.ic.openstack.org:
+    new_hostname: compute042.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.66
+    ipv4_address: 15.126.48.66
+    provisioning_ipv4_address: 10.23.212.45
+    uuid: 34313036-3630-5355-4532-333644464850
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.197
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:A0:ED
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute042.hpuseast.ic.openstack.org
+  compute043.hpuseast.ic.openstack.org:
+    new_hostname: compute043.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.62
+    ipv4_address: 15.126.48.62
+    provisioning_ipv4_address: 10.23.212.46
+    uuid: 34313036-3630-5355-4532-333644464a42
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.193
+        ipmi_username: headmin
+    nics:
+    - mac: 3C:4A:92:72:3E:79
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute043.hpuseast.ic.openstack.org
+  compute044.hpuseast.ic.openstack.org:
+    new_hostname: compute044.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.63
+    ipv4_address: 15.126.48.63
+    provisioning_ipv4_address: 10.23.212.47
+    uuid: 34313036-3630-5355-4532-33364446484d
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.194
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:19:4E:8D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute044.hpuseast.ic.openstack.org
+  compute045.hpuseast.ic.openstack.org:
+    new_hostname: compute045.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.64
+    ipv4_address: 15.126.48.64
+    provisioning_ipv4_address: 10.23.212.48
+    uuid: 34313036-3630-5355-4532-33364446484e
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.195
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:AB:E2:1D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute045.hpuseast.ic.openstack.org
+  compute046.hpuseast.ic.openstack.org:
+    new_hostname: compute046.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.65
+    ipv4_address: 15.126.48.65
+    provisioning_ipv4_address: 10.23.212.49
+    uuid: 34313036-3630-5355-4532-333644464852
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.196
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:58:D5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute046.hpuseast.ic.openstack.org
+  compute047.hpuseast.ic.openstack.org:
+    new_hostname: compute047.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.58
+    ipv4_address: 15.126.48.58
+    provisioning_ipv4_address: 10.23.212.50
+    uuid: 30303536-3834-5355-4532-333745314C35
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.189
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:82:e0
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute047.hpuseast.ic.openstack.org
+  compute048.hpuseast.ic.openstack.org:
+    new_hostname: compute048.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.59
+    ipv4_address: 15.126.48.59
+    provisioning_ipv4_address: 10.23.212.51
+    uuid: 34313036-3630-5355-4532-333644464a43
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.190
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:18:FA:03
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute048.hpuseast.ic.openstack.org
+  compute049.hpuseast.ic.openstack.org:
+    new_hostname: compute049.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.60
+    ipv4_address: 15.126.48.60
+    provisioning_ipv4_address: 10.23.212.52
+    uuid: 34313036-3630-5355-4532-333644464a41
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.191
+        ipmi_username: headmin
+    nics:
+    - mac: B4:99:BA:AA:56:FB
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute049.hpuseast.ic.openstack.org
+  compute050.hpuseast.ic.openstack.org:
+    new_hostname: compute050.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.61
+    ipv4_address: 15.126.48.61
+    provisioning_ipv4_address: 10.23.212.53
+    uuid: 34313036-3630-5355-4532-333644464a44
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.192
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:65:99
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute050.hpuseast.ic.openstack.org
+  compute051.hpuseast.ic.openstack.org:
+    new_hostname: compute051.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.89
+    ipv4_address: 15.126.48.89
+    provisioning_ipv4_address: 10.23.212.54
+    uuid: 2d228780-1dd2-11b2-8000-1cc1de1c9847
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.220
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:1C:98:46
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute051.hpuseast.ic.openstack.org
+  compute052.hpuseast.ic.openstack.org:
+    new_hostname: compute052.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.88
+    ipv4_address: 15.126.48.88
+    provisioning_ipv4_address: 10.23.212.55
+    uuid: 34313036-3630-5355-4532-333644464838
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.219
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:18:B3:F3
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute052.hpuseast.ic.openstack.org
+  compute053.hpuseast.ic.openstack.org:
+    new_hostname: compute053.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.91
+    ipv4_address: 15.126.48.91
+    provisioning_ipv4_address: 10.23.212.56
+    uuid: 30303536-3734-5355-4532-33364446434B
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.222
+        ipmi_username: headmin
+    nics:
+    - mac: ac:16:2d:ab:1a:28
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute053.hpuseast.ic.openstack.org
+  compute054.hpuseast.ic.openstack.org:
+    new_hostname: compute054.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.90
+    ipv4_address: 15.126.48.90
+    provisioning_ipv4_address: 10.23.212.57
+    uuid: 34313036-3630-5355-4532-333644464839
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.221
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C4:8F
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute054.hpuseast.ic.openstack.org
+  compute055.hpuseast.ic.openstack.org:
+    new_hostname: compute055.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.93
+    ipv4_address: 15.126.48.93
+    provisioning_ipv4_address: 10.23.212.58
+    uuid: 30303536-3734-5355-4532-333644464343
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.224
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:f5:58
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute055.hpuseast.ic.openstack.org
+  compute056.hpuseast.ic.openstack.org:
+    new_hostname: compute056.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.92
+    ipv4_address: 15.126.48.92
+    provisioning_ipv4_address: 10.23.212.59
+    uuid: 30303536-3734-5355-4532-333644464345
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.223
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:56:c8
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute056.hpuseast.ic.openstack.org
+  compute057.hpuseast.ic.openstack.org:
+    new_hostname: compute057.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.95
+    ipv4_address: 15.126.48.95
+    provisioning_ipv4_address: 10.23.212.60
+    uuid: 30303536-3834-5355-4532-333644464330
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.226
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:e5:98
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute057.hpuseast.ic.openstack.org
+  compute058.hpuseast.ic.openstack.org:
+    new_hostname: compute058.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.94
+    ipv4_address: 15.126.48.94
+    provisioning_ipv4_address: 10.23.212.61
+    uuid: 30303536-3734-5355-4532-333644464348
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.225
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:27:58
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute058.hpuseast.ic.openstack.org
+  compute059.hpuseast.ic.openstack.org:
+    new_hostname: compute059.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.97
+    ipv4_address: 15.126.48.97
+    provisioning_ipv4_address: 10.23.212.62
+    uuid: 30303536-3834-5355-4532-333644464338
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.228
+        ipmi_username: headmin
+    nics:
+    - mac: ac:16:2d:ab:e9:30
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute059.hpuseast.ic.openstack.org
+  compute060.hpuseast.ic.openstack.org:
+    new_hostname: compute060.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.96
+    ipv4_address: 15.126.48.96
+    provisioning_ipv4_address: 10.23.212.63
+    uuid: 30303536-3834-5355-4532-333644464341
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.227
+        ipmi_username: headmin
+    nics:
+    - mac: ac:16:2d:ab:0a:30
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute060.hpuseast.ic.openstack.org
+  compute071.hpuseast.ic.openstack.org:
+    new_hostname: compute071.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.12
+    ipv4_address: 15.126.48.12
+    provisioning_ipv4_address: 10.23.212.64
+    uuid: 34313036-3630-5355-4532-333644564654
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.143
+        ipmi_username: Administrator
+    nics:
+    - mac: B4:99:BA:A8:0D:F0
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute071.hpuseast.ic.openstack.org
+  compute061.hpuseast.ic.openstack.org:
+    new_hostname: compute061.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.13
+    ipv4_address: 15.126.48.13
+    provisioning_ipv4_address: 10.23.212.65
+    uuid: 34313036-3630-5355-4532-333644564652
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.144
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:64:BC
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute061.hpuseast.ic.openstack.org
+  compute062.hpuseast.ic.openstack.org:
+    new_hostname: compute062.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.14
+    ipv4_address: 15.126.48.14
+    provisioning_ipv4_address: 10.23.212.66
+    uuid: 34313036-3630-5355-4532-333644564653
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.145
+        ipmi_username: Administrator
+    nics:
+    - mac: B4:99:BA:A9:69:58
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute062.hpuseast.ic.openstack.org
+  compute063.hpuseast.ic.openstack.org:
+    new_hostname: compute063.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.15
+    ipv4_address: 15.126.48.15
+    provisioning_ipv4_address: 10.23.212.67
+    uuid: 34313036-3630-5355-4532-333644564559
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.146
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:64:44
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute063.hpuseast.ic.openstack.org
+  compute064.hpuseast.ic.openstack.org:
+    new_hostname: compute064.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.16
+    ipv4_address: 15.126.48.16
+    provisioning_ipv4_address: 10.23.212.68
+    uuid: 34313036-3630-5355-4532-333644564631
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.147
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:70:39:50
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute064.hpuseast.ic.openstack.org
+  compute065.hpuseast.ic.openstack.org:
+    new_hostname: compute065.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.17
+    ipv4_address: 15.126.48.17
+    provisioning_ipv4_address: 10.23.212.69
+    uuid: 34313036-3630-5355-4532-333644564630
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.148
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:65:E8
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute065.hpuseast.ic.openstack.org
+  compute081.hpuseast.ic.openstack.org:
+    new_hostname: compute081.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.80
+    ipv4_address: 15.126.48.80
+    provisioning_ipv4_address: 10.23.212.70
+    uuid: 34313036-3630-5355-4532-33364446464d
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.211
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:64:FF:1F
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute081.hpuseast.ic.openstack.org
+  compute072.hpuseast.ic.openstack.org:
+    new_hostname: compute072.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.81
+    ipv4_address: 15.126.48.81
+    provisioning_ipv4_address: 10.23.212.71
+    uuid: 34313036-3630-5355-4532-33364446464a
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.212
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:CC:63:25
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute072.hpuseast.ic.openstack.org
+  compute073.hpuseast.ic.openstack.org:
+    new_hostname: compute073.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.78
+    ipv4_address: 15.126.48.78
+    provisioning_ipv4_address: 10.23.212.72
+    uuid: 34313036-3630-5355-4532-333644464652
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.209
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C4:FF
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute073.hpuseast.ic.openstack.org
+  compute074.hpuseast.ic.openstack.org:
+    new_hostname: compute074.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.79
+    ipv4_address: 15.126.48.79
+    provisioning_ipv4_address: 10.23.212.73
+    uuid: 34313036-3630-5355-4532-33364446464b
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.210
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C1:25
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute074.hpuseast.ic.openstack.org
+  compute075.hpuseast.ic.openstack.org:
+    new_hostname: compute075.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.84
+    ipv4_address: 15.126.48.84
+    provisioning_ipv4_address: 10.23.212.74
+    uuid: 34313036-3630-5355-4532-333644464659
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.215
+        ipmi_username: headmin
+    nics:
+    - mac: 3C:4A:92:72:1D:B5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute075.hpuseast.ic.openstack.org
+  compute076.hpuseast.ic.openstack.org:
+    new_hostname: compute076.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.85
+    ipv4_address: 15.126.48.85
+    provisioning_ipv4_address: 10.23.212.75
+    uuid: 34313036-3630-5355-4532-333644464832
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.216
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:67:15
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute076.hpuseast.ic.openstack.org
+  compute077.hpuseast.ic.openstack.org:
+    new_hostname: compute077.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.82
+    ipv4_address: 15.126.48.82
+    provisioning_ipv4_address: 10.23.212.76
+    uuid: 34313036-3630-5355-4532-33364446464c
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.213
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:6A:C2:FB
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute077.hpuseast.ic.openstack.org
+  compute078.hpuseast.ic.openstack.org:
+    new_hostname: compute078.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.83
+    ipv4_address: 15.126.48.83
+    provisioning_ipv4_address: 10.23.212.77
+    uuid: 34313036-3630-5355-4532-333644464831
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.214
+        ipmi_username: headmin
+    nics:
+    - mac: D4:85:64:CC:61:C5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute078.hpuseast.ic.openstack.org
+  compute079.hpuseast.ic.openstack.org:
+    new_hostname: compute079.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.86
+    ipv4_address: 15.126.48.86
+    provisioning_ipv4_address: 10.23.212.78
+    uuid: 34313036-3630-5355-4532-333644464830
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.217
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:19:39:D1
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute079.hpuseast.ic.openstack.org
+  compute080.hpuseast.ic.openstack.org:
+    new_hostname: compute80.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.87
+    ipv4_address: 15.126.48.87
+    provisioning_ipv4_address: 10.23.212.79
+    uuid: 34313036-3630-5355-4532-333644464841
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.218
+        ipmi_username: headmin
+    nics:
+    - mac: 3C:4A:92:72:22:E9
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute080.hpuseast.ic.openstack.org
+  compute066.hpuseast.ic.openstack.org:
+    new_hostname: compute066.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.9
+    ipv4_address: 15.126.48.9
+    provisioning_ipv4_address: 10.23.212.80
+    uuid: 34313036-3630-5355-4532-333644564642
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.140
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:65:24
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute066.hpuseast.ic.openstack.org
+  compute067.hpuseast.ic.openstack.org:
+    new_hostname: compute067.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.8
+    ipv4_address: 15.126.48.8
+    provisioning_ipv4_address: 10.23.212.81
+    uuid: 34313036-3630-5355-4532-333644564644
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.139
+        ipmi_username: Administrator
+    nics:
+    - mac: B4:99:BA:A7:F2:1A
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute067.hpuseast.ic.openstack.org
+  compute068.hpuseast.ic.openstack.org:
+    new_hostname: compute068.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.7
+    ipv4_address: 15.126.48.7
+    provisioning_ipv4_address: 10.23.212.82
+    uuid: 34313036-3630-5355-4532-333644564645
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.138
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:64:48
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute068.hpuseast.ic.openstack.org
+  compute082.hpuseast.ic.openstack.org:
+    new_hostname: compute082.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.98
+    ipv4_address: 15.126.48.98
+    provisioning_ipv4_address: 10.23.212.83
+    uuid: 30303536-3834-5355-4532-333644464334
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.229
+        ipmi_username: headmin
+    nics:
+    - mac: 80:c1:6e:80:d5:58
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute082.hpuseast.ic.openstack.org
+  compute069.hpuseast.ic.openstack.org:
+    new_hostname: compute069.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.11
+    ipv4_address: 15.126.48.11
+    provisioning_ipv4_address: 10.23.212.84
+    uuid: 34313036-3630-5355-4532-333644564656
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.142
+        ipmi_username: Administrator
+    nics:
+    - mac: 3C:4A:92:72:2A:D2
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute069.hpuseast.ic.openstack.org
+  compute070.hpuseast.ic.openstack.org:
+    new_hostname: compute070.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.10
+    ipv4_address: 15.126.48.10
+    provisioning_ipv4_address: 10.23.212.85
+    uuid: 34313036-3630-5355-4532-333644564643
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.141
+        ipmi_username: Administrator
+    nics:
+    - mac: 44:1E:A1:72:63:BC
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute070.hpuseast.ic.openstack.org
+  compute083.hpuseast.ic.openstack.org:
+    new_hostname: compute083.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.35
+    ipv4_address: 15.126.48.35
+    provisioning_ipv4_address: 10.23.212.86
+    uuid: 34313036-3630-5355-4532-333644564d56
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.166
+        ipmi_username: headmin
+    nics:
+    - mac: 98:4B:E1:06:E3:19
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute083.hpuseast.ic.openstack.org
+  compute084.hpuseast.ic.openstack.org:
+    new_hostname: compute084.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.34
+    ipv4_address: 15.126.48.34
+    provisioning_ipv4_address: 10.23.212.87
+    uuid: 34313036-3630-5355-4532-333745314b58
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.165
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:41
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute084.hpuseast.ic.openstack.org
+  compute085.hpuseast.ic.openstack.org:
+    new_hostname: compute085.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.33
+    ipv4_address: 15.126.48.33
+    provisioning_ipv4_address: 10.23.212.88
+    uuid: 34313036-3630-5355-4532-333745314b59
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.164
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:67:0D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute085.hpuseast.ic.openstack.org
+  compute086.hpuseast.ic.openstack.org:
+    new_hostname: compute086.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.32
+    ipv4_address: 15.126.48.32
+    provisioning_ipv4_address: 10.23.212.89
+    uuid: 34313036-3630-5355-4532-333745314b57
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.163
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:61
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute086.hpuseast.ic.openstack.org
+  compute087.hpuseast.ic.openstack.org:
+    new_hostname: compute087.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.31
+    ipv4_address: 15.126.48.31
+    provisioning_ipv4_address: 10.23.212.90
+    uuid: 34313036-3630-5355-4532-333745314b56
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.162
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:79
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute087.hpuseast.ic.openstack.org
+  compute088.hpuseast.ic.openstack.org:
+    new_hostname: compute088.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.30
+    ipv4_address: 15.126.48.30
+    provisioning_ipv4_address: 10.23.212.91
+    uuid: 34313036-3630-5355-4532-333745314b43
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.161
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:56:B5
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute088.hpuseast.ic.openstack.org
+  compute089.hpuseast.ic.openstack.org:
+    new_hostname: compute089.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.29
+    ipv4_address: 15.126.48.29
+    provisioning_ipv4_address: 10.23.212.92
+    uuid: 34313036-3630-5355-4532-333745314b42
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.160
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:5F:D1
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute089.hpuseast.ic.openstack.org
+  compute090.hpuseast.ic.openstack.org:
+    new_hostname: compute090.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.28
+    ipv4_address: 15.126.48.28
+    provisioning_ipv4_address: 10.23.212.93
+    uuid: 34313036-3630-5355-4532-333745314b44
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.159
+        ipmi_username: headmin
+    nics:
+    - mac: 44:1E:A1:72:66:95
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute090.hpuseast.ic.openstack.org
+  compute091.hpuseast.ic.openstack.org:
+    new_hostname: compute091.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.37
+    ipv4_address: 15.126.48.37
+    provisioning_ipv4_address: 10.23.212.94
+    uuid: 34313036-3630-5355-4532-333644564d54
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.168
+        ipmi_username: headmin
+    nics:
+    - mac: 98:4B:E1:06:E6:7D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute091.hpuseast.ic.openstack.org
+  compute027.hpuseast.ic.openstack.org:
+    new_hostname: compute027.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.43
+    ipv4_address: 15.126.48.43
+    provisioning_ipv4_address: 10.23.212.95
+    uuid: 34313036-3630-5355-4532-333644564d4e
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.174
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:18:E7:7B
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute027.hpuseast.ic.openstack.org
+  compute092.hpuseast.ic.openstack.org:
+    new_hostname: compute092.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.36
+    ipv4_address: 15.126.48.36
+    provisioning_ipv4_address: 10.23.212.96
+    uuid: 34313036-3630-5355-4532-333644564d58
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.167
+        ipmi_username: headmin
+    nics:
+    - mac: 98:4B:E1:08:AF:8F
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute092.hpuseast.ic.openstack.org
+  compute093.hpuseast.ic.openstack.org:
+    new_hostname: compute093.hpuseast.ic.openstack.org
+    ansible_ssh_host: 15.126.48.67
+    ipv4_address: 15.126.48.67
+    provisioning_ipv4_address: 10.23.212.97
+    uuid: 34313036-3630-5355-4532-333644464a33
+    disabled: true # not needed due to ip limitations
+    driver_info:
+      power:
+        ipmi_address: 10.22.27.198
+        ipmi_username: headmin
+    nics:
+    - mac: 1C:C1:DE:1C:D4:7D
+    driver: agent_ipmitool
+    properties:
+      cpu_arch: x86_64
+      ram: 98304
+      disk_size:
+      cpus:
+    name: compute093.hpuseast.ic.openstack.org
