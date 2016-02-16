@@ -3,7 +3,7 @@ controller00.hpuswest.ic.openstack.org
 compute000.hpuswest.ic.openstack.org
 compute001.hpuswest.ic.openstack.org
 compute002.hpuswest.ic.openstack.org
-compute003.hpuswest.ic.openstack.org
+#compute003.hpuswest.ic.openstack.org # unknown
 compute004.hpuswest.ic.openstack.org
 #compute005.hpuswest.ic.openstack.org # iLO doesn't ping
 compute006.hpuswest.ic.openstack.org
@@ -19,7 +19,7 @@ compute014.hpuswest.ic.openstack.org
 compute016.hpuswest.ic.openstack.org
 compute017.hpuswest.ic.openstack.org
 #compute018.hpuswest.ic.openstack.org # nic issues
-compute019.hpuswest.ic.openstack.org
+#compute019.hpuswest.ic.openstack.org # unknown
 compute020.hpuswest.ic.openstack.org
 compute021.hpuswest.ic.openstack.org
 #compute022.hpuswest.ic.openstack.org # current baremetal00
@@ -38,12 +38,12 @@ compute034.hpuswest.ic.openstack.org
 compute035.hpuswest.ic.openstack.org
 compute036.hpuswest.ic.openstack.org
 #compute037.hpuswest.ic.openstack.org # needs IPMI password reset
-compute038.hpuswest.ic.openstack.org
+#compute038.hpuswest.ic.openstack.org # unknown
 compute038.hpuswest.ic.openstack.org
 #compute039.hpuswest.ic.openstack.org # disk errors
 #compute040.hpuswest.ic.openstack.org # needs ilo firmware update
-compute041.hpuswest.ic.openstack.org
-compute042.hpuswest.ic.openstack.org
-compute043.hpuswest.ic.openstack.org
+#compute041.hpuswest.ic.openstack.org # unknown
+#compute042.hpuswest.ic.openstack.org # unknown
+#compute043.hpuswest.ic.openstack.org # unknown
 
 #TODO Add baremetal controller host here
