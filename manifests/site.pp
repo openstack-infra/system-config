@@ -1150,6 +1150,7 @@ node 'controller00.hpuswest.ic.openstack.org' {
     enable_unbound            => false,
   }
   class { '::openstack_project::infracloud::controller':
+    keystone_rabbit_password         => hiera('keystone_rabbit_password'),
     neutron_rabbit_password          => hiera('neutron_rabbit_password'),
     nova_rabbit_password             => hiera('nova_rabbit_password'),
     root_mysql_password              => hiera('infracloud_mysql_password'),
