@@ -129,7 +129,7 @@ Note that the user running Gerrit will need to accept the GitHub host
 keys. e.g.::
 
   sudo su - gerrit2
-  ssh github.com
+  ssh git@github.com
 
 
 Auto Review Expiry
