@@ -1,0 +1,14 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Ivan Berezovskiy <iberezovskiy@mirantis.com>
+Code-Review+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Igor Yozhikov <iyozhikov@mirantis.com>
+Code-Review+1: Thomas Goirand <thomas@goirand.fr>
+Code-Review+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 17 Feb 2016 16:26:28 +0000
+Reviewed-on: https://review.openstack.org/275323
+Project: openstack-infra/system-config
+Branch: refs/heads/master
