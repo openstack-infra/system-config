@@ -24,6 +24,9 @@ class openstack_project::infracloud::controller (
   $br_name,
   $controller_management_address,
   $controller_public_address = $::fqdn,
+  $quota_instances = 10,
+  $quota_cores = 20,
+  $quota_ram = 51200,
 ) {
   class { '::infracloud::controller':
     keystone_rabbit_password         => $keystone_rabbit_password,
@@ -51,5 +54,8 @@ class openstack_project::infracloud::controller (
     br_name                          => $br_name,
     controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
+    quota_instances                  => $quota_instances,
+    quota_cores                      => $quota_cores,
+    quota_ram                        => $quota_ram,
   }
 }

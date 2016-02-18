@@ -1175,6 +1175,9 @@ node 'controller00.hpuswest.ic.openstack.org' {
     br_name                          => 'br-vlan25',
     controller_management_address    => '10.10.16.146',
     controller_public_address        => $::fqdn,
+    quota_instances                  => hiera('quota_instances', 10),
+    quota_cores                      => hiera('quota_cores', 20),
+    quota_ram                        => hiera('quota_ram', 51200),
   }
 }
 
