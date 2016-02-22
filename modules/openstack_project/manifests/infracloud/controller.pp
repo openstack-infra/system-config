@@ -38,4 +38,14 @@ class openstack_project::infracloud::controller (
     controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
   }
+
+  keystone_tenant { 'openstackci':
+    ensure      => present,
+    enabled     => true,
+  }
+
+  keystone_tenant { 'openstackjenkins':
+    ensure      => present,
+    enabled     => true,
+  }
 }
