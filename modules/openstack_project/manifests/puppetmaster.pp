@@ -3,6 +3,7 @@
 class openstack_project::puppetmaster (
   $jenkins_api_key,
   $puppetmaster_clouds,
+  $infracloud_hpuseast_ssl_cert_file_contents,
   $jenkins_api_user = 'hudson-openstack',
   $root_rsa_key = 'xxx',
   $puppetdb = true,
@@ -125,6 +126,14 @@ class openstack_project::puppetmaster (
     group   => 'root',
     mode    => '0600',
     content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
+  }
+
+  file { '/etc/openstack/infracloud_east_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $infracloud_hpuseast_ssl_cert_file_contents,
   }
 
 # For puppet master apache serving.
