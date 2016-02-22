@@ -60,3 +60,14 @@ clouds:
       username: '<%= @puppetmaster_clouds['openstackci_vexxhost_username'] %>'
       password: '<%= @puppetmaster_clouds['openstackci_vexxhost_password'] %>'
       project_name: '<%= @puppetmaster_clouds['openstackci_vexxhost_project_name'] %>'
+  openstackci-infracloud-east:
+    region_name: RegionOne
+    auth:
+      auth_url: https://controller00.hpuseast.ic.openstack.org:35357/
+      username: <%= @puppetmaster_clouds['openstackci_infracloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_infracloud_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_project_name'] %>
+      project_domain_name: 'infra'
+      user_domain_name: 'infra'
+    cacert: '/etc/openstack/infracloud_east_cacert.pem'
+    identity_api_version: '3'
