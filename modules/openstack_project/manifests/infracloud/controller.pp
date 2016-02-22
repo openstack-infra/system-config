@@ -17,6 +17,7 @@ class openstack_project::infracloud::controller (
   $br_name,
   $controller_management_address,
   $controller_public_address = $::fqdn,
+  $neutron_quota_port = 50,
 ) {
   class { '::infracloud::controller':
     keystone_rabbit_password         => $keystone_rabbit_password,
@@ -37,5 +38,6 @@ class openstack_project::infracloud::controller (
     br_name                          => $br_name,
     controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
+    neutron_quota_port               => $neutron_quota_port,
   }
 }

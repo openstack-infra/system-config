@@ -1168,6 +1168,7 @@ node 'controller00.hpuswest.ic.openstack.org' {
     br_name                          => 'br-vlan25',
     controller_management_address    => '10.10.16.146',
     controller_public_address        => $::fqdn,
+    neutron_quota_port               => hiera('neutron_quota_port', 50),
   }
 }
 
