@@ -64,3 +64,14 @@ clouds:
       username: '<%= vexxhost_username %>'
       password: '<%= vexxhost_password %>'
       project_name: '<%= vexxhost_project %>'
+  infracloud-east:
+    region_name: RegionOne
+    auth:
+      username: '<%= infracloud_username %>'
+      password: '<%= infracloud_password %>'
+      project_name: '<%= infracloud_project %>'
+      user_domain_name: 'infra'
+      project_domain_name: 'infra'
+      auth_url: 'https://controller00.hpuseast.ic.openstack.org:35357/v3'
+    cacert: '/etc/openstack/infracloud_east_cacert.pem'
+    identity_api_version: '3'

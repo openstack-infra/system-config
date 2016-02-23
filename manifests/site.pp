@@ -774,6 +774,13 @@ node 'nodepool.openstack.org' {
     content => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
+  file { '/home/nodepool/.config/openstack/infracloud_east_cacert.pem':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
+    content => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
+  }
 }
 
 # Node-OS: precise
