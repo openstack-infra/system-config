@@ -39,13 +39,22 @@ class openstack_project::infracloud::controller (
     controller_public_address        => $controller_public_address,
   }
 
+  keystone_domain { 'infra':
+    ensure  => present,
+    enabled => true,
+  }
+
   keystone_tenant { 'openstackci':
     ensure      => present,
     enabled     => true,
+    domain      => 'infra',
+    require     => Keystone_domain['infra'],
   }
 
   keystone_tenant { 'openstackjenkins':
     ensure      => present,
     enabled     => true,
+    domain      => 'infra',
+    require     => Keystone_domain['infra'],
   }
 }
