@@ -84,12 +84,12 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackjenkins_infracloud_username'] %>
       password: <%= @puppetmaster_clouds['openstackjenkins_infracloud_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackjenkins_infracloud_project_name'] %>
-      cacert: '/etc/openstack/infracloud_west_cacert.pem'
-      auth_type: 'v3password'
-      identity_api_version: '3'
-      floating_ip_source: 'None'
-      project_domain_id: default
-      user_domain_id: default
+      project_domain_name: 'infra'
+      user_domain_name: 'infra'
+    cacert: '/etc/openstack/infracloud_west_cacert.pem'
+    auth_type: 'v3password'
+    identity_api_version: '3'
+    floating_ip_source: 'None'
   openstackci-infracloud-west:
     region_name: RegionOne
     auth:
@@ -97,12 +97,12 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_infracloud_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_infracloud_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackci_infracloud_project_name'] %>
-      cacert: '/etc/openstack/infracloud_west_cacert.pem'
-      auth_type: 'v3password'
-      identity_api_version: '3'
-      floating_ip_source: 'None'
-      project_domain_id: default
-      user_domain_id: default
+      project_domain_name: 'infra'
+      user_domain_name: 'infra'
+    cacert: '/etc/openstack/infracloud_west_cacert.pem'
+    auth_type: 'v3password'
+    identity_api_version: '3'
+    floating_ip_source: 'None'
   openstackjenkins-rax:
     regions:
     - DFW
