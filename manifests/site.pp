@@ -674,13 +674,6 @@ node 'nodepool.openstack.org' {
   $infracloud_password = hiera('nodepool_infracloud_password')
   $infracloud_project  = hiera('nodepool_infracloud_project', 'project')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
-  file { '/etc/openstack/infracloud_west_cacert.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    content => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
-  }
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
@@ -748,6 +741,14 @@ node 'nodepool.openstack.org' {
         credentials => hiera('jenkins_credentials_id'),
       },
     ],
+  }
+  file { '/home/nodepool/.config/openstack/infracloud_west_cacert.pem':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
+    content => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
+    require => Class['::openstackci::nodepool'],
   }
 }
 
