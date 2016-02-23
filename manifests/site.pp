@@ -756,6 +756,7 @@ node 'nodepool.openstack.org' {
       },
     ],
   }
+
   file { '/home/nodepool/.config/openstack/infracloud_west_cacert.pem':
     ensure  => present,
     owner   => 'nodepool',
@@ -764,6 +765,21 @@ node 'nodepool.openstack.org' {
     content => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
+
+  # copy infra elements to nodepool
+  file { '/etc/nodepool/system-config-elements':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    require => [ Class['::openstackci::nodepool'],
+                 File['etc/nodepool'] ],
+    source  => 'puppet:///modules/openstack_project/files/elements/',
+  }
+
 }
 
 # Node-OS: precise
