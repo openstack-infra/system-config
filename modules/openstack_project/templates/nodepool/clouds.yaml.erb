@@ -46,3 +46,15 @@ clouds:
       username: '<%= internap_username %>'
       password: '<%= internap_password %>'
       project_name: '<%= internap_project %>'
+  infracloud-east:
+    auth:
+      username: '<%= infracloud_username %>'
+      password: '<%= infracloud_password %>'
+      project_name: '<%= infracloud_project %>'
+      user_domain_id: default
+      project_domain_id: default
+      auth_url: 'https://controller00.hpuswest.ic.openstack.org:35357/v3'
+    auth_type: 'v3password'
+    cacert: '/etc/openstack/infracloud_east_cacert.pem'
+    identity_api_version: '3'
+    floating_ip_source: 'None'
