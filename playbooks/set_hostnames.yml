@@ -1,0 +1,7 @@
+---
+# file: set_hostnames.yml
+- hosts: "{{ target }}"
+  gather_facts: no
+  user: root
+  roles:
+    - { role: set_hostname }
