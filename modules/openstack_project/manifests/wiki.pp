@@ -6,6 +6,11 @@ class openstack_project::wiki (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = ''
+  $dbpassword = undef,
+  $secretkey = undef,
+  $upgradekey = undef,
+  $captchaquestions_answer = undef,
+  $googleanalyticsaccount = undef,
 ) {
 
   package { ['openssl', 'ssl-cert', 'subversion']:
@@ -32,6 +37,11 @@ class openstack_project::wiki (
     ssl_cert_file_contents    => $ssl_cert_file_contents,
     ssl_key_file_contents     => $ssl_key_file_contents,
     ssl_chain_file_contents   => $ssl_chain_file_contents,
+    dbpassword                => $dbpassword,
+    secretkey                 => $secretkey,
+    upgradekey                => $upgradekey,
+    captchaquestions_answer   => $captchaquestions_answer,
+    googleanalyticsaccount    => $googleanalyticsaccount,
   }
   class { 'memcached':
     max_memory => 2048,

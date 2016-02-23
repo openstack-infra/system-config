@@ -391,6 +391,11 @@ node 'wiki.openstack.org' {
     ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents'),
+    dbpassword              => hiera('wiki_dbpassword'),
+    secretkey               => hiera('wiki_secretkey'),
+    upgradekey              => hiera('wiki_upgradekey'),
+    captchaquestions_answer => hiera('wiki_captchaquestions_answer'),
+    googleanalyticsaccount  => hiera('wiki_googleanalyticsaccount'),
   }
 }
 
