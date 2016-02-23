@@ -669,6 +669,17 @@ node 'nodepool.openstack.org' {
   $tripleo_username     = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password     = hiera('nodepool_tripleo_password')
   $tripleo_project      = hiera('nodepool_tripleo_project', 'project')
+  $infracloud_username = hiera('nodepool_infracloud_username', 'username')
+  $infracloud_password = hiera('nodepool_infracloud_password')
+  $infracloud_project  = hiera('nodepool_infracloud_project', 'project')
+  $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
+  file { '/etc/openstack/infracloud_east_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
+  }
   $clouds_yaml          = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
