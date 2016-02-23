@@ -17,6 +17,10 @@ class openstack_project::infracloud::controller (
   $br_name,
   $controller_management_address,
   $controller_public_address = $::fqdn,
+  $openstackci_password,
+  $openstackci_email = 'infra-root@openstack.org',
+  $openstackjenkins_password,
+  $openstackjenkins_email = 'infra-root@openstack.org',
 ) {
   class { '::infracloud::controller':
     keystone_rabbit_password         => $keystone_rabbit_password,
@@ -56,5 +60,23 @@ class openstack_project::infracloud::controller (
     enabled     => true,
     domain      => 'infra',
     require     => Keystone_domain['infra'],
+  }
+
+  keystone_user { 'openstackci':
+    ensure   => present,
+    enabled  => true,
+    domain   => 'infra'
+    email    => $openstackci_email,
+    password => $openstackci_password,
+    require  => Keystone_tenant['openstackci'],
+  }
+
+  keystone_user { 'openstackjenkins':
+    ensure   => present,
+    enabled  => true,
+    domain   => 'infra',
+    email    => $openstackjenkins_email,
+    password => $openstackjenkins_password,
+    require  => Keystone_tenant['openstackjenkins'],
   }
 }
