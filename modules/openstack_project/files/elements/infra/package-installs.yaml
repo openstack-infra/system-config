@@ -1,0 +1,8 @@
+curl:
+file:
+less:
+linux-image-generic:
+patch:
+openssh-server:
+rsync:
+wget:
