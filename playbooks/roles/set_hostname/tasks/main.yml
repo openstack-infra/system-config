@@ -1,0 +1,15 @@
+---
+# Set hostname and /etc/hosts
+# Inspired by:
+# https://github.com/ansible/ansible/pull/8482)
+# https://gist.github.com/rothgar/8793800
+- name: Set /etc/hostname
+  hostname: name="{{ inventory_hostname.split('.', 1)[0] }}"
+
+# " lovely lonely double-quote for fixing vim highlighting
+
+- name: Set /etc/hosts
+  lineinfile: dest=/etc/hosts
+              line="127.0.1.1 {{ inventory_hostname }} {{ inventory_hostname.split('.', 1)[0] }}"
+              insertafter='^127\.0\.0\.1 localhost'
+              state=present
