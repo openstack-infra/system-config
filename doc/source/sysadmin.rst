@@ -103,6 +103,15 @@ change for review, you can propose the change with git-review. See the
 <http://docs.openstack.org/infra/manual/developers.html#development-workflow>`_
 for more information.
 
+Accessing Clouds
+================
+
+As an unprivileged user who is a member of the `admin` group on
+puppetmaster, you can access any of the clouds with::
+
+  export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
+  openstack --os-cloud <cloud name> --os-cloud-region <region name>
+
 Adding a New Server
 ===================
 
