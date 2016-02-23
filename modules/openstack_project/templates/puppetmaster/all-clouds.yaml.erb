@@ -103,6 +103,19 @@ clouds:
       floating_ip_source: 'None'
       project_domain_id: default
       user_domain_id: default
+  admin-infracloud-west:
+    region_name: RegionOne
+    auth:
+      auth_url: https://controller00.hpuswest.ic.openstack.org:35357/v3
+      username: <%= @puppetmaster_clouds['admin_infracloud_username'] %>
+      password: <%= @puppetmaster_clouds['admin_infracloud_password'] %>
+      project_name: <%= @puppetmaster_clouds['admin_infracloud_project_name'] %>
+      project_domain_id: default
+      user_domain_id: default
+    cacert: '/etc/openstack/infracloud_west_cacert.pem'
+    auth_type: 'v3password'
+    identity_api_version: '3'
+    floating_ip_source: 'None'
   openstackjenkins-rax:
     regions:
     - DFW
