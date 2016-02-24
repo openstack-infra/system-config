@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  user: root
+  roles:
+    - { role: allow_all_traffic_default_secgroup, os_client_config_cloud: 'openstackci-infracloud-west' }
