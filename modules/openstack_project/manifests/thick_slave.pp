@@ -39,7 +39,6 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::libxml2_dev_package, # for xmllint, need for wadl
     $::openstack_project::jenkins_params::libxslt_dev_package,
     $::openstack_project::jenkins_params::libffi_dev_package, # xattr's cffi dependency
-    $::openstack_project::jenkins_params::pandoc_package, #for docs, markdown->docbook, bug 924507
     $::openstack_project::jenkins_params::pkgconfig_package, # for spidermonkey, used by ceilometer
     $::openstack_project::jenkins_params::python_libvirt_package,
     $::openstack_project::jenkins_params::python_lxml_package, # for validating openstack manuals
