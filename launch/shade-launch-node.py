@@ -84,6 +84,13 @@ def bootstrap_server(server, key, cert, environment, name,
     ssh_client.ssh('bash -x install_puppet.sh')
 
     certname = cert[:(0 - len('.pem'))]
+    shortname = name.split('.')[0]
+    with ssh_client.open('/etc/hosts', 'w') as f:
+        f.write('127.0.0.1 localhost\n')
+        f.write('127.0.1.1 %s %s\n' % (name, shortname))
+    with ssh_client.open('/etc/hostname', 'w') as f:
+        f.write('%s\n' % (shortname,))
+    ssh_client.ssh("hostname %s" % (name,))
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/public_keys")
