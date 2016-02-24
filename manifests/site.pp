@@ -387,11 +387,16 @@ node 'etherpad-dev.openstack.org' {
 # Node-OS: precise
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
-    mysql_root_password     => hiera('wiki_db_password'),
-    sysadmins               => hiera('sysadmins', []),
-    ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('wiki_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('wiki_ssl_chain_file_contents'),
+    mysql_root_password        => hiera('wiki_db_password'),
+    sysadmins                  => hiera('sysadmins', []),
+    ssl_cert_file_contents     => hiera('wiki_ssl_cert_file_contents'),
+    ssl_key_file_contents      => hiera('wiki_ssl_key_file_contents'),
+    ssl_chain_file_contents    => hiera('wiki_ssl_chain_file_contents'),
+    wg_dbpassword              => hiera('wiki_wg_dbpassword'),
+    wg_secretkey               => hiera('wiki_wg_secretkey'),
+    wg_upgradekey              => hiera('wiki_wg_upgradekey'),
+    wg_captchaquestions_answer => hiera('wiki_wg_captchaquestions_answer'),
+    wg_googleanalyticsaccount  => hiera('wiki_wg_googleanalyticsaccount'),
   }
 }
 
