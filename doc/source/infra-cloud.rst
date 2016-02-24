@@ -182,7 +182,7 @@ simplest possible networking. DHCP is configured to hand the machine a
 routable IP which can be reached directly from the internet to facilitate
 nodepool/zuul communications.
 
-.. _provider VLAN: http://docs.openstack.org/networking-guide/deploy_scenario4b.html
+.. _provider VLAN: http://docs.openstack.org/networking-guide/scenario-provider-lb.html
 
 Each site will need 2 VLANs. One for the public IPs which every NIC of every
 host will be attached to. That VLAN will get a publicly routable /23. Also,
