@@ -368,4 +368,28 @@ class openstack_project::static (
     group   => 'jenkins',
     require => User['jenkins'],
   }
+
+  ###########################################################
+  # Neutron Review Dashboard
+
+  ::httpd::vhost { 'neutron-reviews.openstack.org':
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/neutron-reviews',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'neutron-reviews.openstack.org',
+    require    => [
+      File['/srv/static/neutron-reviews'],
+      File[$cert_file],
+      File[$key_file],
+    ],
+  }
+
+  file { '/srv/static/neutron-reviews':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
 }
