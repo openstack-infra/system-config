@@ -4,7 +4,11 @@
 ---
 - hosts: 'jenkins.openstack.org:~jenkins\d+.openstack.org'
   tasks:
+    - name: check if jjb is already running
+      shell: pgrep "jenkins-jobs" || true
+      register: jjb_status
     - name: run jjb
       shell: jenkins-jobs update --delete-old  /etc/jenkins_jobs/config
       async: 7200
       poll: 30
+      when: jjb_status.stdout
