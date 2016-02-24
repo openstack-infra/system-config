@@ -1,0 +1,25 @@
+- name: Register any previously default security group rules
+  shell: /usr/local/bin/openstack security group rule list -f value -c ID default
+  register: command_output
+
+- name: Delete all previously default security group rules
+  os_security_group_rule:
+    cloud: "{{ os_client_config_cloud }}"
+    state: absent
+  with_items: "{{ command_output.stdout_lines }}"
+
+- name: Allow all IPv4 traffic on default security group
+  os_security_group_rule:
+    cloud: "{{ os_client_config_cloud }}"
+    security_group: default
+    direction: ingress
+    ethertype: IPv4
+    remote_ip_prefix: 0.0.0.0/0
+
+- name: Allow all IPv6 traffic on default security group
+  os_security_group_rule:
+    cloud: "{{ os_client_config_cloud }}"
+    security_group: default
+    direction: ingress
+    ethertype: IPv6
+    remote_ip_prefix: ::0/0
