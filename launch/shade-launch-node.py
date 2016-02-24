@@ -89,7 +89,9 @@ def bootstrap_server(server, key, cert, environment, name,
         f.write('127.0.0.1 localhost\n')
         f.write('127.0.1.1 %s %s\n' % (name, shortname))
     with ssh_client.open('/etc/hostname', 'w') as f:
-        f.write('%s\n' % (shortname,))
+        f.write('%s\n' % (name,))
+    with ssh_client.open('/etc/mailname', 'w') as f:
+        f.write('%s\n' % (name,))
     ssh_client.ssh("hostname %s" % (name,))
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/private_keys")
