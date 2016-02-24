@@ -368,4 +368,28 @@ class openstack_project::static (
     group   => 'jenkins',
     require => User['jenkins'],
   }
+
+  ###########################################################
+  # Review Dashboard
+
+  ::httpd::vhost { 'dashboard.openstack.org':
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/dashboard',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'dashboard.openstack.org',
+    require    => [
+      File['/srv/static/dashboard'],
+      File[$cert_file],
+      File[$key_file],
+    ],
+  }
+
+  file { '/srv/static/dashboard':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
 }
