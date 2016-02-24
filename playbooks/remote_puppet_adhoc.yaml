@@ -1,0 +1,5 @@
+- hosts: '*'
+  gather_facts: true
+  roles:
+  - role: puppet
+    manage_config: true
