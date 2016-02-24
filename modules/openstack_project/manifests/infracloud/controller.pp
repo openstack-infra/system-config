@@ -17,6 +17,9 @@ class openstack_project::infracloud::controller (
   $br_name,
   $controller_management_address,
   $controller_public_address = $::fqdn,
+  $neutron_subnet_cidr = '192.168.0.0/24',
+  $neutron_subnet_gateway = '192.168.0.1',
+  $neutron_subnet_allocation_pools = [ 'start=192.168.0.1,end=192.168.0.254' ],
 ) {
   class { '::infracloud::controller':
     keystone_rabbit_password         => $keystone_rabbit_password,
@@ -37,6 +40,9 @@ class openstack_project::infracloud::controller (
     br_name                          => $br_name,
     controller_management_address    => $controller_management_address,
     controller_public_address        => $controller_public_address,
+    neutron_subnet_cidr              => $neutron_subnet_cidr,
+    neutron_subnet_gateway           => $neutron_subnet_gateway,
+    neutron_subnet_allocation_pools  => $neutron_subnet_allocation_pools,
   }
 
   keystone_domain { 'infra':
