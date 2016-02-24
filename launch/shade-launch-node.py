@@ -127,12 +127,13 @@ def bootstrap_server(server, key, cert, environment, name,
 
 def build_server(cloud, name, image, flavor, cert, environment,
                  puppetmaster, volume, keep, net_label,
-                 floating_ip_pool, boot_from_volume):
+                 floating_ip_pool, boot_from_volume,
+                 config_drive):
     key = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name,
-                         reuse_ips=False, wait=True)
+                         reuse_ips=False, wait=True, config_drive=config_drive)
 
     #TODO: test with rax
     #TODO: use shade
@@ -239,6 +240,10 @@ def main():
                         help="network label to attach instance to")
     parser.add_argument("--fip-pool", dest="floating_ip_pool", default=None,
                         help="pool to assign floating IP from")
+    parser.add_argument("--config-drive", dest="config_drive",
+                        help="Boot with config_drive attached.",
+                        action='store_true',
+                        default=False)
     options = parser.parse_args()
 
     if options.cert:
@@ -285,7 +290,7 @@ def main():
                           options.environment, options.server,
                           options.volume, options.keep,
                           options.net_label, options.floating_ip_pool,
-                          options.boot_from_volume)
+                          options.boot_from_volume, options.config_drive)
     dns.shade_print_dns(server)
     # Remove the ansible inventory cache so that next run finds the new
     # server
