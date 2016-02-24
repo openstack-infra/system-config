@@ -1,0 +1,13 @@
+- os_security_group_rule:
+    cloud: {{ os_client_config_cloud }}
+    security_group: default
+    direction: ingress
+    ethertype: IPv4
+    remote_ip_prefix: 0.0.0.0/0
+
+- os_security_group_rule:
+    cloud: {{ os_client_config_cloud }}
+    security_group: default
+    direction: ingress
+    ethertype: IPv6
+    remote_ip_prefix: ::0/0
