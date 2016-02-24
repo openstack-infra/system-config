@@ -395,7 +395,7 @@ node 'wiki.openstack.org' {
     wg_dbpassword              => hiera('wiki_wg_dbpassword'),
     wg_secretkey               => hiera('wiki_wg_secretkey'),
     wg_upgradekey              => hiera('wiki_wg_upgradekey'),
-    wg_captchaquestions_answer => hiera('wiki_wg_captchaquestions_answer'),
+    wg_captchaquestions        => hiera('wiki_wg_captchaquestions'),
     wg_googleanalyticsaccount  => hiera('wiki_wg_googleanalyticsaccount'),
   }
 }
