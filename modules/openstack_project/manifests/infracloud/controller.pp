@@ -47,6 +47,7 @@ class openstack_project::infracloud::controller (
   keystone_tenant { 'openstackci':
     ensure      => present,
     enabled     => true,
+    description => 'Infra Long Lived Resources',
     domain      => 'infra',
     require     => Keystone_domain['infra'],
   }
@@ -54,6 +55,7 @@ class openstack_project::infracloud::controller (
   keystone_tenant { 'openstackjenkins':
     ensure      => present,
     enabled     => true,
+    description => 'Infra short lived resources',
     domain      => 'infra',
     require     => Keystone_domain['infra'],
   }
