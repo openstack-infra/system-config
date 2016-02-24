@@ -302,7 +302,7 @@ to take.
 
 In the case of needing to disable the running of puppet on a node, it's a
 simple matter of adding an entry to the ansible inventory "disabled" group
-in `:file:modules/openstack_project/files/puppetmaster/groups.txt`. The
+in :file:`modules/openstack_project/files/puppetmaster/groups.txt`. The
 disabled entry is an input to `ansible --list-hosts` so you can check your
 entry simply by running it with `ansible $hostlist --list-hosts` as root
 on the puppetmaster host and ensuring that the list of hosts returned is as
