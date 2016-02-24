@@ -45,5 +45,4 @@ compute038.hpuswest.ic.openstack.org
 #compute041.hpuswest.ic.openstack.org # unknown
 #compute042.hpuswest.ic.openstack.org # unknown
 #compute043.hpuswest.ic.openstack.org # unknown
-
-#TODO Add baremetal controller host here
+baremetal00.hpuswest.ic.openstack.org
