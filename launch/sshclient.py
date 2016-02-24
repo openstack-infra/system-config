@@ -18,6 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import contextlib
 import sys
 
 import paramiko
@@ -54,4 +55,11 @@ class SSHClient(object):
         print 'copy', source, dest
         ftp = self.client.open_sftp()
         ftp.put(source, dest)
+        ftp.close()
+
+    @contextlib.contextmanager
+    def open(self, path, mode):
+        ftp = self.client.open_sftp()
+        f = ftp.open(path, mode)
+        yield f
         ftp.close()
