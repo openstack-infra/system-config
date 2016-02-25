@@ -231,7 +231,7 @@ node 'puppetmaster.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'puppetdb.openstack.org' {
   class { 'openstack_project::puppetdb':
     sysadmins => hiera('sysadmins', []),
