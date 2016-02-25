@@ -240,6 +240,7 @@ node 'puppetmaster.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'puppetdb.openstack.org' {
   $open_ports = [8081, 80]
   class { 'openstack_project::server':
