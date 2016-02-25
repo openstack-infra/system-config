@@ -46,10 +46,8 @@ compute036.hpuswest.ic.openstack.org
 #compute043.hpuswest.ic.openstack.org # unknown
 baremetal00.hpuswest.ic.openstack.org
 
-[infracloud-east-controller]
+baremetal00.hpuseast.ic.openstack.org
 controller00.hpuseast.ic.openstack.org
-
-[infracloud-east-compute]
 compute000.hpuseast.ic.openstack.org
 compute001.hpuseast.ic.openstack.org
 compute002.hpuseast.ic.openstack.org
@@ -145,3 +143,4 @@ compute025.hpuseast.ic.openstack.org
 #compute091.hpuseast.ic.openstack.org
 #compute092.hpuseast.ic.openstack.org
 #compute093.hpuseast.ic.openstack.org
+#compute094.hpuseast.ic.openstack.org
