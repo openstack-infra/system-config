@@ -16,6 +16,7 @@ class openstack_project::server (
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = true,
   $pypi_index_url            = 'https://pypi.python.org/simple',
+  $purge_apt_sources         = true,
 ) {
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
@@ -32,6 +33,6 @@ class openstack_project::server (
     manage_exim               => $manage_exim,
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
-    purge_apt_sources         => true,
+    purge_apt_sources         => $purge_apt_sources,
   }
 }

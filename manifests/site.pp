@@ -1165,6 +1165,7 @@ node 'controller00.hpuswest.ic.openstack.org' {
     iptables_public_tcp_ports => [5000,5671,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
+    purge_apt_sources         => false,
   }
   class { '::openstack_project::infracloud::controller':
     keystone_rabbit_password         => hiera('keystone_rabbit_password'),
@@ -1194,6 +1195,7 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
   class { '::openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
+    purge_apt_sources         => false,
   }
   class { '::openstack_project::infracloud::compute':
     nova_rabbit_password             => hiera('nova_rabbit_password'),
@@ -1214,6 +1216,7 @@ node /^baremetal\d{2}\.hpuswest\.ic\.openstack\.org$/ {
     iptables_public_udp_ports => [67,69],
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
+    purge_apt_sources         => false,
   }
 
   class { '::openstack_project::infracloud::baremetal':
