@@ -206,7 +206,7 @@ node 'jenkins-dev.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'cacti.openstack.org' {
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
