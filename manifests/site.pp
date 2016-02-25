@@ -1185,6 +1185,8 @@ node 'controller00.hpuswest.ic.openstack.org' {
     br_name                          => 'br-vlan25',
     controller_management_address    => '10.10.16.146',
     controller_public_address        => $::fqdn,
+    openstackci_password             => hiera('openstackci_infracloud_password'),
+    openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
   }
 }
 
