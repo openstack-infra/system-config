@@ -14,6 +14,8 @@ class openstack_project::puppetboard(
   class { '::puppetboard':
     unresponsive => '1.5',
     enable_query => 'False', # This being a python false
+    git_source   => 'https://github.com/voxpupuli/puppetboard',
+    revision     => '3042e22a1b4dfc0e3b7f3850c77da5a9398a8a52',
   }
 
   $docroot = "${basedir}/puppetboard"
@@ -40,6 +42,10 @@ class openstack_project::puppetboard(
     docroot  => $docroot,
     priority => '50',
     template => 'openstack_project/puppetboard/puppetboard.vhost.erb',
+    require  => [
+      User[$user],
+      Group[$group],
+    ],
   }
 
 }
