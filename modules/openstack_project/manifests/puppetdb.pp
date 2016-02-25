@@ -2,6 +2,7 @@
 #
 class openstack_project::puppetdb (
   $puppetboard = true,
+  $version = '2.3.8-1puppetlabs1',
 ) {
 
   # The puppetlabs postgres module does not manage the postgres user
@@ -34,6 +35,20 @@ class openstack_project::puppetdb (
 
   if $puppetboard {
     class { 'openstack_project::puppetboard': }
+  }
+
+  if versioncmp($version, '2.3.8') > 0 {
+    apt::source { 'puppetlabs':
+      location => 'http://apt.puppetlabs.com',
+      repos    => 'PC1',
+      key      => {
+        'id'     =>'47B320EB4C7C375AA9DAE1A01054B7A24BD6EC30',
+        'server' => 'pgp.mit.edu',
+      },
+    }
+    class { 'puppetdb::globals':
+      version => '4.0.2-1puppetlabs1',
+    }
   }
 
 }
