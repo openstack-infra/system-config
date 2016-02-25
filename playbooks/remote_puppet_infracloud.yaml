@@ -7,9 +7,9 @@
   gather_facts: true
   roles:
     - role: puppet
-      config: true
+      manage_config: true
 - hosts: "compute*.ic.openstack.org:!disabled"
   gather_facts: true
   roles:
     - role: puppet
-      config: true
+      manage_config: true
