@@ -188,4 +188,12 @@ class openstack_project::users {
     uid      => 2020,
     gid      => 2020,
   }
+
+  @user::virtual::localuser { 'colleen':
+    realname => 'Colleen Murphy',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDcHzySqYlH1TfAPx5PaVzqkuMbI3zksJ5E2aZBlsIN7wNSoyO0Dts6HegHZIgi5NGT05wRBAUMCNZwupqFoWDg41JBKzPKITkqvEe/FnNmJFxt591ltXigZZ+ZLoX8B12nww/eeA5nx9PT4hIsLQG50MxEm0iC4ApusaAXMXa7+gTDkzf6yyl4QwinyFFTYtyJwFw5XfQXXRQwL8Qv6mVGrhDz3Fj4VWawByQuxRHgt5G3Ux/PnZzatJ3tuSK66o1uXrvuOiGdUtDCuAFUx+kgcmUTpCC6vgMZdDbrfyw0CGxkmAUNfeEMOw0TWbdioJ2FwH5+4BEvMgiFgsCTjIwDqqyFV9eK8sd0mbJ+I82EyOXPlFPKGan6Ie6LD1qotdUW9vT3pfpR/44s/Id2un3FBnVg7GZkGJshikGO1UqjmZfhEpQ6Q+auLir+mBv2X/ril6qJ2NuQpwMRVzZmriPMxdJDs6xhzg2fGEYRvEvh0kzsqNf4OgKbSWiVOB3WALM30Cx3YdmnB6JonRGA+6CqD+LO4HQMbD7LBVcYzEIS1WtP8aPx/NiybemrF0LWmIgl34A0Tpcc+5MLzzUtgUt6lYFyWxltCP43u1N7ODH+FsFALzo6CO9DjyMxEd6Ay61hyx8Btfhn8NH/wEdCQj1WAMHU+d2ljk5ndAfp8c6LRQ==',
+    key_id   => 'krinkle@gir',
+    uid      => 2021,
+    gid      => 2021,
+  }
 }
