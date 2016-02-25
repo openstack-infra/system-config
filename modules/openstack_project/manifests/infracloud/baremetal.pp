@@ -22,4 +22,10 @@ class openstack_project::infracloud::baremetal (
     vlan                 => $vlan,
     gateway_ip           => $gateway_ip,
   }
+
+  realize (
+    User::Virtual::Localuser['colleen'],
+    User::Virtual::Localuser['rcarrillocruz'],
+  )
+
 }
