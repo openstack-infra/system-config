@@ -1,0 +1,14 @@
+# This playbook will allow to manage power state of the baremetal group
+# power_state setting needs to be passed, with on/off values
+# This playbook can be limited to a single host using the --limit flags
+---
+- hosts: baremetal
+  vars:
+    power_state:
+  connection: local
+  gather_facts: true
+  tasks:
+    - name: 'Manage power state of the given host'
+      shell: "ironic node-set power-state '{{ uuid }}' '{{ power_state }}'"
+      failed_when: ({{ power_state }} != 'on') && ({{ power_state }} != 'off' }})
+
