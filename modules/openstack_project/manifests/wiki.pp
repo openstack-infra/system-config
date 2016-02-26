@@ -9,7 +9,7 @@ class openstack_project::wiki (
   $wg_dbpassword = undef,
   $wg_secretkey = undef,
   $wg_upgradekey = undef,
-  $wg_captchaquestions_answer = undef,
+  $wg_captchaquestions = {},
   $wg_googleanalyticsaccount = undef,
 ) {
 
@@ -41,7 +41,7 @@ class openstack_project::wiki (
     wg_dbpassword              => $wg_dbpassword,
     wg_secretkey               => $wg_secretkey,
     wg_upgradekey              => $wg_upgradekey,
-    wg_captchaquestions_answer => $wg_captchaquestions_answer,
+    wg_captchaquestions        => $wg_captchaquestions,
     wg_googleanalyticsaccount  => $wg_googleanalyticsaccount,
   }
   class { 'memcached':
