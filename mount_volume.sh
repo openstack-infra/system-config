@@ -14,23 +14,37 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Sigh. nova volume-attach is not immediate, but there is no status to track
-sleep 120
+DEVICE=$1
+MOUNT_PATH=$2
+FS_LABEL=$3
 
-if [ -b /dev/vdc ]; then
-    DEV='/dev/vdc'
-elif [ -b /dev/xvdb ]; then
-    DEV='/dev/xvdb'
+# Because images may not have all the things we need.
+if which apt-get ; then
+    apt-get update && apt-get install -y lvm2
+elif which yum ; then
+    yum -y install lvm2
+fi
+
+# Sanity check that we don't break anything that already has an fs.
+if ! blkid | grep $DEVICE ; then
+    set -e
+    parted --script $DEVICE mklabel msdos mkpart primary 0% 100% set 1 lvm on
+    partprobe -s $DEVICE
+    pvcreate ${DEVICE}1
+    vgcreate main ${DEVICE}1
+    lvcreate -l 100%FREE -n $FS_LABEL main
+    mkfs.ext4 -m 0 -j -L $FS_LABEL /dev/main/$FS_LABEL
+    tune2fs -i 0 -c 0 /dev/main/$FS_LABEL
+
+    # Remove existing fstab entries for this device.
+    perl -nle "m,/dev/main/$FS_LABEL, || print" -i /etc/fstab
+
+    if [ ! -d $MOUNT_PATH ] ; then
+        mkdir -p $MOUNT_PATH
+    fi
+
+    echo "/dev/main/$FS_LABEL  $MOUNT_PATH  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
+    mount -a
 else
-    echo "Could not mount volume"
     exit 1
 fi
-if ! blkid | grep $DEV | grep ext4 ; then
-    mkfs.ext4 ${DEV}
-fi
-perl -nle "m,${DEV}, || print" -i /etc/fstab
-if [ ! -d /srv ] ; then
-    mkdir -p /srv
-fi
-echo "${DEV}  /srv  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
-mount -a
