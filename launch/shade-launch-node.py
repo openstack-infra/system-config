@@ -133,10 +133,11 @@ def bootstrap_server(server, key, cert, environment, name,
 
 
 def build_server(cloud, name, image, flavor, cert, environment,
-                 puppetmaster, volume, keep, net_label,
+                 puppetmaster, volume_id, keep, net_label,
                  floating_ip_pool, boot_from_volume,
                  config_drive):
     key = None
+    volume = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name,
@@ -183,13 +184,9 @@ def build_server(cloud, name, image, flavor, cert, environment,
     try:
         cloud.delete_keypair(key_name)
 
-        # TODO: use shade
-        if volume:
-            raise Exception("not implemented")
-            #vobj = client.volumes.create_server_volume(
-            #    server.id, volume, None)
-            #if not vobj:
-            #    raise Exception("Couldn't attach volume")
+        if volume_id:
+            volume = cloud.get_volume(volume_id)
+            cloud.attach_volume(server, volume, wait=True)
 
         server = cloud.get_openstack_vars(server)
         bootstrap_server(server, key, cert, environment, name,
@@ -232,7 +229,7 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="puppetmaster.openstack.org")
-    parser.add_argument("--volume", dest="volume",
+    parser.add_argument("--volume", dest="volume_id",
                         help="UUID of volume to attach to the new server.",
                         default=None)
     parser.add_argument("--boot-from-volume", dest="boot_from_volume",
@@ -288,14 +285,9 @@ def main():
             print i.name
         sys.exit(1)
 
-    if options.volume:
-        print "The --volume option does not support cinder; until it does"
-        print "it should not be used."
-        sys.exit(1)
-
     server = build_server(cloud, options.name, image, flavor, cert,
                           options.environment, options.server,
-                          options.volume, options.keep,
+                          options.volume_id, options.keep,
                           options.net_label, options.floating_ip_pool,
                           options.boot_from_volume, options.config_drive)
     dns.shade_print_dns(server)
