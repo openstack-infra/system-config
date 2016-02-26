@@ -42,7 +42,8 @@ except:
 
 
 def bootstrap_server(server, key, cert, environment, name,
-                     puppetmaster, volume, floating_ip_pool):
+                     puppetmaster, floating_ip_pool, volume_device,
+                     mount_path, fs_label):
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
 
@@ -74,10 +75,11 @@ def bootstrap_server(server, key, cert, environment, name,
                    'make_swap.sh')
     ssh_client.ssh('bash -x make_swap.sh')
 
-    if volume:
+    if volume_device:
         ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'mount_volume.sh'),
                        'mount_volume.sh')
-        ssh_client.ssh('bash -x mount_volume.sh')
+        ssh_client.ssh('bash -x mount_volume.sh -- %s %s %s' %
+                       (volume_device, mount_path, fs_label))
 
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
@@ -133,10 +135,11 @@ def bootstrap_server(server, key, cert, environment, name,
 
 
 def build_server(cloud, name, image, flavor, cert, environment,
-                 puppetmaster, volume, keep, net_label,
+                 puppetmaster, volume_id, keep, net_label,
                  floating_ip_pool, boot_from_volume,
-                 config_drive):
+                 config_drive, mount_path, fs_label):
     key = None
+    volume_device = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name,
@@ -183,17 +186,16 @@ def build_server(cloud, name, image, flavor, cert, environment,
     try:
         cloud.delete_keypair(key_name)
 
-        # TODO: use shade
-        if volume:
-            raise Exception("not implemented")
-            #vobj = client.volumes.create_server_volume(
-            #    server.id, volume, None)
-            #if not vobj:
-            #    raise Exception("Couldn't attach volume")
+        if volume_id:
+            volume = cloud.get_volume(volume_id)
+            volume = cloud.attach_volume(server, volume, wait=True)
+            volume_device = cloud.get_volume_attach_device(volume,
+                                                           server['id'])
 
         server = cloud.get_openstack_vars(server)
         bootstrap_server(server, key, cert, environment, name,
-                         puppetmaster, volume, floating_ip_pool)
+                         puppetmaster, floating_ip_pool, volume_device,
+                         mount_path, fs_label)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (server.id,
                                                server.accessIPv4,
                                                server.accessIPv6))
@@ -232,8 +234,14 @@ def main():
                         "hostname.example.com.pem)")
     parser.add_argument("--server", dest="server", help="Puppetmaster to use.",
                         default="puppetmaster.openstack.org")
-    parser.add_argument("--volume", dest="volume",
+    parser.add_argument("--volume", dest="volume_id",
                         help="UUID of volume to attach to the new server.",
+                        default=None)
+    parser.add_argument("--mount-path", dest="mount_path",
+                        help="Path to mount cinder volume at.",
+                        default=None)
+    parser.add_argument("--fs-label", dest="fs_label",
+                        help="FS label to use when mounting cinder volume.",
                         default=None)
     parser.add_argument("--boot-from-volume", dest="boot_from_volume",
                         help="Create a boot volume for the server and use it.",
@@ -288,16 +296,12 @@ def main():
             print i.name
         sys.exit(1)
 
-    if options.volume:
-        print "The --volume option does not support cinder; until it does"
-        print "it should not be used."
-        sys.exit(1)
-
     server = build_server(cloud, options.name, image, flavor, cert,
                           options.environment, options.server,
-                          options.volume, options.keep,
+                          options.volume_id, options.keep,
                           options.net_label, options.floating_ip_pool,
-                          options.boot_from_volume, options.config_drive)
+                          options.boot_from_volume, options.config_drive,
+                          options.mount_path, options.fs_label)
     dns.shade_print_dns(server)
     # Remove the ansible inventory cache so that next run finds the new
     # server
