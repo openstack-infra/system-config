@@ -1,3 +1,6 @@
+[disabled:children]
+infracloud
+
 [infracloud]
 controller00.hpuswest.ic.openstack.org
 compute000.hpuswest.ic.openstack.org
