@@ -21,7 +21,9 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
     elif [ -b /dev/xvde ]; then
         DEV='/dev/xvde'
     fi
-    if [ -n "$DEV" ]; then
+
+    # Avoid using config drive device for swap
+    if [ -n "$DEV" ] && ! blkid | grep $DEV ; then
         MEMKB=`grep MemTotal /proc/meminfo | awk '{print $2; }'`
         # Use the nearest power of two in MB as the swap size.
         # This ensures that the partitions below are aligned properly.
