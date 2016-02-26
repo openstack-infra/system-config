@@ -1212,7 +1212,6 @@ node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
 node /^baremetal\d{2}\.hpuswest\.ic\.openstack\.org$/ {
   $group = 'infracloud'
   class { '::openstack_project::server':
-    iptables_public_tcp_ports => [80],
     iptables_public_udp_ports => [67,69],
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
