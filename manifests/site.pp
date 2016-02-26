@@ -678,6 +678,9 @@ node 'nodepool.openstack.org' {
   $infracloud_username = hiera('nodepool_infracloud_username', 'username')
   $infracloud_password = hiera('nodepool_infracloud_password')
   $infracloud_project  = hiera('nodepool_infracloud_project', 'project')
+  $osic_username       = hiera('nodepool_osic_username', 'username')
+  $osic_password       = hiera('nodepool_osic_password')
+  $osic_project        = hiera('nodepool_osic_project', 'project')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),

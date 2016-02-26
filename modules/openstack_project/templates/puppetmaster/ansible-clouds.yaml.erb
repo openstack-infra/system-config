@@ -49,3 +49,16 @@ clouds:
       user_domain_name: 'infra'
     cacert: '/etc/openstack/infracloud_west_cacert.pem'
     identity_api_version: '3'
+  openstackci-osic:
+    region_name: RegionOne
+    auth:
+      auth_url: https://172.99.101.17:5000
+      username: <%= @puppetmaster_clouds['openstackci_osic_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_osic_password'] %>
+      project_id: <%= @puppetmaster_clouds['openstackci_osic_project_id'] %>
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
+    # Since DNS is not setup for the CN in the self signed cert we are not
+    # able to verify even if we provide the cert to check against.
+    verify: False
