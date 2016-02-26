@@ -57,3 +57,15 @@ clouds:
       auth_url: 'https://controller00.hpuswest.ic.openstack.org:35357/'
     cacert: '/home/nodepool/.config/openstack/infracloud_west_cacert.pem'
     identity_api_version: '3'
+  osic:
+    region_name: RegionOne
+    auth:
+      auth_url: https://172.99.101.17:5000
+      username: <%= osic_username %>
+      password: <%= osic_password %>
+      project_id: <%= osic_project %>
+      project_domain_name: default
+      user_domain_name: default
+    # Since DNS is not setup for the CN in the self signed cert we are not
+    # able to verify even if we provide the cert to check against.
+    verify: False
