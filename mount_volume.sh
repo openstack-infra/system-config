@@ -14,9 +14,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-# Sigh. nova volume-attach is not immediate, but there is no status to track
-sleep 120
-
 if [ -b /dev/vdc ]; then
     DEV='/dev/vdc'
 elif [ -b /dev/xvdb ]; then
