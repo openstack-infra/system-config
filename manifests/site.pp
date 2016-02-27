@@ -1162,7 +1162,7 @@ node /.*wheel-mirror-.*\.openstack\.org/ {
 node 'controller00.hpuswest.ic.openstack.org' {
   $group = 'infracloud'
   class { '::openstack_project::server':
-    iptables_public_tcp_ports => [5000,5671,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    iptables_public_tcp_ports => [80,5000,5671,8774,9292,9696,35357], # logs,keystone,rabbit,nova,glance,neutron,keystone
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
     purge_apt_sources         => false,
@@ -1201,7 +1201,7 @@ node 'controller00.hpuswest.ic.openstack.org' {
 node 'controller00.hpuseast.ic.openstack.org' {
   $group = 'infracloud'
   class { '::openstack_project::server':
-    iptables_public_tcp_ports => [5000,5671,8774,9292,9696,35357], # keystone,rabbit,nova,glance,neutron,keystone
+    iptables_public_tcp_ports => [80,5000,5671,8774,9292,9696,35357], # logs,keystone,rabbit,nova,glance,neutron,keystone
     sysadmins                 => hiera('sysadmins', []),
     enable_unbound            => false,
   }
