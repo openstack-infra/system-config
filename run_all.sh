@@ -14,6 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# Tell graphite that we are starting to deploy
+echo "puppetmaster.deploy_state:1|g" | nc -u -w0 graphite.openstack.org 8125
+start_time=`date +%s`
+
 # If updating the puppet system-config repo or installing puppet modules
 # fails then abort the puppet run as we will not get the results we
 # expect.
@@ -39,3 +43,10 @@ timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+
+# Tell graphite that we are done deploying
+echo "puppetmaster.deploy_state:0|g" | nc -u -w0 graphite.openstack.org 8125
+end_time=`date +%s`
+total_time=`echo $end_time - $start_time | bc`
+echo "puppetmaster.deploy_time:${total_time}|t" | nc -u -w0 graphite.openstack.org 8125
+
