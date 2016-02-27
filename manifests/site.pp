@@ -265,6 +265,7 @@ node 'puppetdb01.openstack.org' {
 node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
                    'logstash.openstack.org',
+                   'puppetmaster.openstack.org',
                    'nodepool.openstack.org',
                    'zuul.openstack.org']
 
