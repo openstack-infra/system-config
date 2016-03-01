@@ -51,3 +51,10 @@ clouds:
     # Since DNS is not setup for the CN in the self signed cert we are not
     # able to verify even if we provide the cert to check against.
     verify: False
+  openstackci-vexxhost:
+    region_name: ca-ymq-1
+    profile: vexxhost
+    auth:
+      username: '<%= @puppetmaster_clouds['openstackci_vexxhost_username'] %>'
+      password: '<%= @puppetmaster_clouds['openstackci_vexxhost_password'] %>'
+      project_name: '<%= @puppetmaster_clouds['openstackci_vexxhost_project_name'] %>'
