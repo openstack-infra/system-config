@@ -15,6 +15,7 @@ subunit-files:
   - name: logs/testrepository.subunit
     build-queue-filter: 'gate'
   - name: logs/old/testrepository.subunit
+    job-filter: '.*grenade-dsvm.*'
     build-queue-filter: 'gate'
   - name: testrepository.subunit
     build-queue-filter: 'gate'
