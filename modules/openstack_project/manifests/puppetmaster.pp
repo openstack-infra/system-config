@@ -137,7 +137,7 @@ class openstack_project::puppetmaster (
   }
 
   file { '/etc/openstack/infracloud_west_cacert.pem':
-    ensure  => present,
+    ensure  => absent,
     owner   => 'root',
     group   => 'admin',
     mode    => '0660',
