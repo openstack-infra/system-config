@@ -39,7 +39,7 @@ class openstack_project::openstackid_prod (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $release = '1.0.11',
+  $release = '1.0.12',
   $app_url = '',
   $app_key = '',
 ) {
@@ -77,6 +77,7 @@ class openstack_project::openstackid_prod (
     openstackid_release      => $release,
     app_url                  => $app_url,
     app_key                  => $app_key,
+    app_version              => $release,
   }
 
   # redis (custom module written by tipit)
