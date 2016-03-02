@@ -43,10 +43,10 @@ _BASIC_FILE = """
 #
 
 [loggers]
-keys=root,nodepool,requests,shade,image,%(logger_titles)s
+keys=root,nodepool,requests,shade,keystoneauth,image,%(logger_titles)s
 
 [handlers]
-keys=console,debug,normal,image,%(handler_titles)s
+keys=console,debug,normal,http,image,%(handler_titles)s
 
 [formatters]
 keys=simple
@@ -65,6 +65,11 @@ level=WARNING
 handlers=debug,normal
 qualname=shade
 
+[logger_keystoneauth]
+level=DEBUG
+handlers=http
+qualname=keystoneauth
+
 [logger_nodepool]
 level=DEBUG
 handlers=debug,normal
@@ -81,6 +86,12 @@ level=WARNING
 class=StreamHandler
 formatter=simple
 args=(sys.stdout,)
+
+[handler_http]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('%(log_dir)s/builder-http.log', 'H', 8, 30,)
 
 [handler_debug]
 level=DEBUG
