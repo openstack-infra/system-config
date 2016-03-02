@@ -12,9 +12,10 @@ At a Glance
 
 :Hosts:
   * http://mirror.bhs1.ovh.openstack.org/pypi
+  * http://mirror.ca-ymq-1.vexxhost.openstack.org/pypi
   * http://mirror.dfw.rax.openstack.org/pypi
   * http://mirror.gra1.ovh.openstack.org/pypi
-  * http://mirror.iad.rax.openstack.orgv
+  * http://mirror.iad.rax.openstack.org/pypi
   * http://mirror.nyj01.internap.openstack.org/pypi
   * http://mirror.ord.rax.openstack.org/pypi
   * http://mirror.regionone.bluebox-sjc1.openstack.org/pypi
