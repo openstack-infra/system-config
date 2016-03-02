@@ -45,7 +45,6 @@ class openstack_project::jenkins_params {
       $redis_package = 'redis'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb-server'
-      $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkgconfig'
       # FIXME: no PyPy headers on RHEL
       # FIXME: no PyPy on RHEL
@@ -141,7 +140,6 @@ class openstack_project::jenkins_params {
       $redis_package = 'redis-server'
       # For Ceilometer unit tests
       $mongodb_package = 'mongodb'
-      $pandoc_package = 'pandoc'
       $pkgconfig_package = 'pkg-config'
       $pypy_dev_package = 'pypy-dev'
       $pypy_package = 'pypy'
