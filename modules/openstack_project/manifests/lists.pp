@@ -69,6 +69,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-i18n-de':
+    ensure      => present,
+    admin       => 'robert.simai@suse.com',
+    password    => $listpassword,
+    description => 'List of the German OpenStack Internationalization team.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-ir':
     ensure      => present,
     admin       => 'Roozbeh.Shafiee@Gmail.Com',
