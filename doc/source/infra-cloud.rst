@@ -189,3 +189,34 @@ host will be attached to. That VLAN will get a publicly routable /23. Also,
 there should be a second VLAN that is connected only to the NIC of the
 Ironic Cloud and is routed to the IPMI management network of all of the other
 nodes. Whether we use LinuxBridge or Open vSwitch is still TBD.
+
+Troubleshooting
+===============
+
+Regenerating images
+-------------------
+
+When redeploying servers with bifrost, we may have the need to refresh the image
+that is deployed to them, because we may need to add some packages, update the
+elements that we use, consume latest versions of projects...
+
+To generate an image, you need to follow these steps::
+
+  1. In the baremetal server, remove everything under /httpboot directory.
+     This will clean the generated qcow2 image that is consumed by servers.
+
+  2. If there is a need to also update the CoreOS image, remove everything
+     under /tftpboot directory. This will clean the ramdisk image that is
+     used when PXE booting.
+
+  3. Run the install playbook again, so it generates the image. You need to
+     be sure that you pass the skip_install flag, to avoid the update of all
+     the bifrost related projects (ironic, dib, etc...):
+
+     ansible-playbook -vvv -e @/etc/bifrost/bifrost_global_vars \
+         -e skip_install=true \
+         -i /opt/stack/bifrost/playbooks/inventory/bifrost_inventory.py \
+         /opt/stack/bifrost/playbooks/install.yaml
+
+  4. After the install finishes, you can redeploy the servers again
+     using ``run_bifrost.sh`` script.
