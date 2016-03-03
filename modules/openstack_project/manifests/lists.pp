@@ -349,4 +349,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'openstack-i18n-fr':
+    ensure      => present,
+    admin       => 'jftalta@gmail.com',
+    password    => $listpassword,
+    description => 'List of the OpenStack Internationalization team, french local group.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
