@@ -60,6 +60,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-de':
+    ensure      => present,
+    admin       => 'christian@berendt.io',
+    password    => $listpassword,
+    description => 'List for German-speaking OpenStack users',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'openstack-i18n':
     ensure      => present,
     admin       => 'guoyingc@cn.ibm.com',
