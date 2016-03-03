@@ -29,6 +29,7 @@ elasticsearch_clients:
 - logstash-worker19.openstack.org
 - logstash-worker20.openstack.org
 - subunit-worker01.openstack.org
+- subunit-worker02.openstack.org
 statusbot_channels:
 - congress
 - edeploy
@@ -346,6 +347,7 @@ cacti_hosts:
 - status.openstack.org
 - storyboard.openstack.org
 - subunit-worker01.openstack.org
+- subunit-worker02.openstack.org
 - translate.openstack.org
 - translate-dev.openstack.org
 - wiki.openstack.org
