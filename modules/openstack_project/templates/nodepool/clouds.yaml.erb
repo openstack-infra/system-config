@@ -49,16 +49,13 @@ clouds:
   osic:
     region_name: RegionOne
     auth:
-      auth_url: https://172.99.101.17:5000
+      auth_url: https://cloud1.osic.org:5000
       username: <%= osic_username %>
       password: <%= osic_password %>
       project_name: <%= osic_project %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
-    # Since DNS is not setup for the CN in the self signed cert we are not
-    # able to verify even if we provide the cert to check against.
-    verify: False
   vexxhost:
     region_name: ca-ymq-1
     profile: vexxhost
