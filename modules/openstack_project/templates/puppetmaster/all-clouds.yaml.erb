@@ -112,7 +112,7 @@ clouds:
       username: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_username'] %>
       password: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_password'] %>
       project_name: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_project_name'] %>
-  openstackjenkins-osic:
+  openstackjenkins-osic-cloud1:
     region_name: RegionOne
     auth:
       auth_url: https://cloud1.osic.org:5000
@@ -122,7 +122,7 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
-  openstackci-osic:
+  openstackci-osic-cloud1:
     region_name: RegionOne
     auth:
       auth_url: https://cloud1.osic.org:5000
