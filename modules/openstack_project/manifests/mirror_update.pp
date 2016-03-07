@@ -6,6 +6,7 @@ class openstack_project::mirror_update (
   $reprepro_keytab = '',
   $admin_keytab = '',
   $npm_keytab = '',
+  $rpmmirror_keytab = '',
 ) {
 
   class { 'openstack_project::server':
@@ -159,5 +160,38 @@ class openstack_project::mirror_update (
     user       => 'root',
     key_server => 'hkp://keyserver.ubuntu.com',
     key_type   => 'public',
+  }
+
+  ### RPM mirrors ###
+  package { 'createrepo':
+    ensure => present,
+  }
+
+  file { '/etc/rpmmirror.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $rpmmirror_keytab,
+  }
+
+  file { '/usr/local/bin/rpm-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/rpm-mirror-update.sh',
+  }
+
+  cron { 'RPM mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/rpmmirror.lock rpm-mirror-update >>/var/log/rpm-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/rpm-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/rpmmirror.keytab'],
+    ]
   }
 }
