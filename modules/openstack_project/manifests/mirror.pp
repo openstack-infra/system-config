@@ -51,6 +51,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to centos
+  file { "${www_root}/centos":
+    ensure  => link,
+    target  => "${mirror_root}/centos",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # Create the symlink to apt.
   file { "${www_root}/ubuntu":
     ensure  => link,

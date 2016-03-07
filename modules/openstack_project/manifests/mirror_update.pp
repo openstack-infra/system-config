@@ -6,6 +6,7 @@ class openstack_project::mirror_update (
   $reprepro_keytab = '',
   $admin_keytab = '',
   $npm_keytab = '',
+  $centos_keytab = '',
 ) {
 
   class { 'openstack_project::server':
@@ -192,5 +193,34 @@ class openstack_project::mirror_update (
     user       => 'root',
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/ceph-mirror-gpg-key.asc',
+  }
+
+  ### CentOS mirror ###
+  file { '/etc/centos.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $centos_keytab,
+  }
+
+  file { '/usr/local/bin/centos-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/centos-mirror-update.sh',
+  }
+
+  cron { 'centos mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/centos-mirror.lock centos-mirror-update >>/var/log/centos-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/centos-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/centos.keytab'],
+    ]
   }
 }
