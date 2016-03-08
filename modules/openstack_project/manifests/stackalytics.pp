@@ -10,8 +10,4 @@ class openstack_project::stackalytics (
     stackalytics_ssh_private_key => $stackalytics_ssh_private_key,
     vhost_name                   => $vhost_name,
   }
-
-  realize (
-    User::Virtual::Localuser['pabelanger'],
-  )
 }
