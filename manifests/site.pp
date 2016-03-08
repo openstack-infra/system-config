@@ -614,6 +614,15 @@ node 'storyboard.openstack.org' {
   }
 }
 
+# A machine to run Phabricator
+# Node-OS: trusty
+node 'phabricator.openstack.org' {
+  class { 'openstack_project::phabricator':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+    sysadmins               => hiera('sysadmins', []),
+  }
+}
+
 # A machine to serve static content.
 # Node-OS: precise
 node 'static.openstack.org' {
