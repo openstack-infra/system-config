@@ -102,6 +102,21 @@ function setup_puppet_fedora {
     #   https://bugzilla.redhat.com/show_bug.cgi?id=1254616
     sudo sed -i.bak  '/^[^#].*/ s|\(^.*confine :exists => \"/run/systemd/system\".*$\)|#\ \1|' \
         /usr/share/ruby/vendor_ruby/puppet/provider/service/systemd.rb
+
+    # upstream "requests" pip package vendors urllib3 and chardet
+    # packages.  The fedora packages un-vendor this, and symlink those
+    # sub-packages back to packaged versions.  We get into a real mess
+    # of if some of the puppet ends up pulling in "requests" from pip,
+    # and then something like devstack does a "yum install
+    # python-requests" which does a very bad job at overwriting the
+    # pip-installed version (symlinks and existing directories don't
+    # mix).  The solution is to pre-install the python-requests
+    # package; clear it out and re-install from pip.  This way, the
+    # package is installed for dependencies, and we have a pip-managed
+    # requests with correctly vendored sub-packages.
+    sudo ${YUM} install -y python-requests
+    sudo rm -rf /usr/lib/python2.7/site-packages/requests/*
+    sudo pip install requests
 }
 
 function setup_puppet_rhel7 {
