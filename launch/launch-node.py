@@ -256,10 +256,12 @@ def main():
                           options.network, options.boot_from_volume,
                           options.config_drive)
     dns.print_dns(cloud, server)
-    # Remove the ansible inventory cache so that next run finds the new
-    # server
-    if os.path.exists('/var/cache/ansible-inventory/ansible-inventory.cache'):
-        os.unlink('/var/cache/ansible-inventory/ansible-inventory.cache')
+
+    # Zero the ansible inventory cache so that next run finds the new server
+    inventory_cache = '/var/cache/ansible-inventory/ansible-inventory.cache'
+    if os.path.exists(inventory_cache):
+        with open(inventory_cache, 'w'):
+            pass
     os.system('/usr/local/bin/expand-groups.sh')
 
 if __name__ == '__main__':
