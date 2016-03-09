@@ -227,7 +227,7 @@ class openstack_project::puppetmaster (
   vcsrepo { '/opt/ansible':
     ensure   => latest,
     provider => git,
-    revision => 'stable-2.0',
+    revision => 'devel',
     source   => 'https://github.com/ansible/ansible',
   }
 
