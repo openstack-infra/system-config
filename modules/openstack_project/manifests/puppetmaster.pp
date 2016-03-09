@@ -233,6 +233,9 @@ class openstack_project::puppetmaster (
 
   file { '/etc/ansible/hosts':
     ensure  => directory,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '0755',
   }
 
   file { '/etc/ansible/hosts/puppet':
@@ -255,8 +258,15 @@ class openstack_project::puppetmaster (
   file { '/etc/ansible/hosts/emergency':
     ensure  => present,
     owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    group   => 'admin',
+    mode    => '0664',
+  }
+
+  file { '/etc/ansible/hosts/generated-groups':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '0664',
   }
 
   file { '/etc/ansible/hosts/infracloud':
@@ -273,6 +283,20 @@ class openstack_project::puppetmaster (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/puppetmaster/groups.txt',
     notify => Exec['expand_groups'],
+  }
+
+  file { '/var/cache/ansible-inventory':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '2775',
+  }
+
+  file { '/var/cache/ansible-inventory/ansible-inventory.cache':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '0664',
   }
 
   file { '/usr/local/bin/expand-groups.sh':
