@@ -14,41 +14,30 @@ to a group.)
 
 To launch a node in the OpenStack CI account (production servers)::
 
-  . ~root/ci-launch/openstackci-rs-nova.sh
+  export OS_CLOUD=openstackci-rax
+  export OS_REGION=DFW
   export FLAVOR="8 GB Performance"
   export FQDN=servername.openstack.org
-  sudo puppet cert generate $FQDN
   cd /opt/system-config/production/launch/
-  ./launch-node.py $FQDN --flavor "$FLAVOR"
+  ./launch-node.py $FQDN --flavor "$FLAVOR" \
+    --cloud=$OS_CLOUD --region=$OS_REGION
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
-  . ~root/ci-launch/openstackjenkins-rs-nova.sh
+  export OS_CLOUD=openstackjenkins-rax
+  export OS_REGION=DFW
   export FQDN=slavename.slave.openstack.org
-  nova image-list
+  openstack image list
   export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
-  nova flavor-list
+  openstack flavor list
   export FLAVOR="8 GB Performance"
-  sudo puppet cert generate $FQDN
-  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR"
-
-If you are launching a replacement server, you may skip the generate
-step and specify the name of an existing puppet cert (as long as the
-private key is on this host).
-
-The server name and cert names may be different and the latter can be
-specified with --cert if needed, but launch-node.py will assume they
-are the same unless specified.
+  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" \
+     --cloud=$OS_CLOUD --region=$OS_REGION
 
 Manually add the hostname to DNS (the launch script does not do so
 automatically). Note that this example assumes you've already
 exported a relevant FQDN and sourced the appropriate API credentials
 above.
-
-When running outside the official OpenStack CI infrastructure, you
-will want to pass --server puppetmaster.example.com otherwise the
-new node wil try to register with puppetmaster.openstack.org - and
-fail hilariously.
 
 In order for Ansible to be able to send out the Puppet updates,
 you also need the puppetmaster to accept the root SSH key for the
