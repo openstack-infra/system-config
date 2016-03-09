@@ -86,14 +86,6 @@ def bootstrap_server(server, key, name, volume, keep):
                    'install_puppet.sh')
     ssh_client.ssh('bash -x install_puppet.sh')
 
-    shortname = name.split('.')[0]
-    with ssh_client.open('/etc/hosts', 'w') as f:
-        f.write('127.0.0.1 localhost\n')
-        f.write('127.0.1.1 %s %s\n' % (name, shortname))
-    with ssh_client.open('/etc/hostname', 'w') as f:
-        f.write('%s\n' % (shortname,))
-    ssh_client.ssh("hostname %s" % (name,))
-
     # Write out the private SSH key we generated
     key_file = tempfile.NamedTemporaryFile(delete=not keep)
     key.write_private_key(key_file)
@@ -110,17 +102,21 @@ def bootstrap_server(server, key, name, volume, keep):
         '-i', inventory_file.name, '-l', server.id,
         '--private-key={key}'.format(key=key_file.name),
         "--ssh-common-args='-o StrictHostKeyChecking=no'",
+        '-e', 'target={id}'.format(id=server.id),
     ]
 
     # Run the remote puppet apply playbook limited to just this server
     # we just created
     try:
-        print subprocess.check_output(
-            ansible_cmd + [
-                os.path.join(
-                    SCRIPT_DIR, '..', 'playbooks',
-                    'remote_puppet_adhoc.yaml')],
-            stderr=subprocess.STDOUT)
+        for playbook in [
+                'set_hostnames.yml',
+                'remote_puppet_adhoc.yaml',
+                ]:
+            print subprocess.check_output(
+                ansible_cmd + [
+                    os.path.join(
+                        SCRIPT_DIR, '..', 'playbooks', playbook)],
+                stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as e:
         print "Subprocess failed"
         print e.output
