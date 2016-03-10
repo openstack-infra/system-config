@@ -60,7 +60,7 @@ class openstack_project::grafana (
     # in modules.env, and puppet only supports having one in the modulepath
     # at a time.
     install_method => 'repo',
-    version        => '2.1.0',
+    version        => '2.6.0',
   }
 
   ::httpd::vhost { $vhost_name:
