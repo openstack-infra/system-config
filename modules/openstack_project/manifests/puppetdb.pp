@@ -1,7 +1,6 @@
 # == Class: openstack_project::puppetdb
 #
 class openstack_project::puppetdb (
-  $sysadmins = [],
   $puppetboard = true,
 ) {
 
@@ -20,18 +19,7 @@ class openstack_project::puppetdb (
     system => true,
   }
 
-  if $puppetboard {
-    $open_ports = [8081, 80]
-  } else {
-    $open_ports = [8081]
-  }
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => $open_ports,
-    sysadmins                 => $sysadmins,
-  }
-
-  class { '::puppetdb::database::postgresql':
+  class { 'puppetdb::database::postgresql':
     require         => [User['postgres'],
       Class['openstack_project::template'],],
   }
