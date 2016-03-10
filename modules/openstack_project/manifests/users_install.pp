@@ -36,6 +36,7 @@ class openstack_project::users_install (
       User::Virtual::Localuser['elizabeth'],
       User::Virtual::Localuser['jhesketh'],
       User::Virtual::Localuser['nibz'],
+      User::Virtual::Localuser['pabelanger'],
       User::Virtual::Localuser['yolanda'],
     )
   } else {
@@ -47,6 +48,7 @@ class openstack_project::users_install (
       user::virtual::disable{'elizabeth':}
       user::virtual::disable{'jhesketh':}
       user::virtual::disable{'nibz':}
+      user::virtual::disable{'pabelanger':}
       user::virtual::disable{'yolanda':}
   }
 }
