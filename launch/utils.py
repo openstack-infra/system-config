@@ -19,7 +19,6 @@
 # limitations under the License.
 
 import time
-import traceback
 import socket
 
 import paramiko
@@ -35,32 +34,6 @@ def iterate_timeout(max_seconds, purpose):
         yield count
         time.sleep(2)
     raise Exception("Timeout waiting for %s" % purpose)
-
-
-def wait_for_resource(wait_resource):
-    last_progress = None
-    last_status = None
-    # It can take a _very_ long time for Rackspace 1.0 to save an image
-    for count in iterate_timeout(21600, "waiting for %s" % wait_resource):
-        try:
-            resource = wait_resource.manager.get(wait_resource.id)
-        except:
-            print "Unable to list resources, will retry"
-            traceback.print_exc()
-            time.sleep(5)
-            continue
-
-        # In Rackspace v1.0, there is no progress attribute while queued
-        if hasattr(resource, 'progress'):
-            if (last_progress != resource.progress
-                    or last_status != resource.status):
-                print resource.status, resource.progress
-            last_progress = resource.progress
-        elif last_status != resource.status:
-            print resource.status
-        last_status = resource.status
-        if resource.status == 'ACTIVE':
-            return resource
 
 
 def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
