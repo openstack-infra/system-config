@@ -423,3 +423,16 @@ infracloud_hpuswest_ssl_cert_file_contents: |
   owvCaOxApNWme7u9u8YoxwjnqUg/z/+JnoK1BxK3egry7eqEfM53rhupELMAJbtP
   WLk7r3L67Gsoy4WmFjQ=
   -----END CERTIFICATE-----
+statusbot_auth_nicks:
+- jeblair
+- ttx
+- fungi
+- mordred
+- clarkb
+- sdague
+- SergeyLukjanov
+- jhesketh
+- lifeless
+- pleia2
+- yolanda
+- nibalizer
