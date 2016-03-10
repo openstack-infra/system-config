@@ -117,14 +117,14 @@ puppetmaster, running:
 
 .. code-block:: bash
 
-  ansible-playbook --limit='$HOST:localhost' /opt/system-config/production/playbooks/remote_puppet_else.yaml
+  ansible-playbook --limit='$HOST:localhost' /opt/system-config/production/playbooks/remote_puppet_adhoc.yaml
 
-as root, where `$HOST` is the host you want to run puppet on. If you are
-working with git, gerrit or afs servers, you'll want to replace
-`remote_puppet_else.yaml` with the appropriate specific playbook.
+as root, where `$HOST` is the host you want to run puppet on.
 The `:localhost` is important as some of the plays depend on performing a task
 on the localhost before continuing to the host in question, and without it in
 the limit section, the tasks for the host will have undefined values.
+There is also a script, `tools/kick.sh` that takes the host as an argument
+and runs the above command.
 
 Testing new puppet code can be done via `puppet apply --noop` or by
 constructing a VM with a puppet install in it and just running `puppet apply`
