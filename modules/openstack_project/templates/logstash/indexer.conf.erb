@@ -117,7 +117,7 @@ filter {
 
 output {
   elasticsearch {
-    hosts => <%= @elasticsearch_nodes.map { |node| node + ":9200" }.to_s %>
+    hosts => <%= @elasticsearch_nodes.map { |node| node + ":9200" }.inspect %>
     manage_template => false
     flush_size => 1024
   }
