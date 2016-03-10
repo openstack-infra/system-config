@@ -82,10 +82,21 @@ def print_dns(client, name):
                 server.name, ip4))
 
 
-def shade_print_dns(server):
+def get_href(server):
+    if not hasattr(server, 'links'):
+        return None
+    for link in server.links:
+        if link['rel'] == 'self':
+            return link['href']
+
+
+def shade_print_dns(cloud, server):
     ip4 = server.public_v4
     ip6 = server.public_v6
-    href = utils.get_href(server)
+
+    for raw_server in cloud.nova_client.servers.list():
+        if raw_server.id == server.id:
+            href = get_href(raw_server)
 
     print
     print "Run the following commands to set up DNS:"
