@@ -4,7 +4,6 @@ subunit-worker ~subunit-worker\d+\.openstack\.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
-pypi pypi.*.openstack.org
 zuul-merger ~zm\d+\.openstack\.org
 ci-backup ci-backup-*.openstack.org
 afsdb afsdb*.openstack.org
