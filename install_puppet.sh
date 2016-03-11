@@ -237,7 +237,7 @@ function setup_pip {
         zypper --non-interactive in --force-resolution python python-xml
     fi
 
-    python get-pip.py -c <(echo 'pip<8')
+    python get-pip.py
     rm get-pip.py
 
     # we are about to overwrite setuptools, but some packages we
