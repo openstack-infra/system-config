@@ -85,6 +85,17 @@ class openstack_project::infracloud::controller (
     password => $openstackjenkins_password,
     require  => Keystone_tenant['openstackjenkins'],
   }
+
+  keystone_role { 'user': ensure => present }
+
+  keystone_user_role { 'openstackci::infra@openstackci::infra':
+    roles => 'user',
+  }
+
+  keystone_user_role { 'openstackjenkins::infra@openstackjenkins::infra':
+    roles => 'user',
+  }
+
   realize (
     User::Virtual::Localuser['colleen'],
     User::Virtual::Localuser['rcarrillocruz'],
