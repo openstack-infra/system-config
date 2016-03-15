@@ -1,0 +1,32 @@
+<% @releases.each do |release| -%>
+Origin: Ceph
+Codename: <%= release %>
+Description: OpenStack Ceph <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main universe
+UDebComponents: main
+Contents: .gz
+Update: ceph
+Log: <%= @logdir %>/ceph-<%= release %>.log
+
+Origin: Ceph
+Codename: <%= release %>-updates
+Description: OpenStack Ceph <%= release.capitalize %> Updates mirror
+Architectures: amd64
+Components: main universe
+UDebComponents: main
+Contents: .gz
+Update: ceph
+Log: <%= @logdir %>/ceph-<%= release %>-updates.log
+
+Origin: Ceph
+Codename: <%= release %>-backports
+Description: OpenStack Ceph <%= release.capitalize %> Backports mirror
+Architectures: amd64
+Components: main universe
+UDebComponents: main
+Contents: .gz
+Update: ceph
+NotAutomatic: yes
+ButAutomaticUpgrades: yes
+Log: <%= @logdir %>/ceph-<%= release %>-backports.log
