@@ -116,7 +116,7 @@ function setup_puppet_fedora {
     # requests with correctly vendored sub-packages.
     sudo ${YUM} install -y python-requests
     sudo rm -rf /usr/lib/python2.7/site-packages/requests/*
-    sudo pip install requests
+    sudo pip install --force-reinstall --upgrade requests
 }
 
 function setup_puppet_rhel7 {
