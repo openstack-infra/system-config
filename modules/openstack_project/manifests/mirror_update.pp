@@ -1,6 +1,7 @@
 # == Class: openstack_project::mirror_update
 #
 class openstack_project::mirror_update (
+  $ceph_apt_mirror_gpg_key,
   $sysadmins = [],
   $bandersnatch_keytab = '',
   $reprepro_keytab = '',
@@ -124,5 +125,35 @@ class openstack_project::mirror_update (
     user       => 'root',
     key_server => 'hkp://keyserver.ubuntu.com',
     key_type   => 'public',
+  }
+
+  ::openstack_project::reprepro { 'ceph-reprepro-mirror':
+    confdir       => '/etc/reprepro/ceph',
+    basedir       => '/afs/.openstack.org/mirror/ceph',
+    distributions => 'openstack_project/reprepro/distributions.ceph.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/ceph-updates',
+    releases      => ['trusty'],
+  }
+
+  cron { 'reprepro ceph':
+    user        => $user,
+    hour        => '*/2',
+    command     => 'flock -n /var/run/reprepro/ceph.lock reprepro-mirror-update /etc/reprepro/ceph mirror.ceph >>/var/log/reprepro/ceph-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['ceph-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Ceph Archive':
+    ensure      => present,
+    # D41D8CD98F00B204E9800998ECF8427E
+    key_id      => 'E9800998ECF8427E',
+    user        => 'root',
+    key_type    => 'public',
+    key_content => $ceph_apt_mirror_gpg_key,
   }
 }
