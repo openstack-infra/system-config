@@ -540,10 +540,10 @@ node 'mirror-update.openstack.org' {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
-    bandersnatch_keytab => hiera('bandersnatch_keytab'),
-    admin_keytab        => hiera('afsadmin_keytab'),
-    reprepro_keytab     => hiera('reprepro_keytab'),
-    sysadmins           => hiera('sysadmins', []),
+    bandersnatch_keytab     => hiera('bandersnatch_keytab'),
+    admin_keytab            => hiera('afsadmin_keytab'),
+    reprepro_keytab         => hiera('reprepro_keytab'),
+    sysadmins               => hiera('sysadmins', []),
   }
 }
 
