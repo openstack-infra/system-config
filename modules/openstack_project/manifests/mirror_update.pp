@@ -162,4 +162,35 @@ class openstack_project::mirror_update (
     key_server => 'hkp://keyserver.ubuntu.com',
     key_type   => 'public',
   }
+
+  ::openstack_project::reprepro { 'debian-ceph-hammer-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-ceph-hammer',
+    basedir       => '/afs/.openstack.org/mirror/debian-ceph-hammer',
+    distributions => 'openstack_project/reprepro/distributions.debian-ceph-hammer.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-hammer-updates',
+    releases      => ['trusty'],
+  }
+
+  cron { 'reprepro debian ceph hammer':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian-ceph-hammer.lock reprepro-mirror-update /etc/reprepro/debian-ceph-hammer mirror.deb-hammer >>/var/log/reprepro/debian-ceph-hammer-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['debian-ceph-hammer-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Ceph Archive':
+    ensure     => present,
+    # D41D8CD98F00B204E9800998ECF8427E
+    key_id     => 'E9800998ECF8427E',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/ceph-mirror-gpg-key.asc',
+  }
 }

@@ -1,0 +1,12 @@
+<% @releases.each do |release| -%>
+Origin: Ceph Hammer
+Codename: <%= release %>
+Description: OpenStack Debian Ceph Hammer <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main
+UDebComponents: main
+Contents: .gz
+Update: debian-ceph-hammer
+Log: <%= @logdir %>/debian-ceph-hammer<%= release %>.log
+
+<% end -%>
