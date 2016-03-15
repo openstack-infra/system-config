@@ -1,0 +1,10 @@
+<% @releases.each do |release| -%>
+Origin: Ceph
+Codename: <%= release %>
+Description: OpenStack Ceph <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main
+UDebComponents: main
+Contents: .gz
+Update: ceph
+Log: <%= @logdir %>/ceph-<%= release %>.log
