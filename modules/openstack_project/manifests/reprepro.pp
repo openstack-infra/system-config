@@ -1,32 +1,14 @@
-# == Class: openstack_project::mirror_update
+# == Define: openstack_project::mirror_update
 #
-class openstack_project::reprepro (
+define openstack_project::reprepro (
   $confdir,
   $basedir,
   $distributions,
-  $logdir = '/var/log/reprepro',
-  $updates_file = 'puppet:///modules/openstack_project/reprepro/updates',
+  $updates_file,
   $options_template = 'openstack_project/reprepro/options.erb',
   $releases = [],
 ) {
-
-  package { 'reprepro':
-    ensure => present,
-  }
-
-  file { $logdir:
-    ensure => directory,
-  }
-
-  file { '/etc/reprepro':
-    ensure => directory,
-  }
-
   file { "$confdir":
-    ensure => directory,
-  }
-
-  file { '/var/run/reprepro':
     ensure => directory,
   }
 

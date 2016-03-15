@@ -58,11 +58,22 @@ class openstack_project::mirror_update (
     ]
   }
 
-  class { '::openstack_project::reprepro':
-    confdir       => '/etc/reprepro/ubuntu',
-    basedir       => '/afs/.openstack.org/mirror/ubuntu',
-    distributions => 'openstack_project/reprepro/distributions.ubuntu.erb',
-    releases => ['trusty'],
+  # TODO(clarkb) this setup needs to go in a class of its own. It is not
+  # in the define because it is common to all reprepro mirrors.
+  package { 'reprepro':
+    ensure => present,
+  }
+
+  file { '/var/log/reprepro':
+    ensure => directory,
+  }
+
+  file { '/var/run/reprepro':
+    ensure => directory,
+  }
+
+  file { '/etc/reprepro':
+    ensure => directory,
   }
 
   file { '/etc/reprepro.keytab':
@@ -84,16 +95,24 @@ class openstack_project::mirror_update (
     ensure => absent,
   }
 
+  ::openstack_project::reprepro { 'ubuntu-reprepro-mirror':
+    confdir       => '/etc/reprepro/ubuntu',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates'
+    releases      => ['trusty'],
+  }
+
   cron { 'reprepro ubuntu':
     user        => $user,
     hour        => '*/2',
-    command     => 'flock -n /var/run/reprepro/ubuntu.lock reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu >>/var/log/reprepro/mirror.log 2>&1',
+    command     => 'flock -n /var/run/reprepro/ubuntu.lock reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu >>/var/log/reprepro/ubuntu-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       Class['::openstack_project::reprepro'],
+       ::openstack_project::reprepro['ubuntu-reprepro-mirror'],
     ]
   }
 
