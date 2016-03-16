@@ -614,6 +614,7 @@ node 'storyboard.openstack.org' {
       "https://${::fqdn}",
       'http://docs-draft.openstack.org',
     ],
+    sender_email_address => 'storyboard@storyboard.openstack.org',
   }
 }
 
