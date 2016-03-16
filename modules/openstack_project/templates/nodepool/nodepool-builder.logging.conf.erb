@@ -6,10 +6,10 @@
 #
 
 [loggers]
-keys=root,nodepool,requests,shade,image,rax-dfw_bare-precise,rax-dfw_devstack-trusty,rax-dfw_bare-trusty,rax-dfw_devstack-centos7,rax-ord_bare-precise,rax-ord_devstack-trusty,rax-ord_bare-trusty,rax-ord_devstack-centos7,rax-iad_bare-precise,rax-iad_devstack-trusty,rax-iad_bare-trusty,rax-iad_devstack-centos7,tripleo-test-cloud-rh1_tripleo-f22,dib_ubuntu-trusty,dib_devstack-trusty,dib_devstack-centos7,dib_devstack-centos7-dib,dib_fedora-23
+keys=root,nodepool,requests,shade,image,rax-dfw_bare-precise,rax-dfw_devstack-trusty,rax-dfw_bare-trusty,rax-dfw_devstack-centos7,rax-ord_bare-precise,rax-ord_devstack-trusty,rax-ord_bare-trusty,rax-ord_devstack-centos7,rax-iad_bare-precise,rax-iad_devstack-trusty,rax-iad_bare-trusty,rax-iad_devstack-centos7,tripleo-test-cloud-rh1_tripleo-f22,dib_ubuntu-trusty,dib_devstack-trusty,dib_devstack-centos7,dib_centos-7,dib_fedora-23
 
 [handlers]
-keys=console,debug,normal,image,rax-dfw_bare-precise,rax-dfw_devstack-trusty,rax-dfw_bare-trusty,rax-dfw_devstack-centos7,rax-ord_bare-precise,rax-ord_devstack-trusty,rax-ord_bare-trusty,rax-ord_devstack-centos7,rax-iad_bare-precise,rax-iad_devstack-trusty,rax-iad_bare-trusty,rax-iad_devstack-centos7,tripleo-test-cloud-rh1_tripleo-f22,dib_ubuntu-trusty,dib_devstack-trusty,dib_devstack-centos7,dib_devstack-centos7-dib,dib_fedora-23
+keys=console,debug,normal,image,rax-dfw_bare-precise,rax-dfw_devstack-trusty,rax-dfw_bare-trusty,rax-dfw_devstack-centos7,rax-ord_bare-precise,rax-ord_devstack-trusty,rax-ord_bare-trusty,rax-ord_devstack-centos7,rax-iad_bare-precise,rax-iad_devstack-trusty,rax-iad_bare-trusty,rax-iad_devstack-centos7,tripleo-test-cloud-rh1_tripleo-f22,dib_ubuntu-trusty,dib_devstack-trusty,dib_devstack-centos7,dib_centos-7,dib_fedora-23
 
 [formatters]
 keys=simple
@@ -262,17 +262,17 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.devstack-centos7.log', 'H', 8, 30,)
 
-[logger_dib_devstack-centos7-dib]
+[logger_dib_centos-7]
 level=DEBUG
-handlers=dib_devstack-centos7-dib
-qualname=nodepool.image.build.devstack-centos7-dib
+handlers=dib_centos-7
+qualname=nodepool.image.build.centos-7
 propagate=0
 
-[handler_dib_devstack-centos7-dib]
+[handler_dib_centos-7]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @image_log_document_root %>/dib.devstack-centos7-dib.log', 'H', 8, 30,)
+args=('<%= @image_log_document_root %>/dib.centos-7.log', 'H', 8, 30,)
 
 [logger_dib_fedora-23]
 level=DEBUG
