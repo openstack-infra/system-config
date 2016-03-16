@@ -49,6 +49,10 @@ class openstack_project::openstackid_prod (
   $email_smtp_server_password = '',
 ) {
 
+  realize (
+    User::Virtual::Localuser['smarcet'],
+  )
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => $sysadmins,
