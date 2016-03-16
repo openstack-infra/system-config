@@ -15,6 +15,7 @@ class openstack_project::storyboard(
   $hostname = $::fqdn,
   $valid_oauth_clients = [$::fqdn],
   $cors_allowed_origins = ["https://${::fqdn}"],
+  $sender_email_address = '',
 ) {
 
   class { 'project_config':
@@ -94,6 +95,7 @@ class openstack_project::storyboard(
     rabbitmq_vhost         => '/',
     rabbitmq_user          => $rabbitmq_user,
     rabbitmq_user_password => $rabbitmq_password,
+    sender_email_address   => $sender_email_address,
   }
 
   class { '::storyboard::rabbit':
