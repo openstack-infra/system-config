@@ -82,6 +82,8 @@ if [[ `lsb_release -i -s` == 'CentOS' ]]; then
     if [[ `lsb_release -r -s` =~ '7' ]]; then
         CODENAME='centos7'
     fi
+elif [[ `lsb_release -i -s` == 'Debian' ]]; then
+    CODENAME=`lsb_release -c -s`
 elif [[ `lsb_release -i -s` == 'Ubuntu' ]]; then
     CODENAME=`lsb_release -c -s`
 elif [[ `lsb_release -i -s` == 'Fedora' ]]; then
