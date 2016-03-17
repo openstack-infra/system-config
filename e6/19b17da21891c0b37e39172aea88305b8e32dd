@@ -1,0 +1,10 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+1: Ilya Alekseyev (irc:adiantum) <ilyaalekseyev@acm.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 17 Mar 2016 14:42:50 +0000
+Reviewed-on: https://review.openstack.org/293998
+Project: openstack-infra/system-config
+Branch: refs/heads/master
