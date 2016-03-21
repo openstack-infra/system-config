@@ -39,7 +39,7 @@ The cron jobs, current configuration files and more can be done with ``puppet
 apply`` but first some bootstrapping needs to be done.
 
 You want to install these from puppetlabs' apt repo. There is a script,
-`:file:`install_puppet.sh` in the root of the system-config repository that
+:file:`install_puppet.sh` in the root of the system-config repository that
 will setup and install the puppet client. After that you must install the
 ansible playbooks and hiera config (used to maintain secrets).
 
