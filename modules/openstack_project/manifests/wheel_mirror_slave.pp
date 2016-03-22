@@ -72,7 +72,7 @@ class openstack_project::wheel_mirror_slave (
       }
      'Redhat': {
        ensure_packages(['gcc', 'gcc-c++', 'make',
-                        'python-devel', 'python3-devel',
+                        'python-devel', 'python34-devel',
                         'libxml2-devel', 'libxslt-devel',
                         'libffi-devel', 'readline-devel',
                         'openssl-devel', 'libyaml-devel', 'zlib-devel',
