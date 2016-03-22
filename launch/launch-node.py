@@ -94,12 +94,12 @@ def bootstrap_server(server, key, name, volume, keep):
     # Write out inventory
     inventory_file = tempfile.NamedTemporaryFile(delete=not keep)
     inventory_file.write("{host} ansible_host={ip} ansible_user=root".format(
-        host=server.id, ip=server.interface_ip))
+        host=name, ip=server.interface_ip))
     inventory_file.flush()
 
     ansible_cmd = [
         'ansible-playbook',
-        '-i', inventory_file.name, '-l', server.id,
+        '-i', inventory_file.name, '-l', name,
         '--private-key={key}'.format(key=key_file.name),
         "--ssh-common-args='-o StrictHostKeyChecking=no'",
         '-e', 'target={id}'.format(id=server.id),
