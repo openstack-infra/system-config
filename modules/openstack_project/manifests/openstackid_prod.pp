@@ -35,7 +35,7 @@ class openstack_project::openstackid_prod (
   $id_recaptcha_template = '',
   $id_log_error_to_email = '',
   $id_log_error_from_email = '',
-  $id_environment = 'dev',
+  $id_environment = 'production',
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
