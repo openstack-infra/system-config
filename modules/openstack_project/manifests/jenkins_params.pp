@@ -85,7 +85,7 @@ class openstack_project::jenkins_params {
           Package['cgroups-tools'],
         ]
       } else {
-        $mysql_dev_package = 'mysql-devel'
+        $mysql_dev_package = 'mariadb-devel'
         $cgroups_tools_package = ''
         $cgconfig_require = Package['cgroups']
         $cgred_require = Package['cgroups']
