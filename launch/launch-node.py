@@ -102,7 +102,7 @@ def bootstrap_server(server, key, name, volume, keep):
         '-i', inventory_file.name, '-l', name,
         '--private-key={key}'.format(key=key_file.name),
         "--ssh-common-args='-o StrictHostKeyChecking=no'",
-        '-e', 'target={id}'.format(id=server.id),
+        '-e', 'target={name}'.format(name=name),
     ]
 
     # Run the remote puppet apply playbook limited to just this server
@@ -257,7 +257,15 @@ def main():
     if os.path.exists(inventory_cache):
         with open(inventory_cache, 'w'):
             pass
-    os.system('/usr/local/bin/expand-groups.sh')
+    # Remove cloud and region from the environment to work around a bug in occ
+    expand_env = os.environ.copy()
+    expand_env.pop('OS_CLOUD')
+    expand_env.pop('OS_REGION_NAME')
+
+    print subprocess.check_output(
+        '/usr/local/bin/expand-groups.sh'
+        env=expand_env,
+        stderr=subprocess.STDOUT)
 
 if __name__ == '__main__':
     main()
