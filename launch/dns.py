@@ -40,6 +40,7 @@ def print_dns(cloud, server):
     print
     print "Run the following commands to set up DNS:"
     print
+    print ". ~root/ci-launch/openstackci-rs-nova.sh"
     print ". ~root/rackdns-venv/bin/activate"
     print
     print (
