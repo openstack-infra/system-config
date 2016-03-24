@@ -59,6 +59,14 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+  maillist { 'openstack-it':
+  ensure      => present,
+  admin       => 'remo@rm.ht',
+  password    => $listpassword,
+  description => 'List of the OpenStack Italian user group',
+  webserver   => $listdomain,
+  mailserver  => $listdomain,
+}
 
   maillist { 'openstack-de':
     ensure      => present,
