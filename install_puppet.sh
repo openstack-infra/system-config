@@ -187,10 +187,14 @@ Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
 
-    puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-    wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
-    dpkg -i $puppet_deb
-    rm $puppet_deb
+    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial. Instead use
+    # the version of puppet ship by xenial.
+    if [ $lsbdistcodename != 'xenial']; then
+        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+        wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+        dpkg -i $puppet_deb
+        rm $puppet_deb
+    fi;
 
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
