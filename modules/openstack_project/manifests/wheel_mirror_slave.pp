@@ -66,7 +66,7 @@ class openstack_project::wheel_mirror_slave (
                        'libffi-dev', 'libreadline-dev',
                        'libssl-dev', 'libyaml-dev', 'zlib1g-dev',
                        'libldap2-dev', 'libmysqlclient-dev',
-                       'libnspr4-dev', 'libpq-dev', 'libsasl2-dev',
+                       'libpq-dev', 'libsasl2-dev',
                        'libsqlite3-dev', 'libvirt-dev', 'libzmq-dev',
                        'pkg-config', 'swig', 'uuid-dev'])
       }
@@ -77,7 +77,7 @@ class openstack_project::wheel_mirror_slave (
                         'libffi-devel', 'readline-devel',
                         'openssl-devel', 'libyaml-devel', 'zlib-devel',
                         'openldap-devel', 'mariadb-devel',
-                        'nspr-devel', 'postgresql-devel', 'cyrus-sasl-devel',
+                        'postgresql-devel', 'cyrus-sasl-devel',
                         'sqlite-devel', 'libvirt-devel', 'zeromq-devel',
                         'pkgconfig', 'swig', 'uuid-devel'])
     }

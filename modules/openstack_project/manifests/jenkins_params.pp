@@ -26,7 +26,6 @@ class openstack_project::jenkins_params {
       $language_fonts_packages = []
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
-      $nspr_dev_package = 'nspr-devel'
       $sqlite_dev_package = 'sqlite-devel'
       $liberasurecode_dev_package = 'liberasurecode-devel'
       $libevent_dev_package = 'libevent-devel'
@@ -121,7 +120,6 @@ class openstack_project::jenkins_params {
       # for keystone ldap auth integration
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
-      $nspr_dev_package = 'libnspr4-dev'
       $sqlite_dev_package = 'libsqlite3-dev'
       $libvirt_dev_package = 'libvirt-dev'
       $libxml2_package = 'libxml2-utils'
