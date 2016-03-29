@@ -126,7 +126,11 @@ class openstack_project::jenkins_params {
       $libxml2_dev_package = 'libxml2-dev'
       $libxslt_dev_package = 'libxslt1-dev'
       $libffi_dev_package = 'libffi-dev'
-      $maven_package = 'maven2'
+      if ($::operatingsystem == 'Ubuntu') and ($::operatingsystemrelease >= '16.04') {
+        $maven_package = 'maven'
+      } else {
+        $maven_package = 'maven2'
+      }
       # For tooz unit tests
       $memcached_package = 'memcached'
       # For tooz unit tests (and others that use redis)
