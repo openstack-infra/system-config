@@ -24,7 +24,6 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::libpcap_dev_package, # for pypcap egg
     $::openstack_project::jenkins_params::ldap_dev_package,
     $::openstack_project::jenkins_params::librrd_dev_package, # for python-rrdtool, used by kwapi
-    $::openstack_project::jenkins_params::libtidy_package, # for python-tidy, used by sphinxcontrib-docbookrestapi
     $::openstack_project::jenkins_params::libsasl_dev, # for keystone ldap auth integration
     $::openstack_project::jenkins_params::memcached_package, # for tooz unit tests
     $::openstack_project::jenkins_params::redis_package, # for tooz unit tests (and others that use redis)

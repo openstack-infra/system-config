@@ -21,7 +21,6 @@ class openstack_project::jenkins_params {
       $librrd_dev_package = 'rrdtool-devel'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
-      $libtidy_package = 'libtidy'
       $gettext_package = 'gettext'
       $language_fonts_packages = []
       # for keystone ldap auth integration
@@ -114,7 +113,6 @@ class openstack_project::jenkins_params {
       $librrd_dev_package = 'librrd-dev'
       # packages needed by document translation
       $gnome_doc_package = 'gnome-doc-utils'
-      $libtidy_package = 'libtidy-0.99-0'
       $gettext_package = 'gettext'
       $language_fonts_packages = ['fonts-takao', 'fonts-nanum']
       # for keystone ldap auth integration
