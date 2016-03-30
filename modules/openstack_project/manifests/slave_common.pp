@@ -70,26 +70,6 @@ class openstack_project::slave_common(
     mode   => '0440',
   }
 
-  # Temporary for debugging glance launch problem
-  # https://lists.launchpad.net/openstack/msg13381.html
-  # NOTE(dprince): ubuntu only as RHEL6 doesn't have sysctl.d yet
-  if ($::osfamily == 'Debian') {
-
-    file { '/etc/sysctl.d/10-ptrace.conf':
-      ensure => present,
-      source => 'puppet:///modules/jenkins/10-ptrace.conf',
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0444',
-    }
-
-    exec { 'ptrace sysctl':
-      subscribe   => File['/etc/sysctl.d/10-ptrace.conf'],
-      refreshonly => true,
-      command     => '/sbin/sysctl -p /etc/sysctl.d/10-ptrace.conf',
-    }
-  }
-
   # needed by jenkins/jobs
   if ! defined(Package['curl']) {
     package { 'curl':
