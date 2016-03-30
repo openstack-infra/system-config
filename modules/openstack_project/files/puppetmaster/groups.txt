@@ -10,4 +10,4 @@ afsdb afsdb*.openstack.org
 afs afs*.*.openstack.org
 wheel-mirror *wheel-mirror-*.openstack.org
 afsadmin mirror-update.openstack.org:release.slave.openstack.org
-disabled ci-backup-rs-ord.openstack.org:jenkins-dev.openstack.org:ask-staging.openstack.org
+disabled ci-backup-rs-ord.openstack.org:jenkins-dev.openstack.org:ask-staging.openstack.org:openstackid.org
