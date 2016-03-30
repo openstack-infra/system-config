@@ -1,0 +1,10 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Emilien Macchi <emilien@redhat.com>
+Code-Review+1: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 30 Mar 2016 01:07:52 +0000
+Reviewed-on: https://review.openstack.org/299031
+Project: openstack-infra/system-config
+Branch: refs/heads/master
