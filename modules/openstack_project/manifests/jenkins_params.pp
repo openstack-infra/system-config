@@ -53,8 +53,6 @@ class openstack_project::jenkins_params {
       $python_requests_package = 'python-requests'
       $python_zmq_package = 'python-zmq'
       $rubygems_package = 'rubygems'
-      # Common Lisp interpreter, used for cl-openstack-client
-      $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite'
       $unzip_package = 'unzip'
       $zip_package = 'zip'
@@ -152,8 +150,6 @@ class openstack_project::jenkins_params {
         $rubygems_package = 'ruby'
       }
 
-      # Common Lisp interpreter, used for cl-openstack-client
-      $sbcl_package = 'sbcl'
       $sqlite_package = 'sqlite3'
       $unzip_package = 'unzip'
       $zip_package = 'zip'
