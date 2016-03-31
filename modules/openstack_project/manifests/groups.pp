@@ -32,6 +32,8 @@ class openstack_project::groups (
     User::Virtual::Localuser['mkiss'],
   )
 
+  include '::mysql::client'
+
   vcsrepo { '/srv/groups-static-pages':
     ensure   => latest,
     provider => git,

@@ -29,6 +29,8 @@ class openstack_project::groups_dev (
     User::Virtual::Localuser['mkiss'],
   )
 
+  include '::mysql::client'
+
 #  include drupal
 
   vcsrepo { '/srv/groups-static-pages':
