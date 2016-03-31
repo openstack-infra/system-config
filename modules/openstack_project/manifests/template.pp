@@ -190,7 +190,8 @@ class openstack_project::template (
 
   case $::osfamily {
     'Debian': {
-      # Purge and augment existing /etc/apt/sources.list if requested
+      # Purge and augment existing /etc/apt/sources.list if requested, and make
+      # sure apt-get update is run before any packages are installed
       class { '::apt':
         purge => { 'sources.list' => $purge_apt_sources }
       }
@@ -202,6 +203,10 @@ class openstack_project::template (
           owner  => 'root',
           source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}",
         }
+        apt::update {
+            subscribe   => File['/etc/apt/sources.list.d/openstack-infra.list'],
+        }
+        Class['::apt::update'] -> Package <| |>
       }
 
       # Make sure dig is installed
