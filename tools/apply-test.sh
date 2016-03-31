@@ -73,7 +73,7 @@ csplit -sf applytest/puppetapplytest applytest/prep01 '/^}$/' {*}
 sed -i -e '/^\}$/d' applytest/puppetapplytest*
 # Comment out anything that doesn't begin with a space.
 # This gives us the node {} internal contents.
-sed -i -e 's/^[^][:space:]$]/#&/g' applytest/prep00 applytest/puppetapplytest*
+#sed -i -e 's/^[^][:space:]$]/#&/g' applytest/prep00 applytest/puppetapplytest*
 sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/prep00 applytest/puppetapplytest*
 sed -i -e "s@hiera(.\([^.]*\).)@'\1NoDefault'@" applytest/prep00 applytest/puppetapplytest*
 mv applytest/prep00 applytest/head  # These are the top-level variables defined in site.pp
