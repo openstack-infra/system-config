@@ -5,6 +5,9 @@
 # in between any two variables in order for them to be correctly parsed and
 # passed around in test.sh
 #
+stage { 'bootstrap':
+  before => Stage['main'],
+}
 $elasticsearch_nodes = hiera_array('elasticsearch_nodes')
 $elasticsearch_clients = hiera_array('elasticsearch_clients')
 
