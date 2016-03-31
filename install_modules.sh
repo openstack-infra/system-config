@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # Copyright 2014 OpenStack Foundation.
 # Copyright 2014 Hewlett-Packard Development Company, L.P.
 #
