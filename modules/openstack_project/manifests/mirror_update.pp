@@ -100,7 +100,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/ubuntu',
     distributions => 'openstack_project/reprepro/distributions.ubuntu.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
-    releases      => ['trusty'],
+    releases      => ['trusty', 'xenial'],
   }
 
   cron { 'reprepro ubuntu':
