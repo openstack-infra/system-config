@@ -9,6 +9,7 @@ class openstack_project::gerrit (
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
   $git_http_url = '',
+  $canonical_git_url = '',
   $serveradmin = 'webmaster@openstack.org',
   $ssh_host_key = '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
   $ssh_project_key = '/home/gerrit2/review_site/etc/ssh_project_rsa_key',
@@ -106,6 +107,7 @@ class openstack_project::gerrit (
     vhost_name                          => $vhost_name,
     canonicalweburl                     => $canonicalweburl,
     git_http_url                        => $git_http_url,
+    canonical_git_url                   => $canonical_git_url,
     # opinions
     allow_drafts                        => false,
     enable_melody                       => true,
