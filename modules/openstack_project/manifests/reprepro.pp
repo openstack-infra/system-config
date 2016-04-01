@@ -4,6 +4,7 @@ define openstack_project::reprepro (
   $confdir,
   $basedir,
   $distributions,
+  $logdir = '/var/log/reprepro',
   $updates_file,
   $options_template = 'openstack_project/reprepro/options.erb',
   $releases = [],
