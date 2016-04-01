@@ -139,6 +139,11 @@ class openstack_project::review (
     token_private_key                   => $token_private_key,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    download                            => {
+        command => ['checkout', 'cherry_pick', 'pull', 'format_patch'],
+        scheme  => ['ssh', 'http', 'anon_http', 'anon_git'],
+        archive => ['tar', 'tbz2', 'tgz', 'txz'],
+    },
     replication_force_update            => true,
     replication                         => [
       {
