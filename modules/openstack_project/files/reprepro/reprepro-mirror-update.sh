@@ -20,9 +20,12 @@ REPREPRO_CONFIG=$1
 MIRROR_VOLUME=$2
 
 UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.unreferenced-files
-REPREPRO="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro --confdir $REPREPRO_CONFIG"
+REPREPRO="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 90m reprepro --confdir $REPREPRO_CONFIG"
 
 echo "Obtaining reprepro tokens and running reprepro update"
+# NOTE(pabelanger): If you are setting up a mirror for the first time, it would
+# be wise to manually run reprepro first. As our commands here timeout after
+# 90mins and could potentially corrupt the database.
 $REPREPRO update
 
 if [ -f $UNREF_FILE ] ; then
