@@ -106,6 +106,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro ubuntu':
     user        => $user,
     hour        => '*/2',
+    minute      => '0',
     command     => 'flock -n /var/run/reprepro/ubuntu.lock reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu >>/var/log/reprepro/ubuntu-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
