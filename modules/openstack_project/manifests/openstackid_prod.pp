@@ -29,7 +29,7 @@ class openstack_project::openstackid_prod (
   $redis_max_memory = '1gb',
   $redis_bind = '127.0.0.1',
   $redis_password = '',
-  $redis_version = '2.2.12',
+  $redis_version = '2.8.4',
   $id_recaptcha_public_key = '',
   $id_recaptcha_private_key = '',
   $id_recaptcha_template = '',
