@@ -97,3 +97,52 @@ host keys as the zuul user. e.g.::
 
   sudo su - zuul
   ssh -p 29418 review.openstack.org
+
+Restarts
+--------
+
+Zuul restarts are disruptive, so non-emergency restarts should always be
+scheduled for quieter times of the day, week and cycle. To be as
+courteous to developers as possible, just prior to a restart the `Zuul
+Status Page <http://status.openstack.org/zuul/>`_ should be checked to
+see the status of the gate. If there is a series of changes nearly
+merged, wait until that has been completed.
+
+Since Zuul is stateless, some work needs to be done to save and then
+re-enqueue patches when restarts are done. To accomplish this, start by
+running `zuul-changes.py
+<https://git.openstack.org/cgit/openstack-infra/zuul/tree/tools/zuul-changes.py>`_
+to save the check and gate queues::
+
+  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
+    check >check.sh
+  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
+    gate >gate.sh
+
+These check.sh and gate.sh scripts will be used after the restart to
+re-enqueue the changes.
+
+Now use `service zuul stop` to stop zuul and then run ps to make sure
+the process has actually stopped, it may take several seconds for it to
+finally go away.
+
+With Zuul stopped, delete all the used nodes in nodepool. Wait for one
+of each variety to come up before using `service zuul start` to start
+zuul again.
+
+Once Zuul is started, run netcat against localhost 4730 port to confirm
+that all the node types (particularly the uncommon ones) are registered
+with Gearman before re-enqueuing patches. For instance::
+
+  echo "status" | nc localhost 4730 | grep :centos7
+
+When you are satisfied that all the node types have returned, first run
+the gate.sh script and then check.sh to re-enqueue the changes from
+before the restart::
+
+  ./gate.sh
+  ./check.sh
+
+You may watch the `Zuul Status Page
+<http://status.openstack.org/zuul/>`_ to confirm that changes are
+returning to the queues.
