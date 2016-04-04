@@ -79,9 +79,19 @@ utilize. From these metrics we create dashboards which are freely
 accessible via the Internet to help providers see and debug
 performance issues.
 
+The names and regions of providers are a primary component of
+hostnames on job workers, and as such are noticeable to those
+reviewing job logs from our CI system (as an example, developers
+investigating test results on proposed source code changes). In this
+way, names of providers contributing test resources become known to
+the technical community in their day-to-day interaction with our
+systems.
+
 The OpenStack Foundation has identified Infrastructure Donors as a
 special category of sponsoring organization and prominently identifies
-them on this page: https://www.openstack.org/foundation/companies/
+those contributing a significant quantity of resources (as determined
+by the Infra team) at:
+https://www.openstack.org/foundation/companies/#infra-donors
 
 If this sounds interesting, and you have some capacity to spare, it
 would be very much appreciated.  You are welcome to contact the
