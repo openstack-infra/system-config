@@ -5,11 +5,17 @@ class openstack_project::mirror_update (
   $bandersnatch_keytab = '',
   $reprepro_keytab = '',
   $admin_keytab = '',
+  $npm_keytab = '',
 ) {
 
   class { 'openstack_project::server':
     sysadmins => $sysadmins,
     afs       => true,
+  }
+
+  class { 'openstack_project::npm_mirror':
+    mirror_root => '/afs/.openstack.org/mirror/npm',
+    uri_rewrite => 'localhost',
   }
 
   class { 'bandersnatch':
@@ -30,6 +36,13 @@ class openstack_project::mirror_update (
     content => $bandersnatch_keytab,
   }
 
+  file { '/etc/npm.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $npm_keytab,
+  }
+
   file { '/etc/afsadmin.keytab':
     owner   => 'root',
     group   => 'root',
@@ -45,6 +58,14 @@ class openstack_project::mirror_update (
     source  => 'puppet:///modules/openstack_project/bandersnatch-mirror-update.sh',
   }
 
+  file { '/usr/local/bin/npm-mirror-update':
+    ensure   => present,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
+    content  => template('openstack_project/npm-mirror-update.sh'),
+  }
+
   cron { 'bandersnatch':
     user        => $user,
     minute      => '*/5',
@@ -55,6 +76,19 @@ class openstack_project::mirror_update (
        File['/etc/afsadmin.keytab'],
        File['/etc/bandersnatch.keytab'],
        Class['bandersnatch::mirror']
+    ]
+  }
+
+  cron { 'npm-mirror-update':
+    user        => $user,
+    minute      => '*/5',
+    command     => 'flock -n /var/run/npm-mirror-update/mirror.lock npm-mirror-update >>/var/log/npm-mirror-update/mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+      File['/usr/local/bin/npm-mirror-update'],
+      File['/etc/afsadmin.keytab'],
+      File['/etc/npm.keytab'],
+      Class['openstack_project::npm_mirror'],
     ]
   }
 
