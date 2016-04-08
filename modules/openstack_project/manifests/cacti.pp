@@ -73,5 +73,20 @@ class openstack_project::cacti (
     require => File['/var/lib/cacti/linux_host.xml'],
   }
 
-  openstack_project::cacti_device { $cacti_hosts: }
+  file { '/var/lib/cacti/devices':
+    ensure  => present,
+    content => join($cacti_hosts, " "),
+    mode    => '0744',
+    owner   => 'root',
+    group   => 'root',
+  }
+
+  cron { 'add cacti hosts':
+    ensure  => present,
+    user    => root,
+    command => 'for host in $(cat /var/lib/cacti/devices); do /usr/local/bin/create_graphs.sh $host; done',
+    minute  => '0',
+  }
+
+
 }
