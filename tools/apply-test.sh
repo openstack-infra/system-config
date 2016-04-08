@@ -74,8 +74,6 @@ sed -i -e '/^\}$/d' applytest/puppetapplytest*
 # Comment out anything that doesn't begin with a space.
 # This gives us the node {} internal contents.
 sed -i -e 's/^[^][:space:]$]/#&/g' applytest/prep00 applytest/puppetapplytest*
-sed -i -e 's@hiera(.\([^.]*\).,\([^)]*\))@\2@' applytest/prep00 applytest/puppetapplytest*
-sed -i -e "s@hiera(.\([^.]*\).)@'\1NoDefault'@" applytest/prep00 applytest/puppetapplytest*
 mv applytest/prep00 applytest/head  # These are the top-level variables defined in site.pp
 
 if [[ `lsb_release -i -s` == 'CentOS' ]]; then
@@ -114,6 +112,10 @@ sudo mkdir -p /opt/system-config
 sudo ln -s $(pwd) /opt/system-config/production
 sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/hiera.yaml
 sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/puppet/hiera.yaml
+
+# Enable the garbage backend
+git clone https://github.com/nibalizer/hiera-garbage /etc/puppet/modules/garbage
+sed -i 's/- yaml/- yaml\n  - garbage/' modules/openstack_project/files/puppet/hiera.yam
 
 # Demonstrate that hiera lookups are functioning
 find /opt/system-config/production/hiera
