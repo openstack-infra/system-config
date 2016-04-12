@@ -86,6 +86,7 @@ statusbot_channels:
 - openstack-oslo
 - openstack-product
 - openstack-qa
+- openstack-quota
 - openstack-raksha
 - openstack-rally
 - openstack-rating
@@ -172,6 +173,7 @@ meetbot_channels:
 - '#openstack-oslo'
 - '#openstack-product'
 - '#openstack-qa'
+- '#openstack-quota'
 - '#openstack-rally'
 - '#openstack-rating'
 - '#openstack-release'
