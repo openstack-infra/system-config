@@ -5,7 +5,7 @@ class openstack_project::mirror_update (
   $bandersnatch_keytab = '',
   $reprepro_keytab = '',
   $admin_keytab = '',
-  $npm_keytab = '',
+  $npm_keytab = ',
 ) {
 
   class { 'openstack_project::server':
@@ -13,9 +13,11 @@ class openstack_project::mirror_update (
     afs       => true,
   }
 
+  $data_directory = '/afs/.openstack.org/mirror/npm'
+  $uri_rewrite    = 'localhost'
   class { 'openstack_project::npm_mirror':
-    data_directory => '/afs/.openstack.org/mirror/npm',
-    uri_rewrite    => 'localhost',
+    data_directory => $data_directory,
+    uri_rewrite    => $uri_rewrite,
   }
 
   class { 'bandersnatch':
