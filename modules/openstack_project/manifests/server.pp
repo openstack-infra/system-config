@@ -11,7 +11,7 @@ class openstack_project::server (
   $pin_puppet                = '3.',
   $ca_server                 = undef,
   $enable_unbound            = true,
-  $afs                       = false,
+  $afs                       = true,
   $afs_cache_size            = 500000,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = true,
