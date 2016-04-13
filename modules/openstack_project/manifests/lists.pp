@@ -358,4 +358,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'periodic-ci-reports':
+    ensure      => present,
+    admin       => 'fungi@yuggoth.org',
+    password    => $listpassword,
+    description => 'List of OpenStack-Infra Periodic jobs failures.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
