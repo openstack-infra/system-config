@@ -187,8 +187,8 @@ class openstack_project::mirror_update (
 
   gnupg_key { 'Ceph Archive':
     ensure     => present,
-    # D41D8CD98F00B204E9800998ECF8427E
-    key_id     => 'E9800998ECF8427E',
+    # 08B7 3419 AC32 B4E9 66C1  A330 E84A C2C0 460F 3994
+    key_id     => 'E84AC2C0460F3994',
     user       => 'root',
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/ceph-mirror-gpg-key.asc',
