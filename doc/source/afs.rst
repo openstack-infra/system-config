@@ -192,3 +192,133 @@ Finally, create the fileserver with::
     -cmd /usr/lib/openafs/davolserver \
     -cmd /usr/lib/openafs/salvageserver \
     -cmd /usr/lib/openafs/dasalvager
+
+Mirrors
+~~~~~~~
+
+We host mirrors in AFS so that we store only one copy of the data, but
+mirror servers local to each cloud region in which we operate serve
+that data to nearby hosts from their local cache.
+
+All of our mirrors are housed under `/afs/openstack.org/mirror`.  Each
+mirror is on its own volume, and each with a read-only replica.  This
+allows mirrors to be updated and then the read-only replicas
+atomically updated.
+
+In order to establish a new mirror, do the following:
+
+* Create the mirror volume.  See `Creating a Volume`_ for details.
+  The volume should be named `mirror.foo`, where `foo` is descriptive
+  of the contents of the mirror.  Example::
+
+    vos create afs01.dfw.openstack.org a mirror.foo
+
+* Create read-only replicas of the volume.  One replica should be
+  located on the same fileserver (it will take little to no additional
+  space), and at least one other replica on a different fileserver.
+  Example::
+
+    vos addsite afs01.dfw.openstack.org a mirror.foo
+    vos addsite afs01.ord.openstack.org a mirror.foo
+
+* Release the read-only replicas::
+
+    vos release mirror.foo
+
+  See the status of all volumes with::
+
+    vos listvldb
+
+When traversing from a read-only volume to another volume across a
+mountpoint, AFS will first attempt to use a read-only replica of the
+destination volume if one exists.  In order to naturally cause clients
+to prefer our read-only paths for mirrors, the entire path up to that
+point is composed of read-only volumes::
+
+  /afs [root.afs]
+    /openstack.org [root.cell]
+      /mirror [mirror]
+        /bar  [mirror.bar]
+
+In order to mount the mirror.foo volume under `mirror` we need to
+modify the read-write version of the `mirror` volume.  To make this
+easy, the read-write version of the cell root is mounted at
+`/afs/.openstack.org'.  Folllowing the same logic from earlier,
+traversing to paths below that mount point will generally prefer
+read-write volumes.
+
+* Mount the volume into afs using the read-write path::
+
+    fs mkmount /afs/.openstack.org/mirror/foo mirror.foo
+
+* Release the `mirror` volume so that the (currently empty) foo mirror
+  itself appears in directory listings under
+  `/afs/openstack.org/mirror`::
+
+    vos release mirror
+
+* Create a principal for the mirror update process.  See `Adding A
+  Service Principal`_ for details.  The principal should be called
+  `service/foo-mirror`.  Example::
+
+    kadmin: addprinc -randkey service/foo-mirror@OPENSTACK.ORG
+    kadmin: ktadd -k /path/to/foo.keytab service/foo-mirror@OPENSTACK.ORG
+
+* Add the service principal's keytab to hiera.
+
+* Create an AFS user for the service principal::
+
+    pts createuser service/foo-mirror
+
+Because mirrors usually have a large number of directories, it is best
+to avoid frequent ACL changes.  To this end, we grant access to the
+mirror directories to a group where we can easily modify group
+membership if our needs change.
+
+* Create a group to contain the service principal, and add the
+  principal::
+
+    pts creategroup foo-mirror
+    pts adduser service/foo-mirror foo-mirror
+
+  View users, groups, and their membership with::
+
+    pts listentries
+    pts listentries -group
+    pts membership foo-mirror
+
+* Grant the group access to the mirror volume::
+
+    fs setacl /afs/.openstack.org/mirror/foo foo-mirror write
+
+* Set the quota on the volume (e.g., 100GB)::
+
+    fs setquota /afs/.openstack.org/mirror/foo 100000000
+
+Because the initial replication may take more time than we allocate in
+our mirror update cron jobs, manually perform the first mirror update:
+
+* In screen, obtain the lock on mirror-update.openstack.org::
+
+    flock -n /var/run/foo-mirror/mirror.lock bash
+
+  Leave that running while you perform the rest of the steps.
+
+* Also in screen on mirror-update, run the initial mirror sync.
+
+* Log into afs01.dfw.openstack.org and run screen.  Within that
+  session, periodically during the sync, and once again after it is
+  complete, run::
+
+    vos release mirror.foo -localauth
+
+  It is important to do this from an AFS server using `-localauth`
+  rather than your own credentials and inside of screen because if
+  `vos release` is interrupted, it will require some manual cleanup
+  (data will not be corrupted, but clients will not see the new volume
+  until it is successfully released).  Additionally, `vos release` has
+  a bug where it will not use renewed tokens and so token expiration
+  during a vos release may cause a similar problem.
+
+* Once the initial sync and and `vos release` are complete, release
+  the lock file on mirror-update.
