@@ -165,7 +165,7 @@ class openstack_project::mirror_update (
 
   ::openstack_project::reprepro { 'debian-ceph-hammer-reprepro-mirror':
     confdir       => '/etc/reprepro/debian-ceph-hammer',
-    basedir       => '/afs/.openstack.org/mirror/debian-ceph-hammer',
+    basedir       => '/afs/.openstack.org/mirror/deb-hammer',
     distributions => 'openstack_project/reprepro/distributions.debian-ceph-hammer.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-hammer-updates',
     releases      => ['trusty'],
