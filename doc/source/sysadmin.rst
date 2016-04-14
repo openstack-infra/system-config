@@ -466,3 +466,9 @@ The following example increases the size of a volume by 100G::
   NAME=volumename
   sudo lvextend -L+100G /dev/main/$NAME
   sudo resize2fs /dev/main/$NAME
+
+The following example increases the size of a volume to the maximum allowable::
+
+  NAME=volumename
+  sudo lvextend -l +100%FREE /dev/main/$NAME
+  sudo resize2fs /dev/main/$NAME
