@@ -103,6 +103,7 @@ clouds:
       username: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_username'] %>
       password: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_password'] %>
       project_name: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_project_name'] %>
+    floating_ip_source: nova
   openstackjenkins-osic-cloud1:
     region_name: RegionOne
     auth:

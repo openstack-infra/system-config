@@ -28,7 +28,7 @@ clouds:
       password: '<%= tripleo_password %>'
       project_name: '<%= tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
-    has_network: False
+    floating_ip_source: nova
   bluebox-sjc1:
     auth:
       username: '<%= bluebox_username %>'
