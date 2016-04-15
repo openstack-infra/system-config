@@ -7,7 +7,6 @@ class openstack_project::mirror (
   $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
-  $npm_root = "${mirror_root}/npm"
 
   $www_base = '/var/www'
   $www_root = "${www_base}/mirror"
@@ -62,16 +61,6 @@ class openstack_project::mirror (
     ]
   }
 
-  file { "${www_root}/npm":
-    ensure  => link,
-    target  => "${npm_root}",
-    owner   => root,
-    group   => root,
-    require => [
-      File["${www_root}"],
-    ]
-  }
-
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
@@ -87,12 +76,6 @@ class openstack_project::mirror (
 
   if ! defined(Httpd::Mod['rewrite']) {
     httpd::mod { 'rewrite':
-      ensure => present,
-    }
-  }
-
-  if ! defined(Httpd::Mod['substitute']) {
-    httpd::mod { 'substitute':
       ensure => present,
     }
   }
