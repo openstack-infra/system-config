@@ -61,15 +61,6 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
-  openstackjenkins-hpcloud:
-    profile: hp
-    auth:
-      username: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_username'] %>
-      password: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackjenkins_hpcloud_project_name'] %>
-    regions:
-    - region-a.geo-1
-    - region-b.geo-1
   openstackjenkins-bluebox:
     region_name: RegionOne
     auth:
