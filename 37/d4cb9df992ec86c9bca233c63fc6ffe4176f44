@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 15 Apr 2016 01:56:40 +0000
+Reviewed-on: https://review.openstack.org/306181
+Project: openstack-infra/system-config
+Branch: refs/heads/master
