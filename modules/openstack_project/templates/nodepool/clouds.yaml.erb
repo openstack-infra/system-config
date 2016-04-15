@@ -43,10 +43,10 @@ clouds:
       password: '<%= internap_password %>'
       project_name: '<%= internap_project %>'
     networks: 
-    - name: inap-17304-WAN2342
-      routes_externally: True
-    - name: inap-17304-LAN3326
-      routes_externally: False
+      - name: inap-17304-WAN2342
+        routes_externally: True
+      - name: inap-17304-LAN3326
+        routes_externally: False
   osic-cloud1:
     region_name: RegionOne
     auth:

@@ -35,10 +35,10 @@ clouds:
       password: <%= @puppetmaster_clouds['openstackci_internap_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackci_internap_project_name'] %>
     networks: 
-    - name: inap-17301-WAN2344
-      routes_externally: True
-    - name: inap-17301-LAN3328
-      routes_externally: False
+      - name: inap-17301-WAN2344
+        routes_externally: True
+      - name: inap-17301-LAN3328
+        routes_externally: False
   openstackjenkins-internap:
     region_name: nyj01
     profile: internap
@@ -48,9 +48,9 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackjenkins_internap_project_name'] %>
   openstackci-ovh:
     regions:
-    - GRA1
-    - SBG1
-    - BHS1
+      - GRA1
+      - SBG1
+      - BHS1
     profile: ovh
     auth:
       username: <%= @puppetmaster_clouds['openstackci_ovh_username'] %>
@@ -58,9 +58,9 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackci_ovh_project_name'] %>
   openstackci-rax:
     regions:
-    - DFW
-    - ORD
-    - IAD
+      - DFW
+      - ORD
+      - IAD
     profile: rackspace
     auth:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
@@ -75,9 +75,9 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackjenkins_bluebox_project_name'] %>
   openstackjenkins-rax:
     regions:
-    - DFW
-    - ORD
-    - IAD
+      - DFW
+      - ORD
+      - IAD
     profile: rackspace
     auth:
       username: <%= @puppetmaster_clouds['openstackjenkins_rax_username'] %>
@@ -85,8 +85,8 @@ clouds:
       project_id: <%= @puppetmaster_clouds['openstackjenkins_rax_project_id'] %>
   openstackjenkins-ovh:
     regions:
-    - GRA1
-    - SBG1
+      - GRA1
+      - SBG1
     profile: ovh
     auth:
       username: <%= @puppetmaster_clouds['openstackjenkins_ovh_username'] %>
@@ -94,9 +94,9 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackjenkins_ovh_project_name'] %>
   openstack-rax:
     regions:
-    - DFW
-    - ORD
-    - IAD
+      - DFW
+      - ORD
+      - IAD
     profile: rackspace
     auth:
       username: <%= @puppetmaster_clouds['openstack_rax_username'] %>
