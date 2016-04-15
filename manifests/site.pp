@@ -142,14 +142,16 @@ node 'jenkins.openstack.org' {
   $group = "jenkins"
   $zmq_event_receivers = ['logstash.openstack.org',
                           'nodepool.openstack.org']
-  $iptables_rule = regsubst ($zmq_event_receivers,
-                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  $zmq_iptables_rule = regsubst($zmq_event_receivers,
+                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  $http_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 80 -s nodepool.openstack.org -j ACCEPT'
+  $https_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 443 -s nodepool.openstack.org -j ACCEPT'
+  $iptables_rule = flatten([$zmq_iptables_rule, $http_iptables_rule, $https_iptables_rule])
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
-    sysadmins                 => hiera('sysadmins', []),
-    puppetmaster_server       => 'puppetmaster.openstack.org',
+    iptables_rules6     => $iptables_rule,
+    iptables_rules4     => $iptables_rule,
+    sysadmins           => hiera('sysadmins', []),
+    puppetmaster_server => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -166,14 +168,16 @@ node /^jenkins\d+\.openstack\.org$/ {
   $group = "jenkins"
   $zmq_event_receivers = ['logstash.openstack.org',
                           'nodepool.openstack.org']
-  $iptables_rule = regsubst ($zmq_event_receivers,
-                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  $zmq_iptables_rule = regsubst($zmq_event_receivers,
+                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  $http_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 80 -s nodepool.openstack.org -j ACCEPT'
+  $https_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 443 -s nodepool.openstack.org -j ACCEPT'
+  $iptables_rule = flatten([$zmq_iptables_rule, $http_iptables_rule, $https_iptables_rule])
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
-    sysadmins                 => hiera('sysadmins', []),
-    puppetmaster_server       => 'puppetmaster.openstack.org',
+    iptables_rules6     => $iptables_rule,
+    iptables_rules4     => $iptables_rule,
+    sysadmins           => hiera('sysadmins', []),
+    puppetmaster_server => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins':
     jenkins_password        => hiera('jenkins_jobs_password'),
@@ -186,10 +190,14 @@ node /^jenkins\d+\.openstack\.org$/ {
 
 # Node-OS: precise
 node 'jenkins-dev.openstack.org' {
+  $http_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 80 -s nodepool.openstack.org -j ACCEPT'
+  $https_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 443 -s nodepool.openstack.org -j ACCEPT'
+  $iptables_rule = flatten([$http_iptables_rule, $https_iptables_rule])
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
-    puppetmaster_server       => 'puppetmaster.openstack.org',
+    iptables_rules6     => $iptables_rule,
+    iptables_rules4     => $iptables_rule,
+    sysadmins           => hiera('sysadmins', []),
+    puppetmaster_server => 'puppetmaster.openstack.org',
   }
   class { 'openstack_project::jenkins_dev':
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
