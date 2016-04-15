@@ -18,6 +18,11 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_internap_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_internap_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackci_internap_project_name'] %>
+    networks: 
+    - name: inap-17301-WAN2344
+      routes_externally: True
+    - name: inap-17301-LAN3328
+      routes_externally: False
   openstackci-ovh:
     regions:
     - GRA1
