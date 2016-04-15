@@ -6,7 +6,7 @@
   # masters.
   any_errors_fatal: true
   tasks:
-    - shell: '/usr/local/jenkins/bin/safe_jenkins_shutdown --url https://{{ ansible_fqdn }}/ --user {{ user }} --password {{ password }}'
+    - shell: '/usr/local/jenkins/bin/safe_jenkins_shutdown --user {{ user }} --password {{ password }}'
     - service: name=jenkins state=stopped
       # This is necessary because stopping Jenkins is not reliable.
       # We allow return code 1 which means no processes found.
