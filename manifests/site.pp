@@ -931,7 +931,6 @@ node 'release.slave.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'openstackid.org' {
   class { 'openstack_project::openstackid_prod':
@@ -962,7 +961,6 @@ node 'openstackid.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
