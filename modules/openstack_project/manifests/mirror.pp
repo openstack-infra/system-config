@@ -8,6 +8,7 @@ class openstack_project::mirror (
   $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
   $npm_root = "${mirror_root}/npm"
+  $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
 
   $www_base = '/var/www'
   $www_root = "${www_base}/mirror"
@@ -65,6 +66,17 @@ class openstack_project::mirror (
   file { "${www_root}/npm":
     ensure  => link,
     target  => "${npm_root}",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  # Create the symlink to ceph-deb-hammer.
+  file { "${www_root}/ceph-deb-hammer":
+    ensure  => link,
+    target  => "${ceph_deb_hammer_root}",
     owner   => root,
     group   => root,
     require => [
