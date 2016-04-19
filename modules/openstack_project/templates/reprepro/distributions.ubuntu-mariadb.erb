@@ -1,0 +1,12 @@
+<% @releases.each do |release| -%>
+Origin: MariaDB
+Codename: <%= release %>
+Description: OpenStack MariaDB <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main
+UDebComponents: main
+Contents: .gz
+Update: ubuntu-mariadb
+Log: <%= @logdir %>/ubuntu-mariadb<%= release %>.log
+
+<% end -%>
