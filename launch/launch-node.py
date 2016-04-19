@@ -75,7 +75,8 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'make_swap.sh'),
                    'make_swap.sh')
-    ssh_client.ssh('bash -x make_swap.sh')
+    create_opt = mount_path != '/opt'
+    ssh_client.ssh('bash -x make_swap.sh %s' % create_opt)
 
     if volume_device:
         ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'mount_volume.sh'),

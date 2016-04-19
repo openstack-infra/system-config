@@ -14,6 +14,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+CREATE_OPT=$1
+
 # If we're running on a cloud server with no swap, fix that:
 if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
     if [ -b /dev/vdb ]; then
@@ -31,16 +33,18 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
         umount ${DEV}
         parted ${DEV} --script -- mklabel msdos
         parted ${DEV} --script -- mkpart primary linux-swap 1 ${MEM}
-        parted ${DEV} --script -- mkpart primary ext2 ${MEM} -1
         mkswap ${DEV}1
-        mkfs.ext4 ${DEV}2
         swapon ${DEV}1
-        mount ${DEV}2 /mnt
-        rsync -a /opt/ /mnt/
-        umount /mnt
         perl -nle "m,${DEV}, || print" -i /etc/fstab
         echo "${DEV}1  none  swap  sw                           0  0" >> /etc/fstab
-        echo "${DEV}2  /opt  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
+        if [ "$CREATE_OPT" = "True" ] ; then
+            parted ${DEV} --script -- mkpart primary ext2 ${MEM} -1
+            mkfs.ext4 ${DEV}2
+            mount ${DEV}2 /mnt
+            rsync -a /opt/ /mnt/
+            umount /mnt
+            echo "${DEV}2  /opt  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
+        fi
         mount -a
     fi
 fi
