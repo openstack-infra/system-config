@@ -105,6 +105,9 @@ def bootstrap_server(server, key, name, volume, keep):
         '-e', 'target={name}'.format(name=name),
     ]
 
+    if environment is not None:
+        ansible_cmd.append("puppet_environment={0}".format(environment))
+
     # Run the remote puppet apply playbook limited to just this server
     # we just created
     try:
@@ -212,6 +215,8 @@ def main():
                         help="Be verbose about logging cloud actions")
     parser.add_argument("--network", dest="network", default=None,
                         help="network label to attach instance to")
+    parser.add_argument("--environment", dest="environment", default=None,
+                        help="puppet environment to copy and run on new node")
     parser.add_argument("--config-drive", dest="config_drive",
                         help="Boot with config_drive attached.",
                         action='store_true',
