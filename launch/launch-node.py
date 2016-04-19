@@ -34,6 +34,10 @@ import paramiko
 import shade
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
+try:
+    environment = sys.argv[1]
+except:
+    environment = None
 
 try:
     # This unactionable warning does not need to be printed over and over.
@@ -104,6 +108,9 @@ def bootstrap_server(server, key, name, volume, keep):
         "--ssh-common-args='-o StrictHostKeyChecking=no'",
         '-e', 'target={name}'.format(name=name),
     ]
+
+    if environment is not None:
+        ansible_cmd.append("puppet_environment={0}".format(environment))
 
     # Run the remote puppet apply playbook limited to just this server
     # we just created
