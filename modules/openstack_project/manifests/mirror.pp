@@ -128,6 +128,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to MariaDB.
+  file { "${www_root}/mariadb":
+    ensure  => link,
+    target  => "${mirror_root}/mariadb",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',

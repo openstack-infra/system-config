@@ -265,5 +265,35 @@ class openstack_project::mirror_update (
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
   }
 
+  ### MariaDB mirror ###
+  ::openstack_project::reprepro { 'ubuntu-mariadb-reprepro-mirror':
+    confdir       => '/etc/reprepro/ubuntu-mariadb',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu-mariadb',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu-mariadb.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/ubuntu-mariadb-updates',
+    releases      => [ 'trusty', 'xenial' ],
+  }
 
+  cron { 'reprepro ubuntu mariadb':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/ubuntu-mariadb.lock reprepro-mirror-update /etc/reprepro/ubuntu-mariadb mirror.ubuntu-mariadb >>/var/log/reprepro/ubuntu-mariadb-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['ubuntu-mariadb-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'MariaDB Package Signing Key':
+    ensure     => present,
+    # 1993 69E5 404B D5FC 7D2F E43B CBCB 082A 1BB9 43DB
+    key_id     => 'CBCB082A1BB943DB',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-gpg-key.asc',
+  }
 }
