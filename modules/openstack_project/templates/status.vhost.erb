@@ -32,6 +32,8 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     Order allow,deny
     allow from all
   </Directory>
+  ProxyPassMatch ^openstack-health\/#\/g\/$(.+\/.+)/rss http://health.openstack.org/runs/key/$1/recent/rss
+
 
   <Directory <%= @docroot %>>
     Options <%= @options %>
