@@ -332,7 +332,13 @@ function format_change(change, change_queue) {
             result_class += " result_unstable";
         }
         html += '<span class="jobwrapper"><span class="job">';
+        if (job['result'] !== null && job['report_url'] !== null) {
+            html += '<a href="'+job['report_url']+'">';
+        }
         html += job['name'];
+        if (job['result'] !== null && job['report_url'] !== null) {
+            html += '</a>';
+        }
         html += ': ';
         if (job['result'] === null && job['url'] !== null) {
             html += format_progress(job['elapsed_time'], job['remaining_time']);
