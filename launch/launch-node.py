@@ -43,7 +43,7 @@ except:
     pass
 
 
-def bootstrap_server(server, key, name, volume, keep):
+def bootstrap_server(server, key, name, volume, keep, environment):
 
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
@@ -105,6 +105,9 @@ def bootstrap_server(server, key, name, volume, keep):
         '-e', 'target={name}'.format(name=name),
     ]
 
+    if environment is not None:
+        ansible_cmd.append("puppet_environment={0}".format(environment))
+
     # Run the remote puppet apply playbook limited to just this server
     # we just created
     try:
@@ -132,8 +135,8 @@ def bootstrap_server(server, key, name, volume, keep):
             raise
 
 
-def build_server(cloud, name, image, flavor,
-                 volume, keep, network, boot_from_volume, config_drive):
+def build_server(cloud, name, image, flavor, volume,
+                 keep, network, boot_from_volume, config_drive, environment):
     key = None
     server = None
 
@@ -166,7 +169,7 @@ def build_server(cloud, name, image, flavor,
         cloud.delete_keypair(key_name)
 
         server = cloud.get_openstack_vars(server)
-        bootstrap_server(server, key, name, volume, keep)
+        bootstrap_server(server, key, name, volume, keep, environment)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
@@ -212,6 +215,8 @@ def main():
                         help="Be verbose about logging cloud actions")
     parser.add_argument("--network", dest="network", default=None,
                         help="network label to attach instance to")
+    parser.add_argument("--environment", dest="environment", default=None,
+                        help="puppet environment to copy and run on new node")
     parser.add_argument("--config-drive", dest="config_drive",
                         help="Boot with config_drive attached.",
                         action='store_true',
@@ -249,7 +254,7 @@ def main():
     server = build_server(cloud, options.name, image, flavor,
                           options.volume, options.keep,
                           options.network, options.boot_from_volume,
-                          options.config_drive)
+                          options.config_drive, options.environment)
     dns.print_dns(cloud, server)
 
     # Zero the ansible inventory cache so that next run finds the new server
