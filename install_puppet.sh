@@ -121,7 +121,7 @@ function setup_puppet_fedora {
 }
 
 function setup_puppet_rhel7 {
-    local puppet_pkg="https://yum.puppetlabs.com/el/7/products/x86_64/puppetlabs-release-7-10.noarch.rpm"
+    local puppet_pkg="http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
 
     # install a bootstrap epel repo to install latest epel-release
     # package (which provides correct gpg keys, etc); then remove
