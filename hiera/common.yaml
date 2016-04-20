@@ -103,8 +103,8 @@ statusbot_channels:
 - openstack-trove
 - openstack-zaqar
 - openstack-zephyr
-- packstack-dev
 - puppet-openstack
+- rdo
 - refstack
 - senlin
 - storyboard
