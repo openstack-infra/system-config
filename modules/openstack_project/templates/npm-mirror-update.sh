@@ -17,7 +17,7 @@
 set -e
 
 CMD="/usr/bin/registry-static"
-CMD_ARGS="-d <%= @uri_rewrite %> -o <%= @data_directory %> --blobstore afs-blob-store"
+CMD_ARGS="-d <%= @uri_rewrite %> -o <%= @data_directory %> --blobstore afs-blob-store --hooks openstack-registry-hooks"
 
 echo "Obtaining npm tokens and running registry-static."
 k5start -t -f /etc/npm.keytab service/npm -- timeout -k 2m 30m $CMD $CMD_ARGS
