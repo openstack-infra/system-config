@@ -59,25 +59,51 @@ Requirements
 Implementation
 ==============
 
-Multi-Site
-----------
+Single datacenter
+-----------------
 
-There are at least two "sites" with a collection of servers in each
-site. Each site will have its own cloud, and these clouds will share no
-infrastructure or data. The racks may be in the same physical location,
-but they will be managed as if they are not.
+Our servers are placed on a single datacenter (HPE Houston Ecopod), on different
+racks. The servers are composed by three different types of hardware:
+- HP Proliant SL230 Gen8
+- HP Proliant SE1170s
+- HP Proliant SL390s
 
-HP1
-~~~
+SL390 machines come with 96G of RAM, 1.8TiB of disk and 24 Cores of Intel Xeon X5650 @ 2.67GHz processors.
+SL230 and SE1170 machines come with 96G of RAM, 1.8TiB of disk and 32 Cores of Intel Xeon E5-2670 0 @ 2.60GHz processors.
 
-The HP1 site has 48 machines. Each machine has 96G of RAM, 1.8TiB of disk and
-24 Cores of Intel Xeon X5650 @ 2.67GHz processors.
+Rack distribution
+-----------------
 
-HP2
-~~~
+Our servers are distributed on different racks, each of those containing different
+sets of hardware:
 
-The HP2 site has 100 machines. Each machine has 96G of RAM, 1.8TiB of disk and
-32 Cores of Intel Xeon E5-2670 0 @ 2.60GHz processors.
+Rack 5
+~~~~~~
+
+24 x SL230
+16 x SE1170
+
+Rack 8
+~~~~~~
+
+16 x SE1170
+
+Rack 9
+~~~~~~
+
+20 x SE1170
+
+Rack 12
+~~~~~~~
+23 x SL390
+13 X SL230
+4  X SE1170
+
+Rack 13
+~~~~~~~
+
+8 x SL390
+8 x SE1170
 
 Software
 --------
@@ -187,10 +213,16 @@ nodepool/zuul communications.
 .. _provider VLAN: http://docs.openstack.org/networking-guide/scenario-provider-lb.html
 
 Each site will need 2 VLANs. One for the public IPs which every NIC of every
-host will be attached to. That VLAN will get a publicly routable /23. Also,
+host will be attached to. That VLAN will get a publicly routable /19. Also,
 there should be a second VLAN that is connected only to the NIC of the
 Ironic Cloud and is routed to the IPMI management network of all of the other
-nodes. Whether we use LinuxBridge or Open vSwitch is still TBD.
+nodes. We will be using LinuxBridge at first deployments.
+
+Following ranges are used:
+
+  * OSCI iLO: 10.12.8.0/22 (VLAN 1807)
+  * OSCI MGMT: 10.10.16.0/22 (VLAN 2550)
+  * OSCI Public: 15.184.224.0/19 (VLAN 2551)
 
 Troubleshooting
 ===============
