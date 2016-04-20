@@ -49,4 +49,13 @@ class openstack_project::npm_mirror (
       Class['nodejs'],
     ]
   }
+
+  # Common registry hooks
+  package { 'openstack-registry-hooks':
+    ensure   => '1.0.1',
+    provider => 'npm',
+    require  => [
+      Class['nodejs'],
+    ]
+  }
 }
