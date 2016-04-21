@@ -88,10 +88,6 @@ a single project you will want to do the following:
      label-Code-Review = -2..+2 group project-name-core
      label-Workflow = -1..+1 group project-name-core
 
-     [access "refs/heads/proposed/*"]
-     label-Code-Review = -2..+2 group project-name-release
-     label-Workflow = -1..+1 group project-name-release
-
      [receive]
      requireChangeId = true
      requireContributorAgreement = true

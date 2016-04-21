@@ -218,7 +218,7 @@ High level goals:
 #. Members of Release Managers (Release Manager and delegates), and
    $PROJECT-milestone (PTL and release minded people) exclusively can
    perform full code review (blocking or approving: +/- 2), and submit
-   changes to be merged on pre-release proposed/* branches.
+   changes to be merged on pre-release stable/* branches.
 #. Full code review (+/- 2) of API projects (documentation of the API,
    not implementation of the API) should be available to the -core
    group of the corresponding implementation project as well as to the
@@ -305,15 +305,6 @@ Next, edit `project.config` to look like::
   rebase = group Registered Users
   submit = group Continuous Integration Tools
   submit = group Project Bootstrappers
-
-  [access "refs/heads/proposed/*"]
-  exclusiveGroupPermissions = label-Code-Review label-Workflow
-  label-Code-Review = -2..+2 group Project Bootstrappers
-  label-Code-Review = -2..+2 group Release Managers
-  label-Code-Review = -1..+1 group Registered Users
-  label-Workflow = +0..+1 group Project Bootstrappers
-  label-Workflow = +0..+1 group Release Managers
-  owner = group Release Managers
 
   [access "refs/meta/config"]
   read = group Project Owners
