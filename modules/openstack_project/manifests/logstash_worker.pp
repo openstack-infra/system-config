@@ -25,8 +25,28 @@ class openstack_project::logstash_worker (
     source => 'puppet:///modules/openstack_project/logstash/logstash-indexer.default',
   }
 
+  vcsrepo { '/opt/logstash-filters':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/logstash-filters',
+  }
+
+  include logstash
+
+  logstash::filter { 'openstack-logstash-filters':
+    level  => '50',
+    target => '/opt/logstash-filters/filters/openstack-filters.conf',
+    requre => [
+      Class['logstash'],
+      Vcsrepo['/opt/logstash-filters'],
+    ],
+  }
+
   class { 'logstash::indexer':
-    conf_template => 'openstack_project/logstash/indexer.conf.erb',
+    input_template  => 'openstack_project/logstash/input.conf.erb',
+    output_template => 'openstack_project/logstash/output.conf.erb',
+    require         => Logstash::Filter['openstack-logstash-filters'],
   }
 
   include log_processor
