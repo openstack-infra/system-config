@@ -43,7 +43,8 @@ except:
     pass
 
 
-def bootstrap_server(server, key, name, volume, keep):
+def bootstrap_server(server, key, name, volume_device, keep,
+                     mount_path, fs_label):
 
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
@@ -76,10 +77,11 @@ def bootstrap_server(server, key, name, volume, keep):
                    'make_swap.sh')
     ssh_client.ssh('bash -x make_swap.sh')
 
-    if volume:
+    if volume_device:
         ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'mount_volume.sh'),
                        'mount_volume.sh')
-        ssh_client.ssh('bash -x mount_volume.sh')
+        ssh_client.ssh('bash -x mount_volume.sh %s %s %s' %
+                       (volume_device, mount_path, fs_label))
 
     # This next chunk should really exist as a playbook, but whatev
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
@@ -133,7 +135,8 @@ def bootstrap_server(server, key, name, volume, keep):
 
 
 def build_server(cloud, name, image, flavor,
-                 volume, keep, network, boot_from_volume, config_drive):
+                 volume, keep, network, boot_from_volume, config_drive,
+                 mount_path, fs_label, availability_zone):
     key = None
     server = None
 
@@ -142,6 +145,9 @@ def build_server(cloud, name, image, flavor,
                          boot_from_volume=boot_from_volume,
                          network=network,
                          config_drive=config_drive)
+
+    if availability_zone:
+        create_kwargs['availability_zone'] = availability_zone
 
     if volume:
         create_kwargs['volumes'] = [volume]
@@ -166,7 +172,9 @@ def build_server(cloud, name, image, flavor,
         cloud.delete_keypair(key_name)
 
         server = cloud.get_openstack_vars(server)
-        bootstrap_server(server, key, name, volume, keep)
+        volume_device = cloud.get_volume_attach_device(volume, server['id'])
+        bootstrap_server(server, key, name, volume_device, keep,
+                         mount_path, fs_label)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
@@ -199,6 +207,12 @@ def main():
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
+    parser.add_argument("--mount-path", dest="mount_path",
+                        help="Path to mount cinder volume at.",
+                        default=None)
+    parser.add_argument("--fs-label", dest="fs_label",
+                        help="FS label to use when mounting cinder volume.",
+                        default=None)
     parser.add_argument("--boot-from-volume", dest="boot_from_volume",
                         help="Create a boot volume for the server and use it.",
                         action='store_true',
@@ -216,6 +230,8 @@ def main():
                         help="Boot with config_drive attached.",
                         action='store_true',
                         default=True)
+    parser.add_argument("--az", dest="availability_zone", default=None,
+                        help="AZ to boot in.")
     options = parser.parse_args()
 
     shade.simple_logging(debug=options.verbose)
@@ -249,7 +265,9 @@ def main():
     server = build_server(cloud, options.name, image, flavor,
                           options.volume, options.keep,
                           options.network, options.boot_from_volume,
-                          options.config_drive)
+                          options.config_drive,
+                          options.mount_path, options.fs_label,
+                          options.availability_zone)
     dns.print_dns(cloud, server)
 
     # Zero the ansible inventory cache so that next run finds the new server
