@@ -48,7 +48,7 @@ easily test an OpenStack project manifest on your own server.
 Finally, the `manifests/site.pp` file contains the information that is
 specific to the actual servers that OpenStack runs.  These should be
 very simple node definitions that largely exist simply to provide
-private date from hiera to the more robust manifests in the
+private data from hiera to the more robust manifests in the
 `openstack_project` modules.
 
 This means that you can run the same configuration on your own server
@@ -56,11 +56,11 @@ simply by providing a different manifest file instead of site.pp.
 
 .. note::
    The example below is for Debian / Ubuntu systems.  If you are using a
-   RedHat based system be sure to setup sudo or simply run the commands as
+   Red Hat based system be sure to setup sudo or simply run the commands as
    the root user.
 
 As an example, to run the etherpad configuration on your own server,
-start by ensuring git is installed and then cloning the system-config
+start by ensuring `git` is installed and then cloning the system-config
 Git repo::
 
   sudo su -
@@ -68,7 +68,7 @@ Git repo::
   git clone https://git.openstack.org/openstack-infra/system-config
   cd system-config
 
-Then copy the etherpad node definition from manifests/site.pp to a new
+Then copy the etherpad node definition from `manifests/site.pp` to a new
 file (be sure to specify the FQDN of the host you are working with in
 the node specifier).  It might look something like this::
 
