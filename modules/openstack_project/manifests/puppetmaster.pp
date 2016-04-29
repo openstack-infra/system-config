@@ -285,6 +285,13 @@ class openstack_project::puppetmaster (
     notify => Exec['expand_groups'],
   }
 
+  file { '/etc/ansible/cloud-launcher':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '0755',
+  }
+
   file { '/var/cache/ansible-inventory':
     ensure  => directory,
     owner   => 'root',
