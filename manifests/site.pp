@@ -235,7 +235,6 @@ node 'puppetmaster.openstack.org' {
     jenkins_api_user                           => hiera('jenkins_api_user', 'username'),
     jenkins_api_key                            => hiera('jenkins_api_key'),
     puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
-    infracloud_hpuswest_ssl_cert_file_contents => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
   }
 }
 
