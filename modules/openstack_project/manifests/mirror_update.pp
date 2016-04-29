@@ -168,7 +168,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/ceph-deb-hammer',
     distributions => 'openstack_project/reprepro/distributions.debian-ceph-hammer.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-hammer-updates',
-    releases      => ['trusty'],
+    releases      => ['trusty', 'xenial'],
   }
 
   cron { 'reprepro debian ceph hammer':
