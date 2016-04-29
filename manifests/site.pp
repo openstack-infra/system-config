@@ -317,6 +317,7 @@ node 'lists.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'paste.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
