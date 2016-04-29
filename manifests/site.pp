@@ -186,6 +186,15 @@ node /^jenkins\d+\.openstack\.org$/ {
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
   }
+  class { 'openstack_project::zuul_launcher':
+    vhost_name           => hiera('vhost_name', $::fqdn),
+    zuul_ssh_private_key => hiera('jenkins_ssh_private_key'),
+    zuul_url             => 'http://zuul.openstack.org/p'
+    gearman_server       => 'zuul.openstack.org',
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+  }
 }
 
 # Node-OS: precise
