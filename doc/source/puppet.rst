@@ -117,7 +117,7 @@ puppetmaster, running:
 
 .. code-block:: bash
 
-  ansible-playbook --limit='$HOST:localhost' /opt/system-config/production/playbooks/remote_puppet_adhoc.yaml
+  ansible-playbook --limit="$HOST:localhost" /opt/system-config/production/playbooks/remote_puppet_adhoc.yaml
 
 as root, where `$HOST` is the host you want to run puppet on.
 The `:localhost` is important as some of the plays depend on performing a task
