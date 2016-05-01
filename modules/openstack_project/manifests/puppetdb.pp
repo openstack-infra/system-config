@@ -39,6 +39,14 @@ class openstack_project::puppetdb (
   }
 
   if versioncmp($version, '2.3.8') > 0 {
+    file { '/etc/puppetdb/':
+       ensure => directory,
+      before  => Class['::puppetdb::server'],
+    }
+    file { '/etc/puppetdb/conf.d/':
+       ensure => directory,
+      before  => Class['::puppetdb::server'],
+    }
     apt::source { 'puppetlabs-pc1':
       location => 'http://apt.puppetlabs.com',
       repos    => 'PC1',
