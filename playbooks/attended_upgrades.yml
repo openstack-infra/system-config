@@ -1,0 +1,9 @@
+- hosts: all
+  user: nibz
+  become: yes
+  gather_facts: true
+  tasks:
+  - debug: msg="debug {{inventory_hostname}}"
+  - name: run unattented upgrades
+    shell: apt-get update &&  unattended-upgrade
+    when: ansible_os_family == "Debian"
