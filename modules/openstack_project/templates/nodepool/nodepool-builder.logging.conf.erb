@@ -77,49 +77,49 @@ datefmt=
 
 
 [logger_rax-dfw_bare-precise]
-level=DEBUG
+level=INFO
 handlers=rax-dfw_bare-precise
 qualname=nodepool.image.build.rax-dfw.bare-precise
 propagate=0
 
 [handler_rax-dfw_bare-precise]
-level=DEBUG
+level=INFO
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-dfw.bare-precise.log', 'H', 8, 30,)
 
 [logger_rax-ord_bare-precise]
-level=DEBUG
+level=INFO
 handlers=rax-ord_bare-precise
 qualname=nodepool.image.build.rax-ord.bare-precise
 propagate=0
 
 [handler_rax-ord_bare-precise]
-level=DEBUG
+level=INFO
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-ord.bare-precise.log', 'H', 8, 30,)
 
 [logger_rax-iad_bare-precise]
-level=DEBUG
+level=INFO
 handlers=rax-iad_bare-precise
 qualname=nodepool.image.build.rax-iad.bare-precise
 propagate=0
 
 [handler_rax-iad_bare-precise]
-level=DEBUG
+level=INFO
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-iad.bare-precise.log', 'H', 8, 30,)
 
 [logger_tripleo-test-cloud-rh1_tripleo-f22]
-level=DEBUG
+level=INFO
 handlers=tripleo-test-cloud-rh1_tripleo-f22
 qualname=nodepool.image.build.tripleo-test-cloud-rh1.tripleo-f22
 propagate=0
 
 [handler_tripleo-test-cloud-rh1_tripleo-f22]
-level=DEBUG
+level=INFO
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/tripleo-test-cloud-rh1.tripleo-f22.log', 'H', 8, 30,)

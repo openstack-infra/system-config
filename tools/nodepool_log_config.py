@@ -113,7 +113,7 @@ datefmt=
 
 _IMAGE_HANDLER = """
 [handler_%(title)s]
-level=DEBUG
+level=%(level)s
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('%(image_log_dir)s/%(filename)s', 'H', 8, 30,)
@@ -121,7 +121,7 @@ args=('%(image_log_dir)s/%(filename)s', 'H', 8, 30,)
 
 _IMAGE_LOGGER = """
 [logger_%(title)s]
-level=DEBUG
+level=%(level)s
 handlers=%(handler)s
 qualname=nodepool.image.build.%(qualname)s
 propagate=0
@@ -150,6 +150,7 @@ def _generate_logger_and_handler(image_log_dir, provider, image):
         'image_log_dir': image_log_dir,
         'title': '%s_%s' % (provider, image),
         'filename': '%s.%s.log' % (provider, image),
+        'level': '%s' % ('INFO' if provider != 'dib' else 'DEBUG'),
     }
 
     logger = _IMAGE_LOGGER % {
@@ -157,6 +158,7 @@ def _generate_logger_and_handler(image_log_dir, provider, image):
         'handler': '%s_%s' % (provider, image),
         'qualname': '%s%s' % (provider + "." if provider != 'dib' else '',
                               image),
+        'level': '%s' % ('INFO' if provider != 'dib' else 'DEBUG'),
     }
 
     return {
