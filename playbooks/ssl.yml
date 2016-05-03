@@ -1,0 +1,9 @@
+- hosts: all
+  user: nibz
+  become: yes
+  gather_facts: true
+  tasks:
+  - debug: msg="debug {{inventory_hostname}}"
+  - name: update  libssl1.0.0
+    shell -a 'apt-get update && apt-get upgrade -y'
+    when: ansible_os_family == "Debian"
