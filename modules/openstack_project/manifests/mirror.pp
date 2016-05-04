@@ -1,11 +1,11 @@
 # == Class: openstack_project::mirror
 #
 class openstack_project::mirror (
+  $pypi_root  = "${mirror_root}/pypi",
   $vhost_name = $::fqdn,
 ) {
 
   $mirror_root = '/afs/openstack.org/mirror'
-  $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
   $npm_root = "${mirror_root}/npm"
   $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
