@@ -101,6 +101,7 @@ statusbot_channels:
 - openstack-swift
 - openstack-telemetry
 - openstack-trove
+- openstack-vitrage
 - openstack-zaqar
 - openstack-zephyr
 - puppet-openstack
@@ -192,6 +193,7 @@ meetbot_channels:
 - '#openstack-third-party-ci'
 - '#openstack-trove'
 - '#openstack-ux'
+- '#openstack-vitrage'
 - '#openstack-vmware-nsx'
 - '#openstack-watcher'
 - '#openstack-zaqar'
