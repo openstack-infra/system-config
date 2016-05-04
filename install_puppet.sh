@@ -191,7 +191,7 @@ EOF
     # the version of puppet ship by xenial.
     if [ $lsbdistcodename != 'xenial' ]; then
         puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-        wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+        curl -O http://apt.puppetlabs.com/$puppet_deb
         dpkg -i $puppet_deb
         rm $puppet_deb
     fi;
