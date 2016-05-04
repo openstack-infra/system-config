@@ -582,6 +582,7 @@ node /^mirror\..*\.openstack\.org$/ {
 
   class { 'openstack_project::mirror':
     vhost_name => $::fqdn,
+    pypi_root  => '/afs/.openstack.org/mirror/pypi',
     require    => Class['Openstack_project::Server'],
   }
 }
