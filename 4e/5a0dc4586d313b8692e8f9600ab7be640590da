@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <yolanda.robla-mota@hpe.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 05 May 2016 13:23:54 +0000
+Reviewed-on: https://review.openstack.org/312630
+Project: openstack-infra/system-config
+Branch: refs/heads/master
