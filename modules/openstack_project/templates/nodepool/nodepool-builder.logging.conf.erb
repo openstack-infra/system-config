@@ -7,19 +7,15 @@
 
 [loggers]
 keys=root,nodepool,requests,shade,image,
- rax-dfw_bare-precise, rax-dfw_devstack-centos7, rax-ord_bare-precise,
- rax-ord_devstack-centos7, rax-iad_bare-precise,
- rax-iad_devstack-centos7, tripleo-test-cloud-rh1_tripleo-f22,
- dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial,
- dib_devstack-centos7, dib_centos-7, dib_fedora-23
+ rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
+ tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
+ dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7, dib_fedora-23
 
 [handlers]
 keys=console,debug,normal,image,
- rax-dfw_bare-precise, rax-dfw_devstack-centos7, rax-ord_bare-precise,
- rax-ord_devstack-centos7, rax-iad_bare-precise,
- rax-iad_devstack-centos7, tripleo-test-cloud-rh1_tripleo-f22,
- dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial,
- dib_devstack-centos7, dib_centos-7, dib_fedora-23
+ rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
+ tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
+ dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7, dib_fedora-23
 
 [formatters]
 keys=simple
@@ -92,18 +88,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-dfw.bare-precise.log', 'H', 8, 30,)
 
-[logger_rax-dfw_devstack-centos7]
-level=DEBUG
-handlers=rax-dfw_devstack-centos7
-qualname=nodepool.image.build.rax-dfw.devstack-centos7
-propagate=0
-
-[handler_rax-dfw_devstack-centos7]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-dfw.devstack-centos7.log', 'H', 8, 30,)
-
 [logger_rax-ord_bare-precise]
 level=DEBUG
 handlers=rax-ord_bare-precise
@@ -116,18 +100,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-ord.bare-precise.log', 'H', 8, 30,)
 
-[logger_rax-ord_devstack-centos7]
-level=DEBUG
-handlers=rax-ord_devstack-centos7
-qualname=nodepool.image.build.rax-ord.devstack-centos7
-propagate=0
-
-[handler_rax-ord_devstack-centos7]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-ord.devstack-centos7.log', 'H', 8, 30,)
-
 [logger_rax-iad_bare-precise]
 level=DEBUG
 handlers=rax-iad_bare-precise
@@ -139,18 +111,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/rax-iad.bare-precise.log', 'H', 8, 30,)
-
-[logger_rax-iad_devstack-centos7]
-level=DEBUG
-handlers=rax-iad_devstack-centos7
-qualname=nodepool.image.build.rax-iad.devstack-centos7
-propagate=0
-
-[handler_rax-iad_devstack-centos7]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-iad.devstack-centos7.log', 'H', 8, 30,)
 
 [logger_tripleo-test-cloud-rh1_tripleo-f22]
 level=DEBUG
@@ -199,18 +159,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.ubuntu-xenial.log', 'H', 8, 30,)
-
-[logger_dib_devstack-centos7]
-level=DEBUG
-handlers=dib_devstack-centos7
-qualname=nodepool.image.build.devstack-centos7
-propagate=0
-
-[handler_dib_devstack-centos7]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.devstack-centos7.log', 'H', 8, 30,)
 
 [logger_dib_centos-7]
 level=DEBUG
