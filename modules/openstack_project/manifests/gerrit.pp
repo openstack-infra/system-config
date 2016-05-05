@@ -162,16 +162,8 @@ class openstack_project::gerrit (
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
       },
       {
-        # This matches comments from Zuul / 3rd party CI which should
-        # be in a raw format of:
-        #
-        #   (   1   ) (      2          )   (      3       ) (            4           )
-        # - test-name http://link.to/test : [PASSED|FAILURE] Some text about the change
-        #
-        # Gerrit will convert that to the <li> element
-        # that we match & rewrite with styles below
         name  => 'testresult',
-        match => '<li>(.+) <a href=\".+\" target=\"_blank\">(.+)</a> : (\\w+) (.*)</li>',
+        match => '<li>([^ ]+) <a href=\"[^\"]+\" target=\"_blank\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
         html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
       },
       {
