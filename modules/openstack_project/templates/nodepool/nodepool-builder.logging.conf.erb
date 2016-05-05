@@ -9,13 +9,15 @@
 keys=root,nodepool,requests,shade,image,
  rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
  tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
- dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7, dib_fedora-23
+ dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
+ dib_centos-7, dib_fedora-23
 
 [handlers]
 keys=console,debug,normal,image,
  rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
  tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
- dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7, dib_fedora-23
+ dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
+ dib_centos-7, dib_fedora-23
 
 [formatters]
 keys=simple
@@ -135,6 +137,18 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.debian-jessie.log', 'H', 8, 30,)
+
+[logger_dib_ubuntu-precise]
+level=DEBUG
+handlers=dib_ubuntu-precise
+qualname=nodepool.image.build.ubuntu-precise
+propagate=0
+
+[handler_dib_ubuntu-precise]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.ubuntu-precise.log', 'H', 8, 30,)
 
 [logger_dib_ubuntu-trusty]
 level=DEBUG
