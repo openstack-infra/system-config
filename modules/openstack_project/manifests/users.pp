@@ -196,4 +196,12 @@ class openstack_project::users {
     uid      => 2021,
     gid      => 2021,
   }
+
+  @user::virtual::localuser { 'Zara':
+    realname => 'Zara Zaimeche',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCt9wQvGgQIvLvifm7n5g+2sjgjGCQLt03D0v5Fb5xEMufJncIDkwBNDzGvsASwHGjP9YEAA8+f8Ya+Yc9EaDgqQl9r9YEO9CoEC6O1Euk41nQJYYRnzkgmMaxTSlUKNur8XSmzoElLut6ivlLW71fZmSKHAcg9O4lgd9weDDjCcWLD1C9WmRVdtEnw6NQJd5Mn/llHqdbmMlf3I5VL8QvzPndxZEyESdSBz0ywLO5ygtUxtPaCxaanHSTz1yNooT9t2vwDnfc1LB9oT4CaEnVG+FugCPGFnn204eJ2BVEQ945ZsabgFndyvfmEwxlzAeA6+YjQYrukMijb1Owxh1fv',
+    key_id   => 'zara.zaimeche@codethink.co.uk',
+    uid      => 2022,
+    gid      => 2022,
+  }
 }
