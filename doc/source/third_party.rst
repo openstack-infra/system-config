@@ -6,11 +6,11 @@ Third Party Testing
 Overview
 --------
 
-Gerrit has an event stream which can be subscribed to, using this it
-is possible to test commits against testing systems beyond those
-supplied by OpenStack's Jenkins setup.  It is also possible for these
-systems to feed information back into Gerrit and they can also leave
-non-gating votes on Gerrit review requests.
+Gerrit has an event stream which can be subscribed to. Using this event stream,
+it is possible to test commits against testing systems beyond those supplied by
+OpenStack's Jenkins setup.  It is also possible for these systems to feed
+information back into Gerrit and they can also leave non-gating votes on Gerrit
+review requests.
 
 There are several examples of systems that read the Gerrit event stream
 and run their own tests on the commits
