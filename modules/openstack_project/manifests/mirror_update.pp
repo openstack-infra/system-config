@@ -185,6 +185,28 @@ class openstack_project::mirror_update (
     ]
   }
 
+  ::openstack_project::reprepro { 'debian-ceph-jewel-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-ceph-jewel',
+    basedir       => '/afs/.openstack.org/mirror/ceph-deb-jewel',
+    distributions => 'openstack_project/reprepro/distributions.debian-ceph-jewel.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-jewel-updates',
+    releases      => ['trusty', 'xenial'],
+  }
+
+  cron { 'reprepro debian ceph jewel':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian-ceph-jewel.lock reprepro-mirror-update /etc/reprepro/debian-ceph-jewel mirror.deb-jewel >>/var/log/reprepro/debian-ceph-jewel-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['debian-ceph-jewel-reprepro-mirror'],
+    ]
+  }
+
   gnupg_key { 'Ceph Archive':
     ensure     => present,
     # 08B7 3419 AC32 B4E9 66C1  A330 E84A C2C0 460F 3994
