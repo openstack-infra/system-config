@@ -162,9 +162,9 @@ The `a` in the preceding command tells it to place the volume on
 partition `vicepa`.  Our fileservers only have one partition and therefore
 this is a constant.
 
-Be sure to mount the volume in AFS with::
+Be sure to mount the read-write volume in AFS with::
 
-  fs mkmount /afs/openstack.org/path/to/mountpoint $VOLUMENAME
+  fs mkmount /afs/.openstack.org/path/to/mountpoint $VOLUMENAME
 
 You may want to create read-only sites for the volume with ``vos
 addsite`` and then ``vos release``.
