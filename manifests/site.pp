@@ -733,6 +733,8 @@ node 'nodepool.openstack.org' {
     statsd_host                   => 'graphite.openstack.org',
     logging_conf_template         => 'openstack_project/nodepool/nodepool.logging.conf.erb',
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
+    build_workers                 => '1',
+    upload_workers                => '12',
     jenkins_masters               => [
       {
         name        => 'jenkins01',
