@@ -18,6 +18,10 @@ class openstack_project::storyboard(
   $sender_email_address = undef,
 ) {
 
+  realize (
+    User::Virtual::Localuser['Zara'],
+  )
+
   class { 'project_config':
     url  => $project_config_repo,
   }
