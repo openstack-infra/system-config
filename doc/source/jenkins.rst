@@ -109,7 +109,8 @@ hand:
 
 #. Configure the OpenID plugin for your SSO site (e.g. Launchpad)
 
-#. Do not set CSRF protection - that breaks Jenkins job builder.
+#. Do not set CSRF protection - that causes problems with various components
+   such as nodepool and swift log uploader.
 
 #. Login.
 
