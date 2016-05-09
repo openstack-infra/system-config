@@ -23,7 +23,10 @@ subunit-files:
     build-queue-filter: 'periodic'
   - name: logs/testrepository.subunit
     build-queue-filter: 'periodic'
-
+  - name: testrepository.subunit
+    build-queue-filter: 'post'
+  - name: logs/testrepository.subunit
+    build-queue-filter: 'post'
 # List of files to source logs from.
 source-files:
   - name: console.html
