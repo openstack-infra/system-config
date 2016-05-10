@@ -172,7 +172,12 @@ def build_server(cloud, name, image, flavor,
         cloud.delete_keypair(key_name)
 
         server = cloud.get_openstack_vars(server)
-        volume_device = cloud.get_volume_attach_device(volume, server['id'])
+        if volume:
+            volume = cloud.get_volume(volume)
+            volume_device = cloud.get_volume_attach_device(volume,
+                                                           server['id'])
+        else:
+            volume_device = None
         bootstrap_server(server, key, name, volume_device, keep,
                          mount_path, fs_label)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
