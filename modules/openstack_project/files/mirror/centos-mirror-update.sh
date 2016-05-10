@@ -42,9 +42,7 @@ $K5START rsync -rlptDvz \
 
 # TODO(pabelanger): Validate rsync process
 
-# NOTE(pabelanger): Because of the initial amount of data, we'll manually
-# run vos release the first time.
 #echo "rsyc completed successfully, running vos release."
-#k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
+k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
 
 echo "Done."
