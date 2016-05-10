@@ -1,0 +1,9 @@
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 10 May 2016 16:02:32 +0000
+Reviewed-on: https://review.openstack.org/300005
+Project: openstack-infra/system-config
+Branch: refs/heads/master
