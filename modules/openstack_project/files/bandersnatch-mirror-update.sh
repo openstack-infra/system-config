@@ -19,8 +19,7 @@ set -e
 echo "Obtaining bandersnatch tokens and running bandersnatch."
 k5start -t -f /etc/bandersnatch.keytab service/bandersnatch -- timeout -k 2m 30m run-bandersnatch
 
-# TODO(mordred): Re-enable this once vos release is running again
-#echo "Bandersnatch completed successfully, running vos release."
-#k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.pypi
+echo "Bandersnatch completed successfully, running vos release."
+k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.pypi
 
 echo "Done."
