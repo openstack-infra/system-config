@@ -215,7 +215,7 @@ class openstack_project::mirror_update (
     user        => $user,
     minute      => '0',
     hour        => '*/2',
-    command     => 'flock -n /var/run/centos-mirror.lock centos-mirror-update >>/var/log/centos-mirror.log 2>&1',
+    command     => 'flock -n /var/run/centos-mirror.lock centos-mirror-update mirror.centos >>/var/log/centos-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
        File['/usr/local/bin/centos-mirror-update'],

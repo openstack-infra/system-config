@@ -17,16 +17,15 @@ MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/centos"
 MIRROR="rsync://mirror.sfo12.us.leaseweb.net"
-UNREF_FILE=/var/run/${MIRROR_VOLUME}.unreferenced-files
 K5START="k5start -t -f /etc/centos.keytab service/centos-mirror -- timeout -k 2m 30m"
 
 REPO=7
 if ! [ -f $BASE/$REPO ]; then
-    mkdir -p $BASE/$REPO
+    $K5START mkdir -p $BASE/$REPO
 fi
 
 echo "Running rsync..."
-$K5START rsync -avzH \
+$K5START rsync -rlptDvz \
     --delete \
     --delete-excluded \
     --exclude="atomic" \
