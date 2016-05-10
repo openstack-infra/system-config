@@ -178,7 +178,7 @@ Adding a Fileserver
 Put the machine's public IP on a single line in
 /var/lib/openafs/local/NetInfo (TODO: puppet this).
 
-Copy ``/etc/openafs/server/KeyFile`` from an existing fileserver.
+Copy ``/etc/openafs/server/*`` from an existing fileserver.
 
 Create an LVM volume named ``vicepa`` from cinder volumes.  See
 :ref:`cinder` for details on volume management.  Then run::
