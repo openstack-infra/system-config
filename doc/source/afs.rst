@@ -268,7 +268,7 @@ read-write volumes.
 
 * Create an AFS user for the service principal::
 
-    pts createuser service/foo-mirror
+    pts createuser service.foo-mirror
 
 Because mirrors usually have a large number of directories, it is best
 to avoid frequent ACL changes.  To this end, we grant access to the
@@ -279,7 +279,7 @@ membership if our needs change.
   principal::
 
     pts creategroup foo-mirror
-    pts adduser service/foo-mirror foo-mirror
+    pts adduser service.foo-mirror foo-mirror
 
   View users, groups, and their membership with::
 
