@@ -51,6 +51,16 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     RewriteCond %{DOCUMENT_ROOT}/npm/$1/$1$2 -d
     RewriteRule ^/npm/([^/])([^/]*)(/.*)?$ /npm/$1/$1$2$3 [L]
 
+    # TODO(jhesketh): Remove this after bandersnatch implements pep503
+    # https://bitbucket.org/pypa/bandersnatch/pull-requests/20/fully-implement-pep-503-normalization/diff
+    # Try again but replacing -'s with .'s
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} !-f
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} !-d
+    RewriteRule (.*)-(.*) $1.$2
+    RewriteCond %{REQUEST_URI} ^/pypi/simple/([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
+    RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
+
     <DirectoryMatch "<%= @docroot %>\/npm\/[^/]+\/.*">
       DirectoryIndex index.json
       AddOutputFilterByType SUBSTITUTE application/json
@@ -58,7 +68,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     </DirectoryMatch>
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
-    LogLevel warn
+    LogLevel warn rewrite:debug
     CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
     ServerSignature Off
 </VirtualHost>
