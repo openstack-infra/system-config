@@ -7,14 +7,12 @@
 
 [loggers]
 keys=root,nodepool,requests,shade,image,
- rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
  tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
  dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
  dib_centos-7, dib_fedora-23
 
 [handlers]
 keys=console,debug,normal,image,
- rax-dfw_bare-precise, rax-ord_bare-precise, rax-iad_bare-precise,
  tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
  dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
  dib_centos-7, dib_fedora-23
@@ -77,42 +75,6 @@ datefmt=
 
 # ==== individual image loggers ====
 
-
-[logger_rax-dfw_bare-precise]
-level=DEBUG
-handlers=rax-dfw_bare-precise
-qualname=nodepool.image.build.rax-dfw.bare-precise
-propagate=0
-
-[handler_rax-dfw_bare-precise]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-dfw.bare-precise.log', 'H', 8, 30,)
-
-[logger_rax-ord_bare-precise]
-level=DEBUG
-handlers=rax-ord_bare-precise
-qualname=nodepool.image.build.rax-ord.bare-precise
-propagate=0
-
-[handler_rax-ord_bare-precise]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-ord.bare-precise.log', 'H', 8, 30,)
-
-[logger_rax-iad_bare-precise]
-level=DEBUG
-handlers=rax-iad_bare-precise
-qualname=nodepool.image.build.rax-iad.bare-precise
-propagate=0
-
-[handler_rax-iad_bare-precise]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/rax-iad.bare-precise.log', 'H', 8, 30,)
 
 [logger_tripleo-test-cloud-rh1_tripleo-f22]
 level=DEBUG
