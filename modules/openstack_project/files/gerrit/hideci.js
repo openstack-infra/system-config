@@ -118,12 +118,13 @@ var ci_parse_results = function($panel) {
 };
 
 /***
- * function ci_group_by_pipeline - create a group by structure for iterating on pipelines
+ * function ci_group_by_ci_pipeline - create a group by structure for
+ * iterating on CI's pipelines
  *
  * This function takes the full list of comments, the current patch
- * number, and builds an array of (pipelinename, comments array)
+ * number, and builds an array of (ci_name_pipelinename, comments array)
  * tuples. That makes it very easy to process during the display
- * phase to ensure we only display the latest result for every
+ * phase to ensure we only display the latest result for every CI
  * pipeline.
  *
  * Comments that do not have a parsable pipeline (3rd party ci
@@ -132,44 +133,32 @@ var ci_parse_results = function($panel) {
  *
  **/
 
-var ci_group_by_pipeline = function(current, comments) {
-    var pipelines = [];
-    var pipeline_comments = [];
-    var nonpipelines = [];
-    var nonpipeline_comments = [];
+var ci_group_by_ci_pipeline = function(current, comments) {
+    var ci_pipelines = [];
+    var ci_pipeline_comments = [];
     for (var i = 0; i < comments.length; i++) {
         var comment = comments[i];
         if ((comment.psnum != current) || !comment.is_ci || (comment.results.length == 0)) {
             continue;
         }
-        if (comment.pipeline === null) {
-            var index = nonpipelines.indexOf(comment.name);
-            if (index == -1) {
-                // not found, so create new entries
-                nonpipelines.push(comment.name);
-                nonpipeline_comments.push([comment]);
-            } else {
-                nonpipeline_comments[index].push(comment);
-            }
+        var name_pipeline = comment.name;
+        if (comment.pipeline !== null) {
+            name_pipeline += ' ' + comment.pipeline;
+        }
+
+        var index = ci_pipelines.indexOf(name_pipeline);
+        if (index == -1) {
+            // not found, so create new entries
+            ci_pipelines.push(name_pipeline);
+            ci_pipeline_comments.push([comment]);
         } else {
-            var index = pipelines.indexOf(comment.pipeline);
-            if (index == -1) {
-                // not found, so create new entries
-                pipelines.push(comment.pipeline);
-                pipeline_comments.push([comment]);
-            } else {
-                pipeline_comments[index].push(comment);
-            }
+            pipeline_comments[index].push(comment);
         }
     }
 
     var results = [];
-    for (i = 0; i < pipelines.length; i++) {
-        results.push([pipelines[i], pipeline_comments[i]]);
-    }
-    for (i = 0; i < nonpipeline_comments.length; i++) {
-        // if you don't specify a pipline, it defaults to check
-        results.push(['check', nonpipeline_comments[i]]);
+    for (i = 0; i < ci_pipelines.length; i++) {
+        results.push([ci_pipelines[i], ci_pipeline_comments[i]]);
     }
     return results;
 };
@@ -283,19 +272,19 @@ var ci_display_results = function(comments) {
         return;
     }
     var current = ci_latest_patchset(comments);
-    var pipelines = ci_group_by_pipeline(current, comments);
-    for (var i = 0; i < pipelines.length; i++) {
-        var pipeline_name = pipelines[i][0];
-        var pipeline_comments = pipelines[i][1];
+    var ci_pipelines = ci_group_by_ci_pipeline(current, comments);
+    for (var i = 0; i < ci_pipelines.length; i++) {
+        var ci_pipeline_name = ci_pipelines[i][0];
+        var ci_pipeline_comments = ci_pipelines[i][1];
         // the most recent comment on a pipeline
-        var last = pipelines[i][1].length - 1;
-        var comment = pipeline_comments[last];
+        var last = ci_pipeline_comments.length - 1;
+        var comment = ci_pipeline_comments[last];
         var rechecks = "";
         if (last > 0) {
             rechecks = " (" + last + " rechecks)";
         }
 
-        var header = $("<tr>").append($('<td class="header">' + comment.name + " " + pipeline_name + rechecks + '</td>'));
+        var header = $("<tr>").append($('<td class="header">' + ci_pipeline_name + rechecks + '</td>'));
         header.append('<td class="header ci_date">' + comment.date + '</td>');
         $(table).append(header);
         for (var j = 0; j < comment.results.length; j++) {
