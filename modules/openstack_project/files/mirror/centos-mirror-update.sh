@@ -32,7 +32,6 @@ $K5START rsync -rlptDvz \
     --exclude="centosplus" \
     --exclude="cloud" \
     --exclude="cr" \
-    --exclude="extras" \
     --exclude="fasttrack" \
     --exclude="isos" \
     --exclude="sclo" \
