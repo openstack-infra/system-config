@@ -670,6 +670,12 @@ node 'storyboard-dev.openstack.org' {
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
   }
+
+  class { 'openstack_project::storyboard::dev':
+    realize (
+      User::Virtual::Localuser['Zara'],
+    )
+  }
 }
 
 # A machine to serve static content.
