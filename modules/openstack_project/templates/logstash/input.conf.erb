@@ -1,0 +1,8 @@
+input {
+  tcp {
+    host => "localhost"
+    port => 9999
+    codec => json_lines {}
+    type => "jenkins"
+  }
+}
