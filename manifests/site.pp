@@ -831,6 +831,14 @@ node 'zuul.openstack.org' {
       'jenkins06.openstack.org',
       'jenkins07.openstack.org',
       'jenkins-dev.openstack.org',
+      'zl01.openstack.org',
+      'zl02.openstack.org',
+      'zl03.openstack.org',
+      'zl04.openstack.org',
+      'zl05.openstack.org',
+      'zl06.openstack.org',
+      'zl07.openstack.org',
+      'zl08.openstack.org',
       'zm01.openstack.org',
       'zm02.openstack.org',
       'zm03.openstack.org',
@@ -842,6 +850,72 @@ node 'zuul.openstack.org' {
     ],
   }
 }
+
+# Node-OS: trusty
+node /^zl\d+\.openstack\.org$/ {
+  $group = "zuul-merger"
+  $zmq_event_receivers = ['logstash.openstack.org',
+                          'nodepool.openstack.org']
+  $zmq_iptables_rule = regsubst($zmq_event_receivers,
+                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$zmq_iptables_rule])
+  class { 'openstack_project::server':
+    iptables_rules6     => $iptables_rule,
+    iptables_rules4     => $iptables_rule,
+    sysadmins           => hiera('sysadmins', []),
+    puppetmaster_server => 'puppetmaster.openstack.org',
+  }
+  class { 'openstack_project::zuul_launcher':
+    gearman_server       => 'zuul.openstack.org',
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    sysadmins            => hiera('sysadmins', []),
+    sites                => [
+      {
+        name => 'tarballs.openstack.org',
+        host => 'tarballs.openstack.org',
+        user => 'jenkins',
+        root => '/srv/static',
+      },
+      {
+        name => 'eavesdrop.openstack.org',
+        host => 'eavesdrop.openstack.org',
+        user => 'jenkins',
+        root => '/srv/static',
+      },
+      {
+        name => 'static.openstack.org',
+        host => 'static.openstack.org',
+        user => 'jenkins',
+        root => '/srv/static',
+      },
+      {
+        name => 'docs.openstack.org',
+        host => 'ftp3.ftptoyoursite.com',
+        user => 'openstackdocs',
+        pass => hiera('openstackdocs_ftp_password'),
+        root => '/web/content',
+      },
+      {
+        name => 'api.openstack.org',
+        host => 'ftp3.ftptoyoursite.com',
+        user => 'cloudapidocs',
+        pass => hiera('cloudapidocs_ftp_password'),
+        root => '/web/content',
+      },
+      {
+        name => 'developer.openstack.org',
+        host => 'ftp3.ftptoyoursite.com',
+        user => 'clouddevdocs',
+        pass => hiera('clouddevdocs_ftp_password'),
+        root => '/web/content',
+      },
+    ],
+  }
+}
+
 
 # Node-OS: precise
 # Node-OS: trusty
