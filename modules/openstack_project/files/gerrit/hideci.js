@@ -152,7 +152,7 @@ var ci_group_by_ci_pipeline = function(current, comments) {
             ci_pipelines.push(name_pipeline);
             ci_pipeline_comments.push([comment]);
         } else {
-            pipeline_comments[index].push(comment);
+            ci_pipeline_comments[index].push(comment);
         }
     }
 
