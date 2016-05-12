@@ -648,7 +648,7 @@ node 'storyboard.openstack.org' {
 # A machine to run Storyboard devel
 # Node-OS: precise
 node 'storyboard-dev.openstack.org' {
-  class { 'openstack_project::storyboard':
+  class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
@@ -670,6 +670,7 @@ node 'storyboard-dev.openstack.org' {
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
   }
+
 }
 
 # A machine to serve static content.
