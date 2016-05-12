@@ -1,0 +1,85 @@
+# == Class: openstack_project::zuul_launcher
+#
+class openstack_project::zuul_launcher(
+  $vhost_name = $::fqdn,
+  $gearman_server = '127.0.0.1',
+  $gerrit_server = '',
+  $gerrit_user = '',
+  $gerrit_ssh_host_key = '',
+  $zuul_ssh_private_key = '',
+  $url_pattern = '',
+  $zuul_url = '',
+  $status_url = 'http://status.openstack.org/zuul/',
+  $swift_authurl = '',
+  $swift_auth_version = '',
+  $swift_user = '',
+  $swift_key = '',
+  $swift_tenant_name = '',
+  $swift_region_name = '',
+  $swift_default_container = '',
+  $swift_default_logserver_prefix = '',
+  $swift_default_expiry = 7200,
+  $proxy_ssl_cert_file_contents = '',
+  $proxy_ssl_key_file_contents = '',
+  $proxy_ssl_chain_file_contents = '',
+  $sysadmins = [],
+  $statsd_host = '',
+  $gearman_workers = [],
+  $project_config_repo = '',
+  $project_config_base = '',
+  $git_email = 'jenkins@openstack.org',
+  $git_name = 'OpenStack Jenkins',
+  $workspace_root = '/home/jenkins/workspace',
+  $worker_private_key_file = '/var/lib/zuul/ssh/id_rsa',
+  $worker_username = 'jenkins',
+  $sites = [],
+) {
+  # Turn a list of hostnames into a list of iptables rules
+  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $iptables_rules,
+    iptables_rules4           => $iptables_rules,
+    sysadmins                 => $sysadmins,
+  }
+
+  class { '::project_config':
+    url  => $project_config_repo,
+    base => $project_config_base,
+  }
+
+  class { 'zuul::launcher':
+    vhost_name                     => $vhost_name,
+    gearman_server                 => $gearman_server,
+    gerrit_server                  => $gerrit_server,
+    gerrit_user                    => $gerrit_user,
+    known_hosts_content            => "review.openstack.org,104.130.159.134,2001:4800:7818:102:be76:4eff:fe05:9b12 ${gerrit_ssh_host_key}",
+    zuul_ssh_private_key           => $zuul_ssh_private_key,
+    url_pattern                    => $url_pattern,
+    zuul_url                       => $zuul_url,
+    job_name_in_report             => true,
+    status_url                     => $status_url,
+    swift_authurl                  => $swift_authurl,
+    swift_auth_version             => $swift_auth_version,
+    swift_user                     => $swift_user,
+    swift_key                      => $swift_key,
+    swift_tenant_name              => $swift_tenant_name,
+    swift_region_name              => $swift_region_name,
+    swift_default_container        => $swift_default_container,
+    swift_default_logserver_prefix => $swift_default_logserver_prefix,
+    swift_default_expiry           => $swift_default_expiry,
+    proxy_ssl_cert_file_contents   => $proxy_ssl_cert_file_contents,
+    proxy_ssl_key_file_contents    => $proxy_ssl_key_file_contents,
+    proxy_ssl_chain_file_contents  => $proxy_ssl_chain_file_contents,
+    statsd_host                    => $statsd_host,
+    project_config_repo            => $project_config_repo,
+    git_email                      => $git_email,
+    git_name                       => $git_name,
+    jenkins_jobs                   => $::project_config::jenkins_job_builder_config_dir,
+    workspace_root                 => $workspace_root,
+    worker_private_key_file        => $worker_private_key_file,
+    worker_username                => $worker_username,
+    sites                          => $sites,
+  }
+}
