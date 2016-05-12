@@ -24,6 +24,7 @@ At a Glance
   * afsdb01.openstack.org (a vldb and pts server in DFW)
   * afsdb02.openstack.org (a vldb and pts server in ORD)
   * afs01.dfw.openstack.org (a fileserver in DFW)
+  * afs02.dfw.openstack.org (a second fileserver in DFW)
   * afs01.ord.openstack.org (a fileserver in ORD)
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-openafs/tree/
@@ -65,7 +66,7 @@ directory, but may contain directories within the volume.  Volumes are
 mounted within other volumes to construct the filesystem hierarchy of
 the cell.
 
-OpenStack has one fileserver in DFW and one in ORD.  They do not
+OpenStack has two fileservers in DFW and one in ORD.  They do not
 automatically contain copies of the same data.  A read-write volume in
 AFS can only exist on exactly one fileserver, and if that fileserver
 is out of service, the volumes it serves are not available.  However,
@@ -146,6 +147,7 @@ superuser::
   bos adduser -server afsdb01.openstack.org -user $USERNAME.admin
   bos adduser -server afsdb02.openstack.org -user $USERNAME.admin
   bos adduser -server afs01.dfw.openstack.org -user $USERNAME.admin
+  bos adduser -server afs02.dfw.openstack.org -user $USERNAME.admin
   bos adduser -server afs01.ord.openstack.org -user $USERNAME.admin
   pts adduser -user $USERNAME.admin -group system:administrators
 
@@ -200,10 +202,15 @@ We host mirrors in AFS so that we store only one copy of the data, but
 mirror servers local to each cloud region in which we operate serve
 that data to nearby hosts from their local cache.
 
-All of our mirrors are housed under ``/afs/openstack.org/mirror``.  Each
-mirror is on its own volume, and each with a read-only replica.  This
-allows mirrors to be updated and then the read-only replicas
-atomically updated.
+All of our mirrors are housed under ``/afs/openstack.org/mirror``.
+Each mirror is on its own volume, and each with a read-only replica.
+This allows mirrors to be updated and then the read-only replicas
+atomically updated.  Because mirrors are typically very large and
+replication across regions is slow, we place both copies of mirror
+data on two fileservers in the same region.  This allows us to perform
+maintenance on fileservers hosting mirror data as well deal with
+outages related to a single server, but does not protect the mirror
+system from a region-wide outage.
 
 In order to establish a new mirror, do the following:
 
@@ -219,7 +226,7 @@ In order to establish a new mirror, do the following:
   Example::
 
     vos addsite afs01.dfw.openstack.org a mirror.foo
-    vos addsite afs01.ord.openstack.org a mirror.foo
+    vos addsite afs02.dfw.openstack.org a mirror.foo
 
 * Release the read-only replicas::
 
