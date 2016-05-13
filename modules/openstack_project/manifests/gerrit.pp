@@ -77,6 +77,7 @@ class openstack_project::gerrit (
   $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
   $index_threads = 1,
   $download = {},
+  $commitmessage_maxlinelength = 72,
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -215,6 +216,7 @@ class openstack_project::gerrit (
     report_bug_url                      => $report_bug_url,
     index_threads                       => $index_threads,
     download                            => $download,
+    commitmessage_maxlinelength         => $commitmessage_maxlinelength,
   }
 
   mysql_backup::backup_remote { 'gerrit':
