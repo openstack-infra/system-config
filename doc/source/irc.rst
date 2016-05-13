@@ -42,8 +42,9 @@ but there are many reasons why a team would like to have their own channel.
 Access
 ------
 
-Register the channel with ChanServ and give the infrastructure team account
-founder access to the channel with::
+`Register the channel with ChanServ
+<https://freenode.net/news/registering-a-channel-on-freenode>`_ and give the
+infrastructure team account founder access to the channel with::
 
   /msg chanserv register #channel
   /msg chanserv set #channel guard on
