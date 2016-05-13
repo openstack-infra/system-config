@@ -78,6 +78,7 @@ class openstack_project::gerrit (
   $index_threads = 1,
   $download = {},
   $receive_max_object_size_limit = '100 m',
+  $commitmessage_maxlinelength = 72,
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -217,6 +218,7 @@ class openstack_project::gerrit (
     index_threads                       => $index_threads,
     download                            => $download,
     receive_max_object_size_limit       => $receive_max_object_size_limit,
+    commitmessage_maxlinelength         => $commitmessage_maxlinelength,
   }
 
   mysql_backup::backup_remote { 'gerrit':
