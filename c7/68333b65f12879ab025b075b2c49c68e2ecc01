@@ -1,0 +1,10 @@
+Code-Review+1: Emilien Macchi <emilien@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 13 May 2016 16:37:47 +0000
+Reviewed-on: https://review.openstack.org/315698
+Project: openstack-infra/system-config
+Branch: refs/heads/master
