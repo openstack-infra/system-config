@@ -10,14 +10,13 @@ class openstack_project::jenkins (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
-  $jenkins_ssh_public_key = $openstack_project::jenkins_ssh_key,
+  $jenkins_ssh_public_key,
   $jenkins_ssh_private_key = '',
   $project_config_repo = '',
   $project_config_base = '',
   $serveradmin = 'webmaster@openstack.org',
   $logo = 'openstack.png',
-) inherits openstack_project {
-  include openstack_project
+) {
 
   # Set defaults here because they evaluate variables which you cannot
   # do in the class parameter list.

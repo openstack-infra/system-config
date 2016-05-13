@@ -13,13 +13,12 @@ class openstack_project::jenkins_dev (
   $hpcloud_password ='',
   $hpcloud_project ='',
   $nodepool_template ='nodepool-dev.yaml.erb',
+  $jenkins_dev_ssh_key,
 ) {
 
   realize (
     User::Virtual::Localuser['zaro'],
   )
-
-  include openstack_project
 
   include bup
   bup::site { 'rs-ord':
@@ -34,7 +33,7 @@ class openstack_project::jenkins_dev (
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
     jenkins_ssh_private_key => $jenkins_ssh_private_key,
-    jenkins_ssh_public_key  => $openstack_project::jenkins_dev_ssh_key,
+    jenkins_ssh_public_key  => $jenkins_dev_ssh_key,
   }
 
   jenkins::plugin { 'build-timeout':
@@ -101,7 +100,7 @@ class openstack_project::jenkins_dev (
     mysql_password           => $mysql_password,
     nodepool_ssh_private_key => $nodepool_ssh_private_key,
     environment              => {
-      'NODEPOOL_SSH_KEY'     => $openstack_project::jenkins_dev_ssh_key,
+      'NODEPOOL_SSH_KEY'     => $jenkins_dev_ssh_key,
     }
   }
 

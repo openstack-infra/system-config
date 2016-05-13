@@ -157,6 +157,7 @@ node 'jenkins.openstack.org' {
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     jenkins_password        => hiera('jenkins_jobs_password'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
+    jenkins_ssh_public_key  => hiera('jenkins_ssh_key'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
@@ -211,6 +212,7 @@ node 'jenkins-dev.openstack.org' {
     hpcloud_username         => hiera('nodepool_hpcloud_username', 'username'),
     hpcloud_password         => hiera('nodepool_hpcloud_password'),
     hpcloud_project          => hiera('nodepool_hpcloud_project'),
+    jenkins_dev_ssh_key      => hiera('jenkins_dev_ssh_key'),
   }
 }
 
@@ -373,6 +375,7 @@ node 'eavesdrop.openstack.org' {
     accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password'),
     meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
+    jenkins_ssh_key         => hiera('jenkins_ssh_key'),
   }
 }
 
@@ -664,6 +667,7 @@ node 'static.openstack.org' {
     ssl_cert_file_contents  => hiera('static_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('static_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('static_ssl_chain_file_contents'),
+    jenkins_ssh_key         => hiera('jenkins_ssh_key'),
   }
 }
 
@@ -684,6 +688,7 @@ node 'status.openstack.org' {
     recheck_ssh_private_key       => hiera('elastic-recheck_gerrit_ssh_private_key'),
     recheck_bot_nick              => 'openstackrecheck',
     recheck_bot_passwd            => hiera('elastic-recheck_ircbot_password'),
+    jenkins_ssh_key               => hiera('jenkins_ssh_key'),
   }
 }
 
@@ -918,9 +923,8 @@ node /^ci-backup-.*\.openstack\.org$/ {
 # Node-OS: precise
 # Node-OS: trusty
 node 'proposal.slave.openstack.org' {
-  include openstack_project
   class { 'openstack_project::proposal_slave':
-    jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key   => hiera('jenkins_ssh_key'),
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents'),
     zanata_server_url        => 'https://translate.openstack.org/',
@@ -933,11 +937,10 @@ node 'proposal.slave.openstack.org' {
 node 'release.slave.openstack.org' {
   $group = "afsadmin"
 
-  include openstack_project
   class { 'openstack_project::release_slave':
     pypi_username          => 'openstackci',
     pypi_password          => hiera('pypi_password'),
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key => hiera('jenkins_ssh_key'),
     jenkinsci_username     => hiera('jenkins_ci_org_user', 'username'),
     jenkinsci_password     => hiera('jenkins_ci_org_password'),
     mavencentral_username  => hiera('mavencentral_org_user', 'username'),
@@ -1020,8 +1023,9 @@ node 'openstackid-dev.openstack.org' {
 node 'single-use-slave-bare' {
   class { 'openstack_project::single_use_slave':
     # Test non-default values from prepare_node_bare.sh
-    sudo => true,
-    thin => false,
+    sudo            => true,
+    thin            => false,
+    jenkins_ssh_key => hiera('jenkins_ssh_key'),
   }
 }
 
@@ -1037,8 +1041,9 @@ node 'single-use-slave-bare' {
 # NOTE(pabelanger): These are the current settings we use for devstack-* nodes.
 node 'single-use-slave-devstack' {
   class { 'openstack_project::single_use_slave':
-    sudo => true,
-    thin => true,
+    sudo            => true,
+    thin            => true,
+    jenkins_ssh_key => hiera('jenkins_ssh_key'),
   }
 }
 
@@ -1201,11 +1206,10 @@ node 'codesearch.openstack.org' {
 # Node-OS: centos7
 node /.*wheel-mirror-.*\.openstack\.org/ {
   $group = 'wheel-mirror'
-  include openstack_project
 
   class { 'openstack_project::wheel_mirror_slave':
     sysadmins                      => hiera('sysadmins', []),
-    jenkins_ssh_public_key         => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key         => hiera('jenkins_ssh_key'),
     wheel_keytab                   => hiera("wheel_keytab"),
   }
 }

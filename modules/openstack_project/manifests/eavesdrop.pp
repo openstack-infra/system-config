@@ -17,6 +17,7 @@ class openstack_project::eavesdrop (
   $accessbot_password = '',
   $project_config_repo = '',
   $meetbot_channels = [],
+  $jenkins_ssh_key = '',
 ) {
   include ::httpd
   include meetbot
@@ -78,9 +79,8 @@ class openstack_project::eavesdrop (
 
   # Needed to allow Jenkins jobs to publish meeting info to
   # the eavesdrop server.
-  include openstack_project
   class { 'jenkins::jenkinsuser':
-    ssh_key     => $openstack_project::jenkins_ssh_key,
+    ssh_key => $jenkins_ssh_key,
   }
 
   file { '/srv/yaml2ical':

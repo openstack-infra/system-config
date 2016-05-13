@@ -16,14 +16,14 @@ class openstack_project::static (
   $ssl_chain_file_contents = '',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $jenkins_ssh_key,
 ) {
   class { 'project_config':
     url  => $project_config_repo,
   }
 
-  include openstack_project
   class { 'jenkins::jenkinsuser':
-    ssh_key     => $openstack_project::jenkins_ssh_key,
+    ssh_key     => $jenkins_ssh_key,
     gitfullname => $jenkins_gitfullname,
     gitemail    => $jenkins_gitemail,
   }
@@ -184,7 +184,7 @@ class openstack_project::static (
   ###########################################################
   # Logs
   class { 'openstackci::logserver':
-    jenkins_ssh_key         => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_key         => $jenkins_ssh_key,
     domain                  => 'openstack.org',
     swift_authurl           => $swift_authurl,
     swift_user              => $swift_user,

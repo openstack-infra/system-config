@@ -15,11 +15,11 @@ class openstack_project::status (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $openstack_health_api_endpoint = 'http://health.openstack.org',
+  $jenkins_ssh_key,
 ) {
 
-  include openstack_project
   class { 'jenkins::jenkinsuser':
-    ssh_key => $openstack_project::jenkins_ssh_key,
+    ssh_key     => $jenkins_ssh_key,
     gitfullname => $jenkins_gitfullname,
     gitemail    => $jenkins_gitemail,
   }

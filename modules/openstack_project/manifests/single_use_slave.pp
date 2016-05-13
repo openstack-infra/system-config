@@ -15,11 +15,11 @@ class openstack_project::single_use_slave (
   $automatic_upgrades = false,
   $all_mysql_privs = false,
   $enable_unbound = true,
-  $ssh_key = $openstack_project::jenkins_ssh_key,
+  $ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
-) inherits openstack_project {
+) {
   class { 'openstack_project::template':
     certname            => $certname,
     automatic_upgrades  => $automatic_upgrades,
