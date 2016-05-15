@@ -42,6 +42,10 @@ function is_opensuse {
         cat /etc/os-release | grep -q -e "openSUSE"
 }
 
+function is_gentoo {
+    [ -f /usr/bin/emerge ]
+}
+
 # dnf is a drop-in replacement for yum on Fedora>=22
 YUM=yum
 if is_fedora && [[ $(lsb_release -rs) -ge 22 ]]; then
@@ -218,6 +222,12 @@ function setup_puppet_opensuse {
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
+function setup_puppet_gentoo {
+    emaint sync
+    emerge -q --jobs=4 puppet-agent
+    sed -i '/templatedir/d' /etc/puppetlabs/puppet/puppet.conf
+}
+
 #
 # pip setup
 #
@@ -278,6 +288,8 @@ elif is_ubuntu; then
     setup_puppet_ubuntu
 elif is_opensuse; then
     setup_puppet_opensuse
+elif is_gentoo; then
+    setup_puppet_gentoo
 else
     echo "*** Can not setup puppet: distribution not recognized"
     exit 1
