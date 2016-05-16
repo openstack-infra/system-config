@@ -392,22 +392,22 @@ to do, this is how you can add a new volume.
 
 Log into puppetmaster.openstack.org and run::
 
-  . ~root/cinder-venv/bin/activate
-  . ~root/ci-launch/cinder.sh
+  export OS_CLOUD=openstackci-rax
+  export OS_REGION=DFW
 
-  nova list
-  cinder list
+  openstack server list
+  openstack volume list
 
 * Add a new 1024G cinder volume (substitute the hostname and the next number
-  in series for NN)::
+  in series for NN, also the server and volume id can use their names or
+  UUIDs)::
 
-    cinder create --display-name "HOSTNAME.openstack.org/mainNN" 1024
-    nova volume-attach <server id> <volume id> auto
+    openstack volume create --size=1024 "HOSTNAME.openstack.org/mainNN"
 
 * or to add a 100G SSD volume::
 
-    cinder create --volume-type SSD --display-name "HOSTNAME.openstack.org/mainNN" 100
-    nova volume-attach <server id> <volume id> auto
+    openstack volume create --size=100 --type=SSD "HOSTNAME.openstack.org/mainNN"
+    openstack server add volume <server id> <volume id>
 
 * Then, on the host, create the partition table::
 
