@@ -721,6 +721,11 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
+  # Increase max_user_instanaces for diskimage-builder (parted)
+  sysctl::value { 'fs.inotify.max_user_instances':
+    value => 256,
+  }
+
   class { '::openstackci::nodepool':
     vhost_name                    => 'nodepool.openstack.org',
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
