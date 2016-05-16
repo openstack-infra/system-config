@@ -863,6 +863,7 @@ node /^zl\d+\.openstack\.org$/ {
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins            => hiera('sysadmins', []),
     sites                => [
       {
