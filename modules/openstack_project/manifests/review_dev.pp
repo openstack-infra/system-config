@@ -59,6 +59,8 @@ class openstack_project::review_dev (
     contactstore_pubkey                 => $contactstore_pubkey,
     contactstore_url                    =>
       'https://review-dev.openstack.org/fakestore',
+    gc_start_time                       => '4:30',
+    gc_interval                         => '1 day',
     acls_dir                            => $::project_config::gerrit_acls_dir,
     notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
     projects_file                       => $::project_config::jeepyb_project_file,
