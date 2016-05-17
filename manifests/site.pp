@@ -564,6 +564,7 @@ node 'mirror-update.openstack.org' {
     reprepro_keytab     => hiera('reprepro_keytab'),
     npm_keytab          => hiera('npm_keytab'),
     centos_keytab       => hiera('centos_keytab'),
+    epel_keytab         => hiera('epel_keytab'),
     sysadmins           => hiera('sysadmins', []),
   }
 }

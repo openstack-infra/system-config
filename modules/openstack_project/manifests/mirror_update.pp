@@ -7,6 +7,7 @@ class openstack_project::mirror_update (
   $admin_keytab = '',
   $npm_keytab = '',
   $centos_keytab = '',
+  $epel_keytab = '',
 ) {
 
   class { 'openstack_project::server':
@@ -221,6 +222,35 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/centos-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/centos.keytab'],
+    ]
+  }
+
+  ### EPEL mirror ###
+  file { '/etc/epel.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $epel_keytab,
+  }
+
+  file { '/usr/local/bin/epel-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/epel-mirror-update.sh',
+  }
+
+  cron { 'epel mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/epel-mirror.lock epel-mirror-update mirror.epel >>/var/log/epel-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/epel-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/epel.keytab'],
     ]
   }
 }
