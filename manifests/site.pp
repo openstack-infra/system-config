@@ -693,6 +693,7 @@ node 'static.openstack.org' {
     ssl_cert_file_contents  => hiera('static_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('static_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('static_ssl_chain_file_contents'),
+    zuul_ssh_private_key    => hiera('jenkins_ssh_private_key_contents'),
   }
 }
 

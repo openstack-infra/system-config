@@ -14,6 +14,7 @@ class openstack_project::static (
   $ssl_key_file_contents = '',
   $ssl_chain_file = '',
   $ssl_chain_file_contents = '',
+  $zuul_ssh_private_key = '',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
@@ -26,6 +27,28 @@ class openstack_project::static (
     ssh_key     => $openstack_project::jenkins_ssh_key,
     gitfullname => $jenkins_gitfullname,
     gitemail    => $jenkins_gitemail,
+  }
+
+  file { '/var/lib/zuul':
+    ensure => directory,
+    owner  => 'jenkins',
+    group  => 'jenkins',
+  }
+
+  file { '/var/lib/zuul/ssh':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0500',
+    require => File['/var/lib/zuul'],
+  }
+
+  file { '/var/lib/zuul/ssh/id_rsa':
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0400',
+    require => File['/var/lib/zuul/ssh'],
+    content => $zuul_ssh_private_key,
   }
 
   include ::httpd
