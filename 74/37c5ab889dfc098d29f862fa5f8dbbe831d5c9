@@ -1,0 +1,8 @@
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 17 May 2016 00:05:32 +0000
+Reviewed-on: https://review.openstack.org/317129
+Project: openstack-infra/system-config
+Branch: refs/heads/master
