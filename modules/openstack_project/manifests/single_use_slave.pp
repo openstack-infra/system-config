@@ -21,12 +21,12 @@ class openstack_project::single_use_slave (
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) inherits openstack_project {
   class { 'openstack_project::template':
-    certname            => $certname,
-    automatic_upgrades  => $automatic_upgrades,
-    install_users       => $install_users,
-    install_resolv_conf => $install_resolv_conf,
-    enable_unbound      => $enable_unbound,
-    iptables_rules4     =>
+    certname                  => $certname,
+    automatic_upgrades        => $automatic_upgrades,
+    install_users             => $install_users,
+    install_resolv_conf       => $install_resolv_conf,
+    enable_unbound            => $enable_unbound,
+    iptables_rules4           =>
       [
         # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
         # the ironic API from the neutron public net
@@ -39,6 +39,7 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8004 -s 172.24.4.0/23 -j ACCEPT',
         '-m limit --limit 2/min -j LOG --log-prefix "iptables dropped: "',
       ],
+    iptables_public_tcp_ports => [8088],
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
