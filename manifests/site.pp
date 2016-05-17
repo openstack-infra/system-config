@@ -621,6 +621,7 @@ node 'refstack.openstack.org' {
 
 # A machine to run Storyboard
 # Node-OS: precise
+# Node-OS: trusty
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -643,6 +644,33 @@ node 'storyboard.openstack.org' {
       'http://docs-draft.openstack.org',
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
+  }
+}
+
+# A machine to run Storyboard devel
+# Node-OS: trusty
+node 'storyboard-dev.openstack.org' {
+  class { 'openstack_project::storyboard':
+    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+    sysadmins               => hiera('sysadmins', []),
+    mysql_host              => hiera('storyboard_db_host', 'localhost'),
+    mysql_user              => hiera('storyboard_db_user', 'username'),
+    mysql_password          => hiera('storyboard_db_password'),
+    rabbitmq_user           => hiera('storyboard_rabbit_user', 'username'),
+    rabbitmq_password       => hiera('storyboard_rabbit_password'),
+    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
+    hostname                => $::fqdn,
+    valid_oauth_clients     => [
+      $::fqdn,
+      'docs-draft.openstack.org',
+    ],
+    cors_allowed_origins     => [
+      "https://${::fqdn}",
+      'http://docs-draft.openstack.org',
+    ],
+    sender_email_address => 'storyboard-dev@storyboard-dev.openstack.org',
   }
 }
 
