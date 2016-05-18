@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: yolanda.robla <yolanda.robla-mota@hpe.com>
+Workflow+1: yolanda.robla <yolanda.robla-mota@hpe.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 18 May 2016 10:00:22 +0000
+Reviewed-on: https://review.openstack.org/317743
+Project: openstack-infra/system-config
+Branch: refs/heads/master
