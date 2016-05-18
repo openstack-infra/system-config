@@ -7,7 +7,9 @@ class openstack_project::storyboard(
   $rabbitmq_user = 'storyboard',
   $rabbitmq_password,
   $sysadmins = [],
+  $ssl_cert = undef,
   $ssl_cert_file_contents = undef,
+  $ssl_key = undef,
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
   $openid_url = 'https://login.launchpad.net/+openid',
@@ -74,9 +76,9 @@ class openstack_project::storyboard(
 
   class { '::storyboard::cert':
     ssl_cert_content => $ssl_cert_file_contents,
-    ssl_cert         => '/etc/ssl/certs/storyboard.openstack.org.pem',
+    ssl_cert         => $ssl_cert,
     ssl_key_content  => $ssl_key_file_contents,
-    ssl_key          => '/etc/ssl/private/storyboard.openstack.org.key',
+    ssl_key          => $ssl_key,
     ssl_ca_content   => $ssl_chain_file_contents,
   }
 
