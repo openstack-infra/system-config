@@ -185,7 +185,6 @@ meetbot_channels:
 - '#openstack-storlets'
 - '#openstack-swauth'
 - '#openstack-swift'
-- '#openstack-tailgate'
 - '#openstack-telemetry'
 - '#openstack-third-party-ci'
 - '#openstack-trove'
