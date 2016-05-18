@@ -658,9 +658,6 @@ node 'storyboard-dev.openstack.org' {
     mysql_password          => hiera('storyboard_db_password'),
     rabbitmq_user           => hiera('storyboard_rabbit_user', 'username'),
     rabbitmq_password       => hiera('storyboard_rabbit_password'),
-    ssl_cert_file_contents  => hiera('storyboard_ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
     hostname                => $::fqdn,
     valid_oauth_clients     => [
       $::fqdn,
