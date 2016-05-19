@@ -19,10 +19,13 @@ set -e
 CMD="/usr/bin/registry-static"
 CMD_ARGS="-d <%= @uri_rewrite %> -o <%= @data_directory %> --blobstore afs-blob-store --hooks openstack-registry-hooks"
 
+date --iso-8601=ns
 echo "Obtaining npm tokens and running registry-static."
 k5start -t -f /etc/npm.keytab service/npm -- timeout -k 2m 30m $CMD $CMD_ARGS
 
+date --iso-8601=ns
 echo "registry-static completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.npm
 
+date --iso-8601=ns
 echo "Done."

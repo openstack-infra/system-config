@@ -16,10 +16,13 @@
 
 set -e
 
+date --iso-8601=ns
 echo "Obtaining bandersnatch tokens and running bandersnatch."
 k5start -t -f /etc/bandersnatch.keytab service/bandersnatch -- timeout -k 2m 30m run-bandersnatch
 
+date --iso-8601=ns
 echo "Bandersnatch completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v mirror.pypi
 
+date --iso-8601=ns
 echo "Done."

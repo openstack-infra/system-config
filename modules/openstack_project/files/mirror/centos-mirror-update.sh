@@ -24,6 +24,7 @@ if ! [ -f $BASE/$REPO ]; then
     $K5START mkdir -p $BASE/$REPO
 fi
 
+date --iso-8601=ns
 echo "Running rsync..."
 $K5START rsync -rlptDvz \
     --delete \
@@ -40,7 +41,9 @@ $K5START rsync -rlptDvz \
 
 # TODO(pabelanger): Validate rsync process
 
+date --iso-8601=ns
 echo "rsyc completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
 
+date --iso-8601=ns
 echo "Done."
