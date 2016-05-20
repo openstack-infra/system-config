@@ -146,9 +146,8 @@ class openstack_project::review_dev (
     require                         => $::project_config::config_dir,
   }
 
-  gerrit::plugin { 'javamelody':
-    version => '3fefa35',
-  }
+  gerrit::plugin { 'javamelody': version       => '3fefa35' }
+  gerrit::plugin { 'delete-project': version   => '4b7410c' }
 
   package { 'python-launchpadlib':
     ensure => present,
