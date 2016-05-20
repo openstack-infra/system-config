@@ -1,0 +1,33 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+HashKnownHosts No
+LogLevel QUIET
+ForwardX11Trusted no
+Protocol 2
+ForwardAgent no
+ForwardX11 no
+
+# This enables sending locale enviroment variables LC_* LANG, see ssh_config(5).
+SendEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+SendEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+SendEnv LC_IDENTIFICATION LC_ALL
+
+<% if @stricthostkeycheckservers != nil -%>
+  <% if @stricthostkeycheckservers.is_a? Array -%>
+Host<% @stricthostkeycheckservers.each do |name| -%><%= " #{name}" %><% end -%>
+  <% else -%>
+Host<%= " #{stricthostkeycheckservers}" %>
+  <% end -%>
+  StrictHostKeyChecking yes
+  UserKnownHostsFile ~/.ssh/known_hosts
+<% end -%>
+
+Host *.openstack.org<% if @stricthostkeycheckservers != nil -%><% if @stricthostkeycheckservers.is_a? Array -%><%= " !#{name}" %><% else -%><%= " !#{stricthostkeycheckservers}" -%><% end -%><% end -%>
+   StrictHostKeyChecking no
+   UserKnownHostsFile ~/.ssh/known_hosts
+
+Host * !*.openstack.org<% if @stricthostkeycheckservers != nil -%><% if @stricthostkeycheckservers.is_a? Array -%><%= " !#{name}" %><% else -%><%= " !#{stricthostkeycheckservers}" -%><% end -%><% end -%>
+   StrictHostKeyChecking no
+   UserKnownHostsFile /dev/null

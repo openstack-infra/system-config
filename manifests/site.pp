@@ -15,6 +15,10 @@ node default {
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins', []),
   }
+
+  class {'openstack_project::ssh_config':
+    stricthostkeycheckservers => hiera('stricthostkeychecking_enabled_servers', undef),
+  }
 }
 
 #
