@@ -17,7 +17,7 @@ To launch a node in the OpenStack CI account (production servers)::
   export OS_CLOUD=openstackci-rax
   export OS_REGION=DFW
   export FLAVOR="8 GB Performance"
-  export FQDN=servername.openstack.org
+  export FQDN=servername01.openstack.org
   cd /opt/system-config/production/launch/
   ./launch-node.py $FQDN --flavor "$FLAVOR" \
     --cloud=$OS_CLOUD --region=$OS_REGION
@@ -26,7 +26,7 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
 
   export OS_CLOUD=openstackjenkins-rax
   export OS_REGION=DFW
-  export FQDN=slavename.slave.openstack.org
+  export FQDN=slavename01.slave.openstack.org
   openstack image list
   export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
   openstack flavor list

@@ -120,8 +120,11 @@ To create a new server, do the following:
  * Add a file in :file:`modules/openstack_project/manifests/` that defines a
    class which specifies the configuration of the server.
 
- * Add a node entry in :file:`manifests/site.pp` for the server that uses that
-   class.
+ * Add a node pattern entry in :file:`manifests/site.pp` for the server
+   that uses that class. Make sure it supports an ordinal naming pattern
+   (e.g., fooserver01.openstack.org not just fooserver.openstack.org, even
+   if you're replacing an existing server) and that another server with the
+   same does not already exist in the ansible inventory.
 
  * If your server needs private information such as passwords, use
    hiera calls in the site manifest, and ask an infra-core team member
