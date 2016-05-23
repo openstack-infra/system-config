@@ -319,7 +319,7 @@ node 'groups-dev.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'lists.openstack.org' {
   class { 'openstack_project::lists':
     listadmins   => hiera('listadmins', []),
