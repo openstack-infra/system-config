@@ -23,6 +23,8 @@ var psRegex = /^(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
 var mergeFailedRegex = /Merge Failed\./;
 // this regex matches the name of CI systems we trust to report merge failures
 var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
+// this regex matches the name+pipeline that we want at the top of the CI list
+var firstPartyCI = /^Jenkins/;
 // this regex matches the pipeline markup
 var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 // The url to full status information on running jobs
@@ -156,9 +158,32 @@ var ci_group_by_ci_pipeline = function(current, comments) {
         }
     }
 
+    function sort_by_name(a,b) {
+        if (a[0] < b[0])
+            return -1;
+        else if (a[0] > b[0])
+            return 1;
+        else
+            return 0;
+    }
+
     var results = [];
+    var notfirstparty = [];
+    // we want to separate out first party CI results to always be the
+    // top of the list, and third party CI to come after, so that
+    // hunting for first party CI isn't tough.
     for (i = 0; i < ci_pipelines.length; i++) {
-        results.push([ci_pipelines[i], ci_pipeline_comments[i]]);
+        if (firstPartyCI.test(ci_pipelines[i])) {
+            results.push([ci_pipelines[i], ci_pipeline_comments[i]]);
+        } else {
+            notfirstparty.push([ci_pipelines[i], ci_pipeline_comments[i]]);
+        }
+    }
+
+    notfirstparty.sort(sort_by_name);
+
+    for (i = 0; i < notfirstparty.length; i++) {
+        results.push(notfirstparty[i]);
     }
     return results;
 };
