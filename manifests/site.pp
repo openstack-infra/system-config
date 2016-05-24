@@ -486,6 +486,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
   $iptables_nodes_rule = regsubst ($elasticsearch_nodes,
