@@ -700,6 +700,7 @@ node 'static.openstack.org' {
 
 # A machine to serve various project status updates.
 # Node-OS: precise
+# Node-OS: trusty
 node 'status.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
