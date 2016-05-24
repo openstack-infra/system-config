@@ -261,6 +261,7 @@ node 'puppetdb01.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
                    'logstash.openstack.org',
