@@ -1,0 +1,7 @@
+---
+# file: create_openstack_keypair.yml
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: create_openstack_keypair }
