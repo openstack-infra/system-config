@@ -341,6 +341,7 @@ node 'paste.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'planet.openstack.org' {
   class { 'openstack_project::planet':
     sysadmins => hiera('sysadmins', []),
