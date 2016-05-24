@@ -1,0 +1,53 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    clouds: []
+    servers: []
+  pre_tasks:
+    - set_fact:
+        servers: "{{ servers + [{'name': name,
+                                 'image': image,
+                                 'flavor': flavor,
+                                 'network': network,
+                                 'volumes': volumes|default([]),
+                                }] }}"
+    - set_fact:
+        clouds: "{{ clouds + [{'name':cloud,'servers': servers}] }}"
+  roles:
+    - { role: cloud-launcher, generate_keypair: yes }
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - wait_for: port=22 host={{ hostvars[item]['ansible_ssh_host'] }} search_regex=OpenSSH delay=60
+      with_items: "{{ groups['cl_servers_just_created'] }}"
+
+- hosts: cl_servers_just_created
+  remote_user: "{{ configure_node_remote_user|default('ubuntu') }}"
+  become: yes
+  # We need to delay gather_facts until after the pre_task that sets up ansible_ssh_private_key_file
+  # We can manually invoke gather_facts by running the setup module.
+  gather_facts: no
+
+  pre_tasks:
+    - set_fact: ansible_ssh_private_key_file={{ hostvars['localhost']['cl_generated_keypair_private_key_filename'] }}
+    # Run the setup module now that ansible_ssh_private_key_file is set, effectively setting gather_facts: yes
+    - setup:
+
+  roles:
+    - { role: make_swap }
+    - { role: bootstrap_puppet }
+    - { role: set_hostname }
+    - { role: puppet, manage_config: true }
+  post_tasks:
+    - shell: reboot
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: delete_ssh_keypair, key_name: "{{ hostvars['localhost']['cl_generated_keypair_name'] }}" }
+    - { role: delete_openstack_keypair }
