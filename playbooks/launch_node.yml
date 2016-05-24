@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: generate_tmp_keypair }
+    - { role: create_openstack_keypair }
+    - { role: cloud-launcher }
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - wait_for: port=22 host={{ item }} search_regex=OpenSSH delay=60
+      with_items: "{{ groups['cl_servers_just_created'] }}"
+
+- hosts: cl_servers_just_created
+  remote_user: "{{ bootstrap_puppet_remote_user|default('ubuntu') }}"
+  become: yes
+  gather_facts: no
+  pre_tasks:
+    - set_fact: ansible_ssh_private_key_file={{ key_folder|default('/tmp') }}/{{ key_name|default('tmpkey') }}
+  roles:
+    - { role: bootstrap_puppet }
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: delete_tmp_keypair }
+    - { role: delete_openstack_keypair }
