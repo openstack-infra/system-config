@@ -1,0 +1,7 @@
+---
+# file: delete_ssh_keypair.yml
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: delete_ssh_keypair }
