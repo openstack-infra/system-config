@@ -1,0 +1,5 @@
+---
+- os_keypair:
+    cloud: "{{ cloud }}"
+    name: "{{ key_name}}"
+    state: absent
