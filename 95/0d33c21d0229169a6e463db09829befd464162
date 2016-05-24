@@ -1,0 +1,10 @@
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: yolanda.robla <yolanda.robla-mota@hpe.com>
+Workflow+1: yolanda.robla <yolanda.robla-mota@hpe.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 24 May 2016 06:35:48 +0000
+Reviewed-on: https://review.openstack.org/320074
+Project: openstack-infra/system-config
+Branch: refs/heads/master
