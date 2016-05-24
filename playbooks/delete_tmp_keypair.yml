@@ -1,0 +1,7 @@
+---
+# file: generate_tmp_keypair.yml
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - { role: delete_tmp_keypair }

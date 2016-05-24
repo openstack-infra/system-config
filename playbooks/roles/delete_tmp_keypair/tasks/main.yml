@@ -1,0 +1,3 @@
+---
+- file: name={{ key_folder }}/{{key_name }} state=absent
+- file: name={{ key_folder }}/{{ key_name }}.pub state=absent
