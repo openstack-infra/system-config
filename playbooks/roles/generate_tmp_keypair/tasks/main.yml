@@ -1,0 +1,4 @@
+---
+- shell: ssh-keygen -t "{{ key_type }}" -b "{{ key_bits }}" -N '' -f "{{ key_folder }}"/"{{ key_name }}"
+  args:
+    creates: "{{ key_folder}}/{{ key_name }}"

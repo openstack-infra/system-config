@@ -1,0 +1,5 @@
+---
+key_bits: 4096
+key_type: rsa
+key_folder: /tmp
+key_name: tmpkey
