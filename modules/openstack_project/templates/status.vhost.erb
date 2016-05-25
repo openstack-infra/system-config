@@ -17,6 +17,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       AllowOverride None
       Order allow,deny
       allow from all
+      <IfVersion >= 2.4>
+        Require all granted
+      </IfVersion>
   </Directory>
 
   Alias /reviews /srv/static/reviewday
@@ -24,6 +27,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       AllowOverride None
       Order allow,deny
       allow from all
+      <IfVersion >= 2.4>
+        Require all granted
+      </IfVersion>
   </Directory>
 
   Alias /openstack-health /srv/static/openstack-health
@@ -31,6 +37,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     AllowOverride None
     Order allow,deny
     allow from all
+    <IfVersion >= 2.4>
+      Require all granted
+    </IfVersion>
   </Directory>
 
   <Directory <%= @docroot %>>
@@ -38,6 +47,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     AllowOverride None
     Order allow,deny
     allow from all
+    <IfVersion >= 2.4>
+      Require all granted
+    </IfVersion>
   </Directory>
 
   # Sample elastic-recheck config file, adjust prefixes
@@ -48,6 +60,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       AllowOverride None
       Order allow,deny
       allow from all
+      <IfVersion >= 2.4>
+        Require all granted
+      </IfVersion>
   </Directory>
 
   RedirectMatch permanent ^/rechecks(.*) /elastic-recheck
@@ -56,6 +71,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       AllowOverride None
       Order allow,deny
       allow from all
+      <IfVersion >= 2.4>
+        Require all granted
+      </IfVersion>
   </Directory>
 
 
