@@ -39,6 +39,23 @@ class openstack_project::zuul_launcher(
     base => $project_config_base,
   }
 
+  file { '/etc/jenkins_jobs':
+    ensure => directory,
+  }
+
+  file { '/etc/jenkins_jobs/config':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => true,
+    purge   => true,
+    force   => true,
+    source  => $::project_config::jenkins_job_builder_config_dir,
+    require => File['/etc/jenkins_jobs'],
+    notify  => Exec['zuul-launcher-reload'],
+  }
+
   class { '::zuul':
     vhost_name              => $vhost_name,
     gearman_server          => $gearman_server,
