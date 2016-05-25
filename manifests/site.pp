@@ -220,6 +220,7 @@ node 'cacti.openstack.org' {
   class { 'openstack_project::cacti':
     sysadmins   => hiera('sysadmins', []),
     cacti_hosts => hiera_array('cacti_hosts'),
+    vhost_name  => 'cacti.openstack.org',
   }
 }
 
