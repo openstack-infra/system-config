@@ -57,5 +57,7 @@ class openstack_project::zuul_launcher(
     sites                   => $sites,
   }
 
-  class { 'zuul::launcher': }
+  class { 'zuul::launcher':
+    $project_config_repo => $::project_config::config_dir,
+  }
 }
