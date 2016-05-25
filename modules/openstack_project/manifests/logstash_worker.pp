@@ -16,6 +16,8 @@
 #
 class openstack_project::logstash_worker (
   $discover_node = 'elasticsearch01.openstack.org',
+  $filter_rev    = 'master',
+  $filter_source = 'https://git.openstack.org/openstack-infra/logstash-filters',
 ) {
   file { '/etc/default/logstash-indexer':
     ensure => present,
@@ -28,8 +30,8 @@ class openstack_project::logstash_worker (
   vcsrepo { '/opt/logstash-filters':
     ensure   => latest,
     provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack-infra/logstash-filters',
+    revision => $filter_rev,
+    source   => $filter_source,
   }
 
   include ::logstash
