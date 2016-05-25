@@ -455,6 +455,7 @@ node 'logstash.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node /^logstash-worker\d+\.openstack\.org$/ {
   $logstash_worker_iptables_rule = regsubst(flatten([$elasticsearch_nodes, $elasticsearch_clients]),
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
