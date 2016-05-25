@@ -24,22 +24,22 @@ class openstack_project::status (
     gitemail    => $jenkins_gitemail,
   }
 
-  include ::httpd
+  include ::apache
 
-  if ! defined(Httpd::Mod['rewrite']) {
-    httpd::mod { 'rewrite':
+  if ! defined(Apache::Mod['rewrite']) {
+    apache::mod { 'rewrite':
         ensure => present,
     }
   }
 
-  if ! defined(Httpd::Mod['proxy']) {
-    httpd::mod { 'proxy':
+  if ! defined(Apache::Mod['proxy']) {
+    apache::mod { 'proxy':
         ensure => present,
     }
   }
 
-  if ! defined(Httpd::Mod['proxy_http']) {
-    httpd::mod { 'proxy_http':
+  if ! defined(Apache::Mod['proxy_http']) {
+    apache::mod { 'proxy_http':
         ensure => present,
     }
   }
@@ -51,7 +51,7 @@ class openstack_project::status (
   ###########################################################
   # Status - Index
 
-  ::httpd::vhost { 'status.openstack.org':
+  ::apache::vhost { 'status.openstack.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/status',
