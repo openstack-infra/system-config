@@ -109,8 +109,11 @@ class openstack_project::status (
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/jquery-visibility'],
-    require     => [File['/srv/static/status'],
-                    Vcsrepo['/opt/jquery-visibility']],
+    require     => [
+      File['/srv/static/status'],
+      Package['yui-compressor'],
+      Vcsrepo['/opt/jquery-visibility'],
+    ],
   }
 
   vcsrepo { '/opt/jquery-graphite':
@@ -138,8 +141,11 @@ class openstack_project::status (
     path        => '/bin:/usr/bin',
     refreshonly => true,
     subscribe   => Vcsrepo['/opt/flot'],
-    require     => [File['/srv/static/status'],
-                    Vcsrepo['/opt/flot']],
+    require     => [
+      File['/srv/static/status'],
+      Package['yui-compressor'],
+      Vcsrepo['/opt/flot'],
+    ],
   }
 
   ###########################################################
