@@ -619,3 +619,12 @@ source-files:
       - console
       - overcloud
     job-filter: '.*-tripleo-.*'
+  # packstack logs
+  - name: logs/latest/openstack-setup.log.txt
+    tags:
+      - console
+    job-filter: '.*-packstack-integration-.*'
+  - name: logs/latest/tempest.log.txt
+    tags:
+      - console
+    job-filter: '.*-packstack-integration-.*'
