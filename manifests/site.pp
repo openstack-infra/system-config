@@ -769,6 +769,8 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
+  include openstack_project
+
   class { '::openstackci::nodepool':
     vhost_name                    => 'nodepool.openstack.org',
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
