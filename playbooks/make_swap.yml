@@ -1,0 +1,7 @@
+---
+# file: make_swap.yml
+- hosts: "{{ target }}"
+  gather_facts: no
+  user: root
+  roles:
+    - { role: make_swap }
