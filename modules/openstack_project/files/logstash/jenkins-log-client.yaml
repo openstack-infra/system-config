@@ -555,3 +555,12 @@ source-files:
       - console
       - undercloud
     job-filter: '.*-tripleo-ci-.*'
+# packstack logs
+  - name: logs/latest/openstack-setup.log.txt
+    tags:
+      - console
+    job-filter: '.*-packstack-integration-.*'
+  - name: logs/latest/tempest.log.txt
+    tags:
+      - console
+    job-filter: '.*-packstack-integration-.*'
