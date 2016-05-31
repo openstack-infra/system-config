@@ -2,6 +2,7 @@
 class openstack_project::cacti (
   $sysadmins = [],
   $cacti_hosts = [],
+  $vhost_name = '',
 ) {
 
   if $::osfamily != 'Debian' {

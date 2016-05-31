@@ -2,22 +2,26 @@
 # Managed by Puppet
 # ************************************
 
-Alias /cacti /usr/share/cacti/site
+<VirtualHost *:80>
+  ServerName <%= @vhost_name %>
 
-RewriteEngine on
-RewriteRule ^/$ /cacti/graph_view.php [R,L]
+  Alias /cacti /usr/share/cacti/site
 
-<Directory /usr/share/cacti/site>
-  Options +FollowSymLinks
-  AllowOverride None
-  order allow,deny
-  allow from all
-  <IfVersion >= 2.4>
-      Require all granted
-  </IfVersion>
+  RewriteEngine on
+  RewriteRule ^/$ /cacti/graph_view.php [R,L]
 
-  AddType application/x-httpd-php .php
+  <Directory /usr/share/cacti/site>
+    Options +FollowSymLinks
+    AllowOverride None
+    order allow,deny
+    allow from all
+    <IfVersion >= 2.4>
+       Require all granted
+    </IfVersion>
 
-  DirectoryIndex index.php
-</Directory>
+    AddType application/x-httpd-php .php
 
+    DirectoryIndex index.php
+  </Directory>
+
+</VirtualHost>
