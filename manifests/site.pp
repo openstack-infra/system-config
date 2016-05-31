@@ -777,9 +777,9 @@ node 'nodepool.openstack.org' {
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password                => hiera('nodepool_mysql_password'),
     mysql_root_password           => hiera('nodepool_mysql_root_password'),
-    # NOTE(pabelanger): Once we delete our jenkins masters, this key should be moved
-    # into hiera.
-    nodepool_ssh_public_key       => $openstack_project::jenkins_ssh_key,
+    nodepool_ssh_public_key       => hiera('zuul_worker_public_key_contents'),
+    # TODO(pabelanger): Switch out private key with zuul_worker once we are
+    # ready.
     nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
     oscc_file_contents            => $clouds_yaml,
     image_log_document_root       => '/var/log/nodepool/image',
