@@ -30,7 +30,7 @@ class openstack_project::zuul_launcher(
   $git_name = 'OpenStack Jenkins',
   $workspace_root = '/home/jenkins/workspace',
   $worker_private_key_file = '/var/lib/zuul/ssh/id_rsa',
-  $worker_username = 'jenkins',
+  $worker_username = 'zuul',
   $sites = [],
 ) {
 
