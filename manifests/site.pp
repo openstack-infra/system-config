@@ -771,6 +771,8 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
+  class { '::zookeeper': }
+
   include openstack_project
 
   class { '::openstackci::nodepool':
