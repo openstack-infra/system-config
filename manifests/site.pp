@@ -355,7 +355,7 @@ node /^paste\d+\.openstack\.org$/ {
 }
 
 # Node-OS: precise
-# Node-OS: trusty
+# Node-OS: xenial
 node 'planet.openstack.org' {
   class { 'openstack_project::planet':
     sysadmins => hiera('sysadmins', []),
