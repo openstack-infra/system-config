@@ -16,7 +16,7 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/centos"
-MIRROR="rsync://mirror.sfo12.us.leaseweb.net"
+MIRROR="rsync://mirrors.kernel.org"
 K5START="k5start -t -f /etc/centos.keytab service/centos-mirror -- timeout -k 2m 30m"
 
 REPO=7
