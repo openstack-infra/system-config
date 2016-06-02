@@ -16,7 +16,7 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/epel"
-MIRROR="rsync://mirror.math.princeton.edu/pub"
+MIRROR="rsync://mirrors.kernel.org/fedora-epel"
 K5START="k5start -t -f /etc/epel.keytab service/epel-mirror -- timeout -k 2m 30m"
 
 REPO=7
