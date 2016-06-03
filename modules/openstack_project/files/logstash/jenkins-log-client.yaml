@@ -19,6 +19,9 @@ subunit-files:
     build-queue-filter: 'gate'
   - name: testrepository.subunit
     build-queue-filter: 'gate'
+  - name: logs/karma.subunit
+    job-filter: '.*npm-run.*'
+    build-queue-filter: 'gate'
   - name: testrepository.subunit
     build-queue-filter: 'periodic'
   - name: logs/testrepository.subunit
