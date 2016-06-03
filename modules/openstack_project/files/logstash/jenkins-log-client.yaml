@@ -27,6 +27,9 @@ subunit-files:
     build-queue-filter: 'post'
   - name: logs/testrepository.subunit
     build-queue-filter: 'post'
+  - name: logs/karma.subunit
+    job-filter: '.*npm-run.*'
+    build-queue-filter: 'gate'
 # List of files to source logs from.
 source-files:
   - name: console.html
