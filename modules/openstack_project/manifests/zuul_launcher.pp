@@ -67,7 +67,7 @@ class openstack_project::zuul_launcher(
     git_name                => $git_name,
     revision                => $revision,
     git_source_repo         => $git_source_repo,
-    jenkins_jobs            => $::project_config::jenkins_job_builder_config_dir,
+    jenkins_jobs            => '/etc/jenkins_jobs/config',
     workspace_root          => $workspace_root,
     worker_private_key_file => $worker_private_key_file,
     worker_username         => $worker_username,
