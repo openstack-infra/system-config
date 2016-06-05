@@ -34,7 +34,7 @@ $K5START rsync -rlptDvz \
     --exclude="ppc64le" \
     --exclude="x86_64/debug" \
     --exclude="x86_64/repoview" \
-    $MIRROR/epel/$REPO/ $BASE/$REPO/
+    $MIRROR/$REPO/ $BASE/$REPO/
 
 # TODO(pabelanger): Validate rsync process
 
