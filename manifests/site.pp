@@ -220,6 +220,7 @@ node 'cacti.openstack.org' {
   class { 'openstack_project::cacti':
     sysadmins   => hiera('sysadmins', []),
     cacti_hosts => hiera_array('cacti_hosts'),
+    vhost_name  => 'cacti.openstack.org',
   }
 }
 
@@ -261,6 +262,7 @@ node 'puppetdb01.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
                    'logstash.openstack.org',
@@ -339,7 +341,21 @@ node 'paste.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node /^paste\d+\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::paste':
+    db_password         => hiera('paste_db_password'),
+    db_host             => hiera('paste_db_host'),
+    vhost_name          => 'paste.openstack.org',
+  }
+}
+
 # Node-OS: precise
+# Node-OS: trusty
 node 'planet.openstack.org' {
   class { 'openstack_project::planet':
     sysadmins => hiera('sysadmins', []),
@@ -347,6 +363,7 @@ node 'planet.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -423,6 +440,7 @@ node 'wiki.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'logstash.openstack.org' {
   $iptables_es_rule = regsubst($elasticsearch_nodes,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -452,6 +470,7 @@ node 'logstash.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node /^logstash-worker\d+\.openstack\.org$/ {
   $logstash_worker_iptables_rule = regsubst(flatten([$elasticsearch_nodes, $elasticsearch_clients]),
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
@@ -483,6 +502,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
   $iptables_nodes_rule = regsubst ($elasticsearch_nodes,
@@ -697,6 +717,7 @@ node 'static.openstack.org' {
 
 # A machine to serve various project status updates.
 # Node-OS: precise
+# Node-OS: trusty
 node 'status.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
@@ -750,11 +771,16 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
+  include openstack_project
+
   class { '::openstackci::nodepool':
     vhost_name                    => 'nodepool.openstack.org',
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password                => hiera('nodepool_mysql_password'),
     mysql_root_password           => hiera('nodepool_mysql_root_password'),
+    # NOTE(pabelanger): Once we delete our jenkins masters, this key should be moved
+    # into hiera.
+    nodepool_ssh_public_key       => $openstack_project::jenkins_ssh_key,
     nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
     oscc_file_contents            => $clouds_yaml,
     image_log_document_root       => '/var/log/nodepool/image',
