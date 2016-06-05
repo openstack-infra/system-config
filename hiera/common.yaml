@@ -60,6 +60,7 @@ statusbot_channels:
 - openstack-gantt
 - openstack-gate
 - openstack-glance
+- openstack-ha
 - openstack-heat-translator
 - openstack-higgins
 - openstack-horizon
