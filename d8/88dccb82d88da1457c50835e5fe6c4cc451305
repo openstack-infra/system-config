@@ -1,0 +1,9 @@
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sun, 05 Jun 2016 11:12:12 +0000
+Reviewed-on: https://review.openstack.org/325171
+Project: openstack-infra/system-config
+Branch: refs/heads/master
