@@ -63,7 +63,7 @@ class openstack_project::wheel_mirror_slave (
       ensure_packages(['build-essential',
                        'python-all-dev', 'python3-all-dev',
                        'libxml2-dev', 'libxslt-dev',
-                       'libffi-dev', 'libreadline-dev',
+                       'libffi-dev', 'libkrb5-dev', 'libreadline-dev',
                        'libssl-dev', 'libyaml-dev', 'zlib1g-dev',
                        'libldap2-dev', 'libmysqlclient-dev',
                        'libpq-dev', 'libsasl2-dev',
@@ -73,7 +73,7 @@ class openstack_project::wheel_mirror_slave (
      'Redhat': {
        ensure_packages(['gcc', 'gcc-c++', 'make',
                         'python-devel', 'python34-devel',
-                        'libxml2-devel', 'libxslt-devel',
+                        'krb5-devel', 'libxml2-devel', 'libxslt-devel',
                         'libffi-devel', 'readline-devel',
                         'openssl-devel', 'libyaml-devel', 'zlib-devel',
                         'openldap-devel', 'mariadb-devel',

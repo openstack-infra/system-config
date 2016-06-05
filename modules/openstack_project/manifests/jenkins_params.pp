@@ -26,6 +26,7 @@ class openstack_project::jenkins_params {
       # for keystone ldap auth integration
       $libsasl_dev = 'cyrus-sasl-devel'
       $sqlite_dev_package = 'sqlite-devel'
+      $krb5_dev_package = 'krb5-devel'
       $liberasurecode_dev_package = 'liberasurecode-devel'
       $libevent_dev_package = 'libevent-devel'
       $libpcap_dev_package = 'libpcap-devel'
@@ -117,6 +118,7 @@ class openstack_project::jenkins_params {
       $libsasl_dev = 'libsasl2-dev'
       $mysql_dev_package = 'libmysqlclient-dev'
       $sqlite_dev_package = 'libsqlite3-dev'
+      $krb5_dev_package = 'libkrb5-dev'
       $libvirt_dev_package = 'libvirt-dev'
       $libxml2_package = 'libxml2-utils'
       $libxml2_dev_package = 'libxml2-dev'
