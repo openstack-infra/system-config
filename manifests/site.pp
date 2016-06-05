@@ -622,7 +622,7 @@ node 'refstack.openstack.org' {
 # A machine to run Storyboard
 # Node-OS: precise
 # Node-OS: trusty
-node 'storyboard.openstack.org' {
+node /^storyboard\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
