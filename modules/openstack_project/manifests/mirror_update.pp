@@ -8,6 +8,7 @@ class openstack_project::mirror_update (
   $npm_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
+  $tinycorelinux_keytab = '',
 ) {
 
   class { 'openstack_project::server':
@@ -251,6 +252,35 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/epel-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/epel.keytab'],
+    ]
+  }
+
+  ### TinyCoreLinux mirror ###
+  file { '/etc/tinycorelinux.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $tinycorelinux_keytab,
+  }
+
+  file { '/usr/local/bin/tinycorelinux-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/tinycorelinux-mirror-update.sh',
+  }
+
+  cron { 'tinycorelinux mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/tinycorelinux-mirror.lock tinycorelinux-mirror-update mirror.tinycorelinux >>/var/log/tinycorelinux-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/tinycorelinux-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/tinycorelinux.keytab'],
     ]
   }
 }
