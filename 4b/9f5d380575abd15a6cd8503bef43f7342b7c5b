@@ -1,0 +1,9 @@
+Code-Review+1: Donald Stufft <donald@stufft.io>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 06 Jun 2016 16:25:54 +0000
+Reviewed-on: https://review.openstack.org/325654
+Project: openstack-infra/system-config
+Branch: refs/heads/master
