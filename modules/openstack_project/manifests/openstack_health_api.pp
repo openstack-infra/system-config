@@ -23,8 +23,9 @@ class openstack_project::openstack_health_api (
 ) {
   include 'openstack_health'
   class { 'openstack_health::api':
-    db_uri     => "mysql+pymysql://${subunit2sql_db_user}:${subunit2sql_db_pass}@${subunit2sql_db_host}/${subunit2sql_db_name}",
-    vhost_name => $hostname,
-    vhost_port => 80,
+    db_uri           => "mysql+pymysql://${subunit2sql_db_user}:${subunit2sql_db_pass}@${subunit2sql_db_host}/${subunit2sql_db_name}",
+    vhost_name       => $hostname,
+    vhost_port       => 80,
+    cache_expiration => 300,
   }
 }
