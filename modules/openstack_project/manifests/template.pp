@@ -342,6 +342,14 @@ class openstack_project::template (
       }
     }
 
+    file { '/etc/security/limits.d/60-nofile-limit.conf':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/openstack_project/debian_limits.conf',
+      replace => true,
+    }
+
     file { '/etc/apt/apt.conf.d/80retry':
       owner   => 'root',
       group   => 'root',
