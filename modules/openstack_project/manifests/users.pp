@@ -105,7 +105,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'pabelanger':
     realname => 'Paul Belanger',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDIdkI92kJyePsy8MSCgH9VcG5FBdHg+mX8jUniGnxzp2BJ9O+ZVUQLgDIneK/NIoTIs1WIRy5yTuSpqKuX/fZCXdLCfHdHlmNLw5/iF98X9h+c1E5/ZtEuZrfQstP5EHdLxTKD+AEvBSTin9Ptorn+tI1tQf/9hC4flJzOmiFrvhGKhmVd9DToZqMPy2JviajiVu9e/OXdPIcV2hlsm/Db03/zc9Ohkbw6oST/w+ZslvUMCvFUKPAlYG7db4TN+RfWfeWEd3u82beO320zqCPiEHmn2wYAppSXQ+f6beFL6FwejFYgH8F7hEfNyN2Z3V1eR73uSnxfYTGHqgJNAN2Vbl3EmNEhQ60gwuKTXlMpQf5Wny2nJGz7zYCReDbgQH/Zoejw3+Nfk4PcTZtso5Bjti1s+ChGNu3qpS6d7gkEYqcKRtA9If0tP5X5LqUqZw+66BKTBUiXGeip9XCeStN00OdFBcQJZ3h/8xIZsKmkpnBK9uB6NRrFAcxTj9SmpYMUjFOt1nI/b36vCnrcHinSIpWpYAxuySoca5CIJaisQVzG/DzYp801tjCSViKQ0kfMH0cBw0MZOEPYy+itkvDa6chq+gFfmChNJdI4oSqDId8ID60G8eZPDcIKFQAW5kAmdtss11kdwWmszi6KTjdCmbYABfPnt8UGud3WLn5Mew==',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQCuP0CZE8AYnbm8gxecCxKeRw0wHRyryd+FKmNNsdr0d3UvfCbqNzLigrqEBZsKpofi3M4qCWNpKRyfhnjPynLTQjP1vnX9AbL9UGoiHxScfvh3skntTYMs9ezJRd0rMJJZO76FPo8bJLDlwxAQl8m/nuj3HfYiO5hYE7P+a3rhsJh4nEfBb7xh+Q5yM0PWObkkBl6IRiBYjlcsXNZHgTA5kNuihUk5bHqAw54sHh05DhpgOITpTw4LFbh4Ew2NKq49dEb2xbTuAyAr2DHNOGgIwKEZpwtKZEIGEuiLbb4DQRsfivrvyOjnK2NFjQzGyNOHfsOldWHRQwUKUs8nrxKdXvqcrfMnSVaibeYK2TRL+6jd9kc5SIhWI3XLm7HbX7uXMD7/JQrkL25Rcs6nndDCH72DJLz+ynA/T5umMbNBQ9tybL5z73IOpfShRGjQYego22CxDOy7e/5OEMHNoksbFb1S02viM9O2puS7LDqqfT9JIbbPqCrbRi/zOXo0f4EXo6xKUAmd8qlV+6f/p57/qFihzQDaRFVlFEH3k7qwsw7PYGUTwkPaThe6xyZN6D5jqxCZU3aSYu+FGb0oYo+M5IxOm0Cb4NNsvvkRPxWtwSayfFGu6+m/+/RyA3GBcAMev7AuyKN+K2vGMsLagHOx4i+5ZAcUwGzLeXAENNum3w==',
     key_id   => 'pabelanger@redhat.com',
     uid      => 2010,
     gid      => 2010,
