@@ -20,7 +20,6 @@ node default {
 #
 # Long lived servers:
 #
-# Node-OS: precise
 # Node-OS: trusty
 node 'review.openstack.org' {
   class { 'openstack_project::server':
@@ -261,7 +260,6 @@ node 'puppetdb01.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
@@ -362,7 +360,6 @@ node 'planet.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::server':
@@ -439,7 +436,6 @@ node 'wiki.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'logstash.openstack.org' {
   $iptables_es_rule = regsubst($elasticsearch_nodes,
@@ -469,7 +465,6 @@ node 'logstash.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node /^logstash-worker\d+\.openstack\.org$/ {
   $logstash_worker_iptables_rule = regsubst(flatten([$elasticsearch_nodes, $elasticsearch_clients]),
@@ -501,7 +496,6 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
@@ -640,7 +634,6 @@ node 'refstack.openstack.org' {
 }
 
 # A machine to run Storyboard
-# Node-OS: precise
 # Node-OS: trusty
 node 'storyboard.openstack.org' {
   class { 'openstack_project::storyboard':
@@ -716,7 +709,6 @@ node 'static.openstack.org' {
 }
 
 # A machine to serve various project status updates.
-# Node-OS: precise
 # Node-OS: trusty
 node 'status.openstack.org' {
   class { 'openstack_project::server':
@@ -951,7 +943,6 @@ node /^zl\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node /^zm\d+\.openstack\.org$/ {
   $group = "zuul-merger"
@@ -965,7 +956,6 @@ node /^zm\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
