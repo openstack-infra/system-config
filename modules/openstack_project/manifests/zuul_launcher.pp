@@ -32,6 +32,7 @@ class openstack_project::zuul_launcher(
   $worker_private_key_file = '/var/lib/zuul/ssh/id_rsa',
   $worker_username = 'jenkins',
   $sites = [],
+  $nodes = [],
 ) {
 
   class { '::project_config':
@@ -72,6 +73,7 @@ class openstack_project::zuul_launcher(
     worker_private_key_file => $worker_private_key_file,
     worker_username         => $worker_username,
     sites                   => $sites,
+    nodes                   => $nodes,
   }
 
   class { 'zuul::launcher': }
