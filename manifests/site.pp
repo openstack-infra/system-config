@@ -564,13 +564,14 @@ node 'mirror-update.openstack.org' {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
-    bandersnatch_keytab => hiera('bandersnatch_keytab'),
-    admin_keytab        => hiera('afsadmin_keytab'),
-    reprepro_keytab     => hiera('reprepro_keytab'),
-    npm_keytab          => hiera('npm_keytab'),
-    centos_keytab       => hiera('centos_keytab'),
-    epel_keytab         => hiera('epel_keytab'),
-    sysadmins           => hiera('sysadmins', []),
+    bandersnatch_keytab  => hiera('bandersnatch_keytab'),
+    admin_keytab         => hiera('afsadmin_keytab'),
+    reprepro_keytab      => hiera('reprepro_keytab'),
+    npm_keytab           => hiera('npm_keytab'),
+    centos_keytab        => hiera('centos_keytab'),
+    epel_keytab          => hiera('epel_keytab'),
+    tinycorelinux_keytab => hiera('tinycorelinux_keytab'),
+    sysadmins            => hiera('sysadmins', []),
   }
 }
 
