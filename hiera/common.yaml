@@ -109,6 +109,7 @@ statusbot_channels:
 - senlin
 - storyboard
 - syscompass
+- tacker
 - tripleo
 meetbot_channels:
 - '#cloudkitty'
