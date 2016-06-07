@@ -53,7 +53,8 @@ class openstack_project::zuul_launcher(
     purge   => true,
     force   => true,
     source  => $::project_config::jenkins_job_builder_config_dir,
-    require => File['/etc/jenkins_jobs'],
+    require => [File['/etc/jenkins_jobs'],
+                $::project_config::config_dir],
     notify  => Exec['zuul-launcher-reload'],
   }
 
