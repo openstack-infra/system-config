@@ -302,7 +302,7 @@ class openstack_project::puppetmaster (
     group   => 'root',
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/puppetmaster/groups.txt',
-    notify => Exec['expand_groups'],
+    notify => Exec['ansible_expand_groups'],
     require => File['/etc/ansible'],
   }
 
@@ -322,15 +322,19 @@ class openstack_project::puppetmaster (
   }
 
   file { '/usr/local/bin/expand-groups.sh':
+    ensure => absent,
+  }
+
+  file { '/usr/local/bin/ansible-expand-groups.sh':
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => 'puppet:///modules/openstack_project/puppetmaster/expand-groups.sh',
-    notify => Exec['expand_groups'],
+    source => 'puppet:///modules/openstack_project/puppetmaster/ansible-expand-groups.sh',
+    notify => Exec['ansible_expand_groups'],
   }
 
-  exec { 'expand_groups':
-    command     => 'expand-groups.sh',
+  exec { 'ansible_expand_groups':
+    command     => 'ansible-expand-groups.sh',
     path        => '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     refreshonly => true,
   }
