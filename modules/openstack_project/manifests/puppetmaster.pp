@@ -212,14 +212,14 @@ class openstack_project::puppetmaster (
     require => Cron['restartjenkinsmasters'],
   }
 
-  # Ansible mgmt
+  # Ansible config
   # TODO: Put this into its own class, maybe called bastion::ansible or something
 
-  vcsrepo { '/opt/ansible':
-    ensure   => latest,
-    provider => git,
-    revision => 'devel',
-    source   => 'https://github.com/ansible/ansible',
+  file { '/etc/ansible':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'admin',
+    mode    => '0755',
   }
 
   file { '/etc/ansible/hosts':
@@ -227,6 +227,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0755',
+    require => File['/etc/ansible'],
   }
 
   file { '/etc/ansible/hosts/puppet':
@@ -239,7 +240,7 @@ class openstack_project::puppetmaster (
     mode    => '0755',
     source  => '/opt/ansible/contrib/inventory/openstack.py',
     replace => true,
-    require => Vcsrepo['/opt/ansible'],
+    require => File['/etc/ansible/hosts'],
   }
 
   file { '/etc/ansible/hosts/static':
@@ -251,6 +252,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0664',
+    require => File['/etc/ansible/hosts'],
   }
 
   file { '/etc/ansible/hosts/generated-groups':
@@ -258,6 +260,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0664',
+    require => File['/etc/ansible/hosts'],
   }
 
   file { '/etc/ansible/hosts/infracloud':
@@ -266,6 +269,7 @@ class openstack_project::puppetmaster (
     group   => 'root',
     mode    => '0644',
     source  => 'puppet:///modules/openstack_project/puppetmaster/infracloud',
+    require => File['/etc/ansible/hosts'],
   }
 
   file { '/etc/ansible/groups.txt':
@@ -274,6 +278,7 @@ class openstack_project::puppetmaster (
     mode    => '0444',
     source  => 'puppet:///modules/openstack_project/puppetmaster/groups.txt',
     notify => Exec['expand_groups'],
+    require => File['/etc/ansible'],
   }
 
   file { '/var/cache/ansible-inventory':
@@ -288,6 +293,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0664',
+    require => File['/var/cache/ansible-inventory'],
   }
 
   file { '/usr/local/bin/expand-groups.sh':
