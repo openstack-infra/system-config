@@ -20,6 +20,7 @@
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -41,6 +42,24 @@ try:
     requests.packages.urllib3.disable_warnings()
 except:
     pass
+
+
+class JobDir(object):
+    def __init__(self, keep=False):
+        self.keep = keep
+        self.root = tempfile.mkdtemp()
+        self.inventory_root = os.path.join(self.root, 'inventory')
+        os.makedirs(self.inventory_root)
+        self.hosts = os.path.join(self.inventory_root, 'hosts')
+        self.groups = os.path.join(self.inventory_root, 'groups')
+        self.key = os.path.join(self.root, 'id_rsa')
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, etype, value, tb):
+        if not self.keep:
+            shutil.rmtree(self.root)
 
 
 def bootstrap_server(server, key, name, volume_device, keep,
@@ -88,40 +107,55 @@ def bootstrap_server(server, key, name, volume_device, keep,
                    'install_puppet.sh')
     ssh_client.ssh('bash -x install_puppet.sh')
 
-    # Write out the private SSH key we generated
-    key_file = tempfile.NamedTemporaryFile(delete=not keep)
-    key.write_private_key(key_file)
-    key_file.flush()
+    # Update the generated-groups file globally and incorporate it
+    # into our inventory
+    # Remove cloud and region from the environment to work around a bug in occ
+    expand_env = os.environ.copy()
+    expand_env.pop('OS_CLOUD', None)
+    expand_env.pop('OS_REGION_NAME', None)
 
-    # Write out inventory
-    inventory_file = tempfile.NamedTemporaryFile(delete=not keep)
-    inventory_file.write("{host} ansible_host={ip} ansible_user=root".format(
-        host=name, ip=server.interface_ip))
-    inventory_file.flush()
+    print subprocess.check_output(
+        '/usr/local/bin/expand-groups.sh',
+        env=expand_env,
+        stderr=subprocess.STDOUT)
 
-    ansible_cmd = [
-        'ansible-playbook',
-        '-i', inventory_file.name, '-l', name,
-        '--private-key={key}'.format(key=key_file.name),
-        "--ssh-common-args='-o StrictHostKeyChecking=no'",
-        '-e', 'target={name}'.format(name=name),
-    ]
+    with JobDir(keep) as jobdir:
+        # Write out the private SSH key we generated
+        with open(jobdir.key, 'w') as key_file:
+            key.write_private_key(key_file)
+        os.chmod(jobdir.key, 0o600)
 
-    # Run the remote puppet apply playbook limited to just this server
-    # we just created
-    try:
-        for playbook in [
-                'set_hostnames.yml',
-                'remote_puppet_adhoc.yaml']:
-            print subprocess.check_output(
-                ansible_cmd + [
-                    os.path.join(
-                        SCRIPT_DIR, '..', 'playbooks', playbook)],
-                stderr=subprocess.STDOUT)
-    except subprocess.CalledProcessError as e:
-        print "Subprocess failed"
-        print e.output
-        raise
+        # Write out inventory
+        with open(jobdir.hosts, 'w') as inventory_file:
+            inventory_file.write("{host} ansible_host={ip} ansible_user=root".format(
+                    host=name, ip=server.interface_ip))
+
+        os.symlink('/etc/ansible/hosts/generated-groups',
+                   jobdir.groups)
+
+        ansible_cmd = [
+            'ansible-playbook',
+            '-i', jobdir.inventory_root, '-l', name,
+            '--private-key={key}'.format(key=jobdir.key),
+            "--ssh-common-args='-o StrictHostKeyChecking=no'",
+            '-e', 'target={name}'.format(name=name),
+        ]
+
+        # Run the remote puppet apply playbook limited to just this server
+        # we just created
+        try:
+            for playbook in [
+                    'set_hostnames.yml',
+                    'remote_puppet_adhoc.yaml']:
+                print subprocess.check_output(
+                    ansible_cmd + [
+                        os.path.join(
+                            SCRIPT_DIR, '..', 'playbooks', playbook)],
+                    stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as e:
+            print "Subprocess failed"
+            print e.output
+            raise
 
     try:
         ssh_client.ssh("reboot")
@@ -280,15 +314,6 @@ def main():
     if os.path.exists(inventory_cache):
         with open(inventory_cache, 'w'):
             pass
-    # Remove cloud and region from the environment to work around a bug in occ
-    expand_env = os.environ.copy()
-    expand_env.pop('OS_CLOUD', None)
-    expand_env.pop('OS_REGION_NAME', None)
-
-    print subprocess.check_output(
-        '/usr/local/bin/expand-groups.sh',
-        env=expand_env,
-        stderr=subprocess.STDOUT)
 
 if __name__ == '__main__':
     main()
