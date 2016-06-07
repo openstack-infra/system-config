@@ -782,13 +782,6 @@ node 'nodepool.openstack.org' {
     upload_workers                => '16',
     jenkins_masters               => [
       {
-        name        => 'jenkins01',
-        url         => 'https://jenkins01.openstack.org/',
-        user        => hiera('jenkins_api_user', 'username'),
-        apikey      => hiera('jenkins_api_key'),
-        credentials => hiera('jenkins_credentials_id'),
-      },
-      {
         name        => 'jenkins02',
         url         => 'https://jenkins02.openstack.org/',
         user        => hiera('jenkins_api_user', 'username'),
@@ -869,7 +862,6 @@ node 'zuul.openstack.org' {
     gearman_workers                => [
       'nodepool.openstack.org',
       'jenkins.openstack.org',
-      'jenkins01.openstack.org',
       'jenkins02.openstack.org',
       'jenkins03.openstack.org',
       'jenkins04.openstack.org',
@@ -970,7 +962,6 @@ node 'zuul-dev.openstack.org' {
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [
       'jenkins.openstack.org',
-      'jenkins01.openstack.org',
       'jenkins02.openstack.org',
       'jenkins03.openstack.org',
       'jenkins04.openstack.org',
