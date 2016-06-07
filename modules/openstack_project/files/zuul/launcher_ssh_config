@@ -1,0 +1,8 @@
+HashKnownHosts No
+Host *.openstack.org
+  StickHostKeyChecking No
+  UserKnownHostsFile ~/.ssh/known_hosts
+
+Host * !*.openstack.org
+  StickHostKeyChecking No
+  UserKnownHostsFile /dev/null
