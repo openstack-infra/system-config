@@ -4,13 +4,6 @@ cache:
   expiration_time: 86400
   path: /var/cache/ansible-inventory
 clouds:
-  openstackci-bluebox:
-    region_name: RegionOne
-    auth:
-      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0
-      username: <%= @puppetmaster_clouds['openstackci_bluebox_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_bluebox_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_bluebox_project_name'] %>
   openstackci-internap:
     region_name: nyj01
     profile: internap
