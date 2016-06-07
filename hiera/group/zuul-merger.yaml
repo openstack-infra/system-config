@@ -47,5 +47,5 @@ zuul_nodes:
     labels: 'wheel-mirror-centos-7-amd64'
 
   - name: 'wheel-mirror-ubuntu-trusty-amd64.slave.openstack.org'
-    host: 'wheel-mirror-centos-7.amd64.slave.openstack.org'
-    labels: 'proposal'
+    host: 'wheel-mirror-ubuntu-trusty-amd64.slave.openstack.org'
+    labels: 'wheel-mirror-ubuntu-trusty-amd64'
