@@ -1,0 +1,12 @@
+HashKnownHosts No
+Host *.openstack.org
+  StrictHostKeyChecking No
+  UserKnownHostsFile ~/.ssh/known_hosts
+
+# NOTE(notmorgan): It is assumed that slaves are logged into
+# via IP address not hostname ending in ".openstack.org" such
+# as by IP address. This prevents storing the host keys of
+# these slave hosts
+Host * !*.openstack.org
+  StrictHostKeyChecking No
+  UserKnownHostsFile /dev/null
