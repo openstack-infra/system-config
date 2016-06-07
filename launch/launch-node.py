@@ -169,7 +169,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
             print e.output
             raise
 
-        run('/usr/local/bin/expand-groups.sh',
+        run('/usr/local/bin/ansible-expand-groups.sh',
             env=expand_env,
             stderr=subprocess.STDOUT)
 
