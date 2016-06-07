@@ -84,6 +84,22 @@ class openstack_project::puppetmaster (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  file { '/etc/puppet/hieradata':
+    ensure => directory,
+    group  => 'puppet',
+    mode   => '0750',
+    owner  => 'puppet',
+  }
+
+  file { '/etc/puppet/hieradata/production':
+    ensure  => directory,
+    group   => 'puppet',
+    mode    => '0750',
+    owner   => 'root',
+    recurse => true,
+    require => File['/etc/puppet/hieradata'],
+  }
+
   file { '/var/lib/puppet/reports':
     ensure => directory,
     owner  => 'puppet',
