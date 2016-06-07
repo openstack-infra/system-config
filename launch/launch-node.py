@@ -121,7 +121,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
     expand_env.pop('OS_REGION_NAME', None)
 
     print subprocess.check_output(
-        '/usr/local/bin/expand-groups.sh',
+        '/usr/local/bin/ansible-expand-groups.sh',
         env=expand_env,
         stderr=subprocess.STDOUT)
 
