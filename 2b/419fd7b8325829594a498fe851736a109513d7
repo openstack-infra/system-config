@@ -1,0 +1,9 @@
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 08 Jun 2016 13:17:17 +0000
+Reviewed-on: https://review.openstack.org/323539
+Project: openstack-infra/system-config
+Branch: refs/heads/master
