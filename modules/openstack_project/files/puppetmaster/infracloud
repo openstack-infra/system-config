@@ -1,4 +1,4 @@
 [disabled:children]
-infracloud
 
 [infracloud]
+baremetal00.vanilla.ic.openstack.org 
