@@ -33,6 +33,7 @@ class openstack_project::zuul_launcher(
   $worker_username = 'jenkins',
   $sites = [],
   $nodes = [],
+  $accept_nodes = '',
 ) {
 
   class { '::project_config':
@@ -91,6 +92,7 @@ class openstack_project::zuul_launcher(
     worker_username         => $worker_username,
     sites                   => $sites,
     nodes                   => $nodes,
+    accept_nodes            => $accept_nodes,
   }
 
   class { 'zuul::launcher': }

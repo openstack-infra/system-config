@@ -915,6 +915,7 @@ node /^zlstatic\d+\.openstack\.org$/ {
     sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
     nodes                => hiera('zuul_nodes', []),
+    accept_nodes         => false,
   }
 }
 
