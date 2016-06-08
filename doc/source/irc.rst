@@ -213,6 +213,10 @@ the channels the bot is listening to:
 A channel can be added to statusbot by editing the public Hiera data
 file, :file:`hiera/common.yaml`.
 
+The wiki password for the StatusBot account can be (re)set using the
+`ChangePassword.php https://www.mediawiki.org/wiki/Manual:ChangePassword.php`_
+maintenance script.
+
 .. _gerritbot:
 
 Gerritbot
