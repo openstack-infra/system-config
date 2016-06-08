@@ -40,9 +40,12 @@ Requirements
 
 * Support recheck to request re-running a test.
 
-  * Support the following syntaxes: ``recheck``.
+  * Support the following syntaxes: ``recheck``, ``<system>: recheck``
   * Recheck means recheck everything. A single recheck comment should
     re-trigger all testing systems.
+  * <system>: recheck should only re-trigger this specific system.
+  * Any other commands the system responds to should also use the same
+    <system> namespace
 
 * Publish contact information for the maintainers.
 
