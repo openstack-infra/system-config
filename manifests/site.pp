@@ -12,8 +12,15 @@ $elasticsearch_clients = hiera_array('elasticsearch_clients')
 # Default: should at least behave like an openstack server
 #
 node default {
-  class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins', []),
+  $classes = hiera('classes', '')
+  if ($classes) {
+    validate_array($classes)
+    hiera_include('classes')
+  } else {
+    notify { 'Default node invocation' :}
+    class { 'openstack_project::server':
+      sysadmins => hiera('sysadmins', []),
+    }
   }
 }
 
@@ -220,21 +227,6 @@ node 'cacti.openstack.org' {
     sysadmins   => hiera('sysadmins', []),
     cacti_hosts => hiera_array('cacti_hosts'),
     vhost_name  => 'cacti.openstack.org',
-  }
-}
-
-# Node-OS: trusty
-node 'puppetmaster.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140],
-    sysadmins                 => hiera('sysadmins', []),
-    pin_puppet                => '3.6.',
-  }
-  class { 'openstack_project::puppetmaster':
-    root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
-    jenkins_api_user                           => hiera('jenkins_api_user', 'username'),
-    jenkins_api_key                            => hiera('jenkins_api_key'),
-    puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
   }
 }
 

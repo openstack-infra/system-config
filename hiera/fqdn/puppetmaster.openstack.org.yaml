@@ -1,0 +1,7 @@
+---
+classes:
+  - '::openstack_project::server'
+  - '::openstack_project::puppetmaster'
+
+openstack_project::server::iptables_public_tcp_ports:
+  - 8140

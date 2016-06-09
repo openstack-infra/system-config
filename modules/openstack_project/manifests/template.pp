@@ -16,11 +16,16 @@ class openstack_project::template (
   $enable_unbound            = true,
   $afs                       = false,
   $afs_cache_size            = 500000,
+  $afs_cell                  = 'openstack.org',
+  $afs_realm                 = 'OPENSTACK.ORG',
+  $kdc                       = 'kdc.openstack.org',
+  $kdc_list                  = [ 'kdc01.openstack.org', 'kdc02.openstack.org' ],
   $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = false,
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = false,
+  $ssh_authorized_key        = 'XXX',
 ) {
 
   ###########################################################
@@ -31,7 +36,6 @@ class openstack_project::template (
   include sudoers
 
   include openstack_project::params
-  include openstack_project::users
 
   class { 'ssh':
     trusted_ssh_source => $puppetmaster_server,
@@ -42,14 +46,11 @@ class openstack_project::template (
       $iptables_public_udp_ports, [7001])
 
     class { 'openafs::client':
-      cell         => 'openstack.org',
-      realm        => 'OPENSTACK.ORG',
-      admin_server => 'kdc.openstack.org',
+      cell         => $afs_cell,
+      realm        => $afs_realm,
+      admin_server => $kdc,
       cache_size   => $afs_cache_size,
-      kdcs         => [
-        'kdc01.openstack.org',
-        'kdc02.openstack.org',
-      ],
+      kdcs         => $kdc_list,
     }
   } else {
     $all_udp = $iptables_public_udp_ports
@@ -82,7 +83,7 @@ class openstack_project::template (
     }
   }
 
-  class {'openstack_project::users_install':
+  class {'openstack_project::users':
     install_users => $install_users
   }
 
@@ -275,9 +276,9 @@ class openstack_project::template (
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
+    key     => $ssh_authorized_key,
     options => [
-      'from="puppetmaster.openstack.org,localhost"',
+      "from=\"${puppetmaster_server},localhost\"",
     ],
     require => File['/root/.ssh'],
   }

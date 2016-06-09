@@ -1,8 +1,8 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $jenkins_api_key,
   $puppetmaster_clouds,
+  $jenkins_api_key,
   $jenkins_api_user = 'hudson-openstack',
   $root_rsa_key = 'xxx',
   $puppetdb = true,
@@ -124,7 +124,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0660',
-    content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
+    content => hash2yaml($puppetmaster_clouds, 'clouds'),
   }
 
   file { '/etc/openstack/all-clouds.yaml':
@@ -132,7 +132,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'admin',
     mode    => '0660',
-    content => template('openstack_project/puppetmaster/all-clouds.yaml.erb'),
+    content => hash2yaml($puppetmaster_clouds, 'all-clouds'),
   }
 
 # For puppet master apache serving.
