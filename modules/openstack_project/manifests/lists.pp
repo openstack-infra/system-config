@@ -358,4 +358,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'embargo-notice':
+    ensure      => present,
+    admin       => 'jeremy@openstack.org',
+    password    => $listpassword,
+    description => 'Announcements to stakeholders for embargoed security vulnerabilities.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
