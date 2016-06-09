@@ -11,6 +11,7 @@ zmq-publishers:
   - tcp://jenkins07.openstack.org:8888
   - tcp://zlstatic01.openstack.org:8888
   - tcp://zl01.openstack.org:8888
+  - tcp://zl02.openstack.org:8888
 
 subunit-files:
   - name: logs/testrepository.subunit

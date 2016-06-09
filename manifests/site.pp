@@ -871,6 +871,7 @@ node 'zuul.openstack.org' {
       'jenkins-dev.openstack.org',
       'zlstatic01.openstack.org',
       'zl01.openstack.org',
+      'zl02.openstack.org',
       'zm01.openstack.org',
       'zm02.openstack.org',
       'zm03.openstack.org',
