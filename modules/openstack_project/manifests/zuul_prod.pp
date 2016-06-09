@@ -3,6 +3,7 @@
 class openstack_project::zuul_prod(
   $vhost_name = $::fqdn,
   $gearman_server = '127.0.0.1',
+  $gearman_check_job_registration = false,
   $gerrit_server = '',
   $gerrit_user = '',
   $gerrit_ssh_host_key = '',
@@ -42,6 +43,7 @@ class openstack_project::zuul_prod(
   class { 'openstackci::zuul_scheduler':
     vhost_name                     => $vhost_name,
     gearman_server                 => $gearman_server,
+    gearman_check_job_registration => $gearman_check_job_registration,
     gerrit_server                  => $gerrit_server,
     gerrit_user                    => $gerrit_user,
     known_hosts_content            => "review.openstack.org,104.130.159.134,2001:4800:7818:102:be76:4eff:fe05:9b12 ${gerrit_ssh_host_key}",
