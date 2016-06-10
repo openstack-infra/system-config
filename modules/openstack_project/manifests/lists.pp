@@ -358,4 +358,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'release-job-failures':
+    ensure      => present,
+    admin       => 'doug@doughellmann.com',
+    password    => $listpassword,
+    description => 'Notification messages for failures from release-related build jobs.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
