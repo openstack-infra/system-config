@@ -313,7 +313,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-   maillist { 'openstack-internships':
+  maillist { 'openstack-internships':
     ensure      => present,
     admin       => 'stefano@openstack.org',
     password    => $listpassword,
@@ -322,7 +322,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
- maillist { 'foundation-testing-standards':
+  maillist { 'foundation-testing-standards':
     ensure      => present,
     admin       => 'seanroberts66@gmail.com',
     password    => $listpassword,
@@ -332,7 +332,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-   maillist { 'analyst-relations':
+  maillist { 'analyst-relations':
     ensure      => present,
     admin       => 'lauren@openstack.org',
     password    => $listpassword,
@@ -341,7 +341,7 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-   maillist { 'app-catalog-admin':
+  maillist { 'app-catalog-admin':
     ensure      => present,
     admin       => 'doc@aedo.net',
     password    => $listpassword,
