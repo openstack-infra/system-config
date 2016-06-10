@@ -491,8 +491,9 @@ node /^subunit-worker\d+\.openstack\.org$/ {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::subunit_worker':
-    subunit2sql_db_host => hiera('subunit2sql_db_host', ''),
-    subunit2sql_db_pass => hiera('subunit2sql_db_password', ''),
+    subunit2sql_config_file => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
+    subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
+    subunit2sql_db_pass     => hiera('subunit2sql_db_password', ''),
   }
 }
 
