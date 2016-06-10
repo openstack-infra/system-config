@@ -490,7 +490,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
     iptables_public_tcp_ports => [22],
     sysadmins                 => hiera('sysadmins', []),
   }
-  class { 'openstack_project::subunit_worker':
+  class { '::openstackci::subunit_worker':
     subunit2sql_config_file => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
     subunit2sql_db_host     => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass     => hiera('subunit2sql_db_password', ''),
