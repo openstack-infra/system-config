@@ -34,6 +34,8 @@ import os_client_config
 import paramiko
 import shade
 
+from sshclient import SSHException
+
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
 
 try:
@@ -166,7 +168,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
     try:
         ssh_client.ssh("reboot")
-    except Exception as e:
+    except SSHException as e:
         # Some init system kill the connection too fast after reboot.
         # Deal with it by ignoring ssh errors when rebooting.
         if e.rc == -1:
