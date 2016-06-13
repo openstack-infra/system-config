@@ -1,13 +1,13 @@
 ---
-ironic_inventory_hpuswest:
-  baremetal00.hpuswest.ic.openstack.org:
+ironic_inventory_vanilla:
+  baremetal00.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.36
+        ipmi_address: 10.12.83.46
         ipmi_username: Administrator
-    ipv4_public_address: 15.184.52.2
-    ipv4_address: 10.10.16.144
+    ipv4_public_address: 15.184.224.4
+    ipv4_address: 10.10.16.4
     name: baremetal00.hpuswest.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:6d
@@ -16,8 +16,12 @@ ironic_inventory_hpuswest:
       cpus: '24'
       disk_size: '1800'
       ram: '96676'
+      serial_number: use129cnm1
+      rack: '12'
+      ilo_mac: 78:e7:d1:23:95:6a
     uuid: 0090edd1-d3b6-4b6b-b3e4-b2bb09665d7b
     disabled: true # currently deployed
+ironic_inventory_hpuswest:
   baremetal01.hpuswest.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
