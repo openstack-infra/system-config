@@ -415,11 +415,14 @@ class openstack_project::gerrit (
           require => Class['::gerrit'],
         }
         cron { 'mirror_repack':
+          ensure      => absent,
+        }
+        cron { 'mirror_gitgc':
           user        => 'gerrit2',
           weekday     => '0',
           hour        => '4',
           minute      => '7',
-          command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" repack -afd \\;",
+          command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" gc \\;",
           environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
         }
       }
