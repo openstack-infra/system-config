@@ -25,6 +25,7 @@ class openstack_project::wiki (
   realize (
     User::Virtual::Localuser['rlane'],
     User::Virtual::Localuser['mkiss'],
+    User::Virtual::Localuser['maxwell'],
   )
 
   class { 'mediawiki':

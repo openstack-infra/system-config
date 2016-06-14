@@ -212,4 +212,13 @@ class openstack_project::users {
     uid      => 2023,
     gid      => 2023,
   }
+
+  @user::virtual::localuser { 'maxwell':
+    realname => 'JP Maxwell',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA2b5I7Yff9FCrtRmSjpILUePi54Vbc8zqJTbzrIAQZGFLBi3xd2MLlhV5QVgpDBC9H3lGjbdnc81D3aFd3HwHT4dvvvyedT12PR3VDEpftdW84vw3jzdtALcayOQznjbGnScwvX5SgnRhNxuX9Rkh8qNvOsjYPUafRr9azkQoomJFkdNVI4Vb5DbLhTpt18FPeOf0UuqDt/J2tHI4SjZ3kjzr7Nbwpg8xGgANPNE0+2pJbwCA8YDt4g3bzfzvVafQs5o9Gfc9tudkR9ugQG1M+EWCgu42CleOwMTd/rYEB2fgNNPsZAWqwQfdPajVuk70EBKUEQSyoA09eEZX+xJN9Q==',
+    key_id   => 'jpmaxman@tipit.net',
+    uid      => 2024,
+    gid      => 2024,
+  }
+
 }
