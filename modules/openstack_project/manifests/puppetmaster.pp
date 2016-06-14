@@ -321,10 +321,6 @@ class openstack_project::puppetmaster (
     require => File['/var/cache/ansible-inventory'],
   }
 
-  file { '/usr/local/bin/expand-groups.sh':
-    ensure => absent,
-  }
-
   file { '/usr/local/bin/ansible-expand-groups.sh':
     owner  => 'root',
     group  => 'root',
