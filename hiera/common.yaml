@@ -57,6 +57,7 @@ statusbot_channels:
 - openstack-doc
 - openstack-entropy
 - openstack-foundation
+- openstack-fwaas
 - openstack-gantt
 - openstack-gate
 - openstack-glance
