@@ -2,7 +2,6 @@ source-url: http://logs.openstack.org
 
 # List of zmq event inputs.
 zmq-publishers:
-  - tcp://jenkins.openstack.org:8888
   - tcp://jenkins05.openstack.org:8888
   - tcp://jenkins06.openstack.org:8888
   - tcp://jenkins07.openstack.org:8888
