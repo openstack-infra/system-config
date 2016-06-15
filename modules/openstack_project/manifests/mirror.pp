@@ -106,6 +106,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to Ubuntu Cloud Archive.
+  file { "${www_root}/ubuntu-cloud-archive":
+    ensure  => link,
+    target  => "${mirror_root}/ubuntu-cloud-archive",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
