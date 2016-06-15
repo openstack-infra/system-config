@@ -309,7 +309,7 @@ Stage 5 - Jenkins Master(s)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For Zuul to schedule work, it needs one or more Gearman connected Jenkins
-masters. See :ref:`jenkins` for details.
+masters.
 
 The minimum setup is one master, but if you will be permitting any code
 submitter to trigger test runs, we recommend having two: one untrusted and one
@@ -360,7 +360,7 @@ which get the most load (as they run jobs from anyone).
 
 #. Launch the node with a size larger than the jenkins size you specified.
 
-#. Setup Jenkins per :ref:`jenkins`.
+#. Setup Jenkins.
 
 At this stage doing a 'recheck' should still report LOST on a change.
 But in the zuul debug.log in /var/log/zuul you should see a 'build xxx not
