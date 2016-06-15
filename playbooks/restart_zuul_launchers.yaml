@@ -1,0 +1,23 @@
+---
+- hosts: 'zl0*.openstack.org'
+  # Do the entire play completely for one host at a time
+  serial: 1
+  # Treat any errors as fatal so that we don't stop all the jenkins
+  # masters.
+  any_errors_fatal: true
+  tasks:
+    - name: Graceful stop zuul-launcher
+      shell: 'zuul-launcher graceful'
+      become: true
+      become_user: zuul
+
+    - name: Wait for zuul-launcher to stop
+      wait_for:
+        path: /var/lib/zuul/launcher.socket
+        state: absent
+        timeout: 10800
+
+    - name: Start zuul-launcher
+      service:
+        name: zuul-launcher
+        state: started
