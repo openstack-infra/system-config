@@ -161,32 +161,6 @@ node /^jenkins\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: precise
-node 'jenkins-dev.openstack.org' {
-  $http_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 80 -s nodepool.openstack.org -j ACCEPT'
-  $https_iptables_rule = '-m state --state NEW -m tcp -p tcp --dport 443 -s nodepool.openstack.org -j ACCEPT'
-  $iptables_rule = flatten([$http_iptables_rule, $https_iptables_rule])
-  class { 'openstack_project::server':
-    iptables_rules6     => $iptables_rule,
-    iptables_rules4     => $iptables_rule,
-    sysadmins           => hiera('sysadmins', []),
-    puppetmaster_server => 'puppetmaster.openstack.org',
-  }
-  class { 'openstack_project::jenkins_dev':
-    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
-    jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents'),
-    mysql_password           => hiera('nodepool_dev_mysql_password'),
-    mysql_root_password      => hiera('nodepool_dev_mysql_root_password'),
-    nodepool_ssh_private_key => hiera('jenkins_dev_ssh_private_key_contents'),
-    jenkins_api_user         => hiera('jenkins_dev_api_user', 'username'),
-    jenkins_api_key          => hiera('jenkins_dev_api_key'),
-    jenkins_credentials_id   => hiera('jenkins_dev_credentials_id'),
-    hpcloud_username         => hiera('nodepool_hpcloud_username', 'username'),
-    hpcloud_password         => hiera('nodepool_hpcloud_password'),
-    hpcloud_project          => hiera('nodepool_hpcloud_project'),
-  }
-}
-
 # Node-OS: trusty
 node 'cacti.openstack.org' {
   include openstack_project::ssl_cert_check
@@ -817,7 +791,6 @@ node 'zuul.openstack.org' {
       'jenkins05.openstack.org',
       'jenkins06.openstack.org',
       'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
       'zlstatic01.openstack.org',
       'zl01.openstack.org',
       'zl02.openstack.org',
@@ -918,7 +891,6 @@ node 'zuul-dev.openstack.org' {
       'jenkins05.openstack.org',
       'jenkins06.openstack.org',
       'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
     ],
   }
 }
