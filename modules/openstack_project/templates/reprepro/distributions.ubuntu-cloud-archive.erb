@@ -1,0 +1,14 @@
+<% releases.each do |distro_codename, openstack_codenames| -%>
+  <% openstack_codenames.each do |openstack_codename| -%>
+Origin: Canonical
+Codename: <%= distro_codename %>-updates/<%= openstack_codename %>
+Description: OpenStack <%= openstack_codename.capitalize %> Archive for Ubuntu <%= distro_codename.capitalize %>
+Architectures: amd64
+Components: main
+UDebComponents: main
+Contents: .gz
+Update: <%= distro_codename %>-updates
+Log: <%= @logdir %>/ubuntu-cloud-archive-<%= release %>.log
+
+  <% end -%>
+<% end -%>
