@@ -253,4 +253,37 @@ class openstack_project::mirror_update (
        File['/etc/epel.keytab'],
     ]
   }
+
+  ### Ubuntu Cloud Archive Mirror ###
+  ::openstack_project::reprepro { 'ubuntu-cloud-archive-reprepro-mirror':
+    confdir       => '/etc/reprepro/ubuntu-cloud-archive',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu-cloud-archive',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu-cloud-archive.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-updates',
+    releases      => { 'trusty'=>['liberty', 'mitaka'], 'xenial'=>['newton'] },
+  }
+
+  cron { 'reprepro ubuntu-cloud-archive':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/ubuntu-cloud-archive.lock reprepro-mirror-update /etc/reprepro/ubuntu-cloud-archive mirror.ubuntu-cloud-archive >>/var/log/reprepro/ubuntu-cloud-archive-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['ubuntu-cloud-archive-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Canonical Cloud Archive Signing Key':
+    ensure     => present,
+    # 391A 9AA2 1471 9283 9E9D  B031 5EDB 1B62 EC49 26EA
+    key_id     => '5EDB1B62EC4926EA',
+    user       => 'root',
+    key_server => 'hkp://keyserver.ubuntu.com',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
+  }
 }
