@@ -1,0 +1,21 @@
+---
+- hosts: 'zl0*.openstack.org'
+  # Do the entire play completely for one host at a time
+  serial: 1
+  any_errors_fatal: true
+  tasks:
+    - name: Graceful stop zuul-launcher
+      shell: 'zuul-launcher graceful'
+      become: true
+      become_user: zuul
+
+    - name: Wait for zuul-launcher to stop
+      wait_for:
+        path: /var/run/zuul-launcher/zuul-launcher.pid
+        state: absent
+        timeout: 10800
+
+    - name: Restart zuu-launcher
+      service:
+        name: zuul-launcher
+        state: restarted
