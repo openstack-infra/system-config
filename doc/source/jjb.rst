@@ -12,10 +12,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://jenkins.openstack.org
-  * http://jenkins-dev.openstack.org
-:Puppet:
-  * https://git.openstack.org/cgit/openstack-infra/puppet-jenkins/tree/manifests/job_builder.pp
+  * http://zm*.openstack.org
 :Configuration:
   * :config:`jenkins/jobs/`
 :Projects:
@@ -228,44 +225,11 @@ values.
 Notice that example1 makes use of the job group and example2 makes use of the
 job template.
 
-Job Caching
------------
+Zuul
+====
 
-The Jenkins Jobs builder maintains a special `cache`_ that
-contains an MD5 of every generated XML that it builds.  If
-it finds the XML is different then it will proceed to send this
-to Jenkins, otherwise it is skipped. If a job is accidentally deleted
-then this file should be modified or removed.
-
-.. _cache: http://docs.openstack.org/infra/jenkins-job-builder/installation.html#running
-
-Sending a Job to Jenkins
-------------------------
-
-The Jenkins Jobs builder talks to Jenkins using the Jenkins API.  This
-means that it can create and modify jobs directly without the need to
-restart or reload the Jenkins server.  It also means that Jenkins will
-verify the XML and cause the Jenkins Jobs builder to fail if there is
-a problem.
-
-For this to work a configuration file is needed.  There is an erb
-template for this configuration file at
-:file:`modules/jenkins/templates/jenkins_jobs.ini.erb`.  The contents
-of this template are:
-
-.. code-block:: ini
-
-   [jenkins]
-   user=<%= username %>
-   password=<%= password %>
-   url=<%= url %>
-
-The values for user and url are hardcoded in the Puppet repo in
-:file:`modules/openstack_project/manifests/jenkins.pp`, but the
-password is stored in hiera. Make sure you have it defined as
-``jenkins_jobs_password`` in the hiera DB.
-
-The password can be obtained by logging into the Jenkins user,
-clicking on your username in the top-right, clicking on `Configure`
-and then `Show API Token`.  This API Token is your password for the
-API.
+In our environment, we no longer use Jenkins to execute jobs.  Zuul
+itself, via Ansible, runs the actual workload.  Zuul reads JJB config
+files in order to define its jobs, so, aside from the detail of not
+actually using Jenkins or creating any jobs in it, the use of JJB to
+configure jobs in Zuul is the same.
