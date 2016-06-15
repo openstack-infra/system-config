@@ -294,8 +294,6 @@ cacti_hosts:
 - health.openstack.org
 - jenkins-dev.openstack.org
 - jenkins.openstack.org
-- jenkins03.openstack.org
-- jenkins04.openstack.org
 - jenkins05.openstack.org
 - jenkins06.openstack.org
 - jenkins07.openstack.org
