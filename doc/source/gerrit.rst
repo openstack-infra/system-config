@@ -454,8 +454,9 @@ To rename a project:
    projects.yaml/ACLs, jenkins-job-builder and gerritbot for the new
    name. Also add changes to update projects.txt in all branches of
    the requirements repo, devstack-vm-gate-wrap.sh in the
-   devstack-gate repo, and .gitmodules in the openstack/openstack
-   repo if necessary.
+   devstack-gate repo, reference/projects.yaml in the
+   openstack/governance repo, and .gitmodules in the
+   openstack/openstack repo if necessary.
 
 #. Stop puppet runs on the puppetmaster to prevent early application
    of configuration changes::
