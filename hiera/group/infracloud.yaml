@@ -2540,7 +2540,7 @@ ironic_inventory_hpuseast:
     disabled: true # not needed due to ip limit
     driver_info:
       power:
-        ipmi_address: 10.22.27.160
+        ipmi_address: 10.12.83.92
         ipmi_username: headmin
     nics:
     - mac: 44:1E:A1:72:5F:D1
@@ -2550,6 +2550,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use237e1kb
+      rack: '9'
+      ilo_mac: 44:1E:A1:72:5F:D2
     name: compute089.hpuseast.ic.openstack.org
   compute090.hpuseast.ic.openstack.org:
     ansible_ssh_host: 15.126.48.93
