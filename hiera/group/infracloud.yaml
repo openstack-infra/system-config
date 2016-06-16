@@ -858,8 +858,8 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 1d937491-56b6-4eb9-bc73-720a8af1c788
-ironic_inventory_hpuseast:
-  controller00.hpuseast.ic.openstack.org:
+ironic_inventory_chocolate:
+  controller00.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.3
     ipv4_address: 15.126.48.3
     provisioning_ipv4_address: 10.23.212.4
@@ -876,8 +876,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: controller00.hpuseast.ic.openstack.org
-  compute000.hpuseast.ic.openstack.org:
+    name: controller00.chocolate.ic.openstack.org
+  compute000.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.4
     ipv4_address: 15.126.48.4
     provisioning_ipv4_address: 10.23.212.5
@@ -894,9 +894,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute000.hpuseast.ic.openstack.org
-    new_hostname: compute000.hpuseast.ic.openstack.org
-  compute001.hpuseast.ic.openstack.org:
+    name: compute000.chocolate.ic.openstack.org
+    new_hostname: compute000.chocolate.ic.openstack.org
+  compute001.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.5
     ipv4_address: 15.126.48.5
     provisioning_ipv4_address: 10.23.212.6
@@ -913,9 +913,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute001.hpuseast.ic.openstack.org
-    new_hostname: compute001.hpuseast.ic.openstack.org
-  compute002.hpuseast.ic.openstack.org:
+    name: compute001.chocolate.ic.openstack.org
+    new_hostname: compute001.chocolate.ic.openstack.org
+  compute002.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.6
     ipv4_address: 15.126.48.6
     provisioning_ipv4_address: 10.23.212.7
@@ -932,9 +932,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute002.hpuseast.ic.openstack.org
-    new_hostname: compute002.hpuseast.ic.openstack.org
-  compute003.hpuseast.ic.openstack.org:
+    name: compute002.chocolate.ic.openstack.org
+    new_hostname: compute002.chocolate.ic.openstack.org
+  compute003.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.7
     ipv4_address: 15.126.48.7
     provisioning_ipv4_address: 10.23.212.8
@@ -951,9 +951,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute003.hpuseast.ic.openstack.org
-    new_hostname: compute003.hpuseast.ic.openstack.org
-  compute004.hpuseast.ic.openstack.org:
+    name: compute003.chocolate.ic.openstack.org
+    new_hostname: compute003.chocolate.ic.openstack.org
+  compute004.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.8
     ipv4_address: 15.126.48.8
     provisioning_ipv4_address: 10.23.212.9
@@ -970,9 +970,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute004.hpuseast.ic.openstack.org
-    new_hostname: compute004.hpuseast.ic.openstack.org
-  compute005.hpuseast.ic.openstack.org:
+    name: compute004.chocolate.ic.openstack.org
+    new_hostname: compute004.chocolate.ic.openstack.org
+  compute005.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.9
     ipv4_address: 15.126.48.9
     provisioning_ipv4_address: 10.23.212.10
@@ -989,9 +989,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute005.hpuseast.ic.openstack.org
-    new_hostname: compute005.hpuseast.ic.openstack.org
-  compute006.hpuseast.ic.openstack.org:
+    name: compute005.chocolate.ic.openstack.org
+    new_hostname: compute005.chocolate.ic.openstack.org
+  compute006.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.10
     ipv4_address: 15.126.48.10
     provisioning_ipv4_address: 10.23.212.11
@@ -1008,9 +1008,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute006.hpuseast.ic.openstack.org
-    new_hostname: compute006.hpuseast.ic.openstack.org
-  compute007.hpuseast.ic.openstack.org:
+    name: compute006.chocolate.ic.openstack.org
+    new_hostname: compute006.chocolate.ic.openstack.org
+  compute007.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.11
     ipv4_address: 15.126.48.11
     provisioning_ipv4_address: 10.23.212.12
@@ -1027,9 +1027,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute007.hpuseast.ic.openstack.org
-    new_hostname: compute007.hpuseast.ic.openstack.org
-  compute008.hpuseast.ic.openstack.org:
+    name: compute007.chocolate.ic.openstack.org
+    new_hostname: compute007.chocolate.ic.openstack.org
+  compute008.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.12
     ipv4_address: 15.126.48.12
     provisioning_ipv4_address: 10.23.212.13
@@ -1046,9 +1046,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute008.hpuseast.ic.openstack.org
-    new_hostname: compute008.hpuseast.ic.openstack.org
-  compute009.hpuseast.ic.openstack.org:
+    name: compute008.chocolate.ic.openstack.org
+    new_hostname: compute008.chocolate.ic.openstack.org
+  compute009.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.13
     ipv4_address: 15.126.48.13
     provisioning_ipv4_address: 10.23.212.15
@@ -1065,8 +1065,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size: 322122547200
       cpus:
-    name: compute009.hpuseast.ic.openstack.org
-  compute010.hpuseast.ic.openstack.org:
+    name: compute009.chocolate.ic.openstack.org
+  compute010.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.14
     ipv4_address: 15.126.48.14
     provisioning_ipv4_address: 10.23.212.16
@@ -1083,8 +1083,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute010.hpuseast.ic.openstack.org
-  compute011.hpuseast.ic.openstack.org:
+    name: compute010.chocolate.ic.openstack.org
+  compute011.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.15
     ipv4_address: 15.126.48.15
     provisioning_ipv4_address: 10.23.212.17
@@ -1101,8 +1101,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute011.hpuseast.ic.openstack.org
-  compute012.hpuseast.ic.openstack.org:
+    name: compute011.chocolate.ic.openstack.org
+  compute012.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.16
     ipv4_address: 15.126.48.16
     provisioning_ipv4_address: 10.23.212.18
@@ -1119,8 +1119,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute012.hpuseast.ic.openstack.org
-  compute013.hpuseast.ic.openstack.org:
+    name: compute012.chocolate.ic.openstack.org
+  compute013.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.17
     ipv4_address: 15.126.48.17
     provisioning_ipv4_address: 10.23.212.19
@@ -1137,8 +1137,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute013.hpuseast.ic.openstack.org
-  compute014.hpuseast.ic.openstack.org:
+    name: compute013.chocolate.ic.openstack.org
+  compute014.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.18
     ipv4_address: 15.126.48.18
     provisioning_ipv4_address: 10.23.212.20
@@ -1155,8 +1155,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute014.hpuseast.ic.openstack.org
-  compute015.hpuseast.ic.openstack.org:
+    name: compute014.chocolate.ic.openstack.org
+  compute015.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.19
     ipv4_address: 15.126.48.19
     provisioning_ipv4_address: 10.23.212.21
@@ -1173,8 +1173,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute015.hpuseast.ic.openstack.org
-  compute016.hpuseast.ic.openstack.org:
+    name: compute015.chocolate.ic.openstack.org
+  compute016.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.20
     ipv4_address: 15.126.48.20
     provisioning_ipv4_address: 10.23.212.22
@@ -1191,8 +1191,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute016.hpuseast.ic.openstack.org
-  compute017.hpuseast.ic.openstack.org:
+    name: compute016.chocolate.ic.openstack.org
+  compute017.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.21
     ipv4_address: 15.126.48.21
     provisioning_ipv4_address: 10.23.212.14
@@ -1209,8 +1209,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute017.hpuseast.ic.openstack.org
-  compute018.hpuseast.ic.openstack.org:
+    name: compute017.chocolate.ic.openstack.org
+  compute018.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.22
     ipv4_address: 15.126.48.22
     provisioning_ipv4_address: 10.23.212.23
@@ -1227,8 +1227,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute018.hpuseast.ic.openstack.org
-  compute019.hpuseast.ic.openstack.org:
+    name: compute018.chocolate.ic.openstack.org
+  compute019.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.23
     ipv4_address: 15.126.48.23
     provisioning_ipv4_address: 10.23.212.24
@@ -1245,8 +1245,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute019.hpuseast.ic.openstack.org
-  compute020.hpuseast.ic.openstack.org:
+    name: compute019.chocolate.ic.openstack.org
+  compute020.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.24
     ipv4_address: 15.126.48.24
     provisioning_ipv4_address: 10.23.212.25
@@ -1263,8 +1263,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute020.hpuseast.ic.openstack.org
-  compute021.hpuseast.ic.openstack.org:
+    name: compute020.chocolate.ic.openstack.org
+  compute021.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.25
     ipv4_address: 15.126.48.25
     provisioning_ipv4_address: 10.23.212.26
@@ -1281,8 +1281,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute021.hpuseast.ic.openstack.org
-  compute022.hpuseast.ic.openstack.org:
+    name: compute021.chocolate.ic.openstack.org
+  compute022.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.26
     ipv4_address: 15.126.48.26
     provisioning_ipv4_address: 10.23.212.27
@@ -1299,8 +1299,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute022.hpuseast.ic.openstack.org
-  compute023.hpuseast.ic.openstack.org:
+    name: compute022.chocolate.ic.openstack.org
+  compute023.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.27
     ipv4_address: 15.126.48.27
     provisioning_ipv4_address: 10.23.212.28
@@ -1317,8 +1317,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute023.hpuseast.ic.openstack.org
-  compute024.hpuseast.ic.openstack.org:
+    name: compute023.chocolate.ic.openstack.org
+  compute024.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.28
     ipv4_address: 15.126.48.28
     provisioning_ipv4_address: 10.23.212.29
@@ -1335,8 +1335,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute024.hpuseast.ic.openstack.org
-  compute025.hpuseast.ic.openstack.org:
+    name: compute024.chocolate.ic.openstack.org
+  compute025.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.29
     ipv4_address: 15.126.48.29
     provisioning_ipv4_address: 10.23.212.30
@@ -1353,8 +1353,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute025.hpuseast.ic.openstack.org
-  compute026.hpuseast.ic.openstack.org:
+    name: compute025.chocolate.ic.openstack.org
+  compute026.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.30
     ipv4_address: 15.126.48.30
     provisioning_ipv4_address: 10.23.212.31
@@ -1372,8 +1372,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute026.hpuseast.ic.openstack.org
-  compute027.hpuseast.ic.openstack.org:
+    name: compute026.chocolate.ic.openstack.org
+  compute027.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.31
     ipv4_address: 15.126.48.31
     provisioning_ipv4_address: 10.23.212.95
@@ -1391,8 +1391,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute027.hpuseast.ic.openstack.org
-  compute028.hpuseast.ic.openstack.org:
+    name: compute027.chocolate.ic.openstack.org
+  compute028.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.32
     ipv4_address: 15.126.48.32
     provisioning_ipv4_address: 10.23.212.32
@@ -1410,8 +1410,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size: 322122547200
       cpus:
-    name: compute028.hpuseast.ic.openstack.org
-  compute029.hpuseast.ic.openstack.org:
+    name: compute028.chocolate.ic.openstack.org
+  compute029.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.33
     ipv4_address: 15.126.48.33
     provisioning_ipv4_address: 10.23.212.33
@@ -1429,8 +1429,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute029.hpuseast.ic.openstack.org
-  compute030.hpuseast.ic.openstack.org:
+    name: compute029.chocolate.ic.openstack.org
+  compute030.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.34
     ipv4_address: 15.126.48.34
     provisioning_ipv4_address: 10.23.212.34
@@ -1448,8 +1448,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute030.hpuseast.ic.openstack.org
-  compute031.hpuseast.ic.openstack.org:
+    name: compute030.chocolate.ic.openstack.org
+  compute031.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.35
     ipv4_address: 15.126.48.35
     provisioning_ipv4_address: 10.23.212.35
@@ -1467,8 +1467,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute031.hpuseast.ic.openstack.org
-  compute032.hpuseast.ic.openstack.org:
+    name: compute031.chocolate.ic.openstack.org
+  compute032.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.36
     ipv4_address: 15.126.48.36
     provisioning_ipv4_address: 10.23.212.36
@@ -1486,8 +1486,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute032.hpuseast.ic.openstack.org
-  compute033.hpuseast.ic.openstack.org:
+    name: compute032.chocolate.ic.openstack.org
+  compute033.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.37
     ipv4_address: 15.126.48.37
     provisioning_ipv4_address: 10.23.212.37
@@ -1505,8 +1505,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute033.hpuseast.ic.openstack.org
-  compute034.hpuseast.ic.openstack.org:
+    name: compute033.chocolate.ic.openstack.org
+  compute034.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.38
     ipv4_address: 15.126.48.38
     provisioning_ipv4_address: 10.23.212.38
@@ -1524,8 +1524,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute034.hpuseast.ic.openstack.org
-  compute035.hpuseast.ic.openstack.org:
+    name: compute034.chocolate.ic.openstack.org
+  compute035.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.39
     ipv4_address: 15.126.48.39
     provisioning_ipv4_address: 10.23.212.39
@@ -1543,8 +1543,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute035.hpuseast.ic.openstack.org
-  compute036.hpuseast.ic.openstack.org:
+    name: compute035.chocolate.ic.openstack.org
+  compute036.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.40
     ipv4_address: 15.126.48.40
     provisioning_ipv4_address: 10.23.212.40
@@ -1562,8 +1562,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute036.hpuseast.ic.openstack.org
-  compute038.hpuseast.ic.openstack.org:
+    name: compute036.chocolate.ic.openstack.org
+  compute038.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.41
     ipv4_address: 15.126.48.41
     provisioning_ipv4_address: 10.23.212.44
@@ -1581,8 +1581,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute038.hpuseast.ic.openstack.org
-  compute039.hpuseast.ic.openstack.org:
+    name: compute038.chocolate.ic.openstack.org
+  compute039.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.42
     ipv4_address: 15.126.48.42
     provisioning_ipv4_address: 10.23.212.41
@@ -1600,8 +1600,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute039.hpuseast.ic.openstack.org
-  compute040.hpuseast.ic.openstack.org:
+    name: compute039.chocolate.ic.openstack.org
+  compute040.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.43
     ipv4_address: 15.126.48.43
     provisioning_ipv4_address: 10.23.212.42
@@ -1619,8 +1619,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute040.hpuseast.ic.openstack.org
-  compute041.hpuseast.ic.openstack.org:
+    name: compute040.chocolate.ic.openstack.org
+  compute041.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.44
     ipv4_address: 15.126.48.44
     provisioning_ipv4_address: 10.23.212.43
@@ -1638,8 +1638,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute041.hpuseast.ic.openstack.org
-  compute042.hpuseast.ic.openstack.org:
+    name: compute041.chocolate.ic.openstack.org
+  compute042.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.45
     ipv4_address: 15.126.48.45
     provisioning_ipv4_address: 10.23.212.45
@@ -1657,8 +1657,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute042.hpuseast.ic.openstack.org
-  compute043.hpuseast.ic.openstack.org:
+    name: compute042.chocolate.ic.openstack.org
+  compute043.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.46
     ipv4_address: 15.126.48.46
     provisioning_ipv4_address: 10.23.212.46
@@ -1676,8 +1676,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute043.hpuseast.ic.openstack.org
-  compute044.hpuseast.ic.openstack.org:
+    name: compute043.chocolate.ic.openstack.org
+  compute044.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.47
     ipv4_address: 15.126.48.47
     provisioning_ipv4_address: 10.23.212.47
@@ -1695,8 +1695,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute044.hpuseast.ic.openstack.org
-  compute045.hpuseast.ic.openstack.org:
+    name: compute044.chocolate.ic.openstack.org
+  compute045.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.48
     ipv4_address: 15.126.48.48
     provisioning_ipv4_address: 10.23.212.48
@@ -1714,8 +1714,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute045.hpuseast.ic.openstack.org
-  compute046.hpuseast.ic.openstack.org:
+    name: compute045.chocolate.ic.openstack.org
+  compute046.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.49
     ipv4_address: 15.126.48.49
     provisioning_ipv4_address: 10.23.212.49
@@ -1733,8 +1733,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute046.hpuseast.ic.openstack.org
-  compute047.hpuseast.ic.openstack.org:
+    name: compute046.chocolate.ic.openstack.org
+  compute047.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.50
     ipv4_address: 15.126.48.50
     provisioning_ipv4_address: 10.23.212.50
@@ -1752,8 +1752,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute047.hpuseast.ic.openstack.org
-  compute048.hpuseast.ic.openstack.org:
+    name: compute047.chocolate.ic.openstack.org
+  compute048.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.51
     ipv4_address: 15.126.48.51
     provisioning_ipv4_address: 10.23.212.51
@@ -1771,8 +1771,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute048.hpuseast.ic.openstack.org
-  compute049.hpuseast.ic.openstack.org:
+    name: compute048.chocolate.ic.openstack.org
+  compute049.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.52
     ipv4_address: 15.126.48.52
     provisioning_ipv4_address: 10.23.212.52
@@ -1790,8 +1790,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute049.hpuseast.ic.openstack.org
-  compute050.hpuseast.ic.openstack.org:
+    name: compute049.chocolate.ic.openstack.org
+  compute050.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.53
     ipv4_address: 15.126.48.53
     provisioning_ipv4_address: 10.23.212.53
@@ -1809,8 +1809,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute050.hpuseast.ic.openstack.org
-  compute051.hpuseast.ic.openstack.org:
+    name: compute050.chocolate.ic.openstack.org
+  compute051.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.54
     ipv4_address: 15.126.48.54
     provisioning_ipv4_address: 10.23.212.54
@@ -1828,8 +1828,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute051.hpuseast.ic.openstack.org
-  compute052.hpuseast.ic.openstack.org:
+    name: compute051.chocolate.ic.openstack.org
+  compute052.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.55
     ipv4_address: 15.126.48.55
     provisioning_ipv4_address: 10.23.212.55
@@ -1847,8 +1847,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute052.hpuseast.ic.openstack.org
-  compute053.hpuseast.ic.openstack.org:
+    name: compute052.chocolate.ic.openstack.org
+  compute053.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.56
     ipv4_address: 15.126.48.56
     provisioning_ipv4_address: 10.23.212.56
@@ -1866,8 +1866,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute053.hpuseast.ic.openstack.org
-  compute054.hpuseast.ic.openstack.org:
+    name: compute053.chocolate.ic.openstack.org
+  compute054.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.57
     ipv4_address: 15.126.48.57
     provisioning_ipv4_address: 10.23.212.57
@@ -1885,8 +1885,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute054.hpuseast.ic.openstack.org
-  compute055.hpuseast.ic.openstack.org:
+    name: compute054.chocolate.ic.openstack.org
+  compute055.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.58
     ipv4_address: 15.126.48.58
     provisioning_ipv4_address: 10.23.212.58
@@ -1904,8 +1904,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute055.hpuseast.ic.openstack.org
-  compute056.hpuseast.ic.openstack.org:
+    name: compute055.chocolate.ic.openstack.org
+  compute056.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.59
     ipv4_address: 15.126.48.59
     provisioning_ipv4_address: 10.23.212.59
@@ -1923,8 +1923,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute056.hpuseast.ic.openstack.org
-  compute057.hpuseast.ic.openstack.org:
+    name: compute056.chocolate.ic.openstack.org
+  compute057.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.60
     ipv4_address: 15.126.48.60
     provisioning_ipv4_address: 10.23.212.60
@@ -1942,8 +1942,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute057.hpuseast.ic.openstack.org
-  compute058.hpuseast.ic.openstack.org:
+    name: compute057.chocolate.ic.openstack.org
+  compute058.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.61
     ipv4_address: 15.126.48.61
     provisioning_ipv4_address: 10.23.212.61
@@ -1961,8 +1961,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute058.hpuseast.ic.openstack.org
-  compute059.hpuseast.ic.openstack.org:
+    name: compute058.chocolate.ic.openstack.org
+  compute059.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.62
     ipv4_address: 15.126.48.62
     provisioning_ipv4_address: 10.23.212.62
@@ -1980,8 +1980,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute059.hpuseast.ic.openstack.org
-  compute060.hpuseast.ic.openstack.org:
+    name: compute059.chocolate.ic.openstack.org
+  compute060.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.63
     ipv4_address: 15.126.48.63
     provisioning_ipv4_address: 10.23.212.63
@@ -1999,8 +1999,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute060.hpuseast.ic.openstack.org
-  compute061.hpuseast.ic.openstack.org:
+    name: compute060.chocolate.ic.openstack.org
+  compute061.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.64
     ipv4_address: 15.126.48.64
     provisioning_ipv4_address: 10.23.212.65
@@ -2018,8 +2018,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute061.hpuseast.ic.openstack.org
-  compute062.hpuseast.ic.openstack.org:
+    name: compute061.chocolate.ic.openstack.org
+  compute062.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.65
     ipv4_address: 15.126.48.65
     provisioning_ipv4_address: 10.23.212.66
@@ -2037,8 +2037,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute062.hpuseast.ic.openstack.org
-  compute063.hpuseast.ic.openstack.org:
+    name: compute062.chocolate.ic.openstack.org
+  compute063.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.66
     ipv4_address: 15.126.48.66
     provisioning_ipv4_address: 10.23.212.67
@@ -2056,8 +2056,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute063.hpuseast.ic.openstack.org
-  compute064.hpuseast.ic.openstack.org:
+    name: compute063.chocolate.ic.openstack.org
+  compute064.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.67
     ipv4_address: 15.126.48.67
     provisioning_ipv4_address: 10.23.212.68
@@ -2075,8 +2075,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute064.hpuseast.ic.openstack.org
-  compute065.hpuseast.ic.openstack.org:
+    name: compute064.chocolate.ic.openstack.org
+  compute065.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.68
     ipv4_address: 15.126.48.68
     provisioning_ipv4_address: 10.23.212.69
@@ -2094,8 +2094,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute065.hpuseast.ic.openstack.org
-  compute066.hpuseast.ic.openstack.org:
+    name: compute065.chocolate.ic.openstack.org
+  compute066.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.69
     ipv4_address: 15.126.48.69
     provisioning_ipv4_address: 10.23.212.80
@@ -2113,8 +2113,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute066.hpuseast.ic.openstack.org
-  compute067.hpuseast.ic.openstack.org:
+    name: compute066.chocolate.ic.openstack.org
+  compute067.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.70
     ipv4_address: 15.126.48.70
     provisioning_ipv4_address: 10.23.212.81
@@ -2132,8 +2132,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute067.hpuseast.ic.openstack.org
-  compute068.hpuseast.ic.openstack.org:
+    name: compute067.chocolate.ic.openstack.org
+  compute068.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.71
     ipv4_address: 15.126.48.71
     provisioning_ipv4_address: 10.23.212.82
@@ -2151,8 +2151,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute068.hpuseast.ic.openstack.org
-  compute069.hpuseast.ic.openstack.org:
+    name: compute068.chocolate.ic.openstack.org
+  compute069.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.72
     ipv4_address: 15.126.48.72
     provisioning_ipv4_address: 10.23.212.84
@@ -2170,8 +2170,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute069.hpuseast.ic.openstack.org
-  compute070.hpuseast.ic.openstack.org:
+    name: compute069.chocolate.ic.openstack.org
+  compute070.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.73
     ipv4_address: 15.126.48.73
     provisioning_ipv4_address: 10.23.212.85
@@ -2189,8 +2189,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute070.hpuseast.ic.openstack.org
-  compute071.hpuseast.ic.openstack.org:
+    name: compute070.chocolate.ic.openstack.org
+  compute071.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.74
     ipv4_address: 15.126.48.74
     provisioning_ipv4_address: 10.23.212.64
@@ -2208,8 +2208,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute071.hpuseast.ic.openstack.org
-  compute072.hpuseast.ic.openstack.org:
+    name: compute071.chocolate.ic.openstack.org
+  compute072.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.75
     ipv4_address: 15.126.48.75
     provisioning_ipv4_address: 10.23.212.71
@@ -2227,8 +2227,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute072.hpuseast.ic.openstack.org
-  compute073.hpuseast.ic.openstack.org:
+    name: compute072.chocolate.ic.openstack.org
+  compute073.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.76
     ipv4_address: 15.126.48.76
     provisioning_ipv4_address: 10.23.212.72
@@ -2246,8 +2246,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute073.hpuseast.ic.openstack.org
-  compute074.hpuseast.ic.openstack.org:
+    name: compute073.chocolate.ic.openstack.org
+  compute074.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.77
     ipv4_address: 15.126.48.77
     provisioning_ipv4_address: 10.23.212.73
@@ -2265,8 +2265,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute074.hpuseast.ic.openstack.org
-  compute075.hpuseast.ic.openstack.org:
+    name: compute074.chocolate.ic.openstack.org
+  compute075.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.78
     ipv4_address: 15.126.48.78
     provisioning_ipv4_address: 10.23.212.74
@@ -2284,8 +2284,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute075.hpuseast.ic.openstack.org
-  compute076.hpuseast.ic.openstack.org:
+    name: compute075.chocolate.ic.openstack.org
+  compute076.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.79
     ipv4_address: 15.126.48.79
     provisioning_ipv4_address: 10.23.212.75
@@ -2303,8 +2303,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute076.hpuseast.ic.openstack.org
-  compute077.hpuseast.ic.openstack.org:
+    name: compute076.chocolate.ic.openstack.org
+  compute077.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.80
     ipv4_address: 15.126.48.80
     provisioning_ipv4_address: 10.23.212.76
@@ -2322,8 +2322,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute077.hpuseast.ic.openstack.org
-  compute078.hpuseast.ic.openstack.org:
+    name: compute077.chocolate.ic.openstack.org
+  compute078.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.81
     ipv4_address: 15.126.48.81
     provisioning_ipv4_address: 10.23.212.77
@@ -2341,8 +2341,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute078.hpuseast.ic.openstack.org
-  compute079.hpuseast.ic.openstack.org:
+    name: compute078.chocolate.ic.openstack.org
+  compute079.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.82
     ipv4_address: 15.126.48.82
     provisioning_ipv4_address: 10.23.212.78
@@ -2360,8 +2360,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute079.hpuseast.ic.openstack.org
-  compute080.hpuseast.ic.openstack.org:
+    name: compute079.chocolate.ic.openstack.org
+  compute080.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.83
     ipv4_address: 15.126.48.83
     provisioning_ipv4_address: 10.23.212.79
@@ -2379,8 +2379,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute080.hpuseast.ic.openstack.org
-  compute081.hpuseast.ic.openstack.org:
+    name: compute080.chocolate.ic.openstack.org
+  compute081.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.84
     ipv4_address: 15.126.48.84
     provisioning_ipv4_address: 10.23.212.70
@@ -2398,8 +2398,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute081.hpuseast.ic.openstack.org
-  compute082.hpuseast.ic.openstack.org:
+    name: compute081.chocolate.ic.openstack.org
+  compute082.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.85
     ipv4_address: 15.126.48.85
     provisioning_ipv4_address: 10.23.212.83
@@ -2417,8 +2417,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute082.hpuseast.ic.openstack.org
-  compute083.hpuseast.ic.openstack.org:
+    name: compute082.chocolate.ic.openstack.org
+  compute083.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.86
     ipv4_address: 15.126.48.86
     provisioning_ipv4_address: 10.23.212.86
@@ -2436,8 +2436,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute083.hpuseast.ic.openstack.org
-  compute084.hpuseast.ic.openstack.org:
+    name: compute083.chocolate.ic.openstack.org
+  compute084.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.87
     ipv4_address: 15.126.48.87
     provisioning_ipv4_address: 10.23.212.87
@@ -2455,8 +2455,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute084.hpuseast.ic.openstack.org
-  compute085.hpuseast.ic.openstack.org:
+    name: compute084.chocolate.ic.openstack.org
+  compute085.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.88
     ipv4_address: 15.126.48.88
     provisioning_ipv4_address: 10.23.212.88
@@ -2474,8 +2474,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute085.hpuseast.ic.openstack.org
-  compute086.hpuseast.ic.openstack.org:
+    name: compute085.chocolate.ic.openstack.org
+  compute086.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.89
     ipv4_address: 15.126.48.89
     provisioning_ipv4_address: 10.23.212.89
@@ -2493,8 +2493,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute086.hpuseast.ic.openstack.org
-  compute087.hpuseast.ic.openstack.org:
+    name: compute086.chocolate.ic.openstack.org
+  compute087.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.90
     ipv4_address: 15.126.48.90
     provisioning_ipv4_address: 10.23.212.90
@@ -2512,8 +2512,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute087.hpuseast.ic.openstack.org
-  compute088.hpuseast.ic.openstack.org:
+    name: compute087.chocolate.ic.openstack.org
+  compute088.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.91
     ipv4_address: 15.126.48.91
     provisioning_ipv4_address: 10.23.212.91
@@ -2531,8 +2531,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute088.hpuseast.ic.openstack.org
-  compute089.hpuseast.ic.openstack.org:
+    name: compute088.chocolate.ic.openstack.org
+  compute089.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.92
     ipv4_address: 15.126.48.92
     provisioning_ipv4_address: 10.23.212.92
@@ -2550,8 +2550,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute089.hpuseast.ic.openstack.org
-  compute090.hpuseast.ic.openstack.org:
+    name: compute089.chocolate.ic.openstack.org
+  compute090.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.93
     ipv4_address: 15.126.48.93
     provisioning_ipv4_address: 10.23.212.93
@@ -2569,8 +2569,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute090.hpuseast.ic.openstack.org
-  compute091.hpuseast.ic.openstack.org:
+    name: compute090.chocolate.ic.openstack.org
+  compute091.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.94
     ipv4_address: 15.126.48.94
     provisioning_ipv4_address: 10.23.212.94
@@ -2588,8 +2588,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute091.hpuseast.ic.openstack.org
-  compute092.hpuseast.ic.openstack.org:
+    name: compute091.chocolate.ic.openstack.org
+  compute092.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.95
     ipv4_address: 15.126.48.95
     provisioning_ipv4_address: 10.23.212.96
@@ -2607,8 +2607,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute092.hpuseast.ic.openstack.org
-  compute093.hpuseast.ic.openstack.org:
+    name: compute092.chocolate.ic.openstack.org
+  compute093.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.96
     ipv4_address: 15.126.48.96
     provisioning_ipv4_address: 10.23.212.97
@@ -2626,8 +2626,8 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute093.hpuseast.ic.openstack.org
-  compute094.hpuseast.ic.openstack.org:
+    name: compute093.chocolate.ic.openstack.org
+  compute094.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.97
     ipv4_address: 15.126.48.97
     provisioning_ipv4_address: 10.23.212.98
@@ -2645,4 +2645,4 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
-    name: compute094.hpuseast.ic.openstack.org
+    name: compute094.chocolate.ic.openstack.org
