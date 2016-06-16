@@ -334,10 +334,14 @@ function format_change(change, change_queue) {
         html += '<span class="jobwrapper"><span class="job">';
         if (job['result'] !== null && job['report_url'] !== null) {
             html += '<a href="'+job['report_url']+'">';
-        }
-        html += job['name'];
-        if (job['result'] !== null && job['report_url'] !== null) {
+            html += job['name'];
             html += '</a>';
+        } else if (job['url'] !== null) {
+            html += '<a href="'+job['url']+'">';
+            html += job['name'];
+            html += '</a>';
+        } else {
+            html += job['name'];
         }
         html += ': ';
         if (job['result'] === null && job['url'] !== null) {
