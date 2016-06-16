@@ -10,7 +10,6 @@ Major Systems
    gerrit
    grafana
    grafyaml
-   jenkins
    zuul
    jjb
    logstash

@@ -15,6 +15,8 @@ At a Glance
   * http://status.openstack.org/zuul
   * http://zuul.openstack.org
   * http://zuul-dev.openstack.org
+  * zm*.openstack.org
+  * zl*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
   * :file:`modules/openstack_project/manifests/zuul_prod.pp`
@@ -35,12 +37,11 @@ The OpenStack project uses a number of pipelines in Zuul:
 
 **check**
   Newly uploaded patchsets enter this pipeline to receive an initial
-  +/-1 Verified vote from Jenkins.
+  +/-1 Verified vote.
 
 **gate**
   Changes that have been approved by core developers are enqueued in
-  order in this pipeline, and if they pass tests in Jenkins, will be
-  merged.
+  order in this pipeline, and if they pass tests, will be merged.
 
 **post**
   This pipeline runs jobs that operate after each change is merged.
@@ -146,3 +147,31 @@ before the restart::
 You may watch the `Zuul Status Page
 <http://status.openstack.org/zuul/>`_ to confirm that changes are
 returning to the queues.
+
+Mergers
+-------
+
+Servers with names matching the pattern zm*.openstack.org are Zuul
+Mergers.  These are horizontally scalable components of Zuul which
+perform git operations for the benefit of jobs.  They serve git
+repositories via Apache over http, and jobs fetch changes to test from
+them.  They can be started and stopped at will, and new ones added as
+necessary to accommodate load.  If you remove a merger, be sure to
+leave Apache running for several hours until the last job that may
+have been launched with instructions to fetch from that merger has
+completed.
+
+Launchers
+---------
+
+We use an Ansible based launcher in Zuul to actually run jobs.  This
+component runs on a horizontally scalable set of servers named
+zl*.openstack.org.  It reads job configuration from Jenkins Job
+Builder files in the project-config repository and translates that
+into Ansible playbooks which it runs on our workers.  Our jobs are
+configured to upload as much information as possible along with their
+logs, but if there is an error which can not be diagnosed in that
+manner, Ansible logs are available in the launcher-debug log file on
+the launcher host.  You may use the Zuul build UUID to track
+assignment of a given job from the Zuul scheduler to the Zuul launcher
+used by that job.
