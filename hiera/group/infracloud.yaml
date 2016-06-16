@@ -598,7 +598,7 @@ ironic_inventory_hpuswest:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.37
+        ipmi_address: 10.12.83.222
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.131
     ipv4_address: 10.10.16.181
@@ -610,6 +610,9 @@ ironic_inventory_hpuswest:
       cpus: '24'
       disk_size: '1800'
       ram: '96676'
+      serial_number: use129cnm2
+      rack: '12'
+      ilo_mac: '78:e7:d1:23:9a:2a'
     uuid: fc6861a4-95f6-4e5a-b303-6d43a4d21dfa
   compute032.hpuswest.ic.openstack.org:
     driver: agent_ipmitool
