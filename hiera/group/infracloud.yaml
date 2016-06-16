@@ -21,8 +21,7 @@ ironic_inventory_vanilla:
       ilo_mac: 78:e7:d1:23:95:6a
     uuid: 0090edd1-d3b6-4b6b-b3e4-b2bb09665d7b
     disabled: true # currently deployed
-ironic_inventory_hpuswest:
-  baremetal01.hpuswest.ic.openstack.org:
+  baremetal01.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -30,7 +29,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.3
     ipv4_address: 10.10.16.145
-    name: baremetal01.hpuswest.ic.openstack.org
+    name: baremetal01.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:99:bd
     properties:
@@ -43,7 +42,7 @@ ironic_inventory_hpuswest:
       ilo_mac: 78:e7:d1:23:99:ba
     uuid: 476b4113-6378-470f-834d-181017b8f1a8
     disabled: true # only need one deployed baremetal server
-  compute000.hpuswest.ic.openstack.org:
+  compute000.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -51,7 +50,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.100
     ipv4_address: 10.10.16.150
-    name: compute000.hpuswest.ic.openstack.org
+    name: compute000.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:05
     properties:
@@ -60,7 +59,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 0fdfbf53-fe80-4602-83fd-ed6119ad16d4
-  compute001.hpuswest.ic.openstack.org:
+  compute001.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -68,7 +67,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.101
     ipv4_address: 10.10.16.151
-    name: compute001.hpuswest.ic.openstack.org
+    name: compute001.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:aa:44
     properties:
@@ -77,7 +76,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: d1d4232d-91ec-41d9-9f9b-80350ae9f048
-  compute002.hpuswest.ic.openstack.org:
+  compute002.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -85,7 +84,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.102
     ipv4_address: 10.10.16.152
-    name: compute002.hpuswest.ic.openstack.org
+    name: compute002.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9b:2d
     properties:
@@ -94,7 +93,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: ad9e12c5-f74d-449c-96ea-db7ad44cd52c
-  compute003.hpuswest.ic.openstack.org:
+  compute003.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -102,7 +101,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.103
     ipv4_address: 10.10.16.153
-    name: compute003.hpuswest.ic.openstack.org
+    name: compute003.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:36:05
     properties:
@@ -111,7 +110,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: b1a17d9b-5620-42a4-b211-f0a9d4800b7f
-  compute004.hpuswest.ic.openstack.org:
+  compute004.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -119,7 +118,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.104
     ipv4_address: 10.10.16.154
-    name: compute004.hpuswest.ic.openstack.org
+    name: compute004.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:25
     properties:
@@ -131,7 +130,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:95:22
     uuid: 6d76f9b9-5655-4363-b383-110f74b45aaf
-  compute005.hpuswest.ic.openstack.org:
+  compute005.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -139,7 +138,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.105
     ipv4_address: 10.10.16.155
-    name: compute005.hpuswest.ic.openstack.org
+    name: compute005.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:95:ed
     properties:
@@ -149,7 +148,7 @@ ironic_inventory_hpuswest:
       ram: '96676'
     uuid: 945a6ae1-de7c-4f9b-8642-a0aef1ce9c45
     disabled: true # iLO doesn't ping
-  compute006.hpuswest.ic.openstack.org:
+  compute006.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -157,7 +156,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.106
     ipv4_address: 10.10.16.156
-    name: compute006.hpuswest.ic.openstack.org
+    name: compute006.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9b:45
     properties:
@@ -166,7 +165,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: c3a35603-ed63-4801-afce-8d8d3df762b1
-  compute007.hpuswest.ic.openstack.org:
+  compute007.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -174,7 +173,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.107
     ipv4_address: 10.10.16.157
-    name: compute007.hpuswest.ic.openstack.org
+    name: compute007.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:24:e2:65
     properties:
@@ -186,7 +185,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:24:e2:62
     uuid: 7889d9ff-5c17-4f2f-9ac8-8f7b9e8f3bac
-  compute008.hpuswest.ic.openstack.org:
+  compute008.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -194,7 +193,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.108
     ipv4_address: 10.10.16.158
-    name: compute008.hpuswest.ic.openstack.org
+    name: compute008.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:21:66:75
     properties:
@@ -204,7 +203,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: 88df2eb2-8ec5-4601-8ea6-04288193b966
     disabled: true # needs iLO firmware upgrade
-  compute009.hpuswest.ic.openstack.org:
+  compute009.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -212,7 +211,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.109
     ipv4_address: 10.10.16.159
-    name: compute009.hpuswest.ic.openstack.org
+    name: compute009.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:99:d5
     properties:
@@ -224,7 +223,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:99:d2
     uuid: 183df9cb-35c4-4e83-97d6-76d41680a045
-  compute010.hpuswest.ic.openstack.org:
+  compute010.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -232,7 +231,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.110
     ipv4_address: 10.10.16.160
-    name: compute010.hpuswest.ic.openstack.org
+    name: compute010.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:90:0d
     properties:
@@ -242,7 +241,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: d1a88893-abe2-4523-9144-2039e600f839
     disabled: true # iLO doesn't ping
-  compute011.hpuswest.ic.openstack.org:
+  compute011.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -250,7 +249,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.111
     ipv4_address: 10.10.16.161
-    name: compute011.hpuswest.ic.openstack.org
+    name: compute011.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9a:e5
     properties:
@@ -259,7 +258,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 116dfbc8-74e1-4b48-b08e-a338b0981887
-  compute012.hpuswest.ic.openstack.org:
+  compute012.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -267,7 +266,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.112
     ipv4_address: 10.10.16.162
-    name: compute012.hpuswest.ic.openstack.org
+    name: compute012.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:e5
     properties:
@@ -276,7 +275,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: cd8accf6-8d39-40b9-b5fa-cb14e5744750
-  compute013.hpuswest.ic.openstack.org:
+  compute013.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -284,7 +283,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.113
     ipv4_address: 10.10.16.163
-    name: compute013.hpuswest.ic.openstack.org
+    name: compute013.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:d5
     properties:
@@ -293,7 +292,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: f002f9a1-e75b-40fe-8ead-31009eb4d997
-  compute014.hpuswest.ic.openstack.org:
+  compute014.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -301,7 +300,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.114
     ipv4_address: 10.10.16.164
-    name: compute014.hpuswest.ic.openstack.org
+    name: compute014.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:24:32:8d
     properties:
@@ -310,7 +309,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 2793d114-8855-4243-8a60-98303610a2ab
-  compute015.hpuswest.ic.openstack.org:
+  compute015.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -318,7 +317,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.115
     ipv4_address: 10.10.16.165
-    name: compute015.hpuswest.ic.openstack.org
+    name: compute015.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:21:5d:55
     properties:
@@ -328,7 +327,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: 3e00f75a-958e-4034-bd0a-4a0ba9e2df4d
     disabled: true # needs iLO firmware upgrade
-  compute016.hpuswest.ic.openstack.org:
+  compute016.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -336,7 +335,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.116
     ipv4_address: 10.10.16.166
-    name: compute016.hpuswest.ic.openstack.org
+    name: compute016.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:97:cd
     properties:
@@ -348,7 +347,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:97:ca
     uuid: 98d141a3-7efc-4df3-84a6-e3d8cdff3025
-  compute017.hpuswest.ic.openstack.org:
+  compute017.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -356,7 +355,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.117
     ipv4_address: 10.10.16.167
-    name: compute017.hpuswest.ic.openstack.org
+    name: compute017.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:24:1f:1c
     properties:
@@ -365,7 +364,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 2e251e9d-0b00-477c-9069-f9dbe966b5e3
-  compute018.hpuswest.ic.openstack.org:
+  compute018.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -373,7 +372,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.118
     ipv4_address: 10.10.16.168
-    name: compute018.hpuswest.ic.openstack.org
+    name: compute018.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:94:15
     properties:
@@ -383,7 +382,7 @@ ironic_inventory_hpuswest:
       ram: '96676'
     uuid: 0a4da2d7-2420-4201-8714-c78c71c2f17b
     disabled: true # nic issues
-  compute019.hpuswest.ic.openstack.org:
+  compute019.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -391,7 +390,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.119
     ipv4_address: 10.10.16.169
-    name: compute019.hpuswest.ic.openstack.org
+    name: compute019.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:21:5c:55
     properties:
@@ -400,7 +399,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: b9b47664-c5d0-472c-b232-8c1a4ef22fd0
-  compute020.hpuswest.ic.openstack.org:
+  compute020.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -408,7 +407,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.120
     ipv4_address: 10.10.16.170
-    name: compute020.hpuswest.ic.openstack.org
+    name: compute020.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:25:38:7d
     properties:
@@ -417,7 +416,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 4ae583ec-60ae-4027-9a95-f6c132e7a509
-  compute021.hpuswest.ic.openstack.org:
+  compute021.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -425,7 +424,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.121
     ipv4_address: 10.10.16.171
-    name: compute021.hpuswest.ic.openstack.org
+    name: compute021.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:94:fd
     properties:
@@ -434,7 +433,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 272215ce-baf3-4d80-a0c9-c0997b204b2d
-  compute022.hpuswest.ic.openstack.org:
+  compute022.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -442,7 +441,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.122
     ipv4_address: 10.10.16.172
-    name: compute022.hpuswest.ic.openstack.org
+    name: compute022.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:24:31:5d
     properties:
@@ -452,7 +451,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: ac81d1fe-b6be-4677-ba0e-259227ec0e9d
     disabled: true # current baremetal00
-  compute023.hpuswest.ic.openstack.org:
+  compute023.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -460,7 +459,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.123
     ipv4_address: 10.10.16.173
-    name: compute023.hpuswest.ic.openstack.org
+    name: compute023.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:d5
     properties:
@@ -469,7 +468,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 9b4711f0-0fd4-4630-9495-649c64b0f071
-  compute024.hpuswest.ic.openstack.org:
+  compute024.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -477,7 +476,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.124
     ipv4_address: 10.10.16.174
-    name: compute024.hpuswest.ic.openstack.org
+    name: compute024.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:62:95
     properties:
@@ -489,7 +488,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:62:92
     uuid: e9220599-54a6-4bc7-ae4a-60d61fd47bb8
-  compute025.hpuswest.ic.openstack.org:
+  compute025.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -497,7 +496,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.125
     ipv4_address: 10.10.16.175
-    name: compute025.hpuswest.ic.openstack.org
+    name: compute025.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:99:0d
     properties:
@@ -506,7 +505,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 4c717b30-c2d1-43be-b499-eeddeb760576
-  compute026.hpuswest.ic.openstack.org:
+  compute026.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -514,7 +513,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.126
     ipv4_address: 10.10.16.176
-    name: compute026.hpuswest.ic.openstack.org
+    name: compute026.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:d5:94
     properties:
@@ -523,7 +522,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 5519d63e-edb5-44b8-a3d2-5291d52811b6
-  compute027.hpuswest.ic.openstack.org:
+  compute027.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -531,7 +530,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.127
     ipv4_address: 10.10.16.177
-    name: compute027.hpuswest.ic.openstack.org
+    name: compute027.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:61:0d
     properties:
@@ -540,7 +539,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: dbd6cbdf-cee3-4deb-8918-47120610400e
-  compute028.hpuswest.ic.openstack.org:
+  compute028.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -548,7 +547,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.128
     ipv4_address: 10.10.16.178
-    name: compute028.hpuswest.ic.openstack.org
+    name: compute028.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:15
     properties:
@@ -557,7 +556,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 3334a4a2-3ba8-440f-930c-32eceb6974e5
-  compute029.hpuswest.ic.openstack.org:
+  compute029.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -565,7 +564,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.129
     ipv4_address: 10.10.16.179
-    name: compute029.hpuswest.ic.openstack.org
+    name: compute029.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:15:34
     properties:
@@ -574,7 +573,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: f32b231c-7643-4231-a4cb-d2d4e35fecf3
-  compute030.hpuswest.ic.openstack.org:
+  compute030.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -582,7 +581,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.130
     ipv4_address: 10.10.16.180
-    name: compute030.hpuswest.ic.openstack.org
+    name: compute030.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:63:75
     properties:
@@ -594,7 +593,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:63:72
     uuid: fef8db84-d7cf-476b-a883-48ba79675c5c
-  compute031.hpuswest.ic.openstack.org:
+  compute031.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -602,7 +601,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.131
     ipv4_address: 10.10.16.181
-    name: compute031.hpuswest.ic.openstack.org
+    name: compute031.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9a:2d
     properties:
@@ -611,7 +610,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: fc6861a4-95f6-4e5a-b303-6d43a4d21dfa
-  compute032.hpuswest.ic.openstack.org:
+  compute032.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -619,7 +618,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.132
     ipv4_address: 10.10.16.182
-    name: compute032.hpuswest.ic.openstack.org
+    name: compute032.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9d:9d
     properties:
@@ -631,7 +630,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:95:62
     uuid: 0cb0676c-cd26-4ebc-ad78-1a0d6aa26808
-  compute033.hpuswest.ic.openstack.org:
+  compute033.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -639,7 +638,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.133
     ipv4_address: 10.10.16.183
-    name: compute033.hpuswest.ic.openstack.org
+    name: compute033.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:92:ed
     properties:
@@ -648,7 +647,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 49d5d5ba-a249-4d65-8bb0-749765a3a5bb
-  compute034.hpuswest.ic.openstack.org:
+  compute034.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -656,7 +655,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.134
     ipv4_address: 10.10.16.184
-    name: compute034.hpuswest.ic.openstack.org
+    name: compute034.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:98:05
     properties:
@@ -665,7 +664,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 6dbfed9d-d4d0-4a13-93bb-8c3ab26f7004
-  compute035.hpuswest.ic.openstack.org:
+  compute035.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -673,7 +672,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.135
     ipv4_address: 10.10.16.185
-    name: compute035.hpuswest.ic.openstack.org
+    name: compute035.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:4b:f5
     properties:
@@ -685,7 +684,7 @@ ironic_inventory_hpuswest:
       rack: '12'
       ilo_mac: 78:e7:d1:23:4b:f2
     uuid: 11335bc4-d0ab-4693-88a9-64177a0b6e60
-  compute036.hpuswest.ic.openstack.org:
+  compute036.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -693,7 +692,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.136
     ipv4_address: 10.10.16.186
-    name: compute036.hpuswest.ic.openstack.org
+    name: compute036.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9d:7d
     properties:
@@ -702,7 +701,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: e650d06b-dfa9-42be-8c5b-34229934bf4b
-  compute037.hpuswest.ic.openstack.org:
+  compute037.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -710,7 +709,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.137
     ipv4_address: 10.10.16.187
-    name: compute037.hpuswest.ic.openstack.org
+    name: compute037.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:af:ac
     properties:
@@ -720,7 +719,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: 4122dd74-0bbf-49db-ba4b-4c1afda1f8a6
     disabled: true # needs IPMI password reset
-  compute038.hpuswest.ic.openstack.org:
+  compute038.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -728,7 +727,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.138
     ipv4_address: 10.10.16.188
-    name: compute038.hpuswest.ic.openstack.org
+    name: compute038.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:65
     properties:
@@ -737,7 +736,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: '96676'
     uuid: 42fe827f-e567-4c17-8b74-4c28f93728d4
-  compute039.hpuswest.ic.openstack.org:
+  compute039.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -745,7 +744,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.139
     ipv4_address: 10.10.16.189
-    name: compute039.hpuswest.ic.openstack.org
+    name: compute039.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:f5
     properties:
@@ -755,7 +754,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: 54a174f6-173e-4250-bbcf-0103d9b99346
     disabled: true # disk errors
-  compute040.hpuswest.ic.openstack.org:
+  compute040.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -763,7 +762,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.140
     ipv4_address: 10.10.16.190
-    name: compute040.hpuswest.ic.openstack.org
+    name: compute040.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:94:95
     properties:
@@ -773,7 +772,7 @@ ironic_inventory_hpuswest:
       ram: 96676
     uuid: b3d510c9-110c-49db-ba9d-a0d8e893eb24
     disabled: true # needs iLO firmware upgrade
-  compute041.hpuswest.ic.openstack.org:
+  compute041.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -781,7 +780,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.141
     ipv4_address: 10.10.16.191
-    name: compute041.hpuswest.ic.openstack.org
+    name: compute041.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:dd
     properties:
@@ -790,7 +789,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: c8119dcc-84a8-4263-a5c3-418a20e3afe4
-  compute042.hpuswest.ic.openstack.org:
+  compute042.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -798,7 +797,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.142
     ipv4_address: 10.10.16.192
-    name: compute042.hpuswest.ic.openstack.org
+    name: compute042.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9b:b5
     properties:
@@ -807,7 +806,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 1f38e82d-0836-4cf1-9351-f76b9a16efa7
-  compute043.hpuswest.ic.openstack.org:
+  compute043.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -815,7 +814,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.143
     ipv4_address: 10.10.16.193
-    name: compute043.hpuswest.ic.openstack.org
+    name: compute043.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:fd
     properties:
@@ -824,7 +823,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: fce5f6df-ad12-42d4-ad9a-1f0642eba21a
-  controller00.hpuswest.ic.openstack.org:
+  controller00.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -832,7 +831,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.4
     ipv4_address: 10.10.16.146
-    name: controller00.hpuswest.ic.openstack.org
+    name: controller00.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:94:cd
     properties:
@@ -841,7 +840,7 @@ ironic_inventory_hpuswest:
       disk_size: '1800'
       ram: 96676
     uuid: 1df8345b-168c-4f7d-b6ad-d33a3afa9239
-  controller01.hpuswest.ic.openstack.org:
+  controller01.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
@@ -849,7 +848,7 @@ ironic_inventory_hpuswest:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.5
     ipv4_address: 10.10.16.147
-    name: controller01.hpuswest.ic.openstack.org
+    name: controller01.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:99:35
     properties:
