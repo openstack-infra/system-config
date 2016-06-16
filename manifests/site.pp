@@ -728,29 +728,7 @@ node 'nodepool.openstack.org' {
     logging_conf_template         => 'openstack_project/nodepool/nodepool.logging.conf.erb',
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
-    jenkins_masters               => [
-      {
-        name        => 'jenkins05',
-        url         => 'https://jenkins05.openstack.org/',
-        user        => hiera('jenkins_api_user', 'username'),
-        apikey      => hiera('jenkins_api_key'),
-        credentials => hiera('jenkins_credentials_id'),
-      },
-      {
-        name        => 'jenkins06',
-        url         => 'https://jenkins06.openstack.org/',
-        user        => hiera('jenkins_api_user', 'username'),
-        apikey      => hiera('jenkins_api_key'),
-        credentials => hiera('jenkins_credentials_id'),
-      },
-      {
-        name        => 'jenkins07',
-        url         => 'https://jenkins07.openstack.org/',
-        user        => hiera('jenkins_api_user', 'username'),
-        apikey      => hiera('jenkins_api_key'),
-        credentials => hiera('jenkins_credentials_id'),
-      },
-    ],
+    jenkins_masters               => [],
   }
   file { '/home/nodepool/.config/openstack/infracloud_west_cacert.pem':
     ensure  => present,
@@ -788,9 +766,6 @@ node 'zuul.openstack.org' {
     statsd_host                    => 'graphite.openstack.org',
     gearman_workers                => [
       'nodepool.openstack.org',
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
       'zlstatic01.openstack.org',
       'zl01.openstack.org',
       'zl02.openstack.org',
@@ -890,11 +865,7 @@ node 'zuul-dev.openstack.org' {
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
     statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
-    ],
+    gearman_workers      => [],
   }
 }
 

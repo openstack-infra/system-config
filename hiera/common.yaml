@@ -292,9 +292,6 @@ cacti_hosts:
 - groups-dev.openstack.org
 - groups.openstack.org
 - health.openstack.org
-- jenkins05.openstack.org
-- jenkins06.openstack.org
-- jenkins07.openstack.org
 - kdc01.openstack.org
 - kdc02.openstack.org
 - lists.openstack.org
