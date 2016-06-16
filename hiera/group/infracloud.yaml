@@ -8,7 +8,7 @@ ironic_inventory_vanilla:
         ipmi_username: Administrator
     ipv4_public_address: 15.184.224.4
     ipv4_address: 10.10.16.4
-    name: baremetal00.hpuswest.ic.openstack.org
+    name: baremetal00.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:6d
     properties:
