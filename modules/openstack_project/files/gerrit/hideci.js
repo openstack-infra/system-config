@@ -16,15 +16,15 @@
 // this regex matches the hash part of review pages
 var hashRegex = /^\#\/c\/([\d]+)((\/\d+)([.][.](\d+))?)?\/?$/;
 // this regex matches CI comments
-var ciRegex = /^(.* CI|Jenkins)$/;
+var ciRegex = /^(.* CI|Jenkins|Zuul)$/;
 // this regex matches "Patch set #"
 var psRegex = /^(Uploaded patch set|Patch Set) (\d+)(:|\.)/;
 // this regex matches merge failure messages
 var mergeFailedRegex = /Merge Failed\./;
 // this regex matches the name of CI systems we trust to report merge failures
-var trustedCIRegex = /^(OpenStack CI|Jenkins)$/;
+var trustedCIRegex = /^(OpenStack CI|Jenkins|Zuul)$/;
 // this regex matches the name+pipeline that we want at the top of the CI list
-var firstPartyCI = /^Jenkins/;
+var firstPartyCI = /^(Jenkins|Zuul)/;
 // this regex matches the pipeline markup
 var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 // The url to full status information on running jobs
