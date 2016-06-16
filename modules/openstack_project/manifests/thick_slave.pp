@@ -61,7 +61,7 @@ class openstack_project::thick_slave(
   # for pushing files to swift and uploading to pypi with twine
   package { 'requests':
     ensure   => latest,
-    provider => pip,
+    provider => openstack_pip,
   }
   if ($::osfamily == 'RedHat') {
     # Work around https://bugzilla.redhat.com/show_bug.cgi?id=973375

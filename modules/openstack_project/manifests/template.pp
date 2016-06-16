@@ -244,7 +244,7 @@ class openstack_project::template (
   }
   package { 'virtualenv':
     ensure   => $virtualenv_ensure,
-    provider => pip,
+    provider => openstack_pip,
     require  => Class['pip'],
   }
 

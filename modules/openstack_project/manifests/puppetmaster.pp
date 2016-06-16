@@ -163,7 +163,7 @@ class openstack_project::puppetmaster (
 # For launch/launch-node.py.
   package { 'shade':
     ensure   => latest,
-    provider => pip,
+    provider => openstack_pip,
   }
   package { 'python-paramiko':
     ensure => present,
