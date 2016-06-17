@@ -79,6 +79,9 @@ class openstack_project::gerrit (
   $download = {},
   $receive_max_object_size_limit = '100 m',
   $commentlinks = [],
+  $its_plugins = [],
+  $its_rules = [],
+  $java_home = '',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -116,6 +119,7 @@ class openstack_project::gerrit (
     robots_txt_source                   => 'puppet:///modules/openstack_project/gerrit/robots.txt',
     enable_javamelody_top_menu          => false,
     # passthrough
+    java_home                           => $java_home,
     ssl_cert_file                       => $ssl_cert_file,
     ssl_key_file                        => $ssl_key_file,
     ssl_chain_file                      => $ssl_chain_file,
@@ -144,6 +148,8 @@ class openstack_project::gerrit (
     httpd_maxqueued                     => $httpd_maxqueued,
     httpd_maxwait                       => $httpd_maxwait,
     commentlinks                        => $commentlinks,
+    its_plugins                         => $its_plugins,
+    its_rules                           => $its_rules,
     trackingids                         => [
       {
         name   => 'storyboard',
