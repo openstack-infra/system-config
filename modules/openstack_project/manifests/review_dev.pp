@@ -24,9 +24,16 @@ class openstack_project::review_dev (
   $lp_sync_secret = '',
   $swift_username = '',
   $swift_password = '',
+  $storyboard_password = '',
+  $storyboard_ssl_cert = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
 ) {
+
+  $java_home = $::lsbdistcodename ? {
+    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+    'trusty'  => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+  }
 
   realize (
     User::Virtual::Localuser['zaro'],
@@ -94,6 +101,11 @@ class openstack_project::review_dev (
         link  => 'https://storyboard-dev.openstack.org/#!/story/$1',
       },
       {
+        name  => 'its-storyboard',
+        match => '\\b[Tt]ask:? #?(\\d+)',
+        link  => 'task: $1',
+      },
+      {
         name  => 'blueprint',
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
@@ -117,6 +129,24 @@ class openstack_project::review_dev (
         name  => 'gitsha',
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+      },
+    ],
+    its_plugins                        => [
+      {
+        name     => 'its-storyboard',
+        password => $storyboard_password,
+        url      => 'https://storyboard-dev.openstack.org',
+      },
+    ],
+    its_rules                          => [
+      {
+        name       => 'LOG',
+        action     => 'log-event error',
+      },
+      {
+        name       => 'change_status_updates',
+        event_type => 'patchset-created,change-abandoned,change-restored,change-merged',
+        action     => 'add-standard-comment',
       },
     ],
     replication                         => [
@@ -148,6 +178,29 @@ class openstack_project::review_dev (
 
   gerrit::plugin { 'javamelody': version       => '3fefa35' }
   gerrit::plugin { 'delete-project': version   => '4b7410c' }
+  
+  # create a file containing the ssl certificate
+  file { '/home/gerrit2/storyboard-dev.crt':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0600',
+    content => $storyboard_ssl_cert,
+    replace => true,
+    require => User['gerrit2'],
+  }
+
+  # Import certificate to java to allow gerrit its plugins to POST to storyboard
+  exec { 'import-java-certs':
+    user        => 'root',
+    command     => "keytool -import -alias storyboard-dev.openstack.org -keystore $java_home/lib/security/cacerts -file /home/gerrit2/storyboard-dev.crt -storepass secret -noprompt",
+    unless      => "keytool -list -alias storyboard-dev.openstack.org -storepass secret -keystore $java_home/lib/security/cacerts  >/dev/null 2>&1",
+    path        => '/bin:/usr/bin',
+    require     => [
+      Package['openjdk-7-jre-headless'],
+      File['/home/gerrit2/storyboard-dev.crt'],
+    ],
+  }
 
   package { 'python-launchpadlib':
     ensure => present,
