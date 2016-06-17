@@ -39,7 +39,7 @@ class openstack_project::single_use_slave (
         '-p tcp --dport 8004 -s 172.24.4.0/23 -j ACCEPT',
         '-m limit --limit 2/min -j LOG --log-prefix "iptables dropped: "',
       ],
-    iptables_public_tcp_ports => [8088],
+    iptables_public_tcp_ports => [8088, 19885],
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
