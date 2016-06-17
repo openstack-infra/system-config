@@ -79,6 +79,8 @@ class openstack_project::gerrit (
   $download = {},
   $receive_max_object_size_limit = '100 m',
   $commentlinks = [],
+  $its_plugins = [],
+  $its_actions = [],
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -144,6 +146,8 @@ class openstack_project::gerrit (
     httpd_maxqueued                     => $httpd_maxqueued,
     httpd_maxwait                       => $httpd_maxwait,
     commentlinks                        => $commentlinks,
+    its_plugins                         => $its_plugins,
+    its_actions                         => $its_actions,
     trackingids                         => [
       {
         name   => 'storyboard',

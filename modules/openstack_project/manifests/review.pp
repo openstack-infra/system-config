@@ -83,6 +83,8 @@ class openstack_project::review (
   # For openstackwatch.
   $swift_username = '',
   $swift_password = '',
+  $storyboard_username = '',
+  $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
 ) {
@@ -180,6 +182,21 @@ class openstack_project::review (
         name  => 'gitsha',
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+      },
+    ],
+    its_plugins                        => [
+      {
+        name     => 'its-storyboard',
+        username => $storyboard_username,
+        password => $storyboard_password,
+        url      => 'https://storyboard-dev.openstack.org',
+      },
+    ],
+    its_actions                        => [
+      {
+        name       => 'Standard',
+        event_type => 'patchset-created,change-abandoned,change-restored,change-merged',
+        action     => 'add-standard-comment',
       },
     ],
     download                            => {
