@@ -15,7 +15,7 @@ class openstack_project::slave (
   include openstack_project::tmpcleanup
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8088],
+    iptables_public_tcp_ports => [8088, 19885],
     iptables_public_udp_ports => [],
     certname                  => $certname,
     sysadmins                 => $sysadmins,
