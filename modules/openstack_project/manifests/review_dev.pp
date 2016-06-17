@@ -24,6 +24,8 @@ class openstack_project::review_dev (
   $lp_sync_secret = '',
   $swift_username = '',
   $swift_password = '',
+  $storyboard_username = '',
+  $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
 ) {
@@ -117,6 +119,14 @@ class openstack_project::review_dev (
         name  => 'gitsha',
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+      },
+    ],
+    its_plugins                        => [
+      {
+        name     => 'its-storyboard',
+        username => $storyboard_username,
+        password => $storyboard_password,
+        url      => 'https://storyboard.openstack.org',
       },
     ],
     replication                         => [

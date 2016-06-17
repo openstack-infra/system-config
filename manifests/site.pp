@@ -59,6 +59,8 @@ node 'review.openstack.org' {
     contactstore_pubkey                 => hiera('gerrit_contactstore_pubkey'),
     swift_username                      => hiera('swift_store_user', 'username'),
     swift_password                      => hiera('swift_store_key'),
+    storyboard_username                 => hiera('storyboard_username'),
+    storyboard_password                 => hiera('storyboard_password'),
   }
 }
 
@@ -91,6 +93,8 @@ node 'review-dev.openstack.org' {
     lp_sync_consumer_key                => hiera('gerrit_dev_lp_consumer_key'),
     lp_sync_token                       => hiera('gerrit_dev_lp_access_token'),
     lp_sync_secret                      => hiera('gerrit_dev_lp_access_secret'),
+    storyboard_username                 => hiera('storyboard_dev_username'),
+    storyboard_password                 => hiera('storyboard_dev_password'),
   }
 }
 
