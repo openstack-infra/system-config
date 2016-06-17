@@ -24,9 +24,16 @@ class openstack_project::review_dev (
   $lp_sync_secret = '',
   $swift_username = '',
   $swift_password = '',
+  $storyboard_password = '',
+  $storyboard_ssl_cert = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
 ) {
+
+  $java_home = $::lsbdistcodename ? {
+    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+    'trusty'  => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+  }
 
   realize (
     User::Virtual::Localuser['zaro'],
@@ -89,7 +96,7 @@ class openstack_project::review_dev (
         link  => 'https://launchpad.net/bugs/$1',
       },
       {
-        name  => 'story',
+        name  => 'its-storyboard',
         match => '\\b[Ss]tory:? #?(\\d+)',
         link  => 'https://storyboard-dev.openstack.org/#!/story/$1',
       },
@@ -119,6 +126,29 @@ class openstack_project::review_dev (
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
       },
     ],
+    its_plugins                        => [
+      {
+        name     => 'its-storyboard',
+        password => $storyboard_password,
+        url      => 'https://storyboard-dev.openstack.org',
+      },
+    ],
+    its_rules                          => [
+      {
+        name       => 'LOG',
+        action     => 'log-event error',
+      },
+      {
+        name       => 'change_updates',
+        event_type => 'patchset-created,change-abandoned,change-restored,change-merged',
+        action     => 'add-standard-comment',
+      },
+      {
+        name       => 'comment_updates',
+        event_type => 'comment-added',
+        action     => 'add-velocity-comment inline $commenter-name commented on change $change-number: ${its.formatLink($change-url, $subject)}',
+      },
+    ],
     replication                         => [
       {
         name                 => 'github',
@@ -144,6 +174,29 @@ class openstack_project::review_dev (
       },
     ],
     require                         => $::project_config::config_dir,
+  }
+
+  # create a file containing the ssl certificate
+  file { '/home/gerrit2/storyboard-dev.crt':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0600',
+    content => $storyboard_ssl_cert,
+    replace => true,
+    require => User['gerrit2'],
+  }
+
+  # Import certificate to java to allow gerrit its plugins to POST to storyboard
+  exec { 'import-java-certs':
+    user        => 'root',
+    command     => "keytool -import -alias storyboard-dev.openstack.org -keystore $java_home/lib/security/cacerts -file /home/gerrit2/storyboard-dev.crt -storepass secret -noprompt",
+    unless      => "keytool -list -alias storyboard-dev.openstack.org -storepass secret -keystore $java_home/lib/security/cacerts  >/dev/null 2>&1",
+    require     => [
+      Package['openjdk-7-jre-headless'],
+      File["$java_home/lib/security/cacerts"],
+      File['/home/gerrit2/storyboard-dev.crt'],
+    ],
   }
 
   gerrit::plugin { 'javamelody':
