@@ -83,15 +83,22 @@ class openstack_project::review (
   # For openstackwatch.
   $swift_username = '',
   $swift_password = '',
+  $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
 ) {
+
+  $java_home = $::lsbdistcodename ? {
+    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+    'trusty'  => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+  }
 
   class { 'project_config':
     url  => $project_config_repo,
   }
 
   class { 'openstack_project::gerrit':
+    java_home                           => $java_home,
     git_http_url                        => 'https://git.openstack.org/',
     canonical_git_url                   => 'git://git.openstack.org/',
     ssl_cert_file                       => $ssl_cert_file,
@@ -158,6 +165,11 @@ class openstack_project::review (
         link  => 'https://storyboard.openstack.org/#!/story/$1',
       },
       {
+        name  => 'its-storyboard',
+        match => '\\b[Tt]ask:? #?(\\d+)',
+        link  => 'task: $1',
+      },
+      {
         name  => 'blueprint',
         match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
         link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
@@ -181,6 +193,30 @@ class openstack_project::review (
         name  => 'gitsha',
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
         html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+      },
+    ],
+    its_plugins                        => [
+      {
+        name     => 'its-storyboard',
+        password => $storyboard_password,
+        url      => 'https://storyboard.openstack.org',
+      },
+    ],
+    its_rules                          => [
+      {
+        name       => 'change_abandoned',
+        event_type => 'change-abandoned',
+        action     => 'set-status TODO',
+      },
+      {
+        name       => 'change_in_progress',
+        event_type => 'patchset-created, change-restored',
+        action     => 'set-status REVIEW',
+      },
+      {
+        name       => 'change_merged',
+        event_type => 'change-merged',
+        action     => 'set-status MERGED',
       },
     ],
     download                            => {
