@@ -1163,7 +1163,7 @@ ironic_inventory_hpuseast:
     uuid: 34313036-3630-5355-4532-333745314b52
     driver_info:
       power:
-        ipmi_address: 10.22.27.156
+        ipmi_address: 10.12.83.180
         ipmi_username: headmin
     nics:
     - mac: 44:1E:A1:72:5C:09
@@ -1173,6 +1173,9 @@ ironic_inventory_hpuseast:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use237e1kr
+      rack: '9'
+      ilo_mac: 44:1E:A1:72:5C:0A
     name: compute014.hpuseast.ic.openstack.org
   compute015.hpuseast.ic.openstack.org:
     ansible_ssh_host: 15.126.48.19
