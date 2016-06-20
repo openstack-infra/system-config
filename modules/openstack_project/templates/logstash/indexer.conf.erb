@@ -17,15 +17,19 @@ filter {
       drop {}
     }
     multiline {
+      # lines that do not start with a timestamp we consider part of
+      # the previous log message
       negate => true
-      pattern => "^%{TIMESTAMP_ISO8601} \|"
+      pattern => "^%{TIMESTAMP_ISO8601}"
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
     grok {
-      # Do multiline matching as the above mutliline filter may add newlines
-      # to the log messages.
-      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate} \| %{GREEDYDATA:logmessage}" }
+      # Do multiline matching as the above mutliline filter may add
+      # newlines to the log messages.  Note ansible doesn't use the "
+      # | " deliminator between timestamp and message, but Jenkins
+      # did, and devstack, etc does.
+      match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate}( \|)? %{GREEDYDATA:logmessage}" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
   } else if "oslofmt" in [tags] {
