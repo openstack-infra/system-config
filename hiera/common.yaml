@@ -46,7 +46,6 @@ statusbot_channels:
 - openstack-bareon
 - openstack-blazar
 - openstack-board
-- openstack-charms
 - openstack-chef
 - openstack-cinder
 - openstack-cloudkeep
