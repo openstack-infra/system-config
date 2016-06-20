@@ -8,7 +8,7 @@ zuul_sites:
   - name: 'eavesdrop.openstack.org'
     host: 'eavesdrop.openstack.org'
     user: 'jenkins'
-    root: '/srv/meetbot-openstack'
+    root: '/srv/yaml2ical'
 
   - name: 'static.openstack.org'
     host: 'static.openstack.org'
