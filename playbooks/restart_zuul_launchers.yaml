@@ -21,3 +21,4 @@
       service:
         name: zuul-launcher
         state: restarted
+      become: true
