@@ -1,3 +1,4 @@
+review-dev review-dev.openstack.org
 jenkins jenkins*.openstack.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
 subunit-worker ~subunit-worker\d+\.openstack\.org
