@@ -937,6 +937,16 @@ node 'release.slave.openstack.org' {
 }
 
 # Node-OS: trusty
+node /^signing\d+\.ci\.openstack\.org$/ {
+  include openstack_project
+  class { 'openstack_project::signing_node':
+    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+    pubring                => hiera('pubring'),
+    secring                => hiera('secring'),
+  }
+}
+
+# Node-OS: trusty
 node 'openstackid.org' {
   class { 'openstack_project::openstackid_prod':
     sysadmins                   => hiera('sysadmins', []),
