@@ -1,4 +1,3 @@
-review-dev review-dev.openstack.org
 jenkins jenkins*.openstack.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
 subunit-worker ~subunit-worker\d+\.openstack\.org
@@ -11,4 +10,4 @@ afsdb afsdb*.openstack.org
 afs afs*.*.openstack.org
 wheel-mirror *wheel-mirror-*.openstack.org
 afsadmin mirror-update.openstack.org:release.slave.openstack.org
-disabled ci-backup-rs-ord.openstack.org:ask-staging.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
+disabled review-dev.openstack.org:ci-backup-rs-ord.openstack.org:ask-staging.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
