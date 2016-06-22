@@ -1,0 +1,11 @@
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Verified-1: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-by: Jeremy Stanley <fungi@yuggoth.org>
+Submitted-at: Wed, 22 Jun 2016 00:35:04 +0000
+Reviewed-on: https://review.openstack.org/332585
+Project: openstack-infra/system-config
+Branch: refs/heads/master
