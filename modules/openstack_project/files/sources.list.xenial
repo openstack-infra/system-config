@@ -1,0 +1,13 @@
+# This file is kept updated by puppet, adapted from
+# https://help.ubuntu.com/lts/serverguide/configuration.html
+
+deb http://us.archive.ubuntu.com/ubuntu xenial main restricted
+deb http://us.archive.ubuntu.com/ubuntu xenial-updates main restricted
+deb http://us.archive.ubuntu.com/ubuntu xenial universe
+deb http://us.archive.ubuntu.com/ubuntu xenial-updates universe
+deb http://us.archive.ubuntu.com/ubuntu xenial multiverse
+deb http://us.archive.ubuntu.com/ubuntu xenial-updates multiverse
+deb http://us.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu xenial-security main restricted
+deb http://security.ubuntu.com/ubuntu xenial-security universe
+deb http://security.ubuntu.com/ubuntu xenial-security multiverse
