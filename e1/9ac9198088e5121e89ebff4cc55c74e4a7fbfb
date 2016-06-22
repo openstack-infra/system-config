@@ -1,0 +1,10 @@
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 22 Jun 2016 03:31:09 +0000
+Reviewed-on: https://review.openstack.org/332072
+Project: openstack-infra/system-config
+Branch: refs/heads/master
