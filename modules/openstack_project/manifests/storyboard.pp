@@ -7,6 +7,8 @@ class openstack_project::storyboard(
   $rabbitmq_user = 'storyboard',
   $rabbitmq_password,
   $sysadmins = [],
+  $superusers =
+    'puppet:///modules/openstack_project/storyboard/superusers.yaml',
   $ssl_cert = undef,
   $ssl_cert_file_contents = undef,
   $ssl_key = undef,
@@ -117,7 +119,7 @@ class openstack_project::storyboard(
 
   # Load the superusers into the database
   class { '::storyboard::load_superusers':
-    source => 'puppet:///modules/openstack_project/storyboard/superusers.yaml',
+    source => $superusers,
   }
 
   include bup

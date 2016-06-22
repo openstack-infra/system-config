@@ -21,6 +21,8 @@ class openstack_project::storyboard::dev(
   class { 'openstack_project::storyboard':
     project_config_repo     => $project_config_repo,
     sysadmins               => $sysadmins,
+    superusers              =>
+      'puppet:///modules/openstack_project/storyboard/dev_superusers.yaml',
     mysql_host              => $mysql_host,
     mysql_user              => $mysql_user,
     mysql_password          => $mysql_password,
