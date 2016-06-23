@@ -144,11 +144,6 @@ class openstack_project::slave_common(
     }
   }
 
-  # To be removed in due course
-  file { '/etc/zuul-env-reqs.txt':
-    ensure => absent
-  }
-
   python::virtualenv { '/usr/zuul-env':
     ensure       => present,
     owner        => 'root',
