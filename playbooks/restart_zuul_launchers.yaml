@@ -21,3 +21,5 @@
       service:
         name: zuul-launcher
         state: restarted
+      become: true
+      become_user: root
