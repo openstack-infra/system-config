@@ -1,7 +1,7 @@
 ---
 - hosts: 'zlstatic0*.openstack.org:zl0*.openstack.org'
   # Do the entire play completely for one host at a time
-  serial: 1
+  serial: '{{ serial|default(1)|int }}'
   any_errors_fatal: true
   tasks:
     - name: Graceful stop zuul-launcher
