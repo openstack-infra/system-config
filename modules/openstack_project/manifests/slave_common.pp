@@ -5,6 +5,7 @@
 class openstack_project::slave_common(
   $sudo         = false,
   $project_config_repo = '',
+  $zuul_ssh_key = $openstack_project::jenkins_ssh_key,
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
@@ -159,5 +160,55 @@ class openstack_project::slave_common(
     group        => 'root',
     timeout      => 0,
     require      => File['/etc/zuul-env-reqs.txt'],
+  }
+
+  #
+  # The zuul user below is for the zuul launcher to prepare the node
+  #
+  group { 'zuul':
+    ensure => present,
+  }
+
+  user { 'zuul':
+    ensure     => present,
+    comment    => 'Zuul Launcher User',
+    home       => '/home/zuul',
+    gid        => 'zuul',
+    shell      => '/bin/bash',
+    membership => 'minimum',
+    groups     => [],
+    require    => Group['zuul'],
+  }
+
+  file { '/home/zuul':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0644',
+    require => User['zuul'],
+  }
+
+  file { '/home/zuul/.ssh':
+    ensure  => directory,
+    owner   => 'zuul',
+    group   => 'zuul',
+    module  => '0700',
+    require => File['/home/zuul'],
+  }
+
+  file { '/home/zuul/.ssh/authorized_keys':
+    ensure  => 'file',
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    content => template('openstack_project/zuul-authorized_keys.erb'),
+  }
+
+  file { '/etc/sudoers.d/zuul-sudo':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/zuul-sudo.sudo',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0440',
   }
 }
