@@ -151,11 +151,6 @@ class openstack_project::slave_common(
     source   => 'https://git.openstack.org/openstack-infra/zuul.git',
   }
 
-  # To be removed in due course
-  file { '/etc/zuul-env-reqs.txt':
-    ensure => absent
-  }
-
   python::virtualenv { '/usr/zuul-env':
     ensure       => present,
     owner        => 'root',
