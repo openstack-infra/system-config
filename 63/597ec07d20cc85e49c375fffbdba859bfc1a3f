@@ -1,0 +1,10 @@
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 23 Jun 2016 06:21:17 +0000
+Reviewed-on: https://review.openstack.org/332264
+Project: openstack-infra/system-config
+Branch: refs/heads/master
