@@ -30,7 +30,6 @@ subunit-files:
 # List of files to source logs from.
 source-files:
   - name: console.html
-    retry-get: True
     tags:
       - console
   - name: logs/devstack-gate-cleanup-host.txt
