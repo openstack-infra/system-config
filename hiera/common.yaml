@@ -64,7 +64,6 @@ statusbot_channels:
 - openstack-glance
 - openstack-ha
 - openstack-heat-translator
-- openstack-higgins
 - openstack-horizon
 - openstack-hyper-v
 - openstack-i18n
@@ -105,6 +104,7 @@ statusbot_channels:
 - openstack-vitrage
 - openstack-zaqar
 - openstack-zephyr
+- openstack-zun
 - puppet-openstack
 - rdo
 - refstack
@@ -147,7 +147,6 @@ meetbot_channels:
 - '#openstack-gslb'
 - '#openstack-ha'
 - '#openstack-heat-translator'
-- '#openstack-higgins'
 - '#openstack-horizon'
 - '#openstack-i18n'
 - '#openstack-infra'
@@ -204,6 +203,7 @@ meetbot_channels:
 - '#openstack-watcher'
 - '#openstack-zaqar'
 - '#openstack-zephyr'
+- '#openstack-zun'
 - '#osic'
 - '#puppet-openstack'
 - '#rdo'
