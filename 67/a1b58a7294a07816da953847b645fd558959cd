@@ -1,0 +1,11 @@
+Code-Review+1: Shu Muto <shu-mutou@rf.jp.nec.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 24 Jun 2016 18:21:18 +0000
+Reviewed-on: https://review.openstack.org/330017
+Project: openstack-infra/system-config
+Branch: refs/heads/master
