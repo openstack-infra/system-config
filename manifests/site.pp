@@ -718,10 +718,6 @@ node 'nodepool.openstack.org' {
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_password                => hiera('nodepool_mysql_password'),
     mysql_root_password           => hiera('nodepool_mysql_root_password'),
-    nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
-    # TODO(pabelanger): Switch out private key with zuul_worker once we are
-    # ready.
-    nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
     oscc_file_contents            => $clouds_yaml,
     image_log_document_root       => '/var/log/nodepool/image',
     statsd_host                   => 'graphite.openstack.org',
@@ -729,6 +725,15 @@ node 'nodepool.openstack.org' {
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
     jenkins_masters               => [],
+    # This is the key nodepool uses to log into a host and prepare it.
+    # It is deployed via configdrive to the newly booted worker.
+    # TODO(pabelanger): Switch out private key with zuul_worker once we are
+    # ready.
+    nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
+    # This public key will be passed to the zuul-worker DIB element
+    # during build and placed into authorized_keys; it is used by
+    # zuul-workers to log into the new worker.
+    zuul_worker_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
   }
   file { '/home/nodepool/.config/openstack/infracloud_west_cacert.pem':
     ensure  => present,
