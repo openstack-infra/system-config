@@ -1184,6 +1184,7 @@ node 'codesearch.openstack.org' {
 
 # Node-OS: trusty
 # Node-OS: centos7
+# Node-OS: xenial
 node /.*wheel-mirror-.*\.openstack\.org/ {
   $group = 'wheel-mirror'
   include openstack_project
