@@ -10,8 +10,6 @@
       become_user: zuul
 
     - name: Wait for (3h10m) to stop zuul-launcher
-      async: 11400
-      poll: 60
       wait_for:
         path: /var/run/zuul-launcher/zuul-launcher.pid
         state: absent
