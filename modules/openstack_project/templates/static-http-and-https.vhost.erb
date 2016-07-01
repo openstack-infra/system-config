@@ -14,30 +14,12 @@
   RewriteRule ^/(.*)$ http://<%= @vhost_name %>/$1 [L,R=301]
 <% end -%>
   DocumentRoot <%= @docroot %>
-
-<% if scope.lookupvar('openstack_project::static::aliases').is_a? Hash -%>
-  # Alias other folders
-  <% scope.lookupvar('openstack_project::static::aliases').each do |a, d| -%>
-    Alias "<%= a %>" "<%= d %>"
-  <% end -%>
-<% end -%>
-<% if scope.lookupvar('openstack_project::static::directories').is_a? Array -%>
-  <% scope.lookupvar('openstack_project::static::directories').each do |dirname| -%>
-  <Directory <%= dirname %>>
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
-    Satisfy Any
-    Require all granted
-  </Directory>
-  <% end -%>
-<% else -%>
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
     Satisfy Any
     Require all granted
   </Directory>
-<% end -%>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
   CustomLog /var/log/apache2/<%= @vhost_name %>_access.log combined

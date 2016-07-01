@@ -49,10 +49,6 @@ class openstack_project::static (
     }
   }
 
-  if ! defined(Httpd::Mod['alias']) {
-    httpd::mod { 'alias': ensure => present }
-  }
-
   if ! defined(File['/srv/static']) {
     file { '/srv/static':
       ensure => directory,
@@ -256,37 +252,20 @@ class openstack_project::static (
   }
 
   ###########################################################
-  # Governance & Election
-
-  # Extra aliases and directories needed for vhost template:
-  $aliases = {
-    '/election/' => '/srv/static/election/'
-  }
-  $directories = [
-    '/srv/static/election',
-    '/srv/static/governance'
-  ]
+  # Governance
 
   ::httpd::vhost { 'governance.openstack.org':
-    port        => 443, # Is required despite not being used.
-    docroot     => '/srv/static/governance',
-    priority    => '50',
-    ssl         => true,
-    template    => 'openstack_project/static-http-and-https.vhost.erb',
-    vhost_name  => 'governance.openstack.org',
-    require     => [
-      File['/srv/static/election'],
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/governance',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    vhost_name => 'governance.openstack.org',
+    require    => [
       File['/srv/static/governance'],
       File[$cert_file],
       File[$key_file],
     ],
-  }
-
-  file { '/srv/static/election':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => User['jenkins'],
   }
 
   file { '/srv/static/governance':
