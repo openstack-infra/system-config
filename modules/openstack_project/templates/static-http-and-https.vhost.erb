@@ -15,14 +15,14 @@
 <% end -%>
   DocumentRoot <%= @docroot %>
 
-<% if scope.lookupvar('openstack_project::static::aliases').is_a? Hash -%>
+<% if @aliases.is_a? Hash -%>
   # Alias other folders
-  <% scope.lookupvar('openstack_project::static::aliases').each do |a, d| -%>
+  <% @aliases.each do |a, d| -%>
     Alias "<%= a %>" "<%= d %>"
   <% end -%>
 <% end -%>
-<% if scope.lookupvar('openstack_project::static::directories').is_a? Array -%>
-  <% scope.lookupvar('openstack_project::static::directories').each do |dirname| -%>
+<% if @directories.is_a? Array -%>
+    <% @directories.each do |dirname| -%>
   <Directory <%= dirname %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
