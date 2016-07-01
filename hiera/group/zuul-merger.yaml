@@ -5,7 +5,7 @@ zuul_sites:
     user: 'jenkins'
     root: '/srv/static'
 
-  - name: 'eavesdrop.openstack.org'
+  - name: 'yaml2ical'
     host: 'eavesdrop.openstack.org'
     user: 'jenkins'
     root: '/srv/yaml2ical'
