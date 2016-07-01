@@ -26,18 +26,16 @@
   <Directory <%= dirname %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
-    Order allow,deny
-    allow from all
     Satisfy Any
+    Require all granted
   </Directory>
   <% end -%>
 <% else -%>
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
-    Order allow,deny
-    allow from all
     Satisfy Any
+    Require all granted
   </Directory>
 <% end -%>
   LogLevel warn
@@ -65,9 +63,8 @@
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
-    Order allow,deny
-    allow from all
     Satisfy Any
+    Require all granted
   </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
