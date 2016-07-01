@@ -39,6 +39,9 @@
     Order allow,deny
     allow from all
     Satisfy Any
+    <IfVersion >= 2.4>
+      Require all granted
+    </IfVersion>
   </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
