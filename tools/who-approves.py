@@ -124,9 +124,14 @@ for team in projects:
                             repos[repo]['tags'] = \
                                 projects[team]['deliverables'][deli]['tags']
 for aprv_group in aprv_groups.keys():
-    aprv_groups[aprv_group] = json.loads(requests.get(
-        gerrit_url + group_path % all_groups[aprv_group]['id'],
-        auth=gerrit_auth).text[4:])
+    # It's possible for built-in metagroups in recent Gerrit releases to
+    # appear in ACLs but not in the groups list
+    if aprv_group in all_groups:
+        aprv_groups[aprv_group] = json.loads(requests.get(
+            gerrit_url + group_path % all_groups[aprv_group]['id'],
+            auth=gerrit_auth).text[4:])
+    else:
+        sys.stderr.write('Ignoring nonexistent "%s" group.\n' % aprv_group)
 for repo in repos:
     for aprv_group in repos[repo]['approvers'].keys():
         for approver in aprv_groups[aprv_group]:
