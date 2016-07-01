@@ -42,6 +42,10 @@ zuul_nodes:
     host: 'release.slave.openstack.org'
     labels: 'release'
 
+  - name: 'signing01.ci.openstack.org'
+    host: 'signing01.ci.openstack.org'
+    labels: 'signing'
+
   - name: 'wheel-mirror-centos-7-amd64.slave.openstack.org'
     host: 'wheel-mirror-centos-7-amd64.slave.openstack.org'
     labels: 'wheel-mirror-centos-7-amd64'

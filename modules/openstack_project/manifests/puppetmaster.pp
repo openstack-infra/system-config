@@ -176,6 +176,36 @@ class openstack_project::puppetmaster (
     ensure => absent,
   }
 
+  # For signing key management
+  package { 'gnupg':
+    ensure => present,
+  }
+  package { 'gnupg-curl':
+    ensure => present,
+  }
+  file { '/root/signing.gnupg':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
+  }
+  file { '/root/signing.gnupg/gpg.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/signing.conf',
+    require => File['/root/signing.gnupg'],
+  }
+  file { '/root/signing.gnupg/sks-keyservers.netCA.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/sks-ca.pem',
+    require => File['/root/signing.gnupg'],
+  }
+
 # Enable puppetdb
 
   if $puppetdb {
