@@ -275,7 +275,7 @@ function setup_pip {
         rm -rf /usr/lib/python2.7/site-packages/setuptools*
     fi
 
-    pip install -U setuptools
+    pip install -U 'setuptools<24.0'
 }
 
 setup_pip
