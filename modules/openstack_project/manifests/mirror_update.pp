@@ -9,6 +9,7 @@ class openstack_project::mirror_update (
   $centos_keytab = '',
   $epel_keytab = '',
 ) {
+  include ::openstack_project::reprepro_mirror
 
   class { 'openstack_project::server':
     sysadmins => $sysadmins,
@@ -96,24 +97,6 @@ class openstack_project::mirror_update (
     ]
   }
 
-  # TODO(clarkb) this setup needs to go in a class of its own. It is not
-  # in the define because it is common to all reprepro mirrors.
-  package { 'reprepro':
-    ensure => present,
-  }
-
-  file { '/var/log/reprepro':
-    ensure => directory,
-  }
-
-  file { '/var/run/reprepro':
-    ensure => directory,
-  }
-
-  file { '/etc/reprepro':
-    ensure => directory,
-  }
-
   file { '/etc/reprepro.keytab':
     owner   => 'root',
     group   => 'root',
@@ -127,10 +110,6 @@ class openstack_project::mirror_update (
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/reprepro/reprepro-mirror-update.sh',
-  }
-
-  cron { 'reprepro':
-    ensure => absent,
   }
 
   ::openstack_project::reprepro { 'ubuntu-reprepro-mirror':
@@ -285,4 +264,6 @@ class openstack_project::mirror_update (
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
   }
+
+
 }
