@@ -177,7 +177,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'rcarrillocruz':
     realname => 'Ricardo Carrillo Cruz',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDc8rWVoc94ir1fhdC1qK75ZHRXf3JsjrQAx8RZQivICSpZPOpJNCBLJslkKMaSkEIxPOphqgKzp5GusnN5L9/I7DjYuQkqzn4Isi3njym8kWlQR+oDXrB/e/5w0G+WLQKnF9YwvPyw3QXeaUvhAzi/tlj+O3S2ZzWUjA2a12ITG/LFAYVEoSNC4dRJ3eXqIzRiCEkLojC4X2oZfxRv8mxc1vkk1Hpsk3yd2BkqU/v+N76X3CA5OzDDrt/pR8oaQGuncma0G8DuKnRVNmxSgi8HaF9OBwtQ5wnqn7YFQt98T2/cifyC6xhrNkoz9xzDuvxLbMRGAEnG8Tky0cdDSz+x',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQCz1CW5E87v8o7O8B5fe7j1uaPCToRdaBukjH2HzQZ+DSGTIPjirLpp5ZXPuyNnmtRMzwld6mlHYlevVEwuZTNyQwS7ut5o0LjyW6yoEcvPq0xMEZLxaso5dZAtzNgf3FzbtaUYBnkhSwX7c24lf8wPGAl7TC3yO0dePQh2lXVdaBiGB9ybVeQr+kwJIxleUE4puuQ+ONJE2D+hHjoQ/huUMpb996pb/YzkjkAxqHguMid0c1taelyW8n17nEDoWvlV9Qqbo8cerhgURo1OBt2zENLjQQ0kOkPxJx4qx3652e0kbkr11y50r9BMs418mnJdWselMxkSqQNZ+XotoH5Dwn+3K2a6Wv4OX3Dqb9SF/JTD7lA/tIkNfxgsRlzfEQ01rK1+g7Je10EnDCLEzHpFjvZ5q4EEMcYqY+osLFpHAOWGLMx+3eY4pz/xEzRP/x3sjGU09uNOZ3oCWUfSkE4xebnnWtxwWZKyFmv3GHtaqJn2UvpAbODPEYyYcOS3XV3zd233W3C09YYnFUyZbGLXpD05Yet5fZfGTnveMRn5/9LZai+dBPwoMWUJdX4yPnGXgOG8zk0u1nWfcNJfYg+xajSUDiMKjDhlkuFK/GXNYuINe42s1TxzL7pJ4X4UhqLiopeJvPg/U5xdCV5pxVKf1MVenrGe2pfwf1Yr2WMv5w==',
     key_id   => 'rcarrillocruz@infra',
     uid      => 2019,
     gid      => 2019,
