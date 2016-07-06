@@ -938,6 +938,7 @@ node 'release.slave.openstack.org' {
 
 # Node-OS: trusty
 node /^signing\d+\.ci\.openstack\.org$/ {
+  $group = "signing"
   include openstack_project
   class { 'openstack_project::signing_node':
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
