@@ -102,6 +102,7 @@ statusbot_channels:
 - openstack-swauth
 - openstack-swift
 - openstack-telemetry
+- openstack-tricircle
 - openstack-trove
 - openstack-vitrage
 - openstack-zaqar
@@ -200,6 +201,7 @@ meetbot_channels:
 - '#openstack-swift'
 - '#openstack-telemetry'
 - '#openstack-third-party-ci'
+- '#openstack-tricircle'
 - '#openstack-trove'
 - '#openstack-ux'
 - '#openstack-vitrage'
