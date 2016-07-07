@@ -341,6 +341,7 @@ cacti_hosts:
 - release.slave.openstack.org
 - review-dev.openstack.org
 - review.openstack.org
+- signing01.ci.openstack.org
 - stackalytics.openstack.org
 - static.openstack.org
 - status.openstack.org
