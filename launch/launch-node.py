@@ -117,8 +117,20 @@ def bootstrap_server(server, key, name, volume_device, keep,
     # into our inventory
     # Remove cloud and region from the environment to work around a bug in occ
     expand_env = os.environ.copy()
-    expand_env.pop('OS_CLOUD', None)
-    expand_env.pop('OS_REGION_NAME', None)
+    for env_key in expand_env.keys():
+        if env_key.startswith('OS_'):
+            expand_env.pop(env_key, None)
+
+    # Regenerate inventory cache, throwing an error if there is an issue
+    # so that we don't generate a bogus groups file
+    try:
+        subprocess.check_output(
+            ['/etc/ansible/hosts/openstack', '--list'],
+            env=expand_env)
+    except subprocess.CalledProcessError as e:
+        print "Inventory regeneration failed"
+        print e.output
+        raise
 
     print subprocess.check_output(
         '/usr/local/bin/expand-groups.sh',
