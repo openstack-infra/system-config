@@ -1,0 +1,11 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 07 Jul 2016 15:03:02 +0000
+Reviewed-on: https://review.openstack.org/337595
+Project: openstack-infra/system-config
+Branch: refs/heads/master
