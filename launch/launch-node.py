@@ -275,7 +275,7 @@ def main():
     parser.add_argument("--config-drive", dest="config_drive",
                         help="Boot with config_drive attached.",
                         action='store_true',
-                        default=True)
+                        default=False)
     parser.add_argument("--az", dest="availability_zone", default=None,
                         help="AZ to boot in.")
     options = parser.parse_args()
