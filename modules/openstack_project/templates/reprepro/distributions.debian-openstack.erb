@@ -1,0 +1,7 @@
+<% @releases.each do |release| -%>
+Codename: <%= release %>
+Description: Debian OpenStack <%= release.capitalize %> packages
+Architectures: amd64 i386 source
+Components: main
+
+<% end -%>

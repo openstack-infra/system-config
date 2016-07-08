@@ -5,7 +5,7 @@ define openstack_project::reprepro (
   $basedir,
   $distributions,
   $logdir = '/var/log/reprepro',
-  $updates_file,
+  $updates_file = undef,
   $options_template = 'openstack_project/reprepro/options.erb',
   $releases = [],
 ) {
@@ -13,12 +13,14 @@ define openstack_project::reprepro (
     ensure => directory,
   }
 
-  file { "${confdir}/updates":
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-    source => $updates_file,
+  if $updates_file != undef {
+    file { "${confdir}/updates":
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+      source => $updates_file,
+    }
   }
 
   file { "${confdir}/options":
