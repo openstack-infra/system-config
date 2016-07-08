@@ -21,6 +21,7 @@ class openstack_project::template (
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = false,
+  $permit_root_login         = 'no',
 ) {
 
   ###########################################################
@@ -35,6 +36,7 @@ class openstack_project::template (
 
   class { 'ssh':
     trusted_ssh_source => $puppetmaster_server,
+    permit_root_login => $permit_root_login,
   }
 
   if ( $afs ) {
