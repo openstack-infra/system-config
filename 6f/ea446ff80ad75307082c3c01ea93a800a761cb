@@ -1,0 +1,9 @@
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 08 Jul 2016 18:44:52 +0000
+Reviewed-on: https://review.openstack.org/329049
+Project: openstack-infra/system-config
+Branch: refs/heads/master
