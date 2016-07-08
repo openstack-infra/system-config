@@ -26,6 +26,7 @@ class openstack_project::single_use_slave (
     install_users             => $install_users,
     install_resolv_conf       => $install_resolv_conf,
     enable_unbound            => $enable_unbound,
+    permit_root_login         => 'yes',
     iptables_rules4           =>
       [
         # Ports 69 and 6385 allow to allow ironic VM nodes to reach tftp and
