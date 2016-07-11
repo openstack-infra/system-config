@@ -301,9 +301,7 @@ class openstack_project::review (
     require                             => $::project_config::config_dir,
   }
 
-  gerrit::plugin { 'javamelody':
-    version => '3fefa35',
-  }
+  gerrit::plugin { 'javamelody': version       => '3fefa35' }
 
   class { 'gerritbot':
     nick                    => 'openstackgerrit',
