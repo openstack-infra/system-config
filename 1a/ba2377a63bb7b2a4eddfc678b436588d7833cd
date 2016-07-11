@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 11 Jul 2016 20:25:59 +0000
+Reviewed-on: https://review.openstack.org/340401
+Project: openstack-infra/system-config
+Branch: refs/heads/master
