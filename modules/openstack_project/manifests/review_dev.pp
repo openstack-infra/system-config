@@ -178,6 +178,7 @@ class openstack_project::review_dev (
 
   gerrit::plugin { 'javamelody': version       => '3fefa35' }
   gerrit::plugin { 'delete-project': version   => '4b7410c' }
+  gerrit::plugin { 'its-storyboard': version   => 'a9cb131' }
 
   # create a file containing the ssl certificate
   file { '/home/gerrit2/storyboard-dev.crt':
