@@ -933,6 +933,7 @@ node 'release.slave.openstack.org' {
     npm_userpassword       => hiera('npm_user_password'),
     npm_userurl            => 'https://openstack.org',
     admin_keytab           => hiera('afsadmin_keytab'),
+    packaging_keytab       => hiera('packaging_keytab'),
   }
 }
 
