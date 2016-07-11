@@ -200,9 +200,8 @@ class openstack_project::review_dev (
     ],
   }
 
-  gerrit::plugin { 'javamelody':
-    version => '3fefa35',
-  }
+  gerrit::plugin { 'javamelody': version       => '3fefa35' }
+  gerrit::plugin { 'its-storyboard': version   => 'a9cb131' }
 
   package { 'python-launchpadlib':
     ensure => present,
