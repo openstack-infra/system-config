@@ -9,6 +9,7 @@ class openstack_project::proposal_slave (
   $proposal_ssh_private_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $packaging_keytab = '',
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
   $zanata_server_url,
   $zanata_server_user,
@@ -26,6 +27,7 @@ class openstack_project::proposal_slave (
     jenkins_gitfullname => $jenkins_gitfullname,
     jenkins_gitemail    => $jenkins_gitemail,
     project_config_repo => $project_config_repo,
+    afs                 => true,
   }
 
   package { ['Babel', 'pyopenssl', 'ndg-httpsclient', 'pyasn1',
@@ -49,5 +51,22 @@ class openstack_project::proposal_slave (
     mode    => '0400',
     require => File['/home/jenkins/.ssh'],
     content => $proposal_ssh_public_key,
+  }
+
+  include ::openstack_project::reprepro_mirror
+
+  file { '/etc/packaging.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $packaging_keytab,
+  }
+
+  ### Debian Openstack Packages ###
+  ::openstack_project::reprepro { 'debian-openstack-reprepro':
+    confdir       => '/etc/reprepro/debian-openstack',
+    basedir       => '/afs/.openstack.org/mirror/debian-openstack',
+    distributions => 'openstack_project/reprepro/distributions.debian-openstack.erb',
+    releases      => ['jessie'],
   }
 }

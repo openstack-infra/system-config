@@ -32,7 +32,6 @@ class openstack_project::release_slave (
   $npm_userpassword,
   $npm_userurl,
   $admin_keytab = '',
-  $packaging_keytab = '',
 ) {
   class { 'openstack_project::slave':
     ssh_key             => $jenkins_ssh_public_key,
@@ -104,22 +103,5 @@ class openstack_project::release_slave (
     mode    => '0600',
     content => template('openstack_project/puppetforge.yml.erb'),
     require => File['/home/jenkins'],
-  }
-
-  include ::openstack_project::reprepro_mirror
-
-  file { '/etc/packaging.keytab':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0400',
-    content => $packaging_keytab,
-  }
-
-  ### Debian Openstack Packages ###
-  ::openstack_project::reprepro { 'debian-openstack-reprepro':
-    confdir       => '/etc/reprepro/debian-openstack',
-    basedir       => '/afs/.openstack.org/mirror/debian-openstack',
-    distributions => 'openstack_project/reprepro/distributions.debian-openstack.erb',
-    releases      => ['jessie'],
   }
 }

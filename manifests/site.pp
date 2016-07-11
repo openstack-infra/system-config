@@ -906,6 +906,7 @@ node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
     jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
+    packaging_keytab         => hiera('packaging_keytab'),
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents'),
     zanata_server_url        => 'https://translate.openstack.org/',
@@ -933,7 +934,6 @@ node 'release.slave.openstack.org' {
     npm_userpassword       => hiera('npm_user_password'),
     npm_userurl            => 'https://openstack.org',
     admin_keytab           => hiera('afsadmin_keytab'),
-    packaging_keytab       => hiera('packaging_keytab'),
   }
 }
 
