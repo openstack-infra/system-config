@@ -109,8 +109,8 @@ class openstack_project::release_slave (
   include ::openstack_project::reprepro_mirror
 
   file { '/etc/packaging.keytab':
-    owner   => 'root',
-    group   => 'root',
+    owner   => 'jenkins',
+    group   => 'jenkins',
     mode    => '0400',
     content => $packaging_keytab,
   }
