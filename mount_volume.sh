@@ -42,6 +42,8 @@ if ! blkid | grep $DEVICE ; then
     if [ ! -d $MOUNT_PATH ] ; then
         mkdir -p $MOUNT_PATH
     fi
+    # make sure normal users can write here
+    chmod a+rwx $MOUNT_PATH
 
     echo "/dev/main/$FS_LABEL  $MOUNT_PATH  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
     mount -a
