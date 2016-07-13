@@ -54,6 +54,7 @@ if cur.rowcount:
     if args.delete:
         cur.execute('delete from patch_comments where author_id=%s',
                     args.account_id)
+        print "Deleted %s rows." % cur.rowcount
 
 # If we are deleting some patch comments above, see if any of them are
 # parents of other comments.  If so, unparent the child comments so
@@ -70,19 +71,16 @@ if potential_parents:
     cur.execute(query, list(potential_parents))
     t = PrettyTable(['Change', 'Patchset', 'File', 'UUID', 'Date', 'Message'])
     t.align = 'l'
-    delete_rows = []
     for row in cur.fetchall():
         t.add_row(row)
-        delete_rows.append(row)
     if cur.rowcount:
         print "Patch Comment Children -- To Be Unparented"
         print t
         if args.delete:
-            for change_id, patch_set_id, file_name, uuid in delete_rows:
-                cur.execute('update patch_comments set parent_uuid=NULL where '
-                            'change_id=%s and patch_set_id=%s and '
-                            'file_name=%s and uuid=%s',
-                            change_id, patch_set_id, file_name, uuid)
+            query = ('update patch_comments set parent_uuid=NULL where '
+                     'parent_uuid in (%s)' % placeholders)
+            cur.execute(query, list(potential_parents))
+            print "Updated %s rows." % cur.rowcount
 
 # Finally, display / delete any change messages.
 t = PrettyTable(['Change', 'UUID', 'Date', 'Message'])
@@ -97,3 +95,5 @@ if cur.rowcount:
     if args.delete:
         cur.execute('delete from change_messages where author_id=%s',
                     args.account_id)
+        print "Deleted %s rows." % cur.rowcount
+db.commit()
