@@ -1,0 +1,9 @@
+Code-Review+1: Thomas Goirand <thomas@goirand.fr>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 13 Jul 2016 19:52:56 +0000
+Reviewed-on: https://review.openstack.org/341624
+Project: openstack-infra/system-config
+Branch: refs/heads/master
