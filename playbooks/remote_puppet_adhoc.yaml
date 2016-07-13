@@ -1,4 +1,5 @@
 - hosts: '*'
+  strategy: free
   gather_facts: true
   roles:
   - role: puppet
