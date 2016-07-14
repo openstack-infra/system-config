@@ -221,4 +221,12 @@ class openstack_project::users {
     gid      => 2024,
   }
 
+  @user::virtual::localuser { 'ianw':
+    realname => 'Ian Wienand',
+    sshkeys  => 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOjz+dkwRWTJcW9Gt3iGHSzRBsvVlTAK6G2oH3+0D41',
+    key_id   => 'iwienand+osinfra@redhat.com',
+    uid      => 2025,
+    gid      => 2025,
+  }
+
 }
