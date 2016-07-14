@@ -421,47 +421,8 @@ class openstack_project::template (
 
   }
 
-  $puppet_version = $pin_puppet
-  file { '/etc/puppet/puppet.conf':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => template('openstack_project/puppet.conf.erb'),
-    replace => true,
-  }
-
   service { 'puppet':
     ensure => stopped,
-  }
-
-  file { '/etc/puppet/hiera.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    source  => 'puppet:///modules/openstack_project/puppet/hiera.yaml',
-    replace => true,
-  }
-
-  file {'/etc/puppet/environments':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-  file {'/etc/puppet/environments/production':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-  file {'/etc/puppet/environments/production/environment.conf':
-    ensure => file,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
-    source => 'puppet:///modules/openstack_project/puppet/production_environment.conf',
   }
   ###########################################################
 
