@@ -1,7 +1,9 @@
 ---
-- src: git+git://git.openstack.org/openstack-infra/ansible-role-puppet.git
+- src: git://git.openstack.org/openstack-infra/ansible-role-puppet.git
+  scm: git
   version: HEAD
   name: puppet
-- src: git+git://git.openstack.org/openstack/ansible-role-cloud-launcher.git
+- src: git://git.openstack.org/openstack/ansible-role-cloud-launcher.git
+  scm: git
   version: HEAD
   name: cloud-launcher
