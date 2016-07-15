@@ -16,3 +16,4 @@ tools/invite2summit/done*
 Vagrantfile
 .vagrant/
 manifests/local.pp
+*.retry
