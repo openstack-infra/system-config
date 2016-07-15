@@ -7,15 +7,13 @@
 
 [loggers]
 keys=root,nodepool,requests,shade,image,
- tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
- dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
- dib_centos-7, dib_fedora-23
+ dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24
 
 [handlers]
 keys=console,debug,normal,image,
- tripleo-test-cloud-rh1_tripleo-f22, dib_debian-jessie,
- dib_ubuntu-precise, dib_ubuntu-trusty, dib_ubuntu-xenial,
- dib_centos-7, dib_fedora-23
+ dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24
 
 [formatters]
 keys=simple
@@ -75,18 +73,6 @@ datefmt=
 
 # ==== individual image loggers ====
 
-
-[logger_tripleo-test-cloud-rh1_tripleo-f22]
-level=DEBUG
-handlers=tripleo-test-cloud-rh1_tripleo-f22
-qualname=nodepool.image.build.tripleo-test-cloud-rh1.tripleo-f22
-propagate=0
-
-[handler_tripleo-test-cloud-rh1_tripleo-f22]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/tripleo-test-cloud-rh1.tripleo-f22.log', 'H', 8, 30,)
 
 [logger_dib_debian-jessie]
 level=DEBUG
@@ -159,3 +145,15 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-23.log', 'H', 8, 30,)
+
+[logger_dib_fedora-24]
+level=DEBUG
+handlers=dib_fedora-24
+qualname=nodepool.image.build.fedora-24
+propagate=0
+
+[handler_dib_fedora-24]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.fedora-24.log', 'H', 8, 30,)
