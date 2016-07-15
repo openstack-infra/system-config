@@ -9,6 +9,7 @@ class openstack_project::mirror_update (
   $centos_keytab = '',
   $epel_keytab = '',
 ) {
+  include ::gnupg
   include ::openstack_project::reprepro_mirror
 
   class { 'openstack_project::server':
@@ -112,6 +113,37 @@ class openstack_project::mirror_update (
     source  => 'puppet:///modules/openstack_project/reprepro/reprepro-mirror-update.sh',
   }
 
+  ### Debian mirror ###
+  ::openstack_project::reprepro { 'debian-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian',
+    basedir       => '/afs/.openstack.org/mirror/debian',
+    distributions => 'openstack_project/reprepro/distributions.debian.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
+    releases      => ['jessie'],
+  }
+
+  cron { 'reprepro debian':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian.lock reprepro-mirror-update /etc/reprepro/debian mirror.debian >>/var/log/reprepro/debian-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['debian-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Debian Archive':
+    ensure     => present,
+    key_id     => '7638d0442b90d010',
+    user       => 'root',
+    key_server => 'hkp://keyserver.ubuntu.com',
+    key_type   => 'public',
+  }
+
   ::openstack_project::reprepro { 'ubuntu-reprepro-mirror':
     confdir       => '/etc/reprepro/ubuntu',
     basedir       => '/afs/.openstack.org/mirror/ubuntu',
@@ -133,8 +165,6 @@ class openstack_project::mirror_update (
        ::openstack_project::reprepro['ubuntu-reprepro-mirror'],
     ]
   }
-
-  include ::gnupg
 
   gnupg_key { 'Ubuntu Archive':
     ensure     => present,
@@ -264,6 +294,4 @@ class openstack_project::mirror_update (
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
   }
-
-
 }
