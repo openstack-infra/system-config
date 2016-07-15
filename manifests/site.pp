@@ -945,6 +945,7 @@ node /^signing\d+\.ci\.openstack\.org$/ {
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
     pubring                => hiera('pubring'),
     secring                => hiera('secring'),
+    gerritkey              => hiera('gerritkey'),
   }
 }
 
