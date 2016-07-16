@@ -20,6 +20,7 @@ class openstack_project::signing_node (
   $pubring,
   $secring,
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $packaging_keytab = '',
 ) {
   class { 'openstack_project::slave':
     thin                => true,
@@ -57,4 +58,20 @@ class openstack_project::signing_node (
     require => File['/home/jenkins/.gnupg'],
   }
 
+  include ::openstack_project::reprepro_mirror
+
+  file { '/etc/packaging.keytab':
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0400',
+    content => $packaging_keytab,
+  }
+
+  ### Debian Openstack Packages ###
+  ::openstack_project::reprepro { 'debian-openstack-reprepro':
+    confdir       => '/etc/reprepro/debian-openstack',
+    basedir       => '/afs/.openstack.org/mirror/debian-openstack',
+    distributions => 'openstack_project/reprepro/distributions.debian-openstack.erb',
+    releases      => ['jessie-newton'],
+  }
 }
