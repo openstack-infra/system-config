@@ -217,10 +217,6 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/screen-q-vpn.txt
-    tags:
-      - screen
-      - oslofmt
   - name: logs/screen-s-account.txt
     tags:
       - screen
@@ -380,11 +376,6 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
-  - name: logs/new/screen-q-vpn.txt
-    tags:
-      - screen
-      - oslofmt
-    job-filter: '.*grenade.*'
   - name: logs/new/screen-s-account.txt
     tags:
       - screen
@@ -507,11 +498,6 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-q-svc.txt
-    tags:
-      - screen
-      - oslofmt
-    job-filter: '.*grenade.*'
-  - name: logs/old/screen-q-vpn.txt
     tags:
       - screen
       - oslofmt
