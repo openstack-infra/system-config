@@ -23,9 +23,7 @@ class openstack_project::mirror_update (
     uri_rewrite    => $uri_rewrite,
   }
 
-  class { 'bandersnatch':
-    bandersnatch_source => 'https://bitbucket.org/jeblair/bandersnatch',
-  }
+  class { 'bandersnatch': }
 
   class { 'bandersnatch::mirror':
     mirror_root => '/afs/.openstack.org/mirror/pypi',
