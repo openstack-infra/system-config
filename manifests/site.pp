@@ -180,8 +180,6 @@ node 'puppetmaster.openstack.org' {
   }
   class { 'openstack_project::puppetmaster':
     root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
-    jenkins_api_user                           => hiera('jenkins_api_user', 'username'),
-    jenkins_api_key                            => hiera('jenkins_api_key'),
     puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
   }
 }
