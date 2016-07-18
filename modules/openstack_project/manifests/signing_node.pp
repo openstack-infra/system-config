@@ -20,11 +20,20 @@ class openstack_project::signing_node (
   $pubring,
   $secring,
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $packaging_keytab = '',
 ) {
   class { 'openstack_project::slave':
     thin                => true,
     ssh_key             => $jenkins_ssh_public_key,
     project_config_repo => $project_config_repo,
+    afs                 => true,
+  }
+
+  file { '/etc/packaging.keytab':
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0400',
+    content => $packaging_keytab,
   }
 
   package { 'gnupg':
