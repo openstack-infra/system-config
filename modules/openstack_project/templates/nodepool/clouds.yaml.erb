@@ -10,23 +10,23 @@ clouds:
       - ORD
       - IAD
     auth:
-      username: '<%= rackspace_username %>'
-      password: '<%= rackspace_password %>'
-      project_id: <%= rackspace_project %>
+      username: '<%= @rackspace_username %>'
+      password: '<%= @rackspace_password %>'
+      project_id: <%= @rackspace_project %>
   ovh:
     profile: ovh
     regions:
       - BHS1
       - GRA1
     auth:
-      username: '<%= ovh_username %>'
-      password: '<%= ovh_password %>'
-      project_name: '<%= ovh_project %>'
+      username: '<%= @ovh_username %>'
+      password: '<%= @ovh_password %>'
+      project_name: '<%= @ovh_project %>'
   tripleo-test-cloud-rh1:
     region_name: regionOne
     auth:
-      username: '<%= tripleo_username %>'
-      password: '<%= tripleo_password %>'
+      username: '<%= @tripleo_username %>'
+      password: '<%= @tripleo_password %>'
       project_name: '<%= tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
     floating_ip_source: nova
@@ -40,17 +40,17 @@ clouds:
     floating_ip_source: neutron
   bluebox-sjc1:
     auth:
-      username: '<%= bluebox_username %>'
-      password: '<%= bluebox_password %>'
-      project_name: '<%= bluebox_project %>'
+      username: '<%= @bluebox_username %>'
+      password: '<%= @bluebox_password %>'
+      project_name: '<%= @bluebox_project %>'
       auth_url: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0'
   internap:
     profile: internap
     region_name: nyj01
     auth:
-      username: '<%= internap_username %>'
-      password: '<%= internap_password %>'
-      project_name: '<%= internap_project %>'
+      username: '<%= @internap_username %>'
+      password: '<%= @internap_password %>'
+      project_name: '<%= @internap_project %>'
     networks:
       - name: inap-17304-WAN2342
         routes_externally: True
@@ -60,9 +60,9 @@ clouds:
     region_name: RegionOne
     auth:
       auth_url: https://cloud1.osic.org:5000
-      username: <%= osic_username %>
-      password: <%= osic_password %>
-      project_name: <%= osic_project %>
+      username: <%= @osic_username %>
+      password: <%= @osic_password %>
+      project_name: <%= @osic_project %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
@@ -70,6 +70,6 @@ clouds:
     region_name: ca-ymq-1
     profile: vexxhost
     auth:
-      username: '<%= vexxhost_username %>'
-      password: '<%= vexxhost_password %>'
-      project_name: '<%= vexxhost_project %>'
+      username: '<%= @vexxhost_username %>'
+      password: '<%= @vexxhost_password %>'
+      project_name: '<%= @vexxhost_project %>'
