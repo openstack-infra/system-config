@@ -999,6 +999,18 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
+# Node-OS: trusty
+node 'idp.openstackid.org' {
+  class { 'openstack_project::ipsilon_prod':
+    sysadmins               => hiera('sysadmins', []),
+    ipsilon_db_password     => hiera('ipsilon_db_password'),
+    ipsilon_db_hostname     => hiera('ipsilon_db_hostname'),
+    ssl_cert_file_contents  => hiera('ipsilon_ssl_cert_file_contents', undef),
+    ssl_key_file_contents   => hiera('ipsilon_ssl_key_file_contents', undef),
+    ssl_chain_file_contents => hiera('ipsilon_ssl_chain_file_contents', undef),
+  }
+}
+
 # Node-OS: precise
 # Node-OS: trusty
 # This is not meant to be an actual node that connects to the master.
