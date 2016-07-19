@@ -34,6 +34,7 @@ $K5START rsync -rlptDvz \
     --exclude="cr" \
     --exclude="fasttrack" \
     --exclude="isos" \
+    --exclude="paas" \
     --exclude="sclo" \
     --exclude="storage" \
     --exclude="virt" \
