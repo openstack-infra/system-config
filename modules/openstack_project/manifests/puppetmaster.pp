@@ -159,7 +159,11 @@ class openstack_project::puppetmaster (
   }
 
 # For launch/launch-node.py.
-  package { 'shade':
+  $pip_packages = [
+    'shade',
+    'python-openstackclient',
+  ]
+  package { $pip_packages:
     ensure   => latest,
     provider => openstack_pip,
   }
