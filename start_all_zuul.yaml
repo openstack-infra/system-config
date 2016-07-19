@@ -1,0 +1,28 @@
+---
+- hosts: 'zuul.openstack.org'
+  any_errors_fatal: true
+  tasks:
+    - name: Start Zuul
+      service:
+        name: zuul
+        state: started
+      become: true
+      become_user: root
+
+- hosts: 'zlstatic0*.openstack.org:zl0*.openstack.org'
+  tasks:
+    - name: Start zuul-launcher
+      service:
+        name: zuul-launcher
+        state: started
+      become: true
+      become_user: root
+
+- hosts: 'zm0*.openstack.org'
+  tasks:
+    - name: Start zuul-merger
+      service:
+        name: zuul-merger
+        state: started
+      become: true
+      become_user: root
