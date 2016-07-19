@@ -16,7 +16,8 @@ class openstack_project::puppetmaster (
   include openstack_project::params
 
   class { '::ansible':
-    ansible_hostfile => '/etc/ansible/hosts',
+    ansible_hostfile    => '/etc/ansible/hosts',
+    retry_files_enabled => 'False',
   }
 
   file { '/etc/ansible/hostfile':
