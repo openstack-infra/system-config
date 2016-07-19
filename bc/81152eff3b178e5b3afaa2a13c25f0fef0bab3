@@ -1,0 +1,10 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: bruce-benjamin <bruce.benjamin@jhuapl.edu>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 19 Jul 2016 00:37:37 +0000
+Reviewed-on: https://review.openstack.org/334630
+Project: openstack-infra/system-config
+Branch: refs/heads/master
