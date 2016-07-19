@@ -170,7 +170,7 @@ class openstack_project::lists(
 
   maillist { 'openstack-zh':
     ensure      => present,
-    admin       => 'zhaoxinyu@huawei.com',
+    admin       => 'yeluaiesec@gmail.com',
     password    => $listpassword,
     description => 'OpenStack社区中文讨论群组',
     webserver   => $listdomain,
