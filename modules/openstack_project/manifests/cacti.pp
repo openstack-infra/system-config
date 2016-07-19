@@ -25,6 +25,9 @@ class openstack_project::cacti (
     ensure => present,
   }
 
+  ::apache::listen { '80': }
+  ::apache::listen { '443': }
+
   ::apache::vhost::custom { $::fqdn:
     ensure  => present,
     content => template('openstack_project/cacti.vhost.erb'),
