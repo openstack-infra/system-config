@@ -15,6 +15,7 @@ class openstack_project::cacti (
   }
 
   class { '::apache':
+    default_vhost => false,
     mpm_module => 'prefork',
   }
   class { '::apache::mod::rewrite': }
