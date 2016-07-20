@@ -64,6 +64,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to debian
+  file { "${www_root}/debian":
+    ensure  => link,
+    target  => "${mirror_root}/debian",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # Create the symlink to Debian OpenStack Packaging Team reprepro.
   file { "${www_root}/debian-openstack":
     ensure  => link,
