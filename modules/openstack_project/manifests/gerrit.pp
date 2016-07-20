@@ -148,8 +148,14 @@ class openstack_project::gerrit (
     commentlinks                        => $commentlinks,
     trackingids                         => [
       {
-        name   => 'storyboard',
+        name   => 'storyboard-story',
         footer => 'story:',
+        match  => '\\#?(\\d+)',
+        system => 'Storyboard',
+      },
+      {
+        name   => 'storyboard-task',
+        footer => 'task:',
         match  => '\\#?(\\d+)',
         system => 'Storyboard',
       },
