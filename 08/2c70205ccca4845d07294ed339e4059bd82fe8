@@ -1,0 +1,12 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: Zara <zara.zaimeche@codethink.co.uk>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 20 Jul 2016 19:59:41 +0000
+Reviewed-on: https://review.openstack.org/316197
+Project: openstack-infra/system-config
+Branch: refs/heads/master
