@@ -8,6 +8,7 @@ class openstack_project::mirror_update (
   $npm_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
+  $git_keytab = '',
 ) {
   include ::gnupg
   include ::openstack_project::reprepro_mirror
@@ -45,6 +46,13 @@ class openstack_project::mirror_update (
     group   => 'root',
     mode    => '0400',
     content => $npm_keytab,
+  }
+
+  file { '/etc/git.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $git_keytab,
   }
 
   file { '/etc/afsadmin.keytab':
@@ -313,5 +321,34 @@ class openstack_project::mirror_update (
     user       => 'root',
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
+  }
+
+  file { '/usr/local/bin/git-mirror-update.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/git-mirror-update.sh',
+  }
+
+  file { '/etc/git-mirror-list.txt':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git-mirror-list.txt',
+  }
+
+  cron { 'git-mirror-update':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/git-mirror.lock git-mirror-update /etc/git-mirror-list.txt mirror.git >>/var/log/git-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/git-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/git.keytab'],
+    ]
   }
 }

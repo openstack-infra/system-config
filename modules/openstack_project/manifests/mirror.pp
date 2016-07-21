@@ -97,6 +97,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to git
+  file { "${www_root}/git":
+    ensure  => link,
+    target  => "${mirror_root}/git",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # Create the symlink to apt.
   file { "${www_root}/ubuntu":
     ensure  => link,
