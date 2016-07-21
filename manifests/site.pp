@@ -937,6 +937,7 @@ node /^signing\d+\.ci\.openstack\.org$/ {
     packaging_keytab       => hiera('packaging_keytab'),
     pubring                => hiera('pubring'),
     secring                => hiera('secring'),
+    gerritkey              => hiera('gerritkey'),
   }
 }
 

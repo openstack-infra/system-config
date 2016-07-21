@@ -7,6 +7,8 @@ class openstack_project::slave (
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
+  $jenkins_gerrituser = 'jenkins',
+  $jenkins_gerritkey = undef,
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
   $afs = false,
 ) {
@@ -26,6 +28,8 @@ class openstack_project::slave (
     ssh_key      => $ssh_key,
     gitfullname  => $jenkins_gitfullname,
     gitemail     => $jenkins_gitemail,
+    gerrituser   => $jenkins_gerrituser,
+    gerritkey    => $jenkins_gerritkey,
   }
 
   include jenkins::cgroups
