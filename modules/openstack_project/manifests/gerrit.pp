@@ -194,7 +194,9 @@ class openstack_project::gerrit (
   }
 
   if ($testmode == false) {
-    include gerrit::cron
+    class { 'gerrit::cron':
+      gitgc_repos      => true,
+    }
     class { 'github':
       username         => $github_username,
       project_username => $github_project_username,
