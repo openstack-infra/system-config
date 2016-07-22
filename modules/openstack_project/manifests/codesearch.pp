@@ -22,7 +22,8 @@ class openstack_project::codesearch (
   exec { 'create-hound-config':
     command     => 'create-hound-config',
     path        => '/bin:/usr/bin:/usr/local/bin',
-    environment => "PROJECTS_YAML=${::project_config::jeepyb_project_file}",
+    environment => ["PROJECTS_YAML=${::project_config::jeepyb_project_file}",
+                    "GIT_BASE=https://review.portbleu.com" ],
     user        => 'hound',
     cwd         => '/home/hound',
     require     => [
