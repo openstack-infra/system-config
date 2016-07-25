@@ -159,6 +159,10 @@ class openstack_project::template (
   ###########################################################
   # Package resources for all operating systems
 
+  package { 'at':
+    ensure => present,
+  }
+
   package { 'lvm2':
     ensure => present,
   }
