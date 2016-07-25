@@ -5,6 +5,7 @@
 class openstack_project::ask_staging (
   $db_password,
   $redis_password,
+  $akismet_api_key  = undef,
   $db_name          = 'askbotdb',
   $db_user          = 'ask',
   $redis_port       = '6378',
@@ -102,6 +103,7 @@ class openstack_project::ask_staging (
     redis_max_memory      => $redis_max_memory,
     redis_bind            => $redis_bind,
     redis_password        => $redis_password,
+    akismet_api_key       => $akismet_api_key,
     custom_theme_enabled  => true,
     custom_theme_name     => 'os',
     site_name             => 'ask-staging.openstack.org',
