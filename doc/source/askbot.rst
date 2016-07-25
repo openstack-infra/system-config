@@ -83,6 +83,17 @@ Configuration files:
 * :file:`modules/askbot/templates/askbot.vhost.erb`
 * :file:`modules/askbot/templates/settings.py.erb`
 
+In addition to the file-based configuration, Askbot provides a web interface
+to tweak its own settings. Toggles and fields for reputation thresholds,
+user communications rules, data entry and formatting rules, keys for external
+services and static content can be found at `$URL/en/settings/`.
+
+As per Django standard, `$URL/admin` provides access to the Django
+administration interface. Effectively a limited web portal to the data in the
+database - but sometimes useful for debugging login problems using the
+`Django_authopenid` plugin.
+
+
 Celery daemon
 -------------
 
