@@ -462,6 +462,19 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+node /^firehose\d+\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 1883],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::mosquitto':
+    gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    gerrit_public_key   => hiera('germqtt_gerrit_ssh_private_key'),
+    gerrit_private_key  => hiera('germqtt_gerrit_ssh_private_key'),
+  }
+}
+
 # CentOS machines to load balance git access.
 # Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
