@@ -275,8 +275,9 @@ follows (you must be an operator):
 Note the colon in the syntax, if this is omitted only the first word will
 accompany the removal message.
 
-Banning of disruptive users is also available with the /ban command, see your
-client documentation for syntax.
+Banning of disruptive users is also available with the `/ban` command, see your
+client documentation for syntax. You can also add users to Chanserv's auto-kick
+list like so: `/msg chanserv akick <channel_name> add <nick> [optional reason]`
 
 You don't need to become an operator to change the topic, this can be done
 via Chanserv:
