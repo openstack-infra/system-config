@@ -51,6 +51,26 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     RewriteCond %{DOCUMENT_ROOT}/npm/$1/$1$2 -d
     RewriteRule ^/npm/([^/])([^/]*)(/.*)?$ /npm/$1/$1$2$3 [L]
 
+    # TODO(jhesketh): Remove this after bandersnatch implements pep503
+    # https://bitbucket.org/pypa/bandersnatch/pull-requests/20/fully-implement-pep-503-normalization/diff
+
+    # Special cases for openstack.nose_plugin & backports.*
+    RewriteRule ^(.*)/openstack-nose-plugin(.*)$ $1/openstack.nose_plugin$2
+    RewriteRule ^(.*)/backports-(.*)$ $1/backports.$2
+
+    RewriteCond %{REQUEST_URI} ^/pypi/simple/([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
+    RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
+
+    # Try again but replacing -'s with .'s
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} !-f
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI} !-d
+    RewriteRule (.*)-(.*) $1.$2 [N]
+
+    RewriteCond %{REQUEST_URI} ^/pypi/simple/([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
+    RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
+
     <DirectoryMatch "<%= @docroot %>\/npm\/[^/]+\/.*">
       DirectoryIndex index.json
       AddOutputFilterByType SUBSTITUTE application/json
