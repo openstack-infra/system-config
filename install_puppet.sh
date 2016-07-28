@@ -223,7 +223,7 @@ function setup_puppet_opensuse {
 }
 
 function setup_puppet_gentoo {
-    emaint sync
+    echo yes | emaint sync -a
     emerge -q --jobs=4 puppet-agent
     sed -i '/templatedir/d' /etc/puppetlabs/puppet/puppet.conf
 }
