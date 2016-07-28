@@ -273,7 +273,7 @@ node 'lists.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'paste.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -635,7 +635,7 @@ node 'storyboard-dev.openstack.org' {
 }
 
 # A machine to serve static content.
-# Node-OS: precise
+# Node-OS: trusty
 node 'static.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
@@ -741,7 +741,6 @@ node 'nodepool.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
@@ -893,7 +892,6 @@ node /^ci-backup-.*\.openstack\.org$/ {
   include openstack_project::backup_server
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'proposal.slave.openstack.org' {
   include openstack_project
