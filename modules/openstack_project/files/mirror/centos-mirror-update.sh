@@ -36,7 +36,6 @@ $K5START rsync -rlptDvz \
     --exclude="isos" \
     --exclude="paas" \
     --exclude="sclo" \
-    --exclude="storage" \
     --exclude="virt" \
     $MIRROR/centos/$REPO/ $BASE/$REPO/
 
