@@ -27,7 +27,6 @@ class openstack_project::template (
   ###########################################################
   # Classes for all hosts
 
-  include ntp
   include snmpd
   include sudoers
 
@@ -227,6 +226,22 @@ class openstack_project::template (
       # Make sure dig is installed
       package { 'bind-utils':
         ensure => present,
+      }
+    }
+  }
+
+  ###########################################################
+  # Manage  ntp
+  case $::osfamily {
+    'Debian': {
+      include ntp
+    }
+    'RedHat': {
+      class { '::ntp':
+        # Utils in ntp-perl are included in Debian's ntp package; we
+        # add it here for consistency.  See also
+        # https://tickets.puppetlabs.com/browse/MODULES-3660
+        package_name => [ 'ntp' , 'ntp-perl' ]
       }
     }
   }
