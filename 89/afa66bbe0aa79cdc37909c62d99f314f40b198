@@ -1,0 +1,10 @@
+Code-Review+1: Thomas Goirand <thomas@goirand.fr>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Workflow+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 29 Jul 2016 11:44:16 +0000
+Reviewed-on: https://review.openstack.org/347839
+Project: openstack-infra/system-config
+Branch: refs/heads/master
