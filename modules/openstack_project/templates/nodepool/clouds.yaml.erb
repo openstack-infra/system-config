@@ -29,7 +29,7 @@ clouds:
       password: '<%= @tripleo_password %>'
       project_name: '<%= tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
-    floating_ip_source: nova
+    floating_ip_source: neutron
   tripleo-test-cloud-rh2:
     region_name: regionOne
     auth:
