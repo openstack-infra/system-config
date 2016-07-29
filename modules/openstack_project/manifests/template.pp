@@ -27,7 +27,6 @@ class openstack_project::template (
   ###########################################################
   # Classes for all hosts
 
-  include ntp
   include snmpd
   include sudoers
 
@@ -228,6 +227,20 @@ class openstack_project::template (
       package { 'bind-utils':
         ensure => present,
       }
+    }
+  }
+
+  ###########################################################
+  # Manage  ntp
+
+  include '::ntp'
+
+  if ($::osfamily == "RedHat") {
+    # Utils in ntp-perl are included in Debian's ntp package; we
+    # add it here for consistency.  See also
+    # https://tickets.puppetlabs.com/browse/MODULES-3660
+    package { 'ntp-perl':
+      ensure => present
     }
   }
 
