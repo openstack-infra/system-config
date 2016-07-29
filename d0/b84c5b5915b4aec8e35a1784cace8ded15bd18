@@ -1,0 +1,11 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Doug Hellmann <doug@doughellmann.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 29 Jul 2016 18:33:27 +0000
+Reviewed-on: https://review.openstack.org/339248
+Project: openstack-infra/system-config
+Branch: refs/heads/master
