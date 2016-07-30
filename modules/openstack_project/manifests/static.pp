@@ -59,6 +59,14 @@ class openstack_project::static (
     }
   }
 
+  file { '/etc/updatedb.conf':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    source => 'puppet:///modules/openstack_project/updatedb.conf',
+  }
+
   file { '/etc/ssl/certs':
     ensure => directory,
     owner  => 'root',
