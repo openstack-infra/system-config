@@ -1,0 +1,11 @@
+<% @releases.each do |release| -%>
+Origin: Percona
+Codename: <%= release %>
+Description: OpenStack Debian Percona <%= release.capitalize %> mirror
+Architectures: amd64
+Components: main
+Contents: .gz
+Update: debian-percona
+Log: <%= @logdir %>/debian-percona-<%= release %>.log
+
+<% end -%>

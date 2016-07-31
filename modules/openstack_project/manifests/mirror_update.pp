@@ -315,3 +315,34 @@ class openstack_project::mirror_update (
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
   }
 }
+  ### Percona Mirror ###
+  ::openstack_project::reprepro { 'debian-percona-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-percona',
+    basedir       => '/afs/.openstack.org/mirror/debian-percona',
+    distributions => 'openstack_project/reprepro/distributions.debian-percona.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-percona-updates',
+    releases      => { 'trusty'=>['liberty', 'mitaka'], 'xenial'=>['newton'] },
+  }
+
+  cron { 'reprepro debian-percona':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian-percona.lock reprepro-mirror-update /etc/reprepro/debian-percona mirror.debian-percona >>/var/log/reprepro/debian-percona-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::openstack_project::reprepro['debian-percona-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Debian Percona Signing Key':
+    ensure     => present,
+    # 430B DF5C 56E7 C94E 848E E60C 1C4C BDCD CD2E FD2A
+    key_id     => '1C4CBDCDCD2EFD2A',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/debian-percona-gpg-key.asc',
+  }
