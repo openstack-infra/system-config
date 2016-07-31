@@ -162,6 +162,18 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to debian percona
+  file { "${www_root}/debian-percona":
+    ensure  => link,
+    target  => "${mirror_root}/debian-percona",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  # Create the symlink to Ubuntu Cloud Archive.
   file { "${www_root}/robots.txt":
     ensure   => present,
     owner    => 'root',
