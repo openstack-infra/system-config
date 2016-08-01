@@ -1,0 +1,10 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Workflow+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 01 Aug 2016 17:16:19 +0000
+Reviewed-on: https://review.openstack.org/347575
+Project: openstack-infra/system-config
+Branch: refs/heads/master
