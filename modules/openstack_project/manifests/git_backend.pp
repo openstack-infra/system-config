@@ -60,6 +60,7 @@ class openstack_project::git_backend (
         'logo'           => '/static/openstack.png',
         'root-title'     => 'OpenStack git repository browser',
         'max-repo-count' => 1500,
+        'source-filter'  => '/usr/local/bin/highlight.sh',
     },
     manage_cgitrc           => true,
     selinux_mode            => $selinux_mode
@@ -154,6 +155,20 @@ class openstack_project::git_backend (
     require => File['/var/www/cgit/static'],
   }
 
+  if ! defined(Package['python-pygments']) {
+    package { 'python-pygments':
+      ensure => present,
+    }
+  }
+
+  file { '/usr/local/bin/highlight.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/git/highlight.sh',
+  }
+
   file { '/usr/local/bin/commit-filter.sh':
     ensure  => present,
     owner   => 'root',
@@ -215,5 +230,4 @@ class openstack_project::git_backend (
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
     require     => User['zuul'],
   }
-
 }
