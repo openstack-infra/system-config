@@ -16,7 +16,7 @@ class openstack_project::template (
   $enable_unbound            = true,
   $afs                       = false,
   $afs_cache_size            = 500000,
-  $puppetmaster_server       = 'puppetmaster.openstack.org',
+  $puppetmaster_server       = '2001:4800:7818:101:3c21:a454:23ed:4072',
   $manage_exim               = false,
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
