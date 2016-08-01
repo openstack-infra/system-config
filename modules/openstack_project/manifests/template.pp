@@ -242,6 +242,18 @@ class openstack_project::template (
     package { 'ntp-perl':
       ensure => present
     }
+    # NOTE(pabelanger): We need to ensure ntpdate service starts on boot for
+    # centos-7.  Currently, ntpd explicitly require ntpdate to be running before
+    # the sync process can happen in ntpd.  As a result, if ntpdate is not
+    # running, ntpd will start but fail to sync because of DNS is not properly
+    # setup.
+    package { 'ntpdate':
+      ensure => present,
+    }
+    service { 'ntpdate':
+      enable => true,
+      require => Package['ntpdate'],
+    }
   }
 
   ###########################################################
