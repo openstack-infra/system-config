@@ -470,7 +470,7 @@ node /^firehose\d+\.openstack\.org$/ {
   }
   class { 'openstack_project::firehose':
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    gerrit_public_key   => hiera('germqtt_gerrit_ssh_private_key'),
+    gerrit_public_key   => hiera('germqtt_gerrit_ssh_public_key'),
     gerrit_private_key  => hiera('germqtt_gerrit_ssh_private_key'),
     mqtt_password       => hiera('mqtt_service_user_password'),
   }
