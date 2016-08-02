@@ -25,7 +25,6 @@ class openstack_project::firehose (
 ) {
   include mosquitto
   class {'mosquitto::server':
-    log_file               => '/var/log/mosquitto.log',
     infra_service_username => $mqtt_username,
     infra_service_password => $mqtt_password,
   }
