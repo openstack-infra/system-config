@@ -1,3 +1,4 @@
+# coding=utf8
 # Settings for the passcode-sending application
 #
 # Copyright 2013 Thierry Carrez <thierry@openstack.org>
@@ -15,9 +16,9 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-EMAIL_SUBJECT = "Your registration code for OpenStack Summit in Portland"
+EMAIL_SUBJECT = u"Your registration code for OpenStack Summit in Portland"
 
-EMAIL_TEMPLATE = """
+EMAIL_TEMPLATE = u"""
 Hello $name,
 
 As you may already know, we'll be having our next OpenStack Summit
@@ -42,7 +43,7 @@ $signature
 """
 
 EMAIL_FROM = "thierry@openstack.org"
-EMAIL_SIGNATURE = "Thierry Carrez\nOpenStack Foundation"
+EMAIL_SIGNATURE = u"Thierry Carrez\nOpenStack Foundation"
 EMAIL_HOST = "secure.emailsrvr.com"
 EMAIL_PORT = 465
 EMAIL_USER = "thierry.carrez@openstack.org"
