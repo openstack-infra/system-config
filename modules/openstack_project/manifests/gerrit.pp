@@ -155,8 +155,14 @@ class openstack_project::gerrit (
     its_rules                           => $its_rules,
     trackingids                         => [
       {
-        name   => 'storyboard',
+        name   => 'storyboard-story',
         footer => 'story:',
+        match  => '\\#?(\\d+)',
+        system => 'Storyboard',
+      },
+      {
+        name   => 'storyboard-task',
+        footer => 'task:',
         match  => '\\#?(\\d+)',
         system => 'Storyboard',
       },
