@@ -130,7 +130,7 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['debian-reprepro-mirror'],
+       ::Openstack_project::Reprepro['debian-reprepro-mirror'],
     ]
   }
 
@@ -160,7 +160,7 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['ubuntu-reprepro-mirror'],
+       ::Openstack_project::Reprepro['ubuntu-reprepro-mirror'],
     ]
   }
 
@@ -190,7 +190,7 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['debian-ceph-hammer-reprepro-mirror'],
+       ::Openstack_project::Reprepro['debian-ceph-hammer-reprepro-mirror'],
     ]
   }
 
@@ -212,7 +212,7 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['debian-ceph-jewel-reprepro-mirror'],
+       ::Openstack_project::Reprepro['debian-ceph-jewel-reprepro-mirror'],
     ]
   }
 
@@ -302,7 +302,7 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['ubuntu-cloud-archive-reprepro-mirror'],
+       ::Openstack_project::Reprepro['ubuntu-cloud-archive-reprepro-mirror'],
     ]
   }
 
