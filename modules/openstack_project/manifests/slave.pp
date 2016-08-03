@@ -4,6 +4,7 @@ class openstack_project::slave (
   $thin = false,
   $certname = $::fqdn,
   $ssh_key = '',
+  $ssh_known_hosts = undef,
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
@@ -25,11 +26,12 @@ class openstack_project::slave (
   }
 
   class { 'jenkins::slave':
-    ssh_key      => $ssh_key,
-    gitfullname  => $jenkins_gitfullname,
-    gitemail     => $jenkins_gitemail,
-    gerrituser   => $jenkins_gerrituser,
-    gerritkey    => $jenkins_gerritkey,
+    ssh_key         => $ssh_key,
+    ssh_known_hosts => $ssh_known_hosts,
+    gitfullname     => $jenkins_gitfullname,
+    gitemail        => $jenkins_gitemail,
+    gerrituser      => $jenkins_gerrituser,
+    gerritkey       => $jenkins_gerritkey,
   }
 
   include jenkins::cgroups

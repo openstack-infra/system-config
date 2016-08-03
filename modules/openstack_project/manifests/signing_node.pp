@@ -19,6 +19,7 @@ class openstack_project::signing_node (
   $jenkins_ssh_public_key,
   $pubring,
   $secring,
+  $ssh_known_hosts = undef,
   $gitfullname = 'OpenStack Release Bot',
   $gitemail = 'infra-root@openstack.org',
   $gerrituser = 'release',
@@ -29,6 +30,7 @@ class openstack_project::signing_node (
   class { 'openstack_project::slave':
     thin                => true,
     ssh_key             => $jenkins_ssh_public_key,
+    ssh_known_hosts     => $ssh_known_hosts,
     jenkins_gitfullname => $gitfullname,
     jenkins_gitemail    => $gitemail,
     jenkins_gerrituser  => $gerrituser,

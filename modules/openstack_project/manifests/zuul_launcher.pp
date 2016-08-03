@@ -5,7 +5,6 @@ class openstack_project::zuul_launcher(
   $gearman_server = '127.0.0.1',
   $gerrit_server = '',
   $gerrit_user = '',
-  $gerrit_ssh_host_key = '',
   $zuul_ssh_private_key = '',
   $url_pattern = '',
   $zuul_url = '',

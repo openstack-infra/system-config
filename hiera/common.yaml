@@ -1,4 +1,9 @@
 ---
+ssh_known_hosts: |
+  # The SSH-based Gerrit API host key for review.openstack.org
+  [review.openstack.org]:29418,[2001:4800:7819:103:be76:4eff:fe05:8525]:29418,[104.130.246.91]:29418 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfsIj/jqpI+2CFdjCL6kOiqdORWvxQ2sQbCzSzzmLXic8yVhCCbwarkvEpfUOHG4eyB0vqVZfMffxf0Yy3qjURrsroBCiuJ8GdiAcGdfYwHNfBI0cR6kydBZL537YDasIk0Z3ILzhwf7474LmkVzS7V2tMTb4ZiBS/jUeiHsVp88FZhIBkyhlb/awAGcUxT5U4QBXCAmerYXeB47FPuz9JFOVyF08LzH9JRe9tfXtqaCNhlSdRe/2pPRvn2EIhn5uHWwATACG9MBdrK8xv8LqPOik2w1JkgLWyBj11vDd5I3IjrmREGw8dqImqp0r6MD8rxqADlc1elfDIXYsy+TVH
+  # The SSH-based Gerrit API host key for review-dev.openstack.org
+  [review-dev.openstack.org]:29418,[2001:4800:7818:104:be76:4eff:fe05:a763]:29418,[104.239.132.36]:29418 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4J4BJ/C6kl1PcfD5ZdpYIwWXA+vRiB4USncZQHW9+Idtdr4dZRA05RlBAfiTkKKhjarJpt8PQP2hYt8aJL1miZZjp1s05d9mxGVHfoH7Vyg85vhRa7Jg4VZS0cu34R909q23cBcjSNQSyVKP9neOqovoV/DyB8HHEg0kbsOWC3qzdA+6aVdVV7Mtx/0t0MyiTz0xA5ZCRFwF6IuiMPHLNk128qDhjO2UXnrhyP5A7Kl/JHpIWToLKGIorePndFcFyNXlWIhBoQRDcX6FYjPdavjAGlK1S/Jd5DVJ184Z7rEXL682o487c0NQ/lAV4QF3iz0Aw9QRVrUw21xWvfU4R
 elasticsearch_nodes:
 - elasticsearch02.openstack.org
 - elasticsearch03.openstack.org

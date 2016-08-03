@@ -131,6 +131,7 @@ node 'stackalytics.openstack.org' {
   }
 
   class { 'openstack_project::stackalytics':
+    ssh_known_hosts              => hiera('ssh_known_hosts'),
     gerrit_ssh_user              => hiera('stackalytics_gerrit_ssh_user'),
     stackalytics_ssh_private_key => hiera('stackalytics_ssh_private_key_contents'),
   }
@@ -469,7 +470,7 @@ node /^firehose\d+\.openstack\.org$/ {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::firehose':
-    gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts     => hiera('ssh_known_hosts'),
     gerrit_public_key   => hiera('germqtt_gerrit_ssh_public_key'),
     gerrit_private_key  => hiera('germqtt_gerrit_ssh_private_key'),
     mqtt_password       => hiera('mqtt_service_user_password'),
@@ -679,7 +680,7 @@ node 'status.openstack.org' {
 
   class { 'openstack_project::status':
     gerrit_host                   => 'review.openstack.org',
-    gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts               => hiera('ssh_known_hosts'),
     reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents'),
     reviewday_ssh_private_key     => hiera('reviewday_rsa_key_contents'),
     recheck_ssh_public_key        => hiera('elastic-recheck_gerrit_ssh_public_key'),
@@ -761,7 +762,7 @@ node 'zuul.openstack.org' {
     project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server                  => 'review.openstack.org',
     gerrit_user                    => 'jenkins',
-    gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts                => hiera('ssh_known_hosts'),
     zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents'),
     url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     proxy_ssl_cert_file_contents   => hiera('zuul_ssl_cert_file_contents'),
@@ -810,7 +811,6 @@ node /^zlstatic\d+\.openstack\.org$/ {
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins            => hiera('sysadmins', []),
@@ -838,7 +838,7 @@ node /^zl\d+\.openstack\.org$/ {
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts      => hiera('ssh_known_hosts'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins            => hiera('sysadmins', []),
@@ -853,7 +853,7 @@ node /^zm\d+\.openstack\.org$/ {
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts      => hiera('ssh_known_hosts'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
     sysadmins            => hiera('sysadmins', []),
   }
@@ -865,7 +865,7 @@ node 'zuul-dev.openstack.org' {
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server        => 'review-dev.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    ssh_known_hosts      => hiera('ssh_known_hosts'),
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
@@ -911,6 +911,7 @@ node 'proposal.slave.openstack.org' {
   include openstack_project
   class { 'openstack_project::proposal_slave':
     jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
+    ssh_known_hosts          => hiera('ssh_known_hosts'),
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents'),
     zanata_server_url        => 'https://translate.openstack.org/',
@@ -948,6 +949,7 @@ node /^signing\d+\.ci\.openstack\.org$/ {
   include openstack_project
   class { 'openstack_project::signing_node':
     jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+    ssh_known_hosts        => hiera('ssh_known_hosts'),
     packaging_keytab       => hiera('packaging_keytab'),
     pubring                => hiera('pubring'),
     secring                => hiera('secring'),

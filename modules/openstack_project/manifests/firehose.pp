@@ -18,7 +18,7 @@ class openstack_project::firehose (
   $gerrit_username = 'germqtt',
   $gerrit_public_key,
   $gerrit_private_key,
-  $gerrit_ssh_host_key,
+  $ssh_known_hosts,
   $mqtt_hostname = 'firehose01.openstack.org',
   $mqtt_password,
   $mqtt_username = 'infra',
@@ -34,7 +34,7 @@ class openstack_project::firehose (
     gerrit_username     => $gerrit_username,
     gerrit_public_key   => $gerrit_public_key,
     gerrit_private_key  => $gerrit_private_key,
-    gerrit_ssh_host_key => $gerrit_ssh_host_key,
+    ssh_known_hosts     => $ssh_known_hosts,
     mqtt_username       => $mqtt_username,
     mqtt_password       => $mqtt_password,
   }
