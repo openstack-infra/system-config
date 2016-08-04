@@ -194,8 +194,8 @@ class openstack_project::review_dev (
   # Import certificate to java to allow gerrit its plugins to POST to storyboard
   exec { 'import-java-certs':
     user        => 'root',
-    command     => "keytool -import -alias storyboard-dev.openstack.org -keystore $java_home/lib/security/cacerts -file /home/gerrit2/storyboard-dev.crt -storepass secret -noprompt",
-    unless      => "keytool -list -alias storyboard-dev.openstack.org -storepass secret -keystore $java_home/lib/security/cacerts  >/dev/null 2>&1",
+    command     => "keytool -import -alias storyboard-dev.openstack.org -keystore $java_home/lib/security/cacerts -file /home/gerrit2/storyboard-dev.crt -storepass changeit -noprompt",
+    unless      => "keytool -list -alias storyboard-dev.openstack.org -storepass changeit -keystore $java_home/lib/security/cacerts  >/dev/null 2>&1",
     path        => '/bin:/usr/bin',
     require     => [
       Package['openjdk-7-jre-headless'],
