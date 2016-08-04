@@ -1,0 +1,11 @@
+Code-Review+1: Tony Breeds <tony@bakeyournoodle.com>
+Code-Review+1: Ben Kero <ben.kero@gmail.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 04 Aug 2016 07:11:24 +0000
+Reviewed-on: https://review.openstack.org/348514
+Project: openstack-infra/system-config
+Branch: refs/heads/master
