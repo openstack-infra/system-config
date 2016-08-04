@@ -81,6 +81,12 @@ filter {
       match => { "message" => "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{GREEDYDATA:logmessage}" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
+  } else if "ansible" in [tags] {
+    grok {
+      # Example: 2016-08-03 21:54:38,331 p=7382 u=zuul |  Using /tmp/tmpTcapbq/ansible/ansible.cfg as config file
+      match => { "message" => "^%{YEAR}-%{MONTHNUM}-%{MONTHDAY} %{HOUR}:?%{MINUTE}(?::?%{SECOND})?,%{NUMBER:millisecond}%{SPACE}p=%{NUMBER:pid}%{SPACE}u=%{USERNAME}%{SPACE}\|%{SPACE}%{GREEDYDATA:logmessage}" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
   }
 
   # Filters below here should be consistent for all Jenkins log formats.

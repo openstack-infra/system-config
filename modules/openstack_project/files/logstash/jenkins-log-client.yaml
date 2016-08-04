@@ -38,6 +38,9 @@ source-files:
   - name: console.html
     tags:
       - console
+  - name: _zuul_ansible/ansible_log.txt
+    tags:
+      - ansible
   - name: logs/devstack-gate-cleanup-host.txt
     tags:
       - console
