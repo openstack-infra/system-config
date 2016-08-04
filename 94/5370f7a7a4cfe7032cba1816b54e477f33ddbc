@@ -1,0 +1,10 @@
+Code-Review+1: Ben Nemec <openstack@nemebean.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 04 Aug 2016 12:33:47 +0000
+Reviewed-on: https://review.openstack.org/348778
+Project: openstack-infra/system-config
+Branch: refs/heads/master
