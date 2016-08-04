@@ -144,9 +144,19 @@ class openstack_project::review_dev (
         action     => 'log-event error',
       },
       {
-        name       => 'change_status_updates',
-        event_type => 'patchset-created,change-abandoned,change-restored,change-merged',
-        action     => 'add-standard-comment',
+        name       => 'change_abandoned',
+        event_type => 'change-abandoned',
+        action     => 'set-status TODO',
+      },
+      {
+        name       => 'change_in_progress',
+        event_type => 'patchset-created, change-restored',
+        action     => 'set-status REVIEW',
+      },
+      {
+        name       => 'change_merged',
+        event_type => 'change-merged',
+        action     => 'set-status MERGED',
       },
     ],
     replication                         => [
