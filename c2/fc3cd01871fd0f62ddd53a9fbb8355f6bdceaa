@@ -1,0 +1,10 @@
+Code-Review+1: Doug Hellmann <doug@doughellmann.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 05 Aug 2016 16:14:45 +0000
+Reviewed-on: https://review.openstack.org/349023
+Project: openstack-infra/system-config
+Branch: refs/heads/master
