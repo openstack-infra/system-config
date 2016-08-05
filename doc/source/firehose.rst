@@ -56,3 +56,69 @@ MQTT topics are hierarchical and you can filter your subscription on part of the
 hierarchy. `[1]`_
 
 .. _[1]: https://mosquitto.org/man/mqtt-7.html
+
+Client Usage
+============
+There is no outside access to publishing messages to the firehose available,
+however anyone is able to subscribe to any topic services publish to. To
+interact with the firehose you need to use the MQTT protocol. The specific
+contents of the payload are dictated by the service publishing the
+messages. So this section only covers how to subscribe and receive the messages
+not how to consume the content received.
+
+Available Clients
+-----------------
+The MQTT community wiki maintains a page that lists available client bindings
+for many languages here: https://github.com/mqtt/mqtt.github.io/wiki/libraries
+For python using the `paho-mqtt`_ library is recommended
+
+.. _paho-mqtt: https://pypi.python.org/pypi/paho-mqtt/
+
+CLI Example
+-----------
+The mosquitto project also provides both a CLI publisher and subscriber client
+that can be used to easily subscribe to any topic and receive the messages. On
+debian based distributions these are included in the mosquitto-clients package.
+For example, to subscribe to every topic on the firehose you would run::
+
+    mosquitto_sub -h firehose.openstack.org --topic '#'
+
+You can adjust the value of the topic parameter to make what you're subscribing
+to more specific.
+
+Websocket Example
+-----------------
+In addition to using the raw MQTT protocol firehose.o.o  provides a websocket
+interface on port 80 that MQTT traffic can go through. This is especially useful
+for web applications that intend to consume any events from MQTT. To see an
+example of this in action you can try: http://mitsuruog.github.io/what-mqtt/
+(the source is available here: https://github.com/mitsuruog/what-mqtt) and use
+that to subscribe to any topics on firehose.openstack.org.
+
+Another advantage of using websockets over port 80 is that it's much more
+firewall friendly, especially in environments that our more locked down. If you
+would like to consume events from the firehose.
+
+You can also use the paho-mqtt python library to subscribe to mqtt over
+websockets fairly easily. For example this script will subscribe to all topics
+on the firehose and print it to STDOUT::
+
+    import paho.mqtt.client as mqtt
+
+
+    def on_connect(client, userdata, flags, rc):
+        print("Connected with result code " + str(rc))
+            client.subscribe('#')
+
+    def on_message(client, userdata, msg):
+        print(msg.topic+" "+str(msg.payload))
+
+    # Create a websockets client
+    client = mqtt.Client(transport="websockets")
+    client.on_connect = on_connect
+    client.on_message = on_message
+
+    # Connect to the firehose
+    client.connect('firehose.openstack.org', port=80)
+    # Listen forever
+    client.loop_forever()
