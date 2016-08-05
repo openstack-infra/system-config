@@ -227,7 +227,7 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.51
+        ipmi_address: 10.12.83.19
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.110
     ipv4_address: 10.10.16.160
@@ -239,6 +239,9 @@ ironic_inventory_vanilla:
       cpus: '24'
       disk_size: '1800'
       ram: 96676
+      serial_number: use129cnl0
+      rack: b04
+      ilo_mac: 78:E7:D1:23:90:0A
     uuid: d1a88893-abe2-4523-9144-2039e600f839
     disabled: true # iLO doesn't ping
   compute011.vanilla.ic.openstack.org:
