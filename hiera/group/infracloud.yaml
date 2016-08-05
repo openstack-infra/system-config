@@ -262,7 +262,7 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.17
+        ipmi_address: 10.12.83.15
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.112
     ipv4_address: 10.10.16.162
@@ -274,6 +274,9 @@ ironic_inventory_vanilla:
       cpus: '24'
       disk_size: '1800'
       ram: '96676'
+      serial_number: use129cnkv
+      rack: b04
+      ilo_mac: 78:E7:D1:23:93:E2
     uuid: cd8accf6-8d39-40b9-b5fa-cb14e5744750
   compute013.vanilla.ic.openstack.org:
     driver: agent_ipmitool
