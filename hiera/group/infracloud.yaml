@@ -346,7 +346,7 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.12.83.31
+        ipmi_address: 10.12.83.29
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.116
     ipv4_address: 10.10.16.166
