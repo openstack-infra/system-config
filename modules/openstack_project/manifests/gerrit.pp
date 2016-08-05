@@ -397,6 +397,7 @@ class openstack_project::gerrit (
         }
         cron { 'mirror_repack':
           ensure      => absent,
+          user        => 'gerrit2',
         }
         cron { 'mirror_gitgc':
           user        => 'gerrit2',

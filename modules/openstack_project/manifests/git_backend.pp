@@ -119,6 +119,7 @@ class openstack_project::git_backend (
 
   cron { 'mirror_repack':
     ensure      => absent,
+    user        => 'cgit',
   }
 
   cron { 'mirror_gitgc':
