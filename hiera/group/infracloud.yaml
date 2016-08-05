@@ -313,7 +313,7 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.35
+        ipmi_address: 10.12.83.36
         ipmi_username: Administrator
     ipv4_public_address: 15.184.52.115
     ipv4_address: 10.10.16.165
@@ -325,6 +325,9 @@ ironic_inventory_vanilla:
       cpus: '24'
       disk_size: '1800'
       ram: 96676
+      serial_number: use0433a81
+      rack: b04
+      ilo_mac: 78:E7:D1:21:5D:52
     uuid: 3e00f75a-958e-4034-bd0a-4a0ba9e2df4d
     disabled: true # needs iLO firmware upgrade
   compute016.vanilla.ic.openstack.org:
