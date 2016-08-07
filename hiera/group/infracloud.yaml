@@ -1198,7 +1198,7 @@ ironic_inventory_chocolate:
     uuid: 34313036-3630-5355-4532-333745314b53
     driver_info:
       power:
-        ipmi_address: 10.12.83.164
+        ipmi_address: 10.12.83.139
         ipmi_username: headmin
     nics:
     - mac: 44:1E:A1:72:65:1D
@@ -1209,7 +1209,7 @@ ironic_inventory_chocolate:
       disk_size:
       cpus:
       serial_number: use237e1ks
-      rack: '9'
+      rack: b09
       ilo_mac: 44:1E:A1:72:65:1E
     name: compute013.chocolate.ic.openstack.org
   compute014.chocolate.ic.openstack.org:
