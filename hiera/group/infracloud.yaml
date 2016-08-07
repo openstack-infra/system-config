@@ -1761,7 +1761,7 @@ ironic_inventory_chocolate:
     disabled: true # not needed due to ip limit
     driver_info:
       power:
-        ipmi_address: 10.22.27.193
+        ipmi_address: 10.12.83.149
         ipmi_username: headmin
     nics:
     - mac: 3C:4A:92:72:3E:79
@@ -1771,6 +1771,9 @@ ironic_inventory_chocolate:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use236dfjb
+      rack: b10
+      ilo_mac: 3C:4A:92:72:3E:7
     name: compute043.chocolate.ic.openstack.org
   compute044.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.47
