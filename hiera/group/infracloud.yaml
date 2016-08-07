@@ -1083,7 +1083,7 @@ ironic_inventory_chocolate:
     uuid: 30303536-3734-5355-4532-333745314C39
     driver_info:
       power:
-        ipmi_address: 10.22.27.182
+        ipmi_address: 10.12.83.68
         ipmi_username: headmin
     nics:
     - mac: 80:c1:6e:80:b5:38
@@ -1093,6 +1093,9 @@ ironic_inventory_chocolate:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use237e1l9
+      rack: b05
+      ilo_mac: 00:9c:02:a5:3f:b4
     name: compute005.chocolate.ic.openstack.org
     new_hostname: compute005.chocolate.ic.openstack.org
   compute006.chocolate.ic.openstack.org:
