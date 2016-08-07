@@ -2650,7 +2650,7 @@ ironic_inventory_chocolate:
     disabled: true # not needed due to ip limit
     driver_info:
       power:
-        ipmi_address: 10.12.83.92
+        ipmi_address: 10.12.83.148
         ipmi_username: headmin
     nics:
     - mac: 44:1E:A1:72:5F:D1
@@ -2661,7 +2661,7 @@ ironic_inventory_chocolate:
       disk_size:
       cpus:
       serial_number: use237e1kb
-      rack: '9'
+      rack: b10
       ilo_mac: 44:1E:A1:72:5F:D2
     name: compute089.chocolate.ic.openstack.org
   compute090.chocolate.ic.openstack.org:
