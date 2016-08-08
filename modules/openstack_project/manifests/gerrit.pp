@@ -54,7 +54,6 @@ class openstack_project::gerrit (
   $github_oauth_token = '',
   $github_project_username = '',
   $github_project_password = '',
-  $trivial_rebase_role_id = '',
   $email_private_key = '',
   $token_private_key = '',
   $replicate_local = true,
