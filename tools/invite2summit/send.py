@@ -17,6 +17,7 @@
 
 import csv
 import email.utils
+import email.mime.text
 import settings
 import smtplib
 import sys
@@ -27,7 +28,7 @@ from string import Template
 class ATC(object):
     def __init__(self, row):
         self.lpid = row[0]
-        self.name = row[1]
+        self.name = unicode(row[1], 'utf8')
         self.emails = row[2:]
 
 
@@ -67,22 +68,17 @@ if __name__ == '__main__':
         content = template.substitute(name=committer.name,
                                       code=code,
                                       signature=settings.EMAIL_SIGNATURE)
-        msg = (
-            "From: %s\r\n"
-            "To: %s\r\n"
-            "Date: %s\r\n"
-            "Message-ID: %s\r\n"
-            "Subject: %s\r\n"
-            "%s"
-            % (
-                settings.EMAIL_FROM,
-                ','.join(committer.emails),
-                email.utils.formatdate(),
-                email.utils.make_msgid(),
-                settings.EMAIL_SUBJECT,
-                content))
 
-        session.sendmail(settings.EMAIL_FROM, committer.emails, msg)
+        msg = email.mime.text.MIMEText(content, 'plain',
+                                       'utf8')
+        msg["From"] = settings.EMAIL_FROM
+        msg["To"] = ','.join(committer.emails)
+        msg["Date"] = email.utils.formatdate()
+        msg["Message-ID"] = email.utils.make_msgid()
+        msg["Subject"] = settings.EMAIL_SUBJECT
+
+        session.sendmail(settings.EMAIL_FROM, committer.emails,
+                         msg.as_string())
         print "%s,ATC,%s" % (code, committer.name)
         session.quit()
         time.sleep(settings.EMAIL_PAUSE)
