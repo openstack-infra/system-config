@@ -1366,7 +1366,7 @@ ironic_inventory_chocolate:
     uuid: 34313036-3630-5355-4532-333644564c58
     driver_info:
       power:
-        ipmi_address: 10.22.27.178
+        ipmi_address: 10.12.83.78
         ipmi_username: headmin
     nics:
     - mac: B4:99:BA:A8:0F:41
@@ -1376,6 +1376,9 @@ ironic_inventory_chocolate:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use236dvlx
+      rack: b05
+      ilo_mac: B4:99:BA:A8:0F:3F
     name: compute018.chocolate.ic.openstack.org
   compute019.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.23
