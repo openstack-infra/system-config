@@ -22,11 +22,18 @@ class openstack_project::firehose (
   $mqtt_hostname = 'firehose01.openstack.org',
   $mqtt_password,
   $mqtt_username = 'infra',
+  $ca_file,
+  $cert_file,
+  $key_file,
 ) {
   include mosquitto
   class {'mosquitto::server':
     infra_service_username => $mqtt_username,
     infra_service_password => $mqtt_password,
+    enable_tls             => true,
+    ca_file                => $ca_file,
+    cert_file              => $cert_file,
+    key_file               => $key_file,
   }
 
   include germqtt
