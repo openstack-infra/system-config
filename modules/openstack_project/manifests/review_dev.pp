@@ -150,7 +150,7 @@ class openstack_project::review_dev (
       },
       {
         name       => 'change_in_progress',
-        event_type => 'patchset-created, change-restored',
+        event_type => 'patchset-created,change-restored',
         action     => 'set-status REVIEW',
       },
       {
