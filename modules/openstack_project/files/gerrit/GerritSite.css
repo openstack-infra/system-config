@@ -146,6 +146,24 @@ table.infoTable td.notVotable,
     background: inherit;
 }
 
+.test_result_table {
+  border-collapse: collapse;
+}
+
+.test_result_table tr {
+  border-left: 1px solid #eef3f5;
+  border-right: 1px solid #eef3f5;
+}
+
+.test_result_table td.header {
+  background-color: #eef3f5;
+}
+
+.test_result_table td {
+  padding: 2px 4px 2px 6px;
+  border: 1px solid #eef3f5;
+}
+
 .addMemberTextBox {
     width: 20em;
 }
