@@ -40,10 +40,13 @@ clouds:
     floating_ip_source: neutron
   bluebox-sjc1:
     auth:
+      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
       username: '<%= @bluebox_username %>'
       password: '<%= @bluebox_password %>'
       project_name: '<%= @bluebox_project %>'
-      auth_url: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5001/v2.0'
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
   internap:
     profile: internap
     region_name: nyj01
