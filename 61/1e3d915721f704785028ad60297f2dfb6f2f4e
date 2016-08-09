@@ -1,0 +1,10 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: David Moreau Simard <dms@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 09 Aug 2016 22:24:35 +0000
+Reviewed-on: https://review.openstack.org/263866
+Project: openstack-infra/system-config
+Branch: refs/heads/master
