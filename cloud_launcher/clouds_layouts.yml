@@ -1,2 +1,36 @@
-profiles: []
-clouds: []
+profiles:
+  # Profile to launch AFS server for nodepool.
+  - name: openstackci
+    domains:
+      - name: openstackci
+        description: OpenStack CI domain
+    projects:
+      - name: openstackci
+        description: OpenStack CI project
+    security_groups:
+      - name: all
+        description: Allow traffic ingress
+    security_groups_rules:
+      - security_group: all
+        ethertype: ipv4
+        remote_ip_prefix: 0.0.0.0/0
+  - name: openstackzuul
+    domains:
+      - name: openstackzuul
+        description: OpenStack zuul domain
+    projects:
+      - name: openstackzuul
+        description: OpenStack zuul project
+    security_groups:
+      - name: all
+        description: Allow traffic ingress
+    security_groups_rules:
+      - security_group: all
+        ethertype: ipv4
+        remote_ip_prefix: 0.0.0.0/0
+
+clouds:
+  - name: admin-bluebox
+    profiles:
+      - openstackci
+      - openstackzuul
