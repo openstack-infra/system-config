@@ -234,26 +234,26 @@ class openstack_project::template (
   ###########################################################
   # Manage  ntp
 
-  include '::ntp'
+  # We use chrony rather than ntpd as the latter has a few cases where
+  # it can fall into long time-outs and other odd corner cases.
+  # chrony is better suited to our general "bring it up and set the
+  # time quickly" use-case.
+  package { 'ntp':
+    ensure => absent
+  }
 
-  if ($::osfamily == "RedHat") {
-    # Utils in ntp-perl are included in Debian's ntp package; we
-    # add it here for consistency.  See also
-    # https://tickets.puppetlabs.com/browse/MODULES-3660
-    package { 'ntp-perl':
-      ensure => present
+  case $::osfamily {
+    'Debian': {
+      service { 'chrony':
+        enable  => true,
+        require => Package['chrony']
+      }
     }
-    # NOTE(pabelanger): We need to ensure ntpdate service starts on boot for
-    # centos-7.  Currently, ntpd explicitly require ntpdate to be running before
-    # the sync process can happen in ntpd.  As a result, if ntpdate is not
-    # running, ntpd will start but fail to sync because of DNS is not properly
-    # setup.
-    package { 'ntpdate':
-      ensure => present,
-    }
-    service { 'ntpdate':
-      enable => true,
-      require => Package['ntpdate'],
+    'RedHat': {
+      service { 'chronyd':
+        enable  => true,
+        require => Package['chrony']
+      }
     }
   }
 
