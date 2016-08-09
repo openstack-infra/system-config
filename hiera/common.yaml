@@ -97,6 +97,7 @@ statusbot_channels:
 - openstack-sdks
 - openstack-searchlight
 - openstack-solar
+- openstack-shade
 - openstack-sprint
 - openstack-stable
 - openstack-state-management
@@ -194,6 +195,7 @@ meetbot_channels:
 - '#openstack-sdks'
 - '#openstack-searchlight'
 - '#openstack-security'
+- '#openstack-shade'
 - '#openstack-smaug'
 - '#openstack-solar'
 - '#openstack-sprint'
