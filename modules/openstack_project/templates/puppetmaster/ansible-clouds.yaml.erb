@@ -61,3 +61,13 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_tripleo_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_tripleo_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackci_tripleo_project_name'] %>
+  openstackci-bluebox:
+    region_name: RegionOne
+    auth:
+      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
+      username: <%= @puppetmaster_clouds['openstackci_bluebox_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_bluebox_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_bluebox_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
