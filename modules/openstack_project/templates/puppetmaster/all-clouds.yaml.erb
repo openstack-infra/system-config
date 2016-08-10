@@ -72,13 +72,13 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
-  openstackjenkins-bluebox:
+  openstackzuul-bluebox:
     region_name: RegionOne
     auth:
       auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
-      username: <%= @puppetmaster_clouds['openstackjenkins_bluebox_username'] %>
-      password: <%= @puppetmaster_clouds['openstackjenkins_bluebox_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackjenkins_bluebox_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackzuul_bluebox_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_bluebox_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_bluebox_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
