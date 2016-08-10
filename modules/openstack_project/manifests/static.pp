@@ -14,6 +14,12 @@ class openstack_project::static (
   $ssl_key_file_contents = '',
   $ssl_chain_file = '',
   $ssl_chain_file_contents = '',
+  $releases_cert_file = '',
+  $releases_cert_file_contents = '',
+  $releases_key_file = '',
+  $releases_key_file_contents = '',
+  $releases_chain_file = '',
+  $releases_chain_file_contents = '',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
@@ -362,17 +368,45 @@ class openstack_project::static (
   ###########################################################
   # Releases
 
+  # Temporary separate HTTPS cert/key/chain for releases.o.o so that we
+  # don't have to renew the static.o.o cert just to add one SubjectAltName
+  file { '/etc/ssl/certs/releases.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $releases_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/releases.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $releases_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/releases.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $releases_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/releases.openstack.org.pem'],
+  }
+
   ::httpd::vhost { 'releases.openstack.org':
     port       => 443, # Is required despite not being used.
     docroot    => '/srv/static/releases',
     priority   => '50',
     ssl        => true,
-    template   => 'openstack_project/static-http-and-https.vhost.erb',
+    template   => 'openstack_project/static-releases.vhost.erb',
     vhost_name => 'releases.openstack.org',
     require    => [
       File['/srv/static/releases'],
-      File[$cert_file],
-      File[$key_file],
+      File['/etc/ssl/certs/releases.openstack.org.pem'],
+      File['/etc/ssl/private/releases.openstack.org.key'],
     ],
   }
 
