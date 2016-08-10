@@ -13,6 +13,11 @@ profiles:
         ethertype: IPv4
         remote_ip_prefix: 0.0.0.0/0
   - name: openstackzuul
+    flavors:
+      - name: n1.large
+        ram: 8192
+        vcpus: 8
+        disk: 80
     projects:
       - name: openstackzuul
         description: OpenStack zuul project
