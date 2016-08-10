@@ -1348,7 +1348,7 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
     ipmi_passwords     => hiera('ipmi_west_passwords'),
     ssh_private_key    => hiera('bifrost_hpuswest_ssh_private_key'),
     ssh_public_key     => hiera('bifrost_hpuswest_ssh_public_key'),
-    vlan               => 25,
+    vlan               => 2551,
     gateway_ip         => '15.184.64.1',
   }
 }
