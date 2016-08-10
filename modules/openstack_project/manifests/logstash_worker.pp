@@ -16,6 +16,8 @@
 #
 class openstack_project::logstash_worker (
   $discover_node = 'elasticsearch01.openstack.org',
+  $mqtt_password,
+  $mqtt_ca_cert_contents,
 ) {
   file { '/etc/default/logstash-indexer':
     ensure => present,
@@ -45,9 +47,12 @@ class openstack_project::logstash_worker (
   }
 
   class { '::logstash::indexer':
-    input_template  => 'openstack_project/logstash/input.conf.erb',
-    output_template => 'openstack_project/logstash/output.conf.erb',
-    require         => Logstash::Filter['openstack-logstash-filters'],
+    input_template        => 'openstack_project/logstash/input.conf.erb',
+    output_template       => 'openstack_project/logstash/output.conf.erb',
+    enable_mqtt           => true,
+    mqtt_password         => $mqtt_password,
+    mqtt_ca_cert_contents => $mqtt_ca_cert_contents,
+    require               => Logstash::Filter['openstack-logstash-filters'],
   }
 
   include ::log_processor
