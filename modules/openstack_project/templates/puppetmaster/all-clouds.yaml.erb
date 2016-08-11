@@ -112,6 +112,8 @@ clouds:
       username: <%= @puppetmaster_clouds['openstack_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstack_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstack_rax_project_id'] %>
+  # TODO(pabelanger): move this to openstackci-tripleo-test-cloud-rh1 to be
+  # consistant with other cloud providers
   openstack-nodepool-tripleo:
     auth:
       auth_url: https://ci-overcloud.rh1.tripleo.org:13000/v2.0
@@ -119,6 +121,16 @@ clouds:
       password: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_password'] %>
       project_name: <%= @puppetmaster_clouds['openstack_nodepool_tripleo_project_name'] %>
     floating_ip_source: neutron
+  openstackzuul-tripleo-test-cloud-rh1:
+    auth:
+      auth_url: https://ci-overcloud.rh1.tripleo.org:13000
+      username: <%= @puppetmaster_clouds['openstackzuul_tripleo_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_tripleo_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_tripleo_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    floating_ip_source: neutron
+    identity_api_version: '3'
   openstackjenkins-osic-cloud1:
     region_name: RegionOne
     auth:
