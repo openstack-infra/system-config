@@ -1,0 +1,23 @@
+profiles:
+  - name: openstackci-security
+    security_groups:
+      - name: default
+        description: Default security group
+    security_groups_rules:
+      - security_group: default
+        ethertype: IPv4
+        remote_ip_prefix: 0.0.0.0/0
+
+clouds:
+  - name: openstackci-tripleo-test-cloud-rh1
+    profiles:
+      - openstackci-security
+  - name: openstackzuul-tripleo-test-cloud-rh1
+    profiles:
+      - openstackci-security
+  - name: openstackci-tripleo-test-cloud-rh2
+    profiles:
+      - openstackci-security
+  - name: openstackzuul-tripleo-test-cloud-rh2
+    profiles:
+      - openstackci-security
