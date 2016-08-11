@@ -1,0 +1,7 @@
+Name: ubuntu-mariadb
+Method: http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu
+Components: main
+UDebComponents: main
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: 1BB943DB
