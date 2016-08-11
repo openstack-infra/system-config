@@ -25,11 +25,14 @@ clouds:
   tripleo-test-cloud-rh1:
     region_name: regionOne
     auth:
+      auth_url: https://ci-overcloud.rh1.tripleo.org:13000
       username: '<%= @tripleo_username %>'
       password: '<%= @tripleo_password %>'
       project_name: '<%= tripleo_project %>'
-      auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000/v2.0'
+      project_domain_name: default
+      user_domain_name: default
     floating_ip_source: neutron
+    identity_api_version: '3'
   tripleo-test-cloud-rh2:
     region_name: regionOne
     auth:
