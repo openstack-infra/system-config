@@ -316,25 +316,18 @@ class openstack_project::mirror_update (
   }
 
   ### MariaDB mirror ###
-  ::openstack_project::reprepro { 'ubuntu-mariadb-reprepro-mirror':
-    confdir       => '/etc/reprepro/ubuntu-mariadb',
-    basedir       => '/afs/.openstack.org/mirror/ubuntu-mariadb',
-    distributions => 'openstack_project/reprepro/distributions.ubuntu-mariadb.erb',
-    updates_file  => 'puppet:///modules/openstack_project/reprepro/ubuntu-mariadb-updates',
-    releases      => [ 'trusty', 'xenial' ],
-  }
-
-  cron { 'reprepro ubuntu mariadb':
-    user        => $user,
-    hour        => '*/2',
-    minute      => '0',
-    command     => 'flock -n /var/run/reprepro/ubuntu-mariadb.lock reprepro-mirror-update /etc/reprepro/ubuntu-mariadb mirror.ubuntu-mariadb >>/var/log/reprepro/ubuntu-mariadb-mirror.log 2>&1',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
+  ::openstack_project::mariadb_mirror { '10.0':
+    require => [
        File['/usr/local/bin/reprepro-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/reprepro.keytab'],
-       ::openstack_project::reprepro['ubuntu-mariadb-reprepro-mirror'],
+    ]
+  }
+  ::openstack_project::mariadb_mirror { '10.1':
+    require => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
     ]
   }
 
