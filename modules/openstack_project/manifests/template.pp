@@ -84,7 +84,7 @@ class openstack_project::template (
     }
   }
 
-  class {'openstack_project::users_install':
+  class {'openstack_project::users':
     install_users => $install_users
   }
 
