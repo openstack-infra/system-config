@@ -333,3 +333,41 @@ our mirror update cron jobs, manually perform the first mirror update:
 
 * Once the initial sync and and ``vos release`` are complete, release
   the lock file on mirror-update.
+
+Removing a mirror
+~~~~~~~~~~~~~~~~~
+
+If you need to remove a mirror, you can do the following:
+
+* Check what servers volumes are on with ``vos listvldb``::
+
+  VLDB entries for all servers
+
+  ...
+
+  mirror.foo
+      RWrite: 536870934     ROnly: 536870935
+      number of sites -> 3
+         server afs01.dfw.openstack.org partition /vicepa RW Site
+         server afs01.dfw.openstack.org partition /vicepa RO Site
+         server afs01.ord.openstack.org partition /vicepa RO Site
+
+   ...
+
+* Remove the R/W replica of the volume::
+
+    vos remove -server afs02.dfw.openstack.org -partition a -id mirror.foo
+
+* Remove the R/O replicas (you can also see these with ``vos
+  listvol -server afs0[1|2].dfw.openstack.org``)::
+
+    vos remove -server afs01.dfw.openstack.org -partition a -id mirror.foo.readonly
+    vos remove -server afs02.dfw.openstack.org -partition a -id mirror.foo.readonly
+
+* Unmount the volume from the R/W location::
+
+    fs rmmount /afs/.openstack.org/mirror/foo
+
+* Release the R/O mirror volume to reflect the changes::
+
+    vos release mirror
