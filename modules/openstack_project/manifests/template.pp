@@ -27,7 +27,6 @@ class openstack_project::template (
   ###########################################################
   # Classes for all hosts
 
-  include snmpd
   include sudoers
 
   include openstack_project::params

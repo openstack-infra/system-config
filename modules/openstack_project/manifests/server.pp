@@ -18,6 +18,7 @@ class openstack_project::server (
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = true,
 ) {
+  include snmpd
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
