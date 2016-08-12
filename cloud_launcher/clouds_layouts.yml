@@ -1,37 +1,36 @@
 profiles:
   # Profile to launch AFS server for nodepool.
-  - name: openstackci
+  - name: openstackci-projects
     projects:
       - name: openstackci
         description: OpenStack CI project
         domain: default
+      - name: openstackzuul
+        description: OpenStack zuul project
+        domain: default
+  - name: openstackci-security
     security_groups:
-      - name: all
-        description: Allow traffic ingress
+      - name: default
+        description: Default security group
     security_groups_rules:
-      - security_group: all
+      - security_group: default
         ethertype: IPv4
         remote_ip_prefix: 0.0.0.0/0
-  - name: openstackzuul
+  - name: openstackci-flavors
     flavors:
       - name: nodepool
         ram: 8192
         vcpus: 8
         disk: 80
-    projects:
-      - name: openstackzuul
-        description: OpenStack zuul project
-        domain: default
-    security_groups:
-      - name: all
-        description: Allow traffic ingress
-    security_groups_rules:
-      - security_group: all
-        ethertype: IPv4
-        remote_ip_prefix: 0.0.0.0/0
 
 clouds:
   - name: admin-bluebox
     profiles:
-      - openstackci
-      - openstackzuul
+      - openstackci-projects
+      - openstackci-flavors
+  - name: openstackci-bluebox
+    profiles:
+      - openstackci-security
+  - name: openstackzuul-bluebox
+    profiles:
+      - openstackci-security
