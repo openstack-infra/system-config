@@ -27,6 +27,7 @@ profiles:
         disk: 80
 
 clouds:
+  # bluebox-sjc1
   - name: admin-bluebox
     profiles:
       - openstackci-projects
@@ -37,6 +38,16 @@ clouds:
   - name: openstackzuul-bluebox
     profiles:
       - openstackci-security
+
+  # osic-cloud1
+  - name: openstackci-osic-cloud1
+    profiles:
+      - openstackci-security
+  - name: openstackjenkins-osic-cloud1
+    profiles:
+      - openstackci-security
+
+  # tripleo-test-cloud-rh1
   - name: openstackci-tripleo-test-cloud-rh1
     profiles:
       - openstackci-security
