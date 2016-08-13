@@ -72,7 +72,7 @@ class openstack_project::gerrit (
   $cgit = false,
   $web_repo_url = '',
   $web_repo_url_encode = false,
-  $secondary_index = true,
+  $secondary_index = false, # now using online reindexing instead
   $report_bug_text = 'Get Help',
   $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
   $index_threads = 1,
