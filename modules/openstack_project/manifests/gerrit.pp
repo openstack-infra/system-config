@@ -386,99 +386,75 @@ class openstack_project::gerrit (
     }
   }
 
-  if ($projects_file != 'UNDEF') {
-    if ($replicate_local) {
-      if (!defined(File[$local_git_dir])) {
-        file { $local_git_dir:
-          ensure  => directory,
-          owner   => 'gerrit2',
-          require => Class['::gerrit'],
-        }
-        cron { 'mirror_repack':
-          ensure      => absent,
-          user        => 'gerrit2',
-        }
-        cron { 'mirror_gitgc':
-          user        => 'gerrit2',
-          weekday     => '0',
-          hour        => '4',
-          minute      => '7',
-          command     => "find ${local_git_dir} -type d -name \"*.git\" -print -exec git --git-dir=\"{}\" gc \\;",
-          environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-        }
-      }
-    }
+  file { '/home/gerrit2/projects.yaml':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0444',
+    source  => $projects_file,
+    replace => true,
+    require => Class['::gerrit'],
+  }
 
-    file { '/home/gerrit2/projects.yaml':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      source  => $projects_file,
-      replace => true,
-      require => Class['::gerrit'],
-    }
+  file { $jeepyb_cache_dir:
+    ensure => 'directory',
+    owner  => 'gerrit2',
+    group  => 'gerrit2',
+    mode   => '0755',
+  }
 
-    file { $jeepyb_cache_dir:
-      ensure => 'directory',
-      owner  => 'gerrit2',
-      group  => 'gerrit2',
-      mode   => '0755',
-    }
+  file { '/home/gerrit2/projects.ini':
+    ensure  => present,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0444',
+    content => template($projects_config),
+    replace => true,
+    require => Class['::gerrit'],
+  }
 
-    file { '/home/gerrit2/projects.ini':
-      ensure  => present,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      content => template($projects_config),
-      replace => true,
-      require => Class['::gerrit'],
-    }
+  file { '/home/gerrit2/acls':
+    ensure  => directory,
+    owner   => 'gerrit2',
+    group   => 'gerrit2',
+    mode    => '0444',
+    recurse => true,
+    replace => true,
+    purge   => true,
+    force   => true,
+    source  => $acls_dir,
+    require => Class['::gerrit']
+  }
 
-    file { '/home/gerrit2/acls':
-      ensure  => directory,
-      owner   => 'gerrit2',
-      group   => 'gerrit2',
-      mode    => '0444',
-      recurse => true,
-      replace => true,
-      purge   => true,
-      force   => true,
-      source  => $acls_dir,
-      require => Class['::gerrit']
-    }
-
-    if ($testmode == false) {
-      exec { 'manage_projects':
-        command     => '/usr/local/bin/manage-projects -v -l /var/log/manage_projects.log',
-        timeout     => 1800, # 30 minutes
-        subscribe   => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-          ],
-        refreshonly => true,
-        logoutput   => true,
-        require     => [
-            File['/home/gerrit2/projects.yaml'],
-            File['/home/gerrit2/acls'],
-            Class['jeepyb'],
-          ],
-      }
-
-      include logrotate
-      logrotate::file { 'manage_projects.log':
-        log     => '/var/log/manage_projects.log',
-        options => [
-          'compress',
-          'missingok',
-          'rotate 30',
-          'daily',
-          'notifempty',
-          'copytruncate',
+  if ($testmode == false) {
+    exec { 'manage_projects':
+      command     => '/usr/local/bin/manage-projects -v -l /var/log/manage_projects.log',
+      timeout     => 1800, # 30 minutes
+      subscribe   => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
         ],
-        require => Exec['manage_projects'],
-      }
+      refreshonly => true,
+      logoutput   => true,
+      require     => [
+          File['/home/gerrit2/projects.yaml'],
+          File['/home/gerrit2/acls'],
+          Class['jeepyb'],
+        ],
+    }
+
+    include logrotate
+    logrotate::file { 'manage_projects.log':
+      log     => '/var/log/manage_projects.log',
+      options => [
+        'compress',
+        'missingok',
+        'rotate 30',
+        'daily',
+        'notifempty',
+        'copytruncate',
+      ],
+      require => Exec['manage_projects'],
     }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
