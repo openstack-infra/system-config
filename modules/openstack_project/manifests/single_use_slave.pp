@@ -41,6 +41,7 @@ class openstack_project::single_use_slave (
         '-m limit --limit 2/min -j LOG --log-prefix "iptables dropped: "',
       ],
     iptables_public_tcp_ports => [19885],
+    enable_ntp                => false,
   }
   class { 'jenkins::slave':
     ssh_key         => $ssh_key,
