@@ -48,8 +48,8 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.23
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.100
-    ipv4_address: 10.10.16.150
+    ipv4_address: 15.184.224.6
+    provisioning_ipv4_address: 10.10.16.6
     name: compute000.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:93:05
@@ -68,8 +68,8 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.24
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.101
-    ipv4_address: 10.10.16.151
+    ipv4_address: 15.184.224.7
+    provisioning_ipv4_address: 10.10.16.7
     name: compute001.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:aa:44
