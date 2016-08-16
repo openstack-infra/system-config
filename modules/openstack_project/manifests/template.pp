@@ -463,6 +463,7 @@ class openstack_project::template (
 
   service { 'puppet':
     ensure => stopped,
+    enable => false,
   }
 
   file { '/etc/puppet/hiera.yaml':
