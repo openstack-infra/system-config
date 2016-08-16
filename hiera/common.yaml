@@ -342,6 +342,7 @@ cacti_hosts:
 - mirror.nyj01.internap.openstack.org
 - mirror.ord.rax.openstack.org
 - mirror.regionone.bluebox-sjc1.openstack.org
+- mirror.regionone.osic-cloud1.openstack.org
 - mirror-update.openstack.org
 - release.slave.openstack.org
 - review-dev.openstack.org
