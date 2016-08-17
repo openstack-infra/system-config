@@ -158,6 +158,12 @@ class openstack_project::status (
   # sets up the cron update scripts for static pages
   include elastic_recheck::cron
 
+  # preserve deprecated uncategorized.html link
+  file { '/var/lib/elastic-recheck/uncategorized.html':
+    ensure => 'link',
+    target => '/var/lib/elastic-recheck/integrated_gate.html',
+  }
+
   ###########################################################
   # Status - zuul
 
