@@ -19,6 +19,9 @@ class openstack_project::signing_node (
   $jenkins_ssh_public_key,
   $pubring,
   $secring,
+  $lp_access_token,
+  $lp_access_secret,
+  $lp_consumer_key,
   $gitfullname = 'OpenStack Release Bot',
   $gitemail = 'infra-root@openstack.org',
   $gitpgpkey = 'infra-root@openstack.org',
@@ -74,6 +77,27 @@ class openstack_project::signing_node (
     mode    => '0400',
     content => $secring,
     require => File['/home/jenkins/.gnupg'],
+  }
+
+  package { 'python-launchpadlib':
+    ensure => present,
+  }
+
+  file { '/home/gerrit2/.launchpadlib':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0700',
+    require => File['/home/jenkins'],
+  }
+
+  file { '/home/gerrit2/.launchpadlib/creds':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0600',
+    content => template('openstack_project/infra_lp_creds.erb'),
+    require => File['/home/jenkins'],
   }
 
 }
