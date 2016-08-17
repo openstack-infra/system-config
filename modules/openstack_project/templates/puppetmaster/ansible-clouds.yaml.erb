@@ -49,6 +49,18 @@ clouds:
       user_domain_name: default
     identity_api_version: '3'
     floating_ip_source: None
+  openstackci-osic-cloud8:
+    region_name: RegionOne
+    auth:
+      # TODO(pabelanger): Switch do DNS and SSL.
+      auth_url: http://72.3.183.42:5000
+      username: <%= @puppetmaster_clouds['openstackci_osic_cloud8_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_osic_cloud8_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_osic_cloud8_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
+    floating_ip_source: None
   openstackci-vexxhost:
     region_name: ca-ymq-1
     profile: vexxhost
