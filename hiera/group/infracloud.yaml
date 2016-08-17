@@ -6,7 +6,7 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.49
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.224.4
+    ipv4_public_address: 15.184.64.4
     ipv4_address: 10.10.16.4
     name: baremetal00.vanilla.ic.openstack.org
     nics:
