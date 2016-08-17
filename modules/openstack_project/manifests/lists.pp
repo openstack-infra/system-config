@@ -375,4 +375,12 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+  maillist { 'openstack-browbeat':
+    ensure      => present,
+    admin       => 'jtaleric@redhat.com',
+    password    => $listpassword,
+    description => 'OpenStack Browbeat upstream maillist',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
