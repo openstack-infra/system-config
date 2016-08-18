@@ -2,7 +2,7 @@ Name: ubuntu
 Method: http://us.archive.ubuntu.com/ubuntu
 Components: main universe
 UDebComponents: main
-Architectures: amd64
+Architectures: amd64 source
 GetInRelease: no
 VerifyRelease: 437D05B5
 
@@ -10,7 +10,7 @@ Name: ubuntu-security
 Method: http://security.ubuntu.com/ubuntu
 Components: main universe
 UDebComponents: main
-Architectures: amd64
+Architectures: amd64 source
 GetInRelease: no
 VerifyRelease: 437D05B5
 
@@ -18,7 +18,7 @@ Name: debian
 Method: http://ftp.us.debian.org/debian/
 Components: main
 UDebComponents: main
-Architectures: amd64
+Architectures: amd64 source
 GetInRelease: no
 VerifyRelease: 2B90D010
 
@@ -26,6 +26,6 @@ Name: debian-security
 Method: http://security.debian.org/
 Components: main
 UDebComponents: main
-Architectures: amd64
+Architectures: amd64 source
 GetInRelease: no
 VerifyRelease: C857C906
