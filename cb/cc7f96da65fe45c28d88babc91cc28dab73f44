@@ -1,0 +1,10 @@
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Workflow+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 18 Aug 2016 22:39:34 +0000
+Reviewed-on: https://review.openstack.org/357087
+Project: openstack-infra/system-config
+Branch: refs/heads/master
