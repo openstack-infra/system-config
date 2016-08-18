@@ -196,4 +196,17 @@ class openstack_project::mirror (
       File["${www_root}"],
     ]
   }
+
+  ::httpd::logrotate { 'apache2':
+    ensure  => present,
+    options => [
+      'daily',
+      'missingok',
+      'rotate 7',
+      'compress',
+      'delaycompress',
+      'notifempty',
+      'create 640 root adm',
+    ],
+  }
 }
