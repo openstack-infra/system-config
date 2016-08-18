@@ -342,8 +342,8 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.36
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.115
-    ipv4_address: 10.10.16.165
+    ipv4_address: 15.184.64.21
+    provisioning_ipv4_address: 10.10.16.21
     name: compute015.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:21:5d:55
@@ -356,7 +356,6 @@ ironic_inventory_vanilla:
       rack: b04
       ilo_mac: 78:E7:D1:21:5D:52
     uuid: 3e00f75a-958e-4034-bd0a-4a0ba9e2df4d
-    disabled: true # needs iLO firmware upgrade
   compute016.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
