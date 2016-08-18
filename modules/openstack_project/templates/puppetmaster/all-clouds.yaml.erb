@@ -140,6 +140,13 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackjenkins_osic_project_name'] %>
       project_domain_name: default
       user_domain_name: default
+    networks:
+      - name: GATEWAY_NET
+        routes_externally: true
+      - name: GATEWAY_NET_V6
+        routes_externally: true
+        routes_ipv6_externally: true
+        routes_ipv4_externally: false
     identity_api_version: '3'
     floating_ip_source: None
   openstackci-osic-cloud1:
@@ -151,6 +158,13 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackci_osic_project_name'] %>
       project_domain_name: default
       user_domain_name: default
+    networks:
+      - name: GATEWAY_NET
+        routes_externally: true
+      - name: GATEWAY_NET_V6
+        routes_externally: true
+        routes_ipv6_externally: true
+        routes_ipv4_externally: false
     identity_api_version: '3'
     floating_ip_source: None
   openstackjenkins-vexxhost:
