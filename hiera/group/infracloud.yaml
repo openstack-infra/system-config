@@ -241,8 +241,8 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.19
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.110
-    ipv4_address: 10.10.16.160
+    ipv4_address: 15.184.64.16
+    provisioning_ipv4_address: 10.10.16.16
     name: compute010.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:90:0d
@@ -255,7 +255,6 @@ ironic_inventory_vanilla:
       rack: b04
       ilo_mac: 78:E7:D1:23:90:0A
     uuid: d1a88893-abe2-4523-9144-2039e600f839
-    disabled: true # iLO doesn't ping
   compute011.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
