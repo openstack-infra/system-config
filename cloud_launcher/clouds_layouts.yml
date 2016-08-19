@@ -37,3 +37,9 @@ clouds:
   - name: openstackzuul-bluebox
     profiles:
       - openstackci-security
+  - name: openstackci-tripleo-test-cloud-rh1
+    profiles:
+      - openstackci-security
+  - name: openstackzuul-tripleo-test-cloud-rh1
+    profiles:
+      - openstackci-security
