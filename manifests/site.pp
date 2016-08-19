@@ -369,7 +369,7 @@ node 'etherpad-dev.openstack.org' {
   }
 }
 
-# Node-OS: precise
+# Node-OS: trusty
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     mysql_root_password        => hiera('wiki_db_password'),
