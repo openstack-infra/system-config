@@ -16,6 +16,9 @@ profiles:
       - security_group: default
         ethertype: IPv4
         remote_ip_prefix: 0.0.0.0/0
+      - security_group: default
+        ethertype: IPv6
+        remote_ip_prefix: ::/0
   - name: openstackci-flavors
     flavors:
       - name: nodepool
