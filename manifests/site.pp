@@ -389,6 +389,21 @@ node 'wiki.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'wiki-dev.openstack.org' {
+  class { 'openstack_project::wiki':
+    sysadmins             => hiera('sysadmins', []),
+    wg_dbserver           => hiera('wiki_wg_dbserver'),
+    wg_dbname             => 'openstack_wiki',
+    wg_dbuser             => 'wikiuser',
+    wg_dbpassword         => hiera('wg_dbpassword'),
+    wg_secretkey          => hiera('wg_secretkey'),
+    wg_upgradekey         => hiera('wg_upgradekey'),
+    wg_recaptchasitekey   => hiera('wg_recaptchasitekey'),
+    wg_recaptchasecretkey => hiera('wg_recaptchasecretkey'),
+  }
+}
+
+# Node-OS: trusty
 node 'logstash.openstack.org' {
   $iptables_es_rule = regsubst($elasticsearch_nodes,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
