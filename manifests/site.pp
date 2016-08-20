@@ -374,6 +374,7 @@ node /^wiki\d+\.openstack\.org$/ {
   $group = "wiki"
   class { 'openstack_project::wiki':
     sysadmins                 => hiera('sysadmins', []),
+    bup_user                  => 'bup-wiki',
     serveradmin               => hiera('infra_apache_serveradmin'),
     site_hostname             => 'wiki.openstack.org',
     ssl_cert_file_contents    => hiera('ssl_cert_file_contents'),
@@ -388,6 +389,24 @@ node /^wiki\d+\.openstack\.org$/ {
     wg_recaptchasitekey       => hiera('wg_recaptchasitekey'),
     wg_recaptchasecretkey     => hiera('wg_recaptchasecretkey'),
     wg_googleanalyticsaccount => hiera('wg_googleanalyticsaccount'),
+  }
+}
+
+# Node-OS: trusty
+node /^wiki-dev\d+\.openstack\.org$/ {
+  $group = "wiki-dev"
+  class { 'openstack_project::wiki':
+    sysadmins             => hiera('sysadmins', []),
+    serveradmin           => hiera('infra_apache_serveradmin'),
+    site_hostname         => 'wiki-dev.openstack.org',
+    wg_dbserver           => hiera('wiki_wg_dbserver'),
+    wg_dbname             => 'openstack_wiki',
+    wg_dbuser             => 'wikiuser',
+    wg_dbpassword         => hiera('wg_dbpassword'),
+    wg_secretkey          => hiera('wg_secretkey'),
+    wg_upgradekey         => hiera('wg_upgradekey'),
+    wg_recaptchasitekey   => hiera('wg_recaptchasitekey'),
+    wg_recaptchasecretkey => hiera('wg_recaptchasecretkey'),
   }
 }
 
