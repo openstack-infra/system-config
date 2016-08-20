@@ -373,6 +373,7 @@ node 'etherpad-dev.openstack.org' {
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     sysadmins                 => hiera('sysadmins', []),
+    bup_user                  => 'bup-wiki',
     serveradmin               => hiera('infra_apache_serveradmin'),
     ssl_cert_file_contents    => hiera('ssl_cert_file_contents'),
     ssl_key_file_contents     => hiera('ssl_key_file_contents'),
@@ -386,6 +387,22 @@ node 'wiki.openstack.org' {
     wg_recaptchasitekey       => hiera('wg_recaptchasitekey'),
     wg_recaptchasecretkey     => hiera('wg_recaptchasecretkey'),
     wg_googleanalyticsaccount => hiera('wg_googleanalyticsaccount'),
+  }
+}
+
+# Node-OS: trusty
+node 'wiki-dev.openstack.org' {
+  class { 'openstack_project::wiki':
+    sysadmins             => hiera('sysadmins', []),
+    serveradmin           => hiera('infra_apache_serveradmin'),
+    wg_dbserver           => hiera('wiki_wg_dbserver'),
+    wg_dbname             => 'openstack_wiki',
+    wg_dbuser             => 'wikiuser',
+    wg_dbpassword         => hiera('wg_dbpassword'),
+    wg_secretkey          => hiera('wg_secretkey'),
+    wg_upgradekey         => hiera('wg_upgradekey'),
+    wg_recaptchasitekey   => hiera('wg_recaptchasitekey'),
+    wg_recaptchasecretkey => hiera('wg_recaptchasecretkey'),
   }
 }
 
