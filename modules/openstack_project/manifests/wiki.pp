@@ -1,11 +1,13 @@
 # == Class: openstack_project::wiki
 #
 class openstack_project::wiki (
-  $mysql_root_password = '',
   $sysadmins = [],
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $wg_dbserver = undef,
+  $wg_dbname = undef,
+  $wg_dbuser = undef,
   $wg_dbpassword = undef,
   $wg_secretkey = undef,
   $wg_upgradekey = undef,
@@ -40,6 +42,9 @@ class openstack_project::wiki (
     ssl_cert_file_contents     => $ssl_cert_file_contents,
     ssl_key_file_contents      => $ssl_key_file_contents,
     ssl_chain_file_contents    => $ssl_chain_file_contents,
+    wg_dserver                 => $wg_dbserver,
+    wg_dbname                  => $wg_dbname,
+    wg_dbuser                  => $wg_dbuser,
     wg_dbpassword              => $wg_dbpassword,
     wg_secretkey               => $wg_secretkey,
     wg_upgradekey              => $wg_upgradekey,
@@ -53,15 +58,6 @@ class openstack_project::wiki (
     tcp_port   => 11000,
     udp_port   => 11000,
   }
-  class { 'mysql::server':
-    root_password    => $mysql_root_password,
-    override_options => {
-      'mysqld' => {
-        'default-storage-engine' => 'InnoDB',
-      }
-    },
-  }
-  include mysql::server::account_security
 
   mysql_backup::backup { 'wiki':
     require => Class['mysql::server'],
