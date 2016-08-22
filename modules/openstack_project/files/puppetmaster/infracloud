@@ -2,3 +2,7 @@
 
 [infracloud]
 baremetal00.vanilla.ic.openstack.org
+controller00.vanilla.ic.openstack.org
+compute000.vanilla.ic.openstack.org
+compute001.vanilla.ic.openstack.org
+compute002.vanilla.ic.openstack.org
