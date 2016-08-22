@@ -2114,14 +2114,13 @@ ironic_inventory_chocolate:
       cpus:
     name: compute054.chocolate.ic.openstack.org
   compute055.chocolate.ic.openstack.org:
-    ansible_ssh_host: 15.126.48.58
-    ipv4_address: 15.126.48.58
-    provisioning_ipv4_address: 10.23.212.58
+    ansible_ssh_host: 15.184.64.61
+    ipv4_address: 15.184.64.61
+    provisioning_ipv4_address: 10.10.16.61
     uuid: 30303536-3734-5355-4532-333644464343
-    disabled: true # not needed due to ip limit
     driver_info:
       power:
-        ipmi_address: 10.22.27.224
+        ipmi_address: 10.12.83.61
         ipmi_username: HELIONADMIN
     nics:
     - mac: 80:c1:6e:80:f5:58
@@ -2131,6 +2130,9 @@ ironic_inventory_chocolate:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use236dfcc
+      rack: b05
+      ilo_mac: 00:9C:02:A7:E9:3C
     name: compute055.chocolate.ic.openstack.org
   compute056.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.59
