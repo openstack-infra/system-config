@@ -208,4 +208,27 @@ class openstack_project::mirror (
       'create 640 root adm',
     ],
   }
+
+  package { 'apache2-dbg':
+    ensure => present,
+  }
+
+  file { '/etc/apache2/conf-enabled/coredump.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'puppet:///modules/openstack_project/apache2_coredump.conf',
+    require => Package['httpd'],
+    notify  => Service['httpd'],
+  }
+
+  file { '/var/cache/apache2':
+    ensure  => directory,
+    owner   => 'www-data',
+    group   => 'www-data',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/apache2_coredump.conf',
+    require => Package['httpd'],
+  }
 }
