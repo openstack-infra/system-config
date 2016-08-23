@@ -1222,7 +1222,7 @@ node /.*wheel-mirror-.*\.openstack\.org/ {
 }
 
 # Node-OS: trusty
-node 'controller00.hpuswest.ic.openstack.org' {
+node 'controller00.vanilla.ic.openstack.org' {
   $group = 'infracloud'
   class { '::openstack_project::server':
     iptables_public_tcp_ports => [80,5000,5671,8774,9292,9696,35357], # logs,keystone,rabbit,nova,glance,neutron,keystone
@@ -1294,7 +1294,7 @@ node 'controller00.hpuseast.ic.openstack.org' {
   }
 }
 
-node /^compute\d{3}\.hpuswest\.ic\.openstack\.org$/ {
+node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
   $group = 'infracloud'
   class { '::openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
