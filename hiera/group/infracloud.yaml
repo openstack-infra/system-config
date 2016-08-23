@@ -799,10 +799,10 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.25
+        ipmi_address: 10.12.83.45
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.138
-    ipv4_address: 10.10.16.188
+    public_address: 15.184.64.44
+    provisioning_ipv4_address: 10.10.16.44
     name: compute038.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:95:65
@@ -811,6 +811,9 @@ ironic_inventory_vanilla:
       cpus: '24'
       disk_size: '1800'
       ram: '96676'
+      serial_number: use129cnkl
+      rack: b04
+      ilo_mac: 78:E7:D1:23:95:62
     uuid: 42fe827f-e567-4c17-8b74-4c28f93728d4
   compute039.vanilla.ic.openstack.org:
     driver: agent_ipmitool
