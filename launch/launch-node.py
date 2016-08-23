@@ -240,14 +240,25 @@ def build_server(cloud, name, image, flavor,
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
+        print "****"
+        print "Server %s failed to build!" % (server.id)
         try:
             if keep:
-                print "Server failed to build, keeping as requested."
+                print "Keeping as requested"
+                # Write out the private SSH key we generated, as we may not have
+                # got far enough for ansible to run
+                with open('/tmp/%s.id_rsa' % server.id, 'w') as key_file:
+                    key.write_private_key(key_file)
+                    os.chmod(key_file.name, 0o600)
+                    print "Private key saved in %s" % key_file.name
+                print "Run to delete -> openstack server delete %s" % (server.id)
             else:
                 cloud.delete_server(server.id, delete_ips=True)
         except Exception:
             print "Exception encountered deleting server:"
             traceback.print_exc()
+        print "The original exception follows:"
+        print "****"
         # Raise the important exception that started this
         raise
 
