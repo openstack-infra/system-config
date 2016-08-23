@@ -402,7 +402,7 @@ infracloud_hpuseast_ssl_cert_file_contents: |
   waHu4jUcpr+TPgFGlaQB7es/E48KpPG/A93QoBiGgqYn7BbtmmVqEQosYhsw9dM1
   it1KkeR3ySIc6zXTpBM=
   -----END CERTIFICATE-----
-infracloud_hpuswest_ssl_cert_file_contents: |
+infracloud_vanilla_ssl_cert_file_contents: |
   -----BEGIN CERTIFICATE-----
   MIIF2jCCA8ICCQCe7O3PwCh21DANBgkqhkiG9w0BAQsFADCBrjELMAkGA1UEBhMC
   VVMxEjAQBgNVBAgMCU9wZW5TdGFjazEmMCQGA1UECgwdT3BlblN0YWNrIEluZnJh
