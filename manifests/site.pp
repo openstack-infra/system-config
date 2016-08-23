@@ -1253,12 +1253,12 @@ node 'controller00.vanilla.ic.openstack.org' {
     controller_public_address        => $::fqdn,
     openstackci_password             => hiera('openstackci_infracloud_password'),
     openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
-    neutron_subnet_cidr              => '15.184.52.0/22',
-    neutron_subnet_gateway           => '15.184.52.1',
+    neutron_subnet_cidr              => '15.184.64.0/19',
+    neutron_subnet_gateway           => '15.184.64.1',
     neutron_subnet_allocation_pools  => [
-                                          'start=15.184.53.2,end=15.184.53.254',
-                                          'start=15.184.54.2,end=15.184.54.254',
-                                          'start=15.184.55.2,end=15.184.55.254'
+                                          'start=15.184.65.2,end=15.184.65.254',
+                                          'start=15.184.66.2,end=15.184.66.254',
+                                          'start=15.184.67.2,end=15.184.67.254'
                                         ]
   }
 }
