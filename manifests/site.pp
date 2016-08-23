@@ -1308,6 +1308,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
     nova_rabbit_password             => hiera('nova_rabbit_password'),
     neutron_rabbit_password          => hiera('neutron_rabbit_password'),
     neutron_admin_password           => hiera('neutron_admin_password'),
+    ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => 'controller00.vanilla.ic.openstack.org',
