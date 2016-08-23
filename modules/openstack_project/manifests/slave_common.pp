@@ -144,20 +144,24 @@ class openstack_project::slave_common(
     }
   }
 
-  file { '/etc/zuul-env-reqs.txt':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0444',
-    source => 'puppet:///modules/openstack_project/zuul-env-reqs.txt',
+  vcsrepo { '/opt/zuul':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/zuul.git',
   }
 
   python::virtualenv { '/usr/zuul-env':
     ensure       => present,
-    requirements => '/etc/zuul-env-reqs.txt',
     owner        => 'root',
     group        => 'root',
     timeout      => 0,
-    require      => File['/etc/zuul-env-reqs.txt'],
+  }
+
+  exec { 'zuul-env-update':
+    command     => '/usr/zuul-env/bin/pip --log /usr/zuul-env/pip.log install /opt/zuul',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/zuul'],
+    require     => Python::Virtualenv['/usr/zuul-env'],
   }
 }
