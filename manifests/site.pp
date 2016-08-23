@@ -759,7 +759,7 @@ node 'nodepool.openstack.org' {
     owner   => 'nodepool',
     group   => 'nodepool',
     mode    => '0600',
-    content => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
+    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
 }
@@ -1248,7 +1248,7 @@ node 'controller00.vanilla.ic.openstack.org' {
     nova_admin_password              => hiera('nova_admin_password'),
     keystone_admin_token             => hiera('keystone_admin_token'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
-    ssl_cert_file_contents           => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
+    ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => $::fqdn,
     openstackci_password             => hiera('openstackci_infracloud_password'),
@@ -1308,7 +1308,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
     nova_rabbit_password             => hiera('nova_rabbit_password'),
     neutron_rabbit_password          => hiera('neutron_rabbit_password'),
     neutron_admin_password           => hiera('neutron_admin_password'),
-    ssl_cert_file_contents           => hiera('infracloud_hpuswest_ssl_cert_file_contents'),
+    ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => 'controller00.vanilla.ic.openstack.org',
   }
@@ -1349,8 +1349,8 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
     mysql_password     => hiera('bifrost_mysql_password'),
     region             => 'vanilla',
     ipmi_passwords     => hiera('ipmi_west_passwords'),
-    ssh_private_key    => hiera('bifrost_hpuswest_ssh_private_key'),
-    ssh_public_key     => hiera('bifrost_hpuswest_ssh_public_key'),
+    ssh_private_key    => hiera('bifrost_vanilla_ssh_private_key'),
+    ssh_public_key     => hiera('bifrost_vanilla_ssh_public_key'),
     vlan               => 2551,
     gateway_ip         => '15.184.64.1',
   }
