@@ -88,6 +88,10 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
     ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=600)
 
+    # Something up with RAX images that they have the ipv6 interface in
+    # /etc/network/interfaces but eth0 hasn't noticed yet; reload it
+    ssh_client.ssh('ifdown eth0 && ifup eth0')
+
     if server.public_v6:
         ssh_client.ssh('ping6 -c5 -Q 0x10 review.openstack.org '
                        '|| ping6 -c5 -Q 0x10 wiki.openstack.org')
