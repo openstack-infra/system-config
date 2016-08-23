@@ -160,4 +160,11 @@ class openstack_project::slave_common(
     timeout      => 0,
     require      => File['/etc/zuul-env-reqs.txt'],
   }
+
+  exec { 'zuul-env-update':
+    command     => '/usr/zuul-env/bin/pip --log /usr/zuul-env/pip.log install -r /etc/zuul-env-reqs.txt',
+    refreshonly => true,
+    subscribe   => File['/etc/zuul-env-reqs.txt'],
+    require     => Python::Virtualenv['/usr/zuul-env'],
+  }
 }
