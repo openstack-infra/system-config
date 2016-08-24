@@ -98,7 +98,6 @@ class openstack_project::infracloud::controller (
 
   realize (
     User::Virtual::Localuser['colleen'],
-    User::Virtual::Localuser['rcarrillocruz'],
   )
 
 }

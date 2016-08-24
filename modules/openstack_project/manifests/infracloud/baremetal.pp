@@ -25,7 +25,6 @@ class openstack_project::infracloud::baremetal (
 
   realize (
     User::Virtual::Localuser['colleen'],
-    User::Virtual::Localuser['rcarrillocruz'],
   )
 
 }
