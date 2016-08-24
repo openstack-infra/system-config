@@ -54,3 +54,9 @@ clouds:
   - name: openstackzuul-tripleo-test-cloud-rh1
     profiles:
       - openstackci-security
+
+  # infracloud
+  - name: admin-infracloud
+    profiles:
+      - openstackci-projects
+      - openstackci-flavors
