@@ -47,55 +47,6 @@ class openstack_project::infracloud::controller (
     neutron_subnet_allocation_pools  => $neutron_subnet_allocation_pools,
   }
 
-  keystone_domain { 'infra':
-    ensure  => present,
-    enabled => true,
-  }
-
-  keystone_tenant { 'openstackci':
-    ensure      => present,
-    enabled     => true,
-    description => 'Infra Long Lived Resources',
-    domain      => 'infra',
-    require     => Keystone_domain['infra'],
-  }
-
-  keystone_tenant { 'openstackjenkins':
-    ensure      => present,
-    enabled     => true,
-    description => 'Infra short lived resources',
-    domain      => 'infra',
-    require     => Keystone_domain['infra'],
-  }
-
-  keystone_user { 'openstackci':
-    ensure   => present,
-    enabled  => true,
-    domain   => 'infra',
-    email    => $openstackci_email,
-    password => $openstackci_password,
-    require  => Keystone_tenant['openstackci'],
-  }
-
-  keystone_user { 'openstackjenkins':
-    ensure   => present,
-    enabled  => true,
-    domain   => 'infra',
-    email    => $openstackjenkins_email,
-    password => $openstackjenkins_password,
-    require  => Keystone_tenant['openstackjenkins'],
-  }
-
-  keystone_role { 'user': ensure => present }
-
-  keystone_user_role { 'openstackci::infra@openstackci::infra':
-    roles => 'user',
-  }
-
-  keystone_user_role { 'openstackjenkins::infra@openstackjenkins::infra':
-    roles => 'user',
-  }
-
   realize (
     User::Virtual::Localuser['colleen'],
     User::Virtual::Localuser['rcarrillocruz'],
