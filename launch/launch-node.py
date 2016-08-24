@@ -74,7 +74,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
 
-    print 'Public IP', ip
+    print("--- Running initial configuration on host %s ---" % ip)
     for username in ['root', 'ubuntu', 'centos', 'admin']:
         ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
         if ssh_client:
