@@ -53,6 +53,8 @@ class openstack_project::wiki (
     wg_recaptchasitekey        => $wg_recaptchasitekey,
     wg_recaptchasecretkey      => $wg_recaptchasecretkey,
     wg_googleanalyticsaccount  => $wg_googleanalyticsaccount,
+    wg_sitename                => 'OpenStack',
+    wg_logo                    => "https://${::fqdn}/w/images/thumb/c/c4/OpenStack_Logo_-_notext.png/30px-OpenStack_Logo_-_notext.png",
   }
   class { 'memcached':
     max_memory => 2048,
