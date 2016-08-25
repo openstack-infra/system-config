@@ -304,6 +304,38 @@ class openstack_project::review (
   gerrit::plugin { 'javamelody': version       => '3fefa35' }
   gerrit::plugin { 'its-storyboard': version   => 'a9cb131' }
 
+  file { '/etc/apache2/conf-available':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/etc/apache2'],
+  }
+  file { '/etc/apache2/conf-available/connection-tuning':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/openstack_project/gerrit/apache-connection-tuning',
+    require => File['/etc/apache2/conf-available'],
+  }
+  file { '/etc/apache2/conf-enabled':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/etc/apache2'],
+  }
+  file { '/etc/apache2/conf-enabled/connection-tuning':
+    ensure  => link,
+    target  => '/etc/apache2/conf-available/connection-tuning.conf',
+    notify  => Service['httpd'],
+    require => [
+      File['/etc/apache2/conf-enabled'],
+      File['/etc/apache2/conf-available/connection-tuning'],
+    ],
+  }
+
   class { 'gerritbot':
     nick                    => 'openstackgerrit',
     password                => $gerritbot_password,
