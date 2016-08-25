@@ -1,0 +1,31 @@
+# worker MPM
+# StartServers: initial number of server processes to start
+# MinSpareThreads: minimum number of worker threads which are kept spare
+# MaxSpareThreads: maximum number of worker threads which are kept spare
+# ThreadLimit: ThreadsPerChild can be changed to this maximum value during a
+#              graceful restart. ThreadLimit can only be changed by stopping
+#              and starting Apache.
+# ThreadsPerChild: constant number of worker threads in each server process
+# MaxClients: maximum number of simultaneous client connections
+# MaxRequestsPerChild: maximum number of requests a server process serves
+
+<IfModule mpm_worker_module>
+    ServerLimit         128
+    StartServers          3
+    MinSpareThreads      96
+    MaxSpareThreads     192
+    ThreadLimit          64
+    ThreadsPerChild      32
+    MaxClients         4096
+    MaxRequestsPerChild   0
+</IfModule>
+<IfModule mpm_event_module>
+    ServerLimit         128
+    StartServers          3
+    MinSpareThreads      96
+    MaxSpareThreads     192
+    ThreadLimit          64
+    ThreadsPerChild      32
+    MaxClients         4096
+    MaxRequestsPerChild   0
+</IfModule>
