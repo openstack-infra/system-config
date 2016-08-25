@@ -73,3 +73,13 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
+  openstackci-infracloud:
+    region_name: RegionOne
+    auth:
+      auth_url: https://controller00.vanilla.ic.openstack.org:5000
+      username: <%= @puppetmaster_clouds['openstackci_infracloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_infracloud_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
