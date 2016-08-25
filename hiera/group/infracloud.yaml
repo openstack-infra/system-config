@@ -106,10 +106,10 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.12
+        ipmi_address: 10.12.83.43
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.103
-    ipv4_address: 10.10.16.153
+    ipv4_address: 15.184.64.9
+    provisioning_ipv4_address: 10.10.16.9
     name: compute003.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:22:36:05
