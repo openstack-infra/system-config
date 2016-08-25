@@ -370,6 +370,9 @@ Next, edit `project.config` to look like::
   value = 0 Ready for reviews
   value = +1 Approved
 
+  [plugin "its-storyboard"]
+  enabled = true
+
   [project]
   description = Rights inherited by all other projects
 
