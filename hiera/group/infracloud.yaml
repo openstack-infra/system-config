@@ -118,6 +118,9 @@ ironic_inventory_vanilla:
       cpus: '24'
       disk_size: '1800'
       ram: '96676'
+      serial_number: use129cnl3
+      rack: b04
+      ilo_mac: 78:E7:D1:22:36:02
     uuid: b1a17d9b-5620-42a4-b211-f0a9d4800b7f
   compute004.vanilla.ic.openstack.org:
     driver: agent_ipmitool
