@@ -52,16 +52,23 @@ clouds:
     identity_api_version: '3'
   internap:
     profile: internap
-    region_name: nyj01
     auth:
       username: '<%= @internap_username %>'
       password: '<%= @internap_password %>'
       project_name: '<%= @internap_project %>'
-    networks:
-      - name: inap-17304-WAN2342
-        routes_externally: True
-      - name: inap-17304-LAN3326
-        routes_externally: False
+    regions:
+      - name: mtl01
+        values:
+          networks:
+            - name: inap-17304-WAN1101
+              routes_externally: True
+      - name: nyj01
+        values:
+          networks:
+            - name: inap-17304-WAN2342
+              routes_externally: True
+            - name: inap-17304-LAN3326
+              routes_externally: False
   osic-cloud1:
     region_name: RegionOne
     auth:
