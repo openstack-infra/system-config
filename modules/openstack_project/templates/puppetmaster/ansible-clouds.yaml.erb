@@ -7,7 +7,9 @@ cache:
   path: /var/cache/ansible-inventory
 clouds:
   openstackci-internap:
-    region_name: nyj01
+    regions:
+      - mtl01
+      - nyj01
     profile: internap
     auth:
       username: <%= @puppetmaster_clouds['openstackci_internap_username'] %>
