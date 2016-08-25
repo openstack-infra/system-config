@@ -56,7 +56,9 @@ clouds:
     identity_api_version: '3'
     cacert: /etc/ssl/certs/ca-certificates.crt
   openstackci-internap:
-    region_name: nyj01
+    regions:
+      - mtl01
+      - nyj01
     profile: internap
     auth:
       username: <%= @puppetmaster_clouds['openstackci_internap_username'] %>
@@ -68,7 +70,9 @@ clouds:
       - name: inap-17301-LAN3328
         routes_externally: False
   openstackjenkins-internap:
-    region_name: nyj01
+    regions:
+      - mtl01
+      - nyj01
     profile: internap
     auth:
       username: <%= @puppetmaster_clouds['openstackjenkins_internap_username'] %>
