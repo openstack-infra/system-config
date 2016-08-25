@@ -60,9 +60,13 @@ clouds:
     region_name: regionOne
     auth:
       auth_url: 'https://ci-overcloud.rh1.tripleo.org:13000'
-      username: <%= @puppetmaster_clouds['openstackci_tripleo_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_tripleo_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_tripleo_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackci_tripleo_test_cloud_rh1_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_tripleo_test_cloud_rh1_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_tripleo_test_cloud_rh1_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    floating_ip_source: neutron
+    identity_api_version: '3'
   openstackci-bluebox:
     region_name: RegionOne
     auth:
