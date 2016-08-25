@@ -60,3 +60,9 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
+  - name: openstackci-infracloud
+    profiles:
+      - openstackci-security
+  - name: openstackzuul-infracloud
+    profiles:
+      - openstackci-security
