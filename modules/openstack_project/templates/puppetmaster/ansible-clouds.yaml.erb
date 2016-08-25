@@ -7,17 +7,24 @@ cache:
   path: /var/cache/ansible-inventory
 clouds:
   openstackci-internap:
-    region_name: nyj01
     profile: internap
     auth:
       username: <%= @puppetmaster_clouds['openstackci_internap_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_internap_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackci_internap_project_name'] %>
-    networks: 
-      - name: inap-17301-WAN2344
-        routes_externally: True
-      - name: inap-17301-LAN3328
-        routes_externally: False
+    regions:
+      - name: mtl01
+        values:
+          networks:
+            - name: inap-17301-WAN1102
+              routes_externally: True
+      - name: nyj01
+        values:
+          networks:
+            - name: inap-17301-WAN2344
+              routes_externally: True
+            - name: inap-17301-LAN3328
+              routes_externally: False
   openstackci-ovh:
     regions:
       - GRA1
