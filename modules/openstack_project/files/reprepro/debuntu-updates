@@ -24,6 +24,7 @@ VerifyRelease: 2B90D010
 
 Name: debian-security
 Method: http://security.debian.org/
+Suite: jessie/updates
 Components: main
 UDebComponents: main
 Architectures: amd64 source
