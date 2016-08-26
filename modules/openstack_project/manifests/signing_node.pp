@@ -83,7 +83,7 @@ class openstack_project::signing_node (
     ensure => present,
   }
 
-  file { '/home/gerrit2/.launchpadlib':
+  file { '/home/jenkins/.launchpadlib':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
@@ -91,7 +91,7 @@ class openstack_project::signing_node (
     require => File['/home/jenkins'],
   }
 
-  file { '/home/gerrit2/.launchpadlib/creds':
+  file { '/home/jenkins/.launchpadlib/creds':
     ensure  => present,
     owner   => 'jenkins',
     group   => 'jenkins',
