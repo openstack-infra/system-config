@@ -275,6 +275,7 @@ cacti_hosts:
 - compute041.hpuswest.ic.openstack.org
 - compute042.hpuswest.ic.openstack.org
 - compute043.hpuswest.ic.openstack.org
+- controller00.vanilla.ic.openstack.org
 - controller00.hpuswest.ic.openstack.org
 - controller01.hpuswest.ic.openstack.org
 - eavesdrop.openstack.org
