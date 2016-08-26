@@ -230,6 +230,11 @@ cacti_hosts:
 - ask.openstack.org
 - ci-backup-rs-ord.openstack.org
 - controller00.vanilla.ic.openstack.org
+- compute000.vanilla.ic.openstack.org
+- compute001.vanilla.ic.openstack.org
+- compute002.vanilla.ic.openstack.org
+- compute003.vanilla.ic.openstack.org
+- compute004.vanilla.ic.openstack.org
 - eavesdrop.openstack.org
 - elasticsearch01.openstack.org
 - elasticsearch02.openstack.org
