@@ -119,13 +119,15 @@ class openstack_project::review (
     ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
     email                               => 'review@openstack.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
-    database_poollimit                  => '150',
+    database_poollimit                  => '225',
     container_heaplimit                 => '30g',
     core_packedgitopenfiles             => '4096',
     core_packedgitlimit                 => '400m',
     core_packedgitwindowsize            => '16k',
     sshd_threads                        => '100',
     index_threads                       => 4,
+    httpd_minthreads                    => '20',
+    httpd_maxthreads                    => '100',
     httpd_maxqueued                     => '200',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.22.e0c0f29.war',
