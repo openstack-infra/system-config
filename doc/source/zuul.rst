@@ -29,6 +29,8 @@ At a Glance
   * https://storyboard.openstack.org/#!/project/679
 :Resources:
   * `Zuul Reference Manual <http://docs.openstack.org/infra/zuul>`_
+:Chat:
+  * #zuul on freenode
 
 Overview
 ========
