@@ -19,9 +19,10 @@ class openstack_project::review_dev (
   # SSH key for outbound ssh-based replication.
   $ssh_replication_rsa_key_contents='',
   $ssh_replication_rsa_pubkey_contents='',
-  $lp_sync_consumer_key = '',
-  $lp_sync_token = '',
-  $lp_sync_secret = '',
+  # Launchpad creds for bug/blueprint updates
+  $lp_access_token = '',
+  $lp_access_secret = '',
+  $lp_consumer_key = '',
   $swift_username = '',
   $swift_password = '',
   $storyboard_password = '',
@@ -228,7 +229,7 @@ class openstack_project::review_dev (
     owner   => 'gerrit2',
     group   => 'gerrit2',
     mode    => '0600',
-    content => template('openstack_project/gerrit_lp_creds.erb'),
+    content => template('openstack_project/infra_lp_creds.erb'),
     replace => true,
     require => User['gerrit2'],
   }
