@@ -231,6 +231,11 @@ cacti_hosts:
 - baremetal00.hpuswest.ic.openstack.org
 - baremetal01.hpuswest.ic.openstack.org
 - ci-backup-rs-ord.openstack.org
+- compute000.vanilla.ic.openstack.org
+- compute001.vanilla.ic.openstack.org
+- compute002.vanilla.ic.openstack.org
+- compute003.vanilla.ic.openstack.org
+- compute004.vanilla.ic.openstack.org
 - compute000.hpuswest.ic.openstack.org
 - compute001.hpuswest.ic.openstack.org
 - compute002.hpuswest.ic.openstack.org
