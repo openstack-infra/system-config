@@ -183,6 +183,13 @@ we use a Gerrit hook to update Launchpad bugs when changes referencing
 them are applied.  This is managed by the :ref:`jeepyb`
 openstack-infra project.
 
+Storyboard Integration
+======================
+
+We use the Gerrit its-storyboard_ plugin to update :ref:`storyboard`
+stories and tasks when changes referencing them are applied.
+
+.. _its-storyboard: https://review.openstack.org/plugins/its-storyboard/Documentation/index.html
 
 New Project Creation
 ====================

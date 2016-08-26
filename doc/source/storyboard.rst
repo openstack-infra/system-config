@@ -1,5 +1,7 @@
 :title: StoryBoard
 
+.. _storyboard:
+
 StoryBoard
 ##########
 
