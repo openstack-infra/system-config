@@ -80,21 +80,41 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-designate-agent.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*designate.*'
   - name: logs/screen-designate-api.txt
     tags:
       - screen
       - oslofmt
-    job-filter: '-designate-*'
+    job-filter: '.*designate.*'
   - name: logs/screen-designate-central.txt
     tags:
       - screen
       - oslofmt
-    job-filter: '-designate-*'
+    job-filter: '.*designate.*'
+  - name: logs/screen-designate-mdns.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*designate.*'
+  - name: logs/screen-designate-pool-manager.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*designate.*'
   - name: logs/screen-designate-sink.txt
     tags:
       - screen
       - oslofmt
-    job-filter: '-designate-*'
+    job-filter: '.*designate.*'
+  - name: logs/screen-designate-zone-manager.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*designate.*'
   - name: logs/screen-g-api.txt
     tags:
       - screen
