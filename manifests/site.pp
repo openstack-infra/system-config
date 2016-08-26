@@ -961,6 +961,9 @@ node /^signing\d+\.ci\.openstack\.org$/ {
     pubring                => hiera('pubring'),
     secring                => hiera('secring'),
     gerritkey              => hiera('gerritkey'),
+    lp_access_token        => hiera('lp_access_token'),
+    lp_access_secret       => hiera('lp_access_secret'),
+    lp_consumer_key        => hiera('lp_consumer_key'),
   }
 }
 
