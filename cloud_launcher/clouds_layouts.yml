@@ -77,14 +77,14 @@ clouds:
     profiles:
       - openstackci-security
 
-  # infracloud
-  - name: admin-infracloud
+  # infracloud-vanilla
+  - name: admin-infracloud-vanilla
     profiles:
       - openstackci-projects
       - openstackci-flavors
-  - name: openstackci-infracloud
+  - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
-  - name: openstackzuul-infracloud
+  - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security

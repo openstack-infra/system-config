@@ -9,13 +9,13 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
-  admin-infracloud:
+  admin-infracloud-vanilla:
     region_name: RegionOne
     auth:
       auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['admin_infracloud_username'] %>
-      password: <%= @puppetmaster_clouds['admin_infracloud_password'] %>
-      project_name: <%= @puppetmaster_clouds['admin_infracloud_project_name'] %>
+      username: <%= @puppetmaster_clouds['admin_infracloud_vanilla_username'] %>
+      password: <%= @puppetmaster_clouds['admin_infracloud_vanilla_password'] %>
+      project_name: <%= @puppetmaster_clouds['admin_infracloud_vanilla_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
@@ -44,13 +44,13 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
-  openstackci-infracloud:
+  openstackci-infracloud-vanilla:
     region_name: RegionOne
     auth:
       auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackci_infracloud_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_infracloud_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
@@ -123,13 +123,13 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
-  openstackzuul-infracloud:
+  openstackzuul-infracloud-vanilla:
     region_name: RegionOne
     auth:
       auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackzuul_infracloud_username'] %>
-      password: <%= @puppetmaster_clouds['openstackzuul_infracloud_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackzuul_infracloud_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
