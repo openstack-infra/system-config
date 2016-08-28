@@ -766,8 +766,8 @@ ironic_inventory_vanilla:
       power:
         ipmi_address: 10.12.83.42
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.136
-    ipv4_address: 10.10.16.186
+    ipv4_address: 15.184.52.136
+    provisioning_ipv4_address: 10.10.16.186
     name: compute036.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:9d:7d
