@@ -937,14 +937,14 @@ ironic_inventory_vanilla:
       rack: b04
       ilo_mac: 78:e7:d1:23:94:ca
     uuid: 1df8345b-168c-4f7d-b6ad-d33a3afa9239
-  controller01.vanilla.ic.openstack.org:
+  compute044.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
       power:
         ipmi_address: 10.12.83.4
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.5
-    ipv4_address: 10.10.16.147
+    ipv4_address: 15.184.64.50
+    provisioning_ipv4_address: 10.10.16.50
     name: controller01.vanilla.ic.openstack.org
     nics:
     - mac: 78:e7:d1:23:99:35
