@@ -373,6 +373,7 @@ node 'etherpad-dev.openstack.org' {
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
     sysadmins                 => hiera('sysadmins', []),
+    serveradmin               => hiera('infra_apache_serveradmin'),
     ssl_cert_file_contents    => hiera('ssl_cert_file_contents'),
     ssl_key_file_contents     => hiera('ssl_key_file_contents'),
     ssl_chain_file_contents   => hiera('ssl_chain_file_contents'),

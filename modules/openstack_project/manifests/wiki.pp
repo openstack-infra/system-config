@@ -2,6 +2,7 @@
 #
 class openstack_project::wiki (
   $sysadmins = [],
+  $serveradmin = undef,
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
@@ -35,6 +36,7 @@ class openstack_project::wiki (
     role                       => 'all',
     mediawiki_location         => '/srv/mediawiki/w',
     mediawiki_images_location  => '/srv/mediawiki/images',
+    serveradmin                => $serveradmin,
     site_hostname              => $::fqdn,
     ssl_cert_file              => "/etc/ssl/certs/${::fqdn}.pem",
     ssl_key_file               => "/etc/ssl/private/${::fqdn}.key",

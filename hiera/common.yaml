@@ -30,6 +30,7 @@ elasticsearch_clients:
 - logstash-worker20.openstack.org
 - subunit-worker01.openstack.org
 - subunit-worker02.openstack.org
+infra_apache_serveradmin: noc@openstack.org
 statusbot_channels:
 - ara
 - congress
