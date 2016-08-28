@@ -372,19 +372,19 @@ node 'etherpad-dev.openstack.org' {
 # Node-OS: trusty
 node 'wiki.openstack.org' {
   class { 'openstack_project::wiki':
-    sysadmins                  => hiera('sysadmins', []),
-    ssl_cert_file_contents     => hiera('wiki_ssl_cert_file_contents'),
-    ssl_key_file_contents      => hiera('wiki_ssl_key_file_contents'),
-    ssl_chain_file_contents    => hiera('wiki_ssl_chain_file_contents'),
-    wg_dbserver                => hiera('wiki_wg_dbserver'),
-    wg_dbname                  => 'openstack_wiki',
-    wg_dbuser                  => 'wikiuser',
-    wg_dbpassword              => hiera('wiki_wg_dbpassword'),
-    wg_secretkey               => hiera('wiki_wg_secretkey'),
-    wg_upgradekey              => hiera('wiki_wg_upgradekey'),
-    wg_recaptchasitekey        => hiera('wiki_wg_recaptchasitekey'),
-    wg_recaptchasecretkey      => hiera('wiki_wg_recaptchasecretkey'),
-    wg_googleanalyticsaccount  => hiera('wiki_wg_googleanalyticsaccount'),
+    sysadmins                 => hiera('sysadmins', []),
+    ssl_cert_file_contents    => hiera('ssl_cert_file_contents'),
+    ssl_key_file_contents     => hiera('ssl_key_file_contents'),
+    ssl_chain_file_contents   => hiera('ssl_chain_file_contents'),
+    wg_dbserver               => hiera('wg_dbserver'),
+    wg_dbname                 => 'openstack_wiki',
+    wg_dbuser                 => 'wikiuser',
+    wg_dbpassword             => hiera('wg_dbpassword'),
+    wg_secretkey              => hiera('wg_secretkey'),
+    wg_upgradekey             => hiera('wg_upgradekey'),
+    wg_recaptchasitekey       => hiera('wg_recaptchasitekey'),
+    wg_recaptchasecretkey     => hiera('wg_recaptchasecretkey'),
+    wg_googleanalyticsaccount => hiera('wg_googleanalyticsaccount'),
   }
 }
 
