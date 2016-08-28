@@ -244,6 +244,7 @@ cacti_hosts:
 - compute013.vanilla.ic.openstack.org
 - compute014.vanilla.ic.openstack.org
 - compute015.vanilla.ic.openstack.org
+- compute016.vanilla.ic.openstack.org
 - compute017.vanilla.ic.openstack.org
 - compute018.vanilla.ic.openstack.org
 - compute019.vanilla.ic.openstack.org
