@@ -21,27 +21,6 @@ ironic_inventory_vanilla:
       ilo_mac: 78:e7:d1:23:95:6a
     uuid: 0090edd1-d3b6-4b6b-b3e4-b2bb09665d7b
     disabled: true # currently deployed
-  baremetal01.vanilla.ic.openstack.org:
-    driver: agent_ipmitool
-    driver_info:
-      power:
-        ipmi_address: 10.12.83.38
-        ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.3
-    ipv4_address: 10.10.16.145
-    name: baremetal01.vanilla.ic.openstack.org
-    nics:
-    - mac: 78:e7:d1:23:99:bd
-    properties:
-      cpu_arch: x86_64
-      cpus: '24'
-      disk_size: '1800'
-      ram: 96676
-      serial_number: use129cnkk
-      rack: b04
-      ilo_mac: 78:e7:d1:23:99:ba
-    uuid: 476b4113-6378-470f-834d-181017b8f1a8
-    disabled: true # only need one deployed baremetal server
   compute000.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
@@ -957,6 +936,26 @@ ironic_inventory_vanilla:
       rack: 'b04'
       ilo_mac: '78:e7:D1:23:99:32'
     uuid: 1d937491-56b6-4eb9-bc73-720a8af1c788
+  compute045.vanilla.ic.openstack.org:
+    driver: agent_ipmitool
+    driver_info:
+      power:
+        ipmi_address: 10.12.83.38
+        ipmi_username: HELIONADMIN
+    ipv4_address: 15.184.64.51
+    provisinionig_ipv4_address: 10.10.16.51
+    name: compute045.vanilla.ic.openstack.org
+    nics:
+    - mac: 78:e7:d1:23:99:bd
+    properties:
+      cpu_arch: x86_64
+      cpus: '24'
+      disk_size: '1800'
+      ram: 96676
+      serial_number: use129cnkk
+      rack: b04
+      ilo_mac: 78:e7:d1:23:99:ba
+    uuid: 476b4113-6378-470f-834d-181017b8f1a8
 ironic_inventory_chocolate:
   controller00.chocolate.ic.openstack.org:
     ansible_ssh_host: 15.126.48.3
