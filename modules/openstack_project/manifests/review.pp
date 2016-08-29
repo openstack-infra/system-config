@@ -18,8 +18,7 @@
 # http://groups.google.com/group/repo-discuss/msg/269024c966e05d6a
 
 # sshd.threads:
-# http:
-#  //groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
+# http://groups.google.com/group/repo-discuss/browse_thread/thread/b91491c185295a71
 
 # httpd.maxQueued:
 # Default value is too low, should increase to new default.
