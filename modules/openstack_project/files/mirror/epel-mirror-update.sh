@@ -38,7 +38,7 @@ $K5START rsync -rlptDvz \
 
 # TODO(pabelanger): Validate rsync process
 
-date --iso-8601=ns
+date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
 
