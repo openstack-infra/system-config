@@ -1,6 +1,7 @@
 # == Class: openstack_project::wiki
 #
 class openstack_project::wiki (
+  $site_hostname,
   $sysadmins = [],
   $serveradmin = undef,
   $ssl_cert_file_contents = '',
@@ -37,10 +38,7 @@ class openstack_project::wiki (
     mediawiki_location         => '/srv/mediawiki/w',
     mediawiki_images_location  => '/srv/mediawiki/images',
     serveradmin                => $serveradmin,
-    site_hostname              => $::fqdn,
-    ssl_cert_file              => "/etc/ssl/certs/${::fqdn}.pem",
-    ssl_key_file               => "/etc/ssl/private/${::fqdn}.key",
-    ssl_chain_file             => '/etc/ssl/certs/intermediate.pem',
+    site_hostname              => $site_hostname,
     ssl_cert_file_contents     => $ssl_cert_file_contents,
     ssl_key_file_contents      => $ssl_key_file_contents,
     ssl_chain_file_contents    => $ssl_chain_file_contents,
@@ -54,7 +52,7 @@ class openstack_project::wiki (
     wg_recaptchasecretkey      => $wg_recaptchasecretkey,
     wg_googleanalyticsaccount  => $wg_googleanalyticsaccount,
     wg_sitename                => 'OpenStack',
-    wg_logo                    => "https://${::fqdn}/w/images/thumb/c/c4/OpenStack_Logo_-_notext.png/30px-OpenStack_Logo_-_notext.png",
+    wg_logo                    => "https://${site_hostname}/w/images/thumb/c/c4/OpenStack_Logo_-_notext.png/30px-OpenStack_Logo_-_notext.png",
   }
   class { 'memcached':
     max_memory => 2048,
