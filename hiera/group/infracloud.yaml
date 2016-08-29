@@ -185,20 +185,22 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.10.16.27
+        ipmi_address: 10.12.83.22
         ipmi_username: HELIONADMIN
-    ipv4_public_address: 15.184.52.108
-    ipv4_address: 10.10.16.158
+    ipv4_address: 15.184.64.14
+    provisioning_ipv4_address: 10.10.16.14
     name: compute008.vanilla.ic.openstack.org
     nics:
-    - mac: 78:e7:d1:21:66:75
+    - mac: 78:E7:D1:23:44:15
     properties:
       cpu_arch: x86_64
       cpus: '24'
       disk_size: '1800'
       ram: 96676
-    uuid: 88df2eb2-8ec5-4601-8ea6-04288193b966
-    disabled: true # needs iLO firmware upgrade
+      serial_number: 2UX14201HJ
+      rack: b04
+      ilo_mac: 78:E7:D1:23:44:12
+    uuid: 39375951-4138-5532-5831-34323031484A
   compute009.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
