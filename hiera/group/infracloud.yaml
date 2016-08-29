@@ -765,7 +765,7 @@ ironic_inventory_vanilla:
     driver: agent_ipmitool
     driver_info:
       power:
-        ipmi_address: 10.12.83.38
+        ipmi_address: 10.12.83.37
         ipmi_username: HELIONADMIN
     ipv4_address: 15.184.64.43
     provisioning_ipv4_address: 10.10.16.43
