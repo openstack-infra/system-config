@@ -62,6 +62,8 @@ class openstack_project::template (
     public_udp_ports => $all_udp,
     rules4           => $iptables_rules4,
     rules6           => $iptables_rules6,
+    snmp_v4hosts     => ['104.239.135.208'],
+    snmp_v6hosts     => ['2001:4800:7819:104:be76:4eff:fe05:1d6a'],
   }
 
   class { 'timezone':
