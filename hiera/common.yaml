@@ -274,6 +274,7 @@ cacti_hosts:
 - compute040.vanilla.ic.openstack.org
 - compute041.vanilla.ic.openstack.org
 - compute042.vanilla.ic.openstack.org
+- compute043.vanilla.ic.openstack.org
 - eavesdrop.openstack.org
 - elasticsearch01.openstack.org
 - elasticsearch02.openstack.org
