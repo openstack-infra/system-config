@@ -5,6 +5,10 @@ ansible:
 cache:
   expiration_time: 86400
   path: /var/cache/ansible-inventory
+  expiration:
+    server: 5
+    port: 5
+    floating-ip: 5
 clouds:
   openstackci-internap:
     region_name: nyj01
