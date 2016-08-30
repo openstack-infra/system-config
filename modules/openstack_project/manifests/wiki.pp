@@ -3,10 +3,11 @@
 class openstack_project::wiki (
   $site_hostname,
   $sysadmins = [],
+  $bup_user = undef,
   $serveradmin = undef,
-  $ssl_cert_file_contents = '',
-  $ssl_key_file_contents = '',
-  $ssl_chain_file_contents = '',
+  $ssl_cert_file_contents = undef,
+  $ssl_key_file_contents = undef,
+  $ssl_chain_file_contents = undef,
   $wg_dbserver = undef,
   $wg_dbname = undef,
   $wg_dbuser = undef,
@@ -67,11 +68,12 @@ class openstack_project::wiki (
     database_password => $wg_dbpassword,
   }
 
-
-  include bup
-  bup::site { 'rs-ord':
-    backup_user   => 'bup-wiki',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+  if $bup_user != undef {
+    include bup
+    bup::site { 'rs-ord':
+      backup_user   => $bup_user,
+      backup_server => 'ci-backup-rs-ord.openstack.org',
+    }
   }
 
   class { '::elasticsearch':
