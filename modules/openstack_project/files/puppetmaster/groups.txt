@@ -10,6 +10,6 @@ afs afs*.*.openstack.org
 wheel-mirror *wheel-mirror-*.openstack.org
 afsadmin mirror-update.openstack.org:release.slave.openstack.org
 signing signing*.ci.openstack.org
-wiki wiki*.openstack.org
-wiki-dev wiki-dev*.openstack.org
+wiki ~wiki\d+\.openstack\.org
+wiki-dev ~wiki-dev\d+\.openstack\.org
 disabled ci-backup-rs-ord.openstack.org:ask-staging.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
