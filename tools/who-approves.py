@@ -57,7 +57,7 @@
 #     ...                 approvers.add(approver)
 #     ...     return(approvers)
 #     ...
-#     >>> p = yaml.load(open('approvers.yaml'))
+#     >>> p = yaml.safe_load(open('approvers.yaml'))
 #     >>> print('Total repos: %s' % len(p))
 #     Total repos: 751
 #     >>> print('Total approvers: %s' % len(get_approvers(p)))
@@ -96,8 +96,9 @@ projects_file = ('gitweb?p=openstack/governance.git;a=blob_plain;'
                  'f=reference/projects.yaml;hb=%s')
 ref_name = 'refs/heads/master'
 aprv_pattern = 'label-Workflow = .*\.\.\+1 group (.*)'
-projects = yaml.safe_load(
-    requests.get(gerrit_url + projects_file % ref_name).text)
+projects = requests.get(gerrit_url + projects_file % ref_name)
+projects.encoding = 'utf-8'  # Workaround for Gitweb encoding
+projects = yaml.safe_load(projects.text)
 repos_dump = json.loads(requests.get(
     gerrit_url + 'projects/?pp=0').text[4:])
 all_groups = json.loads(requests.get(gerrit_url + 'a/groups/',
