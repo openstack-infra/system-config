@@ -19,6 +19,9 @@ class openstack_project::firehose (
   $gerrit_public_key,
   $gerrit_private_key,
   $gerrit_ssh_host_key,
+  $imap_username,
+  $imap_hostname,
+  $imap_password,
   $mqtt_hostname = 'firehose01.openstack.org',
   $mqtt_password,
   $mqtt_username = 'infra',
@@ -70,5 +73,15 @@ class openstack_project::firehose (
       }}
     ],
     require  => Package['cyrus-imapd'],
+  }
+
+  include lpmqtt
+  class {'lpmqtt::server':
+    mqtt_username => $mqtt_username,
+    mqtt_password => $mqtt_password,
+    imap_hostname => $imap_hostname,
+    imap_username => $imap_username,
+    imap_password => $imap_password,
+    imap_use_ssl  => true,
   }
 }
