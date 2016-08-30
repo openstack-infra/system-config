@@ -25,6 +25,12 @@ profiles:
         ram: 8192
         vcpus: 8
         disk: 80
+  - name: openstackci-mirror-flavor
+    flavors:
+      - name: mirror
+        ram: 8192
+        vcpus: 4
+        disk: 100
 
 clouds:
   # bluebox-sjc1
@@ -82,6 +88,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
+      - openstackci-mirror-flavor
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
