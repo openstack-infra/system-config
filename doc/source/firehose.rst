@@ -15,10 +15,12 @@ At a Glance
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-mosquitto
   * https://git.openstack.org/cgit/openstack-infra/puppet-germqtt
-  * :file:`modules/openstack_project/manifests/firehose.pp`
+  * https://git.openstack.org/cgit/openstack-infra/puppet-lpmqtt
+    * :file:`modules/openstack_project/manifests/firehose.pp`
 :Projects:
   * https://mosquitto.org/
   * http://git.openstack.org/cgit/openstack-infra/germqtt/
+  * http://git.openstack.org/cgit/openstack-infra/lpmqtt/
 
 Overview
 ========
@@ -30,7 +32,7 @@ to go for consuming them.
 
 firehose.openstack.org hosts an instance of Mosquitto to be the MQTT broker
 and also locally runs an instance of germqtt to publish the gerrit event
-stream over MQTT.
+stream over MQTT and lpmqtt to publish a launchpad event stream over MQTT.
 
 Connection Info
 ---------------
@@ -56,6 +58,23 @@ MQTT topics are hierarchical and you can filter your subscription on part of the
 hierarchy. `[1]`_
 
 .. _[1]: https://mosquitto.org/man/mqtt-7.html
+
+Services Publishing to firehose
+-------------------------------
+
+As of right now the following services publish messages to the firehose:
+
++-----------+------------+--------------------+
+| Service   | Base Topic | Source of Messages |
++===========+============+====================+
+| gerrit    | gerrit     | `germqtt`_         |
++-----------+------------+--------------------+
+| launchpad | launchpad  | `lpmqtt`_          |
++-----------+------------+--------------------+
+
+.. _germqtt: http://git.openstack.org/cgit/openstack-infra/germqtt/
+.. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
+
 
 Client Usage
 ============
