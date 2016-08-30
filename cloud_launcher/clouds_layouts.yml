@@ -89,6 +89,10 @@ clouds:
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
+    servers:
+      - name: mirror.regionone.infracloud-vanilla.openstack.org
+        image: ubuntu-trusty
+        flavor: mirror
   - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security
