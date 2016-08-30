@@ -25,6 +25,10 @@ profiles:
         ram: 8192
         vcpus: 8
         disk: 80
+      - name: mirror
+        ram: 8192
+        vcpus: 4
+        disk: 100
 
 clouds:
   # bluebox-sjc1
