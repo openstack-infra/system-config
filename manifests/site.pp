@@ -370,10 +370,12 @@ node 'etherpad-dev.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'wiki.openstack.org' {
+node /^wiki\d+\.openstack\.org$/ {
+  $group = "wiki"
   class { 'openstack_project::wiki':
     sysadmins                 => hiera('sysadmins', []),
     serveradmin               => hiera('infra_apache_serveradmin'),
+    site_hostname             => 'wiki.openstack.org',
     ssl_cert_file_contents    => hiera('ssl_cert_file_contents'),
     ssl_key_file_contents     => hiera('ssl_key_file_contents'),
     ssl_chain_file_contents   => hiera('ssl_chain_file_contents'),
