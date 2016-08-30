@@ -505,6 +505,9 @@ node /^firehose\d+\.openstack\.org$/ {
     ca_file             => hiera('mosquitto_tls_ca_file'),
     cert_file           => hiera('mosquitto_tls_server_cert_file'),
     key_file            => hiera('mosquitto_tls_server_key_file'),
+    imap_hostname       => hiera('lpmqtt_imap_server'),
+    imap_username       => hiera('lpmqtt_imap_username'),
+    imap_password       => hiera('lpmqtt_imap_password'),
   }
 }
 
