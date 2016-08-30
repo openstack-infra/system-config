@@ -78,6 +78,13 @@ clouds:
       project_name: <%= @osic_project %>
       project_domain_name: default
       user_domain_name: default
+    networks:
+      - name: GATEWAY_NET
+        routes_externally: true
+      - name: GATEWAY_NET_V6
+        routes_externally: true
+        routes_ipv6_externally: true
+        routes_ipv4_externally: false
     identity_api_version: '3'
     floating_ip_source: None
   vexxhost:
