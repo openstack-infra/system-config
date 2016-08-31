@@ -188,9 +188,9 @@ clouds:
     region_name: RegionOne
     auth:
       auth_url: https://cloud1.osic.org:5000
-      username: <%= @puppetmaster_clouds['openstackjenkins_osic_username'] %>
-      password: <%= @puppetmaster_clouds['openstackjenkins_osic_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackjenkins_osic_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackjenkins_osic_cloud1_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_osic_cloud1_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_osic_cloud1_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     networks:
@@ -206,9 +206,9 @@ clouds:
     region_name: RegionOne
     auth:
       auth_url: https://cloud1.osic.org:5000
-      username: <%= @puppetmaster_clouds['openstackci_osic_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_osic_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_osic_project_name'] %>
+      username: <%= @puppetmaster_clouds['openstackci_osic_cloud1_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_osic_cloud1_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_osic_cloud1_project_name'] %>
       project_domain_name: default
       user_domain_name: default
     networks:
