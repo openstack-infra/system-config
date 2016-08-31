@@ -1,0 +1,9 @@
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 31 Aug 2016 16:11:24 +0000
+Reviewed-on: https://review.openstack.org/356702
+Project: openstack-infra/system-config
+Branch: refs/heads/master
