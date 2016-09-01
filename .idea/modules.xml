@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../project-config/.idea/project-config.iml" filepath="$PROJECT_DIR$/../project-config/.idea/project-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-cgit/.idea/puppet-cgit.iml" filepath="$PROJECT_DIR$/../puppet-cgit/.idea/puppet-cgit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-gerrit/.idea/puppet-gerrit.iml" filepath="$PROJECT_DIR$/../puppet-gerrit/.idea/puppet-gerrit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-httpd/.idea/puppet-httpd.iml" filepath="$PROJECT_DIR$/../puppet-httpd/.idea/puppet-httpd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-jenkins/.idea/puppet-jenkins.iml" filepath="$PROJECT_DIR$/../puppet-jenkins/.idea/puppet-jenkins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-nodepool/.idea/puppet-nodepool.iml" filepath="$PROJECT_DIR$/../puppet-nodepool/.idea/puppet-nodepool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-openstackci/.idea/puppet-openstackci.iml" filepath="$PROJECT_DIR$/../puppet-openstackci/.idea/puppet-openstackci.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-pip/.idea/puppet-pip.iml" filepath="$PROJECT_DIR$/../puppet-pip/.idea/puppet-pip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-project_config/.idea/puppet-project_config.iml" filepath="$PROJECT_DIR$/../puppet-project_config/.idea/puppet-project_config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-zanata/.idea/puppet-zanata.iml" filepath="$PROJECT_DIR$/../puppet-zanata/.idea/puppet-zanata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../puppet-zuul/.idea/puppet-zuul.iml" filepath="$PROJECT_DIR$/../puppet-zuul/.idea/puppet-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/system-config.iml" filepath="$PROJECT_DIR$/.idea/system-config.iml" />
+    </modules>
+  </component>
+</project>

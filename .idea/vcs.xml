@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../jeepyb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../project-config" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-cgit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-gerrit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-httpd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-jenkins" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-nodepool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-openstackci" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-pip" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-project_config" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../puppet-zanata" vcs="Git" />
+  </component>
+</project>

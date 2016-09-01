@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="puppet-zuul" />
+    <orderEntry type="module" module-name="puppet-project_config" />
+    <orderEntry type="module" module-name="puppet-gerrit" />
+    <orderEntry type="module" module-name="project-config" />
+    <orderEntry type="module" module-name="puppet-jenkins" />
+    <orderEntry type="module" module-name="puppet-zanata" />
+    <orderEntry type="module" module-name="puppet-openstackci" />
+    <orderEntry type="module" module-name="puppet-pip" />
+    <orderEntry type="module" module-name="puppet-nodepool" />
+    <orderEntry type="module" module-name="puppet-cgit" />
+    <orderEntry type="module" module-name="puppet-httpd" />
+  </component>
+  <component name="PuppetModuleSettings">
+    <option name="librariesDisabled" value="true" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/doc/source/_templates" />
+      </list>
+    </option>
+  </component>
+</module>

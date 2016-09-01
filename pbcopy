@@ -1,0 +1,4 @@
+  cron { 'mirror_repack':
+    ensure      => absent,
+  }
+
