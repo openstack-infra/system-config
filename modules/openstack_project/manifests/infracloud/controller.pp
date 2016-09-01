@@ -24,6 +24,8 @@ class openstack_project::infracloud::controller (
   $neutron_subnet_gateway,
   $neutron_subnet_allocation_pools,
 ) {
+  include ::openstack_project::infracloud::base
+
   class { '::infracloud::controller':
     keystone_rabbit_password         => $keystone_rabbit_password,
     neutron_rabbit_password          => $neutron_rabbit_password,

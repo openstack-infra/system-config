@@ -7,6 +7,8 @@ class openstack_project::infracloud::compute (
   $br_name,
   $controller_public_address,
 ) {
+  include ::openstack_project::infracloud::base
+
   class { '::infracloud::compute':
     nova_rabbit_password          => $nova_rabbit_password,
     neutron_rabbit_password       => $neutron_rabbit_password,
