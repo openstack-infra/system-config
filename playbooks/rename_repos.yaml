@@ -1,11 +1,4 @@
 ---
-- hosts: zuul.openstack.org
-  gather_facts: False
-  remote_user: root
-  sudo: yes
-  tasks:
-  - shell: kill -USR1 $(cat /var/run/zuul/zuul.pid)
-  - shell: rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: root
@@ -43,19 +36,12 @@
   sudo: yes
   tasks:
   - shell: cp -ax /home/gerrit2/review_site/index /home/gerrit2/index.backup.$(date +%s)
-  - shell: java -jar /home/gerrit2/review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: root
   sudo: yes
   tasks:
   - shell: invoke-rc.d gerrit start
-- hosts: zuul.openstack.org
-  gather_facts: False
-  remote_user: root
-  sudo: yes
-  tasks:
-  - shell: invoke-rc.d zuul start
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: gerrit2
@@ -64,7 +50,7 @@
   - include_vars: "{{ repolist }}"
   - shell: ssh -p 29418 review.openstack.org gerrit rename-group {{ item.old }} {{ item.new }}
     with_items: "{{ gerrit_groups|default([]) }}"
-- hosts: '*.slave.openstack.org'
+- hosts: '*.ci.openstack.org:*.slave.openstack.org'
   remote_user: root
   sudo: yes
   gather_facts: False
