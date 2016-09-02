@@ -62,21 +62,20 @@ Implementation
 Multi-Site
 ----------
 
-There are at least two "sites" with a collection of servers in each
-site. Each site will have its own cloud, and these clouds will share no
-infrastructure or data. The racks may be in the same physical location,
-but they will be managed as if they are not.
+Despite the servers being in the same physical location and network,
+they are divided in at least two logical "sites", vanilla and chocolate,
+Each site will have its own cloud, and these clouds will share no data.
 
-HP1
-~~~
+Vanilla
+~~~~~~~
 
-The HP1 site has 48 machines. Each machine has 96G of RAM, 1.8TiB of disk and
+The vanilla cloud has 48 machines. Each machine has 96G of RAM, 1.8TiB of disk and
 24 Cores of Intel Xeon X5650 @ 2.67GHz processors.
 
-HP2
-~~~
+Chocolate
+~~~~~~~~~
 
-The HP2 site has 100 machines. Each machine has 96G of RAM, 1.8TiB of disk and
+The chocolate cloud has 100 machines. Each machine has 96G of RAM, 1.8TiB of disk and
 32 Cores of Intel Xeon E5-2670 0 @ 2.60GHz processors.
 
 Software
