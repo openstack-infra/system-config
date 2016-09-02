@@ -29,6 +29,12 @@ profiles:
         ram: 8192
         vcpus: 4
         disk: 100
+  - name: openstackci-images
+    images:
+      - name: ubuntu-trusty
+        download_image_url: https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+        download_image_dest: /tmp/ubuntu-trusty.img
+        filename: /tmp/ubuntu-trusty.img
 
 clouds:
   # bluebox-sjc1
@@ -89,6 +95,7 @@ clouds:
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
+      - openstackci-images
     servers:
       - name: mirror.regionone.infracloud-vanilla.openstack.org
         image: ubuntu-trusty
