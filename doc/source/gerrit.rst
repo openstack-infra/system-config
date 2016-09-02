@@ -408,49 +408,6 @@ project in question, and about 10 minutes of downtime for all of
 Gerrit. All Gerrit changes, merged and open, will carry over, so
 in-progress changes do not need to be merged before the move.
 
-Note that some of the steps in the process below are repetitive and
-so for larger batches a script can be used to generate the command
-lists for upload to and execution on their respective servers::
-
-  #!/bin/sh
-  #
-  # Expects a renames.list file in the current directory with:
-  #
-  #     stackforge/foo -> openstack/foo
-  #     openstack/oldbar -> openstack/newbar
-
-  echo "\nGerrit database updates\n-----------------------"
-  for r in `sed 's/ -> /@/' renames.list` ; do
-      OLD=`echo $r | cut -d@ -f1`
-      NEW=`echo $r | cut -d@ -f2`
-      echo "update account_project_watches set project_name = \"$NEW\" where
-          project_name = \"$OLD\";"
-      echo "update changes set dest_project_name = \"$NEW\",
-          created_on = created_on where dest_project_name = \"$OLD\";"
-  done
-
-  echo "\nGerrit filesystem updates\n-------------------------"
-  for r in `sed 's/ -> /@/' renames.list` ; do
-      OLD=`echo $r | cut -d@ -f1` ; NEW=`echo $r | cut -d@ -f2`
-      echo "sudo mv ~gerrit2/review_site/git/{$OLD,$NEW}.git"
-      echo "sudo mv /opt/lib/git/{$OLD,$NEW}.git"
-  done
-
-  echo "\nGit farm filesystem updates\n---------------------------"
-  for r in `sed 's/ -> /@/' renames.list` ; do
-      OLD=`echo $r | cut -d@ -f1`
-      NEW=`echo $r | cut -d@ -f2`
-      echo "sudo mv /var/lib/git/{$OLD,$NEW}.git"
-  done
-
-  echo "\nJenkins workspace cleanup\n-------------------------"
-  for r in `sed 's/ -> /@/' renames.list` ; do
-  NAME=`echo $r | cut -d@ -f1 | cut -d/ -f2`
-  echo "sudo ansible-playbook -f 10 \\
-      /etc/ansible/playbooks/clean_workspaces.yaml \\
-      --extra-vars \"project=$NAME\""
-  done
-
 To rename a project:
 
 #. Prepare a change to the project-config repo to update things like
@@ -460,15 +417,6 @@ To rename a project:
    devstack-gate repo, reference/projects.yaml in the
    openstack/governance repo, and .gitmodules in the
    openstack/openstack repo if necessary.
-
-#. Stop puppet runs on the puppetmaster to prevent early application
-   of configuration changes::
-
-     sudo crontab -u root -e
-
-   Comment out the crontab entries.  Use ps to make sure that a run is
-   not currently in progress.  When it finishes, make sure the entry
-   has not been added back to the crontab.
 
 #. Prepare a yaml file called repos.yaml that has a single dictionary called
    `repos` with a list of dictionaries each having an old and new entry.
@@ -481,13 +429,37 @@ To rename a project:
      - old: old-core-group
        new: new-core-group
 
+#. An hour in advance of the maintenance (if possible), stop puppet
+   runs on the puppetmaster to prevent early application of
+   configuration changes::
+
+     sudo crontab -u root -e
+
+   Comment out the crontab entries.  Use ps to make sure that a run is
+   not currently in progress.  When it finishes, make sure the entry
+   has not been added back to the crontab.
+
+#. Export and stop Zuul on zuul.openstack.org::
+
+     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org gate >gate.sh
+     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org check >check.sh
+     sudo invoke-rc.d zuul stop
+     sudo rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.listedock
+
 #. Run the ansible rename repos playbook, passing in the path to your yaml
    file::
 
      sudo ansible-playbook -f 10 /opt/system-config/production/playbooks/rename_repos.yaml -e repolist=ABSOLUTE_PATH_TO_VARS_FILE
 
-#. Merge the prepared Puppet configuration change, removing the
-   original Jenkins jobs via the Jenkins WebUI later if needed.
+#. Start Zuul on zuul.openstack.org::
+
+     sudo invoke-rc.d zuul start
+     sudo bash gate.sh
+     sudo bash check.sh
+
+#. Merge the prepared Puppet configuration changes.
+
+#. Rename the project or transfer ownership in GitHub
 
 #. Re-enable puppet runs on the puppetmaster::
 
