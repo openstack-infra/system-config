@@ -1,3 +1,6 @@
+# This file is not a playbook, is a YAML file containing the resources layouts
+# for all the OpenStack Infra clouds.
+# It is meant to be passed as an argument to the the Ansible cloud launcher.
 profiles:
   # Profile to launch AFS server for nodepool.
   - name: openstackci-projects
