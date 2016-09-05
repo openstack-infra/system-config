@@ -259,16 +259,18 @@ class openstack_project::static (
   }
 
   ###########################################################
-  # Governance & Election
+  # Governance (TC and UC) & Election
 
   # Extra aliases and directories needed for vhost template:
   $governance_aliases = {
-    '/election/' => '/srv/static/election/'
+    '/election/' => '/srv/static/election/',
+    '/uc/'       => '/srv/static/uc/',
   }
   # One of these must also be the docroot
   $governance_directories = [
     '/srv/static/election',
     '/srv/static/governance',
+    '/srv/static/uc',
   ]
 
   ::httpd::vhost { 'governance.openstack.org':
