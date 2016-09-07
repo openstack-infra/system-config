@@ -407,6 +407,7 @@ node /^wiki-dev\d+\.openstack\.org$/ {
     wg_upgradekey         => hiera('wg_upgradekey'),
     wg_recaptchasitekey   => hiera('wg_recaptchasitekey'),
     wg_recaptchasecretkey => hiera('wg_recaptchasecretkey'),
+    disallow_robots       => true,
   }
 }
 
