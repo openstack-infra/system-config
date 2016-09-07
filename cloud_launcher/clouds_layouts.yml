@@ -15,6 +15,14 @@ profiles:
     security_groups_rules:
       - security_group: default
         ethertype: IPv4
+        remote_group: default
+        state: absent
+      - security_group: default
+        ethertype: IPv6
+        remote_group: default
+        state: absent
+      - security_group: default
+        ethertype: IPv4
         remote_ip_prefix: 0.0.0.0/0
       - security_group: default
         ethertype: IPv6
