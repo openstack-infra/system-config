@@ -17,6 +17,7 @@ class openstack_project::wiki (
   $wg_recaptchasitekey = undef,
   $wg_recaptchasecretkey = undef,
   $wg_googleanalyticsaccount = undef,
+  $disallow_robots = undef,
 ) {
 
   package { ['openssl', 'ssl-cert', 'subversion']:
@@ -54,6 +55,7 @@ class openstack_project::wiki (
     wg_googleanalyticsaccount  => $wg_googleanalyticsaccount,
     wg_sitename                => 'OpenStack',
     wg_logo                    => "https://${site_hostname}/w/images/thumb/c/c4/OpenStack_Logo_-_notext.png/30px-OpenStack_Logo_-_notext.png",
+    disallow_robots            => $disallow_robots,
   }
   class { 'memcached':
     max_memory => 2048,
