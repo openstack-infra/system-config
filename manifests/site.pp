@@ -332,7 +332,12 @@ node 'eavesdrop.openstack.org' {
     # https://wiki.openstack.org/wiki/Successes
     statusbot_wiki_successpageid => '7717',
     statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
-    accessbot_nick          => hiera('accessbot_nick', 'username'),
+    statusbot_twitter                 => true,
+    statusbot_twitter_key             => hiera('statusbot_twitter_key'),
+    statusbot_twitter_secret          => hiera('statusbot_twitter_secret'),
+    statusbot_twitter_token_key       => hiera('statusbot_twitter_token_key'),
+    statusbot_twitter_token_secret    => hiera('statusbot_twitter_token_secret'),
+    statusbot_accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password'),
     meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
   }
