@@ -1071,6 +1071,7 @@ node 'single-use-slave-bare' {
 
 # Node-OS: centos7
 # Node-OS: fedora23
+# Node-OS: fedora24
 # Node-OS: jessie
 # Node-OS: precise
 # Node-OS: trusty
