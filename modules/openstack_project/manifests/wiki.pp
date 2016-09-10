@@ -69,6 +69,11 @@ class openstack_project::wiki (
     database_user     => $wg_dbuser,
     database_password => $wg_dbpassword,
   }
+  file { '/root/.my.cnf':
+    ensure  => link,
+    target  => '/root/.wiki_db.cnf',
+    require => Mysql_backup::Backup_remote['wiki'],
+  }
 
   if $bup_user != undef {
     include bup
