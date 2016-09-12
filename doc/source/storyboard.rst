@@ -5,8 +5,7 @@ StoryBoard
 
 StoryBoard is the task and project tracking system both developed and used by
 the OpenStack project. Some projects have already elected to move to
-StoryBoard, however it is still considered in limited alpha and is not ready
-for production use.
+StoryBoard.
 
 This section describes how StoryBoard is configured for use in the
 OpenStack project and the tools used to manage that configuration.
@@ -52,9 +51,9 @@ Adding a Project to StoryBoard
 ------------------------------
 
 .. note::
-   At this point, only OpenStack Infrastructure projects should be added to
-   StoryBoard, as key features such as release versioning are not yet
-   implemented.
+   As cross-project work should be tracked in the same task-tracker,
+   those wishing to set up new projects in StoryBoard should check about
+   their specific circumstances in #openstack-infra.
 
 Projects loaded into StoryBoard are handled from the same file that drives our
 gerrit projects. Adding a new project is as simple as modifying a single
@@ -83,4 +82,6 @@ Launchpad OpenID string and email as follows:
 Modifying a Team on StoryBoard
 ------------------------------
 
-Teams are not yet supported. Stay tuned!
+Currently, only admin users can add users to a team; this is accessible
+from the admin submenu menu. Teams have no special permissions yet;
+stay tuned!
