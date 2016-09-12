@@ -963,9 +963,8 @@ ironic_inventory_vanilla:
     uuid: 476b4113-6378-470f-834d-181017b8f1a8
 ironic_inventory_chocolate:
   controller00.chocolate.ic.openstack.org:
-    ansible_ssh_host: 15.126.48.3
-    ipv4_address: 15.126.48.3
-    provisioning_ipv4_address: 10.23.212.4
+    ipv4_address: 15.184.64.100
+    provisioning_ipv4_address: 10.10.16.100
     uuid: 30303536-3734-5355-4532-333745314C43
     driver_info:
       power:
