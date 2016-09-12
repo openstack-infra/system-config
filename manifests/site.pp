@@ -1281,7 +1281,7 @@ node 'controller00.vanilla.ic.openstack.org' {
     keystone_admin_token             => hiera('keystone_admin_token'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
+    br_name                          => 'br_infracloud',
     controller_public_address        => $::fqdn,
     openstackci_password             => hiera('openstackci_infracloud_password'),
     openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
@@ -1319,7 +1319,7 @@ node 'controller00.hpuseast.ic.openstack.org' {
     keystone_admin_token             => hiera('keystone_admin_token'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan1598',
+    br_name                          => 'br_infracloud',
     controller_public_address        => $::fqdn,
     neutron_subnet_cidr              => '15.126.48.0/24',
     neutron_subnet_gateway           => '15.126.48.1',
@@ -1342,7 +1342,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
     neutron_admin_password           => hiera('neutron_admin_password'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
+    br_name                          => 'br_infracloud',
     controller_public_address        => 'controller00.vanilla.ic.openstack.org',
   }
 }
@@ -1358,7 +1358,7 @@ node /^compute\d{3}\.hpuseast\.ic\.openstack\.org$/ {
     neutron_rabbit_password          => hiera('neutron_rabbit_password'),
     neutron_admin_password           => hiera('neutron_admin_password'),
     ssl_cert_file_contents           => hiera('infracloud_hpuseast_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan1598',
+    br_name                          => 'br_infracloud',
     controller_public_address        => 'controller00.hpuseast.ic.openstack.org',
   }
 }
