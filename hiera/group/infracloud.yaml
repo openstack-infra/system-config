@@ -1,5 +1,5 @@
 ---
-ironic_inventory_vanilla:
+ironic_inventory:
   baremetal00.vanilla.ic.openstack.org:
     driver: agent_ipmitool
     driver_info:
@@ -961,7 +961,6 @@ ironic_inventory_vanilla:
       rack: b04
       ilo_mac: 78:e7:d1:23:99:ba
     uuid: 476b4113-6378-470f-834d-181017b8f1a8
-ironic_inventory_chocolate:
   controller00.chocolate.ic.openstack.org:
     ipv4_address: 15.184.64.100
     provisioning_ipv4_address: 10.10.16.100
