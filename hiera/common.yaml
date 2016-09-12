@@ -58,6 +58,7 @@ statusbot_channels:
 - openstack-dev
 - openstack-dns
 - openstack-doc
+- openstack-election
 - openstack-entropy
 - openstack-foundation
 - openstack-fwaas
@@ -147,6 +148,7 @@ meetbot_channels:
 - '#openstack-doc'
 - '#openstack-dragonflow'
 - '#openstack-ec2api'
+- '#openstack-election'
 - '#openstack-fr'
 - '#openstack-freezer'
 - '#openstack-fwaas'
