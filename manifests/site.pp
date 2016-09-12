@@ -1307,7 +1307,7 @@ node 'controller00.vanilla.ic.openstack.org' {
     keystone_admin_token             => hiera('keystone_admin_token'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
+    br_name                          => 'br_infracloud',
     controller_public_address        => $::fqdn,
     openstackci_password             => hiera('openstackci_infracloud_password'),
     openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
@@ -1334,7 +1334,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
     neutron_admin_password           => hiera('neutron_admin_password'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
+    br_name                          => 'br_infracloud',
     controller_public_address        => 'controller00.vanilla.ic.openstack.org',
   }
 }
