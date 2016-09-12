@@ -1377,10 +1377,9 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
   class { '::openstack_project::infracloud::baremetal':
     # NOTE(pabelanger): hiera should be updated to reflect our new region
     # names.
-    ironic_inventory   => hiera('ironic_inventory_vanilla', {}),
+    ironic_inventory   => hiera('ironic_inventory', {}),
     ironic_db_password => hiera('ironic_db_password'),
     mysql_password     => hiera('bifrost_mysql_password'),
-    region             => 'vanilla',
     ipmi_passwords     => hiera('ipmi_west_passwords'),
     ssh_private_key    => hiera('bifrost_vanilla_ssh_private_key'),
     ssh_public_key     => hiera('bifrost_vanilla_ssh_public_key'),

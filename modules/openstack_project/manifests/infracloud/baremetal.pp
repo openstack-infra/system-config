@@ -5,7 +5,6 @@ class openstack_project::infracloud::baremetal (
   $ironic_db_password,
   $ipmi_passwords,
   $mysql_password,
-  $region,
   $ssh_private_key,
   $ssh_public_key,
   $vlan,
