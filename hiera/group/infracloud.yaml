@@ -1109,9 +1109,8 @@ ironic_inventory_chocolate:
     name: compute005.chocolate.ic.openstack.org
     new_hostname: compute005.chocolate.ic.openstack.org
   compute006.chocolate.ic.openstack.org:
-    ansible_ssh_host: 15.126.48.10
-    ipv4_address: 15.126.48.10
-    provisioning_ipv4_address: 10.23.212.11
+    ipv4_address: 15.184.64.107
+    provisioning_ipv4_address: 10.10.16.107
     uuid: 34313036-3630-5355-4532-333644564c57
     driver_info:
       power:
