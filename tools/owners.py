@@ -125,7 +125,7 @@ def normalize_project(project):
 def date_merged(change, after=None, before=None):
     """Determine the date and time a specific change merged"""
 
-    date = change['submitted']
+    date = change.get('submitted', None)
 
     if not date:
         # Something's terribly wrong with any changes matching this now
