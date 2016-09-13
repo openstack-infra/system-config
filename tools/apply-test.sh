@@ -69,6 +69,7 @@ sudo mkdir -p /var/run/puppet
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test primer to avoid setup races when run in parallel."
 ./tools/test_puppet_apply.sh applytest/primer.pp
+
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
