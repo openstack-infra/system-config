@@ -45,4 +45,30 @@ class openstack_project::firehose (
     mqtt_username       => $mqtt_username,
     mqtt_password       => $mqtt_password,
   }
+
+  package {'cyrus-imapd':
+    ensure => latest,
+  }
+
+  class {'::exim':
+    syasmins => $sysadmins,
+    routers  => [
+      {'cyrus' => {
+        'driver'                     => 'accept',
+        'domains'                    => '+local_domains',
+        'local_part_suffix'          => '+*',
+        'local_part_suffix_optional' => true,
+        'transport'                  => 'cyrus',
+      }}
+    ],
+    transports => [
+      {'cyrus' => {
+        'driver'    => 'lmtp',
+        'socket'    => '/var/run/cyrus/socket/lmtp',
+        'user'      => 'cyrus',
+        'batch_max' => '35',
+      }}
+    ],
+    require  => Package['cyrus-imapd'],
+  }
 }
