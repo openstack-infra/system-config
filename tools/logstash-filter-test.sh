@@ -21,6 +21,7 @@
     openstack-infra/logstash-filters
 
 cat > node.pp <<EOF
+  \$elasticsearch_nodes = [ 'localhost' ]
   class { 'openstack_project::logstash_worker':
     filter_source => 'file:///tmp/openstack-infra/logstash-filters/.git',
     filter_rev    => '${ZUUL_REF:-master}',
