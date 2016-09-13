@@ -455,6 +455,9 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 
   class { 'openstack_project::logstash_worker':
     discover_node         => 'elasticsearch02.openstack.org',
+    enable_mqtt           => true,
+    mqtt_password         => hiera('mqtt_service_user_password'),
+    mqtt_ca_cert_contents => hiera('mosquitto_tls_ca_file'),
   }
 }
 

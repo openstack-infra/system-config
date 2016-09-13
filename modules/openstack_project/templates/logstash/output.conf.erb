@@ -4,4 +4,16 @@ output {
     manage_template => false
     flush_size => 1024
   }
+<% if @enable_mqtt -%>
+  mqtt {
+    host => <%= @mqtt_host %>
+    port => <%= @mqtt_port %>
+    topic => <%= @mqtt_topic %>
+    username => <% @mqtt_username %>
+    password => <% @mqtt_password %>
+    ssl => true
+    ca_file => "/etc/logastash/mqtt-root-CA.crt"
+  }
+<% end -%>
+
 }

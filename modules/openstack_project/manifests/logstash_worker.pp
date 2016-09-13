@@ -18,6 +18,13 @@ class openstack_project::logstash_worker (
   $discover_node = 'elasticsearch01.openstack.org',
   $filter_rev    = 'master',
   $filter_source = 'https://git.openstack.org/openstack-infra/logstash-filters',
+  $enable_mqtt = false,
+  $mqtt_hostname = 'firehose.openstack.org',
+  $mqtt_port = 8883,
+  $mqtt_topic = "logstash/${servername}",
+  $mqtt_username = 'infra',
+  $mqtt_password = undef,
+  $mqtt_ca_cert_contents = undef,
 ) {
   file { '/etc/default/logstash-indexer':
     ensure => present,
@@ -47,9 +54,13 @@ class openstack_project::logstash_worker (
   }
 
   class { '::logstash::indexer':
-    input_template  => 'openstack_project/logstash/input.conf.erb',
-    output_template => 'openstack_project/logstash/output.conf.erb',
-    require         => Logstash::Filter['openstack-logstash-filters'],
+    input_template         => 'openstack_project/logstash/input.conf.erb',
+    output_template        => 'openstack_project/logstash/output.conf.erb',
+    enable_mqtt            => $enable_mqtt,
+    mqtt_certfile_contents => undef,
+    mqtt_key_file_contents => undef,
+    mqtt_ca_cert_contents  => undef,
+    require                => Logstash::Filter['openstack-logstash-filters'],
   }
 
   include ::log_processor
