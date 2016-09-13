@@ -1319,16 +1319,16 @@ ironic_inventory:
         ipmi_address: 10.12.83.95
         ipmi_username: HELIONADMIN
     nics:
-    - mac: 44:1E:A1:72:66:F1
+    - mac: D4:85:64:CC:5A:72
     driver: agent_ipmitool
     properties:
       cpu_arch: x86_64
       ram: 98304
       disk_size:
       cpus:
-      serial_number: use237e1ka
-      rack: '9'
-      ilo_mac: '44:1E:A1:72:66:F2'
+      serial_number: use236dvfb
+      rack: b06
+      ilo_mac: null
     name: compute016.chocolate.ic.openstack.org
   compute017.chocolate.ic.openstack.org:
     ipv4_address: 15.184.64.118
