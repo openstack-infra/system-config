@@ -2,7 +2,7 @@
 Origin: Debian
 Codename: <%= release %>
 Description: OpenStack Debian <%= release.capitalize %> mirror
-Architectures: amd64
+Architectures: amd64 source
 Components: main
 UDebComponents: main
 Contents: .gz
@@ -12,7 +12,7 @@ Log: <%= @logdir %>/debian-<%= release %>.log
 Origin: Debian
 Codename: <%= release %>-updates
 Description: OpenStack Debian <%= release.capitalize %> Updates mirror
-Architectures: amd64
+Architectures: amd64 source
 Components: main
 UDebComponents: main
 Contents: .gz
@@ -22,7 +22,7 @@ Log: <%= @logdir %>/debian-<%= release %>-updates.log
 Origin: Debian
 Codename: <%= release %>-backports
 Description: OpenStack Debian <%= release.capitalize %> Backports mirror
-Architectures: amd64
+Architectures: amd64 source
 Components: main
 UDebComponents: main
 Contents: .gz
@@ -32,7 +32,7 @@ Log: <%= @logdir %>/debian-<%= release %>-backports.log
 Origin: Debian
 Codename: <%= release %>-security
 Description: OpenStack Debian <%= release.capitalize %> Security mirror
-Architectures: amd64
+Architectures: amd64 source
 Components: main
 UDebComponents: main
 Contents: .gz
