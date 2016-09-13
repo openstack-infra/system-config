@@ -61,6 +61,9 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     $project_names
 
+sudo mkdir -p /var/run/puppet
+sudo -E bash -x ./install_modules.sh
+
 grep -v 127.0.1.1 /etc/hosts >/tmp/hosts
 HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
