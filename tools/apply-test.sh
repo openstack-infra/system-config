@@ -59,8 +59,6 @@ if [[ $FOUND == "0" ]]; then
     exit 1
 fi
 
-sudo mkdir -p /var/run/puppet
-sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
