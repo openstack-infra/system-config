@@ -53,6 +53,12 @@ class JobDir(object):
         self.hosts = os.path.join(self.inventory_root, 'hosts')
         self.groups = os.path.join(self.inventory_root, 'groups')
         self.key = os.path.join(self.root, 'id_rsa')
+        self.ansible_log = os.path.join(self.root, 'ansible_log.txt')
+        # XXX if we need more, we might like to setup an ansible.cfg
+        # file and use that rather than env vars.  See
+        # zuul/launcher/ansiblelaunchserver.py as an example
+        self.env = os.environ.copy()
+        self.env['ANSIBLE_LOG_PATH'] = self.ansible_log
 
     def __enter__(self):
         return self
@@ -117,31 +123,35 @@ def bootstrap_server(server, key, name, volume_device, keep,
         with open(inventory_cache, 'w'):
             pass
 
-    # Update the generated-groups file globally and incorporate it
-    # into our inventory
-    # Remove cloud and region from the environment to work around a bug in occ
-    expand_env = os.environ.copy()
-    for env_key in expand_env.keys():
-        if env_key.startswith('OS_'):
-            expand_env.pop(env_key, None)
-
-    # Regenerate inventory cache, throwing an error if there is an issue
-    # so that we don't generate a bogus groups file
-    try:
-        subprocess.check_output(
-            ['/etc/ansible/hosts/openstack', '--list'],
-            env=expand_env)
-    except subprocess.CalledProcessError as e:
-        print "Inventory regeneration failed"
-        print e.output
-        raise
-
-    print subprocess.check_output(
-        '/usr/local/bin/expand-groups.sh',
-        env=expand_env,
-        stderr=subprocess.STDOUT)
-
     with JobDir(keep) as jobdir:
+        # Update the generated-groups file globally and incorporate it
+        # into our inventory
+        # Remove cloud and region from the environment to work
+        # around a bug in occ
+        expand_env = os.environ.copy()
+        for env_key in expand_env.keys():
+            if env_key.startswith('OS_'):
+                expand_env.pop(env_key, None)
+        expand_env['ANSIBLE_LOG_PATH'] = jobdir.ansible_log
+
+        # Regenerate inventory cache, throwing an error if there is an issue
+        # so that we don't generate a bogus groups file
+        try:
+            subprocess.check_output(
+                ['/etc/ansible/hosts/openstack', '--list'],
+                env=expand_env)
+        except subprocess.CalledProcessError as e:
+            print "Inventory regeneration failed"
+            print e.output
+            raise
+
+        print "--- Running /usr/local/bin/expand-groups.sh ---"
+        print subprocess.check_output(
+            '/usr/local/bin/expand-groups.sh',
+            env=expand_env,
+            stderr=subprocess.STDOUT)
+        print "--- done ---\n"
+
         # Write out the private SSH key we generated
         with open(jobdir.key, 'w') as key_file:
             key.write_private_key(key_file)
@@ -170,11 +180,14 @@ def bootstrap_server(server, key, name, volume_device, keep,
             for playbook in [
                     'set_hostnames.yml',
                     'remote_puppet_adhoc.yaml']:
+                print "--- Running : %s ---" % (ansible_cmd)
                 print subprocess.check_output(
                     ansible_cmd + [
                         os.path.join(
                             SCRIPT_DIR, '..', 'playbooks', playbook)],
-                    stderr=subprocess.STDOUT)
+                    stderr=subprocess.STDOUT,
+                    env=jobdir.env)
+                print "--- done ---\n"
         except subprocess.CalledProcessError as e:
             print "Subprocess failed"
             print e.output
