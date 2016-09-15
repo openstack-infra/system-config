@@ -68,6 +68,23 @@ class JobDir(object):
             shutil.rmtree(self.root)
 
 
+def run(cmd, **args):
+    args['stdout'] = subprocess.PIPE
+    args['stderr'] = subprocess.STDOUT
+    print "Running: %s" % (cmd,)
+    proc = subprocess.Popen(cmd, **args)
+    out = ''
+    for line in iter(proc.stdout.readline, ''):
+        sys.stdout.write(line)
+        sys.stdout.flush()
+        out += line
+    ret = proc.wait()
+    print "Return code: %s" % (ret,)
+    if ret != 0:
+        raise subprocess.CalledProcessError(ret, cmd, out)
+    return ret
+
+
 def bootstrap_server(server, key, name, volume_device, keep,
                      mount_path, fs_label):
 
@@ -137,20 +154,16 @@ def bootstrap_server(server, key, name, volume_device, keep,
         # Regenerate inventory cache, throwing an error if there is an issue
         # so that we don't generate a bogus groups file
         try:
-            subprocess.check_output(
-                ['/etc/ansible/hosts/openstack', '--list'],
+            run(['/etc/ansible/hosts/openstack', '--list'],
                 env=expand_env)
         except subprocess.CalledProcessError as e:
             print "Inventory regeneration failed"
             print e.output
             raise
 
-        print "--- Running /usr/local/bin/expand-groups.sh ---"
-        print subprocess.check_output(
-            '/usr/local/bin/expand-groups.sh',
+        run('/usr/local/bin/expand-groups.sh',
             env=expand_env,
             stderr=subprocess.STDOUT)
-        print "--- done ---\n"
 
         # Write out the private SSH key we generated
         with open(jobdir.key, 'w') as key_file:
@@ -176,22 +189,12 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
         # Run the remote puppet apply playbook limited to just this server
         # we just created
-        try:
-            for playbook in [
-                    'set_hostnames.yml',
-                    'remote_puppet_adhoc.yaml']:
-                print "--- Running : %s ---" % (ansible_cmd)
-                print subprocess.check_output(
-                    ansible_cmd + [
-                        os.path.join(
-                            SCRIPT_DIR, '..', 'playbooks', playbook)],
-                    stderr=subprocess.STDOUT,
-                    env=jobdir.env)
-                print "--- done ---\n"
-        except subprocess.CalledProcessError as e:
-            print "Subprocess failed"
-            print e.output
-            raise
+        for playbook in [
+                'set_hostnames.yml',
+                'remote_puppet_adhoc.yaml']:
+            run(ansible_cmd + [
+                os.path.join(SCRIPT_DIR, '..', 'playbooks', playbook)],
+                env=jobdir.env)
 
     try:
         ssh_client.ssh("reboot")
