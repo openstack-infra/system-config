@@ -601,6 +601,22 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Serve static AFS content for docs and other sites.
+# Node-OS: trusty
+node 'files01.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80],
+    sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
+    afs_cache_size            => 10000000,  # 10GB
+  }
+
+  class { 'openstack_project::files':
+    vhost_name => 'files.openstack.org',
+    require    => Class['Openstack_project::Server'],
+  }
+}
+
 # Node-OS: trusty
 node 'refstack.openstack.org' {
   class { 'openstack_project::server':
