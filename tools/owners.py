@@ -203,6 +203,7 @@ def main():
     parser.add_argument("-o", "--outdir", help="Create an output directory")
     parser.add_argument("-r", "--ref", help="Specify a Governance refname")
     parser.add_argument("-s", "--sieve", help="Add Gerrit query parameters")
+    parser.add_argument("-p", "--project", help="Limit to a single project")
     options = parser.parse_args()
 
     # If we're supplied a configuration file, use it
@@ -270,6 +271,14 @@ def main():
     else:
         sieve = None
 
+    # Project list limit
+    if options.project:
+        wanted_project = options.project
+    elif 'project' in config:
+        wanted_project = config['project']
+    else:
+        wanted_project = None
+
     # Path to the governance projects list, needs a Git refname as a
     # parameter
     PROJECTS_LIST = ('https://review.openstack.org/'
@@ -317,6 +326,10 @@ def main():
     # Iterate over all governance project-teams only at filename
     # generation time
     for project in gov_projects:
+        # Check for project limit and only process requested project
+        if wanted_project and project != wanted_project:
+            continue
+
         # This will be populated with change owner Ids and counts
         projects[project] = {}
 
@@ -510,6 +523,9 @@ def main():
     # Iterate over all extra-atcs entries
     if not no_extra_atcs:
         for project in gov_projects:
+            # Check for project limit and only process requested project
+            if wanted_project and project != wanted_project:
+                continue
             for extra_atc in gov_projects[project].get('extra-atcs', []):
                 name = extra_atc['name']
                 email = extra_atc['email']
