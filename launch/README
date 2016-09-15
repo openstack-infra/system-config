@@ -12,8 +12,17 @@ and puppet groups for access to their respective keys::
 (Remember to log out and back into your shell if you add yourself
 to a group.)
 
+Launching a node currently requires a different version of ansible
+than what is generally used on the puppetmaster.  Set up a
+virtualenv::
+
+  virtualenv ~/launch-env/
+  . ~/launch-env/bin/activate
+  pip install ansible==2.1.1.0 shade==1.12.1
+
 To launch a node in the OpenStack CI account (production servers)::
 
+  . ~/launch-env/bin/activate
   export OS_CLOUD=openstackci-rax
   export OS_REGION=DFW
   export FLAVOR="8 GB Performance"
@@ -24,6 +33,7 @@ To launch a node in the OpenStack CI account (production servers)::
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
+  . ~/launch-env/bin/activate
   export OS_CLOUD=openstackjenkins-rax
   export OS_REGION=DFW
   export FQDN=slavename01.slave.openstack.org
