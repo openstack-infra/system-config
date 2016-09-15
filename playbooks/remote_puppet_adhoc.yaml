@@ -3,3 +3,4 @@
   roles:
   - role: puppet
     manage_config: true
+    puppet_environment: '{{ puppet_environment | default(omit) }}'
