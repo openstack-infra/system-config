@@ -21,6 +21,10 @@ zuul_sites:
     pass: "%{hiera('openstackdocs_ftp_password')}"
     root: '/web/content'
 
+  - name: 'afs-docs'
+    root: '/afs/openstack.org/docs'
+    keytab: '/etc/zuul-launcher.keytab'
+
   - name: 'api.openstack.org'
     host: 'ftp3.ftptoyoursite.com'
     user: 'cloudapidocs'
@@ -32,6 +36,10 @@ zuul_sites:
     user: 'clouddevdocs'
     pass: "%{hiera('clouddevdocs_ftp_password')}"
     root: '/web/content'
+
+  - name: 'afs-developer-docs'
+    root: '/afs/openstack.org/developer-docs'
+    keytab: '/etc/zuul-launcher.keytab'
 
 zuul_nodes:
   - name: 'proposal.slave.openstack.org'
