@@ -40,19 +40,23 @@ class SSHClient(object):
 
     def ssh(self, command, error_ok=False):
         stdin, stdout, stderr = self.client.exec_command(command)
-        print command
+        print('--- ssh: "%s" ---' % command)
+        print(' -- stdout --')
         output = ''
         for x in stdout:
             output += x
-            sys.stdout.write(x)
+            sys.stdout.write(" | " + x)
         ret = stdout.channel.recv_exit_status()
-        print stderr.read()
+        print(" -- stderr --")
+        for x in stderr:
+            sys.stdout.write(" | " + x)
         if (not error_ok) and ret:
             raise SSHException("Unable to %s" % command, ret)
+        print("--- done ---\n")
         return ret, output
 
     def scp(self, source, dest):
-        print 'copy', source, dest
+        print('--- scp copy:  %s -> %s' % (source, dest))
         ftp = self.client.open_sftp()
         ftp.put(source, dest)
         ftp.close()
