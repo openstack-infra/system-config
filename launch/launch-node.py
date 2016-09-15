@@ -93,7 +93,7 @@ def stream_syslog(ssh_client):
 
 
 def bootstrap_server(server, key, name, volume_device, keep,
-                     mount_path, fs_label):
+                     mount_path, fs_label, environment):
 
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
@@ -198,6 +198,10 @@ def bootstrap_server(server, key, name, volume_device, keep,
             '-e', 'target={name}'.format(name=name),
         ]
 
+        if environment is not None:
+            ansible_cmd.+= [
+                '-e',
+                'puppet_environment={env}'.format(env=environment)]
         # Run the remote puppet apply playbook limited to just this server
         # we just created
         for playbook in [
@@ -220,7 +224,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
 def build_server(cloud, name, image, flavor,
                  volume, keep, network, boot_from_volume, config_drive,
-                 mount_path, fs_label, availability_zone):
+                 mount_path, fs_label, availability_zone, environment):
     key = None
     server = None
 
@@ -263,7 +267,7 @@ def build_server(cloud, name, image, flavor,
         else:
             volume_device = None
         bootstrap_server(server, key, name, volume_device, keep,
-                         mount_path, fs_label)
+                         mount_path, fs_label, environment)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
@@ -305,6 +309,9 @@ def main():
     parser.add_argument("--image", dest="image",
                         default="Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)",
                         help="image name")
+    parser.add_argument("--environment", dest="environment",
+                        help="Puppet environment to use",
+                        default=None)
     parser.add_argument("--volume", dest="volume",
                         help="UUID of volume to attach to the new server.",
                         default=None)
@@ -368,7 +375,8 @@ def main():
                           options.network, options.boot_from_volume,
                           options.config_drive,
                           options.mount_path, options.fs_label,
-                          options.availability_zone)
+                          options.availability_zone,
+                          options.environment)
     dns.print_dns(cloud, server)
 
 if __name__ == '__main__':
