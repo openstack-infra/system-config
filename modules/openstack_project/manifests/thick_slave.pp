@@ -133,12 +133,24 @@ class openstack_project::thick_slave(
           package { $::openstack_project::jenkins_params::liberasurecode_dev_package:
             ensure => present,
           }
+          package { $::openstack_project::jenkins_params::python3_dev_package:
+            ensure => present,
+          }
+          package { $::openstack_project::jenkins_params::python3_package:
+            ensure => present,
+          }
         }
       }
       elsif ($::operatingsystem == 'CentOS') {
         if ($::operatingsystemmajrelease >= '7') {
           # For pyeclib, used by swift
           package { $::openstack_project::jenkins_params::liberasurecode_dev_package:
+            ensure => present,
+          }
+          package { $::openstack_project::jenkins_params::python3_dev_package:
+            ensure => present,
+          }
+          package { $::openstack_project::jenkins_params::python3_package:
             ensure => present,
           }
         }

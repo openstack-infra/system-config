@@ -45,8 +45,15 @@ class openstack_project::jenkins_params {
       $pkgconfig_package = 'pkgconfig'
       # FIXME: no PyPy headers on RHEL
       # FIXME: no PyPy on RHEL
-      # FIXME: no Python 3 headers on RHEL
-      # FIXME: no Python 3 on RHEL
+      if ($::operatingsystem == 'CentOS') and ($::operatingsystemrelease == 7) {
+        # python34 available in epel for centos7
+        $python3_dev_package = 'python34-devel'
+        $python3_package = 'python34'
+      }
+      if ($::operatingsystem == 'Fedora') and ($::operatingsystemrelease >= 22) {
+        $python3_dev_package = 'python3-devel'
+        $python3_package = 'python3'
+      }
       $python_libvirt_package = 'libvirt-python'
       $python_lxml_package = 'python-lxml'
       $python_requests_package = 'python-requests'
