@@ -1586,11 +1586,9 @@ ironic_inventory:
       cpus:
     name: compute029.chocolate.ic.openstack.org
   compute030.chocolate.ic.openstack.org:
-    ansible_ssh_host: 15.126.48.34
-    ipv4_address: 15.126.48.34
-    provisioning_ipv4_address: 10.23.212.34
+    ipv4_address: 15.184.64.131
+    provisioning_ipv4_address: 10.10.16.131
     uuid: 34313036-3630-5355-4532-333644464a32
-    disabled: true # not needed due to ip limit
     driver_info:
       power:
         ipmi_address: 10.12.83.90
