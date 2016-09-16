@@ -22,8 +22,6 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       Require all granted
     </Directory>
 
-    RewriteEngine On
-
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
     CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
