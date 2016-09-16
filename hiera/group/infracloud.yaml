@@ -1451,9 +1451,8 @@ ironic_inventory:
       ilo_mac: B4:99:BA:A7:F4:9F
     name: compute022.chocolate.ic.openstack.org
   compute023.chocolate.ic.openstack.org:
-    ansible_ssh_host: 15.126.48.27
-    ipv4_address: 15.126.48.27
-    provisioning_ipv4_address: 10.23.212.28
+    ipv4_address: 15.184.64.124
+    provisioning_ipv4_address: 10.10.16.124
     uuid: 34313036-3630-5355-4532-333644564d31
     driver_info:
       power:
