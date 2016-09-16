@@ -1536,7 +1536,7 @@ ironic_inventory:
     uuid: 34313036-3630-5355-4532-333644564d4e
     driver_info:
       power:
-        ipmi_address: 10.22.27.174
+        ipmi_address: 10.12.83.107
         ipmi_username: HELIONADMIN
     nics:
     - mac: 1C:C1:DE:18:E7:7B
@@ -1546,6 +1546,9 @@ ironic_inventory:
       ram: 98304
       disk_size:
       cpus:
+      serial_number: use236dvmn
+      rack: b06
+      ilo_mac: 1C:C1:DE:18:E7:7C
     name: compute027.chocolate.ic.openstack.org
   compute028.chocolate.ic.openstack.org:
     ipv4_address: 15.184.64.129
