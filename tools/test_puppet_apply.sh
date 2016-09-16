@@ -18,7 +18,9 @@ file=$1
 fileout=${file}.out
 echo "##" > $fileout
 cat $file > $fileout
+rm -f /tmp/puppet-out
 sudo /tmp/ansible/bin/ansible-playbook -f1 --limit localhost --check playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=$file -e puppet_logdest=/tmp/puppet-out
 ret=$?
+cat /tmp/puppet-out
 cat $fileout
 exit $ret
