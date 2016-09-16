@@ -72,6 +72,7 @@ sudo mv /tmp/hosts /etc/hosts
 # of configuring hiera.
 sudo mkdir -p /opt/system-config
 sudo ln -sf $(pwd) /opt/system-config/production
+sudo -H mkdir -p ~/.ansible/tmp
 
 virtualenv --system-site-packages /tmp/apply-ansible-env
 /tmp/apply-ansible-env/bin/pip install ansible
