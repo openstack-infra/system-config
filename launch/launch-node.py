@@ -202,7 +202,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
         if environment is not None:
             ansible_cmd += [
                 '-e',
-                'puppet_environment={env}'.format(env=environment)]
+                'environment={env}'.format(env=environment)]
         # Run the remote puppet apply playbook limited to just this server
         # we just created
         for playbook in [
