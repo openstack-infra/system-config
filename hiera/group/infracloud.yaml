@@ -2915,3 +2915,11 @@ ironic_inventory:
     name: compute094.chocolate.ic.openstack.org
 rabbitmq::package_gpg_key: 'https://www.rabbitmq.com/rabbitmq-release-signing-key.asc'
 rabbitmq::repo::apt::key: '0A9AF2115F4687BD29803A206B73A36E6026DFCA'
+infracloud_vlan: '2551'
+infracloud_gateway: '15.184.64.1'
+infracloud_default_network_interface: 'eth2'
+infracloud_dhcp_pool_start: '10.10.16.144'
+infracloud_dhcp_pool_end: '10.10.16.190'
+infracloud_network_interface: 'eth2'
+infracloud_ipv4_nameserver: '8.8.8.8'
+infracloud_ipv4_subnet_mask: '255.255.224.0'

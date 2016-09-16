@@ -9,6 +9,12 @@ class openstack_project::infracloud::baremetal (
   $ssh_public_key,
   $vlan,
   $gateway_ip,
+  $default_network_interface,
+  $dhcp_pool_start,
+  $dhcp_pool_end,
+  $network_interface,
+  $ipv4_nameserver,
+  $ipv4_subnet_mask,
 ) {
   class { '::infracloud::bifrost':
     ironic_inventory     => $ironic_inventory,
