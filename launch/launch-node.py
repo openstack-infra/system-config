@@ -23,6 +23,7 @@ import os
 import shutil
 import subprocess
 import sys
+import threading
 import tempfile
 import time
 import traceback
@@ -83,6 +84,13 @@ def run(cmd, **args):
     if ret != 0:
         raise subprocess.CalledProcessError(ret, cmd, out)
     return ret
+
+
+def stream_syslog(ssh_client):
+    try:
+        ssh_client.ssh('tail -f /var/log/syslog')
+    except Exception:
+        print "Syslog stream terminated"
 
 
 def bootstrap_server(server, key, name, volume_device, keep,
@@ -178,6 +186,10 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
         os.symlink('/etc/ansible/hosts/generated-groups',
                    jobdir.groups)
+
+        t = threading.Thread(target=stream_syslog, args=(ssh_client,))
+        t.daemon = True
+        t.start()
 
         ansible_cmd = [
             'ansible-playbook',
