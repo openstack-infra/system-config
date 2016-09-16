@@ -15,12 +15,20 @@
 # under the License.
 
 file=$1
-fileout=${file}.out
+fileout=`pwd`/${file}.out
+ansible_root=`mktemp -d`
+cat > $ansible_root/ansible.cfg <<EOF
+[defaults]
+local_tmp=$ansible_root/local_tmp
+remote_tmp=$ansible_root/remote_tmp
+EOF
 echo "##" > $fileout
 cat $file > $fileout
-sudo /tmp/apply-ansible-env/bin/ansible-playbook -f1 --limit localhost playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=$file -e puppet_noop=true -e puppet_logdest=`pwd`/$fileout
+export ANSIBLE_CONFIG=$ansible_root/ansible.cfg
+sudo /tmp/apply-ansible-env/bin/ansible-playbook -f1 --limit localhost playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=$file -e puppet_noop=true -e puppet_logdest=$fileout
 ret=$?
 if [ $ret -ne 0 ]; then
     mv $fileout $fileout.FAILED
 fi
+rm -fr $ansible_root
 exit $ret
