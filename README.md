@@ -22,3 +22,5 @@ git://git.openstack.org/openstack-infra/system-config repo's docs/source.  To
 build the documentation use
 
  $ tox -evenv python setup.py build_sphinx
+
+DO NOT MERGE
