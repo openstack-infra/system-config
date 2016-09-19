@@ -59,7 +59,7 @@ class openstack_project::git_backend (
         'favicon'        => '/static/favicon.ico',
         'logo'           => '/static/openstack.png',
         'root-title'     => 'OpenStack git repository browser',
-        'max-repo-count' => 1500,
+        'max-repo-count' => 2500,
     },
     manage_cgitrc           => true,
     selinux_mode            => $selinux_mode
