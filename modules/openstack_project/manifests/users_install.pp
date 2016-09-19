@@ -27,6 +27,8 @@ class openstack_project::users_install (
     package { $::openstack_project::params::user_packages:
       ensure => present
     }
+    ## NOTE: This list is arranged in order of chronological precedence,
+    ##       additions should be appended to the end.
     realize (
       User::Virtual::Localuser['mordred'],
       User::Virtual::Localuser['corvus'],
@@ -36,8 +38,8 @@ class openstack_project::users_install (
       User::Virtual::Localuser['elizabeth'],
       User::Virtual::Localuser['jhesketh'],
       User::Virtual::Localuser['nibz'],
-      User::Virtual::Localuser['pabelanger'],
       User::Virtual::Localuser['yolanda'],
+      User::Virtual::Localuser['pabelanger'],
       User::Virtual::Localuser['rcarrillocruz'],
       User::Virtual::Localuser['ianw'],
     )
@@ -50,8 +52,8 @@ class openstack_project::users_install (
       user::virtual::disable{'elizabeth':}
       user::virtual::disable{'jhesketh':}
       user::virtual::disable{'nibz':}
-      user::virtual::disable{'pabelanger':}
       user::virtual::disable{'yolanda':}
+      user::virtual::disable{'pabelanger':}
       user::virtual::disable{'rcarrillocruz':}
       user::virtual::disable{'ianw':}
   }
