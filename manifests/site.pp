@@ -498,10 +498,12 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 # Node-OS: xenial
 node /^firehose\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 1883, 8080, 8883],
+    iptables_public_tcp_ports => [22, 25, 80, 143, 993, 1883, 8080, 8883],
     sysadmins                 => hiera('sysadmins', []),
+    manage_exim               => false,
   }
   class { 'openstack_project::firehose':
+    sysadmins           => hiera('sysadmins', []),
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
     gerrit_public_key   => hiera('germqtt_gerrit_ssh_public_key'),
     gerrit_private_key  => hiera('germqtt_gerrit_ssh_private_key'),
