@@ -54,6 +54,18 @@ class openstack_project::firehose (
     ensure => latest,
   }
 
+  package {'sasl2-bin':
+    ensure => latest,
+  }
+
+  package {'cyrus-admin':
+    ensure => latest,
+  }
+
+  service {'cyrus-imapd':
+    ensure => running,
+  }
+
   class {'::exim':
     sysadmins => $sysadmins,
     routers  => [
