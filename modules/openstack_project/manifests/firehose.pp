@@ -96,5 +96,6 @@ class openstack_project::firehose (
     imap_username => $imap_username,
     imap_password => $imap_password,
     imap_use_ssl  => true,
+    imap_delete_old => true,
   }
 }
