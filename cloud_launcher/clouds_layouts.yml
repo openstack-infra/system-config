@@ -49,6 +49,7 @@ clouds:
   - name: admin-bluebox
     profiles:
       - openstackci-projects
+      - openstackci-security
       - openstackci-flavors
   - name: openstackci-bluebox
     profiles:
@@ -107,6 +108,7 @@ clouds:
   - name: admin-infracloud-vanilla
     profiles:
       - openstackci-projects
+      - openstackci-security
       - openstackci-flavors
   - name: openstackci-infracloud-vanilla
     profiles:
