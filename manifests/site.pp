@@ -498,7 +498,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 # Node-OS: xenial
 node /^firehose\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 25, 80, 143, 993, 1883, 8080, 8883],
+    iptables_public_tcp_ports => [22, 25, 80, 1883, 8080, 8883],
     sysadmins                 => hiera('sysadmins', []),
     manage_exim               => false,
   }
