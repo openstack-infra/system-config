@@ -1220,6 +1220,7 @@ node 'translate-dev.openstack.org' {
 
 # Node-OS: trusty
 node 'apps.openstack.org' {
+  bad puppet yo
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
