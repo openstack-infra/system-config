@@ -325,7 +325,7 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
-        "alias(summarize(sumSeries(stats_counts.zuul.pipeline.*.all_jobs),'1h'),'All Jobs')",
+        "alias(smartSummarize(sumSeries(stats_counts.zuul.pipeline.*.all_jobs),'1h'),'All Jobs')",
     ],
     title: "Zuul Jobs Launched (per Hour)"
 }));
@@ -337,9 +337,9 @@ $("#graph-container").append($(new Image()).addClass('graph').graphite({
     bgcolor: 'ffffff',
     fgcolor: '000000',
     target: [
-        "alias(summarize(stats_counts.gerrit.event.comment-added, '1h'), 'Comment added')",
-        "alias(summarize(stats_counts.gerrit.event.patchset-created, '1h'), 'Patchset created')",
-        "alias(summarize(stats_counts.gerrit.event.change-merged, '1h'), 'Change merged')",
+        "alias(smartSummarize(stats_counts.gerrit.event.comment-added, '1h'), 'Comment added')",
+        "alias(smartSummarize(stats_counts.gerrit.event.patchset-created, '1h'), 'Patchset created')",
+        "alias(smartSummarize(stats_counts.gerrit.event.change-merged, '1h'), 'Change merged')",
     ],
     title: "Gerrit Events (per Hour)"
 }));
