@@ -6,13 +6,13 @@ output {
   }
 <% if @enable_mqtt -%>
   mqtt {
-    host => <%= @mqtt_hostname %>
+    host => "<%= @mqtt_hostname %>"
     port => <%= @mqtt_port %>
-    topic => <%= @mqtt_topic %>
-    username => <%= @mqtt_username %>
-    password => <%= @mqtt_password %>
+    topic => "<%= @mqtt_topic %>"
+    username => "<%= @mqtt_username %>"
+    password => "<%= @mqtt_password %>"
     ssl => true
-    ca_file => "/etc/logstash/mqtt-root-CA.crt"
+    ca_file => "/etc/logstash/mqtt-root-CA.pem.crt"
   }
 <% end -%>
 
