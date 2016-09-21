@@ -64,16 +64,19 @@ Services Publishing to firehose
 
 As of right now the following services publish messages to the firehose:
 
-+-----------+------------+--------------------+
-| Service   | Base Topic | Source of Messages |
-+===========+============+====================+
-| gerrit    | gerrit     | `germqtt`_         |
-+-----------+------------+--------------------+
-| launchpad | launchpad  | `lpmqtt`_          |
-+-----------+------------+--------------------+
++-----------+------------+-------------------------+
+| Service   | Base Topic | Source of Messages      |
++===========+============+=========================+
+| gerrit    | gerrit     | `germqtt`_              |
++-----------+------------+-------------------------+
+| launchpad | launchpad  | `lpmqtt`_               |
++-----------+------------+-------------------------+
++ logstash  | logstash   | `logstash-output-mqtt`_ |
++-----------+------------+-------------------------+
 
 .. _germqtt: http://git.openstack.org/cgit/openstack-infra/germqtt/
 .. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
+.. _logstash-output-mqtt: https://github.com/kompa3/logstash-output-mqtt
 
 
 Client Usage
