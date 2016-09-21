@@ -93,7 +93,6 @@ class openstack_project::slave_db(
 
   class { 'postgresql::server':
     postgres_password => $root_db_password,
-    manage_firewall   => false,
     # The puppetlabs postgres module incorrectly quotes ip addresses
     # in the postgres server config. Use localhost instead.
     listen_addresses  => ['localhost'],

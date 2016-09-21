@@ -187,16 +187,6 @@ node 'puppetmaster.openstack.org' {
   }
 }
 
-# Node-OS: precise
-node 'puppetdb.openstack.org' {
-  $open_ports = [8081, 80]
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => $open_ports,
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  include openstack_project::puppetdb
-}
-
 # Node-OS: trusty
 node 'puppetdb01.openstack.org' {
   $open_ports = [8081, 80]
@@ -204,9 +194,7 @@ node 'puppetdb01.openstack.org' {
     iptables_public_tcp_ports => $open_ports,
     sysadmins                 => hiera('sysadmins', []),
   }
-  class { 'openstack_project::puppetdb':
-    version => '4.0.2-1puppetlabs1',
-  }
+  include '::openstack_project::puppetdb'
 }
 
 # Node-OS: trusty
