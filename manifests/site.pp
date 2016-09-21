@@ -1359,7 +1359,7 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
     ironic_inventory   => hiera('ironic_inventory', {}),
     ironic_db_password => hiera('ironic_db_password'),
     mysql_password     => hiera('bifrost_mysql_password'),
-    ipmi_passwords     => hiera('ipmi_west_passwords'),
+    ipmi_passwords     => hiera('ipmi_passwords'),
     ssh_private_key    => hiera('bifrost_vanilla_ssh_private_key'),
     ssh_public_key     => hiera('bifrost_vanilla_ssh_public_key'),
     vlan               => 2551,
