@@ -68,6 +68,7 @@ class openstack_project::firehose (
 
   class {'::exim':
     sysadmins => $sysadmins,
+    local_domains => "@:firehose.openstack.org",
     routers  => [
       {'cyrus' => {
         'driver'                     => 'accept',
