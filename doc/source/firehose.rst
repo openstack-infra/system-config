@@ -148,3 +148,18 @@ on the firehose and print it to STDOUT
     client.connect('firehose.openstack.org', port=80)
     # Listen forever
     client.loop_forever()
+
+IMAP and MX
+-----------
+
+We're using Cyrus as an IMAP server in order to consume launchpad bug
+events via email. The configuration of the admin password account and
+creation of the lpmqtt user for Cyrus were completed using the
+following::
+
+    $ sudo saslpasswd2 cyrus
+    $ cyradm --user=cyrus --server=localhost
+    Password:
+    localhost> create user.lpmqtt
+
+An MX record has also been set up to point to the firehose server.
