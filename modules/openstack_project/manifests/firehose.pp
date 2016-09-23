@@ -37,6 +37,19 @@ class openstack_project::firehose (
     key_file               => $key_file,
   }
 
+  include logrotate
+  logrotate::file { 'mosquitto.log':
+    log     => '/var/log/mosquitto/mosquitto.log',
+    options => [
+      'compress',
+      'missingok',
+      'rotate 30',
+      'daily',
+      'notifempty',
+      'copytruncate',
+    ],
+  }
+
   include germqtt
   class {'germqtt::server':
     gerrit_username     => $gerrit_username,
