@@ -150,7 +150,7 @@ on the firehose and print it to STDOUT
     client.loop_forever()
 
 IMAP and MX
------------
+===========
 
 We're using Cyrus as an IMAP server in order to consume launchpad bug
 events via email. The configuration of the admin password account and
