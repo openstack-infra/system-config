@@ -13,6 +13,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 
     DocumentRoot <%= @docroot %>
     <Directory <%= @docroot %>>
+        Options Indexes FollowSymLinks MultiViews
         Satisfy any
         Require all granted
     </Directory>
