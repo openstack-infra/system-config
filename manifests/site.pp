@@ -1381,6 +1381,24 @@ node 'controller00.chocolate.ic.openstack.org' {
   }
 }
 
+node /^compute\d{3}\.chocolate\.ic\.openstack\.org$/ {
+  $group = 'infracloud'
+  class { '::openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    enable_unbound            => false,
+    purge_apt_sources         => false,
+  }
+  class { '::openstack_project::infracloud::compute':
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
+    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    neutron_admin_password           => hiera('neutron_admin_password'),
+    ssl_key_file_contents            => hiera('infracloud_chocolate_ssl_key_file_contents'),
+    ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
+    br_name                          => 'br-vlan2551',
+    controller_public_address        => 'controller00.chocolate.ic.openstack.org',
+  }
+}
+
 # Node-OS: trusty
 # Upgrade-Modules
 node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
