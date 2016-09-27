@@ -16,7 +16,7 @@ At a Glance
   * https://git.openstack.org/cgit/openstack-infra/puppet-mosquitto
   * https://git.openstack.org/cgit/openstack-infra/puppet-germqtt
   * https://git.openstack.org/cgit/openstack-infra/puppet-lpmqtt
-    * :file:`modules/openstack_project/manifests/firehose.pp`
+  * :file:`modules/openstack_project/manifests/firehose.pp`
 :Projects:
   * https://mosquitto.org/
   * http://git.openstack.org/cgit/openstack-infra/germqtt/
