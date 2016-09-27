@@ -23,7 +23,7 @@ class openstack_project::firehose (
   $imap_username,
   $imap_hostname,
   $imap_password,
-  $mqtt_hostname = 'firehose01.openstack.org',
+  $mqtt_hostname = 'firehose.openstack.org',
   $mqtt_password,
   $mqtt_username = 'infra',
   $ca_file,
