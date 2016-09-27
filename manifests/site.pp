@@ -909,6 +909,7 @@ node /^zl\d+\.openstack\.org$/ {
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
+    zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
   }
 }
 

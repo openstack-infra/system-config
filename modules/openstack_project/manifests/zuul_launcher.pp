@@ -34,11 +34,19 @@ class openstack_project::zuul_launcher(
   $sites = [],
   $nodes = [],
   $accept_nodes = '',
+  $zuul_launcher_keytab = '',
 ) {
 
   class { '::project_config':
     url  => $project_config_repo,
     base => $project_config_base,
+  }
+
+  file { '/etc/zuul-launcher.keytab':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    content => $zuul_launcher_keytab,
   }
 
   file { '/etc/jenkins_jobs':
