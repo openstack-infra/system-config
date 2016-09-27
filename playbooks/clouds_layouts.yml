@@ -122,3 +122,9 @@ clouds:
   - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security
+
+  # infracloud-chocolate
+  - name: admin-infracloud-chocolate
+    profiles:
+      - openstackci-projects
+      - openstackci-flavors
