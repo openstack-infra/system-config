@@ -23,7 +23,7 @@ At a Glance
 
 Overview
 ========
-wiki.openstack.org runs off of Wikmedia Foundation deployment branches.
+wiki.openstack.org runs off of Wikimedia Foundation deployment branches.
 This was done to ease the pain of managing Mediawiki extensions. The
 foundation branches come with git submodules that refer to known good
 versions of extensions. Much (but not all) of the configuration is in
