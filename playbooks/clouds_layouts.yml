@@ -136,3 +136,6 @@ clouds:
       - name: mirror.regionone.infracloud-chocolate.openstack.org
         image: ubuntu-trusty
         flavor: mirror
+  - name: openstackzuul-infracloud-chocolate
+    profiles:
+      - openstackci-security
