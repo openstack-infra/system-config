@@ -46,6 +46,9 @@ profiles:
         download_image_url: https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
         download_image_dest: /tmp/ubuntu-trusty.img
         filename: /tmp/ubuntu-trusty.img
+  - name: infracloud-roles
+    roles:
+      - name: Member
 
 clouds:
   # bluebox-sjc1
@@ -111,6 +114,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
+      - infracloud-roles
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
@@ -124,6 +128,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
+      - infracloud-roles
   - name: openstackci-infracloud-chocolate
     profiles:
       - openstackci-security
