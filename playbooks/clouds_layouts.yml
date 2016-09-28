@@ -115,10 +115,6 @@ clouds:
     profiles:
       - openstackci-security
       - openstackci-images
-    servers:
-      - name: mirror.regionone.infracloud-vanilla.openstack.org
-        image: ubuntu-trusty
-        flavor: mirror
   - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security
@@ -132,7 +128,3 @@ clouds:
     profiles:
       - openstackci-security
       - openstackci-images
-    servers:
-      - name: mirror.regionone.infracloud-chocolate.openstack.org
-        image: ubuntu-trusty
-        flavor: mirror
