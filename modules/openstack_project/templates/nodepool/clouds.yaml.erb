@@ -124,3 +124,14 @@ clouds:
     identity_api_version: '3'
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem
+  infracloud-chocolate:
+    auth:
+      auth_url: https://controller00.chocolate.ic.openstack.org:5000
+      username: '<%= @infracloud_chocolate_username %>'
+      password: '<%= @infracloud_chocolate_password %>'
+      project_name: '<%= @infracloud_chocolate_project %>'
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
+    floating_ip_source: None
+    cacert: /home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem
