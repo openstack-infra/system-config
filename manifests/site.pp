@@ -501,7 +501,10 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 # Node-OS: xenial
 node /^firehose\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 25, 80, 1883, 8080, 8883],
+    # NOTE(mtreinish) Port 80 and 8080 are disabled because websocket
+    # connections seem to crash mosquitto. Once this is fixed we should add
+    # them back
+    iptables_public_tcp_ports => [22, 25, 1883, 8883],
     sysadmins                 => hiera('sysadmins', []),
     manage_exim               => false,
   }
