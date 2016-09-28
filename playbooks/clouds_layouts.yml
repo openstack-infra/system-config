@@ -128,3 +128,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
+  - name: openstackci-infracloud-chocolate
+    profiles:
+      - openstackci-security
+      - openstackci-images
