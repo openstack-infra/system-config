@@ -132,3 +132,7 @@ clouds:
     profiles:
       - openstackci-security
       - openstackci-images
+    servers:
+      - name: mirror.regionone.infracloud-chocolate.openstack.org
+        image: ubuntu-trusty
+        flavor: mirror
