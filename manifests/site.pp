@@ -772,15 +772,18 @@ node 'nodepool.openstack.org' {
   $tripleo_username    = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password    = hiera('nodepool_tripleo_password')
   $tripleo_project     = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username  = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password  = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project   = hiera('nodepool_infracloud_vanilla_project', 'project')
-  $osic_cloud1_username         = hiera('nodepool_osic_cloud1_username', 'username')
-  $osic_cloud1_password         = hiera('nodepool_osic_cloud1_password')
-  $osic_cloud1_project          = hiera('nodepool_osic_cloud1_project', 'project')
-  $osic_cloud8_username         = hiera('nodepool_osic_cloud8_username', 'username')
-  $osic_cloud8_password         = hiera('nodepool_osic_cloud8_password')
-  $osic_cloud8_project          = hiera('nodepool_osic_cloud8_project', 'project')
+  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
+  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
+  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
+  $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
+  $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
+  $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
+  $osic_cloud1_username           = hiera('nodepool_osic_cloud1_username', 'username')
+  $osic_cloud1_password           = hiera('nodepool_osic_cloud1_password')
+  $osic_cloud1_project            = hiera('nodepool_osic_cloud1_project', 'project')
+  $osic_cloud8_username           = hiera('nodepool_osic_cloud8_username', 'username')
+  $osic_cloud8_password           = hiera('nodepool_osic_cloud8_password')
+  $osic_cloud8_project            = hiera('nodepool_osic_cloud8_project', 'project')
   $vexxhost_username   = hiera('nodepool_vexxhost_username', 'username')
   $vexxhost_password   = hiera('nodepool_vexxhost_password')
   $vexxhost_project    = hiera('nodepool_vexxhost_project', 'project')
@@ -817,6 +820,14 @@ node 'nodepool.openstack.org' {
     group   => 'nodepool',
     mode    => '0600',
     content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
+    require => Class['::openstackci::nodepool'],
+  }
+  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
+    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
 }
