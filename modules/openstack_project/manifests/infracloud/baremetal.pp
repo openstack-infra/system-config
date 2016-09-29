@@ -7,10 +7,12 @@ class openstack_project::infracloud::baremetal (
   $mysql_password,
   $ssh_private_key,
   $ssh_public_key,
+  $bridge_name,
   $vlan,
   $gateway_ip,
 ) {
   class { '::infracloud::bifrost':
+    bridge_name          => $bridge_name,
     ironic_inventory     => $ironic_inventory,
     ironic_db_password   => $ironic_db_password,
     mysql_password       => $mysql_password,
