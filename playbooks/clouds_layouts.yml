@@ -125,15 +125,15 @@ clouds:
       - openstackci-projects
       - openstackci-flavors
       - admin-roles
+      - openstackci-user-roles
+      - openstackzuul-user-roles
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
       - openstackci-images
-      - openstackci-user-roles
   - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security
-      - openstackzuul-user-roles
 
   # infracloud-chocolate
   - name: admin-infracloud-chocolate
@@ -141,12 +141,12 @@ clouds:
       - openstackci-projects
       - openstackci-flavors
       - admin-roles
+      - openstackci-user-roles
+      - openstackzuul-user-roles
   - name: openstackci-infracloud-chocolate
     profiles:
       - openstackci-security
       - openstackci-images
-      - openstackci-user-roles
   - name: openstackzuul-infracloud-chocolate
     profiles:
       - openstackci-security
-      - openstackzuul-user-roles
