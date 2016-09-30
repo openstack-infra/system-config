@@ -24,6 +24,7 @@ zuul_sites:
   - name: 'afs-docs'
     root: '/afs/openstack.org/docs'
     keytab: '/etc/zuul-launcher.keytab'
+    user: 'service/zuul-launcher'
 
   - name: 'api.openstack.org'
     host: 'ftp3.ftptoyoursite.com'
@@ -40,6 +41,7 @@ zuul_sites:
   - name: 'afs-developer-docs'
     root: '/afs/openstack.org/developer-docs'
     keytab: '/etc/zuul-launcher.keytab'
+    user: 'service/zuul-launcher'
 
 zuul_nodes:
   - name: 'proposal.slave.openstack.org'
