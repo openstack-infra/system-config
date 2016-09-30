@@ -80,6 +80,7 @@ class openstack_project::jenkins_params {
           Package['cgroups'],
           Package['cgroups-tools'],
         ]
+        $nss_devel = 'nss-devel'
       } else {
         $mysql_dev_package = 'mariadb-devel'
         $cgroups_tools_package = ''
@@ -173,6 +174,7 @@ class openstack_project::jenkins_params {
       $swig = "swig"
       $libjpeg_dev = "libjpeg-dev"
       $zlib_dev = "zlib1g-dev"
+      $nss_devel = 'nss-devel'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
