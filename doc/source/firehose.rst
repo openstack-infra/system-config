@@ -41,6 +41,8 @@ firehose.openstack.org has 2 open ports for MQTT traffic:
 
  * **1883** - The default MQTT port
  * **80** - Uses websockets for the MQTT communication
+ * **8883** - The default SSL/TLS MQTT port
+ * **8080** - Uses websockets for SSL/TLS encrypted MQTT communication
 
 Topics
 ------
@@ -148,6 +150,68 @@ on the firehose and print it to STDOUT
     client.connect('firehose.openstack.org', port=80)
     # Listen forever
     client.loop_forever()
+
+Using SSL/TLS
+-------------
+If you would like to connect to the firehose using ssl to encrypt the events you
+recieve from MQTT you just need to connect with ssl enabled via either of the
+encypted ports. If you'd like to verify the server ssl certificate when
+connecting you'll need to provide a CA bundle to use as most MQTT clients do
+not know how to use the system trusted CA bundle like most http clients.
+
+To connect to the firehose and subscribe to all topics you can use the
+mosquitto CLI client::
+
+  mosquitto_sub --topic '#' -h firehose.openstack.org --cafile /etc/ca-certificates/extracted/tls-ca-bundle.pem -p 8883
+
+You can use python:
+
+.. code-block:: python
+   :emphasize-lines: 15,20
+
+    import paho.mqtt.client as mqtt
+
+
+    def on_connect(client, userdata, flags, rc):
+        print("Connected with result code " + str(rc))
+        client.subscribe('#')
+
+
+    def on_message(client, userdata, msg):
+        print(msg.topic+" "+str(msg.payload))
+
+
+    # Create an SSL encrypted websockets client
+    client = mqtt.Client()
+    client.tls_set(ca_certs='/etc/ca-certificates/extracted/tls-ca-bundle.pem')
+    client.on_connect = on_connect
+    client.on_message = on_message
+
+    # Connect to the firehose
+    client.connect('firehose.openstack.org', port=8883)
+    client.loop_forever()
+
+
+Or with ruby:
+
+.. code-block:: ruby
+   :emphasize-lines: 6,7,8
+
+    require 'rubygems'
+    require 'mqtt'
+
+    client = MQTT::Client.new
+    client.host = 'firehose.openstack.org'
+    client.ssl = true
+    client.cert_file = '/etc/ca-certificates/extracted/tls-ca-bundle.pem'
+    client.port = 8883
+    client.connect()
+    client.subscribe('#')
+
+    client.get do |topic,message|
+        puts message
+        end
+
 
 IMAP and MX
 ===========
