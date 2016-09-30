@@ -50,10 +50,12 @@ profiles:
     roles:
       - name: Member
   - name: openstackci-user-roles
+    user_roles:
       - role: Member
         user: openstackci
         project: openstackci
   - name: openstackzuul-user-roles
+    user_roles:
       - role: Member
         user: openstackzuul
         project: openstackzuul
