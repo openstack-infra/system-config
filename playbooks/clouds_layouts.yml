@@ -46,7 +46,7 @@ profiles:
         download_image_url: https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
         download_image_dest: /tmp/ubuntu-trusty.img
         filename: /tmp/ubuntu-trusty.img
-  - name: infracloud-roles
+  - name: admin-roles
     roles:
       - name: Member
   - name: openstackci-user-roles
@@ -122,7 +122,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
-      - infracloud-roles
+      - admin-roles
   - name: openstackci-infracloud-vanilla
     profiles:
       - openstackci-security
@@ -136,7 +136,7 @@ clouds:
     profiles:
       - openstackci-projects
       - openstackci-flavors
-      - infracloud-roles
+      - admin-roles
   - name: openstackci-infracloud-chocolate
     profiles:
       - openstackci-security
