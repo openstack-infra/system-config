@@ -129,9 +129,11 @@ clouds:
     profiles:
       - openstackci-security
       - openstackci-images
+      - openstackci-user-roles
   - name: openstackzuul-infracloud-vanilla
     profiles:
       - openstackci-security
+      - openstackzuul-user-roles
 
   # infracloud-chocolate
   - name: admin-infracloud-chocolate
@@ -143,6 +145,8 @@ clouds:
     profiles:
       - openstackci-security
       - openstackci-images
+      - openstackci-user-roles
   - name: openstackzuul-infracloud-chocolate
     profiles:
       - openstackci-security
+      - openstackzuul-user-roles
