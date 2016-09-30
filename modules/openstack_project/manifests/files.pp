@@ -49,4 +49,14 @@ class openstack_project::files (
       'create 640 root adm',
     ],
   }
+
+  ###########################################################
+  # docs.openstack.org
+
+  ::httpd::vhost { 'docs.openstack.org':
+    port       => 80,
+    docroot    => "${afs_root}docs",
+    priority   => '50',
+    template   => 'openstack_project/docs.vhost.erb',
+  }
 }
