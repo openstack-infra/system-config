@@ -49,6 +49,14 @@ profiles:
   - name: infracloud-roles
     roles:
       - name: Member
+  - name: openstackci-user-roles
+      - role: Member
+        user: openstackci
+        project: openstackci
+  - name: openstackzuul-user-roles
+      - role: Member
+        user: openstackzuul
+        project: openstackzuul
 
 clouds:
   # bluebox-sjc1
