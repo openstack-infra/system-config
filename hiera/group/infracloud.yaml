@@ -2591,8 +2591,8 @@ ironic_inventory:
       cpus:
     name: compute081.chocolate.ic.openstack.org
   compute082.chocolate.ic.openstack.org:
-    ipv4_address: 15.184.64.181
-    provisioning_ipv4_address: 10.10.16.181
+    ipv4_address: 15.184.64.183
+    provisioning_ipv4_address: 10.10.16.183
     uuid: 30303536-3834-5355-4532-333644464334
     driver_info:
       power:
