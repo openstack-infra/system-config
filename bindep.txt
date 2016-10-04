@@ -1,0 +1,4 @@
+libffi-dev [platform:dpkg]
+libffi-devel [platform:rpm]
+libssl-dev [platform:dpkg]
+openssl-devel [platform:rpm]
