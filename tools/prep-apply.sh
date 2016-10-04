@@ -31,6 +31,8 @@ cat > clonemap.yaml <<EOF
 clonemap:
   - name: '(.*?)/puppet-(.*)'
     dest: '/etc/puppet/modules/\2'
+  - name: '(.*?)/ansible-role-(.*)'
+    dest: '/etc/ansible/roles/\2'
 EOF
 
 # These arrays are initialized here and populated in modules.env
@@ -47,7 +49,7 @@ declare -A SOURCE_MODULES
 declare -A INTEGRATION_MODULES
 
 
-project_names=""
+project_names="openstack-infra/ansible-role-puppet"
 
 source $MODULE_ENV_FILE
 
@@ -66,12 +68,11 @@ HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
 
-# Manage hiera
+# Set up the production config directory, and then let ansible take care
+# of configuring hiera.
 sudo mkdir -p /opt/system-config
-sudo ln -s $(pwd) /opt/system-config/production
-sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/hiera.yaml
-sudo cp modules/openstack_project/files/puppet/hiera.yaml /etc/puppet/hiera.yaml
+sudo ln -sf $(pwd) /opt/system-config/production
+sudo -H mkdir -p ~/.ansible/tmp
 
-# Demonstrate that hiera lookups are functioning
-find /opt/system-config/production/hiera
-hiera -c /etc/puppet/hiera.yaml -d elasticsearch_nodes ::environment=production
+virtualenv --system-site-packages /tmp/apply-ansible-env
+/tmp/apply-ansible-env/bin/pip install ansible
