@@ -1,0 +1,8 @@
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Workflow+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 04 Oct 2016 21:15:44 +0000
+Reviewed-on: https://review.openstack.org/382066
+Project: openstack-infra/system-config
+Branch: refs/heads/master
