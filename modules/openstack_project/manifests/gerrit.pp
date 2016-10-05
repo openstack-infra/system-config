@@ -83,6 +83,7 @@ class openstack_project::gerrit (
   $its_plugins = [],
   $its_rules = [],
   $java_home = '',
+  $sshd_idle_timeout = '1h',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -191,6 +192,7 @@ class openstack_project::gerrit (
     index_threads                       => $index_threads,
     download                            => $download,
     receive_max_object_size_limit       => $receive_max_object_size_limit,
+    sshd_idle_timeout                   => $sshd_idle_timeout,
     commitmessage_params                =>
       {
         maxLineLength   => '72',
