@@ -47,9 +47,10 @@ elif [[ `lsb_release -i -s` == 'Fedora' ]]; then
 fi
 
 FOUND=0
+touch $CODENAME.final
 for f in `find applytest -name 'puppetapplytest*' -print` ; do
     if grep -q "Node-OS: $CODENAME" $f; then
-        cat applytest/head $f > $f.final
+        cat applytest/head $f >> $CODENAME.final
         FOUND=1
     fi
 done
@@ -62,7 +63,7 @@ fi
 sudo mkdir -p /var/run/puppet
 sudo -E bash -x ./install_modules.sh
 echo "Running apply test on these hosts:"
-find applytest -name 'puppetapplytest*.final' -print0
-find applytest -name 'puppetapplytest*.final' -print0 | \
+find applytest -name $CODENAME.final -print0
+find applytest -name $CODENAME.final -print0 | \
     xargs -0 -P $(nproc) -n 1 -I filearg \
         ./tools/test_puppet_apply.sh filearg
