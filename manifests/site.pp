@@ -816,6 +816,7 @@ node 'nodepool.openstack.org' {
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
     jenkins_masters               => [],
+    split_daemon                  => true,
   }
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
     ensure  => present,
