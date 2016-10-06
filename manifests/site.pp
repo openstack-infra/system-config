@@ -946,7 +946,7 @@ node /^zm\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
+    project_config_repo  => 'https://review-dev.openstack.org/project-config',
     gerrit_server        => 'review-dev.openstack.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
@@ -955,7 +955,10 @@ node 'zuul-dev.openstack.org' {
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
     statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [],
+    gearman_workers      => [
+      'nodepool.openstack.org',
+      'zlstatic00.openstack.org',
+    ],
   }
 }
 

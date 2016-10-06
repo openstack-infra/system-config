@@ -51,4 +51,9 @@ class openstack_project::zuul_dev(
   class { 'openstackci::zuul_merger':
     manage_common_zuul => false,
   }
+
+  class { 'openstackci::zuul_launcher':
+    status_url               => $status_url,
+  }
+
 }
