@@ -955,7 +955,9 @@ node 'zuul-dev.openstack.org' {
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
     statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [],
+    gearman_workers      => [
+      'zuul-dev.openstack.org',
+    ],
   }
 }
 

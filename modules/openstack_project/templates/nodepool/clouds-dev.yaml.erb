@@ -1,0 +1,46 @@
+cache:
+  expiration:
+    server: 5
+    port: 5
+    floating-ip: 5
+clouds:
+  osic-cloud1:
+    region_name: RegionOne
+    auth:
+      auth_url: https://cloud1.osic.org:5000
+      username: <%= @osic_cloud1_username %>
+      password: <%= @osic_cloud1_password %>
+      project_name: <%= @osic_cloud1_project %>
+      project_domain_name: default
+      user_domain_name: default
+    networks:
+      - name: GATEWAY_NET
+        routes_externally: true
+      - name: GATEWAY_NET_V6
+        routes_externally: true
+        routes_ipv6_externally: true
+        routes_ipv4_externally: false
+    identity_api_version: '3'
+    floating_ip_source: None
+  infracloud-vanilla:
+    auth:
+      auth_url: https://controller00.vanilla.ic.openstack.org:5000
+      username: '<%= @infracloud_vanilla_username %>'
+      password: '<%= @infracloud_vanilla_password %>'
+      project_name: '<%= @infracloud_vanilla_project %>'
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
+    floating_ip_source: None
+    cacert: /home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem
+  infracloud-chocolate:
+    auth:
+      auth_url: https://controller00.chocolate.ic.openstack.org:5000
+      username: '<%= @infracloud_chocolate_username %>'
+      password: '<%= @infracloud_chocolate_password %>'
+      project_name: '<%= @infracloud_chocolate_project %>'
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '3'
+    floating_ip_source: None
+    cacert: /home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem
