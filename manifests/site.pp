@@ -1265,6 +1265,22 @@ node 'apps.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'apps-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { '::apps_dev_site':
+    ssl_cert_file           => '/etc/ssl/certs/apps-dev.openstack.org.pem',
+    ssl_cert_file_contents  => hiera('apps_ssl_cert_file_contents'),
+    ssl_key_file            => '/etc/ssl/private/apps-dev.openstack.org.key',
+    ssl_key_file_contents   => hiera('apps_ssl_key_file_contents'),
+    ssl_chain_file          => '/etc/ssl/certs/apps-dev.openstack.org_intermediate.pem',
+    ssl_chain_file_contents => hiera('apps_ssl_chain_file_contents'),
+  }
+}
+
+# Node-OS: trusty
 node 'odsreg.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
