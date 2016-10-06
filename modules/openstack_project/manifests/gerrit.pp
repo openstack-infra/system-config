@@ -313,7 +313,7 @@ class openstack_project::gerrit (
   }
 
   exec { 'reload_gerrit_header':
-    command     => 'sleep 10; touch /home/gerrit2/review_site/etc/GerritSiteHeader.html',
+    command     => 'sleep 20; touch /home/gerrit2/review_site/etc/GerritSiteHeader.html',
     path        => '/bin:/usr/bin',
     refreshonly => true,
   }
