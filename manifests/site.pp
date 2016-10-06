@@ -1428,17 +1428,21 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
   }
 
   class { '::openstack_project::infracloud::baremetal':
-    # NOTE(pabelanger): hiera should be updated to reflect our new region
-    # names.
-    ironic_inventory   => hiera('ironic_inventory', {}),
-    ironic_db_password => hiera('ironic_db_password'),
-    mysql_password     => hiera('bifrost_mysql_password'),
-    ipmi_passwords     => hiera('ipmi_passwords'),
-    ssh_private_key    => hiera('bifrost_vanilla_ssh_private_key'),
-    ssh_public_key     => hiera('bifrost_vanilla_ssh_public_key'),
-    bridge_name        => hiera('bridge_name'),
-    vlan               => 2551,
-    gateway_ip         => '15.184.64.1',
+    ironic_inventory          => hiera('ironic_inventory', {}),
+    ironic_db_password        => hiera('ironic_db_password'),
+    mysql_password            => hiera('bifrost_mysql_password'),
+    ipmi_passwords            => hiera('ipmi_passwords'),
+    ssh_private_key           => hiera('bifrost_vanilla_ssh_private_key'),
+    ssh_public_key            => hiera('bifrost_vanilla_ssh_public_key'),
+    bridge_name               => hiera('bridge_name'),
+    vlan                      => hiera('vlan'),
+    gateway_ip                => hiera('gateway_ip'),
+    default_network_interface => hiera('default_network_interface'),
+    dhcp_pool_start           => hiera('dhcp_pool_start'),
+    dhcp_pool_end             => hiera('dhcp_pool_end'),
+    network_interface         => hiera('network_interface'),
+    ipv4_nameserver           => hiera('ipv4_nameserver'),
+    ipv4_subnet_mask          => hiera('ipv4_subnet_mask'),
   }
 }
 
