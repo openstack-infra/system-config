@@ -180,6 +180,7 @@ node 'puppetmaster.openstack.org' {
     iptables_public_tcp_ports => [8140],
     sysadmins                 => hiera('sysadmins', []),
     pin_puppet                => '3.6.',
+    puppetdb                  => false,
   }
   class { 'openstack_project::puppetmaster':
     root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
