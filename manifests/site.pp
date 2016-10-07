@@ -184,6 +184,7 @@ node 'puppetmaster.openstack.org' {
   class { 'openstack_project::puppetmaster':
     root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
     puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
+    puppetdb                                   => false,
   }
 }
 
