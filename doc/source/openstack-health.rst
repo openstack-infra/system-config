@@ -10,7 +10,7 @@ At a Glance
 
 :Hosts:
   * API Server: http://health.openstack.org
-  * Fronted: http://status.openstack.org/openstack-health
+  * Frontend: http://status.openstack.org/openstack-health
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-openstack_health/tree/
   * :file:`modules/openstack_project/manifests/openstack_health_api.pp`
