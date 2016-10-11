@@ -34,7 +34,7 @@ class openstack_project::ask (
   }
 
   class { 'solr':
-    mirror    => 'http://apache.mesi.com.ar/lucene/solr',
+    mirror    => 'https://archive.apache.org/dist/lucene/solr',
     version   => $solr_version,
     cores     => [ 'core-default', 'core-en', 'core-zh' ],
     dist_root => '/srv/dist/solr',
