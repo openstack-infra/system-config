@@ -208,4 +208,23 @@ class openstack_project::mirror (
       'create 640 root adm',
     ],
   }
+
+
+  if $vhost_name == 'mirror.regionone.osic-cloud1.openstack.org' {
+    # Work around networking issue in osic cloud.
+    file { "/etc/network/interfaces.d/eth0.cfg":
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/openstack_project/mirror/osic_cloud_eth0.cfg',
+    }
+    file { "/etc/network/interfaces.d/eth1.cfg":
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/openstack_project/mirror/osic_cloud_eth1.cfg',
+    }
+  }
 }
