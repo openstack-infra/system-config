@@ -130,7 +130,6 @@ meetbot_channels:
 - '#openstack-ansible'
 - '#openstack-api'
 - '#openstack-app-catalog'
-- '#openstack-astara'
 - '#openstack-barbican'
 - '#openstack-bareon'
 - '#openstack-blazar'
