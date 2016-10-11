@@ -74,7 +74,7 @@ active Mediawiki install slot. To perform a Mediawiki upgrade:
      --startOver`` followed by ``php
      extensions/CirrusSearch/maintenance/forceSearchIndex.php`` relative to
      the inactive slot you've upgraded (option 1.A as described at
-     https://git.wikimedia.org/blob/mediawiki%2Fextensions%2FCirrusSearch.git/HEAD/README
+     https://phabricator.wikimedia.org/diffusion/ECIR/browse/master/README
      in the upgrading section).
   #. At this point we are ready to change the ``/srv/mediawiki/w``
      symlink to point to the slot we just upgraded
