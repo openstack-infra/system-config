@@ -11,9 +11,13 @@ class openstack_project::zuul_dev(
   $status_url = 'http://zuul-dev.openstack.org',
   $zuul_url = '',
   $sysadmins = [],
+  $sites = [],
+  $nodes = [],
+  $zuul_launcher_keytab = '',
   $statsd_host = '',
   $gearman_workers = [],
   $project_config_repo = '',
+  $project_config_base = 'dev/',
 ) {
 
   realize (
@@ -45,10 +49,26 @@ class openstack_project::zuul_dev(
     git_email                => 'jenkins@openstack.org',
     git_name                 => 'OpenStack Jenkins',
     project_config_repo      => $project_config_repo,
-    project_config_base      => 'dev/',
+    project_config_base      => $project_config_base,
   }
 
   class { 'openstackci::zuul_merger':
     manage_common_zuul => false,
   }
+
+  class { 'openstackci::zuul_launcher':
+    status_url           => $status_url,
+    gearman_server       => $gearman_server,
+    gerrit_server        => $gerrit_server,
+    gerrit_user          => $gerrit_user,
+    gerrit_ssh_host_key  => $gerrit_ssh_host_key,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    project_config_repo  => $project_config_repo,
+    project_config_base  => $project_config_base,
+    sysadmins            => $sysadmins,
+    sites                => $sites,
+    nodes                => $nodes,
+    zuul_launcher_keytab => $zuul_launcher_keytab,
+    accept_nodes         => false,
+    }
 }
