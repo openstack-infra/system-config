@@ -900,7 +900,7 @@ node /^zlstatic\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+  class { 'openstack_ci::zuul_launcher':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
@@ -929,7 +929,7 @@ node /^zl\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+  class { 'openstack_ci::zuul_launcher':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
@@ -966,6 +966,9 @@ node 'zuul-dev.openstack.org' {
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
+    sites                => hiera('zuul_sites', []),
+    nodes                => hiera('zuul_nodes', []),
+    zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [],
   }
