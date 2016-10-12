@@ -261,35 +261,6 @@ class openstack_project::puppetmaster (
     }
   }
 
-# Jenkins master management
-  cron { 'restartjenkinsmasters':
-    ensure      => absent,
-    # Run through all masters onces a week.
-    weekday     => '6',
-    hour        => '0',
-    minute      => '15',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    command     => "flock -n /var/run/puppet/restart_jenkins_masters.lock ansible-playbook -f 1 /opt/system-config/production/playbooks/restart_jenkins_masters.yaml --extra-vars 'user=${jenkins_api_user} password=${jenkins_api_key}' >> /var/log/restart_jenkins_masters.log 2>&1",
-  }
-
-  file { '/var/log/restart_jenkins_masters.log':
-    ensure => absent,
-  }
-
-  logrotate::file { 'restartjenkinsmasters':
-    ensure  => absent,
-    log     => '/var/log/restart_jenkins_masters.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['restartjenkinsmasters'],
-  }
-
   # Ansible mgmt
   # TODO: Put this into its own class, maybe called bastion::ansible or something
 
