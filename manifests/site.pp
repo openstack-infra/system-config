@@ -954,6 +954,9 @@ node 'zuul-dev.openstack.org' {
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
+    sites                => hiera('zuul_sites', []),
+    nodes                => hiera('zuul_nodes', []),
+    zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [],
   }

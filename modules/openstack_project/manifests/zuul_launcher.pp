@@ -37,9 +37,11 @@ class openstack_project::zuul_launcher(
   $zuul_launcher_keytab = '',
 ) {
 
-  class { '::project_config':
-    url  => $project_config_repo,
-    base => $project_config_base,
+  if ! defined(Class['project_config']) {
+    class { '::project_config':
+      url  => $project_config_repo,
+      base => $project_config_base,
+    }
   }
 
   file { '/etc/zuul-launcher.keytab':
