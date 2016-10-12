@@ -4,6 +4,7 @@ cache:
     port: 5
     floating-ip: 5
 clouds:
+<% if @rackspace_username != "" -%>
   rax:
     profile: rackspace
     regions:
@@ -14,6 +15,8 @@ clouds:
       username: '<%= @rackspace_username %>'
       password: '<%= @rackspace_password %>'
       project_id: <%= @rackspace_project %>
+<% end -%>
+<% if @ovh_username != "" -%>
   ovh:
     profile: ovh
     regions:
@@ -23,6 +26,8 @@ clouds:
       username: '<%= @ovh_username %>'
       password: '<%= @ovh_password %>'
       project_name: '<%= @ovh_project %>'
+<% end -%>
+<% if @tripleo_username != "" -%>
   tripleo-test-cloud-rh1:
     region_name: regionOne
     auth:
@@ -42,6 +47,8 @@ clouds:
       project_name: '<%= tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh2.tripleo.org:13000/v2.0'
     floating_ip_source: neutron
+<% end -%>
+<% if @bluebox_username != "" -%>
   bluebox-sjc1:
     auth:
       auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
@@ -51,6 +58,8 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '3'
+<% end -%>
+<% if @internap_username != "" -%>
   internap:
     profile: internap
     auth:
@@ -70,6 +79,8 @@ clouds:
               routes_externally: True
             - name: inap-17304-LAN3326
               routes_externally: False
+<% end -%>
+<% if @osic_cloud1_username != "" -%>
   osic-cloud1:
     region_name: RegionOne
     auth:
@@ -88,6 +99,8 @@ clouds:
         routes_ipv4_externally: false
     identity_api_version: '3'
     floating_ip_source: None
+<% end -%>
+<% if @osic_cloud8_username != "" -%>
   osic-cloud8:
     region_name: RegionOne
     auth:
@@ -106,6 +119,8 @@ clouds:
         routes_ipv4_externally: false
     identity_api_version: '3'
     floating_ip_source: None
+<% end -%>
+<% if @vexxhost_username != "" -%>
   vexxhost:
     region_name: ca-ymq-1
     profile: vexxhost
@@ -113,6 +128,8 @@ clouds:
       username: '<%= @vexxhost_username %>'
       password: '<%= @vexxhost_password %>'
       project_name: '<%= @vexxhost_project %>'
+<% end -%>
+<% if @infracloud_vanilla_username != "" -%>
   infracloud-vanilla:
     auth:
       auth_url: https://controller00.vanilla.ic.openstack.org:5000
@@ -124,6 +141,8 @@ clouds:
     identity_api_version: '3'
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem
+<% end -%>
+<% if @infracloud_chocolate_username != "" -%>
   infracloud-chocolate:
     auth:
       auth_url: https://controller00.chocolate.ic.openstack.org:5000
@@ -135,6 +154,7 @@ clouds:
     identity_api_version: '3'
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem
+<% end -%>
   datacentred:
     region_name: sal01
     profile: datacentred
