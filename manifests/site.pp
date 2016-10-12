@@ -900,7 +900,7 @@ node /^zlstatic\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+  class { '::zuul':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
@@ -911,6 +911,9 @@ node /^zlstatic\d+\.openstack\.org$/ {
     sites                => hiera('zuul_sites', []),
     nodes                => hiera('zuul_nodes', []),
     accept_nodes         => false,
+  }
+  class { 'openstack_ci::zuul_launcher':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
   }
 }
 
@@ -929,7 +932,7 @@ node /^zl\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+  class { '::zuul':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
@@ -938,6 +941,11 @@ node /^zl\d+\.openstack\.org$/ {
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
+    nodes                => hiera('zuul_nodes', []),
+    accept_nodes         => false,
+  }
+  class { 'openstack_ci::zuul_launcher':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
   }
 }
@@ -966,6 +974,9 @@ node 'zuul-dev.openstack.org' {
     url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
     zuul_url             => 'http://zuul-dev.openstack.org/p',
     sysadmins            => hiera('sysadmins', []),
+    sites                => hiera('zuul_sites', []),
+    nodes                => hiera('zuul_nodes', []),
+    zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
     statsd_host          => 'graphite.openstack.org',
     gearman_workers      => [],
   }
