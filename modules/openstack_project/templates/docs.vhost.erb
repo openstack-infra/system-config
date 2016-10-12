@@ -11,6 +11,10 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       <%= "  ServerAlias #{@serveraliases}" -%>
     <% end -%>
 
+    RewriteEngine On
+    # Include file from openstack-manuals
+    <% File.read("/opt/openstack-manuals/www/setup/RewriteRules.incl") %>
+
     DocumentRoot <%= @docroot %>
     <Directory <%= @docroot %>>
         Options Indexes FollowSymLinks MultiViews

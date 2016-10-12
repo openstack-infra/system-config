@@ -59,5 +59,17 @@ class openstack_project::files (
     priority   => '50',
     template   => 'openstack_project/docs.vhost.erb',
     serveraliases => 'docs-beta.openstack.org',
+    require       => [
+      Vcsrepo['/opt/openstack-manuals'],
+    ],
   }
+
+  # For www/setup/RewriteRules.inc
+  vcsrepo { '/opt/openstack-manuals':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack/openstack-manuals.git',
+  }
+
 }
