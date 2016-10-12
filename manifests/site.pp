@@ -175,6 +175,17 @@ node 'cacti.openstack.org' {
 }
 
 # Node-OS: trusty
+node /^cacti\d+\.openstack\.org$/ {
+  $group = "cacti"
+  include openstack_project::ssl_cert_check
+  class { 'openstack_project::cacti':
+    sysadmins   => hiera('sysadmins', []),
+    cacti_hosts => hiera_array('cacti_hosts'),
+    vhost_name  => 'cacti.openstack.org',
+  }
+}
+
+# Node-OS: trusty
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [8140],
