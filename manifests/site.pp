@@ -805,6 +805,8 @@ node 'nodepool.openstack.org' {
   $datacentred_username   = hiera('nodepool_datacentred_username', 'username')
   $datacentred_password   = hiera('nodepool_datacentred_password')
   $datacentred_project    = hiera('nodepool_datacentred_project', 'project')
+  $citycloud_username = hiera('nodepool_citycloud_username', 'username')
+  $citycloud_password = hiera('nodepool_citycloud_password')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
