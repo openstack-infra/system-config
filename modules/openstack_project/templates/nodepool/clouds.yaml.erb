@@ -135,3 +135,13 @@ clouds:
     identity_api_version: '3'
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem
+  datacentred:
+    region_name: sal01
+    auth:
+      auth_url: https://compute.datacentred.io:5000/
+      username: '<%= @datacentred_username %>'
+      password: '<%= @datacentred_password%>'
+      project_name: '<%= @datacentred_project_name %>'
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '2'

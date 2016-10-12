@@ -307,3 +307,13 @@ clouds:
       username: '<%= @puppetmaster_clouds['openstackci_vexxhost_username'] %>'
       password: '<%= @puppetmaster_clouds['openstackci_vexxhost_password'] %>'
       project_name: '<%= @puppetmaster_clouds['openstackci_vexxhost_project_name'] %>'
+  openstackzuul-datacentred:
+    region_name: sal01
+    auth:
+      auth_url: https://compute.datacentred.io:5000/
+      username: <%= @puppetmaster_clouds['openstackzuul_datacentred_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_datacentred_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_datacentred_project_name'] %>
+      project_domain_name: default
+      user_domain_name: default
+    identity_api_version: '2'
