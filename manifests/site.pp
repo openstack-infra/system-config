@@ -802,6 +802,9 @@ node 'nodepool.openstack.org' {
   $vexxhost_username   = hiera('nodepool_vexxhost_username', 'username')
   $vexxhost_password   = hiera('nodepool_vexxhost_password')
   $vexxhost_project    = hiera('nodepool_vexxhost_project', 'project')
+  $datacentred_username   = hiera('nodepool_datacentred_username', 'username')
+  $datacentred_password   = hiera('nodepool_datacentred_password')
+  $datacentred_project    = hiera('nodepool_datacentred_project', 'project')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
