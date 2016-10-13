@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Code-Review+1: Ramy Asselin <ramy.asselin@hpe.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 13 Oct 2016 17:38:09 +0000
+Reviewed-on: https://review.openstack.org/386100
+Project: openstack-infra/system-config
+Branch: refs/heads/master
