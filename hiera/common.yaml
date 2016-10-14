@@ -34,6 +34,7 @@ infra_apache_serveradmin: noc@openstack.org
 statusbot_channels:
 - ara
 - congress
+- craton
 - edeploy
 - fuel-dev
 - heat
@@ -124,6 +125,7 @@ meetbot_channels:
 - '#ara'
 - '#cloudkitty'
 - '#congress'
+- '#craton'
 - '#dox'
 - '#heat'
 - '#midonet'
