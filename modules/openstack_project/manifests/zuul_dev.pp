@@ -8,12 +8,13 @@ class openstack_project::zuul_dev(
   $gerrit_ssh_host_key = '',
   $zuul_ssh_private_key = '',
   $url_pattern = '',
-  $status_url = 'http://zuul-dev.openstack.org',
   $zuul_url = '',
+  $status_url = 'http://zuul-dev.openstack.org/zuul/',
   $sysadmins = [],
   $statsd_host = '',
+  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
   $gearman_workers = [],
-  $project_config_repo = '',
+  $zuul_launcher_keytab = '',
 ) {
 
   realize (
@@ -30,12 +31,11 @@ class openstack_project::zuul_dev(
     sysadmins                 => $sysadmins,
   }
 
-  class { 'openstackci::zuul_scheduler':
+  class { '::zuul':
     vhost_name               => $vhost_name,
     gearman_server           => $gearman_server,
     gerrit_server            => $gerrit_server,
     gerrit_user              => $gerrit_user,
-    known_hosts_content      => "review-dev.openstack.org,23.253.78.13,2001:4800:7817:101:be76:4eff:fe04 ${gerrit_ssh_host_key}",
     zuul_ssh_private_key     => $zuul_ssh_private_key,
     url_pattern              => $url_pattern,
     zuul_url                 => $zuul_url,
@@ -44,6 +44,10 @@ class openstack_project::zuul_dev(
     statsd_host              => $statsd_host,
     git_email                => 'jenkins@openstack.org',
     git_name                 => 'OpenStack Jenkins',
+  }
+
+  class { 'openstackci::zuul_scheduler2':
+    known_hosts_content      => "review-dev.openstack.org,23.253.78.13,2001:4800:7817:101:be76:4eff:fe04 ${gerrit_ssh_host_key}",
     project_config_repo      => $project_config_repo,
     project_config_base      => 'dev/',
   }
