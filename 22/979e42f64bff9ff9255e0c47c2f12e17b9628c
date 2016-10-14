@@ -1,0 +1,14 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+1: Matjaz Pancur <matjaz.pancur@fri.uni-lj.si>
+Code-Review+1: Ildiko Vancsa <ildiko.vancsa@gmail.com>
+Code-Review+1: Gergely Csatari <gergely.csatari@nokia.com>
+Code-Review+1: Marton Kiss <marton.kiss@gmail.com>
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Workflow+1: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+1: Zhenguo Niu <Niu.ZGlinux@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 14 Oct 2016 09:04:30 +0000
+Reviewed-on: https://review.openstack.org/367005
+Project: openstack-infra/system-config
+Branch: refs/heads/master
