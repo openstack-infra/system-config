@@ -100,8 +100,8 @@ statusbot_channels:
 - openstack-sahara
 - openstack-sdks
 - openstack-searchlight
-- openstack-solar
 - openstack-shade
+- openstack-solar
 - openstack-sprint
 - openstack-stable
 - openstack-state-management
@@ -174,9 +174,9 @@ meetbot_channels:
 - '#openstack-lbaas'
 - '#openstack-manila'
 - '#openstack-meeting'
-- '#openstack-meeting-alt'
 - '#openstack-meeting-3'
 - '#openstack-meeting-4'
+- '#openstack-meeting-alt'
 - '#openstack-meeting-cp'
 - '#openstack-mistral'
 - '#openstack-monasca'
@@ -188,10 +188,10 @@ meetbot_channels:
 - '#openstack-nimble'
 - '#openstack-nova'
 - '#openstack-operators'
-- '#openstack-performance'
-- '#openstack-pkg'
 - '#openstack-opw'
 - '#openstack-oslo'
+- '#openstack-performance'
+- '#openstack-pkg'
 - '#openstack-powervm'
 - '#openstack-product'
 - '#openstack-qa'
