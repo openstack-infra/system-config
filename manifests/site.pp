@@ -905,17 +905,20 @@ node /^zlstatic\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+
+  class { '::zuul':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
     nodes                => hiera('zuul_nodes', []),
     accept_nodes         => false,
+  }
+
+  class { 'openstack_project::zuul_launcher':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
   }
 }
 
@@ -934,15 +937,18 @@ node /^zl\d+\.openstack\.org$/ {
     puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
-  class { 'openstack_project::zuul_launcher':
+
+  class { '::zuul':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
     gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
+  }
+
+  class { 'openstack_project::zuul_launcher':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
     zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
   }
 }
