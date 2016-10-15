@@ -55,4 +55,10 @@ class openstack_project::zuul_dev(
   class { 'openstackci::zuul_merger':
     manage_common_zuul => false,
   }
+
+  class { 'openstack_project::zuul_launcher':
+    project_config_repo      => $project_config_repo,
+    project_config_base      => 'dev/',
+    zuul_launcher_keytab     => $zuul_launcher_keytab,
+  }
 }
