@@ -39,14 +39,6 @@ class openstack_project::zuul_launcher(
     notify  => Exec['zuul-launcher-reload'],
   }
 
-  file { '/home/zuul/.ssh':
-    ensure  => directory,
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0700',
-    require => User['zuul'],
-  }
-
   file { '/home/zuul/.ssh/config':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/zuul/launcher_ssh_config',
