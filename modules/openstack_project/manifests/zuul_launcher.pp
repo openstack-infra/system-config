@@ -39,12 +39,14 @@ class openstack_project::zuul_launcher(
     notify  => Exec['zuul-launcher-reload'],
   }
 
-  file { '/home/zuul/.ssh':
-    ensure  => directory,
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0700',
-    require => User['zuul'],
+  if ! defined(Class['known_hosts']) {
+    file { '/home/zuul/.ssh':
+      ensure  => directory,
+      owner   => 'zuul',
+      group   => 'zuul',
+      mode    => '0700',
+      require => User['zuul'],
+    }
   }
 
   file { '/home/zuul/.ssh/config':
