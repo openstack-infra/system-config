@@ -769,6 +769,8 @@ node 'status.openstack.org' {
 
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
+  # TODO(pabelanger): Move all of this back into nodepool manifest, it has
+  # grown too big.
   $bluebox_username    = hiera('nodepool_bluebox_username', 'username')
   $bluebox_password    = hiera('nodepool_bluebox_password')
   $bluebox_project     = hiera('nodepool_bluebox_project', 'project')
@@ -850,6 +852,15 @@ node 'nodepool.openstack.org' {
     mode    => '0600',
     content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
+  }
+
+  cron { 'mirror_gitgc':
+    user        => 'nodepool',
+    hour        => '20',
+    minute      => '0',
+    command     => 'find /opt/dib_cache/source-repositories/ -type d -name "*.git" -exec git --git-dir="{}" gc \; >/dev/null',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => Class['::openstackci::nodepool'],
   }
 }
 
