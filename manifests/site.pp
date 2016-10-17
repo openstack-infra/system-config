@@ -1347,8 +1347,6 @@ node 'controller00.vanilla.ic.openstack.org' {
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     br_name                          => hiera('bridge_name'),
     controller_public_address        => $::fqdn,
-    openstackci_password             => hiera('openstackci_infracloud_password'),
-    openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
     neutron_subnet_cidr              => '15.184.64.0/19',
     neutron_subnet_gateway           => '15.184.64.1',
     neutron_subnet_allocation_pools  => [
@@ -1405,8 +1403,6 @@ node 'controller00.chocolate.ic.openstack.org' {
     ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => $::fqdn,
-    openstackci_password             => hiera('openstackci_infracloud_password'),
-    openstackjenkins_password        => hiera('openstackjenkins_infracloud_password'),
     neutron_subnet_cidr              => '15.184.64.0/19',
     neutron_subnet_gateway           => '15.184.64.1',
     neutron_subnet_allocation_pools  => [
