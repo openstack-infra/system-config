@@ -15,6 +15,13 @@ class openstack_project::zuul_dev(
   $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
   $gearman_workers = [],
   $zuul_launcher_keytab = '',
+  $mysql_password = '',
+  $mysql_root_password = '',
+  $nodepool_ssh_public_key = '',
+  $osic_cloud8_username = '',
+  $osic_cloud8_password = '',
+  $osic_cloud8_project  = '',
+  $clouds_yaml          = '',
 ) {
 
   realize (
@@ -60,5 +67,42 @@ class openstack_project::zuul_dev(
     project_config_repo      => $project_config_repo,
     project_config_base      => 'dev/',
     zuul_launcher_keytab     => $zuul_launcher_keytab,
+  }
+
+  include openstack_project
+
+  class { '::openstackci::nodepool':
+    vhost_name                    => '127.0.0.1',
+    project_config_repo           => $project_config_repo,
+    mysql_password                => $mysql_password,
+    mysql_root_password           => $mysql_root_password,
+    nodepool_ssh_public_key       => $nodepool_ssh_public_key,
+    # TODO(pabelanger): Switch out private key with zuul_worker once we are
+    # ready.
+    nodepool_ssh_private_key      => hiera('jenkins_dev_ssh_private_key_contents'),
+    oscc_file_contents            => $clouds_yaml,
+    image_log_document_root       => '/var/log/nodepool/image',
+    statsd_host                   => 'graphite.openstack.org',
+    logging_conf_template         => 'openstack_project/nodepool/nodepool.logging.conf.erb',
+    builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
+    upload_workers                => '16',
+    jenkins_masters               => [],
+    split_daemon                  => true,
+  }
+  file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
+    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
+    require => Class['::openstackci::nodepool'],
+  }
+  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
+    ensure  => present,
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
+    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
+    require => Class['::openstackci::nodepool'],
   }
 }
