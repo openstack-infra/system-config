@@ -967,16 +967,29 @@ node /^zm\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   class { 'openstack_project::zuul_dev':
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server        => 'review-dev.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
-    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    zuul_url             => 'http://zuul-dev.openstack.org/p',
-    sysadmins            => hiera('sysadmins', []),
-    statsd_host          => 'graphite.openstack.org',
-    gearman_workers      => [],
+    project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
+    gerrit_server                 => 'review-dev.openstack.org',
+    gerrit_user                   => 'jenkins',
+    gerrit_ssh_host_key           => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key          => hiera('zuul_dev_ssh_private_key_contents'),
+    url_pattern                   => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url                      => 'http://zuul-dev.openstack.org/p',
+    sysadmins                     => hiera('sysadmins', []),
+    statsd_host                   => 'graphite.openstack.org',
+    gearman_workers               => [
+      '127.0.0.1',
+    ],
+
+    mysql_password                => hiera('nodepool_dev_mysql_password'),
+    mysql_root_password           => hiera('nodepool_dev_mysql_root_password'),
+    nodepool_ssh_public_key       => hiera('zuul_dev_worker_ssh_public_key_contents'),
+    # TODO(pabelanger): Switch out private key with zuul_worker once we are
+    # ready.
+    nodepool_ssh_private_key      => hiera('jenkins_dev_ssh_private_key_contents'),
+    osic_cloud8_username          => hiera('nodepool_osic_cloud8_username', 'username'),
+    osic_cloud8_password          => hiera('nodepool_osic_cloud8_password'),
+    osic_cloud8_project           => hiera('nodepool_osic_cloud8_project', 'project'),
+    clouds_yaml                   => template("openstack_project/nodepool/clouds.yaml.erb"),
   }
 }
 
