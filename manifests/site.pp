@@ -1355,7 +1355,8 @@ node 'controller00.vanilla.ic.openstack.org' {
                                           'start=15.184.65.2,end=15.184.65.254',
                                           'start=15.184.66.2,end=15.184.66.254',
                                           'start=15.184.67.2,end=15.184.67.254'
-                                        ]
+                                        ],
+    mysql_max_connections            => hiera('mysql_max_connections'),
   }
 }
 
