@@ -15,6 +15,8 @@ HOST_ID=`php -q add_graphs.php --list-hosts |grep $HOST_NAME|cut -f 1`
 
 if [[ $HOST_NAME =~ vanilla\.ic\.openstack\.org ]]; then
     TREE_NAME='Infra Cloud Vanilla'
+elif [[ $HOST_NAME =~ chocolate\.ic\.openstack\.org ]]; then
+    TREE_NAME='Infra Cloud Chocolate'
 else
     TREE_NAME='All Hosts'
 fi
