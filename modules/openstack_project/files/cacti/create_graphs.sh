@@ -67,7 +67,7 @@ add_ds_graph "Host MIB - Available Disk Space" "Available Disk Space" \
 SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
     grep "SNMP - Interface Statistics"|cut -f 1`
 
-for $iface in $(php -q /usr/share/cacti/cli/add_graphs.php --host-id=$HOST_ID --snmp-field=ifName --list-snmp-values | grep -v tap| grep -v brq) ; do
+for iface in $(php -q /usr/share/cacti/cli/add_graphs.php --host-id=$HOST_ID --snmp-field=ifName --list-snmp-values | grep -v tap| grep -v brq) ; do
 add_ds_graph "Interface - Traffic (bits/sec)" "In/Out Bits (64-bit Counters)" \
     "ifName" "$iface"
 add_ds_graph "Interface - Errors/Discards" "In/Out Errors/Discarded Packets" \
