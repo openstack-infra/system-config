@@ -535,6 +535,15 @@ node /^firehose\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS:trusty
+node /^pholio\d+\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => $sysadmins,
+  }
+  class { 'openstack_project::pholio':  }
+}
+
 # CentOS machines to load balance git access.
 # Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
