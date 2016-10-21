@@ -38,6 +38,11 @@ class openstack_project::files (
     ]
   }
 
+  httpd_mod { 'rewrite':
+    ensure => present,
+    before => Service['httpd'],
+  }
+
   class { '::httpd::logrotate':
     options => [
       'daily',
