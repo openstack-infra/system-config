@@ -535,6 +535,13 @@ node /^firehose\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS:trusty
+node /^pholio\d+\.openstack\.org$/ {
+  class { 'openstack_project::pholio':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
 # CentOS machines to load balance git access.
 # Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
