@@ -439,6 +439,7 @@ cacti_hosts:
 - openstackid.org
 - paste.openstack.org
 - pbx.openstack.org
+- pholio01.openstack.org
 - planet.openstack.org
 - proposal.slave.openstack.org
 - puppetdb.openstack.org
