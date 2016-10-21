@@ -1,0 +1,9 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Workflow+1: Elizabeth K. Joseph <lyz@princessleia.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 21 Oct 2016 16:31:18 +0000
+Reviewed-on: https://review.openstack.org/389777
+Project: openstack-infra/system-config
+Branch: refs/heads/master
