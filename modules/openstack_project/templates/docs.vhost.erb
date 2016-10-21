@@ -11,15 +11,11 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       <%= "  ServerAlias #{@serveraliases}" -%>
     <% end -%>
 
-    RewriteEngine on
-
     DocumentRoot <%= @docroot %>
     <Directory <%= @docroot %>>
         Options Indexes FollowSymLinks MultiViews
         Satisfy any
         Require all granted
-        # Allow mod_rewrite rules
-        AllowOverride FileInfo
     </Directory>
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
