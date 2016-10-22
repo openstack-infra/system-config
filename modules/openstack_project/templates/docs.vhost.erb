@@ -20,6 +20,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
         Require all granted
         # Allow mod_rewrite rules
         AllowOverride FileInfo
+        ErrorDocument 404 /errorpage.html
     </Directory>
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
