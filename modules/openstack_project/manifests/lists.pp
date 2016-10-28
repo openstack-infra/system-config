@@ -375,4 +375,12 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+  maillist { 'cloud-operations-api':
+    ensure      => present,
+    admin       => 'korenlev@gmail.com',
+    password    => $listpassword,
+    description => 'Dealing with cloud admins operations API for maintenance and troubleshooting',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
