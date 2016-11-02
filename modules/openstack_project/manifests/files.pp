@@ -65,4 +65,15 @@ class openstack_project::files (
     template   => 'openstack_project/docs.vhost.erb',
     serveraliases => 'docs-beta.openstack.org',
   }
+
+  ###########################################################
+  # developer.openstack.org
+
+  ::httpd::vhost { 'developer.openstack.org':
+    port       => 80,
+    docroot    => "${afs_root}developer-docs",
+    priority   => '50',
+    template   => 'openstack_project/docs.vhost.erb',
+    serveraliases => 'developer-beta.openstack.org',
+  }
 }
