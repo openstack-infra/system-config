@@ -257,27 +257,12 @@ This is not a comprehensive overview of commands available to individuals
 running IRC channels on Freenode, but a basic overview of some of the common
 commands which may be required for channel operators.
 
-Operator status is required to perform certain commands in your channel like
-inviting users, changing the topic through your client and removing disruptive
-users. To give yourself operator status in a channel, use the following
-command:
+Operator status is sometimes required to perform certain commands in your
+channel (though most everything can be done through `/msg chanserv` commands
+instead if permission flags are set correctly). To give yourself operator
+status in a channel, use the following command:
 
   /msg chanserv op #channel
-
-On some networks, the preferred mechanism for removing a user from a channel is
-a kick. Freenode also supports the "remove" command which is a gentler way to
-simply send a part-like command to the user's client. In most cases, this will
-signal the client not to try to rejoin. Syntax for the removal command is as
-follows (you must be an operator):
-
-  /quote remove #channel nickname :Reason goes here
-
-Note the colon in the syntax, if this is omitted only the first word will
-accompany the removal message.
-
-Banning of disruptive users is also available with the `/ban` command, see your
-client documentation for syntax. You can also add users to Chanserv's auto-kick
-list like so: `/msg chanserv akick <channel_name> add <nick> [optional reason]`
 
 You don't need to become an operator to change the topic, this can be done
 via Chanserv:
@@ -292,6 +277,29 @@ command:
 Visit the `Freenode Channel Guidelines <https://freenode.net/changuide>`_
 for more information about recommended strategies for running channels on
 Freenode.
+
+Banning Disruptive Users
+========================
+
+The easiest and fastest solution to indefinitely ban an abusive user from a
+channel is to add them to Chanserv's auto-kick list like so: `/msg chanserv
+akick <channel_name> add <nick> [optional reason]` (this will immediately and
+anonymously kick them from the channel, and prevent them from rejoining until
+expoicitly removed again).
+
+On some networks, the preferred mechanism for removing a user from a channel is
+a kick. Freenode also supports the "remove" command which is a gentler way to
+simply send a part-like command to the user's client. In most cases, this will
+signal the client not to try to rejoin. Syntax for the removal command is as
+follows (you must be an operator):
+
+  /quote remove #channel nickname :Reason goes here
+
+Note the colon in the syntax, if this is omitted only the first word will
+accompany the removal message.
+
+Banning of disruptive users is also available with the `/ban` command, see your
+client documentation for syntax.
 
 Renaming an IRC Channel
 =======================
