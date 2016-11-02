@@ -122,6 +122,8 @@ statusbot_channels:
 - syscompass
 - tacker
 - tripleo
+# Note that freenode only allows a single account to connect to 120
+# channel.
 meetbot_channels:
 - '#ara'
 - '#cloudkitty'
