@@ -1,0 +1,11 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Kairat Kushaev <kkushaev@mirantis.com>
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 03 Nov 2016 14:33:32 +0000
+Reviewed-on: https://review.openstack.org/382971
+Project: openstack-infra/system-config
+Branch: refs/heads/master
