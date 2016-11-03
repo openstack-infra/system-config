@@ -1296,6 +1296,21 @@ node 'apps.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'apps-dev.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { '::apps_site':
+    without_glare           => false,
+    commit                  => 'feature/glare-support',
+    use_pip                 => false,
+    use_git                 => true,
+    repo_url                => 'https://git.openstack.org/openstack/app-catalog.git',
+  }
+}
+
+# Node-OS: trusty
 node 'odsreg.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
