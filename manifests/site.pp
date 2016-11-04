@@ -542,7 +542,7 @@ node /^pholio\d+\.openstack\.org$/ {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::pholio':
-    mysql_user_password  => hiera('pholio_mysql_password'),
+    mysql_user_password  => hiera('pholio_mysql_user_password'),
     mysql_root_password  => hiera('pholio_mysql_root_password'),
     # snakeoil for now; will move to real key soon (ianw 2016-11-04)
     ssl_cert_file        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
