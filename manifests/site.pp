@@ -541,7 +541,14 @@ node /^pholio\d+\.openstack\.org$/ {
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
-  class { 'openstack_project::pholio':  }
+  class { 'openstack_project::pholio':
+    mysql_user_password  => hiera('pholio_mysql_password'),
+    mysql_root_password  => hiera('pholio_mysql_root_password'),
+    # snakeoil for now; will move to real key soon (ianw 2016-11-04)
+    ssl_cert_file        => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file         => '/etc/ssl/private/ssl-cert-snakeoil.key',
+    ssl_chain_file       => '',
+  }
 }
 
 # CentOS machines to load balance git access.
