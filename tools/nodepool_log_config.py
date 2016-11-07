@@ -34,7 +34,7 @@ CONFIG_FILE = '../../project-config/nodepool/nodepool.yaml'
 LOGGING_CONFIG_FILE = MODULES_PATH + '/nodepool-builder.logging.conf.erb'
 LOG_DIR = '/var/log/nodepool'
 IMAGE_LOG_DIR = '<%= @image_log_document_root %>'
-
+UPLOAD_LOG_DIR = '<%= @upload_log_document_root %>'
 
 _BASIC_FILE = """
 
@@ -107,9 +107,10 @@ args=('%(image_log_dir)s/image.log', 'H', 8, 30,)
 format=%%(asctime)s %%(levelname)s %%(name)s: %%(message)s
 datefmt=
 
-# ==== individual image loggers ====
+# ==== loggers and handlers ====
 
-%(image_loggers_and_handlers)s"""
+%(loggers_and_handlers)s
+"""
 
 _IMAGE_HANDLER = """
 [handler_%(title)s]
@@ -127,25 +128,50 @@ qualname=nodepool.image.build.%(qualname)s
 propagate=0
 """
 
+_UPLOAD_HANDLER = """
+[handler_%(title)s]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('%(upload_log_dir)s/%(filename)s', 'H', 8, 30,)
+"""
 
-def _get_providers_and_images(config_file):
+_UPLOAD_LOGGER = """
+[logger_%(title)s]
+level=DEBUG
+handlers=%(handler)s
+qualname=nodepool.image.upload.%(qualname)s
+propagate=0
+"""
+
+
+def _get_providers_and_images(config):
     ret = []
-    config = yaml.load(config_file)
     for provider in config['providers']:
         for image in provider['images']:
             if 'diskimage' not in image:
                 ret.append((provider['name'], image['name']))
-    logging.debug("Added %d providers & images" % len(ret))
+                logging.debug("Added snapshot image: %s:%s" % (
+                    provider['name'], image['name']))
 
     # diskimages have a special provider
     if 'diskimages' in config:
         for diskimage in config['diskimages']:
             ret.append(('dib', diskimage['name']))
+            logging.debug("Added dib image: %s" % diskimage['name'])
 
     return ret
 
 
-def _generate_logger_and_handler(image_log_dir, provider, image):
+def _get_upload_providers(config):
+    ret = []
+    for provider in config['providers']:
+        ret.append(provider['name'])
+        logging.debug("Added upload provider: %s" % provider['name'])
+    return ret
+
+
+def _generate_image_logger_and_handler(image_log_dir, provider, image):
     handler = _IMAGE_HANDLER % {
         'image_log_dir': image_log_dir,
         'title': '%s_%s' % (provider, image),
@@ -167,7 +193,29 @@ def _generate_logger_and_handler(image_log_dir, provider, image):
     }
 
 
-def generate_log_config(config, log_dir, image_log_dir, output):
+def _generate_upload_logger_and_handler(upload_log_dir, provider):
+    handler = _UPLOAD_HANDLER % {
+        'upload_log_dir': upload_log_dir,
+        'title': '%s_upload' % (provider),
+        'filename': '%s.log' % (provider),
+    }
+
+    logger = _IMAGE_LOGGER % {
+        'title': '%s_upload' % (provider),
+        'handler': '%s_upload' % (provider),
+        'qualname': '%s' % (provider),
+    }
+
+    return {
+        'handler_title': '%s_upload' % (provider),
+        'logger_title': '%s_upload' % (provider),
+        'handler': handler,
+        'logger': logger,
+    }
+
+
+def generate_log_config(config, log_dir, image_log_dir,
+                        upload_log_dir, output):
 
     """Generate a sample logging file
 
@@ -199,16 +247,26 @@ def generate_log_config(config, log_dir, image_log_dir, output):
     :param config: input config file
     :param log_dir: directory for main log file
     :param image_log_dir: directory for image build logs
+    :param upload_log_dir: directory for upload logs
     :param output: open file handle to output sample configuration to
 
     """
 
     loggers_and_handlers = []
     logging.debug("Reading config file %s" % config.name)
+    config = yaml.load(config)
+
+    # image loggers
     for (provider, image) in _get_providers_and_images(config):
         loggers_and_handlers.append(
-            _generate_logger_and_handler(image_log_dir, provider, image))
+            _generate_image_logger_and_handler(image_log_dir, provider, image))
 
+    # provider loggers (for upload)
+    for provider in _get_upload_providers(config):
+        loggers_and_handlers.append(
+            _generate_upload_logger_and_handler(upload_log_dir, provider))
+
+    # output all loggers and handlers
     logger_titles = []
     handler_titles = []
     image_loggers_and_handlers = ""
@@ -217,6 +275,7 @@ def generate_log_config(config, log_dir, image_log_dir, output):
         handler_titles.append(item['handler_title'])
         image_loggers_and_handlers += item['logger'] + item['handler']
 
+    # Final output
     final_output = _BASIC_FILE % {
         'log_dir': log_dir,
         'image_log_dir': image_log_dir,
@@ -228,7 +287,7 @@ def generate_log_config(config, log_dir, image_log_dir, output):
                                                   break_long_words=False,
                                                   break_on_hyphens=False,
                                                   subsequent_indent=' ')),
-        'image_loggers_and_handlers': image_loggers_and_handlers,
+        'loggers_and_handlers': image_loggers_and_handlers,
     }
 
     logging.debug("Writing output to %s" % output.name)
@@ -255,7 +314,10 @@ def main():
                         "(default: %s)" % LOG_DIR)
     parser.add_argument('-i', '--image-log-dir', default=IMAGE_LOG_DIR,
                         help="Output directory for image logs "
-                        "(default: %s)" % IMAGE_LOG_DIR)
+                        "(default: %s)" % IMAGE_LOG_DIR.replace('%', '%%'))
+    parser.add_argument('-u', '--upload-log-dir', default=UPLOAD_LOG_DIR,
+                        help="Output directory for upload logs "
+                        "(default: %s)" % UPLOAD_LOG_DIR.replace('%', '%%'))
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
@@ -263,6 +325,7 @@ def main():
     generate_log_config(args.config,
                         args.log_dir,
                         args.image_log_dir,
+                        args.upload_log_dir,
                         args.output)
 
 
