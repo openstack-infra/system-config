@@ -305,17 +305,32 @@ class openstack_project::review (
   gerrit::plugin { 'javamelody': version       => '3fefa35' }
   gerrit::plugin { 'its-storyboard': version   => 'a9cb131' }
 
+  # Gerritbot class needs to be included to install dependencies
   class { 'gerritbot':
+    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+  }
+
+  gerritbot::bot { 'gerritbot1':
     nick                    => 'openstackgerrit',
     password                => $gerritbot_password,
     server                  => 'irc.freenode.net',
     user                    => 'gerritbot',
     vhost_name              => $::fqdn,
-    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
     channel_file            => $::project_config::gerritbot_channel_file,
     require                 => $::project_config::config_dir,
   }
+
+  gerritbot::bot { 'gerritbot2':
+    nick                    => 'openstackgerrit2',
+    password                => $gerritbot_password,
+    server                  => 'irc.freenode.net',
+    user                    => 'gerritbot',
+    vhost_name              => $::fqdn,
+    channel_file            => $::project_config::gerritbot2_channel_file,
+    require                 => $::project_config::config_dir,
+  }
+
   class { 'gerrit::remotes':
     ensure => absent,
   }
