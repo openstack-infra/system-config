@@ -37,7 +37,7 @@
 #
 #     $ virtualenv venv
 #     [...]
-#     $ ./venv/bin/pip install pyyaml requests
+#     $ ./venv/bin/pip install pyyaml requests requests[security]
 #     [...]
 #     $ ./venv/bin/python tools/owners.py -a 2015-03-04 \
 #           -b 2016-03-04 -i 11131 -o owners -r march-2016-elections
