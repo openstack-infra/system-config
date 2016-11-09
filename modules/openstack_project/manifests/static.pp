@@ -270,6 +270,7 @@ class openstack_project::static (
   $governance_directories = [
     '/srv/static/election',
     '/srv/static/governance',
+    '/srv/static/tc',
     '/srv/static/uc',
   ]
 
