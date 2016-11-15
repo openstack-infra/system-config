@@ -8,12 +8,24 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,
  dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24,
+ rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
+ ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
+ osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
+ osic-cloud1-disk_upload, tripleo-test-cloud-rh1_upload,
+ tripleo-test-cloud-rh2_upload, infracloud-vanilla_upload,
+ infracloud-chocolate_upload
 
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24,
+ rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
+ ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
+ osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
+ osic-cloud1-disk_upload, tripleo-test-cloud-rh1_upload,
+ tripleo-test-cloud-rh2_upload, infracloud-vanilla_upload,
+ infracloud-chocolate_upload
 
 [formatters]
 keys=simple
@@ -71,7 +83,7 @@ args=('<%= @image_log_document_root %>/image.log', 'H', 8, 30,)
 format=%(asctime)s %(levelname)s %(name)s: %(message)s
 datefmt=
 
-# ==== individual image loggers ====
+# ==== loggers and handlers ====
 
 
 [logger_dib_debian-jessie]
@@ -157,3 +169,172 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-24.log', 'H', 8, 30,)
+
+[logger_rax-dfw_upload]
+level=DEBUG
+handlers=rax-dfw_upload
+qualname=nodepool.image.build.rax-dfw
+propagate=0
+
+[handler_rax-dfw_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-dfw.log', 'H', 8, 30,)
+
+[logger_rax-ord_upload]
+level=DEBUG
+handlers=rax-ord_upload
+qualname=nodepool.image.build.rax-ord
+propagate=0
+
+[handler_rax-ord_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-ord.log', 'H', 8, 30,)
+
+[logger_rax-iad_upload]
+level=DEBUG
+handlers=rax-iad_upload
+qualname=nodepool.image.build.rax-iad
+propagate=0
+
+[handler_rax-iad_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-iad.log', 'H', 8, 30,)
+
+[logger_ovh-gra1_upload]
+level=DEBUG
+handlers=ovh-gra1_upload
+qualname=nodepool.image.build.ovh-gra1
+propagate=0
+
+[handler_ovh-gra1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/ovh-gra1.log', 'H', 8, 30,)
+
+[logger_ovh-bhs1_upload]
+level=DEBUG
+handlers=ovh-bhs1_upload
+qualname=nodepool.image.build.ovh-bhs1
+propagate=0
+
+[handler_ovh-bhs1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/ovh-bhs1.log', 'H', 8, 30,)
+
+[logger_bluebox-sjc1_upload]
+level=DEBUG
+handlers=bluebox-sjc1_upload
+qualname=nodepool.image.build.bluebox-sjc1
+propagate=0
+
+[handler_bluebox-sjc1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/bluebox-sjc1.log', 'H', 8, 30,)
+
+[logger_internap-mtl01_upload]
+level=DEBUG
+handlers=internap-mtl01_upload
+qualname=nodepool.image.build.internap-mtl01
+propagate=0
+
+[handler_internap-mtl01_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/internap-mtl01.log', 'H', 8, 30,)
+
+[logger_osic-cloud1-s3500_upload]
+level=DEBUG
+handlers=osic-cloud1-s3500_upload
+qualname=nodepool.image.build.osic-cloud1-s3500
+propagate=0
+
+[handler_osic-cloud1-s3500_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/osic-cloud1-s3500.log', 'H', 8, 30,)
+
+[logger_osic-cloud1-s3700_upload]
+level=DEBUG
+handlers=osic-cloud1-s3700_upload
+qualname=nodepool.image.build.osic-cloud1-s3700
+propagate=0
+
+[handler_osic-cloud1-s3700_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/osic-cloud1-s3700.log', 'H', 8, 30,)
+
+[logger_osic-cloud1-disk_upload]
+level=DEBUG
+handlers=osic-cloud1-disk_upload
+qualname=nodepool.image.build.osic-cloud1-disk
+propagate=0
+
+[handler_osic-cloud1-disk_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/osic-cloud1-disk.log', 'H', 8, 30,)
+
+[logger_tripleo-test-cloud-rh1_upload]
+level=DEBUG
+handlers=tripleo-test-cloud-rh1_upload
+qualname=nodepool.image.build.tripleo-test-cloud-rh1
+propagate=0
+
+[handler_tripleo-test-cloud-rh1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh1.log', 'H', 8, 30,)
+
+[logger_tripleo-test-cloud-rh2_upload]
+level=DEBUG
+handlers=tripleo-test-cloud-rh2_upload
+qualname=nodepool.image.build.tripleo-test-cloud-rh2
+propagate=0
+
+[handler_tripleo-test-cloud-rh2_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh2.log', 'H', 8, 30,)
+
+[logger_infracloud-vanilla_upload]
+level=DEBUG
+handlers=infracloud-vanilla_upload
+qualname=nodepool.image.build.infracloud-vanilla
+propagate=0
+
+[handler_infracloud-vanilla_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/infracloud-vanilla.log', 'H', 8, 30,)
+
+[logger_infracloud-chocolate_upload]
+level=DEBUG
+handlers=infracloud-chocolate_upload
+qualname=nodepool.image.build.infracloud-chocolate
+propagate=0
+
+[handler_infracloud-chocolate_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/infracloud-chocolate.log', 'H', 8, 30,)
+
