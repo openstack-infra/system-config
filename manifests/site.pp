@@ -535,7 +535,7 @@ node /^firehose\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS:trusty
+# Node-OS: trusty
 node /^pholio\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
@@ -543,7 +543,7 @@ node /^pholio\d+\.openstack\.org$/ {
   }
   class { '::phabricator':
     httpd_admin_email       => hiera('infra_apache_serveradmin'),
-    httpd_vhost_name        => 'pholio.openstack.org'),
+    httpd_vhost_name        => 'pholio.openstack.org',
     mysql_user_password     => hiera('pholio_mysql_user_password'),
     mysql_root_password     => hiera('pholio_mysql_root_password'),
     ssl_cert_file_contents  => hiera('ssl_cert_file_contents'),
