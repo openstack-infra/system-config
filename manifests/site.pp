@@ -63,6 +63,8 @@ node 'review.openstack.org' {
   }
 }
 
+
+
 # Node-OS: trusty
 node 'review-dev.openstack.org' {
   class { 'openstack_project::server':
@@ -1177,6 +1179,15 @@ node 'single-use-slave-devstack' {
   class { 'openstack_project::single_use_slave':
     sudo => true,
     thin => true,
+  }
+}
+
+# Node-OS: trusty
+# Used for testing all-in-one deployments
+node 'single-node-ci.test.only' {
+
+  class { '::openstackci::single_node_ci':
+    project_config_repo         => 'git://git.openstack.org/openstack-infra/project-config-example',
   }
 }
 
