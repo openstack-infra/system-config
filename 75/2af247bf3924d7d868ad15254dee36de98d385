@@ -1,0 +1,10 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: ShangXiao <shangxiaobj@inspur.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 16 Nov 2016 02:26:15 +0000
+Reviewed-on: https://review.openstack.org/397464
+Project: openstack-infra/system-config
+Branch: refs/heads/master
