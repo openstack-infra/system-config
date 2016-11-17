@@ -1149,6 +1149,7 @@ node 'openstackid-dev.openstack.org' {
 
 # Node-OS: precise
 # Node-OS: trusty
+# Node-OS: xenial
 # This is not meant to be an actual node that connects to the master.
 # This is a dummy node definition to trigger a test of the code path used by
 # nodepool's prepare_node scripts in the apply tests
