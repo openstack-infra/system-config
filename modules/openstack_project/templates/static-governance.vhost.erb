@@ -22,7 +22,7 @@
   <% scope.lookupvar('openstack_project::static::governance_directories').each do |dirname| -%>
   <Directory <%= dirname %>>
     Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
+    AllowOverride FileInfo
     Satisfy Any
     Require all granted
   </Directory>
@@ -56,7 +56,7 @@
   <% scope.lookupvar('openstack_project::static::governance_directories').each do |dirname| -%>
   <Directory <%= dirname %>>
     Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
+    AllowOverride FileInfo
     Satisfy Any
     Require all granted
   </Directory>
