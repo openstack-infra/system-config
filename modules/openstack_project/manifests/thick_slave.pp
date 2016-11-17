@@ -54,9 +54,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::nss_devel, # for python-nss
   ]
 
-  package { $packages:
-    ensure => present,
-  }
+  ensure_resource('package', $packages, {'ensure' => 'present'})
 
   include pip
   # for pushing files to swift and uploading to pypi with twine
