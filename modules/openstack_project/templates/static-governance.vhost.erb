@@ -27,6 +27,13 @@
     Require all granted
   </Directory>
   <% end -%>
+  <Directory /srv/static/governance/badges>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride FileInfo
+    Satisfy Any
+    Require all granted
+    ErrorDocument 404 /badges/project-unofficial.svg
+  </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
   CustomLog /var/log/apache2/<%= @vhost_name %>_access.log combined
@@ -61,6 +68,13 @@
     Require all granted
   </Directory>
   <% end -%>
+  <Directory /srv/static/governance/badges>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride FileInfo
+    Satisfy Any
+    Require all granted
+    ErrorDocument 404 /badges/project-unofficial.svg
+  </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
   CustomLog /var/log/apache2/<%= @vhost_name %>_access.log combined
