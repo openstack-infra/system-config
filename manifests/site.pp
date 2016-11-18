@@ -1281,18 +1281,20 @@ node 'translate.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'translate-dev.openstack.org' {
+node /^translate-dev\d*\.openstack\.org$/ {
+  $group = "translate-dev"
   class { 'openstack_project::translate_dev':
-    sysadmins               => hiera('sysadmins', []),
-    admin_users             => 'aeng,camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
-    openid_url              => 'https://openstackid-dev.openstack.org',
-    listeners               => ['ajp'],
-    from_address            => 'noreply@openstack.org',
-    mysql_host              => hiera('translate_dev_mysql_host', 'localhost'),
-    mysql_password          => hiera('translate_dev_mysql_password'),
-    zanata_server_user      => hiera('proposal_zanata_user'),
-    zanata_server_api_key   => hiera('proposal_zanata_api_key'),
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+    sysadmins             => hiera('sysadmins', []),
+    admin_users           => 'aeng,camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
+    openid_url            => 'https://openstackid-dev.openstack.org',
+    listeners             => ['ajp'],
+    from_address          => 'noreply@openstack.org',
+    mysql_host            => hiera('translate_dev_mysql_host', 'localhost'),
+    mysql_password        => hiera('translate_dev_mysql_password'),
+    zanata_server_user    => hiera('proposal_zanata_user'),
+    zanata_server_api_key => hiera('proposal_zanata_api_key'),
+    project_config_repo   => 'https://git.openstack.org/openstack-infra/project-config',
+    vhost_name            => 'translate-dev.openstack.org',
   }
 }
 
