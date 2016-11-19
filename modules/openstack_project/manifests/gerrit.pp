@@ -10,6 +10,7 @@ class openstack_project::gerrit (
   $canonicalweburl = "https://${::fqdn}/",
   $git_http_url = '',
   $canonical_git_url = '',
+  $known_hosts_content = '',
   $serveradmin = 'webmaster@openstack.org',
   $ssh_host_key = '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
   $ssh_project_key = '/home/gerrit2/review_site/etc/ssh_project_rsa_key',
@@ -195,6 +196,12 @@ class openstack_project::gerrit (
       {
         maxLineLength   => '72',
       },
+  }
+
+  if $known_hosts_content != '' {
+    class { '::gerrit::known_hosts':
+      known_hosts_content => $known_hosts_content,
+    }
   }
 
   mysql_backup::backup_remote { 'gerrit':
