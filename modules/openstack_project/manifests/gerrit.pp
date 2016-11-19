@@ -10,6 +10,7 @@ class openstack_project::gerrit (
   $canonicalweburl = "https://${::fqdn}/",
   $git_http_url = '',
   $canonical_git_url = '',
+  $known_hosts_content = '',
   $serveradmin = 'webmaster@openstack.org',
   $ssh_host_key = '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
   $ssh_project_key = '/home/gerrit2/review_site/etc/ssh_project_rsa_key',
@@ -122,6 +123,7 @@ class openstack_project::gerrit (
     enable_javamelody_top_menu          => false,
     # passthrough
     java_home                           => $java_home,
+    known_hosts_content                 => $known_hosts_content,
     ssl_cert_file                       => $ssl_cert_file,
     ssl_key_file                        => $ssl_key_file,
     ssl_chain_file                      => $ssl_chain_file,

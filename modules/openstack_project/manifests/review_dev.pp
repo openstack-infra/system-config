@@ -29,6 +29,7 @@ class openstack_project::review_dev (
   $storyboard_ssl_cert = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
+  $gerrit_ssh_host_key = '',
 ) {
 
   $java_home = $::lsbdistcodename ? {
@@ -59,6 +60,7 @@ class openstack_project::review_dev (
     ssh_project_rsa_pubkey_contents     => $ssh_project_rsa_pubkey_contents,
     ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
+    known_hosts_content                 => "review-dev.openstack.org,23.253.78.13,2001:4800:7817:101:be76:4eff:fe04 ${gerrit_ssh_host_key}",
     email                               => 'review-dev@openstack.org',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.22.e0c0f29.war',
