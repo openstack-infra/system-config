@@ -1319,12 +1319,28 @@ node 'apps-dev.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
   class { '::apps_site':
-    without_glare           => false,
-    commit                  => 'feature/glare-support',
-    use_pip                 => false,
-    use_git                 => true,
-    repo_url                => 'https://git.openstack.org/openstack/app-catalog.git',
+    without_glare   => false,
   }
+  class { '::apps_site::plugins::glare':
+    use_ssl         => false,
+    memcache_server => '127.0.0.1:11211',
+    vhost_name      => $::fqdn,
+  }
+  class { '::apps_site::wsgi::apache':
+    use_ssl    => false,
+    servername => $::fqdn,
+  }
+  class { '::apps_site::catalog':
+    import_assets   => true,
+    domain          => $::fqdn,
+    glare_url       => "http://${::fqdn}:9494",
+    memcache_server => '127.0.0.1:11211',
+  }
+
+  Class['::apps_site'] ->
+    Class['::apps_site::plugins::glare'] ->
+      Class['::apps_site::wsgi::apache'] ->
+        Class['::apps_site::catalog']
 }
 
 # Node-OS: trusty
