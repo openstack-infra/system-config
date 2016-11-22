@@ -1,0 +1,11 @@
+version: 0.1
+auth:
+  htpasswd:
+    realm: openstack-infra
+    path:  /etc/docker/registry/users # Path to htpassword file
+http:
+  addr: {{ listen_ip }}:{{ listen_port }}
+storage:
+  filesystem:
+    rootdirectory: {{ storage_directory }} # This directory can be mirrored for multi-region registries
+    maxthreads: 100

@@ -646,6 +646,17 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node /^docker\..*\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80],
+    sysadmins => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::docker':
+  }
+}
+
 # Serve static AFS content for docs and other sites.
 # Node-OS: trusty
 node 'files01.openstack.org' {
