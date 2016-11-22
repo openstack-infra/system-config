@@ -1,74 +1,61 @@
 ---
-- hosts: zuul.openstack.org
-  gather_facts: False
-  remote_user: root
-  sudo: yes
-  tasks:
-  - shell: kill -USR1 $(cat /var/run/zuul/zuul.pid)
-  - shell: rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.lock
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: root
-  sudo: yes
   tasks:
   - shell: invoke-rc.d gerrit stop
   - include_vars: "{{ repolist }}"
   - shell: echo 'update account_project_watches set project_name = "{{ item.new }}" where project_name = "{{ item.old }}";' | mysql reviewdb
-    with_items: repos
+    with_items: {{ repos }}
   - shell: echo 'update changes set dest_project_name = "{{ item.new }}", created_on = created_on where dest_project_name = "{{ item.old }}";' | mysql reviewdb
-    with_items: repos
-  - shell: mv {{ item[0] }}{{ item[1].old }} {{ item[0] }}{{ item[1].new }}
+    with_items: {{ repos }}
+  - shell: mv {{ item[0] }}{{ item[1].old }}.git {{ item[0] }}{{ item[1].new }}.git
     with_nested:
-    - [ '~gerrit2/review_site/git/', '/opt/lib/git' ]
-    - repos
+    - [ '~gerrit2/review_site/git/', '/opt/lib/git/' ]
+    - {{ repos }}
 - hosts: 'git0*'
   gather_facts: False
   tasks:
   - include_vars: "{{ repolist }}"
-  - shell: mv {{ item[0] }}{{ item[1].old }} {{ item[0] }}{{ item[1].new }}
+  - shell: mv {{ item[0] }}{{ item[1].old }}.git {{ item[0] }}{{ item[1].new }}.git
     with_nested:
-    - [ '/var/lib/git' ]
-    - repos
+    - [ '/var/lib/git/' ]
+    - {{ repos }}
 - hosts: storyboard.openstack.org
   gather_facts: False
   remote_user: root
-  sudo: yes
   tasks:
   - include_vars: "{{ repolist }}"
-  - shell: echo 'update projects set name="{{ item.new }}" where name="{{ item.old }}";' | mysql storyboard
-    with_items: repos
+  - shell: echo 'update projects set name="{{ item.new }}" where name="{{ item.old }}";' | mysql --defaults-file=/root/.storyboard_db.cnf storyboard
+    with_items: {{ repos }}
 - hosts: review.openstack.org
   gather_facts: False
-  remote_user: gerrit2
-  sudo: yes
+  remote_user: root
+  become: yes
+  become_user: gerrit2
   tasks:
   - shell: cp -ax /home/gerrit2/review_site/index /home/gerrit2/index.backup.$(date +%s)
-  - shell: java -jar /home/gerrit2/review_site/bin/gerrit.war reindex -d /home/gerrit2/review_site
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: root
-  sudo: yes
   tasks:
   - shell: invoke-rc.d gerrit start
-- hosts: zuul.openstack.org
-  gather_facts: False
-  remote_user: root
-  sudo: yes
-  tasks:
-  - shell: invoke-rc.d zuul start
 - hosts: review.openstack.org
   gather_facts: False
-  remote_user: gerrit2
-  sudo: yes
-  tasks:
-  - include_vars: "{{ repolist }}"
-  - shell: ssh -p 29418 review.openstack.org gerrit rename-group {{ item.old }} {{ item.new }}
-    with_items: "{{ gerrit_groups|default([]) }}"
-- hosts: '*.slave.openstack.org'
   remote_user: root
-  sudo: yes
+  become: yes
+  become_user: gerrit2
+  tasks:
+  - pause: prompt="Make sure that Gerrit ssh api is accepting requests. Use Enter or ^C c to continue. ^C a to abort."
+  - include_vars: "{{ repolist }}"
+  - shell: ssh -p 29418 -i /home/gerrit2/review_site/etc/ssh_project_rsa_key openstack-project-creator@review.openstack.org gerrit rename-group {{ item.old }} {{ item.new }}
+    with_items: "{{ gerrit_groups|default([]) }}"
+# TODO: online reindex accounts
+# TODO: online reindex projects
+- hosts: '*.ci.openstack.org:*.slave.openstack.org'
+  remote_user: root
   gather_facts: False
   tasks:
   - include_vars: "{{ repolist }}"
   - shell: 'rm -rf ~jenkins/workspace/*{{ item.old | basename }}*'
-    with_items: repos
+    with_items: {{ repos }}
