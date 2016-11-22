@@ -1211,6 +1211,21 @@ node /^afsdb.*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
+node afsdb01.openstack.org$/ {
+  $group = "afsdb"
+
+  class { 'openstack_project::server':
+    iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
+    sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
+    manage_exim               => true,
+  }
+
+  include openstack_project::afsdb
+  include openstack_project::afsrelease
+}
+
+# Node-OS: trusty
 node /^afs.*\..*\.openstack\.org$/ {
   $group = "afs"
 
