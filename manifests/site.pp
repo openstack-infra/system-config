@@ -668,6 +668,24 @@ node 'design-summit-prep.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node 'docker01.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 433],
+    sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
+  }
+
+  class { 'openstack_project::docker_registry':
+    keytab                  => hiera('docker_keytab'),
+    password                => hiera('docker_password'),
+    username                => hiera('docker_username'),
+    ssl_cert_file_contents  => hiera('docker_ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('docker_ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('docker_ssl_chain_file_contents'),
+  }
+}
+
 # Serve static AFS content for docs and other sites.
 # Node-OS: trusty
 node 'files01.openstack.org' {
