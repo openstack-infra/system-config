@@ -1,0 +1,94 @@
+#!/bin/sh
+set -e
+
+### BEGIN INIT INFO
+# Provides:           docker-registry
+# Required-Start:     $syslog $remote_fs
+# Required-Stop:      $syslog $remote_fs
+# Default-Start:      2 3 4 5
+# Default-Stop:       0 1 6
+# Short-Description:  the Docker toolset to pack, ship, store, and deliver content
+### END INIT INFO
+
+BASE=docker-registry
+
+BINARY=/usr/bin/$BASE
+CONFIG=/etc/docker/registry/config.yml
+EXECUSER=docker-registry
+PIDFILE=/var/run/$BASE.pid
+LOGFILE=/var/log/$BASE.log
+DESC="$BASE"
+
+. /lib/lsb/init-functions
+
+if [ -f /etc/default/$BASE ]; then
+	. /etc/default/$BASE
+fi
+
+if init_is_upstart; then
+	log_failure_msg "$BASE is managed via upstart, try using service $BASE $1"
+	exit 1
+fi
+
+if [ ! -x "$BINARY" ]; then
+	log_failure_msg "$BINARY not present or not executable"
+	exit 1
+fi
+
+fail_unless_root() {
+	if [ "$(id -u)" != '0' ]; then
+		log_failure_msg "$DESC must be run as root"
+		exit 1
+	fi
+}
+
+case "$1" in
+	start)
+		fail_unless_root
+
+		# NOTE(mnaser): Added to start k5start before service startup
+		log_begin_msg "Starting k5start"
+		start-stop-daemon --start --pidfile /var/run/k5start.pid \
+			--exec /usr//bin/k5start -- -b -p /var/run/k5start.pid \
+			-f /etc/docker.keytab service/docker
+
+		log_begin_msg "Starting $DESC"
+		start-stop-daemon --start --background \
+			--no-close \
+			--chuid "$EXECUSER" \
+			--exec "$BINARY" \
+			--pidfile "$PIDFILE" \
+			--make-pidfile \
+			-- "$CONFIG" \
+				>> "$LOGFILE" 2>&1
+		log_end_msg $?
+		;;
+
+	stop)
+		fail_unless_root
+		log_begin_msg "Stopping $DESC"
+		start-stop-daemon --stop --pidfile "$PIDFILE"
+
+		# NOTE(mnaser): Added to stop k5start on service shutdown
+		log_begin_msg "Stopping k5start"
+		start-stop-daemon --stop --pidfile /var/run/k5start.pid
+		rm -f /var/run/k5start.pid
+
+		log_end_msg $?
+		;;
+
+	restart|force-reload)
+		fail_unless_root
+		$0 stop
+		$0 start
+		;;
+
+	status)
+		status_of_proc -p "$PIDFILE" "$BINARY" "$DESC"
+		;;
+
+	*)
+		echo "usage: $0 {start|stop|restart|status}"
+		exit 1
+		;;
+esac

@@ -1,0 +1,11 @@
+version: 0.1
+auth:
+  htpasswd:
+    realm: openstack-infra
+    path:  /etc/docker/registry/users # Path to htpassword file
+http:
+  addr: 127.0.0.1:8080
+storage:
+  filesystem:
+    rootdirectory: /afs/.openstack.org/mirror/docker-registry # This directory can be mirrored for multi-region registries
+    maxthreads: 100
