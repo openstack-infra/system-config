@@ -1,0 +1,27 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+<VirtualHost *:443>
+  ServerName <%= @vhost_name %>
+  SSLEngine on
+  SSLProtocol All -SSLv2 -SSLv3
+  # Once the machine is using something to terminate TLS that supports ECDHE
+  # then this should be edited to remove the RSA+AESGCM:RSA+AES so that PFS
+  # only is guarenteed.
+  SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!AES256:!aNULL:!eNULL:!MD5:!DSS:!PSK:!SRP
+  SSLHonorCipherOrder on
+  SSLCertificateFile <%= scope['openstack_project::docker_registry::cert_file'] %>
+  SSLCertificateKeyFile <%= scope['openstack_project::docker_registry::key_file'] %>
+<% if scope['openstack_project::docker_registry::chain_file'] != '' %>
+  SSLCertificateChainFile <%= scope['openstack_project::docker_registry::chain_file'] %>
+<% end %>
+
+  ProxyPass "/" "http://localhost:8080/"
+  ProxyPassReverse "/" "http://localhost:8080/"
+
+  LogLevel warn
+  ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
+  CustomLog /var/log/apache2/<%= @vhost_name %>_access.log combined
+  ServerSignature Off
+</VirtualHost>
