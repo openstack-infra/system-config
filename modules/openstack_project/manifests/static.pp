@@ -94,6 +94,7 @@ class openstack_project::static (
   # it in $ssl_cert_file.
   if ($ssl_cert_file == '') and ($ssl_cert_file_contents == '') {
     $cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem'
+    file { $cert_file: }
   } else {
     if $ssl_cert_file == '' {
       $cert_file = "/etc/ssl/certs/${::fqdn}.pem"
@@ -119,6 +120,7 @@ class openstack_project::static (
   # optionally specify the path to use for it in $ssl_key_file.
   if ($ssl_key_file == '') and ($ssl_key_file_contents == '') {
     $key_file = '/etc/ssl/private/ssl-cert-snakeoil.key'
+    file { $key_file: }
   } else {
     if $ssl_key_file == '' {
       $key_file = "/etc/ssl/private/${::fqdn}.key"
