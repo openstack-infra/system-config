@@ -786,6 +786,7 @@ node 'status.openstack.org' {
 
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
+  $group = 'nodepool'
   # TODO(pabelanger): Move all of this back into nodepool manifest, it has
   # grown too big.
   $bluebox_username    = hiera('nodepool_bluebox_username', 'username')
@@ -886,6 +887,7 @@ node 'nodepool.openstack.org' {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^nb\d+\.openstack\.org$/ {
+  $group = 'nodepool'
   # TODO(pabelanger): Move all of this back into nodepool manifest, it has
   # grown too big.
   $bluebox_username    = hiera('nodepool_bluebox_username', 'username')
