@@ -942,7 +942,7 @@ node /^nb\d+\.openstack\.org$/ {
   class { '::openstackci::nodepool_builder':
     vhost_name                    => $::fqdn,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    revision			  => 'zuulv3',
+    revision                      => 'feature/zuulv3',
     oscc_file_contents            => $clouds_yaml,
     image_log_document_root       => '/var/log/nodepool/image',
     statsd_host                   => 'graphite.openstack.org',
