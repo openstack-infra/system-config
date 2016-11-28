@@ -152,4 +152,16 @@ class openstack_project::ask (
     backup_user   => 'bup-ask',
     backup_server => 'ci-backup-rs-ord.openstack.org',
   }
+
+  class { '::httpd::logrotate':
+    options => [
+      'daily',
+      'missingok',
+      'rotate 7',
+      'compress',
+      'delaycompress',
+      'notifempty',
+      'create 640 root adm',
+    ],
+  }
 }
