@@ -44,7 +44,7 @@ _BASIC_FILE = """
 #
 
 [loggers]
-keys=root,nodepool,requests,shade,image,
+keys=root,nodepool,requests,shade,image,kazoo
  %(logger_titles)s
 
 [handlers]
@@ -77,6 +77,12 @@ qualname=nodepool
 level=DEBUG
 handlers=image
 qualname=nodepool.image.build
+propagate=0
+
+[logger_kazoo]
+level=INFO
+handlers=debug,normal
+qualname=kazoo
 propagate=0
 
 [handler_console]
