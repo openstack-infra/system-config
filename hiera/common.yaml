@@ -439,6 +439,7 @@ cacti_hosts:
 - logstash-worker19.openstack.org
 - logstash-worker20.openstack.org
 - logstash.openstack.org
+- nb01.openstack.org
 - nodepool.openstack.org
 - openstackid.org
 - paste.openstack.org
