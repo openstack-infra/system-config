@@ -29,7 +29,7 @@ clouds:
       auth_url: https://ci-overcloud.rh1.tripleo.org:13000
       username: '<%= @tripleo_username %>'
       password: '<%= @tripleo_password %>'
-      project_name: '<%= tripleo_project %>'
+      project_name: '<%= @tripleo_project %>'
       project_domain_name: default
       user_domain_name: default
     floating_ip_source: neutron
@@ -37,9 +37,9 @@ clouds:
   tripleo-test-cloud-rh2:
     region_name: regionOne
     auth:
-      username: '<%= tripleo_username %>'
-      password: '<%= tripleo_password %>'
-      project_name: '<%= tripleo_project %>'
+      username: '<%= @tripleo_username %>'
+      password: '<%= @tripleo_password %>'
+      project_name: '<%= @tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh2.tripleo.org:13000/v2.0'
     floating_ip_source: neutron
   bluebox-sjc1:
