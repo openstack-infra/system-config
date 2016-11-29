@@ -276,7 +276,7 @@ class openstack_project::static (
 
   ::httpd::vhost { 'governance.openstack.org':
     port       => 443, # Is required despite not being used.
-    docroot    => '/srv/static/governance',
+    docroot    => '/srv/static/tc',
     priority   => '50',
     ssl        => true,
     template   => 'openstack_project/static-governance.vhost.erb',
