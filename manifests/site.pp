@@ -947,6 +947,7 @@ node /^nb\d+\.openstack\.org$/ {
 
 
   class { '::openstackci::nodepool_builder':
+    nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
     vhost_name                    => $::fqdn,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     revision                      => 'feature/zuulv3',
