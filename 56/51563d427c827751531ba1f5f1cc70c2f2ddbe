@@ -1,0 +1,9 @@
+Code-Review+2: Ricardo Carrillo Cruz <ricardo.carrillo.cruz@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 29 Nov 2016 15:04:21 +0000
+Reviewed-on: https://review.openstack.org/404251
+Project: openstack-infra/system-config
+Branch: refs/heads/master
