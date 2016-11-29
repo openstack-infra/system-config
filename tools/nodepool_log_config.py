@@ -44,7 +44,7 @@ _BASIC_FILE = """
 #
 
 [loggers]
-keys=root,nodepool,requests,shade,image,kazoo
+keys=root,nodepool,requests,shade,image,kazoo,
  %(logger_titles)s
 
 [handlers]
