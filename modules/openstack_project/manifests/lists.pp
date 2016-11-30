@@ -231,6 +231,14 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'interop-wg':
+    ensure      => present,
+    admin       => 'chris@openstack.org',
+    password    => $listpassword,
+    description => 'Discussions of the OpenStack Foundation Board Interoperability Working Group',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 
   maillist { 'ambassadors':
     ensure      => present,
