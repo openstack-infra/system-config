@@ -267,6 +267,12 @@ class openstack_project::static (
     '/tc/'       => '/srv/static/tc/',
     '/uc/'       => '/srv/static/uc/',
   }
+  # Extra redirects needed for vhost template:
+  $governance_redirects = {
+    '/goals/'       => '/tc/goals/',
+    '/reference/'   => '/tc/reference/',
+    '/resolutions/' => '/tc/resolutions/',
+  }
   # One of these must also be the docroot
   $governance_directories = [
     '/srv/static/election',
