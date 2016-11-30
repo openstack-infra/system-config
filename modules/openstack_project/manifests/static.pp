@@ -56,6 +56,10 @@ class openstack_project::static (
     httpd::mod { 'alias': ensure => present }
   }
 
+  if ! defined(Httpd::Mod['headers']) {
+    httpd::mod { 'headers': ensure => present }
+  }
+
   if ! defined(File['/srv/static']) {
     file { '/srv/static':
       ensure => directory,
