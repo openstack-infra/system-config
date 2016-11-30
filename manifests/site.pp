@@ -1247,6 +1247,9 @@ node 'openstackid-dev.openstack.org' {
     email_smtp_server           => 'smtp.sendgrid.net',
     email_smtp_server_user      => hiera('openstackid_dev_smtp_user'),
     email_smtp_server_password  => hiera('openstackid_dev_smtp_password'),
+    laravel_version             => 5,
+    app_log_level               => 'debug',
+    curl_verify_ssl_cert        => false,
   }
 }
 
