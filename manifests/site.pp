@@ -1287,6 +1287,12 @@ node 'single-use-slave-devstack' {
 }
 
 # Node-OS: trusty
+# Used for testing all-in-one deployments
+node 'single-node-ci.test.only' {
+  include ::openstackci::single_node_ci
+}
+
+# Node-OS: trusty
 node 'kdc01.openstack.org' {
   class { 'openstack_project::kdc':
     sysadmins => hiera('sysadmins', []),
