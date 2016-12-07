@@ -264,6 +264,7 @@ class openstack_project::static (
   # Extra aliases and directories needed for vhost template:
   $governance_aliases = {
     '/election/' => '/srv/static/election/',
+    '/tc/'       => '/srv/static/tc/',
     '/uc/'       => '/srv/static/uc/',
   }
   # One of these must also be the docroot
