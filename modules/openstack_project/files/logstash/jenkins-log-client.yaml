@@ -215,6 +215,22 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-o-api.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-o-cw.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-o-hk.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-o-hm.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-q-agt.txt
     tags:
       - screen
@@ -555,6 +571,26 @@ source-files:
       - oslofmt
     job-filter: '.*multinode.*'
   - name: logs/subnode-2/screen-n-net.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-o-api.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-o-cw.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-o-hk.txt
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*multinode.*'
+  - name: logs/subnode-2/screen-o-hm.txt
     tags:
       - screen
       - oslofmt
