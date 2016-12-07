@@ -60,6 +60,10 @@
   <% scope.lookupvar('openstack_project::static::governance_aliases').each do |a, d| -%>
     Alias "<%= a %>" "<%= d %>"
   <% end -%>
+  # Set up redirects
+  <% scope.lookupvar('openstack_project::static::governance_redirects').each do |a, d| -%>
+    Redirect "<%= a %>" "<%= d %>"
+  <% end -%>
   <% scope.lookupvar('openstack_project::static::governance_directories').each do |dirname| -%>
   <Directory <%= dirname %>>
     Options Indexes FollowSymLinks MultiViews
