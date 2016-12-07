@@ -5,35 +5,12 @@
 <VirtualHost *:80>
   ServerName <%= @vhost_name %>
 <% if @serveraliases.is_a? Array -%>
-  # Permanently redirect these ServerAlias entries to ServerName
 <% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
 <% elsif @serveraliases != '' -%>
 <%= " ServerAlias #{@serveraliases}" %>
-  RewriteEngine On
-  RewriteCond %{HTTP_HOST} !<%= @vhost_name %>$ [NC]
-  RewriteRule ^/(.*)$ http://<%= @vhost_name %>/$1 [L,R=301]
 <% end -%>
-  DocumentRoot <%= @docroot %>
-
-  # Alias other folders
-  <% scope.lookupvar('openstack_project::static::governance_aliases').each do |a, d| -%>
-    Alias "<%= a %>" "<%= d %>"
-  <% end -%>
-  <% scope.lookupvar('openstack_project::static::governance_directories').each do |dirname| -%>
-  <Directory <%= dirname %>>
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
-    Satisfy Any
-    Require all granted
-  </Directory>
-  <% end -%>
-  <Directory /srv/static/governance/badges>
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
-    Satisfy Any
-    Require all granted
-    ErrorDocument 404 /badges/project-unofficial.svg
-  </Directory>
+  RewriteEngine On
+  RewriteRule ^/(.*) https://<%= @vhost_name %>/$1 [last,redirect=permanent]
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
   CustomLog /var/log/apache2/<%= @vhost_name %>_access.log combined
