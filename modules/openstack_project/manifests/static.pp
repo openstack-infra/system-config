@@ -269,6 +269,7 @@ class openstack_project::static (
   }
   # Extra redirects needed for vhost template:
   $governance_redirects = {
+    '/badges/'      => '/tc/badges/',
     '/goals/'       => '/tc/goals/',
     '/reference/'   => '/tc/reference/',
     '/resolutions/' => '/tc/resolutions/',
