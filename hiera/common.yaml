@@ -179,6 +179,7 @@ meetbot_channels:
 - '#openstack-meeting'
 - '#openstack-meeting-3'
 - '#openstack-meeting-4'
+- '#openstack-meeting-5'
 - '#openstack-meeting-alt'
 - '#openstack-meeting-cp'
 - '#openstack-mistral'
