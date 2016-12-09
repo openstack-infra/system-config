@@ -26,15 +26,30 @@ At a Glance
   * https://storyboard.openstack.org/#!/project/668
 :Resources:
   * `Nodepool Reference Manual <http://docs.openstack.org/infra/nodepool>`_
+  * `ZooKeeper Programmer's Guide <https://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html>`_
+  * `ZooKeeper Administrator's Guide <https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html>`_
+  * `zk_shell <https://pypi.python.org/pypi/zk_shell/>`_
 
 Overview
 ========
 
-Once per day, for every image type (and provider) configured by nodepool, a new
-image with cached data for use by devstack.  Nodepool spins up new instances
-and tears down old as tests are queued up and completed, always maintaining a
-consistent number of available instances for tests up to the set limits of the
-CI infrastructure.
+Once per day, for every image type (and provider) configured by
+nodepool, a new image with cached data is built for use by devstack.
+Nodepool spins up new instances and tears down old as tests are queued
+up and completed, always maintaining a consistent number of available
+instances for tests up to the set limits of the CI infrastructure.
+
+Zookeeper
+=========
+
+Nodepool stores image metadata in ZooKeeper.  We have a one-node
+ZooKeeper "cluster" running on nodepool.openstack.org.
+
+The Nodepool CLI should be sufficient to examine and alter any of the
+information stored in ZooKeeper.  However, in case advanced debugging
+is needed, use of zk-shell ("pip install zk_shell" into a virtualenv
+and run "zk-shell") is recommended as an easy way to inspect and/or
+change data in ZooKeeper.
 
 Bad Images
 ==========
@@ -50,28 +65,37 @@ last good image.
 Nodepool periodically deletes old images, however, it never deletes
 the current or next most recent image in the ``ready`` state for any
 image-provider combination.  So if you find that the
-``devstack-precise`` images for a single or all providers are
-problematic, you can run::
+``ubuntu-precise`` image is problematic, you can run::
 
-  $ sudo nodepool image-list
+  $ sudo nodepool dib-image-list
 
-  +--------+--------------------+------------------------+----------------------------------------------------------+------------+--------------------------------------+--------------------------------------+----------+-------------+
-  | ID     | Provider           | Image                  | Hostname                                                 | Version    | Image ID                             | Server ID                            | State    | Age (hours) |
-  +--------+--------------------+------------------------+----------------------------------------------------------+------------+--------------------------------------+--------------------------------------+----------+-------------+
-  | 168655 | hpcloud-az2        | devstack-precise       | devstack-precise-1394417686.template.openstack.org       | 1394417686 | 387612                               | 4909797                              | ready    | 26.83       |
-  | 168696 | hpcloud-az2        | devstack-precise       | devstack-precise-1394514268.template.openstack.org       | 1394514268 | 388782                               | 4930213                              | ready    | 0.75        |
-  +--------+--------------------+------------------------+----------------------------------------------------------+------------+--------------------------------------+--------------------------------------+----------+-------------+
+  +---------------------------+----------------+---------+-----------+----------+-------------+
+  | ID                        | Image          | Builder | Formats   | State    | Age         |
+  +---------------------------+----------------+---------+-----------+----------+-------------+
+  | ubuntu-precise-0000000001 | ubuntu-precise | nb01    | qcow2,vhd | ready    | 02:00:57:33 |
+  | ubuntu-precise-0000000002 | ubuntu-precise | nb01    | qcow2,vhd | ready    | 01:00:57:33 |
+  +---------------------------+----------------+---------+-----------+----------+-------------+
 
-Image 168655 is the previous image and 168696 is the current image
-(they are both marked as ``ready`` and the current image is simply the
-image with the shortest age.  Delete the problematic image with::
+Image ubuntu-precise-0000000001 is the previous image and
+ubuntu-precise-0000000002 is the current image (they are both marked
+as ``ready`` and the current image is simply the image with the
+shortest age.
 
-  $ sudo nodepool image-delete 168696
+Nodepool aggressively attempts to build and upload missing images, so
+if the problem with the image will not be solved with an immediate
+rebuild, image builds must first be disabled for that image.  To do
+so, add ``paused: True`` to the ``diskimage`` section for
+``ubuntu-precise`` in nodepool.yaml.
 
-Then the previous image, 168655, will become the current image and
-nodepool will use it when creating new nodes.  When nodepool next
-creates an image, it will still retain 168655 since it will still be
-considered the next-most-recent image.
+Then delete the problematic image with::
+
+  $ sudo nodepool image-delete ubuntu-precise-0000000002
+
+All uploads corresponding to that image build will be deleted and the
+previous image will become the current image and nodepool will use it
+when creating new nodes.  When nodepool next creates an image, it will
+still retain build #1 since it will still be considered the
+next-most-recent image.
 
 vhd-util
 ========
