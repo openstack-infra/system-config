@@ -347,6 +347,7 @@ GnuPG directory:
 
 .. code-block:: shell-session
 
+    root@puppetmaster:~# umask 077
     root@puppetmaster:~# mkdir temporary.gnupg
     root@puppetmaster:~# gpg --homedir signing.gnupg --output \
     > temporary.gnupg/secret-subkeys --export-secret-subkeys 0xC0224DB5F541FB68\!
@@ -361,6 +362,19 @@ GnuPG directory:
     gpg:               imported: 1  (RSA: 1)
     gpg:       secret keys read: 1
     gpg:   secret keys imported: 1
+
+Check that the exported version does not contain a usable primary
+secret key by listing all secret keys and looking for a `sec#` in
+front of it instead of just `sec`:
+
+.. code-block:: shell-session
+
+    root@puppetmaster:~# gpg --homedir temporary.gnupg --list-secret-keys
+    temporary.gnupg/secring.gpg
+    ---------------------------
+    sec#  2048R/C6D5584D 2016-07-07 [expires: 2017-02-02]
+    uid                  OpenStack Infra (Some Cycle) <infra-root@openstack.org>
+    ssb   2048R/F541FB68 2016-07-07
 
 So that our CI jobs will be able to make use of this subkey without
 interactively supplying a passphrase, the old passphrase (exported
@@ -410,19 +424,56 @@ configuration management:
 .. code-block:: shell-session
 
     root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
-    > /opt/system-config/hieradata/production/group/signing.yaml -f \
+    > /etc/puppet/hieradata/production/group/signing.yaml -f \
     > temporary.gnupg/pubring.gpg pubring
     root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
-    > /opt/system-config/hieradata/production/group/signing.yaml -f \
+    > /etc/puppet/hieradata/production/group/signing.yaml -f \
     > temporary.gnupg/secring.gpg secring
 
-Finally, do your best to securely remove the temporary copy of the
-unencrypted signing subkey and any associated files:
+Safely clean up, doing your best to securely remove the temporary
+copy of the unencrypted signing subkey and any associated files:
 
 .. code-block:: shell-session
 
     root@puppetmaster:~# shred temporary.gnupg/*
     root@puppetmaster:~# rm -rf temporary.gnupg
+
+Finally, commit the hiera alterations:
+
+.. code-block:: shell-session
+
+    root@puppetmaster:~# echo -e "Updated signing key to Some cycle\n-me" | git \
+    > --git-dir /etc/puppet/hieradata/.git --work-tree /etc/puppet/hieradata \
+    > commit -F - production/group/signing.yaml
+
+Once the key updates on signing01.ci.openstack.org, as the jenkins
+user inspect the result. You should see the new cycle name and the
+`sec#` here again indicating the primary secret key is unusable, and
+if you try to sign some random data you shouldn't be prompted for a
+passphrase to use the signing subkey:
+
+.. code-block:: shell-session
+
+    jenkins@signing01:~$ gpg --homedir temporary.gnupg --list-secret-keys
+    temporary.gnupg/secring.gpg
+    ---------------------------
+    sec#  2048R/C6D5584D 2016-07-07 [expires: 2017-02-02]
+    uid                  OpenStack Infra (Some Cycle) <infra-root@openstack.org>
+    ssb   2048R/F541FB68 2016-07-07
+
+    jenkins@signing01:~$ echo foo | gpg --sign --armor
+    -----BEGIN PGP MESSAGE-----
+    Version: GnuPG v1
+
+    owEBOgHF/pANAwACAbkGmxM1cAzcAcsKYgBYM654Zm9vCokBHAQAAQIABgUCWDOu
+    eAAKCRC5BpsTNXAM3CC0CAC4Lc4DkTCvQpK0EXDZvYBbktYFslYyqbUcgSLqWFIC
+    JxP5Zdz5G1gRABZ3NIfuerJczuy+Nd0ZBFrFEgw3JCzGYBydEyhlLJa1St64/JJy
+    uOJY3IAKI5i9jBlt53+0FyKyNqifpk+Grmrqi8W+74bHpoNMnnfPWL2Llb2fz4bK
+    DBlsATrCMj7IvgKpwNX2/IxFN5vqENd54v+J3jn/7Bxnf5UFLzowqOWjj1xaX3e0
+    E2m4r6PMJoGQwFLyiPW0cjZJa22wSU2u2MjFjMMukpA+axgxGqLzDLYa1tmtJ6p3
+    CMUalOq1Bxy5M4rU9VrffzNP9dSC38iYDm0BExxv3otM
+    =i1wq
+    -----END PGP MESSAGE-----
 
 
 Attestation
