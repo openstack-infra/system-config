@@ -475,6 +475,25 @@ passphrase to use the signing subkey:
     =i1wq
     -----END PGP MESSAGE-----
 
+To document this transition, export a minimal text version of the
+public master key:
+
+.. code-block:: shell-session
+
+    root@puppetmaster:~# ( gpg --fingerprint \
+    > 0x120d3c23c6d5584d6fc2464664dbb05acc5e7c28
+    > gpg --armor --export-options export-clean,export-minimal \
+    > --export 0x120d3c23c6d5584d6fc2464664dbb05acc5e7c28 ) > \
+    > 0x120d3c23c6d5584d6fc2464664dbb05acc5e7c28.txt
+
+Add the file to a change for the `openstack/releases` repo placing
+it in the `doc/source/static` directory, and then link it similarly
+to other exported public keys are linked in the `Cryptographic
+Signatures
+<https://releases.openstack.org/#cryptographic-signatures>` section
+of `doc/source/index.rst` (noting the appropriate end date for use of
+the prior key as the start date for the new one).
+
 
 Attestation
 -----------
