@@ -1,0 +1,11 @@
+Code-Review+1: greghaynes <greg@greghaynes.net>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 12 Dec 2016 19:51:19 +0000
+Reviewed-on: https://review.openstack.org/409344
+Project: openstack-infra/system-config
+Branch: refs/heads/master
