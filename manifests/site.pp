@@ -852,7 +852,6 @@ node 'nodepool.openstack.org' {
     mysql_password                => hiera('nodepool_mysql_password'),
     mysql_root_password           => hiera('nodepool_mysql_root_password'),
     nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
-    revision                      => 'feature/zuulv3',
     # TODO(pabelanger): Switch out private key with zuul_worker once we are
     # ready.
     nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
@@ -951,7 +950,6 @@ node /^nb\d+\.openstack\.org$/ {
     nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
     vhost_name                    => $::fqdn,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    revision                      => 'feature/zuulv3',
     oscc_file_contents            => $clouds_yaml,
     image_log_document_root       => '/var/log/nodepool/image',
     statsd_host                   => 'graphite.openstack.org',
