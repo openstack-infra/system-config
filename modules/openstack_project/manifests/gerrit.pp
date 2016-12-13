@@ -83,6 +83,7 @@ class openstack_project::gerrit (
   $its_plugins = [],
   $its_rules = [],
   $java_home = '',
+  $openidssourl = 'https://login.launchpad.net/+openid',
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -137,7 +138,7 @@ class openstack_project::gerrit (
     ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     email                               => $email,
-    openidssourl                        => 'https://login.launchpad.net/+openid',
+    openidssourl                        => $openidssourl,
     database_poollimit                  => $database_poollimit,
     container_heaplimit                 => $container_heaplimit,
     core_packedgitopenfiles             => $core_packedgitopenfiles,
