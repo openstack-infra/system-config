@@ -80,7 +80,6 @@ class openstack_project::review_dev (
     email_private_key                   => $email_private_key,
     gitweb                              => false,
     cgit                                => true,
-    openidssourl                        => 'https://login.ubuntu.com/+openid',
     web_repo_url                        => 'https://git.openstack.org/cgit/',
     web_repo_url_encode                 => false,
     swift_username                      => $swift_username,
