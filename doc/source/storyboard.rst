@@ -78,7 +78,7 @@ Launchpad OpenID string and email as follows:
 
 ``:config:`gerrit/projects.yaml```::
 
-    - openid: https://login.launchpad.net/+id/LOLPONIES
+    - openid: https://login.ubuntu.com/+id/LOLPONIES
       email: pinkie.pie@example.com
 
 
