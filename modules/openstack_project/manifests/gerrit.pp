@@ -137,7 +137,7 @@ class openstack_project::gerrit (
     ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     email                               => $email,
-    openidssourl                        => 'https://login.launchpad.net/+openid',
+    openidssourl                        => 'https://login.ubuntu.com/+openid',
     database_poollimit                  => $database_poollimit,
     container_heaplimit                 => $container_heaplimit,
     core_packedgitopenfiles             => $core_packedgitopenfiles,
