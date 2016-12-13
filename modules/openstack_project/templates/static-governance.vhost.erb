@@ -32,6 +32,10 @@
     AllowOverride None
     Satisfy Any
     Require all granted
+    <IfModule mod_headers.c>
+        Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+        Header set Pragma "no-cache"
+    </IfModule>
     ErrorDocument 404 /badges/project-unofficial.svg
   </Directory>
   LogLevel warn
@@ -77,6 +81,10 @@
     AllowOverride None
     Satisfy Any
     Require all granted
+    <IfModule mod_headers.c>
+        Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+        Header set Pragma "no-cache"
+    </IfModule>
     ErrorDocument 404 /badges/project-unofficial.svg
   </Directory>
   LogLevel warn
