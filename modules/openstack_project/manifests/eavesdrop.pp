@@ -18,7 +18,6 @@ class openstack_project::eavesdrop (
   $statusbot_twitter_secret = '',
   $statusbot_twitter_token_key = '',
   $statusbot_twitter_token_secret = '',
-  $statusbot_accessbot_nick = '',
   $accessbot_nick = '',
   $accessbot_password = '',
   $project_config_repo = '',

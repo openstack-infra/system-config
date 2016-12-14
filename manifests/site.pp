@@ -349,7 +349,7 @@ node 'eavesdrop.openstack.org' {
     statusbot_twitter_secret          => hiera('statusbot_twitter_secret'),
     statusbot_twitter_token_key       => hiera('statusbot_twitter_token_key'),
     statusbot_twitter_token_secret    => hiera('statusbot_twitter_token_secret'),
-    statusbot_accessbot_nick          => hiera('accessbot_nick', 'username'),
+    accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password'),
     meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
   }
