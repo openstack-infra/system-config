@@ -89,13 +89,13 @@ so, add ``paused: True`` to the ``diskimage`` section for
 
 Then delete the problematic image with::
 
-  $ sudo nodepool image-delete ubuntu-precise-0000000002
+  $ sudo nodepool dib-image-delete ubuntu-precise-0000000002
 
-All uploads corresponding to that image build will be deleted and the
-previous image will become the current image and nodepool will use it
-when creating new nodes.  When nodepool next creates an image, it will
-still retain build #1 since it will still be considered the
-next-most-recent image.
+All uploads corresponding to that image build will be deleted from providers
+before the image DIB files are deleted. The previous image will become the
+current image and nodepool will use it when creating new nodes. When nodepool
+next creates an image, it will still retain build #1 since it will still be
+considered the next-most-recent image.
 
 vhd-util
 ========
