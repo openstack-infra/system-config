@@ -105,6 +105,10 @@ class openstack_project::git (
       'option'  => [
         'tcplog',
       ],
+      'timeout' => [
+        'client 15m',
+        'server 15m',
+      ],
     },
   }
   haproxy::balancermember { 'balance_git_http_member':
