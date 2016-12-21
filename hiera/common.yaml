@@ -90,6 +90,7 @@ statusbot_channels:
 - openstack-pkg
 - openstack-powervm
 - openstack-product
+- openstack-python3
 - openstack-qa
 - openstack-quota
 - openstack-raksha
@@ -199,6 +200,7 @@ meetbot_channels:
 - '#openstack-powervm'
 - '#openstack-product'
 - '#openstack-ptg'
+- '#openstack-python3'
 - '#openstack-qa'
 - '#openstack-quota'
 - '#openstack-rally'
