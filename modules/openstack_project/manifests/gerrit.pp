@@ -83,7 +83,7 @@ class openstack_project::gerrit (
   $its_plugins = [],
   $its_rules = [],
   $java_home = '',
-  $openidssourl = 'https://login.launchpad.net/+openid',
+  $openidssourl = 'https://login.ubuntu.com/+openid',
 ) {
 
   class { 'jeepyb::openstackwatch':
