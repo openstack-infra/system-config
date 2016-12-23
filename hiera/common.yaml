@@ -110,6 +110,7 @@ statusbot_channels:
 - openstack-telemetry
 - openstack-tricircle
 - openstack-trove
+- openstack-valence
 - openstack-vitrage
 - openstack-zaqar
 - openstack-zephyr
@@ -223,6 +224,7 @@ meetbot_channels:
 - '#openstack-trove'
 - '#openstack-ux'
 - '#openstack-vitrage'
+- '#openstack-valence'
 - '#openstack-vmware-nsx'
 - '#openstack-watcher'
 - '#openstack-zaqar'
