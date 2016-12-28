@@ -612,6 +612,7 @@ node 'mirror-update.openstack.org' {
   class { 'openstack_project::mirror_update':
     bandersnatch_keytab => hiera('bandersnatch_keytab'),
     admin_keytab        => hiera('afsadmin_keytab'),
+    fedora_keytab       => hiera('fedora_keytab'),
     reprepro_keytab     => hiera('reprepro_keytab'),
     gem_keytab          => hiera('gem_keytab'),
     npm_keytab          => hiera('npm_keytab'),

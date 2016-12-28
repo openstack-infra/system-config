@@ -9,6 +9,7 @@ class openstack_project::mirror_update (
   $npm_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
+  $fedora_keytab = '',
 ) {
   include ::gnupg
   include ::openstack_project::reprepro_mirror
@@ -303,6 +304,35 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/epel-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/epel.keytab'],
+    ]
+  }
+
+  ### Fedora mirror ###
+  file { '/etc/fedora.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $fedora_keytab,
+  }
+
+  file { '/usr/local/bin/fedora-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/fedora-mirror-update.sh',
+  }
+
+  cron { 'fedora mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/fedora-mirror.lock fedora-mirror-update mirror.fedora >>/var/log/fedora-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/fedora-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/fedora.keytab'],
     ]
   }
 
