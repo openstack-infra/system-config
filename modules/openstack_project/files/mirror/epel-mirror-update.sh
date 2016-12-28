@@ -30,6 +30,7 @@ $K5START rsync -rlptDvz \
     --delete \
     --delete-excluded \
     --exclude="SRPMS" \
+    --exclude="aarch64" \
     --exclude="ppc64" \
     --exclude="ppc64le" \
     --exclude="x86_64/debug" \
