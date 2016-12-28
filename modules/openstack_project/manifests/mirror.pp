@@ -98,6 +98,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to fedora
+  file { "${www_root}/fedora":
+    ensure  => link,
+    target  => "${mirror_root}/fedora",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # Create the symlink to apt.
   file { "${www_root}/ubuntu":
     ensure  => link,
