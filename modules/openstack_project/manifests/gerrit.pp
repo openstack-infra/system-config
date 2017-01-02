@@ -68,7 +68,7 @@ class openstack_project::gerrit (
   $testmode = false,
   $swift_username = '',
   $swift_password = '',
-  $gitweb = true,
+  $gitweb = {},
   $cgit = false,
   $web_repo_url = '',
   $web_repo_url_encode = false,
