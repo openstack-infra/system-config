@@ -78,10 +78,12 @@ class openstack_project::review_dev (
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
     email_private_key                   => $email_private_key,
-    gitweb                              => false,
-    cgit                                => true,
-    web_repo_url                        => 'https://git.openstack.org/cgit/',
-    web_repo_url_encode                 => false,
+    gitweb                              =>
+      {
+        type       => 'cgit',
+        url        => 'https://git.openstack.org/cgit/',
+        urlEncode  => 'false',
+      },
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
     replication_force_update            => true,
