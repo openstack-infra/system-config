@@ -149,6 +149,10 @@ class openstack_project::review (
     token_private_key                   => $token_private_key,
     swift_username                      => $swift_username,
     swift_password                      => $swift_password,
+    gitweb                              =>
+      {
+        revision   => '?p=${project}.git;a=commitdiff;h=${commit}',
+      },
     commentlinks                        => [
       {
         name  => 'bugheader',
