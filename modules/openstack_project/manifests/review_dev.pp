@@ -82,6 +82,7 @@ class openstack_project::review_dev (
       {
         type       => 'cgit',
         url        => 'https://git.openstack.org/cgit/',
+        revision   => '${project}/commit/?id=${commit}',
         urlEncode  => 'false',
       },
     swift_username                      => $swift_username,
