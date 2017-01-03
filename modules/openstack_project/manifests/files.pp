@@ -67,6 +67,16 @@ class openstack_project::files (
   }
 
   ###########################################################
+  # docs-archived.openstack.org
+
+  ::httpd::vhost { 'docs-archived.openstack.org':
+    port       => 80,
+    docroot    => "${afs_root}docs-old",
+    priority   => '50',
+    template   => 'openstack_project/docs.vhost.erb',
+  }
+
+  ###########################################################
   # developer.openstack.org
 
   ::httpd::vhost { 'developer.openstack.org':
