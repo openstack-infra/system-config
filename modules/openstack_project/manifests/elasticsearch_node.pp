@@ -37,7 +37,7 @@ class openstack_project::elasticsearch_node (
       'http.cors.allow-origin'               => "'*'", # lint:ignore:double_quoted_strings
     },
     heap_size          => $heap_size,
-    version            => '1.7.5',
+    version            => '1.7.6',
   }
 
   cron { 'delete_old_es_indices':
