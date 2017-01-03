@@ -63,7 +63,6 @@ class openstack_project::files (
     docroot    => "${afs_root}docs",
     priority   => '50',
     template   => 'openstack_project/docs.vhost.erb',
-    serveraliases => 'docs-beta.openstack.org',
   }
 
   ###########################################################
@@ -74,6 +73,5 @@ class openstack_project::files (
     docroot    => "${afs_root}developer-docs",
     priority   => '50',
     template   => 'openstack_project/docs.vhost.erb',
-    serveraliases => 'developer-beta.openstack.org',
   }
 }
