@@ -81,9 +81,9 @@ statusbot_channels:
 - openstack-merges
 - openstack-metering
 - openstack-monasca
+- openstack-mogan
 - openstack-neutron
 - openstack-neutron-ovn
-- openstack-nimble
 - openstack-nova
 - openstack-opw
 - openstack-oslo
@@ -184,12 +184,12 @@ meetbot_channels:
 - '#openstack-meeting-cp'
 - '#openstack-mistral'
 - '#openstack-monasca'
+- '#openstack-mogan'
 - '#openstack-net-bgpvpn'
 - '#openstack-networking-cisco'
 - '#openstack-neutron'
 - '#openstack-neutron-ovn'
 - '#openstack-neutron-release'
-- '#openstack-nimble'
 - '#openstack-nova'
 - '#openstack-operators'
 - '#openstack-opw'
