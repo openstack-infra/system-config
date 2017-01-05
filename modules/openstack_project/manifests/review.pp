@@ -151,7 +151,10 @@ class openstack_project::review (
     swift_password                      => $swift_password,
     gitweb                              =>
       {
-        revision   => '?p=${project}.git;a=commitdiff;h=${commit}',
+        type       => 'cgit',
+        url        => 'https://git.openstack.org/cgit/',
+        revision   => '${project}/commit/?id=${commit}',
+        urlEncode  => 'false',
       },
     commentlinks                        => [
       {
