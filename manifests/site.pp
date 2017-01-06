@@ -1308,7 +1308,7 @@ node 'kdc02.openstack.org' {
 }
 
 # Node-OS: trusty
-node afsdb01.openstack.org/ {
+node 'afsdb01.openstack.org' {
   $group = "afsdb"
 
   class { 'openstack_project::server':
