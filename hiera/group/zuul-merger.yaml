@@ -22,7 +22,7 @@ zuul_sites:
     root: '/web/content'
 
   - name: 'afs-docs'
-    root: '/afs/openstack.org/docs'
+    root: '/afs/.openstack.org/docs'
     keytab: '/etc/zuul-launcher.keytab'
     user: 'service/zuul-launcher'
 
@@ -39,7 +39,7 @@ zuul_sites:
     root: '/web/content'
 
   - name: 'afs-developer-docs'
-    root: '/afs/openstack.org/developer-docs'
+    root: '/afs/.openstack.org/developer-docs'
     keytab: '/etc/zuul-launcher.keytab'
     user: 'service/zuul-launcher'
 
