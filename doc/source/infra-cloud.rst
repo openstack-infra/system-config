@@ -88,13 +88,18 @@ possible. In the future the cloud may be continuously deployed.
 Management
 ----------
 
- * A "Ironic Controller" machine is installed by hand into each site. That
-   machine is enrolled into the puppet/ansible infrastructure.
+ * Currently a single "Ironic Controller" is installed by hand and used by both
+   sites. That machine is enrolled into the puppet/ansible infrastructure and
+   can be reached at baremetal00.vanilla.ic.openstack.org.
 
  * The "Ironic Controller" will have bifrost installed on it. All of the
    other machines in that site will be enrolled in the Ironic that bifrost
    manages. bifrost will be responsible for booting base OS with IP address
    and ssh key for each machine.
+
+ * You can interact with the Bifrost Ironic installation by sourcing
+   ``/opt/stack/bifrost/env-vars`` then running the ironic cli client (for
+   example: ``ironic node-list``).
 
  * The machines will all be added to a manual ansible inventory file adjacent
    to the dynamic inventory that ansible currently uses to run puppet. Any
