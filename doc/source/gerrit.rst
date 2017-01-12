@@ -432,6 +432,8 @@ To rename a project:
      repos:
      - old: stackforge/awesome-repo
        new: openstack/awesome-repo
+     - old: openstack/foo
+       new: openstack/bar
      gerrit_groups:
      - old: old-core-group
        new: new-core-group
@@ -471,6 +473,11 @@ To rename a project:
 #. Re-enable puppet runs on the puppetmaster::
 
      sudo crontab -u root -e
+
+   .. warning::
+      Wait for the ``project-config`` changes to merge before
+      re-enabling cron, else duplicate projects can appear that have
+      to be manually removed.
 
 #. Submit a change that updates .gitreview with the new location of the
    project.
