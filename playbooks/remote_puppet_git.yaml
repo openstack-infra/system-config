@@ -27,3 +27,5 @@
     - role: puppet
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
+      vars:
+        puppet_timeout: 60m
