@@ -6,13 +6,13 @@
   - shell: invoke-rc.d gerrit stop
   - include_vars: "{{ repolist }}"
   - shell: echo 'update account_project_watches set project_name = "{{ item.new }}" where project_name = "{{ item.old }}";' | mysql reviewdb
-    with_items: {{ repos }}
+    with_items: "{{ repos }}"
   - shell: echo 'update changes set dest_project_name = "{{ item.new }}", created_on = created_on where dest_project_name = "{{ item.old }}";' | mysql reviewdb
-    with_items: {{ repos }}
+    with_items: "{{ repos }}"
   - shell: mv {{ item[0] }}{{ item[1].old }}.git {{ item[0] }}{{ item[1].new }}.git
     with_nested:
     - [ '~gerrit2/review_site/git/', '/opt/lib/git/' ]
-    - {{ repos }}
+    - "{{ repos }}"
 - hosts: 'git0*'
   gather_facts: False
   tasks:
@@ -20,14 +20,14 @@
   - shell: mv {{ item[0] }}{{ item[1].old }}.git {{ item[0] }}{{ item[1].new }}.git
     with_nested:
     - [ '/var/lib/git/' ]
-    - {{ repos }}
+    - "{{ repos }}"
 - hosts: storyboard.openstack.org
   gather_facts: False
   remote_user: root
   tasks:
   - include_vars: "{{ repolist }}"
   - shell: echo 'update projects set name="{{ item.new }}" where name="{{ item.old }}";' | mysql --defaults-file=/root/.storyboard_db.cnf storyboard
-    with_items: {{ repos }}
+    with_items: "{{ repos }}"
 - hosts: review.openstack.org
   gather_facts: False
   remote_user: root
@@ -58,4 +58,4 @@
   tasks:
   - include_vars: "{{ repolist }}"
   - shell: 'rm -rf ~jenkins/workspace/*{{ item.old | basename }}*'
-    with_items: {{ repos }}
+    with_items: "{{ repos }}"
