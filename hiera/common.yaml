@@ -76,6 +76,7 @@ statusbot_channels:
 - openstack-ironic
 - openstack-keystone
 - openstack-kolla
+- openstack-lbaas
 - openstack-manila
 - openstack-meniscus
 - openstack-merges
