@@ -291,6 +291,13 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
 
+# Neutron functional per-test logs
+  - name: logs/dsvm-functional-logs/*
+    tags:
+      - screen
+      - oslofmt
+    job-filter: '.*neutron-dsvm-functional.*'
+
 # Grenade new logs below
   - name: logs/new/screen-c-api.txt
     tags:
