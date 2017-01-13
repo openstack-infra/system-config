@@ -1,5 +1,5 @@
 [loggers]
-keys=root,nodepool,requests,shade
+keys=root,nodepool,requests,shade,shade_task_manager
 
 [handlers]
 keys=console,debug,normal
@@ -20,6 +20,11 @@ qualname=requests
 level=WARNING
 handlers=debug,normal
 qualname=shade
+
+[logger_shade_task_manager]
+level=INFO
+handlers=debug,normal
+qualname=shade.task_manager
 
 [logger_gear]
 level=DEBUG
