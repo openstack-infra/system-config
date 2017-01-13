@@ -291,6 +291,16 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
 
+# Neutron index log files (files with messages from all test cases)
+  - name: logs/dsvm-functional-index.txt
+    tags:
+      - oslofmt
+    job-filter: '.*neutron-dsvm-functional.*'
+  - name: logs/dsvm-fullstack-index.txt
+    tags:
+      - oslofmt
+    job-filter: '.*neutron-dsvm-fullstack.*'
+
 # Grenade new logs below
   - name: logs/new/screen-c-api.txt
     tags:
