@@ -1,6 +1,12 @@
 - hosts: all
   gather_facts: true
   tasks:
-  - name: run unattended upgrades
-    shell: apt-get update &&  unattended-upgrade
-    when: ansible_os_family == "Debian"
+    - name: Update apt cache.
+      become: yes
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: run unattended upgrades
+      shell: unattended-upgrade
+      when: ansible_os_family == "Debian"
