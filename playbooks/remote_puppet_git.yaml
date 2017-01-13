@@ -6,7 +6,7 @@
   tasks:
     # Note that git module does ls-remote if clone is set to no and places
     # the remote_head value in returndict.after
-    - git: repo=https://git.openstack.org/openstack-infra/project-config clone=no
+    - git: repo=https://git.openstack.org/openstack-infra/project-config clone=no version=master
       register: gitinfo
   roles:
     - role: puppet

@@ -7,6 +7,7 @@
       repo: https://git.openstack.org/openstack-infra/system-config
       dest: /opt/system-config/production
       force: yes
+      version: master
   - shell: ./install_modules.sh
     args:
       chdir: /opt/system-config/production
