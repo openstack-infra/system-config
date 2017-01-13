@@ -8,7 +8,7 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24,
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-24, dib_fedora-25,
  rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
  ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
  osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
@@ -19,7 +19,7 @@ keys=root,nodepool,requests,shade,image,kazoo,
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-23, dib_fedora-24,
+ dib_ubuntu-xenial, dib_centos-7, dib_fedora-24, dib_fedora-25,
  rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
  ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
  osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
@@ -152,18 +152,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.centos-7.log', 'H', 8, 30,)
 
-[logger_dib_fedora-23]
-level=DEBUG
-handlers=dib_fedora-23
-qualname=nodepool.image.build.fedora-23
-propagate=0
-
-[handler_dib_fedora-23]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.fedora-23.log', 'H', 8, 30,)
-
 [logger_dib_fedora-24]
 level=DEBUG
 handlers=dib_fedora-24
@@ -175,6 +163,18 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-24.log', 'H', 8, 30,)
+
+[logger_dib_fedora-25]
+level=DEBUG
+handlers=dib_fedora-25
+qualname=nodepool.image.build.fedora-25
+propagate=0
+
+[handler_dib_fedora-25]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.fedora-25.log', 'H', 8, 30,)
 
 [logger_rax-dfw_upload]
 level=DEBUG
