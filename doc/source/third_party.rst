@@ -361,7 +361,7 @@ The following documentation explains how to setup a 3rd party CI system using th
 Managing Jenkins Jobs
 ---------------------
 When code is pushed to Gerrit, a series of jobs are triggered that run a series
-of tests against the proposed code. `Jenkins <http://docs.openstack.org/infra/system-config/jenkins.html>`_
+of tests against the proposed code. Jenkins
 is the server that executes and
 manages these jobs. It is a Java application with an extensible architecture
 that supports plugins that add functionality to the base server.
