@@ -125,4 +125,17 @@ class openstack_project::translate(
     ],
     require => Exec['register-zanata-projects'],
   }
+
+  mysql_backup::backup_remote { 'translate':
+    database_host     => $mysql_host,
+    database_user     => $mysql_user,
+    database_password => $mysql_password,
+    require           => Class['::zanata'],
+  }
+
+  include bup
+  bup::site { 'rs-ord':
+    backup_user   => 'bup-translate',
+    backup_server => 'ci-backup-rs-ord.openstack.org',
+  }
 }
