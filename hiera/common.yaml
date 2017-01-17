@@ -55,6 +55,7 @@ statusbot_channels:
 - openstack-cloudkeep
 - openstack-community
 - openstack-containers
+- openstack-cyborg
 - openstack-dev
 - openstack-dns
 - openstack-doc
