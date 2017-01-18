@@ -54,6 +54,8 @@ class openstack_project::translate_dev(
     zanata_listeners            => $listeners,
     zanata_admin_users          => $admin_users,
     zanata_default_from_address => $from_address,
+    zanata_url                  => 'https://sourceforge.net/projects/zanata/files/webapp/zanata-war-3.9.6.war',
+    zanata_checksum             => '67a360616eaf442b089a39921ff22149d2f0fdb5',
     require                     => [
                                    Class['openstack_project::server']
                                    ],
