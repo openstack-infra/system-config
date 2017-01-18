@@ -18,8 +18,7 @@ class openstack_project::puppetmaster (
   class { '::ansible':
     ansible_hostfile    => '/etc/ansible/hosts',
     retry_files_enabled => 'False',
-    ansible_version     => 'v2.2.1.0-0.3.rc3',
-    ansible_source      => 'git+git://github.com/ansible/ansible.git',
+    ansible_version     => '2.2.1.0',
   }
 
   file { '/etc/ansible/hostfile':
