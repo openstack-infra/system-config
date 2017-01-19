@@ -1,0 +1,9 @@
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 19 Jan 2017 23:12:14 +0000
+Reviewed-on: https://review.openstack.org/422367
+Project: openstack-infra/system-config
+Branch: refs/heads/master
