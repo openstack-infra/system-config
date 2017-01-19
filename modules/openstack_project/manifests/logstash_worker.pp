@@ -53,6 +53,7 @@ class openstack_project::logstash_worker (
     notify  => Service['logstash'],
   }
 
+  validate_array($elasticsearch_nodes)  # needed by output.conf.erb
   class { '::logstash::indexer':
     input_template         => 'openstack_project/logstash/input.conf.erb',
     output_template        => 'openstack_project/logstash/output.conf.erb',

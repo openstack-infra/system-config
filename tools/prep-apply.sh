@@ -25,15 +25,8 @@ export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
 
 export PUPPET_INTEGRATION_TEST=1
 
+# Remove previously-installed modules
 sudo rm -rf /etc/puppet/modules/*
-
-cat > clonemap.yaml <<EOF
-clonemap:
-  - name: '(.*?)/puppet-(.*)'
-    dest: '/etc/puppet/modules/\2'
-  - name: '(.*?)/ansible-role-(.*)'
-    dest: '/etc/ansible/roles/\2'
-EOF
 
 # These arrays are initialized here and populated in modules.env
 
@@ -48,10 +41,21 @@ declare -A SOURCE_MODULES
 # key:value is source location, revision to checkout
 declare -A INTEGRATION_MODULES
 
+source $MODULE_ENV_FILE
+
+# Install SOURCE_MODULES
+sudo -E bash -x $ROOT/install_modules.sh
+
+# Install INTEGRATION_MODULES
+cat > clonemap.yaml <<EOF
+clonemap:
+  - name: '(.*?)/puppet-(.*)'
+    dest: '/etc/puppet/modules/\2'
+  - name: '(.*?)/ansible-role-(.*)'
+    dest: '/etc/ansible/roles/\2'
+EOF
 
 project_names="openstack-infra/ansible-role-puppet"
-
-source $MODULE_ENV_FILE
 
 for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_scope=$(basename `dirname $MOD`)
@@ -63,6 +67,7 @@ sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
     git://git.openstack.org \
     $project_names
 
+# Fix hostname lookups
 grep -v 127.0.1.1 /etc/hosts >/tmp/hosts
 HOST=`echo $HOSTNAME |awk -F. '{ print $1 }'`
 echo "127.0.1.1 $HOST.openstack.org $HOST" >> /tmp/hosts
