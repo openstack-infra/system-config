@@ -55,10 +55,6 @@ class openstack_project::wheel_mirror_slave (
   # below follows a rough list of things required to build binary
   # wheels.
 
-  # TODO: global-requirements keeps other-requirements that can be
-  # parsed by bindep.  We should have some sort of bindep provider
-  # that can interact with that
-
   case $::osfamily {
     'Debian': {
       ensure_packages(['build-essential',
@@ -86,4 +82,35 @@ class openstack_project::wheel_mirror_slave (
       err "${::osfamily} not supported yet"
     }
   }
+
+  # This mostly mirrors setting up bindep in /usr/bindep-env just as
+  # project-config:nodepool/elements/cache-bindep/ element does for
+  # regular nodes.  This way we can use the regular jenkins macros
+  # which expect bindep to be there.
+  #
+  # NOTE that installing pacakges on long-lived slaves like this is
+  # particular to this wheel-build job and likely should not be
+  # replicated.
+
+  vcsrepo { '/opt/bindep':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/bindep.git',
+  }
+
+  python::virtualenv { '/usr/bindep-env':
+    ensure       => present,
+    owner        => 'root',
+    group        => 'root',
+    timeout      => 0,
+  }
+
+  exec { 'bindep-env-update':
+    command     => '/usr/bindep-env/bin/pip --log /usr/bindep-env/pip.log install /opt/bindep',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/bindep'],
+    require     => Python::Virtualenv['/usr/bindep-env'],
+  }
+
 }
