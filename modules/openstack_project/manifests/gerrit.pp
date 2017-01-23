@@ -202,6 +202,7 @@ class openstack_project::gerrit (
     database_host     => $mysql_host,
     database_user     => 'gerrit2',
     database_password => $mysql_password,
+    dest_dir          => '/home/gerrit2/mysql_backups',
     require           => Class['::gerrit'],
   }
 
