@@ -651,6 +651,7 @@ node 'design-summit-prep.openstack.org' {
 # Serve static AFS content for docs and other sites.
 # Node-OS: trusty
 node 'files01.openstack.org' {
+  $group = "files"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80],
     sysadmins                 => hiera('sysadmins', []),
@@ -659,8 +660,14 @@ node 'files01.openstack.org' {
   }
 
   class { 'openstack_project::files':
-    vhost_name => 'files.openstack.org',
-    require    => Class['Openstack_project::Server'],
+    vhost_name                    => 'files.openstack.org',
+    developer_cert_file_contents  => hiera('developer_ssl_cert_file_contents'),
+    developer_key_file_contents   => hiera('developer_ssl_key_file_contents'),
+    developer_chain_file_contents => hiera('developer_ssl_chain_file_contents'),
+    docs_cert_file_contents       => hiera('docs_ssl_cert_file_contents'),
+    docs_key_file_contents        => hiera('docs_ssl_key_file_contents'),
+    docs_chain_file_contents      => hiera('docs_ssl_chain_file_contents'),
+    require                       => Class['Openstack_project::Server'],
   }
 }
 
