@@ -6,6 +6,7 @@ ci-backup ci-backup-*.openstack.org
 disabled ci-backup-rs-ord.openstack.org:db368fcd-e61a-4294-a5cb-851c16650f7a:wiki.openstack.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 ethercalc ~ethercalc\d+\.openstack\.org
+files ~files\d+\.openstack\.org
 git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
