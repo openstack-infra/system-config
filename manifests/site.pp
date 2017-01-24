@@ -356,6 +356,22 @@ node 'eavesdrop.openstack.org' {
 }
 
 # Node-OS: trusty
+node /^ethercalc\d+\.openstack\.org$/ {
+  $group = "ethercalc"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::ethercalc':
+    vhost_name              => 'ethercalc.openstack.org',
+    ssl_cert_file_contents  => hiera('ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('ssl_chain_file_contents'),
+  }
+}
+
+# Node-OS: trusty
 node 'etherpad.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
