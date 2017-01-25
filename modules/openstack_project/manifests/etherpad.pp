@@ -41,6 +41,7 @@ class openstack_project::etherpad (
     database_host     => $mysql_host,
     database_user     => $mysql_user,
     database_password => $mysql_password,
+    num_backups       => '10',
     require           => Class['etherpad_lite'],
   }
 
