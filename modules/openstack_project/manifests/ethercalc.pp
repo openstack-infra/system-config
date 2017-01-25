@@ -7,7 +7,7 @@ class openstack_project::ethercalc (
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
 ) {
-  include ethercalc
+  class { '::ethercalc': }
 
   class { 'ethercalc::apache':
     vhost_name              => $vhost_name,
