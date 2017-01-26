@@ -677,12 +677,12 @@ node 'files01.openstack.org' {
 
   class { 'openstack_project::files':
     vhost_name                    => 'files.openstack.org',
-    developer_cert_file_contents  => hiera('developer_ssl_cert_file_contents'),
-    developer_key_file_contents   => hiera('developer_ssl_key_file_contents'),
-    developer_chain_file_contents => hiera('developer_ssl_chain_file_contents'),
-    docs_cert_file_contents       => hiera('docs_ssl_cert_file_contents'),
-    docs_key_file_contents        => hiera('docs_ssl_key_file_contents'),
-    docs_chain_file_contents      => hiera('docs_ssl_chain_file_contents'),
+    developer_cert_file_contents  => hiera('developer_cert_file_contents'),
+    developer_key_file_contents   => hiera('developer_key_file_contents'),
+    developer_chain_file_contents => hiera('developer_chain_file_contents'),
+    docs_cert_file_contents       => hiera('docs_cert_file_contents'),
+    docs_key_file_contents        => hiera('docs_key_file_contents'),
+    docs_chain_file_contents      => hiera('docs_chain_file_contents'),
     require                       => Class['Openstack_project::Server'],
   }
 }
