@@ -2,6 +2,12 @@
 #
 class openstack_project::files (
   $vhost_name = $::fqdn,
+  $developer_cert_file_contents,
+  $developer_key_file_contents,
+  $developer_chain_file_contents,
+  $docs_cert_file_contents,
+  $docs_key_file_contents,
+  $docs_chain_file_contents,
 ) {
 
   $afs_root = '/afs/openstack.org/'
@@ -22,6 +28,22 @@ class openstack_project::files (
     mode     => '0444',
     source   => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require  => File["${www_base}"],
+  }
+
+  #####################################################
+  # Set up directories needed by HTTPS certs/keys
+  file { '/etc/ssl/certs':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  file { '/etc/ssl/private':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
   }
 
   #####################################################
@@ -59,19 +81,69 @@ class openstack_project::files (
   # docs.openstack.org
 
   ::httpd::vhost { 'docs.openstack.org':
-    port       => 80,
+    port       => 443, # Is required despite not being used.
     docroot    => "${afs_root}docs",
     priority   => '50',
     template   => 'openstack_project/docs.vhost.erb',
+  }
+  file { '/etc/ssl/certs/docs.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $docs_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/docs.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $docs_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/docs.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $docs_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/docs.openstack.org.pem'],
   }
 
   ###########################################################
   # developer.openstack.org
 
   ::httpd::vhost { 'developer.openstack.org':
-    port       => 80,
+    port       => 443, # Is required despite not being used.
     docroot    => "${afs_root}developer-docs",
     priority   => '50',
-    template   => 'openstack_project/docs.vhost.erb',
+    template   => 'openstack_project/developer.vhost.erb',
+  }
+  file { '/etc/ssl/certs/developer.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $developer_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/developer.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $developer_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/developer.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $developer_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/developer.openstack.org.pem'],
   }
 }

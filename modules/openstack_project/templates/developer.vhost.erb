@@ -46,9 +46,9 @@
     # only is guarenteed.
     SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!AES256:!aNULL:!eNULL:!MD5:!DSS:!PSK:!SRP
     SSLHonorCipherOrder on
-    SSLCertificateFile /etc/ssl/certs/docs.openstack.org.pem
-    SSLCertificateKeyFile /etc/ssl/private/docs.openstack.org.key
-    SSLCertificateChainFile /etc/ssl/certs/docs.openstack.org_intermediate.pem
+    SSLCertificateFile /etc/ssl/certs/developer.openstack.org.pem
+    SSLCertificateKeyFile /etc/ssl/private/developer.openstack.org.key
+    SSLCertificateChainFile /etc/ssl/certs/developer.openstack.org_intermediate.pem
 
     DocumentRoot <%= @docroot %>
     <Directory <%= @docroot %>>
