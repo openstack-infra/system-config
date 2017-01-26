@@ -405,6 +405,7 @@ cacti_hosts:
 - elasticsearch05.openstack.org
 - elasticsearch06.openstack.org
 - elasticsearch07.openstack.org
+- ethercalc.openstack.org
 - etherpad-dev.openstack.org
 - etherpad.openstack.org
 - files01.openstack.org
