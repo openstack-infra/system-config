@@ -669,7 +669,7 @@ node 'design-summit-prep.openstack.org' {
 node 'files01.openstack.org' {
   $group = "files"
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
     afs_cache_size            => 10000000,  # 10GB
