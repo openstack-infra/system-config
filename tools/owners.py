@@ -178,14 +178,8 @@ def query_gerrit(query):
     return decoded
 
 
-def main():
-    """The giant pile of spaghetti which does everything else"""
-
-    # Record the start time for use later
-    start = datetime.datetime.utcnow()
-
-    # TODO(fungi): this could be trivially extracted to a separate
-    # function
+def usage(argv):
+    """Parse command line argument"""
     parser = argparse.ArgumentParser(
         description="When run using OpenStack's Gerrit server, this builds "
         "YAML representations of aggregate change owner details and change "
@@ -203,7 +197,16 @@ def main():
     parser.add_argument("-o", "--outdir", help="Create an output directory")
     parser.add_argument("-r", "--ref", help="Specify a Governance refname")
     parser.add_argument("-s", "--sieve", help="Add Gerrit query parameters")
-    options = parser.parse_args()
+    return parser.parse_args(argv[1:])
+
+
+def main(argv=sys.argv):
+    """The giant pile of spaghetti which does everything else"""
+
+    # Record the start time for use later
+    start = datetime.datetime.utcnow()
+
+    options = usage(argv)
 
     # If we're supplied a configuration file, use it
     if options.config:
@@ -638,4 +641,5 @@ def main():
         fd.writelines(electorate)
         fd.close()
 
-main()
+if __name__ == "__main__":
+    main()
