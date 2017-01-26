@@ -248,7 +248,7 @@ node 'graphite.openstack.org' {
 # Node-OS: trusty
 node 'groups.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::groups':
@@ -265,7 +265,7 @@ node 'groups.openstack.org' {
 # Node-OS: trusty
 node 'groups-dev.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::groups_dev':
@@ -359,7 +359,7 @@ node 'eavesdrop.openstack.org' {
 node /^ethercalc\d+\.openstack\.org$/ {
   $group = "ethercalc"
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
@@ -374,7 +374,7 @@ node /^ethercalc\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'etherpad.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
@@ -391,7 +391,7 @@ node 'etherpad.openstack.org' {
 # Node-OS: trusty
 node 'etherpad-dev.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
@@ -453,7 +453,7 @@ node 'logstash.openstack.org' {
   $logstash_iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 3306],
+    iptables_public_tcp_ports => [80, 3306],
     iptables_rules6           => $logstash_iptables_rule,
     iptables_rules4           => $logstash_iptables_rule,
     sysadmins                 => hiera('sysadmins', []),
@@ -480,7 +480,6 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   $group = 'logstash-worker'
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
     iptables_rules6           => $logstash_worker_iptables_rule,
     iptables_rules4           => $logstash_worker_iptables_rule,
     sysadmins                 => hiera('sysadmins', []),
@@ -498,7 +497,6 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::subunit_worker':
@@ -516,7 +514,6 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
                                      '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_rule = flatten([$iptables_nodes_rule, $iptables_clients_rule])
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
     iptables_rules6           => $iptables_rule,
     iptables_rules4           => $iptables_rule,
     sysadmins                 => hiera('sysadmins', []),
@@ -532,7 +529,7 @@ node /^firehose\d+\.openstack\.org$/ {
     # NOTE(mtreinish) Port 80 and 8080 are disabled because websocket
     # connections seem to crash mosquitto. Once this is fixed we should add
     # them back
-    iptables_public_tcp_ports => [22, 25, 1883, 8883],
+    iptables_public_tcp_ports => [25, 1883, 8883],
     sysadmins                 => hiera('sysadmins', []),
     manage_exim               => false,
   }
@@ -554,7 +551,7 @@ node /^firehose\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node /^pholio\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { '::phabricator':
@@ -644,7 +641,7 @@ node /^mirror\..*\.openstack\.org$/ {
   $group = "mirror"
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80],
+    iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
     afs_cache_size            => 50000000,  # 50GB
@@ -769,7 +766,7 @@ node 'storyboard-dev.openstack.org' {
 # Node-OS: trusty
 node 'static.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::static':
@@ -793,7 +790,7 @@ node 'static.openstack.org' {
 # Node-OS: trusty
 node 'status.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
@@ -1378,7 +1375,7 @@ node /^afs.*\..*\.openstack\.org$/ {
 node 'ask.openstack.org' {
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
@@ -1395,7 +1392,7 @@ node 'ask.openstack.org' {
 # Node-OS: trusty
 node 'ask-staging.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
+    iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
