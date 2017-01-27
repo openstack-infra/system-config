@@ -111,7 +111,7 @@ be all one line per event):
 For most purposes you will want to trigger on ``patchset-created`` for when a
 new patchset has been uploaded.
 
-Further documentation on how to use the events stream can be found in `Gerrit's stream event documentation page <http://gerrit-documentation.googlecode.com/svn/Documentation/2.3/cmd-stream-events.html>`_.
+Further documentation on how to use the events stream can be found in `Gerrit's stream event documentation page <https://review.openstack.org/Documentation/cmd-stream-events.html>`_.
 
 Posting Result To Gerrit
 ------------------------
@@ -133,7 +133,7 @@ In this example ``c0ff33`` is the commit ID for the review.  You can
 set the verified to either `-1` or `+1` depending on whether or not it
 passed the tests.
 
-Further documentation on the `review` command in Gerrit can be found in the `Gerrit review documentation page <http://gerrit-documentation.googlecode.com/svn/Documentation/2.3/cmd-review.html>`_.
+Further documentation on the `review` command in Gerrit can be found in the `Gerrit review documentation page <https://review.openstack.org/Documentation/cmd-review.html>`_.
 
 We do suggest cautious testing of these systems and have a development Gerrit
 setup to test on if required.  In SmokeStack's case all failures are manually
