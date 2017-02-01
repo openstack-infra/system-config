@@ -60,6 +60,7 @@ class openstack_project::git_backend (
         'logo'           => '/static/openstack.png',
         'root-title'     => 'OpenStack git repository browser',
         'max-repo-count' => 2500,
+        'robots'         => 'index',
     },
     manage_cgitrc           => true,
     selinux_mode            => $selinux_mode
