@@ -10,6 +10,7 @@ class openstack_project::zuul_merger(
   $zuul_url = "http://${::fqdn}/p",
   $git_email = 'jenkins@openstack.org',
   $git_name = 'OpenStack Jenkins',
+  $revision = 'master',
 ) {
   class { 'openstackci::zuul_merger':
     vhost_name               => $vhost_name,
@@ -22,5 +23,6 @@ class openstack_project::zuul_merger(
     git_email                => $git_email,
     git_name                 => $git_name,
     manage_common_zuul       => true,
+    revision                 => $revision,
   }
 }

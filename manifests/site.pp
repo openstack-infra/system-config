@@ -1009,6 +1009,22 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+node 'zuulv3-dev.openstack.org' {
+  $group = "zuul-merger"
+
+  class { 'openstack_project::zuul_merger':
+    gearman_server       => 'localhost',
+    gerrit_server        => 'review-dev.openstack.org',
+    gerrit_user          => 'zuul',
+    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+    revision             => 'feature/zuulv3',
+  }
+
+  # TODO(pabelanger): Add zuul_scheduler support
+  # TODO(pabelanger): Add zuul_launcher support
+}
+
 # Node-OS: trusty
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
