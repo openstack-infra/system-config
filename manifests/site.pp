@@ -1009,6 +1009,33 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+node 'zuulv3-dev.openstack.org' {
+  $group = "zuul-merger"
+
+  class { 'openstack_project::zuul_merger':
+    gearman_server       => 'localhost',
+    gerrit_server        => 'review.openstack.org',
+    gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+  }
+
+  class { 'openstack_project::zuul_dev':
+    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
+    gerrit_server        => 'review-dev.openstack.org',
+    gerrit_user          => 'jenkins',
+    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
+    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul-dev.openstack.org/p',
+    sysadmins            => hiera('sysadmins', []),
+    statsd_host          => 'graphite.openstack.org',
+    gearman_workers      => [],
+  }
+
+  # TODO(pabelanger): Add zuul_launcher support
+}
+
 # Node-OS: trusty
 node 'zuul.openstack.org' {
   class { 'openstack_project::zuul_prod':
