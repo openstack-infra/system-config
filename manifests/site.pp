@@ -918,6 +918,63 @@ node 'nodepool.openstack.org' {
 
 # Node-OS: trusty
 # Node-OS: xenial
+node /^nl\d+\.openstack\.org$/ {
+  $group = 'nodepool'
+  # TODO(pabelanger): Move all of this back into nodepool manifest, it has
+  # grown too big.
+  $bluebox_username               = hiera('nodepool_bluebox_username', 'username')
+  $bluebox_password               = hiera('nodepool_bluebox_password')
+  $bluebox_project                = hiera('nodepool_bluebox_project', 'project')
+  $rackspace_username             = hiera('nodepool_rackspace_username', 'username')
+  $rackspace_password             = hiera('nodepool_rackspace_password')
+  $rackspace_project              = hiera('nodepool_rackspace_project', 'project')
+  $hpcloud_username               = hiera('nodepool_hpcloud_username', 'username')
+  $hpcloud_password               = hiera('nodepool_hpcloud_password')
+  $hpcloud_project                = hiera('nodepool_hpcloud_project', 'project')
+  $internap_username              = hiera('nodepool_internap_username', 'username')
+  $internap_password              = hiera('nodepool_internap_password')
+  $internap_project               = hiera('nodepool_internap_project', 'project')
+  $ovh_username                   = hiera('nodepool_ovh_username', 'username')
+  $ovh_password                   = hiera('nodepool_ovh_password')
+  $ovh_project                    = hiera('nodepool_ovh_project', 'project')
+  $tripleo_username               = hiera('nodepool_tripleo_username', 'username')
+  $tripleo_password               = hiera('nodepool_tripleo_password')
+  $tripleo_project                = hiera('nodepool_tripleo_project', 'project')
+  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
+  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
+  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
+  $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
+  $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
+  $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
+  $osic_cloud1_username           = hiera('nodepool_osic_cloud1_username', 'username')
+  $osic_cloud1_password           = hiera('nodepool_osic_cloud1_password')
+  $osic_cloud1_project            = hiera('nodepool_osic_cloud1_project', 'project')
+  $osic_cloud8_username           = hiera('nodepool_osic_cloud8_username', 'username')
+  $osic_cloud8_password           = hiera('nodepool_osic_cloud8_password')
+  $osic_cloud8_project            = hiera('nodepool_osic_cloud8_project', 'project')
+  $vexxhost_username              = hiera('nodepool_vexxhost_username', 'username')
+  $vexxhost_password              = hiera('nodepool_vexxhost_password')
+  $vexxhost_project               = hiera('nodepool_vexxhost_project', 'project')
+  $datacentred_username           = hiera('nodepool_datacentred_username', 'username')
+  $datacentred_password           = hiera('nodepool_datacentred_password')
+  $datacentred_project            = hiera('nodepool_datacentred_project', 'project')
+  $citycloud_username             = hiera('nodepool_citycloud_username', 'username')
+  $citycloud_password             = hiera('nodepool_citycloud_password')
+  $entercloud_username            = hiera('nodepool_entercloud_username', 'username')
+  $entercloud_password            = hiera('nodepool_entercloud_password')
+  $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
+
+  class { 'openstack_project::server':
+    sysadmins => hiera('sysadmins', []),
+  }
+
+  include openstack_project
+
+  # TODO(pabelanger): Add '::openstackci::nodepool_launcher'
+}
+
+# Node-OS: trusty
+# Node-OS: xenial
 node /^nb\d+\.openstack\.org$/ {
   $group = 'nodepool'
   # TODO(pabelanger): Move all of this back into nodepool manifest, it has

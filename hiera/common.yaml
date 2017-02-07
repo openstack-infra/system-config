@@ -450,6 +450,7 @@ cacti_hosts:
 - logstash.openstack.org
 - nb01.openstack.org
 - nb02.openstack.org
+- nl01.openstack.org
 - nodepool.openstack.org
 - openstackid.org
 - paste.openstack.org
