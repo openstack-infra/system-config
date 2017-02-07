@@ -230,4 +230,11 @@ class openstack_project::users {
     gid      => 2025,
   }
 
+  @user::virtual::localuser { 'shrews':
+    realname => 'David Shrewsbury',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCdzEzB2KpNLTTFJGLCNMY53sja37PXFzHHdjWEGaZtaTcuCn/ufV9ql5yhS5/414u9swoHM71H00+nT4uSWcXc2tTRXYWslaiwU47DOtQsD//CvGgIFBNO1EinWhYa5uTSfxI+Z/x4PBu7XFq5wi/JCfJ+iHIWsvXn8U44r1csURcZU0GMPAVG1MO+s3p1W7daVqF9RR7UuwCECb3hdPN1N/M4s6myBiuRXCeDND98dKLf8b342hw+pWvQ3g/OCLcVlYPWT4fy1YGQT8hT+jA2XPfwCtu/k7HKAGH3E8UcnBtY/RI9ibciIFe+Ro7q8t+tp5SgjGLq1NnE4Yp5rpsh',
+    key_id   => 'david@koala',
+    uid      => 2026,
+    gid      => 2026,
+  }
 }
