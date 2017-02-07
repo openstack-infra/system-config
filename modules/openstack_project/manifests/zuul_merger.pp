@@ -8,16 +8,9 @@ class openstack_project::zuul_merger(
   $gerrit_ssh_host_key = '',
   $zuul_ssh_private_key = '',
   $zuul_url = "http://${::fqdn}/p",
-  $sysadmins = [],
   $git_email = 'jenkins@openstack.org',
   $git_name = 'OpenStack Jenkins',
 ) {
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => $sysadmins,
-  }
-
   class { 'openstackci::zuul_merger':
     vhost_name               => $vhost_name,
     gearman_server           => $gearman_server,

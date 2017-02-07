@@ -1106,6 +1106,11 @@ node /^zl\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node /^zm\d+\.openstack\.org$/ {
   $group = "zuul-merger"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::zuul_merger':
     gearman_server       => 'zuul.openstack.org',
     gerrit_server        => 'review.openstack.org',
