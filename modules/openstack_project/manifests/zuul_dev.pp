@@ -10,25 +10,13 @@ class openstack_project::zuul_dev(
   $url_pattern = '',
   $status_url = 'http://zuul-dev.openstack.org',
   $zuul_url = '',
-  $sysadmins = [],
   $statsd_host = '',
-  $gearman_workers = [],
   $project_config_repo = '',
 ) {
 
   realize (
     User::Virtual::Localuser['zaro'],
   )
-
-  # Turn a list of hostnames into a list of iptables rules
-  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-    sysadmins                 => $sysadmins,
-  }
 
   class { 'openstackci::zuul_scheduler':
     vhost_name               => $vhost_name,
