@@ -24,21 +24,10 @@ class openstack_project::zuul_prod(
   $proxy_ssl_chain_file_contents = '',
   $sysadmins = [],
   $statsd_host = '',
-  $gearman_workers = [],
   $project_config_repo = '',
   $git_email = 'jenkins@openstack.org',
   $git_name = 'OpenStack Jenkins',
 ) {
-  # Turn a list of hostnames into a list of iptables rules
-  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-    sysadmins                 => $sysadmins,
-  }
-
   class { 'openstackci::zuul_scheduler':
     vhost_name                     => $vhost_name,
     gearman_server                 => $gearman_server,
