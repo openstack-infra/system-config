@@ -1009,6 +1009,41 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+node 'zuulv3-dev.openstack.org' {
+  $group = "zuul-merger"
+
+  $gerrit_server        => 'review-dev.openstack.org',
+  $gerrit_user          => 'zuul',
+  $gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+  $zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+  $zuul_url             = "http://${::fqdn}/p",
+  $git_email            = 'jenkins@openstack.org',
+  $git_name             = 'OpenStack Jenkins',
+  $revision             = 'feature/zuulv3',
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gerrit_server        => $gerrit_server,
+    gerrit_user          => $gerrit_user,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    git_email            => $git_email,
+    git_name             => $git_name,
+    revision             => $revision,
+  }
+
+  class { 'openstack_project::zuul_merger':
+    gerrit_server        => $gerrit_server
+    gerrit_user          => $gerrit_user,
+    gerrit_ssh_host_key  => $gerrit_ssh_host_key,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    revision             => $revision,
+    manage_common_zuul   => false,
+  }
+  # TODO(pabelanger): Add zuul_scheduler support
+  # TODO(pabelanger): Add zuul_launcher support
+}
+
 # Node-OS: trusty
 node 'zuul.openstack.org' {
   $gearman_workers = [
