@@ -1011,6 +1011,34 @@ node /^nb\d+\.openstack\.org$/ {
 
 # Node-OS: trusty
 node 'zuul.openstack.org' {
+  $gearman_workers = [
+    'nodepool.openstack.org',
+    'zlstatic01.openstack.org',
+    'zl01.openstack.org',
+    'zl02.openstack.org',
+    'zl03.openstack.org',
+    'zl04.openstack.org',
+    'zl05.openstack.org',
+    'zl06.openstack.org',
+    'zl07.openstack.org',
+    'zm01.openstack.org',
+    'zm02.openstack.org',
+    'zm03.openstack.org',
+    'zm04.openstack.org',
+    'zm05.openstack.org',
+    'zm06.openstack.org',
+    'zm07.openstack.org',
+    'zm08.openstack.org',
+  ]
+  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    iptables_rules6           => $iptables_rules,
+    iptables_rules4           => $iptables_rules,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::zuul_prod':
     project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
     gerrit_server                  => 'review.openstack.org',
@@ -1024,25 +1052,6 @@ node 'zuul.openstack.org' {
     zuul_url                       => 'http://zuul.openstack.org/p',
     sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.openstack.org',
-    gearman_workers                => [
-      'nodepool.openstack.org',
-      'zlstatic01.openstack.org',
-      'zl01.openstack.org',
-      'zl02.openstack.org',
-      'zl03.openstack.org',
-      'zl04.openstack.org',
-      'zl05.openstack.org',
-      'zl06.openstack.org',
-      'zl07.openstack.org',
-      'zm01.openstack.org',
-      'zm02.openstack.org',
-      'zm03.openstack.org',
-      'zm04.openstack.org',
-      'zm05.openstack.org',
-      'zm06.openstack.org',
-      'zm07.openstack.org',
-      'zm08.openstack.org',
-    ],
   }
 }
 
