@@ -1076,7 +1076,6 @@ node /^zlstatic\d+\.openstack\.org$/ {
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
     nodes                => hiera('zuul_nodes', []),
     accept_nodes         => false,
@@ -1105,7 +1104,6 @@ node /^zl\d+\.openstack\.org$/ {
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
     zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
     project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
     sites                => hiera('zuul_sites', []),
     zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
   }
