@@ -103,5 +103,5 @@ class openstack_project::zuul_launcher(
     accept_nodes            => $accept_nodes,
   }
 
-  class { 'zuul::launcher': }
+  class { 'openstackci::zuul_launcher':
 }
