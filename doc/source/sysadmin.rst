@@ -218,9 +218,11 @@ To start backing up a server, some commands need to be run manually on
 both the backup server, and the server to be backed up.  On the server
 to be backed up::
 
+  sudo su -
   ssh-keygen -t rsa -f /root/.ssh/id_rsa -N ""
+  bup init
 
-And then ''cat /root/.ssh/id_rsa.pub'' for use later.
+And then ``cat /root/.ssh/id_rsa.pub`` for use later.
 
 On the backup servers::
 
@@ -238,7 +240,6 @@ and add this to the authorized_keys file::
 Switching back to the server to be backed up, run::
 
   ssh $BUPUSER@ci-backup-rs-ord.openstack.org
-  ssh $BUPUSER@ci-backup-hp-az1.openstack.org
 
 And verify the host key.  Note this will start the bup server on the
 remote end, you will not be given a pty. Use ^D to close the connection
