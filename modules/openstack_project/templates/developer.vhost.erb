@@ -11,16 +11,7 @@
     <% end -%>
 
     RewriteEngine on
-
-    DocumentRoot <%= @docroot %>
-    <Directory <%= @docroot %>>
-        Options Indexes FollowSymLinks MultiViews
-        Satisfy any
-        Require all granted
-        # Allow mod_rewrite rules
-        AllowOverride FileInfo
-        ErrorDocument 404 /errorpage.html
-    </Directory>
+    RewriteRule ^/(.*) https://<%= @srvname %>/$1 [last,redirect=permanent]
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
