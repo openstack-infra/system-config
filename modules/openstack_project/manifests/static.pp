@@ -31,6 +31,12 @@ class openstack_project::static (
     gitemail    => $jenkins_gitemail,
   }
 
+  # This will try to index our millions of logs and docs by default
+  # and cause all sorts of IO and disk-usage issues.
+  package { 'mlocate':
+    ensure => absent,
+  }
+
   include ::httpd
   include ::httpd::mod::wsgi
 
