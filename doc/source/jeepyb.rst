@@ -179,7 +179,7 @@ Manage Projects
 ---------------
 
 Some projects may have upstreams defined in Jeepyb; the
-``manage-projects`` cron job will update these remotes so that their
+``track-upstream`` cron job will update these remotes so that their
 commits are available in Gerrit. It will also ensure that project metadata
 is set up as defined in projects.yaml.
 

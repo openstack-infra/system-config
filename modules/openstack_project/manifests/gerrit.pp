@@ -468,6 +468,16 @@ class openstack_project::gerrit (
             Class['jeepyb'],
           ],
       }
+      cron { 'track_upstream':
+        user        => 'root',
+        hour        => '*/1',
+        command     => '/usr/local/bin/track-upstream -v -l /var/log/track_upstream.log',
+        environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+        require     => [
+            File['/home/gerrit2/projects.yaml'],
+            Class['jeepyb'],
+        ],
+      }
 
       include logrotate
       logrotate::file { 'manage_projects.log':
