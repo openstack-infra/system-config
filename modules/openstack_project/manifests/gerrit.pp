@@ -257,6 +257,13 @@ class openstack_project::gerrit (
     notify => Exec['reload_gerrit_header'],
   }
 
+  file { '/home/gerrit2/review_site/static/title.svg':
+    ensure  => present,
+    source  => 'puppet:///modules/openstack_project/openstack-logo-full.svg',
+    require => Class['::gerrit'],
+    notify => Exec['reload_gerrit_header'],
+  }
+
   file { '/home/gerrit2/review_site/static/openstack-page-bkg.jpg':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
@@ -467,6 +474,16 @@ class openstack_project::gerrit (
             File['/home/gerrit2/acls'],
             Class['jeepyb'],
           ],
+      }
+      cron { 'track_upstream':
+        user        => 'root',
+        hour        => '*',
+        command     => '/usr/local/bin/track-upstream -v -l /var/log/track_upstream.log',
+        environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+        require     => [
+            File['/home/gerrit2/projects.yaml'],
+            Class['jeepyb'],
+        ],
       }
 
       include logrotate
