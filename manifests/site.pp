@@ -1089,15 +1089,16 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: trusty
 node 'zuulv3-dev.openstack.org' {
-  $gerrit_server        => 'review.openstack.org',
-  $gerrit_user          => 'zuul',
-  $gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-  $zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
-  $zuul_url             = "http://${::fqdn}/p",
-  $git_email            = 'zuul@openstack.org',
-  $git_name             = 'OpenStack Zuul',
-  $revision             = 'feature/zuulv3',
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $gerrit_ssh_host_key  = hiera('gerrit_ssh_rsa_pubkey_contents')
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $zuul_url             = "http://${::fqdn}/p"
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'feature/zuulv3'
 
   $gearman_workers = []
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
@@ -1121,7 +1122,7 @@ node 'zuulv3-dev.openstack.org' {
   }
 
   class { 'openstack_project::zuul_merger':
-    gerrit_server        => $gerrit_server
+    gerrit_server        => $gerrit_server,
     gerrit_user          => $gerrit_user,
     gerrit_ssh_host_key  => $gerrit_ssh_host_key,
     zuul_ssh_private_key => $zuul_ssh_private_key,
