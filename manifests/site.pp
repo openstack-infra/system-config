@@ -1089,11 +1089,12 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: trusty
 node 'zuulv3-dev.openstack.org' {
-  $gerrit_server        => 'review.openstack.org',
-  $gerrit_user          => 'zuul',
-  $gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-  $zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
+  $gerrit_server        = 'review.openstack.org',
+  $gerrit_user          = 'zuul',
+  $gerrit_ssh_host_key  = hiera('gerrit_ssh_rsa_pubkey_contents'),
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents'),
   $zuul_url             = "http://${::fqdn}/p",
   $git_email            = 'zuul@openstack.org',
   $git_name             = 'OpenStack Zuul',
