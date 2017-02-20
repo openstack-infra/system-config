@@ -892,6 +892,7 @@ node 'nodepool.openstack.org' {
     upload_workers                => '16',
     jenkins_masters               => [],
     split_daemon                  => true,
+    enable_html_status            => true,
   }
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
     ensure  => present,
