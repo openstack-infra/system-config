@@ -177,6 +177,7 @@ node 'puppetmaster.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 node 'puppetdb.openstack.org' {
   $open_ports = [8081, 80]
   class { 'openstack_project::server':
@@ -1288,6 +1289,7 @@ node 'pbx.openstack.org' {
 }
 
 # Node-OS: precise
+# Node-OS: trusty
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
   $group = "ci-backup"
