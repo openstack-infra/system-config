@@ -860,7 +860,8 @@ node 'nodepool.openstack.org' {
   $zk_receivers = [
     'nb01.openstack.org',
     'nb02.openstack.org',
-    'nl01.openstack.org'
+    'nl01.openstack.org',
+    'zuulv3-dev.openstack.org',
   ]
   $zk_iptables_rule = regsubst($zk_receivers,
                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2181 -s \1 -j ACCEPT')
