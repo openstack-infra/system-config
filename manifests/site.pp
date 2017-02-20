@@ -226,6 +226,7 @@ node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
                    'logstash.openstack.org',
                    'nodepool.openstack.org',
+                   'nl01.openstack.org',
                    'zuul.openstack.org']
 
   # Turn a list of hostnames into a list of iptables rules
