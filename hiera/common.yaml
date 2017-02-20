@@ -503,6 +503,7 @@ cacti_hosts:
 - zm07.openstack.org
 - zm08.openstack.org
 - zuul.openstack.org
+- zuulv3-dev.openstack.org
 infracloud_hpuseast_ssl_cert_file_contents: |
   -----BEGIN CERTIFICATE-----
   MIIEijCCAvICCQDZLTPao6k1yjANBgkqhkiG9w0BAQsFADCBhjELMAkGA1UEBhMC
