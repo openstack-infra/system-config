@@ -45,10 +45,10 @@ How It Works
 
 The devstack test starts with an essentially bare virtual machine
 made available by :ref:`nodepool` and prepares the testing
-environment. This is driven by the the devstack-gate repository which
-holds several scripts that are run by Jenkins.
+environment. This is driven by the devstack-gate repository which
+holds several scripts that are run by Zuul.
 
-When a proposed change is approved by the core reviewers, Jenkins
+When a proposed change is approved by the core reviewers, Zuul
 triggers the devstack gate test itself. This job runs on one of the
 previously configured nodes and invokes the devstack-vm-gate-wrap.sh
 script which checks out code from all of the involved repositories, and
@@ -56,8 +56,8 @@ merges the proposed change.  That script then calls devstack-vm-gate.sh
 which installs a devstack configuration file, and invokes devstack. Once
 devstack is finished, it runs exercise.sh and Tempest, which perform
 integration testing. After everything is done, devstack-gate copies
-and formats all of the logs for archival. A jenkins jobs then copies
-these logs to the log archive.
+and formats all of the logs for archival. Zuul then copies these logs
+to the log archive.
 
 How to Debug a Devstack Gate Failure
 ====================================

@@ -7,13 +7,13 @@ StackForge
 
 StackForge is the way that OpenStack related projects can consume and
 make use of the OpenStack project infrastructure. This includes Gerrit
-code review, Jenkins continuous integration, GitHub repository
+code review, Zuul gating, GitHub repository
 mirroring, and various small things like IRC bots, pypi uploads, RTFD
 updates. Projects should make use of StackForge if they want to run
-their project with Gerrit code review and have a trunk gated by Jenkins.
+their project with Gerrit code review and have a trunk gated by Zuul.
 
 StackForge projects are expected to be self sufficient when it comes to
-configuring Gerrit/Jenkins/Zuul etc. The openstack-infra team can
+configuring Gerrit/Zuul etc. The openstack-infra team can
 provide assistance as resources allow, but should not be relied on.
 
 What StackForge is not:
