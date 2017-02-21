@@ -306,7 +306,8 @@ Next, edit `project.config` to look like::
   label-Code-Review = -1..+1 group Registered Users
   label-Verified = -2..+2 group Continuous Integration Tools
   label-Verified = -2..+2 group Project Bootstrappers
-  label-Verified = -1..+1 group Voting Third-Party CI
+  label-Verified = -1..+1 group Continuous Integration Tools Development
+  label-Verified = -1..+1 group Voting Zuulv3 
   label-Workflow = -1..+0 group Change Owner
   label-Workflow = -1..+1 group Project Bootstrappers
   rebase = group Registered Users
