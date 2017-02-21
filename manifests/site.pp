@@ -1761,6 +1761,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
   class { '::openstack_project::infracloud::compute':
     nova_rabbit_password             => hiera('nova_rabbit_password'),
     neutron_rabbit_password          => hiera('neutron_rabbit_password'),
+    nova_rabbit_password             => hiera('nova_rabbit_password'),
     neutron_admin_password           => hiera('neutron_admin_password'),
     ssl_key_file_contents            => hiera('ssl_key_file_contents'),
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
