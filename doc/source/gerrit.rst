@@ -88,7 +88,7 @@ access to external testing tools on a sandbox project.
 The `Voting Third-Party CI` group is used to grant +/-1 Verified
 access to external testing tools for all projects.
 
-The `Continuous Integration Tools` group contains Jenkins and any
+The `Continuous Integration Tools` group contains Zuul and any
 other CI tools that get +2/-2 access on reviews.
 
 The `Release Managers` group is used for release managers.
@@ -216,9 +216,9 @@ High level goals:
 #. Anonymous users can read all projects.
 #. All registered users can perform informational code review (+/-1)
    on any project.
-#. Jenkins can perform verification (blocking or approving: +/-1).
+#. Zuul can perform verification (blocking or approving: +/-2).
 #. All registered users can create changes.
-#. The OpenStack Release Manager and Jenkins can tag releases (push
+#. The OpenStack Release Manager and Zuul can tag releases (push
    annotated tags).
 #. Members of $PROJECT-core group can perform full code review
    (blocking or approving: +/- 2), and submit changes to be merged.

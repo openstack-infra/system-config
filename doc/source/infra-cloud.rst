@@ -35,8 +35,8 @@ repairing the service.
 Requirements
 ============
 
- * Compute - The intended workload is mostly nodepool launched Jenkins
-   slaves. Thus flavors that are capable of running these tests in a
+ * Compute - The intended workload is mostly nodepool launched Zuul
+   workers. Thus flavors that are capable of running these tests in a
    reasonable amount of time must be available. The flavor(s) must provide:
 
     * 8GB RAM

@@ -29,7 +29,7 @@ class openstack_project::logstash (
   class { 'log_processor': }
 
   class { 'log_processor::client':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
+    config_file => 'puppet:///modules/openstack_project/logstash/log-client.yaml',
     statsd_host => $statsd_host,
   }
 

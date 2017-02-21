@@ -7,7 +7,7 @@ Grafana
 
 Grafana is an open source, feature rich metrics dashboard and graph editor for
 Graphite, InfluxDB & OpenTSDB. OpenStack runs Graphite which stores all the
-metrics related to Nodepool, Zuul and Jenkins (to name a few).
+metrics related to Nodepool and Zuul (to name a few).
 
 At a Glance
 ===========

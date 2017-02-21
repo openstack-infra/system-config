@@ -33,7 +33,7 @@ instance of Zanata running on the `Wildfly JBoss Application Server
 before being applied in production.
 
 Translators work through the Zanata web UI or with the zanata-cli tool to do
-their translations. A series of Jenkins jobs handle translations proposals
+their translations. A series of Zuul jobs handle translations proposals
 on the proposal slave.
 
 Projects are added for translations by

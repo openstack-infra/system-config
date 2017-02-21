@@ -57,7 +57,7 @@ your channel.
 Join #openstack-infra if you have any trouble with any of these commands.
 
 NOTE: Channel admin should issue the access commands above BEFORE adding
-channel to gerritbot and accessbot, otherwise Jenkins will fail tests.
+channel to gerritbot and accessbot, otherwise Zuul will fail tests.
 
 Meetbot
 =======
