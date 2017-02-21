@@ -977,7 +977,6 @@ node /^nl\d+\.openstack\.org$/ {
   include openstack_project
 
   class { '::openstackci::nodepool_launcher':
-    nodepool_ssh_public_key  => hiera('zuul_worker_ssh_public_key_contents'),
     nodepool_ssh_private_key => hiera('zuul_worker_ssh_private_key_contents'),
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents       => $clouds_yaml,
