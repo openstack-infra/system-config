@@ -33,6 +33,11 @@ subunit-files:
     build-queue-filter: 'post'
   - name: logs/testrepository.subunit
     build-queue-filter: 'post'
+    # Special match for alternative platform tests that are -nv.  They
+    # are only the check queue but we want to be able to monitor them.
+  - name: logs/testrepository.subunit
+    build-queue-filter: 'check'
+    job-filter: '.*dsvm-platform.*'
 # List of files to source logs from.
 source-files:
   - name: console.html
