@@ -109,6 +109,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to openSUSE
+  file { "${www_root}/opensuse":
+    ensure  => link,
+    target  => "${mirror_root}/opensuse",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # Create the symlink to apt.
   file { "${www_root}/ubuntu":
     ensure  => link,
