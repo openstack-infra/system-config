@@ -214,10 +214,7 @@ EOF
 }
 
 function setup_puppet_opensuse {
-    local version=`grep -e "VERSION_ID" /etc/os-release | tr -d "\"" | cut -d "=" -f2`
-    zypper ar http://download.opensuse.org/repositories/systemsmanagement:/puppet/openSUSE_${version}/systemsmanagement:puppet.repo
-    zypper -v --gpg-auto-import-keys --no-gpg-checks -n ref
-    zypper --non-interactive in --force-resolution puppet
+    zypper -n in --force-resolution puppet
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
