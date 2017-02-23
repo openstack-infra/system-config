@@ -55,6 +55,20 @@ class openstack_project::slave_common(
         }
       }
     }
+    'Suse': {
+
+      if ! defined(Package['kernel-default-devel']) {
+        package { 'kernel-default-devel':
+          ensure => present,
+        }
+      }
+
+      if ! defined(Package['linux-glibc-devel']) {
+        package { 'linux-glibc-devel':
+          ensure => present,
+        }
+      }
+    }
     'Debian': {
       if ($::operatingsystem == 'Debian') {
         # install depending on architecture
