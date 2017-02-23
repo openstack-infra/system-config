@@ -20,6 +20,12 @@ class openstack_project::params {
       $user_packages = ['emacs-nox', 'vim-enhanced']
       $login_defs = 'puppet:///modules/openstack_project/login.defs.redhat'
     }
+    'Suse':  {
+      $packages = concat($cross_platform_packages, ['ruby2.1-rubygem-puppet', 'iputils'])
+      $user_packages = ['emacs-nox', 'vim', 'sysstat']
+      $update_pkg_list_cmd = ''
+      $login_defs = 'puppet:///modules/openstack_project/login.defs.suse'
+    }
     'Debian': {
       $packages = concat($cross_platform_packages, ['iputils-ping', 'dnsutils'])
       case $::operatingsystemrelease {
@@ -34,7 +40,7 @@ class openstack_project::params {
       $login_defs = 'puppet:///modules/openstack_project/login.defs.debian'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat (slaves only).")
+      fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat and Suse (slaves only).")
     }
   }
 }
