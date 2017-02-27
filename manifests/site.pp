@@ -1582,6 +1582,33 @@ node 'translate.openstack.org' {
 
 # Node-OS: trusty
 # Node-OS: xenial
+node /^translate\d+\.openstack\.org$/ {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::translate':
+    admin_users                => 'aeng,camunoz,cboylan,daisyycguo,infra,jaegerandi,lyz,mordred,stevenk',
+    openid_url                 => 'https://openstackid.org',
+    listeners                  => ['ajp'],
+    from_address               => 'noreply@openstack.org',
+    mysql_host                 => "invalid.host.for.now",
+    mysql_password             => "supersecret",
+    zanata_server_user         => hiera('proposal_zanata_user'),
+    zanata_server_api_key      => hiera('proposal_zanata_api_key'),
+    zanata_wildfly_version     => '10.1.0',
+    zanata_wildfly_install_url => 'https://repo1.maven.org/maven2/org/wildfly/wildfly-dist/10.1.0.Final/wildfly-dist-10.1.0.Final.tar.gz',
+    zanata_url                 => 'https://github.com/zanata/zanata-server/releases/download/server-3.9.6/zanata-3.9.6-wildfly.zip',
+    zanata_checksum            => 'cb7a477f46a118a337b59b9f4004ef7e6c77a1a8',
+    project_config_repo        => 'https://git.openstack.org/openstack-infra/project-config',
+    ssl_cert_file_contents     => hiera('translate_ssl_cert_file_contents'),
+    ssl_key_file_contents      => hiera('translate_ssl_key_file_contents'),
+    ssl_chain_file_contents    => hiera('translate_ssl_chain_file_contents'),
+  }
+}
+
+# Node-OS: trusty
+# Node-OS: xenial
 node /^translate-dev\d*\.openstack\.org$/ {
   $group = "translate-dev"
   class { 'openstack_project::translate_dev':
