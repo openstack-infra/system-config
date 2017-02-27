@@ -1605,6 +1605,7 @@ node /^translate\d+\.openstack\.org$/ {
     ssl_cert_file_contents     => hiera('translate_ssl_cert_file_contents'),
     ssl_key_file_contents      => hiera('translate_ssl_key_file_contents'),
     ssl_chain_file_contents    => hiera('translate_ssl_chain_file_contents'),
+    vhost_name                 => 'translate.openstack.org',
   }
 }
 
