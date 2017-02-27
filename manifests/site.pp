@@ -1583,6 +1583,7 @@ node 'translate.openstack.org' {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^translate\d+\.openstack\.org$/ {
+  $group = "translate"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
