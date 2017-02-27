@@ -54,6 +54,7 @@ $K5START rsync -rlptDvz \
     --exclude="i386/" \
     --exclude="SRPMS/" \
     --exclude="x86_64/debug" \
+    --exclude="x86_64/drpms" \
     $MIRROR/fedora/$REPO/ $BASE/$REPO/
 
 # TODO(pabelanger): Validate rsync process
