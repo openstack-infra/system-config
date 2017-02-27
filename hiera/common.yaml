@@ -484,6 +484,7 @@ cacti_hosts:
 - subunit-worker01.openstack.org
 - subunit-worker02.openstack.org
 - translate.openstack.org
+- translate01.openstack.org
 - translate-dev.openstack.org
 - wiki.openstack.org
 - zlstatic01.openstack.org
