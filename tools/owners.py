@@ -40,7 +40,8 @@
 #     $ ./venv/bin/pip install pyyaml requests
 #     [...]
 #     $ ./venv/bin/python tools/owners.py -a 2015-03-04 \
-#           -b 2016-03-04 -i 11131 -o owners -r march-2016-elections
+#           -b 2016-03-04 -i 11131 -i 22816 -o owners \
+#           -r march-2016-elections
 #     MISSING: ansible-build-image
 #     MERGING DUPLICATE ACCOUNT: 8074 into 2467
 #     [...blah, blah, blah...wait for completion...]
@@ -52,8 +53,8 @@
 # the full electorate over like:
 #
 #     $ ./venv/bin/python tools/owners.py -a 2015-03-04 \
-#           -b 2016-03-04 -i 11131 -o sbm -r march-2016-elections \
-#           -n -s 'branch:^stable/.*'
+#           -b 2016-03-04 -i 11131 -i 22816 -o sbm \
+#           -r march-2016-elections -n -s 'branch:^stable/.*'
 #     [...wait for completion again...]
 #     $ cp sbm/_electorate.txt owners/stable_branch_maintenance.txt
 #     $ cp sbm/_all_owners.yaml owners/stable_branch_maintenance.yaml
