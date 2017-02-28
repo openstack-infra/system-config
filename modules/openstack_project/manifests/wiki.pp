@@ -55,6 +55,7 @@ class openstack_project::wiki (
     wg_googleanalyticsaccount  => $wg_googleanalyticsaccount,
     wg_sitename                => 'OpenStack',
     wg_logo                    => "https://${site_hostname}/w/images/thumb/c/c4/OpenStack_Logo_-_notext.png/30px-OpenStack_Logo_-_notext.png",
+    favicon_path               => '/srv/mediawiki/favicon.ico',
     disallow_robots            => $disallow_robots,
   }
   class { 'memcached':
@@ -73,6 +74,15 @@ class openstack_project::wiki (
     ensure  => link,
     target  => '/root/.wiki_db.cnf',
     require => Mysql_backup::Backup_remote['wiki'],
+  }
+
+  file { '/srv/mediawiki/favicon.ico':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    source  => 'puppet:///modules/openstack_project/status/favicon.ico',
+    require => File['/srv/mediawiki'],
   }
 
   if $bup_user != undef {
