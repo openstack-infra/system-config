@@ -237,9 +237,11 @@ with each project that a channel is interested in listed under the channel.
 Accessbot
 =========
 
-Accessbot defines access that should apply to all channels. Teams can add new
-channel to accessbot/channels.yaml and optionally keep channel operator
-permissions to the channel by specifying the full_mask option.
+Accessbot is used to log IRC communications and is a fundamental requirement
+for any OpenStack IRC channel.  Accessbot also defines access that should
+apply to all channels.  Teams can add new channel to accessbot/channels.yaml
+and optionally keep channel operator permissions to the channel by specifying
+the full_mask option.
 
 Accessbot's configuration is in :config:`accessbot/channels.yaml`
 
@@ -306,6 +308,7 @@ client documentation for syntax.
 Renaming an IRC Channel
 =======================
 
+
 First, follow the procedure for creating a new channel, including submitting
 the appropriate changes to Gerrit for logging, accessbot, etc and adding the
 proper credentials for the openstackinfra account.
@@ -359,4 +362,3 @@ port, check entries on /etc/hosts for chat.freenode.net, until you find one
 server that is operative. Switch the entries on /etc/hosts to choose
 the right one, and restart the service with:
 
-    sudo service xxxbot restart
