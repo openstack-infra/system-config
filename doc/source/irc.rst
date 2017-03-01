@@ -237,9 +237,11 @@ with each project that a channel is interested in listed under the channel.
 Accessbot
 =========
 
-Accessbot defines access that should apply to all channels. Teams can add new
-channel to accessbot/channels.yaml and optionally keep channel operator
-permissions to the channel by specifying the full_mask option.
+Accessbot is used to log IRC communications and is a fundamental requirement
+for any OpenStack IRC channel.  Accessbot also defines access that should
+apply to all channels.  Teams can add new channel to accessbot/channels.yaml
+and optionally keep channel operator permissions to the channel by specifying
+the full_mask option.
 
 Accessbot's configuration is in :config:`accessbot/channels.yaml`
 
