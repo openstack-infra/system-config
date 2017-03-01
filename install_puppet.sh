@@ -145,9 +145,10 @@ EOF
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
-    yum install -y redhat-lsb-core git puppet
+    yum install -y redhat-lsb-core git
 
     rpm -ivh $puppet_pkg
+    yum install -y puppet
 
     # see comments in setup_puppet_fedora
     ln -s /usr/bin/pip /usr/bin/pip-python
