@@ -127,26 +127,13 @@ function setup_puppet_fedora {
 function setup_puppet_rhel7 {
     local puppet_pkg="https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
 
-    # install a bootstrap epel repo to install latest epel-release
-    # package (which provides correct gpg keys, etc); then remove
-    # boostrap
-    cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
-[epel-bootstrap]
-name=Bootstrap EPEL
-mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=\$basearch
-failovermethod=priority
-enabled=0
-gpgcheck=0
-EOF
-    yum --enablerepo=epel-bootstrap -y install epel-release
-    rm -f /etc/yum.repos.d/epel-bootstrap.repo
-
     _systemd_update
     yum update -y
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git
 
+    # Install puppetlabs repo & then puppet comes from there
     rpm -ivh $puppet_pkg
     yum install -y puppet
 
@@ -156,7 +143,7 @@ EOF
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 
     # install RDO repo as well; this covers a few things like
-    # openvswitch that aren't available for EPEL
+    # openvswitch that aren't available
     yum install -y https://rdoproject.org/repos/rdo-release.rpm
 }
 
