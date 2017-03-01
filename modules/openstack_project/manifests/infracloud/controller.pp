@@ -24,6 +24,7 @@ class openstack_project::infracloud::controller (
   $neutron_subnet_gateway,
   $neutron_subnet_allocation_pools,
   $mysql_max_connections = 1024,
+  $openstack_release = 'mitaka',
 ) {
   include ::openstack_project::infracloud::base
 
@@ -49,6 +50,7 @@ class openstack_project::infracloud::controller (
     neutron_subnet_gateway           => $neutron_subnet_gateway,
     neutron_subnet_allocation_pools  => $neutron_subnet_allocation_pools,
     mysql_max_connections            => $mysql_max_connections,
+    openstack_release                => $openstack_release,
   }
 
   realize (
