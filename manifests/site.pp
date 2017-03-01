@@ -1748,6 +1748,7 @@ node 'controller00.vanilla.ic.openstack.org' {
                                           'start=15.184.67.2,end=15.184.67.254'
                                         ],
     mysql_max_connections            => hiera('mysql_max_connections'),
+    openstack_release                => 'mitaka',
   }
 }
 
@@ -1766,6 +1767,7 @@ node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
     ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
     br_name                          => hiera('bridge_name'),
     controller_public_address        => 'controller00.vanilla.ic.openstack.org',
+    openstack_release                => 'mitaka',
   }
 }
 
@@ -1796,6 +1798,7 @@ node 'controller00.chocolate.ic.openstack.org' {
     ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => $::fqdn,
+    openstack_release                => 'mitaka',
     neutron_subnet_cidr              => '15.184.64.0/19',
     neutron_subnet_gateway           => '15.184.64.1',
     neutron_subnet_allocation_pools  => [
@@ -1821,6 +1824,7 @@ node /^compute\d{3}\.chocolate\.ic\.openstack\.org$/ {
     ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     br_name                          => 'br-vlan2551',
     controller_public_address        => 'controller00.chocolate.ic.openstack.org',
+    openstack_release                => 'mitaka',
   }
 }
 
@@ -1851,6 +1855,7 @@ node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
     network_interface         => hiera('network_interface'),
     ipv4_nameserver           => hiera('ipv4_nameserver'),
     ipv4_subnet_mask          => hiera('ipv4_subnet_mask'),
+    openstack_release         => 'mitaka',
   }
 }
 
