@@ -562,7 +562,13 @@ using, and then null out the others with:
 
   update accounts set preferred_email=NULL, registered_on=registered_on where account_id=OLD;
 
-Then flush Gerrit's caches so any immediate account lookups will hit
+Then be sure to set the old account to inactive:
+
+.. code-block:: bash
+
+  ssh review.openstack.org -p29418 gerrit set-account --inactive OLD
+
+Finally, flush Gerrit's caches so any immediate account lookups will hit
 the current DB contents:
 
 .. code-block:: bash
