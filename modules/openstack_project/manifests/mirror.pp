@@ -163,15 +163,20 @@ class openstack_project::mirror (
     ]
   }
 
-  # Create the symlink to MariaDB.
-  file { "${www_root}/mariadb":
+  # Create the symlink to Ubuntu MariaDB.
+  file { "${www_root}/ubuntu-mariadb":
     ensure  => link,
-    target  => "${mirror_root}/mariadb",
+    target  => "${mirror_root}/ubuntu-mariadb",
     owner   => root,
     group   => root,
     require => [
       File["${www_root}"],
     ]
+  }
+
+  # TODO(pabelanger): We can remove this after puppet runs a few times.
+  file { "${www_root}/mariadb":
+    ensure  => absent,
   }
 
   file { "${www_root}/gem":
