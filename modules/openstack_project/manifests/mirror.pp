@@ -163,10 +163,10 @@ class openstack_project::mirror (
     ]
   }
 
-  # Create the symlink to MariaDB.
-  file { "${www_root}/mariadb":
+  # Create the symlink to Ubuntu MariaDB.
+  file { "${www_root}/ubuntu-mariadb":
     ensure  => link,
-    target  => "${mirror_root}/mariadb",
+    target  => "${mirror_root}/ubuntu-mariadb",
     owner   => root,
     group   => root,
     require => [
