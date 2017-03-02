@@ -569,6 +569,12 @@ the current DB contents:
 
   ssh review.openstack.org -p29418 gerrit flush-caches --all
 
+Finally, be sure to set the old account to inactive:
+
+.. code-block:: bash
+
+  ssh review.openstack.org -p29418 gerrit set-account --inactive OLD
+
 
 Combining Gerrit Accounts
 -------------------------
