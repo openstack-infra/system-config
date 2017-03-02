@@ -1,6 +1,9 @@
-hacking>=0.5.6,<0.8
-Sphinx>=1.1.2,<1.2
-oslosphinx
-bashate>=0.2
-PyYAML
+# The order of packages is significant, because pip processes them in the order
+# of appearance. Changing the order has an impact on the overall integration
+# process, which may cause wedges in the gate later.
+hacking!=0.13.0,<0.14,>=0.12.0 # Apache-2.0
+sphinx>=1.5.1 # BSD
+oslosphinx>=4.7.0 # Apache-2.0
+bashate>=0.2 # Apache-2.0
+PyYAML>=3.10.0 # MIT
 ansible-lint
