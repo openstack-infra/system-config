@@ -1,7 +1,15 @@
-Name: ubuntu-mariadb
+Name: ubuntu-mariadb-trusty
 Method: http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu
 Components: main
-UDebComponents: main
+UDebComponents:
 Architectures: amd64
 GetInRelease: no
 VerifyRelease: 1BB943DB
+
+Name: ubuntu-mariadb-xenial
+Method: http://ftp.osuosl.org/pub/mariadb/repo/10.1/ubuntu
+Components: main
+UDebComponents:
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: F1656F24C74CD1D8
