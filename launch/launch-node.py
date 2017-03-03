@@ -37,6 +37,29 @@ import shade
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
 
+# Handy defaults
+PROVIDER_DEFAULTS = {
+    'rax-prod': {
+        'cloud-name': 'openstackci-rax',
+        'region': 'DFW',
+        'flavor': '8 GB Performance',
+        'image': 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+    },
+    'rax-slave': {
+        'cloud-name': 'openstackjenkins-rax',
+        'region': 'DFW',
+        'flavor': '8 GB Performance',
+        'image': 'Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)'
+    },
+    'vexxhost' : {
+        'cloud-name': 'openstackci-vexxhost',
+        'region': 'ca-ymq-1',
+        'flavor': 'v1-standard-8',
+        'image': 'Ubuntu 16.04.1 LTS [2017-03-02]'
+    },
+}
+DEFAULT_PROVIDER='rax-prod'
+
 try:
     # This unactionable warning does not need to be printed over and over.
     import requests.packages.urllib3
@@ -299,17 +322,35 @@ def build_server(cloud, name, image, flavor,
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    try:
+        has_provider = 'PROVIDER' in os.environ
+        provider = os.environ.get('PROVIDER', DEFAULT_PROVIDER)
+        arg_defaults = PROVIDER_DEFAULTS[provider]
+    except KeyError:
+        print("Could not find defaults for PROVIDER '%s'" % provider)
+        sys.exit(1)
+
+    parser = argparse.ArgumentParser(description=
+                                     "Launch a new node. Specify --cloud or "
+                                     " set PROVIDER to one of %s""" %
+                                     (','.join(PROVIDER_DEFAULTS.keys())))
     parser.add_argument("name", help="server name")
-    parser.add_argument("--cloud", dest="cloud", required=True,
-                        help="cloud name")
+    # --cloud is required if you don't choose a PROVIDER via environment
+    parser.add_argument("--cloud", dest="cloud",
+                        help="cloud name (default: %s)" %
+                        arg_defaults['cloud-name'],
+                        default=arg_defaults['cloud-name'])
     parser.add_argument("--region", dest="region",
-                        help="cloud region")
-    parser.add_argument("--flavor", dest="flavor", default='1GB',
-                        help="name (or substring) of flavor")
+                        default=arg_defaults['region'],
+                        help="cloud region (default: %s)" %
+                        arg_defaults['region'])
+    parser.add_argument("--flavor", dest="flavor",
+                        default=arg_defaults['flavor'],
+                        help="name (or substring) of flavor (default: %s)" %
+                        arg_defaults['flavor'])
     parser.add_argument("--image", dest="image",
-                        default="Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)",
-                        help="image name")
+                        default=arg_defaults['image'],
+                        help="image name (default: %s)" % arg_defaults['image'])
     parser.add_argument("--environment", dest="environment",
                         help="Puppet environment to use",
                         default=None)
@@ -371,6 +412,29 @@ def main():
             print i.name
         sys.exit(1)
 
+    # TODO(ianw): print all the things ... this is enough for sanity
+    print """
+I am about to build a server:
+
+ * In cloud: %(cloud)s %(region)s
+ * With name: %(name)s
+ * Using image: %(image)s
+ * Of flavor: %(flavor)s
+ * If something fails, I will %(keep)s the server
+
+OK? [y/n]""" % dict(cloud=options.cloud,
+                    region="[region %s]" % options.region
+                    if options.region else "",
+                    name=options.name,
+                    image=image.name,
+                    flavor=flavor.name,
+                    keep="keep" if options.keep else "destroy")
+    do_it = raw_input().lower()
+    if not do_it == 'y':
+        print "Cancelling"
+        sys.exit(0)
+
+    sys.exit(1)
     server = build_server(cloud, options.name, image, flavor,
                           options.volume, options.keep,
                           options.network, options.boot_from_volume,
