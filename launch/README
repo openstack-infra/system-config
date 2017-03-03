@@ -23,26 +23,20 @@ virtualenv::
 To launch a node in the OpenStack CI account (production servers)::
 
   . ~/launch-env/bin/activate
-  export OS_CLOUD=openstackci-rax
-  export OS_REGION_NAME=DFW
-  export FLAVOR="8 GB Performance"
+  export PROVIDER_DEFAULTS=rax-prod
   export FQDN=servername01.openstack.org
   cd /opt/system-config/production/launch/
-  ./launch-node.py $FQDN --flavor "$FLAVOR" \
-    --cloud=$OS_CLOUD --region=$OS_REGION_NAME
+  ./launch-node.py $FQDN
 
 To launch a node in the OpenStack Jenkins account (slave nodes)::
 
   . ~/launch-env/bin/activate
-  export OS_CLOUD=openstackjenkins-rax
-  export OS_REGION_NAME=DFW
+  export PROVIDER_DEFAULTS=rax-slave
   export FQDN=slavename01.slave.openstack.org
-  openstack image list
-  export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
-  openstack flavor list
-  export FLAVOR="8 GB Performance"
-  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" \
-     --cloud=$OS_CLOUD --region=$OS_REGION_NAME
+  ./launch-node.py $FQDN rax-slave
+
+See the definition of PROVIDER_DETAILS for keys to use other
+providers.  Note command-line flags will override any defaults.
 
 Manually add the hostname to DNS (the launch script does not do so
 automatically). Note that this example assumes you've already
