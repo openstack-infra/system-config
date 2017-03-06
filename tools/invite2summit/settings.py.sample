@@ -42,7 +42,7 @@ Regards,
 $signature
 """
 
-EMAIL_FROM = "thierry@openstack.org"
+EMAIL_FROM = "Thierry Carrez <thierry@openstack.org>"
 EMAIL_SIGNATURE = u"Thierry Carrez\nOpenStack Foundation"
 EMAIL_HOST = "secure.emailsrvr.com"
 EMAIL_PORT = 465
