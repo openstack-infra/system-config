@@ -133,7 +133,7 @@ class openstack_project::translate(
     database_user     => $mysql_user,
     database_password => $mysql_password,
     num_backups       => '10',
-    require           => Class['zanata'],
+    require           => Class['::zanata'],
   }
 
   include bup
