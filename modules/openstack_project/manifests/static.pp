@@ -348,14 +348,63 @@ class openstack_project::static (
   }
 
   ###########################################################
-  # legacy devstack.org site redirect
+  # legacy site redirects
 
   ::httpd::vhost { 'devstack.org':
     port          => 80,
     priority      => '50',
     docroot       => 'MEANINGLESS_ARGUMENT',
     serveraliases => ['*.devstack.org'],
-    template      => 'openstack_project/devstack.vhost.erb',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'cinder.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'glance.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'horizon.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'keystone.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'nova.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'qa.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
+  }
+
+  ::httpd::vhost { 'swift.openstack.org':
+    port          => 80,
+    priority      => '50',
+    docroot       => 'MEANINGLESS_ARGUMENT',
+    template      => 'openstack_project/legacy.vhost.erb',
   }
 
   ###########################################################
