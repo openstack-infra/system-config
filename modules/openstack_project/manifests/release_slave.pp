@@ -120,6 +120,6 @@ class openstack_project::release_slave (
     confdir       => '/etc/reprepro/debian-openstack',
     basedir       => '/afs/.openstack.org/mirror/debian-openstack',
     distributions => 'openstack_project/reprepro/distributions.debian-openstack.erb',
-    releases      => ['jessie-newton', 'jessie-ocata'],
+    releases      => ['jessie-newton', 'jessie-ocata', 'stretch-ocata'],
   }
 }
