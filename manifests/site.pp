@@ -981,6 +981,7 @@ node /^nl\d+\.openstack\.org$/ {
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents       => $clouds_yaml,
     statsd_host              => 'graphite.openstack.org',
+    statsd_prefix            => 'zuulv3',
     revision                 => 'feature/zuulv3',
   }
 
