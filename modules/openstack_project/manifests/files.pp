@@ -77,6 +77,20 @@ class openstack_project::files (
     ],
   }
 
+  # Until Apache 2.4.24 the event MPM has some issues scalability
+  # bottlenecks that were seen to drop connections, especially on
+  # larger files; see
+  #  https://httpd.apache.org/docs/2.4/mod/event.html
+  #
+  # The main advantage of event MPM is for keep-alive requests which
+  # are not really a big issue on this static file server.  Therefore
+  # we switch to the threaded worker MPM as a workaround.  This can be
+  # reconsidered when the apache version running is sufficient to
+  # avoid these problems.
+
+  httpd::mod { 'mpm_event': ensure => 'absent' }
+  httpd::mod { 'mpm_worker': ensure => 'present' }
+
   ###########################################################
   # docs.openstack.org
 
