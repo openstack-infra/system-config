@@ -1,0 +1,11 @@
+Code-Review+1: Nir Magnezi <nmagnezi@redhat.com>
+Code-Review+1: Lubosz Kosnik (diltram) <lubosz.kosnik@intel.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 14 Mar 2017 15:58:46 +0000
+Reviewed-on: https://review.openstack.org/408246
+Project: openstack-infra/system-config
+Branch: refs/heads/master
