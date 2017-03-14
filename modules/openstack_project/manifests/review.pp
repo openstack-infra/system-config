@@ -120,7 +120,7 @@ class openstack_project::review (
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '225',
     container_heaplimit                 => '30g',
-    core_packedgitopenfiles             => '4096',
+    core_packedgitopenfiles             => '8096',
     core_packedgitlimit                 => '400m',
     core_packedgitwindowsize            => '16k',
     sshd_threads                        => '100',
