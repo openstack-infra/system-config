@@ -1,0 +1,10 @@
+Code-Review+1: Mikhail S Medvedev <mihailmed@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 14 Mar 2017 23:52:19 +0000
+Reviewed-on: https://review.openstack.org/427362
+Project: openstack-infra/system-config
+Branch: refs/heads/master
