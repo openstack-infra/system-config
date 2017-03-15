@@ -91,6 +91,12 @@ class openstack_project::files (
   httpd::mod { 'mpm_event': ensure => 'absent' }
   httpd::mod { 'mpm_worker': ensure => 'present' }
 
+  file { '/etc/apache2/mods-available/mpm_worker.conf':
+    ensure => file,
+    source => 'puppet:///modules/openstack_project/files/mpm_worker.conf',
+    notify => Service['httpd'],
+  }
+
   ###########################################################
   # docs.openstack.org
 
