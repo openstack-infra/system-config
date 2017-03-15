@@ -107,6 +107,20 @@ class openstack_project::openstackid_prod (
     email_smtp_server_port     => $email_smtp_server_port,
     email_smtp_server_user     => $email_smtp_server_user,
     email_smtp_server_password => $email_smtp_server_password,
+    laravel_version            => $laravel_version,
+    app_log_level              => $app_log_level,
+    app_log_email_level        => $app_log_email_level,
+    db_log_enabled             => $db_log_enabled,
+    banning_enabled            => $banning_enabled,
+    app_debug                  => $app_debug,
+    app_locale                 => $app_locale,
+    curl_verify_ssl_cert       => $curl_verify_ssl_cert,
+    curl_allow_redirect        => $curl_allow_redirect,
+    curl_timeout               => $curl_timeout,
+    assets_base_url            => $assets_base_url,
+    cache_driver               => $cache_driver,
+    session_driver             => $session_driver,
+    session_cookie_secure      => $session_cookie_secure,
   }
 
   # redis (custom module written by tipit)
