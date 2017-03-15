@@ -166,6 +166,8 @@ function setup_puppet_ubuntu {
             --assume-yes install -y --force-yes lsb-release
     fi
 
+    lsbdistvendor=`lsb_release -i -s`
+    lsbdistversion=`lsb_release -r -s`
     lsbdistcodename=`lsb_release -c -s`
     if [ $lsbdistcodename != 'trusty' ] ; then
         rubypkg=rubygems
@@ -173,12 +175,16 @@ function setup_puppet_ubuntu {
         rubypkg=ruby
     fi
 
+    if [ "$lsbdistvendor" = 'Debian' ] && [ "$lsbdistversion" -ge "9.0" ] ; then
+        # NOTE(zigo): Puppetlabs does not support Debian Stretch and up. Instead use
+        # the version of puppet ship by the distro.
+        PUPPET_VERSION=4.*
+    else
+        PUPPET_VERSION=3.*
+        PUPPETDB_VERSION=2.*
+        FACTER_VERSION=2.*
 
-    PUPPET_VERSION=3.*
-    PUPPETDB_VERSION=2.*
-    FACTER_VERSION=2.*
-
-    cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
+        cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
 Pin-Priority: 501
@@ -191,19 +197,17 @@ Package: facter
 Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
-
-    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial. Instead use
-    # the version of puppet ship by xenial.
-    if [ $lsbdistcodename != 'xenial' ]; then
-        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-        if type curl >/dev/null 2>&1; then
-            curl -O http://apt.puppetlabs.com/$puppet_deb
-        else
-            wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+        if [ $lsbdistcodename != 'xenial' ]; then
+            puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+            if type curl >/dev/null 2>&1; then
+                curl -O http://apt.puppetlabs.com/$puppet_deb
+            else
+                wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+            fi
+            dpkg -i $puppet_deb
+            rm $puppet_deb
         fi
-        dpkg -i $puppet_deb
-        rm $puppet_deb
-    fi;
+    fi
 
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
