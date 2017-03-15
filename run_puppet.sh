@@ -7,7 +7,7 @@ else
 fi
 
 MODULE_DIR=${BASE_DIR}/modules
-MODULE_PATH=${MODULE_DIR}:/etc/puppet/modules
+MODULE_PATH=${MODULE_DIR}:/etc/puppet/modules:/usr/share/puppet/modules
 MANIFEST_LOG=/var/log/manifest.log
 
 cd $BASE_DIR

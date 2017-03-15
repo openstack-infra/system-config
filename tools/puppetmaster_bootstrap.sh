@@ -25,4 +25,4 @@ EOF
 export PUPPET_VERSION=3
 ./install_puppet.sh
 ./install_modules.sh
-puppet apply  --modulepath=modules:/etc/puppet/modules manifests/local.pp
+puppet apply  --modulepath=modules:/etc/puppet/modules:/usr/share/puppet/modules manifests/local.pp
