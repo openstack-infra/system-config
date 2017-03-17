@@ -86,7 +86,7 @@ statusbot_channels:
 - openstack-neutron
 - openstack-neutron-ovn
 - openstack-nova
-- openstack-opw
+- openstack-outreachy
 - openstack-oslo
 - openstack-pkg
 - openstack-powervm
@@ -195,7 +195,7 @@ meetbot_channels:
 - '#openstack-neutron-release'
 - '#openstack-nova'
 - '#openstack-operators'
-- '#openstack-opw'
+- '#openstack-outreachy'
 - '#openstack-oslo'
 - '#openstack-performance'
 - '#openstack-pkg'
