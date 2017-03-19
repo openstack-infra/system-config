@@ -55,6 +55,7 @@ statusbot_channels:
 - openstack-cloudkeep
 - openstack-community
 - openstack-containers
+- openstack-cyborg
 - openstack-dev
 - openstack-dns
 - openstack-doc
@@ -150,6 +151,7 @@ meetbot_channels:
 - '#openstack-community'
 - '#openstack-containers'
 - '#openstack-cue'
+- '#openstack-cyborg'
 - '#openstack-dev'
 - '#openstack-dib'
 - '#openstack-diversity'
