@@ -342,7 +342,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/ubuntu-cloud-archive',
     distributions => 'openstack_project/reprepro/distributions.ubuntu-cloud-archive.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-updates',
-    releases      => { 'trusty'=>['liberty', 'mitaka'], 'xenial'=>['newton', 'ocata'] },
+    releases      => { 'trusty'=>['liberty', 'mitaka'], 'xenial'=>['newton', 'ocata', 'pike'] },
   }
 
   cron { 'reprepro ubuntu-cloud-archive':
