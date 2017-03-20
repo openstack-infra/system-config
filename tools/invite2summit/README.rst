@@ -15,10 +15,10 @@ You use it like this:
   to escape them like ``... a $$600-off discount code ...`` so as to
   avoid raising *ValueError: Invalid placeholder in string: line <X>,
   col <Y>*
-- Run a test with ``python send.py atc_sample.csv codes_sample.csv``
+- Run a test with ``PYTHONIOENCODING=utf-8 python send.py atc_sample.csv codes_sample.csv > sent_sample.csv``
 
 Should work on stock Ubuntu.
 
 When ready, run the real thing with::
 
-  $ python send.py atc.csv codes.csv > sent.csv
+  $ PYTHONIOENCODING=utf-8 python send.py atc.csv codes.csv > sent.csv
