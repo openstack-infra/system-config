@@ -113,6 +113,13 @@ using::
     --email openstack-infra@lists.openstack.org \
     --ssh-key - openstack-project-creator
 
+You also need to add the 'committer' e-mail to the account. This email
+is the default email <gerrit username>@<gerrit host name>::
+
+  ssh -p 29418 $USER@$HOST gerrit set-account \
+    openstack-project-creator --add-email gerrit2@$HOST
+
+
 GitHub Integration
 ==================
 
