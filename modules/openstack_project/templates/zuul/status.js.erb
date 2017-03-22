@@ -324,7 +324,13 @@ function format_change(change, change_queue) {
             }
         } else if (result == 'SUCCESS') {
             result_class += " result_success";
-        } else if (result == 'FAILURE') {
+        } else if (result == 'FAILURE' || result == 'POST_FAILURE') {
+            if (job['voting'] == false) {
+                result_class += " result_failure_nv";
+            } else {
+                result_class += " result_failure";
+            }
+        } else if (result == 'POST_FAILURE') {
             result_class += " result_failure";
         } else if (result == 'LOST') {
             result_class += " result_unstable";
