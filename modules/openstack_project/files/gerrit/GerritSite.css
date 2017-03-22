@@ -122,6 +122,9 @@ results. */
 .result_FAILURE {
     color: #cf2f19;
 }
+.result_FAILURE_NV {
+    color: #f4ada4;
+}
 .result_UNSTABLE, .result_WARNING {
     color: #e39f00;
 }
