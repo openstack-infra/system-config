@@ -460,7 +460,6 @@ cacti_hosts:
 - pholio01.openstack.org
 - planet.openstack.org
 - proposal.slave.openstack.org
-- puppetdb.openstack.org
 - puppetmaster.openstack.org
 - mirror.bhs1.ovh.openstack.org
 - mirror.ca-ymq-1.vexxhost.openstack.org

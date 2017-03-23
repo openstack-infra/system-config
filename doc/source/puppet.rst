@@ -31,9 +31,7 @@ Puppet Driving Ansible Driving Puppet
 
 In OpenStack Infra, there are ansible playbooks that drive the running of
 ``puppet apply`` on all of the hosts in the inventory. That process first
-copies appropriate ``hiera`` data files to each host, and when it is done
-it copies back the JSON report of the puppet run and submits it to
-``puppetdb``.
+copies appropriate ``hiera`` data files to each host.
 
 The cron jobs, current configuration files and more can be done with ``puppet
 apply`` but first some bootstrapping needs to be done.

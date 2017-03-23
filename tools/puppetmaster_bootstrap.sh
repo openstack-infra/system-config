@@ -17,7 +17,6 @@ node default {
     sysadmins    => hiera('sysadmins', []),
     version      => '3.6.',
     ca_server    => 'ci-puppetmaster.openstack.org',
-    puppetdb     => false,
   }
 }
 EOF
