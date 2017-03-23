@@ -471,6 +471,7 @@ class openstack_project::gerrit (
       cron { 'track_upstream':
         user        => 'root',
         hour        => '*',
+        minute      => '42',
         command     => '/usr/local/bin/track-upstream -v -l /var/log/track_upstream.log',
         environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
         require     => [
