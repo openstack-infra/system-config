@@ -3,8 +3,6 @@
 class openstack_project::puppetmaster (
   $puppetmaster_clouds,
   $root_rsa_key = 'xxx',
-  $puppetdb = true,
-  $puppetdb_server = 'puppetdb.openstack.org',
   $puppetmaster_update_cron_interval = { min     => '*/15',
                                          hour    => '*',
                                          day     => '*',
@@ -249,17 +247,6 @@ class openstack_project::puppetmaster (
     mode    => '0400',
     source  => 'puppet:///modules/openstack_project/puppetmaster/sks-ca.pem',
     require => File['/root/signing.gnupg'],
-  }
-
-# Enable puppetdb
-
-  if $puppetdb {
-    class { 'puppetdb::master::config':
-      puppetdb_server              => $puppetdb_server,
-      puppet_service_name          => 'apache2',
-      puppetdb_soft_write_failure  => true,
-      manage_storeconfigs          => false,
-    }
   }
 
   # Ansible mgmt

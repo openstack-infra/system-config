@@ -175,16 +175,11 @@ function setup_puppet_ubuntu {
 
 
     PUPPET_VERSION=3.*
-    PUPPETDB_VERSION=2.*
     FACTER_VERSION=2.*
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
-Pin-Priority: 501
-
-Package: puppetdb puppetdb-terminus
-Pin: version $PUPPETDB_VERSION
 Pin-Priority: 501
 
 Package: facter
