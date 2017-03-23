@@ -481,3 +481,63 @@ The following example increases the size of a volume to the maximum allowable::
   NAME=volumename
   sudo lvextend -l +100%FREE /dev/main/$NAME
   sudo resize2fs /dev/main/$NAME
+
+Replace an Existing Device
+--------------------------
+
+We generally need to do this if our cloud provider is planning maintenance to a
+volume. We usually get a few days heads up on maintenance window, so depending
+on the size of the volume, it may take some time to replace.
+
+First thing to do is add the replacement device to the server, see
+`Adding a New Device`_. Be sure the replacement volume is the same type / size
+as the existing.
+
+If the step above were followed, you should see something like::
+
+  $ sudo pvs
+    PV         VG   Fmt  Attr PSize  PFree 
+    /dev/xvdb1 main lvm2 a--  50.00g     0 
+    /dev/xvdc1 main lvm2 a--  50.00g 50.00g
+
+Be sure both devices are in the same VG (volume group), if not you did not
+properly extend the device.
+
+.. note::
+   Be sure to use a screen session for the following step!
+
+Next is to move the data from once device to another::
+
+  $ sudo pvmove /dev/xvdb1 /dev/xvdc1
+    /dev/xvdb1: Moved: 0.0%
+    /dev/xvdb1: Moved: 1.8%
+    ...
+    ...
+    /dev/xvdb1: Moved: 99.4%
+    /dev/xvdb1: Moved: 100.0%
+
+Confirm all the data was moved, and the original device is empty (PFree)::
+
+  $ sudo pvs
+    PV         VG   Fmt  Attr PSize  PFree 
+    /dev/xvdb1 main lvm2 a--  50.00g 50.00g
+    /dev/xvdc1 main lvm2 a--  50.00g     0 
+
+And remove the device from the main volume group::
+
+  $ sudo vgreduce main /dev/xvdb1
+    Removed "/dev/xvdb1" from volume group "main"
+
+To be safe, we can also wipe the label from LVM::
+
+  $ sudo pvremove /dev/xvdb1
+    Labels on physical volume "/dev/xvdb1" successfully wiped
+
+Leaving us with just a single device::
+
+  $ sudo pvs
+    PV         VG   Fmt  Attr PSize  PFree
+    /dev/xvdc1 main lvm2 a--  50.00g    0 
+
+At this time, you are able to remove the original volume from openstack if
+no longer needed.
