@@ -117,6 +117,35 @@ For example, to subscribe to every topic on the firehose you would run::
 You can adjust the value of the topic parameter to make what you're subscribing
 to more specific.
 
+MQTT Protocol Example
+---------------------
+You can also use the paho-mqtt python library to subscribe to MQTT messages
+fairly easily. For example this script will subscribe to all topics on the
+firehose and print it to STDOUT
+
+.. code-block:: python
+   :emphasize-lines: 12,17
+
+    import paho.mqtt.client as mqtt
+
+
+    def on_connect(client, userdata, flags, rc):
+        print("Connected with result code " + str(rc))
+        client.subscribe('#')
+
+    def on_message(client, userdata, msg):
+        print(msg.topic+" "+str(msg.payload))
+
+    # Create a websockets client
+    client = mqtt.Client()
+    client.on_connect = on_connect
+    client.on_message = on_message
+
+    # Connect to the firehose
+    client.connect('firehose.openstack.org')
+    # Listen forever
+    client.loop_forever()
+
 Websocket Example
 -----------------
 In addition to using the raw MQTT protocol firehose.o.o  provides a websocket
