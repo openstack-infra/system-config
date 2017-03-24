@@ -119,12 +119,15 @@ to more specific.
 
 MQTT Protocol Example
 ---------------------
-You can also use the paho-mqtt python library to subscribe to MQTT messages
-fairly easily. For example this script will subscribe to all topics on the
-firehose and print it to STDOUT
+Interacting with firehose on the unecrpyted MQTT port is normally pretty easy in
+most language bindings. Here are some examples that will have the same behavior
+as the CLI example above and will subscribe to all topics on the firehose and
+print it to STDOUT.
 
+
+Python
+''''''
 .. code-block:: python
-   :emphasize-lines: 12,17
 
     import paho.mqtt.client as mqtt
 
@@ -145,6 +148,49 @@ firehose and print it to STDOUT
     client.connect('firehose.openstack.org')
     # Listen forever
     client.loop_forever()
+
+Haskell
+'''''''
+This requires the `mqtt-hs`_ library to be installed.
+
+.. _mqtt-hs: https://hackage.haskell.org/package/mqtt-hs
+
+.. code-block:: haskell
+
+
+  {-# Language DataKinds, OverloadedStrings #-}
+
+  module Subscribe where
+
+  import Control.Concurrent
+  import Control.Concurrent.STM
+  import Control.Monad (unless, forever)
+  import System.Exit (exitFailure)
+  import System.IO (hPutStrLn, stderr)
+
+  import qualified Network.MQTT as MQTT
+
+  topic :: MQTT.Topic
+  topic = "#"
+
+  handleMsg :: MQTT.Message MQTT.PUBLISH -> IO ()
+  handleMsg msg = do
+      let t = MQTT.topic $ MQTT.body msg
+          p = MQTT.payload $ MQTT.body msg
+      print t
+      print p
+
+  main :: IO ()
+  main = do
+    cmds <- MQTT.mkCommands
+    pubChan <- newTChanIO
+    let conf = (MQTT.defaultConfig cmds pubChan)
+                { MQTT.cHost = "firehose.openstack.org" }
+    _ <- forkIO $ do
+      qosGranted <- MQTT.subscribe conf [(topic, MQTT.Handshake)]
+      forever $ atomically (readTChan pubChan) >>= handleMsg
+    terminated <- MQTT.run conf
+    print terminated
 
 Websocket Example
 -----------------
