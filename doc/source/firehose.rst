@@ -117,6 +117,55 @@ For example, to subscribe to every topic on the firehose you would run::
 You can adjust the value of the topic parameter to make what you're subscribing
 to more specific.
 
+Code Examples
+-------------
+Interacting with firehose on the unecrpyted MQTT port is normally pretty easy in
+most language bindings. Here are some examples that will have the same behavior
+as the CLI example above:
+
+Haskell
+'''''''
+This requires the `mqtt-hs`_ library to be installed.
+
+.. _mqtt-hs: https://hackage.haskell.org/package/mqtt-hs
+
+.. code-block:: haskell
+
+
+  {-# Language DataKinds, OverloadedStrings #-}
+
+  module Subscribe where
+
+  import Control.Concurrent
+  import Control.Concurrent.STM
+  import Control.Monad (unless, forever)
+  import System.Exit (exitFailure)
+  import System.IO (hPutStrLn, stderr)
+
+  import qualified Network.MQTT as MQTT
+
+  topic :: MQTT.Topic
+  topic = "#"
+
+  handleMsg :: MQTT.Message MQTT.PUBLISH -> IO ()
+  handleMsg msg = do
+      let t = MQTT.topic $ MQTT.body msg
+          p = MQTT.payload $ MQTT.body msg
+      print t
+      print p
+
+  main :: IO ()
+  main = do
+    cmds <- MQTT.mkCommands
+    pubChan <- newTChanIO
+    let conf = (MQTT.defaultConfig cmds pubChan)
+                { MQTT.cHost = "firehose.openstack.org" }
+    _ <- forkIO $ do
+      qosGranted <- MQTT.subscribe conf [(topic, MQTT.Handshake)]
+      forever $ atomically (readTChan pubChan) >>= handleMsg
+    terminated <- MQTT.run conf
+    print terminated
+
 Websocket Example
 -----------------
 In addition to using the raw MQTT protocol firehose.o.o  provides a websocket
