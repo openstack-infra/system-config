@@ -459,10 +459,10 @@ configuration management:
 
     root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
     > /etc/puppet/hieradata/production/group/signing.yaml -f \
-    > temporary.gnupg/pubring.gpg pubring
+    > temporary.gnupg/pubring.gpg pubring > /dev/null
     root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
     > /etc/puppet/hieradata/production/group/signing.yaml -f \
-    > temporary.gnupg/secring.gpg secring
+    > temporary.gnupg/secring.gpg secring > /dev/null
 
 Safely clean up, doing your best to securely remove the temporary
 copy of the unencrypted signing subkey and any associated files:
