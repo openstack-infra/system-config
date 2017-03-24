@@ -17,11 +17,14 @@
 class openstack_project::subunit_worker (
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
+  $mqtt_user = 'infra'
+  $mqtt_pass = undef,
 ) {
   include subunit2sql
   subunit2sql::worker { 'A':
-    config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
+    config_file        => template('openstack_project/logstash/jenkins-subunit-worker.yaml'),
     db_host            => $subunit2sql_db_host,
     db_pass            => $subunit2sql_db_pass,
   }
+
 }
