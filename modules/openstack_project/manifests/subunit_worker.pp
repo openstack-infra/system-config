@@ -17,11 +17,23 @@
 class openstack_project::subunit_worker (
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
+  $mqtt_user = 'infra',
+  $mqtt_pass = undef,
 ) {
+
+  file { '/etc/subunit2sql/subunit-woker.yaml':
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    content => template('openstack_project/logstash/jenkins-subunit-worker.yaml'),
+  }
+
   include subunit2sql
   subunit2sql::worker { 'A':
-    config_file        => 'puppet:///modules/openstack_project/logstash/jenkins-subunit-worker.yaml',
-    db_host            => $subunit2sql_db_host,
-    db_pass            => $subunit2sql_db_pass,
+    config_file => '/etc/subunit2sql/subunit-woker.yaml',
+    db_host     => $subunit2sql_db_host,
+    db_pass     => $subunit2sql_db_pass,
   }
+
 }
