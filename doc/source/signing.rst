@@ -326,6 +326,40 @@ be valid only for as long as its associated master key is valid:
 
     gpg> save
 
+Next, sign the new master key with the key from the previous cycle
+(specified with the ``--default-key`` option). This proves that the
+new key was created by a party with access to its predecessor, so
+provides some added assurance of its validity:
+
+.. code-block:: shell-session
+
+    root@puppetmaster:~# gpg --homedir signing.gnupg --default-key 0x70CA2E45DF30B1B8 --sign-key 0x120D3C23C6D5584D
+
+    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
+                                   trust: ultimate      validity: ultimate
+    sub  2048R/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage:E
+    sub  2048R/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage:S
+    [ultimate] (1). OpenStack Infra (Pike Cycle) <infra-root@openstack.org>
+
+
+    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
+                                   trust: ultimate      validity: ultimate
+     Primary key fingerprint: 120D 3C23 C6D5 584D 6FC2  4646 64DB B05A CC5E 7C28
+
+         OpenStack Infra (Some Cycle) <infra-root@openstack.org>
+
+    This key is due to expire on 2017-02-02.
+    Are you sure that you want to sign this key with your
+    key "OpenStack Infra (Previous Cycle) <infra-root@openstack.org>" (0x70CA2E45DF30B1B8)
+
+    Really sign? (y/N) y
+
+    You need a passphrase to unlock the secret key for
+    user: "OpenStack Infra (Previous Cycle) <infra-root@openstack.org>"
+    2048-bit RSA key, ID 0x70CA2E45DF30B1B8, created 2016-11-03
+
+    Enter passphrase: ********************************
+
 Now send the master key to the keyserver network. The subkeys are
 all submitted along with it, so do not need to be specified
 separately:
