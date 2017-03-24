@@ -1,0 +1,8 @@
+gearman-host: logstash.openstack.org
+gearman-port: 4730
+config: /etc/subunit2sql/subunit2sql.conf
+mqtt-host: firehose.openstack.org
+mqtt-port: 8883
+mqtt-user: <%= @mqtt_user %>
+mqtt-pass: <%= @mqtt_pass %>
+mqtt-ca_certs: "/etc/ca-certificates/extracted/tls-ca-bundle.pem"
