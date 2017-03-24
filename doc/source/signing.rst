@@ -484,8 +484,8 @@ passphrase to use the signing subkey:
 
 .. code-block:: shell-session
 
-    jenkins@signing01:~$ gpg --homedir temporary.gnupg --list-secret-keys
-    temporary.gnupg/secring.gpg
+    jenkins@signing01:~$ gpg --list-secret-keys
+    /home/jenkins/.gnupg/secring.gpg
     ---------------------------
     sec#  2048R/C6D5584D 2016-07-07 [expires: 2017-02-02]
     uid                  OpenStack Infra (Some Cycle) <infra-root@openstack.org>
