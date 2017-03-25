@@ -22,7 +22,7 @@ class openstack_project::puppetdb (
 
   class { 'puppetdb::database::postgresql':
     require         => [User['postgres'],
-      Class['openstack_project::template'],],
+      Class['openstack_project::server'],],
   }
 
   class { '::puppetdb::server':
