@@ -18,6 +18,8 @@ class openstack_project::server (
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = true,
 ) {
+  include openstack_project::params
+
   if $::osfamily == 'Debian' {
      # Purge and augment existing /etc/apt/sources.list if requested, and make
      # sure apt-get update is run before any packages are installed
@@ -41,6 +43,11 @@ class openstack_project::server (
        Exec['update-apt'] -> Package <| |>
      }
    }
+
+  package { $::openstack_project::params::packages:
+    ensure => present
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
@@ -57,4 +64,5 @@ class openstack_project::server (
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
   }
+
 }
