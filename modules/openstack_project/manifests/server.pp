@@ -41,6 +41,11 @@ class openstack_project::server (
        Exec['update-apt'] -> Package <| |>
      }
    }
+
+  package { $::openstack_project::params::packages:
+    ensure => present
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
@@ -57,4 +62,5 @@ class openstack_project::server (
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
   }
+
 }
