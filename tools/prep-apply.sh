@@ -77,6 +77,8 @@ sudo mv /tmp/hosts /etc/hosts
 # of configuring hiera.
 sudo mkdir -p /opt/system-config
 sudo ln -sf $(pwd) /opt/system-config/production
+# Really make sure that the openstack_project module is in the module path
+sudo ln -sf /opt/system-config/production/modules/openstack_project /etc/puppet/modules
 sudo -H mkdir -p ~/.ansible/tmp
 
 virtualenv --system-site-packages /tmp/apply-ansible-env
