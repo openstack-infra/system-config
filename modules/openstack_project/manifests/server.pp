@@ -57,4 +57,39 @@ class openstack_project::server (
        Exec['update-apt'] -> Package <| |>
      }
    }
+  ###########################################################
+  # Package resources for all operating systems
+
+  package { 'at':
+    ensure => present,
+  }
+
+  package { 'lvm2':
+    ensure => present,
+  }
+
+  package { 'strace':
+    ensure => present,
+  }
+
+  package { 'tcpdump':
+    ensure => present,
+  }
+
+  package { 'rsyslog':
+    ensure => present,
+  }
+
+  package { 'git':
+    ensure => present,
+  }
+
+  package { 'rsync':
+    ensure => present,
+  }
+
+  package { $::openstack_project::params::packages:
+    ensure => present
+  }
+
 }
