@@ -33,6 +33,28 @@ class openstack_project::server (
     manage_exim               => $manage_exim,
     sysadmins                 => $sysadmins,
     pypi_index_url            => $pypi_index_url,
-    purge_apt_sources         => $purge_apt_sources,
   }
+  if $::osfamily == 'Debian' {
+     # Purge and augment existing /etc/apt/sources.list if requested, and make
+     # sure apt-get update is run before any packages are installed
+     class { '::apt':
+       purge => { 'sources.list' => $purge_apt_sources }
+     }
+     if $purge_apt_sources == true {
+       file { '/etc/apt/sources.list.d/openstack-infra.list':
+         ensure => present,
+         group  => 'root',
+         mode   => '0444',
+         owner  => 'root',
+         source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}",
+       }
+       exec { 'update-apt':
+           command     => 'apt-get update',
+           refreshonly => true,
+           path        => '/bin:/usr/bin',
+           subscribe   => File['/etc/apt/sources.list.d/openstack-infra.list'],
+       }
+       Exec['update-apt'] -> Package <| |>
+     }
+   }
 }
