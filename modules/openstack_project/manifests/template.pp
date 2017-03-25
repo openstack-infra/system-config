@@ -20,7 +20,6 @@ class openstack_project::template (
   $manage_exim               = false,
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
-  $purge_apt_sources         = false,
   $permit_root_login         = 'no',
 ) {
 
@@ -204,28 +203,6 @@ class openstack_project::template (
 
   case $::osfamily {
     'Debian': {
-      # Purge and augment existing /etc/apt/sources.list if requested, and make
-      # sure apt-get update is run before any packages are installed
-      class { '::apt':
-        purge => { 'sources.list' => $purge_apt_sources }
-      }
-      if $purge_apt_sources == true {
-        file { '/etc/apt/sources.list.d/openstack-infra.list':
-          ensure => present,
-          group  => 'root',
-          mode   => '0444',
-          owner  => 'root',
-          source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}",
-        }
-        exec { 'update-apt':
-            command     => 'apt-get update',
-            refreshonly => true,
-            path        => '/bin:/usr/bin',
-            subscribe   => File['/etc/apt/sources.list.d/openstack-infra.list'],
-        }
-        Exec['update-apt'] -> Package <| |>
-      }
-
       # Make sure dig is installed
       package { 'dnsutils':
         ensure => present,
@@ -372,6 +349,7 @@ class openstack_project::template (
     # NOTE(pabelanger): Puppetlabs only support Ubuntu Trusty and below,
     # anything greater will use the OS version of puppet.
     if ($::operatingsystemrelease < '15.04') {
+      include ::apt
       apt::source { 'puppetlabs':
         location => 'http://apt.puppetlabs.com',
         repos    => 'main',
