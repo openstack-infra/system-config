@@ -54,9 +54,6 @@ class openstack_project::single_use_slave (
   }
 
   if (! $thin) {
-    class { 'openstack_project::thick_slave':
-      all_mysql_privs => $all_mysql_privs,
-    }
+    notice("The openstack_project::single_use_slave::thin parameter has no effect.")
   }
-
 }
