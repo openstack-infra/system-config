@@ -74,6 +74,14 @@ class openstack_project::mirror_update (
     source  => 'puppet:///modules/openstack_project/bandersnatch-mirror-update.sh',
   }
 
+  file { '/usr/local/bin/gem-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/gem-mirror-update.sh',
+  }
+
   file { '/usr/local/bin/npm-mirror-update':
     ensure   => present,
     owner    => 'root',
@@ -96,9 +104,8 @@ class openstack_project::mirror_update (
   }
 
   cron { 'rubygems-mirror':
-    user        => 'rubygems',
     minute      => '*/5',
-    command     => 'flock -n /var/run/rubygems/mirror.lock timeout -k 2m 30m gem mirror >>/var/log/rubygems/mirror.log 2>&1',
+    command     => 'flock -n /var/run/rubygems/mirror.lock gem-mirror-update  >>/var/log/rubygems/mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
       File['/etc/afsadmin.keytab'],
