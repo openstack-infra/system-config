@@ -168,32 +168,6 @@ class openstack_project::template (
   }
 
   ###########################################################
-  # Manage  ntp
-
-  include '::ntp'
-
-  if ($::osfamily == "RedHat") {
-    # Utils in ntp-perl are included in Debian's ntp package; we
-    # add it here for consistency.  See also
-    # https://tickets.puppetlabs.com/browse/MODULES-3660
-    package { 'ntp-perl':
-      ensure => present
-    }
-    # NOTE(pabelanger): We need to ensure ntpdate service starts on boot for
-    # centos-7.  Currently, ntpd explicitly require ntpdate to be running before
-    # the sync process can happen in ntpd.  As a result, if ntpdate is not
-    # running, ntpd will start but fail to sync because of DNS is not properly
-    # setup.
-    package { 'ntpdate':
-      ensure => present,
-    }
-    service { 'ntpdate':
-      enable => true,
-      require => Package['ntpdate'],
-    }
-  }
-
-  ###########################################################
   # Manage  python/pip
 
   $desired_virtualenv = '13.1.0'
