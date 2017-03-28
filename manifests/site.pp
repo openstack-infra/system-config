@@ -322,6 +322,13 @@ node 'planet.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node 'planet01.openstack.org' {
+  class { 'openstack_project::planet':
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
 # Node-OS: trusty
 node 'eavesdrop.openstack.org' {
   class { 'openstack_project::server':
