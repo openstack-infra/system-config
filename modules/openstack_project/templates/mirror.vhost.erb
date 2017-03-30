@@ -97,6 +97,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 
     # Per site caching reverse proxy rules
     # Only cache specific backends, rely on afs cache otherwise.
+    SSLProxyEngine on
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo" "https://trunk.rdoproject.org/"
