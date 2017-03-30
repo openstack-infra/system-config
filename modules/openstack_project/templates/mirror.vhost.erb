@@ -81,4 +81,23 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     LogLevel warn
     CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
     ServerSignature Off
+
+    # Caching reverse proxy for things that don't make sense in AFS
+    #
+    # General cache rules
+    CacheRoot "/opt/apache_cache"
+    CacheDirLevels 5
+    CacheDirLength 3
+    # Prevent thundering herds.
+    CacheLock on
+    CacheLockPath "/tmp/mod_cache-lock"
+    CacheLockMaxAge 5
+    # 100MB
+    CacheMaxFileSize 104857600
+
+    # Per site caching reverse proxy rules
+    # Only cache specific backends, rely on afs cache otherwise.
+    CacheEnable disk  "/rdo"
+    ProxyPass "/rdo" "https://trunk.rdoproject.org/"
+    ProxyPassReverse "/rdo" "https://trunk.rdoproject.org/"
 </VirtualHost>

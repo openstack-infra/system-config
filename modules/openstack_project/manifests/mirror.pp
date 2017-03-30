@@ -202,6 +202,14 @@ class openstack_project::mirror (
   # Build VHost
   include ::httpd
 
+  file { '/opt/apache_cache':
+    ensure => directory,
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+    require => Class['httpd']
+  }
+
   if ! defined(Httpd::Mod['rewrite']) {
     httpd::mod { 'rewrite':
       ensure => present,
@@ -210,6 +218,24 @@ class openstack_project::mirror (
 
   if ! defined(Httpd::Mod['substitute']) {
     httpd::mod { 'substitute':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Httpd::Mod['cache']) {
+    httpd::mod { 'cache':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Httpd::Mod['cache_disk']) {
+    httpd::mod { 'cache_disk':
+      ensure => present,
+    }
+  }
+
+  if ! defined(Httpd::Mod['proxy']) {
+    httpd::mod { 'proxy':
       ensure => present,
     }
   }
