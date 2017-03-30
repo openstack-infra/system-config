@@ -3,6 +3,11 @@
 # ************************************
 
 NameVirtualHost <%= @vhost_name %>:<%= @port %>
+
+# Dedicated port for proxy caching, as not to affect afs mirrors.
+Listen 8080
+NameVirtualHost <%= @vhost_name %>:8080
+
 <VirtualHost <%= @vhost_name %>:<%= @port %>>
     ServerName <%= @srvname %>
     <% if @serveraliases.is_a? Array -%>
@@ -81,6 +86,19 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     LogLevel warn
     CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
     ServerSignature Off
+</VirtualHost>
+
+<VirtualHost <%= @vhost_name %>:8080>
+    ServerName <%= @srvname %>
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_proxy_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_proxy_access.log combined
+    ServerSignature Off
 
     # Caching reverse proxy for things that don't make sense in AFS
     #
@@ -88,6 +106,8 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     CacheRoot "/opt/apache_cache"
     CacheDirLevels 5
     CacheDirLength 3
+    # SSL support
+    SSLProxyEngine on
     # Prevent thundering herds.
     CacheLock on
     CacheLockPath "/tmp/mod_cache-lock"
