@@ -240,6 +240,12 @@ class openstack_project::mirror (
     }
   }
 
+  if ! defined(Httpd::Mod['proxy_http']) {
+    httpd::mod { 'proxy_http':
+      ensure => present,
+    }
+  }
+
   ::httpd::vhost { $vhost_name:
     port     => 80,
     priority => '50',
