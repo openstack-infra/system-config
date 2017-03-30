@@ -88,6 +88,8 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
     CacheRoot "/opt/apache_cache"
     CacheDirLevels 5
     CacheDirLength 3
+    # SSL support
+    SSLProxyEngine on
     # Prevent thundering herds.
     CacheLock on
     CacheLockPath "/tmp/mod_cache-lock"
