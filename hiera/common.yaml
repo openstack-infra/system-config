@@ -473,6 +473,8 @@ cacti_hosts:
 - mirror.ord.rax.openstack.org
 - mirror.regionone.bluebox-sjc1.openstack.org
 - mirror.regionone.osic-cloud1.openstack.org
+- mirror.regionone.infracloud-chocolate.openstack.org
+- mirror.regionone.infracloud-vanilla.openstack.org
 - mirror.regionone.tripleo-test-cloud-rh1.openstack.org
 - mirror.regionone.tripleo-test-cloud-rh2.openstack.org
 - mirror-update.openstack.org
