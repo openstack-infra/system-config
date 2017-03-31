@@ -39,7 +39,18 @@ NameVirtualHost <%= @vhost_name %>:8080
     RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
     RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
 
-    # Wheel URL's are:
+    # Rubygem's URL's are:
+    # /gem/gems/foobar-1.0.0.gem
+    RewriteCond %{REQUEST_URI} ^/gem/gems/([^/])([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/gem/gems/$1/$1$2/ -d
+    RewriteRule ^/gem/gems/([^/])([^/])([^/]*)?$ /gem/gems/$1/$1$2/$1$2$3 [L]
+
+    # Rubygem's URL's are:
+    # /gem/quick/Marshal.4.8/foobar-1.0.0.gemspec.rz
+    RewriteCond %{REQUEST_URI} ^/gem/quick/([^/]+)/([^/])([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/gem/quick/$1/$2/$2$3/ -d
+    RewriteRule ^/gem/quick/([^/]+)/([^/])([^/])([^/]*)?$ /gem/quick/$1/$2/$2$3/$2$3$4 [L]
+
     # /wheel/{distro}-{distro-version}/a/a/a-etc.whl
     # /wheel/{distro}-{distro-version}/a/abcd/abcd-etc.whl
     # /wheel/{distro}-{distro-version}/a/abcde/abcde-etc.whl
