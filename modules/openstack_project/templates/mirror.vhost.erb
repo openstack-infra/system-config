@@ -39,6 +39,12 @@ NameVirtualHost <%= @vhost_name %>:8080
     RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
     RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
 
+    # Rubygem's URL's are:
+    # /gem/gems/foobar-1.0.0.gem
+    RewriteCond %{REQUEST_URI} ^/gem/gems/([^/])([^/])([^/]*)
+    RewriteCond %{DOCUMENT_ROOT}/gem/gems/$1/$1$2/ -d
+    RewriteRule ^/gem/gems/([^/])([^/])([^/]*)(/.*)?$ /gem/gems/$1/$1$2/$1$2$3 [L]
+
     # Wheel URL's are:
     # /wheel/{distro}-{distro-version}/a/a/a-etc.whl
     # /wheel/{distro}-{distro-version}/a/abcd/abcd-etc.whl
