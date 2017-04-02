@@ -74,6 +74,16 @@ class openstack_project::server (
     }
   }
 
+  ###########################################################
+  # Process if ( $high_level_directive ) blocks
+
+  if ($enable_unbound) {
+    class { 'unbound':
+      install_resolv_conf => $install_resolv_conf
+    }
+  }
+
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
