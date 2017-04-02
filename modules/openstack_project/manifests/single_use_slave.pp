@@ -14,7 +14,6 @@ class openstack_project::single_use_slave (
   $thin = true,
   $automatic_upgrades = false,
   $all_mysql_privs = false,
-  $enable_unbound = true,
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
@@ -25,7 +24,6 @@ class openstack_project::single_use_slave (
     automatic_upgrades        => $automatic_upgrades,
     install_users             => $install_users,
     install_resolv_conf       => $install_resolv_conf,
-    enable_unbound            => $enable_unbound,
     permit_root_login         => 'yes',
     iptables_rules4           =>
       [
