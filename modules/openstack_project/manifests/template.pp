@@ -17,7 +17,6 @@ class openstack_project::template (
   $ca_server                 = undef,
   $afs                       = false,
   $afs_cache_size            = 500000,
-  $puppetmaster_server       = 'puppetmaster.openstack.org',
   $manage_exim               = false,
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
