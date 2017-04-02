@@ -2,7 +2,6 @@
 #
 class openstack_project::slave (
   $thin = false,
-  $certname = $::fqdn,
   $ssh_key = '',
   $sysadmins = [],
   $jenkins_gitfullname = 'OpenStack Jenkins',
@@ -20,7 +19,6 @@ class openstack_project::slave (
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [19885],
     iptables_public_udp_ports => [],
-    certname                  => $certname,
     sysadmins                 => $sysadmins,
     afs                       => $afs
   }
