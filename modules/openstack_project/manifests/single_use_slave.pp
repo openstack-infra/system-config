@@ -4,7 +4,6 @@
 # toggleable options. Most importantly sudo rights for the Jenkins
 # user are by default off but can be enabled.
 class openstack_project::single_use_slave (
-  $certname = $::fqdn,
   $install_resolv_conf = true,
   $sudo = false,
   # TODO(pabelanger): To be removed in a future patch.
