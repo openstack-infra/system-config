@@ -10,12 +10,8 @@ class openstack_project::thick_slave(
   $packages = [
     $::openstack_project::jenkins_params::ant_package, # for building buck
     $::openstack_project::jenkins_params::awk_package, # for building extract_docs.awk to work correctly
-    $::openstack_project::jenkins_params::asciidoc_package, # for building gerrit/building openstack docs
-    $::openstack_project::jenkins_params::docbook_xml_package, # for building openstack docs
-    $::openstack_project::jenkins_params::docbook5_xml_package, # for building openstack docs
-    $::openstack_project::jenkins_params::docbook5_xsl_package, # for building openstack docs
+    $::openstack_project::jenkins_params::asciidoc_package, # for building gerrit
     $::openstack_project::jenkins_params::gettext_package, # for msgfmt, used in translating manuals
-    $::openstack_project::jenkins_params::gnome_doc_package, # for generating translation files for docs
     $::openstack_project::jenkins_params::graphviz_package, # for generating graphs in docs
     $::openstack_project::jenkins_params::firefox_package, # for selenium tests
     $::openstack_project::jenkins_params::language_fonts_packages,
