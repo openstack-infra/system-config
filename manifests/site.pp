@@ -1182,7 +1182,6 @@ node /^zlstatic\d+\.openstack\.org$/ {
     iptables_rules6     => $iptables_rule,
     iptables_rules4     => $iptables_rule,
     sysadmins           => hiera('sysadmins', []),
-    puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
   class { 'openstack_project::zuul_launcher':
@@ -1211,7 +1210,6 @@ node /^zl\d+\.openstack\.org$/ {
     iptables_rules6     => $iptables_rule,
     iptables_rules4     => $iptables_rule,
     sysadmins           => hiera('sysadmins', []),
-    puppetmaster_server => 'puppetmaster.openstack.org',
     afs                 => true,
   }
   class { 'openstack_project::zuul_launcher':
