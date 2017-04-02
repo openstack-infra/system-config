@@ -18,9 +18,11 @@ set -e
 
 REPREPRO_CONFIG=$1
 MIRROR_VOLUME=$2
+BASE=`cat ${REPREPRO_CONFIG}/options | grep base | cut -d' ' -f2`
 
 UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.unreferenced-files
-REPREPRO="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m reprepro --confdir $REPREPRO_CONFIG"
+K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m"
+REPREPRO="$K5START reprepro --confdir $REPREPRO_CONFIG"
 
 date --iso-8601=ns
 echo "Obtaining reprepro tokens and running reprepro update"
@@ -41,7 +43,7 @@ echo "Checking state of mirror"
 $REPREPRO checkpool fast
 $REPREPRO check
 
-date --iso-8601=ns
+date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "reprepro completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
 
