@@ -13,7 +13,6 @@ class openstack_project::template (
   $automatic_upgrades        = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
-  $enable_unbound            = true,
   $afs                       = false,
   $afs_cache_size            = 500000,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
@@ -93,12 +92,6 @@ class openstack_project::template (
 
   class {'openstack_project::users_install':
     install_users => $install_users
-  }
-
-  if ($enable_unbound) {
-    class { 'unbound':
-      install_resolv_conf => $install_resolv_conf
-    }
   }
 
   package { 'rsyslog':
