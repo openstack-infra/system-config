@@ -278,6 +278,23 @@ class openstack_project::mirror (
     ]
   }
 
+  # Cache cleanup
+  package { 'apache2-utils':
+    ensure => present,
+  }
+
+  cron { 'apache-cache-cleanup':
+    # Clean apache cache once an hour, keep size down to 2GB.
+    minute      => '0',
+    hour        => '*',
+    command     => 'htcacheclean -n -p /opt/apache_cache -t -l 2048M > /dev/null',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/opt/apache_cache'],
+       Package['apache2-utils'],
+    ],
+  }
+
   class { '::httpd::logrotate':
     options => [
       'daily',
