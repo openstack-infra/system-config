@@ -214,6 +214,11 @@ system from a region-wide outage.
 
 In order to establish a new mirror, do the following:
 
+* The following commands need to be run authenticated on a host with
+  kerberos and AFS setup.  You can run the commands on
+  ``mirror-update.openstack.org``.  Firstly ``kinit`` and ``aklog`` to
+  get tokens.
+
 * Create the mirror volume.  See `Creating a Volume`_ for details.
   The volume should be named ``mirror.foo``, where `foo` is
   descriptive of the contents of the mirror.  Example::
@@ -247,9 +252,9 @@ point is composed of read-only volumes::
       /mirror      [mirror]
         /bar       [mirror.bar]
 
-In order to mount the mirror.foo volume under ``mirror`` we need to
-modify the read-write version of the ``mirror`` volume.  To make this
-easy, the read-write version of the cell root is mounted at
+In order to mount the ``mirror.foo`` volume under ``mirror`` we need
+to modify the read-write version of the ``mirror`` volume.  To make
+this easy, the read-write version of the cell root is mounted at
 ``/afs/.openstack.org``.  Folllowing the same logic from earlier,
 traversing to paths below that mount point will generally prefer
 read-write volumes.
@@ -271,7 +276,16 @@ read-write volumes.
     kadmin: addprinc -randkey service/foo-mirror@OPENSTACK.ORG
     kadmin: ktadd -k /path/to/foo.keytab service/foo-mirror@OPENSTACK.ORG
 
-* Add the service principal's keytab to hiera.
+* Add the service principal's keytab to hiera.  Run the keytab through
+  ``base64``::
+
+    cat /path/to/foo.keytab | base64
+
+  Then paste result into
+  ``puppetmaster:/etc/puppet/hieradata/production/mirror-update.openstack.org.yaml``
+  (don't forget to ``git commit`` and save the change).  Add the key
+  to ``mirror-update.openstack.org`` in ``manifests/site.pp`` for the
+  mirror scripts to access on the host.
 
 * Create an AFS user for the service principal::
 
@@ -309,17 +323,21 @@ membership if our needs change.
 Because the initial replication may take more time than we allocate in
 our mirror update cron jobs, manually perform the first mirror update:
 
-* In screen, obtain the lock on mirror-update.openstack.org::
+* In screen, obtain the lock on ``mirror-update.openstack.org``::
 
     flock -n /var/run/foo-mirror/mirror.lock bash
 
   Leave that running while you perform the rest of the steps.
 
-* Also in screen on mirror-update, run the initial mirror sync.
+* Also in screen on ``mirror-update``, run the initial mirror sync.
+  If using one of the mirror update scripts (from ``/usr/local/bin``)
+  be aware that they generally run the update process under
+  ``timeout`` with shorter periods than may be required for the
+  initial full sync.
 
-* Log into afs01.dfw.openstack.org and run screen.  Within that
-  session, periodically during the sync, and once again after it is
-  complete, run::
+* Log into ``afs01.dfw.openstack.org`` and run ``screen``.  Within
+  that session, periodically during the sync, and once again after it
+  is complete, run::
 
     vos release mirror.foo -localauth
 
