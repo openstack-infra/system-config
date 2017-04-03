@@ -29,6 +29,7 @@
     <% end -%>
 
     RewriteEngine on
+    RewriteRule ^/infra/shade/(.*) /developer/shade/$1 [last,redirect=permanent]
 
     SSLEngine on
     SSLProtocol All -SSLv2 -SSLv3
