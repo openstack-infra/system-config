@@ -10,6 +10,7 @@ class openstack_project::mirror_update (
   $centos_keytab = '',
   $epel_keytab = '',
   $fedora_keytab = '',
+  $opensuse_keytab = '',
 ) {
   include ::gnupg
   include ::openstack_project::reprepro_mirror
@@ -340,6 +341,35 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/fedora-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/fedora.keytab'],
+    ]
+  }
+
+  ### openSUSE mirror ###
+  file { '/etc/opensuse.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $opensuse_keytab,
+  }
+
+  file { '/usr/local/bin/opensuse-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/opensuse-mirror-update.sh',
+  }
+
+  cron { 'opensuse mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/6',
+    command     => 'flock -n /var/run/opensuse-mirror.lock opensuse-mirror-update mirror.opensuse >>/var/log/opensuse-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/opensuse-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/opensuse.keytab'],
     ]
   }
 
