@@ -11,6 +11,7 @@ class openstack_project::mirror_update (
   $epel_keytab = '',
   $fedora_keytab = '',
   $opensuse_keytab = '',
+  $rdo_keytab = '',
 ) {
   include ::gnupg
   include ::openstack_project::reprepro_mirror
@@ -283,6 +284,35 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/centos-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/centos.keytab'],
+    ]
+  }
+
+  ### RDO mirror ###
+  file { '/etc/rdo.keytab':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
+    content => $rdo_keytab,
+  }
+
+  file { '/usr/local/bin/rdo-mirror-update':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/mirror/rdo-mirror-update.sh',
+  }
+
+  cron { 'rdo mirror':
+    user        => $user,
+    minute      => '0',
+    hour        => '*/2',
+    command     => 'flock -n /var/run/rdo-mirror.lock rdo-mirror-update mirror.rdo >>/var/log/rdo-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/rdo-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/rdo.keytab'],
     ]
   }
 
