@@ -1,0 +1,10 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Dirk Mueller <dirk@dmllr.de>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 03 Apr 2017 07:57:33 +0000
+Reviewed-on: https://review.openstack.org/452594
+Project: openstack-infra/system-config
+Branch: refs/heads/master
