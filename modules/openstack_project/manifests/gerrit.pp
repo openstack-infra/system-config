@@ -6,6 +6,7 @@
 class openstack_project::gerrit (
   $mysql_host,
   $mysql_password,
+  $accountpatchreviewdb_url = undef,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
   $git_http_url = '',
@@ -174,6 +175,7 @@ class openstack_project::gerrit (
     contactstore_url                    => $contactstore_url,
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
+    accountpatchreviewdb_url            => $accountpatchreviewdb_url,
     email_private_key                   => $email_private_key,
     token_private_key                   => $token_private_key,
     replicate_local                     => $replicate_local,
