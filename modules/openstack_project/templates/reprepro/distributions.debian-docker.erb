@@ -1,0 +1,12 @@
+<% @releases.each do |release| -%>
+Origin: Docker
+Codename: <%= release %>
+Description: Docker <%= release.capitalize %> mirror
+Architectures: amd64 source
+Components: main
+UDebComponents: main
+Contents: .gz
+Update: docker
+Log: <%= @logdir %>/debian-docker-<%= release %>.log
+
+<% end -%>
