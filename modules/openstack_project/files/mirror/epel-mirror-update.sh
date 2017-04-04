@@ -37,7 +37,12 @@ $K5START rsync -rlptDvz \
     --exclude="x86_64/repoview" \
     $MIRROR/$REPO/ $BASE/$REPO/
 
-# TODO(pabelanger): Validate rsync process
+# NOTE(pabelanger): Validate repomd.xml with upstream release version, this is
+# to help protect when our upstream mirror (mirrors.kernel.org) is out of sync
+# with its upstream mirror.
+REPOMD="x86_64/repodata/repomd.xml"
+SHA1SUM=`curl -s https://dl.fedoraproject.org/pub/epel/7/$REPOMD | sha1sum | cut -d' ' -f1`
+echo "$SHA1SUM $BASE/$REPO/$REPOMD" | sha1sum -c -
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
