@@ -85,6 +85,7 @@ class openstack_project::review (
   $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
+  $gerrit_ssh_known_hosts = '',
 ) {
 
   $java_home = $::lsbdistcodename ? {
@@ -116,6 +117,7 @@ class openstack_project::review (
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
     ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
+    gerrit_ssh_known_hosts              => "${gerrit_ssh_known_hosts} ${gerrit_ssh_host_key}",
     email                               => 'review@openstack.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '225',
