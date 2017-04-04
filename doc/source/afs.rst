@@ -333,3 +333,26 @@ our mirror update cron jobs, manually perform the first mirror update:
 
 * Once the initial sync and and ``vos release`` are complete, release
   the lock file on mirror-update.
+
+Reverse Proxy Cache
+^^^^^^^^^^^^^^^^^^^
+
+There are some hosted resources that are not currently able to be
+practically mirrored. Examples of this include RDO (rsync from RDO
+is slow and they update frequently) and docker images (which require
+specialized software to run a docker registry and then sorting out
+how to run that on a shared filesystem). In an effort to help make
+jobs that rely on these resources quicker and more reliable we have
+added caching reverse proxies to each of the region local mirrors.
+
+These proxies run in the existing Apache setup on our mirror hosts
+and listen on port 8080. They have a white listed set of backends
+(currently just RDO). Currently they will cache data for up to 24
+hours (Apache default) with pruning performed by htcacheclean once
+an hour to keep the cache size at or under 2GB of disk space.
+
+Apache was chosen because we already had configuration management in
+place for Apache on these hosts. Made it easy to add in additional
+configuration for the reverse proxies without also needing to add
+a completely new service deployment for something like Squid or
+a caching docker registry daemon.
