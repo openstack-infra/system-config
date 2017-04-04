@@ -196,6 +196,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to docker-deb.
+  file { "${www_root}/docker-deb":
+    ensure  => link,
+    target  => "${mirror_root}/docker-deb",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # TODO(pabelanger): We can remove this after puppet runs a few times.
   file { "${www_root}/mariadb":
     ensure  => absent,
