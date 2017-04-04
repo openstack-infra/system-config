@@ -16,7 +16,10 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/epel"
-MIRROR="rsync://mirrors.kernel.org/fedora-epel"
+# NOTE(pabelanger): #fedora-admin:
+# tibbs | I run pubmirror[12].math.uh.edu.
+# tibbs | It polls the masters every ten minutes.
+MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/epel"
 K5START="k5start -t -f /etc/epel.keytab service/epel-mirror -- timeout -k 2m 30m"
 
 REPO=7
