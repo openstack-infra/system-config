@@ -63,7 +63,7 @@ class openstack_project::review_dev (
     gerrit_ssh_known_hosts              => "${gerrit_ssh_known_hosts} ${gerrit_ssh_host_key}",
     email                               => 'review-dev@openstack.org',
     war                                 =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.22.e0c0f29.war',
+      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.13.7.4.988b40f.war',
     contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
