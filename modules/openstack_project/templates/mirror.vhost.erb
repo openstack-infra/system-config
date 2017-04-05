@@ -124,4 +124,9 @@ NameVirtualHost <%= @vhost_name %>:8080
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+
+    # hub.docker.com
+    CacheEnable disk  "/hub.docker"
+    ProxyPass "/hub.docker/" "https://hub.docker.com/"
+    ProxyPassReverse "/hub.docker/" "https://hub.docker.com/"
 </VirtualHost>
