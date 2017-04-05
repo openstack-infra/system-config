@@ -26,6 +26,7 @@ class openstack_project::firehose (
   $mqtt_hostname = 'firehose.openstack.org',
   $mqtt_password,
   $mqtt_username = 'infra',
+  $statsd_host,
   $ca_file,
   $cert_file,
   $key_file,
@@ -98,5 +99,11 @@ class openstack_project::firehose (
     imap_password => $imap_password,
     imap_use_ssl  => false,
     imap_delete_old => true,
+  }
+
+  include mqtt_statsd
+  class {'mqtt_statsd::server':
+    mqtt_hostname   => $mqtt_hostname,
+    statsd_hostname => $statsd_host,
   }
 }

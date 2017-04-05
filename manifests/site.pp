@@ -226,6 +226,7 @@ node 'puppetdb01.openstack.org' {
 # Node-OS: trusty
 node 'graphite.openstack.org' {
   $statsd_hosts = ['git.openstack.org',
+                   'firehose01.openstack.org',
                    'logstash.openstack.org',
                    'nodepool.openstack.org',
                    'nl01.openstack.org',
@@ -552,6 +553,7 @@ node /^firehose\d+\.openstack\.org$/ {
     imap_hostname       => hiera('lpmqtt_imap_server'),
     imap_username       => hiera('lpmqtt_imap_username'),
     imap_password       => hiera('lpmqtt_imap_password'),
+    statsd_host         => 'graphite.openstack.org',
   }
 }
 
