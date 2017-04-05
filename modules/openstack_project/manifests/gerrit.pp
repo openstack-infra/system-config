@@ -192,6 +192,7 @@ class openstack_project::gerrit (
     report_bug_text                     => $report_bug_text,
     report_bug_url                      => $report_bug_url,
     index_threads                       => $index_threads,
+    offline_reindex                     => true,
     download                            => $download,
     receive_max_object_size_limit       => $receive_max_object_size_limit,
     commitmessage_params                =>
