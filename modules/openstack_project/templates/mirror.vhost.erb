@@ -8,6 +8,9 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 Listen 8080
 NameVirtualHost <%= @vhost_name %>:8080
 
+Listen 8081
+NameVirtualHost <%= @vhost_name %>:8081
+
 <VirtualHost <%= @vhost_name %>:<%= @port %>>
     ServerName <%= @srvname %>
     <% if @serveraliases.is_a? Array -%>
@@ -99,9 +102,9 @@ NameVirtualHost <%= @vhost_name %>:8080
       AllowOverride None
     </Directory>
 
-    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_proxy_error.log
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8080_error.log
     LogLevel warn
-    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_proxy_access.log combined
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8080_access.log combined
     ServerSignature Off
 
     # Caching reverse proxy for things that don't make sense in AFS
@@ -124,4 +127,50 @@ NameVirtualHost <%= @vhost_name %>:8080
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+</VirtualHost>
+
+<VirtualHost <%= @vhost_name %>:8081>
+    ServerName <%= @srvname %>:8081
+
+    # Disable directory listing by default.
+    <Directory />
+      Order Deny,Allow
+      Deny from all
+      Options None
+      AllowOverride None
+    </Directory>
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8081_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8081_access.log combined
+    ServerSignature Off
+
+    # Caching reverse proxy for things that don't make sense in AFS
+    #
+    # General cache rules
+    CacheRoot "/opt/apache_cache"
+    CacheDirLevels 5
+    CacheDirLength 3
+    # SSL support
+    SSLProxyEngine on
+    # Prevent thundering herds.
+    CacheLock on
+    CacheLockPath "/tmp/mod_cache-lock"
+    CacheLockMaxAge 5
+    # 100MB
+    CacheMaxFileSize 104857600
+    # Ignore expire headers
+    CacheIgnoreQueryString On
+    CacheStoreExpired On
+
+    # registry-1.docker.com
+    CacheEnable disk  "/registry-1.docker"
+    ProxyPass "/registry-1.docker/" "https://registry-1.docker.io/"
+    ProxyPassReverse "/registry-1.docker/" "https://registry-1.docker.io/"
+
+    # dseasb33srnrn.cloudfront.net
+    CacheEnable disk "/cloudfront"
+    ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
+    ProxyPassReverse "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
+
 </VirtualHost>
