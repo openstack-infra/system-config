@@ -398,3 +398,30 @@ If you need to remove a mirror, you can do the following:
 
     vos remove -server afs02.dfw.openstack.org -partition a -id mirror.foo
 
+Reverse Proxy Cache
+^^^^^^^^^^^^^^^^^^^
+
+* `modules/openstack_project/templates/mirror.vhost.erb
+  <https://git.openstack.org/cgit/openstack-infra/system-config/tree/modules/openstack_project/templates/mirror.vhost.erb>`__
+
+Each of the region-local mirror hosts exposes a limited reverse HTTP
+proxy on port 8080.  These proxies run within the same Apache setup as
+used to expose AFS mirror contents.  `mod_cache
+<https://httpd.apache.org/docs/2.4/mod/mod_proxy.html>`__ is used to
+expose a white-listed set of resources (currently just RDO).
+
+Currently they will cache data for up to 24 hours (Apache default)
+with pruning performed by ``htcacheclean`` once an hour to keep the
+cache size at or under 2GB of disk space.
+
+The reverse proxy is provided because there are some hosted resources
+that are not currently able to be practically mirrored.  Examples of
+this include RDO (rsync from RDO is slow and they update frequently)
+and docker images (which require specialized software to run a docker
+registry and then sorting out how to run that on a shared filesystem).
+
+Apache was chosen because we already had configuration management in
+place for Apache on these hosts.  This avoids management overheads of
+a completely new service deployment such as Squid or a caching docker
+registry daemon.
+
