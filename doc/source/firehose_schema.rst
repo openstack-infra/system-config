@@ -59,3 +59,60 @@ event type.
 .. _JSON payload: https://review.openstack.org/Documentation/json.html
 .. _Gerrit events: https://review.openstack.org/Documentation/cmd-stream-events.html#events
 
+Launchpad
+=========
+The messages sent to firehose for launchpad are generated using `lpmqtt`_
+
+.. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
+
+Topics
+------
+
+The topics for lpmqtt follow a pretty simple formula::
+
+    launchpad/<project>/<event type>/<bug number>
+
+the ``project`` is the launchpad project name, ``event type`` will always be
+"bug" (or not present). The intent of this was to be "bug" or "blueprint", but
+due to limitations in launchpad getting notifications from blueprints is not
+possible. The flexibility was left in the schema just in case this ever changes.
+The ``bug number`` is obviously the bug number from launchpad.
+
+It's also worth noting that only the base topic is a guaranteed field. Depending
+on the notification email from launchpad some of the other fields may not be
+present. In those cases the topic will be populated left to right until a
+missing field is encountered.
+
+Payload
+-------
+
+The payload of messages is dynamically generated and dependent on the
+notification recieved from launchpad, and launchpad isn't always consistent in
+what fields are present in those notifications.
+
+However, for bug event types this there is a standard format. The fields which
+are always present for bugs (which should normally be the only message for
+firehose) are:
+
+ * commenters
+ * bug-reporter
+ * bug-modifier
+ * bug-number
+ * event-type
+
+The remaining fields are dynamic and depend on launchpad. An example message
+payload (with the body trimmed) for a bug is::
+
+  {
+    "status": "Triaged",
+    "project": "octavia",
+    "assignee": "reedip.banerjee@nectechnologies.in",
+    "bug-reporter": "Reedip (reedip-banerjee)",
+    "event-type": "bug",
+    "bug-number": "1680938",
+    "commenters": ["reedip-banerjee"]
+    "tags": ["rfe"],
+    "importance": "Medium",
+    "bug-modifier": "Michael Johnson (johnsom)",
+    "body": "notification body, often is just bug comment or summary",
+  }
