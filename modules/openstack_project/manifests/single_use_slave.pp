@@ -42,11 +42,36 @@ class openstack_project::single_use_slave (
       ],
     iptables_public_tcp_ports => [19885],
   }
-  class { 'jenkins::slave':
-    ssh_key         => $ssh_key,
-    gitfullname     => $jenkins_gitfullname,
-    gitemail        => $jenkins_gitemail,
+
+  include ::haveged
+  include ::pip
+
+  class { '::jenkins::jenkinsuser':
+    ssh_key     => $ssh_key,
+    gitfullname => $jenkins_gitfullname,
+    gitemail    => $jenkins_gitemail,
   }
+
+  file { '/usr/local/jenkins':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
+  package { 'tox':
+    ensure   => 'latest',
+    provider => openstack_pip,
+    require  => Class[pip],
+  }
+
+  # TODO(fungi): switch jobs to use /usr/git-review-env/bin/git-review
+  package { 'git-review':
+    ensure   => '1.25.0',
+    provider => openstack_pip,
+    require  => Class[pip],
+  }
+
 
   class { 'openstack_project::slave_common':
     sudo                => $sudo,
