@@ -7,25 +7,21 @@
 
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
- dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-24, dib_fedora-25,
- rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
- osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
- osic-cloud1-disk_upload, tripleo-test-cloud-rh1_upload,
- tripleo-test-cloud-rh2_upload, infracloud-vanilla_upload,
- infracloud-chocolate_upload
+ dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
+ dib_fedora-25, rax-dfw_upload, rax-ord_upload, rax-iad_upload,
+ ovh-gra1_upload, ovh-bhs1_upload, bluebox-sjc1_upload,
+ internap-mtl01_upload, osic-cloud1-s3500_upload,
+ osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
+ infracloud-vanilla_upload, infracloud-chocolate_upload
 
 [handlers]
 keys=console,debug,normal,image,
- dib_debian-jessie, dib_ubuntu-precise, dib_ubuntu-trusty,
- dib_ubuntu-xenial, dib_centos-7, dib_fedora-24, dib_fedora-25,
- rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, bluebox-sjc1_upload, internap-mtl01_upload,
- osic-cloud1-s3500_upload, osic-cloud1-s3700_upload,
- osic-cloud1-disk_upload, tripleo-test-cloud-rh1_upload,
- tripleo-test-cloud-rh2_upload, infracloud-vanilla_upload,
- infracloud-chocolate_upload
+ dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
+ dib_fedora-25, rax-dfw_upload, rax-ord_upload, rax-iad_upload,
+ ovh-gra1_upload, ovh-bhs1_upload, bluebox-sjc1_upload,
+ internap-mtl01_upload, osic-cloud1-s3500_upload,
+ osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
+ infracloud-vanilla_upload, infracloud-chocolate_upload
 
 [formatters]
 keys=simple
@@ -40,7 +36,7 @@ handlers=debug,normal
 qualname=requests
 
 [logger_shade]
-level=DEBUG
+level=WARNING
 handlers=debug,normal
 qualname=shade
 
@@ -104,18 +100,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.debian-jessie.log', 'H', 8, 30,)
 
-[logger_dib_ubuntu-precise]
-level=DEBUG
-handlers=dib_ubuntu-precise
-qualname=nodepool.image.build.ubuntu-precise
-propagate=0
-
-[handler_dib_ubuntu-precise]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.ubuntu-precise.log', 'H', 8, 30,)
-
 [logger_dib_ubuntu-trusty]
 level=DEBUG
 handlers=dib_ubuntu-trusty
@@ -151,18 +135,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.centos-7.log', 'H', 8, 30,)
-
-[logger_dib_fedora-24]
-level=DEBUG
-handlers=dib_fedora-24
-qualname=nodepool.image.build.fedora-24
-propagate=0
-
-[handler_dib_fedora-24]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.fedora-24.log', 'H', 8, 30,)
 
 [logger_dib_fedora-25]
 level=DEBUG
@@ -284,18 +256,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/osic-cloud1-s3700.log', 'H', 8, 30,)
 
-[logger_osic-cloud1-disk_upload]
-level=DEBUG
-handlers=osic-cloud1-disk_upload
-qualname=nodepool.image.upload.osic-cloud1-disk
-propagate=0
-
-[handler_osic-cloud1-disk_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/osic-cloud1-disk.log', 'H', 8, 30,)
-
 [logger_tripleo-test-cloud-rh1_upload]
 level=DEBUG
 handlers=tripleo-test-cloud-rh1_upload
@@ -307,18 +267,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh1.log', 'H', 8, 30,)
-
-[logger_tripleo-test-cloud-rh2_upload]
-level=DEBUG
-handlers=tripleo-test-cloud-rh2_upload
-qualname=nodepool.image.upload.tripleo-test-cloud-rh2
-propagate=0
-
-[handler_tripleo-test-cloud-rh2_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh2.log', 'H', 8, 30,)
 
 [logger_infracloud-vanilla_upload]
 level=DEBUG
