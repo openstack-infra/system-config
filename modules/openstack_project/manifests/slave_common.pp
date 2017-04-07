@@ -17,6 +17,13 @@ class openstack_project::slave_common(
     url  => $project_config_repo,
   }
 
+  file { '/usr/local/jenkins':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
   file { '/usr/local/jenkins/common_data':
     ensure  => directory,
     owner   => 'root',
@@ -49,7 +56,7 @@ class openstack_project::slave_common(
     group   => 'jenkins',
     mode    => '0644',
     source  => 'puppet:///modules/openstack_project/pydistutils.cfg',
-    require => Class['jenkins::slave'],
+    require => Class['jenkins::jenkinsuser'],
   }
 
   if ($sudo == true) {
