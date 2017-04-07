@@ -3,11 +3,9 @@ copy_puppet: true
 manifest: /opt/system-config/production/manifests/site.pp
 manifest_base: /opt/system-config
 puppet_logdest: syslog
-puppet_report_as: puppetmaster.openstack.org
 
 puppet:
   logdest: syslog
-  report_as: puppetmaster.openstack.org
   copy_hieradata: true
   copy_puppet: true
   manifest: /opt/system-config/production/manifests/site.pp
