@@ -87,6 +87,7 @@ As of right now the following services publish messages to the firehose:
 .. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
 .. _logstash-output-mqtt: https://github.com/kompa3/logstash-output-mqtt
 
+For a full schema description see :ref:`firehose_schema`
 
 Client Usage
 ============

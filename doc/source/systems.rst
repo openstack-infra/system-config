@@ -40,6 +40,7 @@ Major Systems
    codesearch
    signing
    firehose
+   firehose_schema
    pholio
 
 .. NOTE(dhellmann): These projects were not listed above, or in any
