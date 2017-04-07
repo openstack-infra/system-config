@@ -31,12 +31,6 @@ class openstack_project::template (
   include openstack_project::params
   include openstack_project::users
 
-  class { 'ssh':
-    trusted_ssh_type   => 'address',
-    trusted_ssh_source => '23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072',
-    permit_root_login  => $permit_root_login,
-  }
-
   if ( $afs ) {
     $all_udp = concat(
       $iptables_public_udp_ports, [7001])
@@ -67,7 +61,6 @@ class openstack_project::template (
   class { 'timezone':
     timezone => 'Etc/UTC',
   }
-
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
@@ -175,50 +168,6 @@ class openstack_project::template (
     ensure   => $virtualenv_ensure,
     provider => openstack_pip,
     require  => Class['pip'],
-  }
-
-  ###########################################################
-  # Manage Root ssh
-
-  if ! defined(File['/root/.ssh']) {
-    file { '/root/.ssh':
-      ensure => directory,
-      mode   => '0700',
-    }
-  }
-
-  ssh_authorized_key { 'puppet-remote-2014-04-17':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-05-24':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-09-11':
-    ensure  => absent,
-    user    => 'root',
-  }
-
-  ssh_authorized_key { 'puppet-remote-2014-09-15':
-    ensure  => present,
-    user    => 'root',
-    type    => 'ssh-rsa',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
-    options => [
-      'from="23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,localhost"',
-    ],
-    require => File['/root/.ssh'],
-  }
-  ssh_authorized_key { '/root/.ssh/authorized_keys':
-    ensure  => absent,
-    user    => 'root',
-  }
-
-  file_line { 'ensure NoRoaming for ssh clients':
-    after => '^Host \*',
-    path  => '/etc/ssh/ssh_config',
-    line  => '    UseRoaming no',
   }
 
   ###########################################################
