@@ -174,7 +174,6 @@ node 'puppetmaster.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 node 'puppetdb.openstack.org' {
   $open_ports = [8081, 80]
@@ -290,7 +289,6 @@ node /^paste\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 # Node-OS: xenial
 node /planet\d*\.openstack\.org$/ {
@@ -1286,7 +1284,6 @@ node 'pbx.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
@@ -1405,7 +1402,6 @@ node 'openstackid-dev.openstack.org' {
   }
 }
 
-# Node-OS: precise
 # Node-OS: trusty
 # This is not meant to be an actual node that connects to the master.
 # This is a dummy node definition to trigger a test of the code path used by
@@ -1424,7 +1420,6 @@ node 'single-use-slave-bare' {
 # Node-OS: fedora24
 # Node-OS: fedora25
 # Node-OS: jessie
-# Node-OS: precise
 # Node-OS: trusty
 # Node-OS: xenial
 # This is not meant to be an actual node that connects to the master.
