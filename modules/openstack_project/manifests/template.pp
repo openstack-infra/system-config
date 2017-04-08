@@ -106,11 +106,6 @@ class openstack_project::template (
     require => Package['rsyslog'],
   }
 
-  # We don't like byobu
-  file { '/etc/profile.d/Z98-byobu.sh':
-    ensure => absent,
-  }
-
   if $::osfamily == 'Debian' {
 
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
@@ -126,15 +121,6 @@ class openstack_project::template (
       require => Package['rsyslog'],
     }
 
-    # Ubuntu installs their whoopsie package by default, but it eats through
-    # memory and we don't need it on servers
-    package { 'whoopsie':
-      ensure => absent,
-    }
-
-    package { 'popularity-contest':
-      ensure => absent,
-    }
   }
 
   ###########################################################
