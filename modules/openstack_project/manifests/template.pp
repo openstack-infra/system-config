@@ -30,7 +30,6 @@ class openstack_project::template (
   include snmpd
   include sudoers
 
-  include openstack_project::params
   include openstack_project::users
 
   class { 'ssh':

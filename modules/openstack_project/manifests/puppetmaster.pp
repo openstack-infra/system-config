@@ -13,7 +13,6 @@ class openstack_project::puppetmaster (
                                        },
 ) {
   include logrotate
-  include openstack_project::params
 
   class { '::ansible':
     ansible_hostfile    => '/etc/ansible/hosts',
