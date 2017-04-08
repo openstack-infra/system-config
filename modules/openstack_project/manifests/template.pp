@@ -274,15 +274,6 @@ class openstack_project::template (
       replace => true,
     }
 
-    file { '/etc/default/puppet':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/puppet.default',
-      replace => true,
-    }
-
   }
 
   if ($::operatingsystem == 'CentOS') {
@@ -319,11 +310,6 @@ class openstack_project::template (
   }
 
   $puppet_version = $pin_puppet
-
-  service { 'puppet':
-    ensure => stopped,
-    enable => false,
-  }
 
   ###########################################################
 
