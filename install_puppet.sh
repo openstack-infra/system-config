@@ -16,6 +16,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# NOTE(pabelanger): We now use the pip-and-virtualenv element from
+# diskimage-builder to do this. Default to true for backwards compatibility.
+SETUP_PIP=${SETUP_PIP:-true}
 
 #
 # Distro identification functions
@@ -87,13 +90,16 @@ function setup_puppet_fedora {
 
     mkdir -p /etc/puppet/modules/
 
-    # Puppet expects the pip command named as pip-python on
-    # Fedora, as per the packaged command name.  However, we're
-    # installing from get-pip.py so it's just 'pip'.  An easy
-    # work-around is to just symlink pip-python to "fool" it.
-    # See upstream issue:
-    #  https://tickets.puppetlabs.com/browse/PUP-1082
-    ln -fs /usr/bin/pip /usr/bin/pip-python
+    if $SETUP_PIP; then
+        # Puppet expects the pip command named as pip-python on
+        # Fedora, as per the packaged command name.  However, we're
+        # installing from get-pip.py so it's just 'pip'.  An easy
+        # work-around is to just symlink pip-python to "fool" it.
+        # See upstream issue:
+        #  https://tickets.puppetlabs.com/browse/PUP-1082
+        ln -fs /usr/bin/pip /usr/bin/pip-python
+    fi
+
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 
@@ -150,8 +156,11 @@ EOF
     rpm -ivh $puppet_pkg
     yum install -y puppet
 
-    # see comments in setup_puppet_fedora
-    ln -s /usr/bin/pip /usr/bin/pip-python
+    if $SETUP_PIP; then
+        # see comments in setup_puppet_fedora
+        ln -s /usr/bin/pip /usr/bin/pip-python
+    fi
+
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 
@@ -279,7 +288,9 @@ function setup_pip {
     pip install -U setuptools
 }
 
-setup_pip
+if $SETUP_PIP; then
+    setup_pip
+fi
 
 if is_fedora; then
     setup_puppet_fedora
