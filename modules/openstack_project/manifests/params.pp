@@ -7,7 +7,6 @@ class openstack_project::params {
     'RedHat': {
       $packages = ['parted', 'puppet', 'wget', 'iputils']
       $user_packages = ['emacs-nox', 'vim-enhanced']
-      $update_pkg_list_cmd = ''
       $login_defs = 'puppet:///modules/openstack_project/login.defs.redhat'
     }
     'Debian': {
@@ -21,7 +20,6 @@ class openstack_project::params {
           $user_packages = ['emacs-nox', 'vim-nox']
         }
       }
-      $update_pkg_list_cmd = 'apt-get update >/dev/null 2>&1;'
       $login_defs = 'puppet:///modules/openstack_project/login.defs.debian'
     }
     default: {
