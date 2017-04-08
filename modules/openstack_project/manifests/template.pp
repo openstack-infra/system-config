@@ -16,7 +16,6 @@ class openstack_project::template (
   $afs                       = false,
   $afs_cache_size            = 500000,
   $puppetmaster_server       = 'puppetmaster.openstack.org',
-  $manage_exim               = false,
   $sysadmins                 = [],
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $permit_root_login         = 'no',
@@ -77,12 +76,6 @@ class openstack_project::template (
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
-
-  if $manage_exim {
-    class { 'exim':
-      sysadmins => $sysadmins,
-    }
-  }
 
   if $automatic_upgrades == true {
     class { 'openstack_project::automatic_upgrades':
