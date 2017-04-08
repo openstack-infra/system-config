@@ -89,6 +89,10 @@ class openstack_project::server (
     }
   }
 
+  class { 'openstack_project::automatic_upgrades':
+    origins => ["Puppetlabs:${lsbdistcodename}"],
+  }
+
   include snmpd
 
   class { 'openstack_project::template':
