@@ -326,11 +326,6 @@ class openstack_project::template (
 
   $puppet_version = $pin_puppet
 
-  service { 'puppet':
-    ensure => stopped,
-    enable => false,
-  }
-
   ###########################################################
 
 }

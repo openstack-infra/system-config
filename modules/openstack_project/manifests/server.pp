@@ -110,6 +110,11 @@ class openstack_project::server (
     }
   }
 
+  service { 'puppet':
+    ensure => stopped,
+    enable => false,
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
