@@ -367,7 +367,7 @@ class openstack_project::template (
   }
 
   # Which Puppet do I take?
-  # Take $puppet_version and pin to that version
+  # Take $pin_puppet and pin to that version
   if ($::osfamily == 'Debian') {
     # NOTE(pabelanger): Puppetlabs only support Ubuntu Trusty and below,
     # anything greater will use the OS version of puppet.
@@ -458,8 +458,6 @@ class openstack_project::template (
     }
 
   }
-
-  $puppet_version = $pin_puppet
 
   service { 'puppet':
     ensure => stopped,
