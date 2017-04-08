@@ -183,12 +183,6 @@ class openstack_project::template (
     user    => 'root',
   }
 
-  file_line { 'ensure NoRoaming for ssh clients':
-    after => '^Host \*',
-    path  => '/etc/ssh/ssh_config',
-    line  => '    UseRoaming no',
-  }
-
   if ($::osfamily == 'Debian') {
     # NOTE(pabelanger): Puppetlabs only support Ubuntu Trusty and below,
     # anything greater will use the OS version of puppet.
