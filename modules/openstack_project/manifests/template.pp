@@ -326,12 +326,6 @@ class openstack_project::template (
     user    => 'root',
   }
 
-  file_line { 'ensure NoRoaming for ssh clients':
-    after => '^Host \*',
-    path  => '/etc/ssh/ssh_config',
-    line  => '    UseRoaming no',
-  }
-
   ###########################################################
   # Manage Puppet
   # possible TODO: break this into openstack_project::puppet
