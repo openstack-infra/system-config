@@ -6,13 +6,6 @@ class openstack_project::slave_common(
   $sudo         = false,
   $project_config_repo = '',
 ){
-  vcsrepo { '/opt/requirements':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack/requirements',
-  }
-
   class { 'project_config':
     url  => $project_config_repo,
   }
