@@ -93,6 +93,23 @@ class openstack_project::server (
     origins => ["Puppetlabs:${lsbdistcodename}"],
   }
 
+  # We don't like byobu
+  file { '/etc/profile.d/Z98-byobu.sh':
+    ensure => absent,
+  }
+
+  if $::osfamily == 'Debian' {
+    # Ubuntu installs their whoopsie package by default, but it eats through
+    # memory and we don't need it on servers
+    package { 'whoopsie':
+      ensure => absent,
+    }
+
+    package { 'popularity-contest':
+      ensure => absent,
+    }
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
