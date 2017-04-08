@@ -226,6 +226,11 @@ EOF
         --assume-yes install -y --force-yes puppet git $rubypkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+    if [ -f /bin/systemctl ]; then
+        systemctl disable puppet
+    else
+        service puppet disable
+    fi
 }
 
 function setup_puppet_opensuse {

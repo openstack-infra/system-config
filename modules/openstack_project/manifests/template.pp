@@ -227,16 +227,6 @@ class openstack_project::template (
       source  => 'puppet:///modules/openstack_project/90no-translations',
       replace => true,
     }
-
-    file { '/etc/default/puppet':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/puppet.default',
-      replace => true,
-    }
-
   }
 
   if ($::operatingsystem == 'CentOS') {
@@ -248,10 +238,6 @@ class openstack_project::template (
       source  => 'puppet:///modules/openstack_project/centos7-puppetlabs.repo',
       replace => true,
     }
-  }
-  service { 'puppet':
-    ensure => stopped,
-    enable => false,
   }
 
   ###########################################################
