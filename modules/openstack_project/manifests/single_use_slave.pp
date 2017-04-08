@@ -2,17 +2,13 @@
 #
 # This class configures single use Jenkins slaves with a few
 # toggleable options. Most importantly sudo rights for the Jenkins
-# user are by default off but can be enabled. Also, automatic_upgrades
-# are off by default as the assumption is the backing image for
-# this single use slaves will be refreshed with new packages
-# periodically.
+# user are by default off but can be enabled.
 class openstack_project::single_use_slave (
   $certname = $::fqdn,
   $install_users = true,
   $install_resolv_conf = true,
   $sudo = false,
   $thin = true,
-  $automatic_upgrades = false,
   $all_mysql_privs = false,
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
@@ -21,7 +17,6 @@ class openstack_project::single_use_slave (
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname                  => $certname,
-    automatic_upgrades        => $automatic_upgrades,
     install_users             => $install_users,
     install_resolv_conf       => $install_resolv_conf,
     permit_root_login         => 'yes',

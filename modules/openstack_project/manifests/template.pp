@@ -10,7 +10,6 @@ class openstack_project::template (
   $pin_puppet                = '3.',
   $install_users             = true,
   $install_resolv_conf       = true,
-  $automatic_upgrades        = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
   $afs                       = false,
@@ -73,15 +72,6 @@ class openstack_project::template (
     timezone => 'Etc/UTC',
   }
 
-
-  ###########################################################
-  # Process if ( $high_level_directive ) blocks
-
-  if $automatic_upgrades == true {
-    class { 'openstack_project::automatic_upgrades':
-      origins => ["Puppetlabs:${lsbdistcodename}"],
-    }
-  }
 
   class {'openstack_project::users_install':
     install_users => $install_users
