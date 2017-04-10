@@ -203,6 +203,11 @@ EOF
         fi
         dpkg -i $puppet_deb
         rm $puppet_deb
+
+        # ansible also requires python2 on the host to run correctly.
+        # Make sure we have it, as some images come without it
+        DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
+            --assume-yes install python-minimal
     fi;
 
     apt-get update
