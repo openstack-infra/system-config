@@ -332,24 +332,6 @@ class openstack_project::template (
     line  => '    UseRoaming no',
   }
 
-  ###########################################################
-  # Manage Puppet
-  # possible TODO: break this into openstack_project::puppet
-
-  case $pin_puppet {
-    '2.7.': {
-      $pin_facter = '1.'
-      $pin_puppetdb = '1.'
-    }
-    /^3\./: {
-      $pin_facter = '2.'
-      $pin_puppetdb = '2.'
-    }
-    default: {
-      fail("Puppet version not supported")
-    }
-  }
-
   if ($::operatingsystem == 'Fedora') {
 
     package { 'hiera':
@@ -366,8 +348,6 @@ class openstack_project::template (
 
   }
 
-  # Which Puppet do I take?
-  # Take $puppet_version and pin to that version
   if ($::osfamily == 'Debian') {
     # NOTE(pabelanger): Puppetlabs only support Ubuntu Trusty and below,
     # anything greater will use the OS version of puppet.
@@ -406,15 +386,6 @@ class openstack_project::template (
       replace => true,
     }
 
-    file { '/etc/apt/preferences.d/00-puppet.pref':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      content => template('openstack_project/00-puppet.pref.erb'),
-      replace => true,
-    }
-
     file { '/etc/default/puppet':
       ensure  => present,
       owner   => 'root',
@@ -436,9 +407,6 @@ class openstack_project::template (
       replace => true,
     }
   }
-
-  $puppet_version = $pin_puppet
-
   service { 'puppet':
     ensure => stopped,
     enable => false,
