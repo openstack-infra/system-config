@@ -74,6 +74,16 @@ class openstack_project::server (
     }
   }
 
+  ###########################################################
+  # Process if ( $high_level_directive ) blocks
+
+  if ($enable_unbound) {
+    class { 'unbound':
+      install_resolv_conf => $install_resolv_conf
+    }
+  }
+
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
@@ -83,7 +93,6 @@ class openstack_project::server (
     pin_puppet                => $pin_puppet,
     ca_server                 => $ca_server,
     puppetmaster_server       => $puppetmaster_server,
-    enable_unbound            => $enable_unbound,
     afs                       => $afs,
     afs_cache_size            => $afs_cache_size,
     manage_exim               => $manage_exim,
