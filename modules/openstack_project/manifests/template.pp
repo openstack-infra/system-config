@@ -239,22 +239,6 @@ class openstack_project::template (
     }
   }
 
-  if ($::operatingsystem == 'Fedora') {
-
-    package { 'hiera':
-      ensure   => latest,
-      provider => 'gem',
-    }
-
-    exec { 'symlink hiera modules' :
-      command     => 'ln -s /usr/local/share/gems/gems/hiera-puppet-* /etc/puppet/modules/',
-      path        => '/bin:/usr/bin',
-      subscribe   => Package['hiera'],
-      refreshonly => true,
-    }
-
-  }
-
   # Which Puppet do I take?
   # Take $puppet_version and pin to that version
   if ($::osfamily == 'Debian') {
