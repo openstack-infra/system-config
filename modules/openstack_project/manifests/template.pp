@@ -317,36 +317,14 @@ class openstack_project::template (
   }
 
   if ($::operatingsystem == 'CentOS') {
-    if ($::operatingsystemmajrelease == '6') {
-      $puppet_repo_source_path =
-        'puppet:///modules/openstack_project/centos6-puppetlabs.repo'
-      $custom_cgit = present
-    } elsif ($::operatingsystemmajrelease == '7') {
-      $puppet_repo_source_path =
-        'puppet:///modules/openstack_project/centos7-puppetlabs.repo'
-      $custom_cgit = absent
-    }
     file { '/etc/yum.repos.d/puppetlabs.repo':
       ensure  => present,
       owner   => 'root',
       group   => 'root',
       mode    => '0444',
-      source  => $puppet_repo_source_path,
+      source  => 'puppet:///modules/openstack_project/centos7-puppetlabs.repo',
       replace => true,
     }
-
-    # This git package includes a small work-around for slow https
-    # cloning performance, as discussed in redhat bz#1237395.  Should
-    # be fixed in 6.8
-    file { '/etc/yum.repos.d/git-1237395.repo':
-      ensure  => $custom_cgit,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/git-1237395.repo',
-      replace => true,
-    }
-
   }
 
   $puppet_version = $pin_puppet

@@ -1,8 +1,0 @@
-[iwienand-git-1237395]
-name=Copr repo for git-1237395 owned by iwienand
-baseurl=https://copr-be.cloud.fedoraproject.org/results/iwienand/git-1237395/epel-6-$basearch/
-skip_if_unavailable=True
-gpgcheck=1
-gpgkey=https://copr-be.cloud.fedoraproject.org/results/iwienand/git-1237395/pubkey.gpg
-enabled=1
-enabled_metadata=1
