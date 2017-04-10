@@ -7,6 +7,8 @@ class openstack_project::template (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
+  $snmp_v4hosts              = [],
+  $snmp_v6hosts              = [],
   $pin_puppet                = '3.',
   $install_users             = true,
   $install_resolv_conf       = true,
@@ -24,8 +26,6 @@ class openstack_project::template (
 
   ###########################################################
   # Classes for all hosts
-
-  include snmpd
   include sudoers
 
   include openstack_project::params
@@ -60,14 +60,8 @@ class openstack_project::template (
     public_udp_ports => $all_udp,
     rules4           => $iptables_rules4,
     rules6           => $iptables_rules6,
-    snmp_v4hosts     => [
-      '104.239.135.208',
-      '104.130.253.206',
-    ],
-    snmp_v6hosts     => [
-      '2001:4800:7819:104:be76:4eff:fe05:1d6a',
-      '2001:4800:7818:103:be76:4eff:fe04:7ed0',
-    ],
+    snmp_v4hosts     => $snmp_v4hosts,
+    snmp_v6hosts     => $snmp_v6hosts,
   }
 
   class { 'timezone':
