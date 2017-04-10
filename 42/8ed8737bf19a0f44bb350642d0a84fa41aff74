@@ -1,0 +1,11 @@
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 10 Apr 2017 00:05:15 +0000
+Reviewed-on: https://review.openstack.org/452604
+Project: openstack-infra/system-config
+Branch: refs/heads/master
