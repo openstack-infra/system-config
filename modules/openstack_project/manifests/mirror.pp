@@ -89,13 +89,7 @@ class openstack_project::mirror (
 
   # Create the symlink to rdo
   file { "${www_root}/rdo":
-    ensure  => link,
-    target  => "${mirror_root}/rdo",
-    owner   => root,
-    group   => root,
-    require => [
-      File["${www_root}"],
-    ]
+    ensure  => absent,
   }
 
   # Create the symlink to epel
