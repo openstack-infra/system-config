@@ -101,6 +101,10 @@ class openstack_project::template (
     }
   }
 
+  package { 'rsyslog':
+    ensure => present,
+  }
+
   if ($::in_chroot) {
     notify { 'rsyslog in chroot':
       message => 'rsyslog not refreshed, running in chroot',
@@ -160,59 +164,6 @@ class openstack_project::template (
 
     package { 'popularity-contest':
       ensure => absent,
-    }
-  }
-
-  ###########################################################
-  # Package resources for all operating systems
-
-  package { 'at':
-    ensure => present,
-  }
-
-  package { 'lvm2':
-    ensure => present,
-  }
-
-  package { 'strace':
-    ensure => present,
-  }
-
-  package { 'tcpdump':
-    ensure => present,
-  }
-
-  package { 'rsyslog':
-    ensure => present,
-  }
-
-  package { 'git':
-    ensure => present,
-  }
-
-  package { 'rsync':
-    ensure => present,
-  }
-
-  package { $::openstack_project::params::packages:
-    ensure => present
-  }
-
-  ###########################################################
-  # Package resources for specific operating systems
-
-  case $::osfamily {
-    'Debian': {
-      # Make sure dig is installed
-      package { 'dnsutils':
-        ensure => present,
-      }
-    }
-    'RedHat': {
-      # Make sure dig is installed
-      package { 'bind-utils':
-        ensure => present,
-      }
     }
   }
 
