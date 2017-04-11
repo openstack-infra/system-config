@@ -119,7 +119,7 @@ results. */
 .result_SUCCESS {
     color: #007f00;
 }
-.result_FAILURE {
+.result_FAILURE, .result_POST_FAILURE {
     color: #cf2f19;
 }
 .result_UNSTABLE, .result_WARNING {
