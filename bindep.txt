@@ -1,4 +1,5 @@
 libffi-dev [platform:dpkg]
 libffi-devel [platform:rpm]
+libselinux-python [platform:rpm]
 libssl-dev [platform:dpkg]
 openssl-devel [platform:rpm]
