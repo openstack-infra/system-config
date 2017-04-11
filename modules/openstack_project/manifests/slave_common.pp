@@ -4,43 +4,12 @@
 # openstack_project::single_use_slave
 class openstack_project::slave_common(
   $sudo         = false,
-  $project_config_repo = '',
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
     provider => git,
     revision => 'master',
     source   => 'https://git.openstack.org/openstack/requirements',
-  }
-
-  class { 'project_config':
-    url  => $project_config_repo,
-  }
-
-  file { '/usr/local/jenkins/common_data':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => [File['/usr/local/jenkins'],
-                $::project_config::config_dir],
-    source  => $::project_config::jenkins_data_dir,
-  }
-
-  file { '/usr/local/jenkins/slave_scripts':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => true,
-    purge   => true,
-    force   => true,
-    require => [File['/usr/local/jenkins'],
-                $::project_config::config_dir],
-    source  => $::project_config::jenkins_scripts_dir,
   }
 
   file { '/home/jenkins/.pydistutils.cfg':
