@@ -900,7 +900,7 @@ node 'nodepool.openstack.org' {
     user        => 'nodepool',
     hour        => '20',
     minute      => '0',
-    command     => 'find /opt/dib_cache/source-repositories/ -type d -name "*.git" -exec git --git-dir="{}" gc \; >/dev/null',
+    command     => 'find /opt/dib_cache/source-repositories/ -maxdepth 1 -type d -name "*.git" -exec git --git-dir="{}" gc \; >/dev/null',
     environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
     require     => Class['::openstackci::nodepool'],
   }
