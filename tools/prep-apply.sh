@@ -81,5 +81,5 @@ sudo ln -sf $(pwd) /opt/system-config/production
 sudo ln -sf /opt/system-config/production/modules/openstack_project /etc/puppet/modules
 sudo -H mkdir -p ~/.ansible/tmp
 
-virtualenv --system-site-packages /tmp/apply-ansible-env
+virtualenv --system-site-packages --python /usr/bin/python2.7 /tmp/apply-ansible-env
 /tmp/apply-ansible-env/bin/pip install ansible
