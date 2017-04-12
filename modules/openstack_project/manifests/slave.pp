@@ -73,6 +73,13 @@ class openstack_project::slave (
     source  => $::project_config::jenkins_scripts_dir,
   }
 
+  # needed by jenkins/jobs
+  if ! defined(Package['curl']) {
+    package { 'curl':
+      ensure => present,
+    }
+  }
+
   class { 'openstack_project::slave_common': }
 
   if (! $thin) {
