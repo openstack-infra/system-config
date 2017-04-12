@@ -57,9 +57,7 @@ class openstack_project::single_use_slave (
     require  => Class[pip],
   }
 
-  class { 'openstack_project::slave_common':
-    sudo                => $sudo,
-  }
+  class { 'openstack_project::slave_common': }
 
   if (! $thin) {
     notice("The openstack_project::single_use_slave::thin parameter has no effect.")
