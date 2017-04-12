@@ -8,7 +8,6 @@ class openstack_project::single_use_slave (
   $install_users = true,
   $install_resolv_conf = true,
   $sudo = false,
-  $thin = true,
   $all_mysql_privs = false,
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
@@ -61,7 +60,4 @@ class openstack_project::single_use_slave (
     sudo                => $sudo,
   }
 
-  if (! $thin) {
-    notice("The openstack_project::single_use_slave::thin parameter has no effect.")
-  }
 }
