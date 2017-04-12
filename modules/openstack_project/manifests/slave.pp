@@ -73,6 +73,15 @@ class openstack_project::slave (
     source  => $::project_config::jenkins_scripts_dir,
   }
 
+  file { '/home/jenkins/.pydistutils.cfg':
+    ensure  => present,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    mode    => '0644',
+    source  => 'puppet:///modules/openstack_project/pydistutils.cfg',
+    require => Class['jenkins::jenkinsuser'],
+  }
+
   class { 'openstack_project::slave_common': }
 
   if (! $thin) {
