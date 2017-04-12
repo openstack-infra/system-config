@@ -42,8 +42,5 @@ class openstack_project::single_use_slave (
     gitemail    => $jenkins_gitemail,
   }
 
-  class { 'openstack_project::slave_common':
-    sudo                => $sudo,
-  }
-
+  class { 'openstack_project::slave_common': }
 }
