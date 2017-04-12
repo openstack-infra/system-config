@@ -44,19 +44,6 @@ class openstack_project::single_use_slave (
     gitemail    => $jenkins_gitemail,
   }
 
-  package { 'tox':
-    ensure   => 'latest',
-    provider => openstack_pip,
-    require  => Class[pip],
-  }
-
-  # TODO(fungi): switch jobs to use /usr/git-review-env/bin/git-review
-  package { 'git-review':
-    ensure   => '1.25.0',
-    provider => openstack_pip,
-    require  => Class[pip],
-  }
-
   class { 'openstack_project::slave_common':
     sudo                => $sudo,
   }
