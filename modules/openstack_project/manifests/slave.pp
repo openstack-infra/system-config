@@ -86,4 +86,24 @@ class openstack_project::slave (
     include openstack_project::thick_slave
   }
 
+  vcsrepo { '/opt/zuul':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/zuul.git',
+  }
+
+  python::virtualenv { '/usr/zuul-env':
+    ensure       => present,
+    owner        => 'root',
+    group        => 'root',
+    timeout      => 0,
+  }
+
+  exec { 'zuul-env-update':
+    command     => '/usr/zuul-env/bin/pip --log /usr/zuul-env/pip.log install /opt/zuul',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/zuul'],
+    require     => Python::Virtualenv['/usr/zuul-env'],
+  }
 }
