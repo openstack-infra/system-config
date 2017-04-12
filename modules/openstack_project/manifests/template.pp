@@ -155,19 +155,6 @@ class openstack_project::template (
     }
   }
 
-  ssh_authorized_key { 'puppet-remote-2014-04-17':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-05-24':
-    ensure  => absent,
-    user    => 'root',
-  }
-  ssh_authorized_key { 'puppet-remote-2014-09-11':
-    ensure  => absent,
-    user    => 'root',
-  }
-
   ssh_authorized_key { 'puppet-remote-2014-09-15':
     ensure  => present,
     user    => 'root',
@@ -177,10 +164,6 @@ class openstack_project::template (
       'from="23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,localhost"',
     ],
     require => File['/root/.ssh'],
-  }
-  ssh_authorized_key { '/root/.ssh/authorized_keys':
-    ensure  => absent,
-    user    => 'root',
   }
 
   if ($::osfamily == 'Debian') {
