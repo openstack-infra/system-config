@@ -13,7 +13,6 @@ class openstack_project::single_use_slave (
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
-  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
 ) inherits openstack_project {
   class { 'openstack_project::template':
     certname                  => $certname,
@@ -45,15 +44,6 @@ class openstack_project::single_use_slave (
     gitemail    => $jenkins_gitemail,
   }
 
-  # NOTE(pabelanger): We need to create this directory here, since slave.pp also
-  # creates it.  Moving forward, this will be moved into DIB.
-  file { '/usr/local/jenkins':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
-
   package { 'tox':
     ensure   => 'latest',
     provider => openstack_pip,
@@ -67,10 +57,8 @@ class openstack_project::single_use_slave (
     require  => Class[pip],
   }
 
-
   class { 'openstack_project::slave_common':
     sudo                => $sudo,
-    project_config_repo => $project_config_repo,
   }
 
   if (! $thin) {
