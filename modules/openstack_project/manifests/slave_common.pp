@@ -5,13 +5,6 @@
 class openstack_project::slave_common(
   $sudo         = false,
 ){
-  vcsrepo { '/opt/requirements':
-    ensure   => latest,
-    provider => git,
-    revision => 'master',
-    source   => 'https://git.openstack.org/openstack/requirements',
-  }
-
   file { '/home/jenkins/.pydistutils.cfg':
     ensure  => present,
     owner   => 'jenkins',
