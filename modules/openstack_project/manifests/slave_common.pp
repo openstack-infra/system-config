@@ -5,15 +5,6 @@
 class openstack_project::slave_common(
   $sudo         = false,
 ){
-  file { '/home/jenkins/.pydistutils.cfg':
-    ensure  => present,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/pydistutils.cfg',
-    require => Class['jenkins::jenkinsuser'],
-  }
-
   if ($sudo == true) {
     file { '/etc/sudoers.d/jenkins-sudo':
       ensure => present,
