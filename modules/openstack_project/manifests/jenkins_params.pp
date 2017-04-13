@@ -92,6 +92,7 @@ class openstack_project::jenkins_params {
       $swig = "swig"
       $libjpeg_dev = "libjpeg-turbo-devel"
       $zlib_dev = "zlib-devel"
+      $systemd_journal_dev = 'systemd-devel'
     }
     'Debian': {
       # packages needed by slaves
@@ -175,6 +176,7 @@ class openstack_project::jenkins_params {
       $libjpeg_dev = "libjpeg-dev"
       $zlib_dev = "zlib1g-dev"
       $nss_devel = 'libnss3-dev'
+      $systemd_journal_dev = 'libsystemd-journal-dev'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
