@@ -48,6 +48,7 @@ class openstack_project::thick_slave(
     $::openstack_project::jenkins_params::libjpeg_dev, # for sphinx Pillow dep
     $::openstack_project::jenkins_params::zlib_dev, # for sphinx Pillow dep
     $::openstack_project::jenkins_params::nss_devel, # for python-nss
+    $::openstack_project::jenkins_params::systemd_journal_dev, # for systemd-python
   ]
 
   package { $packages:
