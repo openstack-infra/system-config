@@ -425,3 +425,76 @@ place for Apache on these hosts.  This avoids management overheads of
 a completely new service deployment such as Squid or a caching docker
 registry daemon.
 
+No Outage Server Maintenance
+----------------------------
+
+afsdb0X.openstack.org
+~~~~~~~~~~~~~~~~~~~~~
+
+We have redundant AFS DB servers. You can take one down without causing
+a service outage as long as the other remains up. To do this safely::
+
+  root@afsdb01:~# bos shutdown afsdb02.openstack.org -localauth
+  root@afsdb01:~# bos status afsdb02.openstack.org -localauth
+  Instance ptserver, temporarily disabled, currently shutdown.
+  Instance vlserver, temporarily disabled, currently shutdown.
+
+Then perform your maintenance on afsdb02. When done a reboot will
+automatically restart the bos service or you can manually restart
+the openafs-fileserver service::
+
+  root@afsdb02:~# service openafs-fileserver start
+
+Finally check that the service is back up and running::
+
+  root@afsdb01:~# bos status afsdb02.openstack.org -localauth
+  Instance ptserver, currently running normally.
+  Instance vlserver, currently running normally.
+
+Now you can repeat the process against afsdb01 from afsdb02.
+
+afs0X.openstack.org
+~~~~~~~~~~~~~~~~~~~
+
+Taking down the actual fileservers is slightly more complicated
+but works similarly. Basically what we need to do is make sure that
+either no one needs the RW volumes hosted by a fileserver before
+taking it down or move the RW volume to another fileserver.
+
+To ensure nothing needs the RW volumes you can hold the various
+file locks on hosts that publish to AFS and/or remove cron entries
+that perform vos releases or volume writes.
+
+If instead you need to move the RW volume first step is checking
+where the volumes live::
+
+  root@afsdb01:~# vos listvldb -localauth
+  VLDB entries for all servers
+
+  mirror
+      RWrite: 536870934     ROnly: 536870935
+      number of sites -> 3
+         server afs01.dfw.openstack.org partition /vicepa RW Site
+         server afs01.dfw.openstack.org partition /vicepa RO Site
+         server afs01.ord.openstack.org partition /vicepa RO Site
+
+We see that if we want to allow write to the mirror volume and take
+down afs01.dfw.openstack.org we will have to move the volume to one
+of the other servers::
+
+  root@afsdb01:~# vos move -id mirro -toserver afs01.ord.openstack.org -topartition vicepa -fromserver afs01.dfw.openstack.org -frompartition vicepa -localauth
+
+When that is done (use listvldb command above to check) it is now safe
+to take down afs01.dfw.openstack.org while having writers to the mirror
+volume. We use the same process as for the db server::
+
+  root@afsdb01:~# bos shutdown afs01.dfw.openstack.org -localauth
+  root@afsdb01:~# bos status afsdb01.dfw.openstack.org -localauth
+  Instance ptserver, temporarily disabled, currently shutdown.
+  Instance vlserver, temporarily disabled, currently shutdown.
+
+Perform maintenance, then restart as above and check the status again::
+
+  root@afsdb01:~# bos status afsdb01.dfw.openstack.org -localauth
+  Instance ptserver, currently running normally.
+  Instance vlserver, currently running normally.
