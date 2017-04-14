@@ -97,3 +97,25 @@ should be capitalized.
 Then save the principal's keytab::
 
   kadmin: ktadd -k /path/to/$NAME.keytab service/$NAME@OPENSTACK.ORG
+
+No Service Outage Server Maintenance
+------------------------------------
+
+Should you need perform maintenance on the kerberos server that requires
+taking kerberos processes offline you can do this by performing your
+updates on a single server at a time.
+
+`kdc01.openstack.org` is our primary server and `kdc02.openstack.org`
+is the hot standby. Perform your maintenance on `kdc02.openstack.org`
+first. Then once that is done we can prepare for taking down the
+primary. On `kdc01.openstack.org` run::
+
+  root@kdc01:~# /usr/local/bin/run-kprop.sh
+
+You should see::
+
+  Database propagation to kdc02.openstack.org: SUCCEEDED
+
+Once this is done the standby server is ready and we can take kdc01
+offline. When kdc01 is back online rerun `run-kprop.sh` to ensure
+everything is working again.
