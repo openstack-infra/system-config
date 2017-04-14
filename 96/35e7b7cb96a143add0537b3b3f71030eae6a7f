@@ -1,0 +1,10 @@
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 14 Apr 2017 18:49:46 +0000
+Reviewed-on: https://review.openstack.org/437154
+Project: openstack-infra/system-config
+Branch: refs/heads/master
