@@ -86,33 +86,15 @@ clouds:
     profiles:
       - openstackci-security
 
-  # osic-cloud8
-  - name: openstackci-osic-cloud8
-    profiles:
-      - openstackci-security
-  - name: openstackzuul-osic-cloud8
-    profiles:
-      - openstackci-security
-
   # internap
   - name: openstackci-internap-mtl01
     oscc_cloud: openstackci-internap
     region_name: mtl01
     profiles:
       - openstackci-security
-  - name: openstackci-internap-nyj01
-    oscc_cloud: openstackci-internap
-    region_name: nyj01
-    profiles:
-      - openstackci-security
   - name: openstackjenkins-internap-mtl01
     oscc_cloud: openstackjenkins-internap
     region_name: mtl01
-    profiles:
-      - openstackci-security
-  - name: openstackjenkins-internap-nyj01
-    oscc_cloud: openstackjenkins-internap
-    region_name: nyj01
     profiles:
       - openstackci-security
 
