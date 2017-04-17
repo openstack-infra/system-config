@@ -32,13 +32,6 @@ class openstack_project::slave_common(
     mode   => '0440',
   }
 
-  # needed by jenkins/jobs
-  if ! defined(Package['curl']) {
-    package { 'curl':
-      ensure => present,
-    }
-  }
-
   vcsrepo { '/opt/zuul':
     ensure   => latest,
     provider => git,
