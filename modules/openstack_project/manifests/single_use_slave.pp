@@ -34,7 +34,6 @@ class openstack_project::single_use_slave (
   }
 
   include ::haveged
-  include ::pip
 
   class { '::jenkins::jenkinsuser':
     ssh_key     => $ssh_key,

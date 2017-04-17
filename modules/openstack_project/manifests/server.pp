@@ -112,6 +112,29 @@ class openstack_project::server (
     }
   }
 
+  ###########################################################
+  # Manage  python/pip
+
+  $desired_virtualenv = '13.1.0'
+  class { '::pip':
+    index_url       => $pypi_index_url,
+    optional_settings => {
+      'extra-index-url' => '',
+    },
+    manage_pip_conf => true,
+  }
+
+  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
+    $virtualenv_ensure = $desired_virtualenv
+  } else {
+    $virtualenv_ensure = present
+  }
+  package { 'virtualenv':
+    ensure   => $virtualenv_ensure,
+    provider => openstack_pip,
+    require  => Class['pip'],
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
@@ -132,7 +155,6 @@ class openstack_project::server (
     afs                       => $afs,
     afs_cache_size            => $afs_cache_size,
     sysadmins                 => $sysadmins,
-    pypi_index_url            => $pypi_index_url,
   }
 
 }
