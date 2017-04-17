@@ -11,6 +11,7 @@ profiles:
       - name: openstackzuul
         description: OpenStack zuul project
         domain: default
+
   - name: openstackci-security
     security_groups:
       - name: default
@@ -30,6 +31,8 @@ profiles:
       - security_group: default
         ethertype: IPv6
         remote_ip_prefix: ::/0
+
+  - name: openstackci-keypairs
     keypairs:
       - name: infra-root-keys
         public_key: |
@@ -45,20 +48,24 @@ profiles:
         ram: 8192
         vcpus: 4
         disk: 100
+
   - name: openstackci-images
     images:
       - name: ubuntu-trusty
         download_image_url: https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
         download_image_dest: /tmp/ubuntu-trusty.img
         filename: /tmp/ubuntu-trusty.img
+
   - name: admin-roles
     roles:
       - name: Member
+
   - name: openstackci-user-roles
     user_roles:
       - role: Member
         user: openstackci
         project: openstackci
+
   - name: openstackzuul-user-roles
     user_roles:
       - role: Member
@@ -73,17 +80,22 @@ clouds:
       - openstackci-flavors
   - name: openstackci-bluebox
     profiles:
+      - openstackci-keypairs
       - openstackci-security
   - name: openstackzuul-bluebox
     profiles:
+      - openstackci-keypairs
       - openstackci-security
 
   # osic-cloud1
   - name: openstackci-osic-cloud1
     profiles:
+      - openstackci-keypairs
       - openstackci-security
+
   - name: openstackjenkins-osic-cloud1
     profiles:
+      - openstackci-keypairs
       - openstackci-security
 
   # internap
@@ -91,19 +103,55 @@ clouds:
     oscc_cloud: openstackci-internap
     region_name: mtl01
     profiles:
+      - openstackci-keypairs
       - openstackci-security
   - name: openstackjenkins-internap-mtl01
     oscc_cloud: openstackjenkins-internap
     region_name: mtl01
     profiles:
+      - openstackci-keypairs
       - openstackci-security
+
+  # rackspace
+  - name: openstackci-rax-dfw
+    oscc_cloud: openstackci-rax
+    region_name: dfw
+    profiles:
+      - openstackci-keypairs
+  - name: openstackjenkins-rax-dfw
+    oscc_cloud: openstackjenkins-rax
+    region_name: dfw
+    profiles:
+      - openstackci-keypairs
+  - name: openstackci-rax-ord
+    oscc_cloud: openstackci-rax
+    region_name: ord
+    profiles:
+      - openstackci-keypairs
+  - name: openstackjenkins-rax-ord
+    oscc_cloud: openstackjenkins-rax
+    region_name: ord
+    profiles:
+      - openstackci-keypairs
+  - name: openstackci-rax-iad
+    oscc_cloud: openstackci-rax
+    region_name: iad
+    profiles:
+      - openstackci-keypairs
+  - name: openstackjenkins-rax-iad
+    oscc_cloud: openstackjenkins-rax
+    region_name: iad
+    profiles:
+      - openstackci-keypairs
 
   # tripleo-test-cloud-rh1
   - name: openstackci-tripleo-test-cloud-rh1
     profiles:
+      - openstackci-keypairs
       - openstackci-security
   - name: openstackzuul-tripleo-test-cloud-rh1
     profiles:
+      - openstackci-keypairs
       - openstackci-security
 
   # infracloud-vanilla
@@ -116,10 +164,12 @@ clouds:
       - openstackzuul-user-roles
   - name: openstackci-infracloud-vanilla
     profiles:
+      - openstackci-keypairs
       - openstackci-security
       - openstackci-images
   - name: openstackzuul-infracloud-vanilla
     profiles:
+      - openstackci-keypairs
       - openstackci-security
 
   # infracloud-chocolate
@@ -132,8 +182,10 @@ clouds:
       - openstackzuul-user-roles
   - name: openstackci-infracloud-chocolate
     profiles:
+      - openstackci-keypairs
       - openstackci-security
       - openstackci-images
   - name: openstackzuul-infracloud-chocolate
     profiles:
+      - openstackci-keypairs
       - openstackci-security
