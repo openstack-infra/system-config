@@ -97,8 +97,6 @@ class openstack_project::slave (
     require => Class['jenkins::jenkinsuser'],
   }
 
-  class { 'openstack_project::slave_common': }
-
   if (! $thin) {
     include openstack_project::thick_slave
   }

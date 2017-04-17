@@ -40,6 +40,4 @@ class openstack_project::single_use_slave (
     gitfullname => $jenkins_gitfullname,
     gitemail    => $jenkins_gitemail,
   }
-
-  class { 'openstack_project::slave_common': }
 }
