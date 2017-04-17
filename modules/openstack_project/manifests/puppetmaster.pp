@@ -28,6 +28,17 @@ class openstack_project::puppetmaster (
     require => Class['ansible'],
   }
 
+  cron { 'updatecloudlauncher':
+    user        => 'root',
+    minute      => '0',
+    hour        => '*/1'
+    monthday    => '*',
+    month       => '*',
+    weekday     => '*',
+    command     => 'flock -n /var/run/puppet/puppet_run_cloud_launcher.lock bash /opt/system-config/production/run_cloud_launcher.sh >> /var/log/puppet_run_cloud_launcher_cron.log 2>&1',
+    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => $puppetmaster_update_cron_interval[min],
