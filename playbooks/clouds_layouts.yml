@@ -98,6 +98,38 @@ clouds:
     profiles:
       - openstackci-security
 
+  # rackspace
+  - name: openstackci-rax-dfw
+    oscc_cloud: openstackci-rax
+    region_name: dfw
+    profiles:
+      - openstackci-security
+  - name: openstackjenkins-rax-dfw
+    oscc_cloud: openstackjenkins-rax
+    region_name: dfw
+    profiles:
+      - openstackci-security
+  - name: openstackci-rax-ord
+    oscc_cloud: openstackci-rax
+    region_name: ord
+    profiles:
+      - openstackci-security
+  - name: openstackjenkins-rax-ord
+    oscc_cloud: openstackjenkins-rax
+    region_name: ord
+    profiles:
+      - openstackci-security
+  - name: openstackci-rax-iad
+    oscc_cloud: openstackci-rax
+    region_name: iad
+    profiles:
+      - openstackci-security
+  - name: openstackjenkins-rax-iad
+    oscc_cloud: openstackjenkins-rax
+    region_name: iad
+    profiles:
+      - openstackci-security
+
   # tripleo-test-cloud-rh1
   - name: openstackci-tripleo-test-cloud-rh1
     profiles:
