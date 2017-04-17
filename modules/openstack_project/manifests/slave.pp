@@ -34,6 +34,14 @@ class openstack_project::slave (
     gerritkey    => $jenkins_gerritkey,
   }
 
+  file { '/etc/sudoers.d/jenkins-sudo-grep':
+    ensure => present,
+    source => 'puppet:///modules/openstack_project/jenkins-sudo-grep.sudo',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0440',
+  }
+
   include jenkins::cgroups
   include ulimit
   ulimit::conf { 'limit_jenkins_procs':
