@@ -25,7 +25,7 @@ EOF
 echo "##" > $fileout
 cat $file > $fileout
 export ANSIBLE_CONFIG=$ansible_root/ansible.cfg
-sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -f1 --limit localhost playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout
+sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -i localhost -f1 --limit localhost playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout
 ret=$?
 if [ $ret -ne 0 ]; then
     mv $fileout $fileout.FAILED
