@@ -7,13 +7,13 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
   ServerName <%= @srvname %>
 
   RewriteEngine On
-RewriteRule ^/jenkins-job-builder(/.*|$) http://docs.openstack.org/infra/jenkins-job-builder$1 [last,redirect=permanent]
-  RewriteRule ^/nodepool(/.*|$) http://docs.openstack.org/infra/nodepool$1 [last,redirect=permanent]
-  RewriteRule ^/openstackid(/.*|$) http://docs.openstack.org/infra/openstackid$1 [last,redirect=permanent]
-  RewriteRule ^/shade(/.*|$) http://docs.openstack.org/infra/shade$1 [last,redirect=permanent]
-  RewriteRule ^/storyboard(/.*|$) http://docs.openstack.org/infra/storyboard$1 [last,redirect=permanent]
-  RewriteRule ^/zuul(/.*|$) http://docs.openstack.org/infra/zuul$1 [last,redirect=permanent]
-  RewriteRule ^/(.*) http://docs.openstack.org/infra/system-config/$1 [last,redirect=permanent]
+RewriteRule ^/jenkins-job-builder(/.*|$) https://docs.openstack.org/infra/jenkins-job-builder$1 [last,redirect=permanent]
+  RewriteRule ^/nodepool(/.*|$) https://docs.openstack.org/infra/nodepool$1 [last,redirect=permanent]
+  RewriteRule ^/openstackid(/.*|$) https://docs.openstack.org/infra/openstackid$1 [last,redirect=permanent]
+  RewriteRule ^/shade(/.*|$) https://docs.openstack.org/infra/shade$1 [last,redirect=permanent]
+  RewriteRule ^/storyboard(/.*|$) https://docs.openstack.org/infra/storyboard$1 [last,redirect=permanent]
+  RewriteRule ^/zuul(/.*|$) https://docs.openstack.org/infra/zuul$1 [last,redirect=permanent]
+  RewriteRule ^/(.*) https://docs.openstack.org/infra/system-config/$1 [last,redirect=permanent]
 
   ErrorLog /var/log/apache2/<%= @name %>_error.log
   LogLevel warn
