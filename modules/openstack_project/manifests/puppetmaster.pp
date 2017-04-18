@@ -31,7 +31,7 @@ class openstack_project::puppetmaster (
   cron { 'updatecloudlauncher':
     user        => 'root',
     minute      => '0',
-    hour        => '*/1'
+    hour        => '*/1',
     monthday    => '*',
     month       => '*',
     weekday     => '*',
