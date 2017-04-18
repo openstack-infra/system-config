@@ -97,6 +97,18 @@ current image and nodepool will use it when creating new nodes. When nodepool
 next creates an image, it will still retain build #1 since it will still be
 considered the next-most-recent image.
 
+Cloud Provider
+==============
+
+Nodepool has been configured to use the 'infra-root-keys' keypair from our cloud
+providers. The contents of the key are injected into the root users ssh
+authorized_keys file using glean. 
+
+Infrastructure Root Team member should add their public SSH key to our
+:file:`playbooks/clouds_layouts.yml` file. Once merged, cloud-launcher will run
+once an hour from puppetmaster.openstack.org and populate our 'infra-root-keys'
+in our clouds.
+
 vhd-util
 ========
 
