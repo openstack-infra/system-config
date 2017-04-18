@@ -229,7 +229,7 @@ EOF
 }
 
 function setup_puppet_opensuse {
-    zypper -n in --force-resolution puppet
+    zypper --non-interactive install --force-resolution puppet
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
@@ -265,7 +265,7 @@ function setup_pip {
     fi
 
     if is_opensuse; then
-        zypper --non-interactive in --force-resolution python python-xml
+        zypper --non-interactive install --force-resolution python python-xml
     fi
 
     python get-pip.py
