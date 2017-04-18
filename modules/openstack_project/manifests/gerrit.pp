@@ -74,7 +74,7 @@ class openstack_project::gerrit (
   $web_repo_url_encode = false,
   $secondary_index = true,
   $report_bug_text = 'Get Help',
-  $report_bug_url = 'http://docs.openstack.org/infra/system-config/project.html#contributing',
+  $report_bug_url = 'https://docs.openstack.org/infra/system-config/project.html#contributing',
   $index_threads = 1,
   $download = {},
   $receive_max_object_size_limit = '100 m',
