@@ -22,10 +22,13 @@ cat > $ansible_root/ansible.cfg <<EOF
 local_tmp=$ansible_root/local_tmp
 remote_tmp=$ansible_root/remote_tmp
 EOF
+cat > $ansible_root/hosts <<EOF
+localhost ansible_connection=local
+EOF
 echo "##" > $fileout
 cat $file > $fileout
 export ANSIBLE_CONFIG=$ansible_root/ansible.cfg
-sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -f1 --limit localhost playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout
+sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -i $ansible_root/hosts -f1 playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout
 ret=$?
 if [ $ret -ne 0 ]; then
     mv $fileout $fileout.FAILED
