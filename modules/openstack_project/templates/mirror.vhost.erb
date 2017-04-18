@@ -127,6 +127,10 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+
+    CacheEnable disk  "/registry.npmjs"
+    ProxyPass "/registry.npmjs/" "https://registry.npmjs.org/"
+    ProxyPassReverse "/registry.npmjs/" "https://registry.npmjs.org/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
