@@ -115,32 +115,32 @@ clouds:
   # rackspace
   - name: openstackci-rax-dfw
     oscc_cloud: openstackci-rax
-    region_name: dfw
+    region_name: DFW
     profiles:
       - openstackci-keypairs
   - name: openstackjenkins-rax-dfw
     oscc_cloud: openstackjenkins-rax
-    region_name: dfw
+    region_name: DFW
     profiles:
       - openstackci-keypairs
   - name: openstackci-rax-ord
     oscc_cloud: openstackci-rax
-    region_name: ord
+    region_name: ORD
     profiles:
       - openstackci-keypairs
   - name: openstackjenkins-rax-ord
     oscc_cloud: openstackjenkins-rax
-    region_name: ord
+    region_name: ORD
     profiles:
       - openstackci-keypairs
   - name: openstackci-rax-iad
     oscc_cloud: openstackci-rax
-    region_name: iad
+    region_name: IAD
     profiles:
       - openstackci-keypairs
   - name: openstackjenkins-rax-iad
     oscc_cloud: openstackjenkins-rax
-    region_name: iad
+    region_name: IAD
     profiles:
       - openstackci-keypairs
 
