@@ -5,7 +5,7 @@
 # user are by default off but can be enabled.
 class openstack_project::single_use_slave (
   $certname = $::fqdn,
-  $install_users = true,
+  $install_users = false,
   $install_resolv_conf = true,
   $sudo = false,
   $ssh_key = $openstack_project::jenkins_ssh_key,
