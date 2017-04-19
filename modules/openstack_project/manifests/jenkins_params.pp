@@ -88,7 +88,7 @@ class openstack_project::jenkins_params {
       $swig = "swig"
       $libjpeg_dev = "libjpeg-turbo-devel"
       $zlib_dev = "zlib-devel"
-      $systemd_dev = 'systemd-devel'
+      $systemd_dev_packages = ['systemd-devel']
     }
     'Debian': {
       # packages needed by slaves
@@ -118,10 +118,10 @@ class openstack_project::jenkins_params {
       $libffi_dev_package = 'libffi-dev'
       if ($::operatingsystem == 'Ubuntu') and ($::operatingsystemrelease >= '16.04') {
         $maven_package = 'maven'
-        $systemd_dev = 'libsystemd-dev'
+        $systemd_dev_packages = ['libsystemd-dev']
       } else {
         $maven_package = 'maven2'
-        $systemd_dev = 'libsystemd-journal-dev'
+        $systemd_dev_packages = ['libsystemd-journal-dev', 'libsystemd-daemon-dev']
       }
       # For tooz unit tests
       $memcached_package = 'memcached'
