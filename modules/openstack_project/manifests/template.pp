@@ -58,59 +58,6 @@ class openstack_project::template (
     install_users => $install_users
   }
 
-  package { 'rsyslog':
-    ensure => present,
-  }
-
-  if ($::in_chroot) {
-    notify { 'rsyslog in chroot':
-      message => 'rsyslog not refreshed, running in chroot',
-    }
-    $rsyslog_notify = []
-  } else {
-    service { 'rsyslog':
-      ensure     => running,
-      enable     => true,
-      hasrestart => true,
-      require    => Package['rsyslog'],
-    }
-    $rsyslog_notify = [ Service['rsyslog'] ]
-  }
-
-  ###########################################################
-  # System tweaks
-
-  # Increase syslog message size in order to capture
-  # python tracebacks with syslog.
-  file { '/etc/rsyslog.d/99-maxsize.conf':
-    ensure  => present,
-    # Note MaxMessageSize is not a puppet variable.
-    content => '$MaxMessageSize 6k',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    notify  => $rsyslog_notify,
-    require => Package['rsyslog'],
-  }
-
-  if $::osfamily == 'Debian' {
-
-    # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
-    file { '/etc/rsyslog.d/50-default.conf':
-      ensure  => present,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      source  =>
-        'puppet:///modules/openstack_project/rsyslog.d_50-default.conf',
-      replace => true,
-      notify  => $rsyslog_notify,
-      require => Package['rsyslog'],
-    }
-
-  }
-
-  ###########################################################
   if ($::osfamily == 'Debian') {
     # NOTE(pabelanger): Puppetlabs only support Ubuntu Trusty and below,
     # anything greater will use the OS version of puppet.
