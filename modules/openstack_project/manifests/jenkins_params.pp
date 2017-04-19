@@ -121,7 +121,9 @@ class openstack_project::jenkins_params {
         $systemd_dev_packages = ['libsystemd-dev']
       } else {
         $maven_package = 'maven2'
-        $systemd_dev_packages = ['libsystemd-journal-dev', 'libsystemd-daemon-dev']
+        $systemd_dev_packages = ['libsystemd-journal-dev',
+            'libsystemd-daemon-dev',
+            'libsystemd-login-dev']
       }
       # For tooz unit tests
       $memcached_package = 'memcached'
