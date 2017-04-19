@@ -54,10 +54,6 @@ class openstack_project::template (
     snmp_v6hosts     => $snmp_v6hosts,
   }
 
-  class { 'timezone':
-    timezone => 'Etc/UTC',
-  }
-
   class {'openstack_project::users_install':
     install_users => $install_users
   }
