@@ -20,6 +20,10 @@ class openstack_project::server (
 ) {
   include openstack_project::params
 
+  class { 'timezone':
+    timezone => 'Etc/UTC',
+  }
+
   if $::osfamily == 'Debian' {
      # Purge and augment existing /etc/apt/sources.list if requested, and make
      # sure apt-get update is run before any packages are installed
