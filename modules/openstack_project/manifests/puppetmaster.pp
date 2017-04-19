@@ -11,6 +11,12 @@ class openstack_project::puppetmaster (
                                          month   => '*',
                                          weekday => '*',
                                        },
+  $enable_mqtt = false,
+  $mqtt_hostname = 'firehose.openstack.org',
+  $mqtt_port = 8883,
+  $mqtt_username = 'infra',
+  $mqtt_password = undef,
+  $mqtt_ca_cert_contents = undef,
 ) {
   include logrotate
 
@@ -356,6 +362,30 @@ class openstack_project::puppetmaster (
     mode   => '0755',
     source => 'puppet:///modules/openstack_project/puppetmaster/expand-groups.sh',
     notify => Exec['expand_groups'],
+  }
+  if $enable_mqtt {
+    file { '/etc/mqtt_ca_cert.pem.crt':
+      ensure  => present,
+      content => $mqtt_ca_cert_contents,
+      replace => true,
+      owner   => 'root',
+      group   => 'admin',
+      mode    => '0555',
+    }
+
+    file { '/etc/mqtt_client.yaml':
+      owner   => 'root',
+      group   => 'admin',
+      mode    => '0664',
+      content => template('openstack_project/puppetmaster/mqtt_client.yaml.erb'),
+    }
+
+    file { '/opt/ansible/lib/ansible/plugins/callback/mqtt.py':
+      owner  => 'root',
+      group  => 'admin',
+      mode   => '0664',
+      source => 'puppet:///modules/openstack_project/puppetmaster/mqtt.py',
+    }
   }
 
   exec { 'expand_groups':
