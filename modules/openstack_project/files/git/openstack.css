@@ -1,7 +1,7 @@
 @import url('/cgit-data/cgit.css');
 
 body {
-  background: url("/static/openstack-page-bkg.jpg") no-repeat scroll 0 0 white !important;
+  background: no-repeat scroll 0 0 white !important;
 }
 
 div#cgit {
@@ -97,3 +97,9 @@ div#cgit table.blob .kwa  { color:#000000; font-weight:bold; }
 div#cgit table.blob .kwb  { color:#830000; }
 div#cgit table.blob .kwc  { color:#000000; font-weight:bold; }
 div#cgit table.blob .kwd  { color:#010181; }
+
+/* Make logo larger than default */
+div#cgit table#header td.logo {
+    width: 248px;
+    vertical-align: top;
+}
