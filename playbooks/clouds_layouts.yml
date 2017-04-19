@@ -122,6 +122,32 @@ clouds:
       - openstackci-keypairs
       - openstackci-security
 
+  # ovh
+  - name: openstackci-ovh-bhs1
+    oscc_cloud: openstackci-ovh
+    region_name: BHS1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackjenkins-ovh-bhs1
+    oscc_cloud: openstackjenkins-ovh
+    region_name: BHS1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackci-ovh-gra1
+    oscc_cloud: openstackci-ovh
+    region_name: GRA1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackjenkins-ovh-gra1
+    oscc_cloud: openstackjenkins-ovh
+    region_name: GRA1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+
   # internap
   - name: openstackci-internap-mtl01
     oscc_cloud: openstackci-internap
