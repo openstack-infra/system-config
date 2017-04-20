@@ -18,6 +18,7 @@ class openstack_project::server (
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = true,
 ) {
+  include sudoers
   include openstack_project::params
 
   class { 'timezone':
