@@ -137,3 +137,16 @@ clouds:
     identity_api_version: '3'
     floating_ip_source: None
     cacert: /etc/ssl/certs/ca-certificates.crt
+  openstackci-citycloud:
+    regions:
+      - Lon1
+      - Kna1
+      - La1
+      - Sto2
+    profile: citycloud
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_citycloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_citycloud_password'] %>
+      project_id: bed89257500340af8d0fbe7141b1bfd6
+      project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
+      user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
