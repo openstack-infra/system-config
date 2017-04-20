@@ -72,30 +72,6 @@ class openstack_project::template (
       }
     }
 
-    file { '/etc/security/limits.d/60-nofile-limit.conf':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      source  => 'puppet:///modules/openstack_project/debian_limits.conf',
-      replace => true,
-    }
-
-    file { '/etc/apt/apt.conf.d/80retry':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/80retry',
-      replace => true,
-    }
-
-    file { '/etc/apt/apt.conf.d/90no-translations':
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0444',
-      source  => 'puppet:///modules/openstack_project/90no-translations',
-      replace => true,
-    }
-
     file { '/etc/default/puppet':
       ensure  => present,
       owner   => 'root',
@@ -104,7 +80,6 @@ class openstack_project::template (
       source  => 'puppet:///modules/openstack_project/puppet.default',
       replace => true,
     }
-
   }
 
   if ($::operatingsystem == 'CentOS') {
