@@ -23,7 +23,6 @@ class openstack_project::template (
 
   ###########################################################
   # Classes for all hosts
-  include sudoers
 
   include openstack_project::users
 
