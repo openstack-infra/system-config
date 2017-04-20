@@ -317,6 +317,18 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     identity_api_version: '2'
+  openstackci-citycloud:
+    regions:
+      - Fra1
+      - Lon1
+      - Kna1
+    profile: citycloud
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_citycloud_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_citycloud_password'] %>
+      project_id: TODO_update
+      project_domain_name: default
+      user_domain_id: TODO_update
   openstackzuul-citycloud:
     regions:
       - Fra1
@@ -326,9 +338,9 @@ clouds:
     auth:
       username: <%= @puppetmaster_clouds['openstackzuul_citycloud_username'] %>
       password: <%= @puppetmaster_clouds['openstackzuul_citycloud_password'] %>
-      project_id: 1e6292e5893043a9b75ba0066079642c
+      project_id: TODO_update
       project_domain_name: default
-      user_domain_id: c4a5013bd7e6427082ad11e5d260870d
+      user_domain_id: TODO_update
   openstackzuul-entercloud:
     regions:
       - nl-ams1
