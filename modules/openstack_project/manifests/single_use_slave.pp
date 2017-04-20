@@ -32,8 +32,6 @@ class openstack_project::single_use_slave (
     iptables_public_tcp_ports => [19885],
   }
 
-  include ::haveged
-
   class { '::jenkins::jenkinsuser':
     ssh_key     => $ssh_key,
     gitfullname => $jenkins_gitfullname,
