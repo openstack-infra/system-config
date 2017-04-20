@@ -161,6 +161,25 @@ class openstack_project::server (
     require  => Class['pip'],
   }
 
+  ###########################################################
+  # Turn off puppet service
+
+  service { 'puppet':
+    ensure => stopped,
+    enable => false,
+  }
+
+  if $::osfamily == 'Debian' {
+    file { '/etc/default/puppet':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/puppet.default',
+      replace => true,
+    }
+  }
+
   class { 'openstack_project::template':
     iptables_public_tcp_ports => $iptables_public_tcp_ports,
     iptables_public_udp_ports => $iptables_public_udp_ports,
