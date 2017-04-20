@@ -20,6 +20,11 @@ class openstack_project::server (
 ) {
   include sudoers
   include openstack_project::params
+  include openstack_project::users
+
+  class { 'openstack_project::users_install':
+    install_users => true,
+  }
 
   class { 'timezone':
     timezone => 'Etc/UTC',
