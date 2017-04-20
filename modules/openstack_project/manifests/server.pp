@@ -50,6 +50,30 @@ class openstack_project::server (
   }
 
   if $::osfamily == 'Debian' {
+    file { '/etc/security/limits.d/60-nofile-limit.conf':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/openstack_project/debian_limits.conf',
+      replace => true,
+    }
+
+    file { '/etc/apt/apt.conf.d/80retry':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/80retry',
+      replace => true,
+    }
+
+    file { '/etc/apt/apt.conf.d/90no-translations':
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0444',
+      source  => 'puppet:///modules/openstack_project/90no-translations',
+      replace => true,
+    }
+
     # Custom rsyslog config to disable /dev/xconsole noise on Debuntu servers
     file { '/etc/rsyslog.d/50-default.conf':
       ensure  => present,
