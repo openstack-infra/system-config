@@ -10,7 +10,6 @@ class openstack_project::template (
   $snmp_v4hosts              = [],
   $snmp_v6hosts              = [],
   $pin_puppet                = '3.',
-  $install_resolv_conf       = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
   $afs                       = false,
