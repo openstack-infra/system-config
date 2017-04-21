@@ -3,12 +3,6 @@
 # A template host with no running services
 #
 class openstack_project::template (
-  $iptables_public_tcp_ports = [],
-  $iptables_public_udp_ports = [],
-  $iptables_rules4           = [],
-  $iptables_rules6           = [],
-  $snmp_v4hosts              = [],
-  $snmp_v6hosts              = [],
   $pin_puppet                = '3.',
   $install_users             = true,
   $install_resolv_conf       = true,
@@ -25,22 +19,6 @@ class openstack_project::template (
   # Classes for all hosts
 
   include openstack_project::users
-
-  if ( $afs ) {
-    $all_udp = concat(
-      $iptables_public_udp_ports, [7001])
-  } else {
-    $all_udp = $iptables_public_udp_ports
-  }
-
-  class { 'iptables':
-    public_tcp_ports => $iptables_public_tcp_ports,
-    public_udp_ports => $all_udp,
-    rules4           => $iptables_rules4,
-    rules6           => $iptables_rules6,
-    snmp_v4hosts     => $snmp_v4hosts,
-    snmp_v6hosts     => $snmp_v6hosts,
-  }
 
   class {'openstack_project::users_install':
     install_users => $install_users
