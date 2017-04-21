@@ -229,7 +229,7 @@ EOF
     if [ -f /bin/systemctl ]; then
         systemctl disable puppet
     else
-        service puppet disable
+        update-rc.d -f puppet remove
     fi
 }
 
