@@ -12,7 +12,6 @@ class openstack_project::template (
   $pin_puppet                = '3.',
   $install_users             = true,
   $install_resolv_conf       = true,
-  $certname                  = $::fqdn,
   $ca_server                 = undef,
   $afs                       = false,
   $afs_cache_size            = 500000,

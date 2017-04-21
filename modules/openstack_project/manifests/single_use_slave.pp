@@ -4,7 +4,6 @@
 # toggleable options. Most importantly sudo rights for the Jenkins
 # user are by default off but can be enabled.
 class openstack_project::single_use_slave (
-  $certname = $::fqdn,
   $install_users = false,
   $install_resolv_conf = true,
   $sudo = false,
@@ -13,7 +12,6 @@ class openstack_project::single_use_slave (
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) inherits openstack_project {
   class { 'openstack_project::template':
-    certname                  => $certname,
     install_users             => $install_users,
     install_resolv_conf       => $install_resolv_conf,
     iptables_rules4           =>
