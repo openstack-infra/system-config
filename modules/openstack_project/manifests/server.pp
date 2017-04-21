@@ -168,6 +168,10 @@ class openstack_project::server (
         'kdc02.openstack.org',
       ],
     }
+    $all_udp = concat(
+      $iptables_public_udp_ports, [7001])
+  } else {
+    $all_udp = $iptables_public_udp_ports
   }
 
   class { 'openstack_project::automatic_upgrades':
@@ -175,6 +179,15 @@ class openstack_project::server (
   }
 
   include snmpd
+
+  class { 'iptables':
+    public_tcp_ports => $iptables_public_tcp_ports,
+    public_udp_ports => $all_udp,
+    rules4           => $iptables_rules4,
+    rules6           => $iptables_rules6,
+    snmp_v4hosts     => $snmp_v4hosts,
+    snmp_v6hosts     => $snmp_v6hosts,
+  }
 
   # We don't like byobu
   file { '/etc/profile.d/Z98-byobu.sh':
