@@ -10,7 +10,6 @@ class openstack_project::template (
   $snmp_v4hosts              = [],
   $snmp_v6hosts              = [],
   $pin_puppet                = '3.',
-  $install_users             = true,
   $install_resolv_conf       = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
@@ -23,8 +22,6 @@ class openstack_project::template (
 
   ###########################################################
   # Classes for all hosts
-
-  include openstack_project::users
 
   if ( $afs ) {
     $all_udp = concat(
@@ -51,10 +48,6 @@ class openstack_project::template (
     rules6           => $iptables_rules6,
     snmp_v4hosts     => $snmp_v4hosts,
     snmp_v6hosts     => $snmp_v6hosts,
-  }
-
-  class {'openstack_project::users_install':
-    install_users => $install_users
   }
 
   if ($::osfamily == 'Debian') {
