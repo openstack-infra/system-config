@@ -30,4 +30,5 @@ set +e
 # Run all the ansible playbooks under timeout to prevent them from getting
 # stuck if they are oomkilled
 
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_infracloud_baremetal.yaml
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_infracloud.yaml

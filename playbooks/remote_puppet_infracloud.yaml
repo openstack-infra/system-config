@@ -1,8 +1,4 @@
 ---
-- hosts: "baremetal*.ic.openstack.org:!disabled"
-  gather_facts: true
-  roles:
-    - role: puppet
 - hosts: "controller*.ic.openstack.org:!disabled"
   gather_facts: true
   roles:
