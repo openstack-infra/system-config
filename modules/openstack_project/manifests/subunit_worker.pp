@@ -19,6 +19,7 @@ class openstack_project::subunit_worker (
   $subunit2sql_db_pass,
   $mqtt_user = 'infra',
   $mqtt_pass = undef,
+  $mqtt_ca_cert_contents = undef,
 ) {
 
   file { '/etc/subunit2sql/subunit-woker.yaml':
@@ -28,6 +29,15 @@ class openstack_project::subunit_worker (
     mode    => '0555',
     content => template('openstack_project/logstash/jenkins-subunit-worker.yaml.erb'),
   }
+
+  file { '/etc/subunit2sql/mqtt-root-CA.pem.crt':
+      ensure  => present,
+      content => $mqtt_ca_cert_contents,
+      replace => true,
+      owner   => 'subunit',
+      group   => 'subunit',
+      mode    => '0555',
+    }
 
   include subunit2sql
   subunit2sql::worker { 'A':
