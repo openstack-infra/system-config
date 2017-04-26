@@ -186,6 +186,19 @@ class openstack_project::server (
     }
   }
 
+  if $afs {
+    class { 'openafs::client':
+      cell         => 'openstack.org',
+      realm        => 'OPENSTACK.ORG',
+      admin_server => 'kdc.openstack.org',
+      cache_size   => $afs_cache_size,
+      kdcs         => [
+        'kdc01.openstack.org',
+        'kdc02.openstack.org',
+      ],
+    }
+  }
+
   class { 'openstack_project::automatic_upgrades':
     origins => ["Puppetlabs:${lsbdistcodename}"],
   }
@@ -269,7 +282,6 @@ class openstack_project::server (
     ca_server                 => $ca_server,
     puppetmaster_server       => $puppetmaster_server,
     afs                       => $afs,
-    afs_cache_size            => $afs_cache_size,
     sysadmins                 => $sysadmins,
   }
 
