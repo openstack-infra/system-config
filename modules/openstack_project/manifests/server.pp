@@ -197,6 +197,10 @@ class openstack_project::server (
         'kdc02.openstack.org',
       ],
     }
+    $all_udp = concat(
+      $iptables_public_udp_ports, [7001])
+  } else {
+    $all_udp = $iptables_public_udp_ports
   }
 
   class { 'openstack_project::automatic_upgrades':
@@ -204,6 +208,23 @@ class openstack_project::server (
   }
 
   include snmpd
+
+  $snmp_v4hosts = [
+    '104.239.135.208',
+    '104.130.253.206',
+  ]
+  $snmp_v6hosts = [
+    '2001:4800:7819:104:be76:4eff:fe05:1d6a',
+    '2001:4800:7818:103:be76:4eff:fe04:7ed0',
+  ]
+  class { 'iptables':
+    public_tcp_ports => $iptables_public_tcp_ports,
+    public_udp_ports => $all_udp,
+    rules4           => $iptables_rules4,
+    rules6           => $iptables_rules6,
+    snmp_v4hosts     => $snmp_v4hosts,
+    snmp_v6hosts     => $snmp_v6hosts,
+  }
 
   # We don't like byobu
   file { '/etc/profile.d/Z98-byobu.sh':
@@ -265,18 +286,6 @@ class openstack_project::server (
   }
 
   class { 'openstack_project::template':
-    iptables_public_tcp_ports => $iptables_public_tcp_ports,
-    iptables_public_udp_ports => $iptables_public_udp_ports,
-    iptables_rules4           => $iptables_rules4,
-    iptables_rules6           => $iptables_rules6,
-    snmp_v4hosts              => [
-      '104.239.135.208',
-      '104.130.253.206',
-    ],
-    snmp_v6hosts              => [
-      '2001:4800:7819:104:be76:4eff:fe05:1d6a',
-      '2001:4800:7818:103:be76:4eff:fe04:7ed0',
-    ],
     certname                  => $certname,
     pin_puppet                => $pin_puppet,
     ca_server                 => $ca_server,
