@@ -114,3 +114,38 @@ payload (with the body trimmed) for a bug is::
     "bug-modifier": "Full Name (username)",
     "body": "notification body, often is just bug comment or summary",
   }
+
+Subunit Workers
+===============
+
+The messages for the subunit workers are generated directly in the
+`subunit gearman worker scripts`_.
+
+.. _subunit gearman worker scripts: http://git.openstack.org/cgit/openstack-infra/puppet-subunit2sql/tree/files/subunit-gearman-worker.py
+
+Topics
+------
+
+The topics for the subunit workers follow a simple pattern::
+
+    gearman-subunit/<worker hostname>/<git namespace/<repo name>/<change number>
+
+Where  ``worker hostname`` is the host which processed the subunit file, as
+of right now there are 2, subunit-worker01 and subunit-worker02, but there may
+be more (or less in the future. The ``git namespace`` and ``repo name`` are
+pretty self explanatory, and are just for the git repo under test that the
+subunit was emitted from. ``change number`` is the gerrit change number for the
+job that launched the tests the subunit is for.
+
+Payload
+-------
+The payload for the messages from the subunit workers is pretty straightforward
+json that contains 3 fields: ``status``, ``build_uuid``, and ``source_url``.
+
+An example is::
+
+    {
+        'status': 'success',
+        'build_uuid': '45f7c1ddbfd74c6aba94662623bd61b8'
+        'source_url': 'A url',
+    }
