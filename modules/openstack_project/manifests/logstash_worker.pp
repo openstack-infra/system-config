@@ -18,7 +18,7 @@ class openstack_project::logstash_worker (
   $discover_node = 'elasticsearch01.openstack.org',
   $filter_rev    = 'master',
   $filter_source = 'https://git.openstack.org/openstack-infra/logstash-filters',
-  $enable_mqtt = false,
+  $enable_mqtt = true,
   $mqtt_hostname = 'firehose.openstack.org',
   $mqtt_port = 8883,
   $mqtt_topic = "logstash/${::hostname}",
@@ -26,6 +26,15 @@ class openstack_project::logstash_worker (
   $mqtt_password = undef,
   $mqtt_ca_cert_contents = undef,
 ) {
+
+  file { '/etc/logstash/worker.yaml':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    content => template('openstack_project/logstash/jenkins-log-worker.yaml.erb'),
+  }
+
   file { '/etc/default/logstash-indexer':
     ensure => present,
     owner  => 'root',
@@ -64,15 +73,15 @@ class openstack_project::logstash_worker (
 
   include ::log_processor
   log_processor::worker { 'A':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logstash/worker.yaml',
   }
   log_processor::worker { 'B':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logstash/worker.yaml',
   }
   log_processor::worker { 'C':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logstash/worker.yaml',
   }
   log_processor::worker { 'D':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logstash/worker.yaml',
   }
 }
