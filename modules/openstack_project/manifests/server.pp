@@ -315,13 +315,4 @@ class openstack_project::server (
     }
   }
 
-  class { 'openstack_project::template':
-    certname                  => $certname,
-    pin_puppet                => $pin_puppet,
-    ca_server                 => $ca_server,
-    puppetmaster_server       => $puppetmaster_server,
-    afs                       => $afs,
-    sysadmins                 => $sysadmins,
-  }
-
 }
