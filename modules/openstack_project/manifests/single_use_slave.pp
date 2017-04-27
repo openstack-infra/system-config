@@ -12,8 +12,4 @@ class openstack_project::single_use_slave (
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) inherits openstack_project {
-  class { 'openstack_project::template':
-    certname                  => $certname,
-    install_resolv_conf       => $install_resolv_conf,
-  }
 }
