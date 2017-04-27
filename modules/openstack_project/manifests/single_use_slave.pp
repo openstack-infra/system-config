@@ -7,6 +7,7 @@ class openstack_project::single_use_slave (
   $certname = $::fqdn,
   $install_resolv_conf = true,
   $sudo = false,
+  # TODO(pabelanger): To be removed in a future patch.
   $ssh_key = $openstack_project::jenkins_ssh_key,
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
@@ -14,11 +15,5 @@ class openstack_project::single_use_slave (
   class { 'openstack_project::template':
     certname                  => $certname,
     install_resolv_conf       => $install_resolv_conf,
-  }
-
-  class { '::jenkins::jenkinsuser':
-    ssh_key     => $ssh_key,
-    gitfullname => $jenkins_gitfullname,
-    gitemail    => $jenkins_gitemail,
   }
 }
