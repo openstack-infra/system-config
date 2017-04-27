@@ -55,6 +55,14 @@ filter {
       match => { "message" => "(?m)^%{TIMESTAMP_ISO8601:logdate}%{SPACE}%{NUMBER:pid}?%{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" }
       add_field => { "received_at" => "%{@timestamp}" }
     }
+  } else if "journald" in [tags] {
+    grok {
+      # Do multiline matching as the above mutliline filter may add newlines
+      # to the log messages.
+      # TODO move the LOGLEVELs into a proper grok pattern.
+      match => { "message" => "%{SYSLOGTIMESTAMP:logdate}%{SPACE}%{SYSLOGHOST:syslog_host}?%{SPACE}%{DATA:syslog_program}(?:\[%{POSINT:syslog_pid}\])?:? %{SPACE}?(?<loglevel>AUDIT|CRITICAL|DEBUG|INFO|TRACE|WARNING|ERROR) \[?\b%{NOTSPACE:module}\b\]?%{SPACE}?%{GREEDYDATA:logmessage}?" }
+      add_field => { "received_at" => "%{@timestamp}" }
+    }
   } else if "apachecombined" in [tags] {
     grok {
       match => { "message" => "%{COMBINEDAPACHELOG}" }

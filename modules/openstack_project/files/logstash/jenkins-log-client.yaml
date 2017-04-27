@@ -271,6 +271,162 @@ source-files:
     tags:
       - screen
       - oslofmt
+
+# journald dumps
+  - name: logs/devstack@c-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@c-bak.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@c-sch.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@c-vol.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@designate-agent.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-api.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-central.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-mdns.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-pool-manager.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-sink.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@designate-zone-manager.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*designate.*'
+  - name: logs/devstack@g-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@g-reg.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@h-api-cfn.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@h-api-cw.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@h-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@h-eng.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@ir-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@ir-cond.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@key.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@m-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@m-sch.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@m-shr.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-api-meta.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-cell-child.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*cells.*'
+  - name: logs/devstack@n-cell-region.service.log.txt
+    tags:
+      - journald
+    job-filter: '.*cells.*'
+  - name: logs/devstack@n-cond.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-cpu.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-cpu-1.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-crt.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-net.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-obj.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@n-sch.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-agt.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-dhcp.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-l3.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-lbaas.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-meta.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-metering.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@q-svc.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@s-account.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@s-container.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@s-object.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@sahara.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@tr-api.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@tr-cond.service.log.txt
+    tags:
+      - journald
+  - name: logs/devstack@tr-tmgr.service.log.txt
+    tags:
+      - journald
+
   - name: logs/apache/horizon_error.txt
     tags:
       - apacheerror
