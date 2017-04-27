@@ -12,8 +12,6 @@ via devstack on a cloud server.
 At a Glance
 ===========
 
-:Puppet:
-  * :file:`modules/openstack_project/manifests/simple_slave.pp`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/devstack-gate
 :Bugs:
