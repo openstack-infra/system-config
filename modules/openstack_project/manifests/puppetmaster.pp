@@ -364,6 +364,12 @@ class openstack_project::puppetmaster (
     notify => Exec['expand_groups'],
   }
   if $enable_mqtt {
+    package {'paho-mqtt':
+      ensure   => latest,
+      provider => openstack_pip,
+      require  => Class['pip'],
+    }
+
     file { '/etc/mqtt_ca_cert.pem.crt':
       ensure  => present,
       content => $mqtt_ca_cert_contents,
