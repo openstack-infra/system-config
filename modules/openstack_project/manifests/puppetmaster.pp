@@ -381,10 +381,15 @@ class openstack_project::puppetmaster (
     }
 
     file { '/opt/ansible/lib/ansible/plugins/callback/mqtt.py':
-      owner  => 'root',
-      group  => 'admin',
-      mode   => '0664',
-      source => 'puppet:///modules/openstack_project/puppetmaster/mqtt.py',
+      ensure => absent,
+    }
+
+    file { '/etc/ansible/callback_plugins/mqtt.py':
+      owner   => 'root',
+      group   => 'admin',
+      mode    => '0664',
+      source  => 'puppet:///modules/openstack_project/puppetmaster/mqtt.py',
+      require => File['/etc/ansible/callback_plugins'],
     }
   }
 
