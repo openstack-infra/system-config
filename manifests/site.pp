@@ -171,6 +171,9 @@ node 'puppetmaster.openstack.org' {
     root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
     puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
     puppetdb                                   => false,
+    enable_mqtt                                => true,
+    mqtt_password                              => hiera('mqtt_service_user_password'),
+    mqtt_ca_cert_contents                      => hiera('mosquitto_tls_ca_file'),
   }
 }
 
