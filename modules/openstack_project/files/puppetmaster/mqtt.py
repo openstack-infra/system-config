@@ -155,7 +155,7 @@ class CallbackModule(CallbackBase):
 
     def v2_playbook_on_play_start(self, play):
         self.playbook = play.name
-        self.uuid = play._uuid
+        self.uuid = str(play._uuid)
         topic = 'playbooks/' + self.uuid + '/action/start'
         msg = json.dumps({
             'status': "OK",
