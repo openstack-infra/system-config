@@ -380,7 +380,7 @@ class openstack_project::puppetmaster (
       content => template('openstack_project/puppetmaster/mqtt_client.yaml.erb'),
     }
 
-    file { '/opt/ansible/lib/ansible/plugins/callback/mqtt.py':
+    file { '/etc/ansible/callback_plugins/mqtt.py':
       owner  => 'root',
       group  => 'admin',
       mode   => '0664',
