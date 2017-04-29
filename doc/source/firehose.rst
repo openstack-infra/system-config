@@ -76,6 +76,8 @@ As of right now the following services publish messages to the firehose:
 +----------------+-----------------+---------------------------+
 | Service        | Base Topic      | Source of Messages        |
 +================+=================+===========================+
+| ansible        | ansible         | `ansible_mqtt_plugin`_    |
++----------------+-----------------+---------------------------+
 | gerrit         | gerrit          | `germqtt`_                |
 +----------------+-----------------+---------------------------+
 | launchpad      | launchpad       | `lpmqtt`_                 |
@@ -86,6 +88,7 @@ As of right now the following services publish messages to the firehose:
 .. _germqtt: http://git.openstack.org/cgit/openstack-infra/germqtt/
 .. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
 .. _subunit-gearman-worker: http://git.openstack.org/cgit/openstack-infra/puppet-subunit2sql/tree/files/subunit-gearman-worker.py
+.. _ansible_mqtt_plugin: http://git.openstack.org/cgit/openstack-infra/system-config/tree/modules/openstack_project/files/puppetmaster/mqtt.py
 
 For a full schema description see :ref:`firehose_schema`
 
