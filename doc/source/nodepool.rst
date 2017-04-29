@@ -15,7 +15,6 @@ At a Glance
   * nodepool.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/nodepool.pp
-  * :file:`modules/openstack_project/manifests/single_use_slave.pp`
 :Configuration:
   * :config:`nodepool/nodepool.yaml`
   * :config:`nodepool/scripts/`
