@@ -82,10 +82,13 @@ As of right now the following services publish messages to the firehose:
 +----------------+-----------------+---------------------------+
 | subunit worker | gearman-subunit | `subunit-gearman-worker`_ |
 +----------------+-----------------+---------------------------+
+| ansible        | ansible         | `ansible_mqtt_plugin`_    |
++----------------+-----------------+---------------------------+
 
 .. _germqtt: http://git.openstack.org/cgit/openstack-infra/germqtt/
 .. _lpmqtt: http://git.openstack.org/cgit/openstack-infra/lpmqtt/
 .. _subunit-gearman-worker: http://git.openstack.org/cgit/openstack-infra/puppet-subunit2sql/tree/files/subunit-gearman-worker.py
+.. _ansible_mqtt_plugin: http://git.openstack.org/cgit/openstack-infra/system-config/tree/modules/openstack_project/files/puppetmaster/mqtt.py
 
 For a full schema description see :ref:`firehose_schema`
 
