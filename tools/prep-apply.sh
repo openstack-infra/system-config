@@ -43,6 +43,8 @@ declare -A INTEGRATION_MODULES
 
 source $MODULE_ENV_FILE
 
+# Install puppet
+sudo -E bash -x $ROOT/install_puppet.sh
 # Install SOURCE_MODULES
 sudo -E bash -x $ROOT/install_modules.sh
 

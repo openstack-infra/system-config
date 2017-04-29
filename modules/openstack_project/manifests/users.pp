@@ -185,6 +185,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'krotscheck':
     realname => 'Michael Krotscheck',
+    sshkeys  => '',
     uid      => 2020,
     gid      => 2020,
   }
