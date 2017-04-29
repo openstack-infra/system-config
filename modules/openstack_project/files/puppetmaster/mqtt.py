@@ -208,7 +208,7 @@ class CallbackModule(CallbackBase):
             'playbook_name': self.playbook,
             'playbook_id': self.uuid,
             'ansible_task': str(result._task),
-            'ansible_result': result._result
+            'ansible_result': self._dump_results(result._result)
         }
         self._publish(topic, json.dumps(data))
 
@@ -225,7 +225,7 @@ class CallbackModule(CallbackBase):
             'playbook_name': self.playbook,
             'ansible_host': result._host.name,
             'ansible_task': str(result._task),
-            'ansible_result': result._result
+            'ansible_result': self._dump_results(result._result)
         }
         self._publish(topic, json.dumps(data))
 
@@ -242,7 +242,7 @@ class CallbackModule(CallbackBase):
             'playbook_id': self.uuid,
             'ansible_host': host,
             'ansible_task': str(result._task),
-            'ansible_result': result._result
+            'ansible_result': self._dump_results(result._result)
         }
         self._publish(topic, json.dumps(data))
 
@@ -259,6 +259,6 @@ class CallbackModule(CallbackBase):
             'playbook_id': self.uuid,
             'ansible_host': result._host.name,
             'ansible_task': str(result._task),
-            'ansible_result': result._result
+            'ansible_result': self._dump_results(result._result)
         }
         self._publish(topic, json.dumps(data))
