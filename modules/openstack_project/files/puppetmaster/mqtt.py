@@ -156,7 +156,7 @@ class CallbackModule(CallbackBase):
     def v2_playbook_on_play_start(self, play):
         self.playbook = play.name
         self.uuid = str(play._uuid)
-        topic = 'playbooks/' + self.uuid + '/action/start'
+        topic = 'playbook/' + self.uuid + '/action/start'
         msg = json.dumps({
             'status': "OK",
             'host': self.hostname,
@@ -198,7 +198,7 @@ class CallbackModule(CallbackBase):
 
     def v2_runner_on_ok(self, result, **kwargs):
         host = result._host.get_name()
-        topic = 'playbooks/' + self.uuid + '/tasks/' + host + '/OK'
+        topic = 'playbook/' + self.uuid + '/task/' + host + '/OK'
         data = {
             'status': "OK",
             'host': self.hostname,
@@ -214,7 +214,7 @@ class CallbackModule(CallbackBase):
 
     def v2_runner_on_failed(self, result, **kwargs):
         host = result._host.get_name()
-        topic = 'playbooks/' + self.uuid + '/tasks/' + host + '/FAILED'
+        topic = 'playbook/' + self.uuid + '/task/' + host + '/FAILED'
         self.errors += 1
         data = {
             'status': "FAILED",
@@ -232,7 +232,7 @@ class CallbackModule(CallbackBase):
     def v2_runner_on_unreachable(self, result):
         host = result._host.get_name()
         self.errors += 1
-        topic = 'playbooks/' + self.uuid + '/tasks/' + host + '/UNREACHABLE'
+        topic = 'playbook/' + self.uuid + '/task/' + host + '/UNREACHABLE'
         data = {
             'status': "UNREACHABLE",
             'host': self.hostname,
@@ -249,7 +249,7 @@ class CallbackModule(CallbackBase):
     def v2_runner_on_async_failed(self, result):
         host = result._host.get_name()
         self.errors += 1
-        topic = 'playbooks/' + self.uuid + '/tasks/' + host + '/FAILED'
+        topic = 'playbook/' + self.uuid + '/task/' + host + '/FAILED'
         data = {
             'status': "FAILED",
             'host': self.hostname,
