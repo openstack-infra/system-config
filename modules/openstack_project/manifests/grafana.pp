@@ -28,26 +28,26 @@ class openstack_project::grafana (
       'reporting_enabled' => false,
     },
     'auth.anonymous' => {
-      enabled => true,
+      'enabled' => true,
     },
     'database' => {
-      type     => 'mysql',
-      host     => "${mysql_host}:3306",
-      name     => $mysql_name,
-      user     => $mysql_user,
-      password => $mysql_password,
+      'type'     => 'mysql',
+      'host'     => "${mysql_host}:3306",
+      'name'     => $mysql_name,
+      'user'     => $mysql_user,
+      'password' => $mysql_password,
     },
     'security' => {
-      admin_password => $admin_password,
-      admin_user     => $admin_user,
-      secret_key     => $secret_key,
+      'admin_password' => $admin_password,
+      'admin_user'     => $admin_user,
+      'secret_key'     => $secret_key,
     },
     'server'   => {
-      http_addr => $http_host,
-      http_port => $http_port,
+      'http_addr' => $http_host,
+      'http_port' => $http_port,
     },
     'users'    => {
-      allow_sign_up => false,
+      'allow_sign_up' => false,
     },
   }
 
