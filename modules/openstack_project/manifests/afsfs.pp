@@ -15,6 +15,5 @@ class openstack_project::afsfs (
         ip       => '23.253.200.228',
       },
     ],
-    require      => Class['Openstack_project::Template'],
   }
 }
