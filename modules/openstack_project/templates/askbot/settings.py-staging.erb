@@ -326,6 +326,10 @@ HAYSTACK_CONNECTIONS = {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
         'URL': 'http://127.0.0.1:8983/solr/core-zh'
     },
+    'default_ru': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr/core-ru'
+    },
 }
 
 HAYSTACK_SIGNAL_PROCESSOR = 'askbot.search.haystack.signals.AskbotRealtimeSignalProcessor'
@@ -408,10 +412,12 @@ ASKBOT_LANGUAGE_MODE = 'url-lang'
 LANGUAGES = (
     ('en', 'English'),
     ('zh', 'Chinese'),
+    ('ru', 'Russian'),
 )
 COUNTRY_CODES = {
     'en': 'us',
     'zh': 'cn',
+    'ru': 'ru',
 }
 
 ASKBOT_CSS_DEVEL = False

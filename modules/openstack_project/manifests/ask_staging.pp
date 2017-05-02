@@ -36,7 +36,7 @@ class openstack_project::ask_staging (
   class { 'solr':
     mirror    => 'https://archive.apache.org/dist/lucene/solr',
     version   => $solr_version,
-    cores     => [ 'core-default', 'core-en', 'core-zh' ],
+    cores     => [ 'core-default', 'core-en', 'core-zh', 'core-ru' ],
     dist_root => '/srv/dist/solr',
     require   => File['/srv/dist/solr'],
   }
@@ -59,6 +59,16 @@ class openstack_project::ask_staging (
     group   => 'jetty',
     mode    => '0644',
     require => File['/usr/share/solr/core-en/conf'],
+  }
+
+  file { '/usr/share/solr/core-ru/conf/schema.xml':
+    ensure  => present,
+    content => template('openstack_project/askbot/schema.ru.xml.erb'),
+    replace => true,
+    owner   => 'jetty',
+    group   => 'jetty',
+    mode    => '0644',
+    require => File['/usr/share/solr/core-ru/conf'],
   }
 
   # deploy smartcn Chinese analyzer from solr contrib/analysys-extras
