@@ -31,7 +31,7 @@ filter {
   } else if "oslofmt" in [tags] {
     multiline {
       negate => true
-      pattern => "^%{TIMESTAMP_ISO8601} "
+      pattern => "^(%{TIMESTAMP_ISO8601}|%{SYSLOGTIMESTAMP}) "
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
@@ -44,7 +44,7 @@ filter {
       # NUMBER being required element here is important, otherwise
       # ERROR messages just fold into the previous messages, which are
       # typically INFO.
-      pattern => "^%{TIMESTAMP_ISO8601}%{SPACE}%{NUMBER}%{SPACE}(TRACE|ERROR)"
+      pattern => "^(%{TIMESTAMP_ISO8601}|%{SYSLOGTIMESTAMP})%{SPACE}%{NUMBER}%{SPACE}(TRACE|ERROR)"
       what => "previous"
       stream_identity => "%{host}.%{filename}"
     }
