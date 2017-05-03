@@ -4,7 +4,7 @@ Codename: <%= release %>
 Description: Docker <%= release.capitalize %> mirror
 Architectures: amd64 source
 Components: main
-UDebComponents: main
+UDebComponents:
 Contents: .gz
 Update: debian-docker
 Log: <%= @logdir %>/debian-docker-<%= release %>.log
