@@ -257,6 +257,38 @@ class openstack_project::mirror_update (
     key_source => 'puppet:///modules/openstack_project/reprepro/ceph-mirror-gpg-key.asc',
   }
 
+  ## Docker APT mirror
+  ::openstack_project::reprepro { 'debian-docker-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-docker',
+    basedir       => '/afs/.openstack.org/mirror/deb-docker',
+    distributions => 'openstack_project/reprepro/distributions.debian-docker.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-docker-updates',
+    releases      => ['xenial'],
+  }
+
+  cron { 'reprepro debian docker':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian-docker.lock reprepro-mirror-update /etc/reprepro/debian-docker mirror.deb-docker >>/var/log/reprepro/debian-docker-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['debian-docker-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Docker Archive':
+    ensure     => present,
+    # 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+    key_id     => '0EBFCD88',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/docker-mirror-gpg-key.asc',
+  }
+
   ### CentOS mirror ###
   file { '/etc/centos.keytab':
     owner   => 'root',
