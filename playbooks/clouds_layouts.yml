@@ -239,3 +239,53 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+
+  # Citycloud
+  - name: openstackci-citycloud-Lon1
+    oscc_cloud: openstackci-citycloud
+    region_name: Lon1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-citycloud-Lon1
+    oscc_cloud: openstackzuul-citycloud
+    region_name: Lon1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackci-citycloud-La1
+    oscc_cloud: openstackci-citycloud
+    region_name: La1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-citycloud-La1
+    oscc_cloud: openstackzuul-citycloud
+    region_name: La1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackci-citycloud-Kna1
+    oscc_cloud: openstackci-citycloud
+    region_name: Kna1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-citycloud-Kna1
+    oscc_cloud: openstackzuul-citycloud
+    region_name: Kna1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackci-citycloud-Sto2
+    oscc_cloud: openstackci-citycloud
+    region_name: Sto2
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-citycloud-Sto2
+    oscc_cloud: openstackzuul-citycloud
+    region_name: Sto2
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
