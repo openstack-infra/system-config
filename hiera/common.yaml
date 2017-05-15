@@ -238,7 +238,6 @@ meetbot_channels:
 - '#openstack-zaqar'
 - '#openstack-zephyr'
 - '#openstack-zun'
-- '#osic'
 - '#puppet-openstack'
 - '#rdo'
 - '#refstack'
