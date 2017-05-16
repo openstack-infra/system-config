@@ -11,7 +11,7 @@ developers.
 OpenStack developers or users do not need to read this documentation.
 Instead, see the `Infra Manual <https://docs.openstack.org/infra/manual/>`_
 to learn how contribute to or the `OpenStack documentation
-<https://docs.openstack.org/> on how to use OpenStack.
+<https://docs.openstack.org/>`_ on how to use OpenStack.
 
 Contents:
 
