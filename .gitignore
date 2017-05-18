@@ -17,3 +17,5 @@ Vagrantfile
 .vagrant/
 manifests/local.pp
 *.retry
+AUTHORS
+ChangeLog
