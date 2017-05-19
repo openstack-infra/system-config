@@ -96,6 +96,22 @@ profiles:
         user: openstackzuul
         project: openstackzuul
 
+  - name: openstackci-networking
+    networks:
+      - name: openstackci-network1
+    subnets:
+      - name: openstackci-subnet1
+        network_name: openstackci-network1
+        cidr: '10.0.1.0/24'
+
+  - name: openstackzuul-networking
+    networks:
+      - name: openstackzuul-network1
+    subnets:
+      - name: openstackzuul-subnet1
+        network_name: openstackzuul-network1
+        cidr: '10.0.1.0/24'
+
 clouds:
   # bluebox-sjc1
   - name: admin-bluebox
@@ -247,45 +263,93 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackci-networking
+    routers:
+      - name: openstackci-router1
+        network: ext-net
+        interfaces:
+          - openstackci-subnet1
   - name: openstackzuul-citycloud-Lon1
     oscc_cloud: openstackzuul-citycloud
     region_name: Lon1
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackzuul-networking
+    routers:
+      - name: openstackzuul-router1
+        network: ext-net
+        interfaces:
+          - openstackzuul-subnet1
   - name: openstackci-citycloud-La1
     oscc_cloud: openstackci-citycloud
     region_name: La1
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackci-networking
+    routers:
+      - name: openstackci-router1
+        network: ext-net
+        interfaces:
+          - openstackci-subnet1
   - name: openstackzuul-citycloud-La1
     oscc_cloud: openstackzuul-citycloud
     region_name: La1
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackzuul-networking
+    routers:
+      - name: openstackzuul-router1
+        network: ext-net
+        interfaces:
+          - openstackzuul-subnet1
   - name: openstackci-citycloud-Kna1
     oscc_cloud: openstackci-citycloud
     region_name: Kna1
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackci-networking
+    routers:
+      - name: openstackci-router1
+        network: ext-net
+        interfaces:
+          - openstackci-subnet1
   - name: openstackzuul-citycloud-Kna1
     oscc_cloud: openstackzuul-citycloud
     region_name: Kna1
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackzuul-networking
+    routers:
+      - name: openstackzuul-router1
+        network: ext-net
+        interfaces:
+          - openstackzuul-subnet1
   - name: openstackci-citycloud-Sto2
     oscc_cloud: openstackci-citycloud
     region_name: Sto2
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackci-networking
+    routers:
+      - name: openstackci-router1
+        network: ext-net
+        interfaces:
+          - openstackci-subnet1
   - name: openstackzuul-citycloud-Sto2
     oscc_cloud: openstackzuul-citycloud
     region_name: Sto2
     profiles:
       - openstackci-keypairs
       - openstackci-security
+      - openstackzuul-networking
+    routers:
+      - name: openstackzuul-router1
+        network: ext-net
+        interfaces:
+          - openstackzuul-subnet1
