@@ -849,6 +849,7 @@ node 'nodepool.openstack.org' {
   $zk_receivers = [
     'nb01.openstack.org',
     'nb02.openstack.org',
+    'nb03.openstack.org',
     'nl01.openstack.org',
     'zuulv3-dev.openstack.org',
   ]
