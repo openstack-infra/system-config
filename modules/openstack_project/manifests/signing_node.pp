@@ -100,4 +100,8 @@ class openstack_project::signing_node (
     require => File['/home/jenkins/.launchpadlib'],
   }
 
+  package { 'python3-yaml':
+    ensure => present,
+  }
+
 }
