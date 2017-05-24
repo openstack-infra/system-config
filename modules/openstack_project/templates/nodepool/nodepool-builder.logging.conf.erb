@@ -8,7 +8,7 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_opensuse-42.2, rax-dfw_upload, rax-ord_upload,
+ dib_fedora-25, dib_opensuse-422, rax-dfw_upload, rax-ord_upload,
  rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
  bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
@@ -19,7 +19,7 @@ keys=root,nodepool,requests,shade,image,kazoo,
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_opensuse-42.2, rax-dfw_upload, rax-ord_upload,
+ dib_fedora-25, dib_opensuse-422, rax-dfw_upload, rax-ord_upload,
  rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
  bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
@@ -152,17 +152,17 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-25.log', 'H', 8, 30,)
 
-[logger_dib_opensuse-42.2]
+[logger_dib_opensuse-422]
 level=DEBUG
-handlers=dib_opensuse-42.2
-qualname=nodepool.image.build.opensuse-42.2
+handlers=dib_opensuse-422
+qualname=nodepool.image.build.opensuse-422
 propagate=0
 
-[handler_dib_opensuse-42.2]
+[handler_dib_opensuse-422]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @image_log_document_root %>/dib.opensuse-42.2.log', 'H', 8, 30,)
+args=('<%= @image_log_document_root %>/dib.opensuse-422.log', 'H', 8, 30,)
 
 [logger_rax-dfw_upload]
 level=DEBUG
