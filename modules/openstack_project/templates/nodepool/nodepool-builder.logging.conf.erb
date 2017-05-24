@@ -8,20 +8,24 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, rax-dfw_upload, rax-ord_upload, rax-iad_upload,
- ovh-gra1_upload, ovh-bhs1_upload, bluebox-sjc1_upload,
- internap-mtl01_upload, osic-cloud1-s3500_upload,
+ dib_fedora-25, dib_opensuse-42.2, rax-dfw_upload, rax-ord_upload,
+ rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
+ bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload
+ infracloud-vanilla_upload, infracloud-chocolate_upload,
+ citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
+ citycloud-sto2_upload
 
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, rax-dfw_upload, rax-ord_upload, rax-iad_upload,
- ovh-gra1_upload, ovh-bhs1_upload, bluebox-sjc1_upload,
- internap-mtl01_upload, osic-cloud1-s3500_upload,
+ dib_fedora-25, dib_opensuse-42.2, rax-dfw_upload, rax-ord_upload,
+ rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
+ bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload
+ infracloud-vanilla_upload, infracloud-chocolate_upload,
+ citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
+ citycloud-sto2_upload
 
 [formatters]
 keys=simple
@@ -147,6 +151,18 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-25.log', 'H', 8, 30,)
+
+[logger_dib_opensuse-42.2]
+level=DEBUG
+handlers=dib_opensuse-42.2
+qualname=nodepool.image.build.opensuse-42.2
+propagate=0
+
+[handler_dib_opensuse-42.2]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.opensuse-42.2.log', 'H', 8, 30,)
 
 [logger_rax-dfw_upload]
 level=DEBUG
@@ -291,4 +307,52 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/infracloud-chocolate.log', 'H', 8, 30,)
+
+[logger_citycloud-lon1_upload]
+level=DEBUG
+handlers=citycloud-lon1_upload
+qualname=nodepool.image.upload.citycloud-lon1
+propagate=0
+
+[handler_citycloud-lon1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/citycloud-lon1.log', 'H', 8, 30,)
+
+[logger_citycloud-kna1_upload]
+level=DEBUG
+handlers=citycloud-kna1_upload
+qualname=nodepool.image.upload.citycloud-kna1
+propagate=0
+
+[handler_citycloud-kna1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/citycloud-kna1.log', 'H', 8, 30,)
+
+[logger_citycloud-la1_upload]
+level=DEBUG
+handlers=citycloud-la1_upload
+qualname=nodepool.image.upload.citycloud-la1
+propagate=0
+
+[handler_citycloud-la1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/citycloud-la1.log', 'H', 8, 30,)
+
+[logger_citycloud-sto2_upload]
+level=DEBUG
+handlers=citycloud-sto2_upload
+qualname=nodepool.image.upload.citycloud-sto2
+propagate=0
+
+[handler_citycloud-sto2_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/citycloud-sto2.log', 'H', 8, 30,)
 
