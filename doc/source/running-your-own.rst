@@ -376,17 +376,13 @@ to bring up initially, so that's our next step.
 
 The platform specific slaves are named $platform-serial.slave.$PROJECT in
 site.pp. For instance, Python2.6 is not widely available now, so it runs on
-centos6-xx.slave.$platform nodes. There can be multiple slaves, and each
-gets their own puppet cert. The openstack/site.pp has a legacy setting for
-``certname`` that you should remove.
+centos6-xx.slave.$platform nodes.
 
 #. Migrate modules/openstack_project/manifests/slave.pp
    We reuse tmpcleanup as-is.
 
 #. Convert a slave definition in site.pp. Lets say
    ``/^centos6-?\d+\.slave\.openstack\.org$/``
-
-#. Remove the certname override - upstream are dropping this gradually.
 
 #. Launch a node, passing in --image and --flavor to get a node that you
    want :). e.g::
