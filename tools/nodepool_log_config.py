@@ -64,7 +64,7 @@ handlers=debug,normal
 qualname=requests
 
 [logger_shade]
-level=WARNING
+level=DEBUG
 handlers=debug,normal
 qualname=shade
 
