@@ -241,4 +241,12 @@ class openstack_project::users {
     uid      => 2026,
     gid      => 2026,
   }
+
+  @user::virtual::localuser { 'bkero':
+    realname => 'Ben Kero',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEA0m7hau2lgz8IiFPQl+RfVO4jAgnVQLW2CKQxsq7qRfPlhjRUbU7mCKBMq0DS/GyK/SJvE0L8QefopFvlyfbzXi5kbHlUprFeTGtQkvF/XotRNAx6hcbVdClbqyy3JwcQBc/jFkfBuy2mdTEVCINKQorngvosRCM7CtnpSUMGcw9K5Rr48kkB+UtgJOLkraZ6QyngmUtm3nRnL8uk4tfKw3DZbBe/eXzCvNVd/fYAKpeoIAgRwPj4jmPLuly+Y5IipxizsWgVAGjeAC3p3ybHqXORBu2S+u2kV8sLoBQkrWZETX+QGv0gRzXv7IFINhNv9+2sgHOmumbSDnNzvfNZaw==',
+    key_id   => 'bkero@ponderosa',
+    uid      => 2027,
+	gid      => 2027,
+  }
 }
