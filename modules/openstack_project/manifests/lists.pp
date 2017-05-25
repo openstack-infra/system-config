@@ -269,6 +269,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-sdk-authors':
+    ensure      => present,
+    admin       => 'mordred@inaugust.com',
+    password    => $listpassword,
+    description => 'Discussions around development of SDKs that consume OpenStack APIs. Advanced users of the REST APIs also welcome. Not for general usage questions.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'enterprise-wg':
     ensure      => present,
     admin       => 'carol.l.barrett@intel.com',
