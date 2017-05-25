@@ -39,3 +39,8 @@ timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+
+
+# Native ansible playbooks for infra servers.
+# Entries here should have no puppet within their playbooks
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/zuul-scheduler.yaml

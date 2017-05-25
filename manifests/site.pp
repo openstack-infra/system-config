@@ -1087,6 +1087,22 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+# NOTE(pabelanger): This server is currently bootstrapped with puppet. The rest
+# of our logic is now moved to ansible.  We have to do this split approach
+# until we decide to completely move to ansible.
+node 'zuulv3.openstack.org' {
+  $gearman_workers = []
+  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    iptables_rules6           => $iptables_rules,
+    iptables_rules4           => $iptables_rules,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+}
+
 # Node-OS: trusty
 node 'zuulv3-dev.openstack.org' {
   $gerrit_server        = 'review.openstack.org'

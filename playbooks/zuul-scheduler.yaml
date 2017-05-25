@@ -1,0 +1,6 @@
+---
+- hosts: "zuulv3.openstack.org:!disabled"
+  gather_facts: true
+
+  roles:
+    - openstack.zuul
