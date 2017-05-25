@@ -1,0 +1,12 @@
+# Make sure zuul-executor service is disabled
+zuul_service_zuul_executor_enabled: no
+zuul_service_zuul_executor_manage: false
+zuul_service_zuul_executor_state: stopped
+
+# Make sure zuul-merger service is disabled
+zuul_service_zuul_merger_enabled: no
+zuul_service_zuul_merger_manage: false
+zuul_service_zuul_merger_state: stopped
+
+# Make sure zuul-scheduler is not managed
+zuul_service_zuul_scheduler_manage: false
