@@ -19,32 +19,34 @@ BASE="/afs/.openstack.org/mirror/opensuse"
 MIRROR="rsync://mirrors.kernel.org"
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
-REPO=distribution/leap/42.2
-if ! [ -f $BASE/$REPO ]; then
-    $K5START mkdir -p $BASE/$REPO
-fi
+for DISTVER in 42.2 42.3; do
+    REPO=distribution/leap/$DISTVER
+    if ! [ -f $BASE/$REPO ]; then
+        $K5START mkdir -p $BASE/$REPO
+    fi
 
-date --iso-8601=ns
-echo "Running rsync releases..."
-$K5START rsync -rlptDvz \
-    --delete \
-    --delete-excluded \
-    --exclude="iso" \
-    $MIRROR/opensuse/$REPO/ $BASE/$REPO/
+    date --iso-8601=ns
+    echo "Running rsync distribution $DISTVER ..."
+    $K5START rsync -rlptDvz \
+        --delete \
+        --delete-excluded \
+        --exclude="iso" \
+        $MIRROR/opensuse/$REPO/ $BASE/$REPO/
 
-REPO=update/leap/42.2
-if ! [ -f $BASE/$REPO ]; then
-    $K5START mkdir -p $BASE/$REPO
-fi
+    REPO=update/leap/$DISTVER
+    if ! [ -f $BASE/$REPO ]; then
+        $K5START mkdir -p $BASE/$REPO
+    fi
 
-date --iso-8601=ns
-echo "Running rsync updates..."
-$K5START rsync -rlptDvz \
-    --delete \
-    --delete-excluded \
-    --exclude="src/" \
-    --exclude="nosrc/" \
-    $MIRROR/opensuse/$REPO/ $BASE/$REPO/
+    date --iso-8601=ns
+    echo "Running rsync updates $DISTVER ..."
+    $K5START rsync -rlptDvz \
+        --delete \
+        --delete-excluded \
+        --exclude="src/" \
+        --exclude="nosrc/" \
+        $MIRROR/opensuse/$REPO/ $BASE/$REPO/
+done
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
