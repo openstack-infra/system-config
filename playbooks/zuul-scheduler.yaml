@@ -1,0 +1,16 @@
+---
+- hosts: "zuulv3.openstack.org:!disabled"
+  gather_facts: true
+
+  pre_tasks:
+  # TODO(pabelanger): Create project-config ansible role.
+  - name: Git clone openstack-infra/project-config
+    become: yes
+    git:
+      dest: /opt/openstack-infra/project-config
+      repo: https://git.openstack.org/openstack-infra/project-config
+      version: master
+
+  roles:
+    - openstack.zuul
+    - openstack.ssh

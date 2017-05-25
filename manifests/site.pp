@@ -1087,6 +1087,19 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+# NOTE(pabelanger): This server is currently bootstrapped with puppet. The rest
+# of our logic is now moved to ansible.  We have to do this split approach
+# until we decide to completely move to ansible.
+node 'zuulv3.openstack.org' {
+  $group = "zuul-scheduler"
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+}
+
 # Node-OS: trusty
 node 'zuulv3-dev.openstack.org' {
   $gerrit_server        = 'review.openstack.org'

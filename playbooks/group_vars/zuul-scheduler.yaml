@@ -1,0 +1,30 @@
+---
+# Ensure we have sane defaults for our installation. For more information refer
+# to http://git.openstack.org/cgit/openstack/ansible-role-zuul/tree/defaults/main.yaml
+
+zuul_user_name: zuul
+zuul_user_home: /var/lib/zuul
+
+# Install zuul from git
+zuul_install_method: git
+
+# Make sure we are using feature/zuulv3
+zuul_git_version: feature/zuulv3
+
+# Install zuul using python3
+zuul_pip_executable: pip3
+
+# Make sure zuul services are not managed
+zuul_service_zuul_executor_manage: false
+zuul_service_zuul_merger_manage: false
+zuul_service_zuul_scheduler_manage: false
+
+zuul_file_zuul_conf_src: zuul-scheduler/etc/zuul/zuul.conf
+
+# Make sure ssh is setup properly.
+# TODO(pabelanger): Get private keys from hiera for zuul user.
+ssh_user_name: "{{ zuul_user_name }}"
+ssh_user_home: "{{ zuul_user_home }}"
+
+ssh_known_hosts_content: |
+    review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfsIj/jqpI+2CFdjCL6kOiqdORWvxQ2sQbCzSzzmLXic8yVhCCbwarkvEpfUOHG4eyB0vqVZfMffxf0Yy3qjURrsroBCiuJ8GdiAcGdfYwHNfBI0cR6kydBZL537YDasIk0Z3ILzhwf7474LmkVzS7V2tMTb4ZiBS/jUeiHsVp88FZhIBkyhlb/awAGcUxT5U4QBXCAmerYXeB47FPuz9JFOVyF08LzH9JRe9tfXtqaCNhlSdRe/2pPRvn2EIhn5uHWwATACG9MBdrK8xv8LqPOik2w1JkgLWyBj11vDd5I3IjrmREGw8dqImqp0r6MD8rxqADlc1elfDIXYsy+TVH gerrit-code-review@gerrit.openstack.org
