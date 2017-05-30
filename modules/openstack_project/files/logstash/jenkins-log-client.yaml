@@ -570,6 +570,10 @@ source-files:
       - apachecombined
     job-filter: '.*grenade.*'
 # multinode  subnode logs
+  - name: logs/subnode-2/devstacklog.txt
+    tags:
+      - console
+      - console.html
   - name: logs/subnode-2/screen-n-api-meta.txt
     tags:
       - screen
