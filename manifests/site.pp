@@ -1131,6 +1131,44 @@ node 'zuulv3-dev.openstack.org' {
   # TODO(pabelanger): Add zuul_launcher support
 }
 
+# Node-OS: xenial
+node 'zuulv3.openstack.org' {
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $zuul_url             = "http://${::fqdn}/p"
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'feature/zuulv3'
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { '::project_config':
+    url => 'https://git.openstack.org/openstack-infra/project-config',
+  }
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gerrit_server        => $gerrit_server,
+    gerrit_user          => $gerrit_user,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    git_email            => $git_email,
+    git_name             => $git_name,
+    revision             => $revision,
+    python_version       => 3,
+  }
+
+  class { '::zuul::scheduler':
+    layout_dir => $::project_config::zuul_layout_dir,
+    require    => $::project_config::config_dir,
+  }
+}
+
 # Node-OS: trusty
 node 'zuul.openstack.org' {
   $gearman_workers = [
