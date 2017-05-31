@@ -1161,6 +1161,7 @@ node 'zuulv3.openstack.org' {
     git_email            => $git_email,
     git_name             => $git_name,
     revision             => $revision,
+    python_version       => 3,
   }
 
   class { 'openstack_project::zuul_merger':
