@@ -244,7 +244,7 @@ class openstack_project::server (
   ###########################################################
   # Manage  python/pip
 
-  $desired_virtualenv = '13.1.0'
+  $desired_virtualenv = '15.1.0'
   class { '::pip':
     index_url       => $pypi_index_url,
     optional_settings => {
