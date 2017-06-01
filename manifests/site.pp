@@ -1087,6 +1087,35 @@ node /^nb\d+\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+node /^ze\d+\.openstack\.org$/ {
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'feature/zuulv3'
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [79],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gerrit_server        => $gerrit_server,
+    gerrit_user          => $gerrit_user,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    git_email            => $git_email,
+    git_name             => $git_name,
+    revision             => $revision,
+    zuulv3               => true,
+  }
+
+  class { 'openstack_project::executor': }
+}
+
 # Node-OS: trusty
 node 'zuulv3-dev.openstack.org' {
   $gerrit_server        = 'review.openstack.org'
