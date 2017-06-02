@@ -1162,6 +1162,9 @@ node 'zuulv3.openstack.org' {
     git_name             => $git_name,
     revision             => $revision,
     python_version       => 3,
+    zookeeper_hosts      => 'nodepool.openstack.org:2181',
+    zuulv3               => true,
+    connections          => hiera('zuul_connections', []),
   }
 
   class { '::zuul::scheduler':
