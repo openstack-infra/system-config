@@ -1,0 +1,15 @@
+---
+zuul_connections:
+  - name: 'smtp'
+    driver: 'smtp'
+    server: 'localhost'
+    port: '25'
+    default_from: 'zuul@zuulv3.openstack.org'
+    default_to: 'zuul.reports@zuulv3.openstack.org'
+
+  - name: 'gerrit'
+    driver: 'gerrit'
+    server: 'review.openstack.org'
+    canonical_hostname: 'git.openstack.org'
+    user: 'zuul'
+    sshkey: '/var/lib/zuul/ssh/id_rsa'
