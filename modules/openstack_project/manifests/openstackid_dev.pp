@@ -56,7 +56,7 @@ class openstack_project::openstackid_dev (
   $curl_verify_ssl_cert = false,
   $curl_allow_redirect = false,
   $curl_timeout = 60,
-  $assets_base_url = 'https://www.openstack.org/',
+  $assets_base_url = 'https://devbranch.openstack.org/',
   $cache_driver = 'redis',
   $session_driver = 'redis',
   $session_cookie_secure = false,
