@@ -155,6 +155,12 @@ class openstack_project::gerrit (
     its_rules                           => $its_rules,
     trackingids                         => [
       {
+        name    => 'launchpad-bug',
+        footers => ['closes-bug:', 'partial-bug:', 'related-bug:'],
+        match   => '\\#?(\\d+)',
+        system  => 'Launchpad',
+      },
+      {
         name   => 'storyboard-story',
         footer => 'story:',
         match  => '\\#?(\\d+)',
