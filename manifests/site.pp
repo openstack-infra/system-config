@@ -1090,6 +1090,8 @@ node /^nb\d+\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^ze\d+\.openstack\.org$/ {
+  $group = "zuul-executor"
+
   $gerrit_server        = 'review.openstack.org'
   $gerrit_user          = 'zuul'
   $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
