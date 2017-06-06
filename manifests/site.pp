@@ -852,6 +852,7 @@ node 'nodepool.openstack.org' {
     'nb03.openstack.org',
     'nb04.openstack.org',
     'nl01.openstack.org',
+    'ze01.openstack.org',
     'zuulv3-dev.openstack.org',
     'zuulv3.openstack.org',
   ]
