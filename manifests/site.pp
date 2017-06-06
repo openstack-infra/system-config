@@ -1211,6 +1211,7 @@ node 'zuulv3.openstack.org' {
 node 'zuul.openstack.org' {
   $gearman_workers = [
     'nodepool.openstack.org',
+    'ze01.openstack.org',
     'zlstatic01.openstack.org',
     'zl01.openstack.org',
     'zl02.openstack.org',
