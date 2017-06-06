@@ -1107,15 +1107,16 @@ node /^ze\d+\.openstack\.org$/ {
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
-    gerrit_server        => $gerrit_server,
-    gerrit_user          => $gerrit_user,
-    zuul_ssh_private_key => $zuul_ssh_private_key,
-    git_email            => $git_email,
-    git_name             => $git_name,
-    revision             => $revision,
-    python_version       => 3,
-    zookeeper_hosts      => 'nodepool.openstack.org:2181',
-    zuulv3               => true,
+    gerrit_server           => $gerrit_server,
+    gerrit_user             => $gerrit_user,
+    zuul_ssh_private_key    => $zuul_ssh_private_key,
+    git_email               => $git_email,
+    git_name                => $git_name,
+    worker_private_key_file => '/var/lib/zuul/ssh/id_rsa',
+    revision                => $revision,
+    python_version          => 3,
+    zookeeper_hosts         => 'nodepool.openstack.org:2181',
+    zuulv3                  => true,
   }
 
   class { '::zuul::executor': }
