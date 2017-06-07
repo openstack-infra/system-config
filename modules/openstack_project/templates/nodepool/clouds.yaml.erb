@@ -42,6 +42,17 @@ clouds:
       project_name: '<%= @tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh2.tripleo.org:13000/v2.0'
     floating_ip_source: neutron
+  tripleo-test-rdocloud:
+    region_name: regionOne
+    auth:
+      auth_url: https://phx2.cloud.rdoproject.org:13000
+      username: '<%= @rdocloud_username %>'
+      password: '<%= @rdocloud_password %>'
+      project_name: '<%= @rdocloud_project %>'
+      project_domain_name: default
+      user_domain_name: default
+    floating_ip_source: neutron
+    identity_api_version: '3'
   bluebox-sjc1:
     auth:
       auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
