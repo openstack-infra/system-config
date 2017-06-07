@@ -231,7 +231,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/ceph-deb-jewel',
     distributions => 'openstack_project/reprepro/distributions.debian-ceph-jewel.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-jewel-updates',
-    releases      => ['trusty', 'xenial'],
+    releases      => ['jessie', 'trusty', 'xenial'],
   }
 
   cron { 'reprepro debian ceph jewel':
