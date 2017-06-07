@@ -1092,12 +1092,13 @@ node /^nb\d+\.openstack\.org$/ {
 node /^ze\d+\.openstack\.org$/ {
   $group = "zuul-executor"
 
-  $gerrit_server        = 'review.openstack.org'
-  $gerrit_user          = 'zuul'
-  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
-  $git_email            = 'zuul@openstack.org'
-  $git_name             = 'OpenStack Zuul'
-  $revision             = 'feature/zuulv3'
+  $gerrit_server          = 'review.openstack.org'
+  $gerrit_user            = 'zuul'
+  $gerrit_ssh_private_key = hiera('gerrit_ssh_private_key_contents')
+  $zuul_ssh_private_key   = hiera('zuul_ssh_private_key_contents')
+  $git_email              = 'zuul@openstack.org'
+  $git_name               = 'OpenStack Zuul'
+  $revision               = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79],
@@ -1110,10 +1111,10 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_server          => 'zuulv3.openstack.org',
     gerrit_server           => $gerrit_server,
     gerrit_user             => $gerrit_user,
-    zuul_ssh_private_key    => $zuul_ssh_private_key,
+    zuul_ssh_private_key    => $gerrit_zuul_ssh_private_key,
     git_email               => $git_email,
     git_name                => $git_name,
-    worker_private_key_file => '/var/lib/zuul/ssh/id_rsa',
+    worker_private_key_file => '/var/lib/zuul/ssh/nodepool_id_rsa',
     revision                => $revision,
     python_version          => 3,
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
@@ -1121,6 +1122,14 @@ node /^ze\d+\.openstack\.org$/ {
   }
 
   class { '::zuul::executor': }
+
+  file { '/var/lib/zuul/ssh/nodepool_id_rsa':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    require => File['/var/lib/zuul/ssh'],
+    content => $zuul_ssh_private_key,
+  }
 }
 
 # Node-OS: trusty
