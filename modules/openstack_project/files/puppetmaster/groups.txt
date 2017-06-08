@@ -19,3 +19,4 @@ wheel-mirror *wheel-mirror-*.openstack.org
 wiki ~wiki\d+\.openstack\.org
 wiki-dev ~wiki-dev\d+\.openstack\.org
 zuul-merger ~z[lm](static)?\d+\.openstack\.org
+zuul-executor ~ze\d+\.openstack\.org
