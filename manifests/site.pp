@@ -1111,7 +1111,7 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_server          => 'zuulv3.openstack.org',
     gerrit_server           => $gerrit_server,
     gerrit_user             => $gerrit_user,
-    zuul_ssh_private_key    => $gerrit_zuul_ssh_private_key,
+    zuul_ssh_private_key    => $gerrit_ssh_private_key,
     git_email               => $git_email,
     git_name                => $git_name,
     worker_private_key_file => '/var/lib/zuul/ssh/nodepool_id_rsa',
