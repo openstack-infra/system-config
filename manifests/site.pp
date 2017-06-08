@@ -1121,6 +1121,7 @@ node /^ze\d+\.openstack\.org$/ {
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
     zuulv3                  => true,
     connections             => hiera('zuul_connections', []),
+    zuul_status_url         => 'http://127.0.0.1:8001/openstack',
   }
 
   class { '::zuul::executor': }
