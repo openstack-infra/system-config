@@ -1094,6 +1094,7 @@ node /^ze\d+\.openstack\.org$/ {
 
   $gerrit_server          = 'review.openstack.org'
   $gerrit_user            = 'zuul'
+  $gerrit_ssh_host_key    = hiera('gerrit_ssh_rsa_pubkey_contents'),
   $gerrit_ssh_private_key = hiera('gerrit_ssh_private_key_contents')
   $zuul_ssh_private_key   = hiera('zuul_ssh_private_key_contents')
   $git_email              = 'zuul@openstack.org'
@@ -1130,6 +1131,10 @@ node /^ze\d+\.openstack\.org$/ {
     mode    => '0400',
     require => File['/var/lib/zuul/ssh'],
     content => $zuul_ssh_private_key,
+  }
+
+  class { '::zuul::known_hosts':
+    known_hosts_content => "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
   }
 }
 
