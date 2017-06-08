@@ -1119,6 +1119,7 @@ node /^ze\d+\.openstack\.org$/ {
     python_version          => 3,
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
     zuulv3                  => true,
+    connections             => hiera('zuul_connections', []),
   }
 
   class { '::zuul::executor': }
