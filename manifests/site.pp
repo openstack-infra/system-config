@@ -1134,7 +1134,7 @@ node /^ze\d+\.openstack\.org$/ {
   }
 
   class { '::zuul::known_hosts':
-    known_hosts_content => "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
+    known_hosts_content => "review.openstack.org,104.130.246.91,2001:4800:7819:103:be76:4eff:fe05:8525 ${gerrit_ssh_host_key}",
   }
 }
 
