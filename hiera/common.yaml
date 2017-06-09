@@ -113,6 +113,7 @@ statusbot_channels:
 - openstack-telemetry
 - openstack-tricircle
 - openstack-trove
+- openstack-uk
 - openstack-valence
 - openstack-vitrage
 - openstack-zaqar
