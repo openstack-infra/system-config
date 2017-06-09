@@ -94,7 +94,7 @@ class openstack_project::mirror_update (
   cron { 'bandersnatch':
     user        => $user,
     minute      => '*/5',
-    command     => 'flock -n /var/run/bandersnatch/mirror.lock bandersnatch-mirror-update >>/var/log/bandersnatch/mirror.log 2>&1',
+    command     => 'flock -n /var/run/bandersnatch/mirror.lock bandersnatch-mirror-update /var/log/bandersnatch/mirror.log',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
        File['/usr/local/bin/bandersnatch-mirror-update'],
