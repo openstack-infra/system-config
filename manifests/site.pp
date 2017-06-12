@@ -329,6 +329,8 @@ node 'eavesdrop.openstack.org' {
     statusbot_wiki_pageid   => '1781',
     # https://wiki.openstack.org/wiki/Successes
     statusbot_wiki_successpageid => '7717',
+    # https://wiki.openstack.org/wiki/Praises
+    statusbot_wiki_praisepageid => '37662',
     statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
     statusbot_twitter                 => true,
     statusbot_twitter_key             => hiera('statusbot_twitter_key'),
