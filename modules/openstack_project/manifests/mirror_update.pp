@@ -104,30 +104,6 @@ class openstack_project::mirror_update (
     ]
   }
 
-  cron { 'rubygems-mirror':
-    minute      => '*/5',
-    command     => 'flock -n /var/run/rubygems/mirror.lock gem-mirror-update  >>/var/log/rubygems/mirror.log 2>&1',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
-      File['/etc/afsadmin.keytab'],
-      File['/etc/gem.keytab'],
-      Class['openstack_project::gem_mirror'],
-    ]
-  }
-
-  cron { 'npm-mirror-update':
-    user        => $user,
-    minute      => '*/5',
-    command     => 'flock -n /var/run/npm-mirror-update/mirror.lock npm-mirror-update >>/var/log/npm-mirror-update/mirror.log 2>&1',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
-      File['/usr/local/bin/npm-mirror-update'],
-      File['/etc/afsadmin.keytab'],
-      File['/etc/npm.keytab'],
-      Class['openstack_project::npm_mirror'],
-    ]
-  }
-
   file { '/etc/reprepro.keytab':
     owner   => 'root',
     group   => 'root',
