@@ -7,6 +7,7 @@ Major Systems
    :maxdepth: 2
 
    cacti
+   certificate_authority
    gerrit
    grafana
    grafyaml
