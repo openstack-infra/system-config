@@ -393,4 +393,52 @@ class openstack_project::puppetmaster (
     refreshonly => true,
   }
 
+  # Certificate Authority for zuul services.
+  file { '/etc/zuul-ca':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+  }
+
+  # Folder layout for demoCA is default from /etc/ssl/openssl.cnf.
+  file { '/etc/zuul-ca/demoCA':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca'],
+  }
+
+  file { '/etc/zuul-ca/demoCA/certs':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca/demoCA'],
+  }
+
+  file { '/etc/zuul-ca/demoCA/crl':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca/demoCA'],
+  }
+
+  file { '/etc/zuul-ca/demoCA/newcerts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca/demoCA'],
+  }
+
+  file { '/etc/zuul-ca/demoCA/private':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca/demoCA'],
+  }
 }
