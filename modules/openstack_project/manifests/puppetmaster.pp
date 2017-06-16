@@ -393,4 +393,52 @@ class openstack_project::puppetmaster (
     refreshonly => true,
   }
 
+  # Certificate Authority for zuul services.
+  file { '/etc/zuul-ca':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+  }
+
+  file { '/etc/zuul-ca/openssl.cnf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    source  => 'puppet:///modules/openstack_project/puppetmaster/zuul_ca.cnf',
+    require => File['/etc/zuul-ca'],
+  }
+
+  file { '/etc/zuul-ca/certs':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca'],
+  }
+
+  file { '/etc/zuul-ca/crl':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca'],
+  }
+
+  file { '/etc/zuul-ca/newcerts':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca'],
+  }
+
+  file { '/etc/zuul-ca/private':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'puppet',
+    mode    => '0640',
+    require => File['/etc/zuul-ca'],
+  }
 }
