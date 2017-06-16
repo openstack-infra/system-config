@@ -1121,6 +1121,9 @@ node /^ze\d+\.openstack\.org$/ {
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
     zuulv3                  => true,
     connections             => hiera('zuul_connections', []),
+    gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
+    gearman_ssl_ca          => hiera('gearman_ssl_ca'),
   }
 
   class { '::zuul::executor': }
@@ -1212,17 +1215,20 @@ node 'zuulv3.openstack.org' {
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
-    gerrit_server        => $gerrit_server,
-    gerrit_user          => $gerrit_user,
-    zuul_ssh_private_key => $zuul_ssh_private_key,
-    git_email            => $git_email,
-    git_name             => $git_name,
-    revision             => $revision,
-    python_version       => 3,
-    zookeeper_hosts      => 'nodepool.openstack.org:2181',
-    zuulv3               => true,
-    connections          => hiera('zuul_connections', []),
-    zuul_status_url      => 'http://127.0.0.1:8001/openstack',
+    gerrit_server           => $gerrit_server,
+    gerrit_user             => $gerrit_user,
+    zuul_ssh_private_key    => $zuul_ssh_private_key,
+    git_email               => $git_email,
+    git_name                => $git_name,
+    revision                => $revision,
+    python_version          => 3,
+    zookeeper_hosts         => 'nodepool.openstack.org:2181',
+    zuulv3                  => true,
+    connections             => hiera('zuul_connections', []),
+    zuul_status_url         => 'http://127.0.0.1:8001/openstack',
+    gearman_server_ssl_cert => hiera('gearman_server_ssl_cert'),
+    gearman_server_ssl_key  => hiera('gearman_server_ssl_key'),
+    gearman_ssl_ca          => hiera('gearman_ssl_ca'),
   }
 
   class { '::zuul::scheduler':
