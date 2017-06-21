@@ -127,6 +127,9 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+    CacheEnable disk  "/pypi"
+    ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+    ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
