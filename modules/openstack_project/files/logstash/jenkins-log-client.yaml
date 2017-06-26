@@ -19,6 +19,9 @@ subunit-files:
     build-queue-filter: 'gate'
   - name: testrepository.subunit
     build-queue-filter: 'gate'
+  - name: testrepository.subunit
+    job-filter: '.*tripleo.*'
+    build-queue-filter: 'check'
   - name: logs/karma.subunit
     job-filter: '.*npm-run.*'
     build-queue-filter: 'gate'
