@@ -540,23 +540,6 @@ node /^firehose\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
-node /^pholio\d+\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  class { '::phabricator':
-    httpd_admin_email       => hiera('infra_apache_serveradmin'),
-    httpd_vhost             => 'pholio.openstack.org',
-    mysql_user_password     => hiera('pholio_mysql_user_password'),
-    mysql_root_password     => hiera('pholio_mysql_root_password'),
-    ssl_cert_file_contents  => hiera('ssl_cert_file_contents'),
-    ssl_key_file_contents   => hiera('ssl_key_file_contents'),
-    ssl_chain_file_contents => hiera('ssl_chain_file_contents'),
-  }
-}
-
 # CentOS machines to load balance git access.
 # Node-OS: centos7
 node /^git(-fe\d+)?\.openstack\.org$/ {
