@@ -1092,14 +1092,15 @@ node /^nb\d+\.openstack\.org$/ {
 node /^ze\d+\.openstack\.org$/ {
   $group = "zuul-executor"
 
-  $gerrit_server          = 'review.openstack.org'
-  $gerrit_user            = 'zuul'
-  $gerrit_ssh_host_key    = hiera('gerrit_ssh_rsa_pubkey_contents')
-  $gerrit_ssh_private_key = hiera('gerrit_ssh_private_key_contents')
-  $zuul_ssh_private_key   = hiera('zuul_ssh_private_key_contents')
-  $git_email              = 'zuul@openstack.org'
-  $git_name               = 'OpenStack Zuul'
-  $revision               = 'feature/zuulv3'
+  $gerrit_server           = 'review.openstack.org'
+  $gerrit_user             = 'zuul'
+  $gerrit_ssh_host_key     = hiera('gerrit_ssh_rsa_pubkey_contents')
+  $gerrit_ssh_private_key  = hiera('gerrit_ssh_private_key_contents')
+  $zuul_ssh_private_key    = hiera('zuul_ssh_private_key_contents')
+  $zuul_static_private_key = hiera('jenkins_ssh_private_key_contents')
+  $git_email               = 'zuul@openstack.org'
+  $git_name                = 'OpenStack Zuul'
+  $revision                = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79],
@@ -1134,6 +1135,14 @@ node /^ze\d+\.openstack\.org$/ {
     mode    => '0400',
     require => File['/var/lib/zuul/ssh'],
     content => $zuul_ssh_private_key,
+  }
+
+  file { '/var/lib/zuul/ssh/static_id_rsa':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    require => File['/var/lib/zuul/ssh'],
+    content => $zuul_static_private_key,
   }
 
   class { '::zuul::known_hosts':
