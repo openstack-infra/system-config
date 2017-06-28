@@ -149,7 +149,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/debian',
     distributions => 'openstack_project/reprepro/distributions.debian.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
-    releases      => ['jessie'],
+    releases      => ['jessie', 'stretch'],
   }
 
   cron { 'reprepro debian':
