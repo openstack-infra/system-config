@@ -17,6 +17,9 @@ class openstack_project::static (
   $releases_cert_file_contents = '',
   $releases_key_file_contents = '',
   $releases_chain_file_contents = '',
+  $service_types_cert_file_contents = '',
+  $service_types_key_file_contents = '',
+  $service_types_chain_file_contents = '',
   $jenkins_gitfullname = 'OpenStack Jenkins',
   $jenkins_gitemail = 'jenkins@openstack.org',
 ) {
@@ -478,6 +481,48 @@ class openstack_project::static (
   }
 
   file { '/srv/static/releases':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  ###########################################################
+  # service-types.openstack.org
+
+  ::httpd::vhost { 'service-types.openstack.org':
+    port       => 443, # Is required despite not being used.
+    docroot    => "${afs_root}docs/service-types",
+    priority   => '50',
+    template   => 'openstack_project/service-types.vhost.erb',
+  }
+  file { '/etc/ssl/certs/service-types.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $service_types_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/service-types.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $service_types_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/service-types.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $service_types_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/service-types.openstack.org.pem'],
+  }
+
+  file { '/srv/static/service-types':
     ensure  => directory,
     owner   => 'jenkins',
     group   => 'jenkins',
