@@ -615,13 +615,8 @@ source-files:
       - console
       - postci
     job-filter: '.*-tripleo-ci-.*'
-  - name: logs/undercloud/var/log/undercloud_install.txt
+  - name: logs/undercloud/var/log/extra/logstash.txt
     tags:
       - console
-      - undercloud
-    job-filter: '.*-tripleo-ci-.*'
-  - name: logs/undercloud/var/log/image_build.txt
-    tags:
-      - console
-      - undercloud
+      - postci
     job-filter: '.*-tripleo-ci-.*'
