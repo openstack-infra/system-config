@@ -1,0 +1,62 @@
+# ************************************
+# Managed by Puppet
+# ************************************
+
+<VirtualHost *:80>
+    ServerName <%= @srvname %>
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
+
+    RewriteEngine on
+    RewriteRule ^/(.*) https://<%= @srvname %>/$1 [last,redirect=permanent]
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
+    ServerSignature Off
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+    ServerName <%= @srvname %>
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
+
+    RewriteEngine on
+
+    SSLEngine on
+    SSLProtocol All -SSLv2 -SSLv3
+    # Once the machine is using something to terminate TLS that supports ECDHE
+    # then this should be edited to remove the RSA+AESGCM:RSA+AES so that PFS
+    # only is guarenteed.
+    SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!AES256:!aNULL:!eNULL:!MD5:!DSS:!PSK:!SRP
+    SSLHonorCipherOrder on
+    SSLCertificateFile /etc/ssl/certs/service-types.openstack.org.pem
+    SSLCertificateKeyFile /etc/ssl/private/service-types.openstack.org.key
+    SSLCertificateChainFile /etc/ssl/certs/service-types.openstack.org_intermediate.pem
+
+    DocumentRoot <%= @docroot %>
+    <Directory <%= @docroot %>>
+        Options Indexes FollowSymLinks MultiViews
+        Satisfy any
+        Require all granted
+        # Allow mod_rewrite rules
+        AllowOverride FileInfo
+        HeaderName HEADER.html
+        IndexIgnore HEADER.html
+        # OpenStack Docs CSS links
+        IndexHeadInsert "<link href='https://docs.openstack.org/common/css/bootstrap.css' rel='stylesheet'/><link href='https://docs.openstack.org/common/css/combined.css' rel='stylesheet'/><link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css' rel='stylesheet'/><link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'/>"
+    </Directory>
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
+    ServerSignature Off
+</VirtualHost>
+</IfModule>
