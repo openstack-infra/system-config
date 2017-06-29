@@ -18,7 +18,6 @@ At a Glance
   * http://mirror.iad.rax.openstack.org/pypi
   * http://mirror.nyj01.internap.openstack.org/pypi
   * http://mirror.ord.rax.openstack.org/pypi
-  * http://mirror.regionone.bluebox-sjc1.openstack.org/pypi
 :Puppet:
   * :file:`modules/openstack_project/manifests/static.pp`
 :Projects:

@@ -16,7 +16,7 @@
 
 import shade
 
-for cloud in ('osic-cloud1', 'bluebox-sjc1'):
+for cloud in ('osic-cloud1',):
     cloud = shade.openstack_cloud(cloud=cloud)
     cleaned = [cloud.delete_floating_ip(ip.id) for ip in
                cloud.list_floating_ips() if ip.attached is False]

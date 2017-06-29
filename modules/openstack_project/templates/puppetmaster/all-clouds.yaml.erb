@@ -1,15 +1,4 @@
 clouds:
-  admin-bluebox:
-    region_name: RegionOne
-    auth:
-      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
-      username: <%= @puppetmaster_clouds['admin_bluebox_username'] %>
-      password: <%= @puppetmaster_clouds['admin_bluebox_password'] %>
-      project_name: <%= @puppetmaster_clouds['admin_bluebox_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    identity_endpoint_override: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5000/v3'
   admin-infracloud-vanilla:
     region_name: RegionOne
     auth:
@@ -46,17 +35,6 @@ clouds:
       password: <%= @puppetmaster_clouds['infra_files_rw_password'] %>
       project_name: <%= @puppetmaster_clouds['infra_files_rw_project_name'] %>
     region_name: DFW
-  openstackci-bluebox:
-    region_name: RegionOne
-    auth:
-      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
-      username: <%= @puppetmaster_clouds['openstackci_bluebox_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_bluebox_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_bluebox_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    identity_endpoint_override: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5000/v3'
   openstackci-infracloud-vanilla:
     region_name: RegionOne
     auth:
@@ -139,17 +117,6 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
-  openstackzuul-bluebox:
-    region_name: RegionOne
-    auth:
-      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
-      username: <%= @puppetmaster_clouds['openstackzuul_bluebox_username'] %>
-      password: <%= @puppetmaster_clouds['openstackzuul_bluebox_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackzuul_bluebox_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    identity_endpoint_override: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5000/v3'
   openstackzuul-infracloud-vanilla:
     region_name: RegionOne
     auth:
