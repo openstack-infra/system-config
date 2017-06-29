@@ -42,16 +42,6 @@ clouds:
       project_name: '<%= @tripleo_project %>'
       auth_url: 'https://ci-overcloud.rh2.tripleo.org:13000/v2.0'
     floating_ip_source: neutron
-  bluebox-sjc1:
-    auth:
-      auth_url: https://montytaylor-sjc.openstack.blueboxgrid.com:5000
-      username: '<%= @bluebox_username %>'
-      password: '<%= @bluebox_password %>'
-      project_name: '<%= @bluebox_project %>'
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    identity_endpoint_override: 'https://montytaylor-sjc.openstack.blueboxgrid.com:5000/v3'
   internap:
     profile: internap
     auth:

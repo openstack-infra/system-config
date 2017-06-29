@@ -10,7 +10,6 @@ keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
  dib_fedora-25, dib_opensuse-422, rax-dfw_upload, rax-ord_upload,
  rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
  infracloud-vanilla_upload, infracloud-chocolate_upload,
  citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
@@ -21,7 +20,6 @@ keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
  dib_fedora-25, dib_opensuse-422, rax-dfw_upload, rax-ord_upload,
  rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- bluebox-sjc1_upload, internap-mtl01_upload, osic-cloud1-s3500_upload,
  osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
  infracloud-vanilla_upload, infracloud-chocolate_upload,
  citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
@@ -223,18 +221,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/ovh-bhs1.log', 'H', 8, 30,)
-
-[logger_bluebox-sjc1_upload]
-level=DEBUG
-handlers=bluebox-sjc1_upload
-qualname=nodepool.image.upload.bluebox-sjc1
-propagate=0
-
-[handler_bluebox-sjc1_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/bluebox-sjc1.log', 'H', 8, 30,)
 
 [logger_internap-mtl01_upload]
 level=DEBUG

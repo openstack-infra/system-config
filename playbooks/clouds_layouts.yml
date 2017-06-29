@@ -113,20 +113,6 @@ profiles:
         cidr: '10.0.1.0/24'
 
 clouds:
-  # bluebox-sjc1
-  - name: admin-bluebox
-    profiles:
-      - openstackci-projects
-      - openstackci-flavors
-  - name: openstackci-bluebox
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-  - name: openstackzuul-bluebox
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-
   # osic-cloud1
   - name: openstackci-osic-cloud1
     profiles:
