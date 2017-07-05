@@ -432,18 +432,6 @@ class openstack_project::static (
   ###########################################################
   # Releases
 
-  # These are no longer needed now that this site shares the same
-  # cert as the others.
-  file { '/etc/ssl/certs/releases.openstack.org.pem':
-    ensure  => absent,
-  }
-  file { '/etc/ssl/private/releases.openstack.org.key':
-    ensure  => absent,
-  }
-  file { '/etc/ssl/certs/releases.openstack.org_intermediate.pem':
-    ensure  => absent,
-  }
-
   ::httpd::vhost { 'releases.openstack.org':
     port       => 443, # Is required despite not being used.
     docroot    => '/srv/static/releases',
