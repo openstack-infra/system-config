@@ -484,6 +484,30 @@ class openstack_project::static (
     require => User['jenkins'],
   }
 
+  ###########################################################
+  # service-types.openstack.org
+
+  ::httpd::vhost { 'service-types.openstack.org':
+    port       => 443, # Is required despite not being used.
+    docroot    => '/srv/static/service-types',
+    priority   => '50',
+    ssl        => true,
+    template   => 'openstack_project/static-https-redirect.vhost.erb',
+    vhost_name => 'service-types.openstack.org',
+    require    => [
+      File['/srv/static/service-types'],
+      File[$cert_file],
+      File[$key_file],
+    ],
+  }
+
+  file { '/srv/static/service-types':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
 
   # Until Apache 2.4.24 the event MPM has some issues scalability
   # bottlenecks that were seen to drop connections, especially on
