@@ -21,6 +21,8 @@
 <VirtualHost *:443>
   ServerName <%= @vhost_name %>
   DocumentRoot <%= @docroot %>
+  AddType text/plain .yaml
+  AddType text/plain .yml
   SSLEngine on
   SSLProtocol All -SSLv2 -SSLv3
   # Once the machine is using something to terminate TLS that supports ECDHE
