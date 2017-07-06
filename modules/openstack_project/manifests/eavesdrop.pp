@@ -22,6 +22,8 @@ class openstack_project::eavesdrop (
   $accessbot_password = '',
   $project_config_repo = '',
   $meetbot_channels = [],
+  $ptgbot_nick = '',
+  $ptgbot_password = '',
 ) {
   include ::httpd
   include meetbot
@@ -124,4 +126,11 @@ class openstack_project::eavesdrop (
     target  => '/srv/yaml2ical/calendars/',
     require => File['/srv/yaml2ical'],
   }
+
+  class { 'ptgbot':
+    nick     => $ptgbot_nick,
+    password => $ptgbot_password,
+    channel  => '#openstack-ptg',
+  }
+
 }
