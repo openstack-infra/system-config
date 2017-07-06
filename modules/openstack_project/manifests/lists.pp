@@ -278,6 +278,15 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
+  maillist { 'openstack-sigs':
+    ensure      => present,
+    admin       => 'thierry@openstack.org',
+    password    => $listpassword,
+    description => 'OpenStack SIGs discussions, gathering users, operators and developers of OpenStack into common groups.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
   maillist { 'enterprise-wg':
     ensure      => present,
     admin       => 'carol.l.barrett@intel.com',
