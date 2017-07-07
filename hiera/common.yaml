@@ -113,6 +113,7 @@ statusbot_channels:
 - openstack-telemetry
 - openstack-tricircle
 - openstack-trove
+- openstack-uc
 - openstack-valence
 - openstack-vitrage
 - openstack-zaqar
@@ -231,6 +232,7 @@ meetbot_channels:
 - '#openstack-tricircle'
 - '#openstack-trove'
 - '#openstack-upstream-institute'
+- '#openstack-uc'
 - '#openstack-ux'
 - '#openstack-vitrage'
 - '#openstack-valence'
