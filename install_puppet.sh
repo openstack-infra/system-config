@@ -174,9 +174,25 @@ function setup_puppet_ubuntu {
     fi
 
 
-    PUPPET_VERSION=3.*
-    PUPPETDB_VERSION=2.*
-    FACTER_VERSION=2.*
+    PUPPET_VERSION=${PUPPET_VERSION:-3.*}
+    if [ "$PUPPET_VERSION" == "3.*" ] ; then
+        if [ $lsbdistcodename != 'xenial' ] ; then
+            puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+        else
+            puppet_deb=''
+        fi
+        puppetpkg=puppet
+        PUPPETDB_VERSION=2.*
+        FACTER_VERSION=2.*
+    elif [ "$PUPPET_VERSION" == "4.*" ] ; then
+        puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
+        puppetpkg=puppet-agent
+        PUPPETDB_VERSION=4.*
+        FACTER_VERSION=3.*
+    else
+        echo "Unsupported puppet version ${PUPPET_VERSION}"
+        exit 1
+    fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
@@ -192,10 +208,10 @@ Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
 
-    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial. Instead use
+
+    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial for puppet 3. Instead use
     # the version of puppet ship by xenial.
-    if [ $lsbdistcodename != 'xenial' ]; then
-        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+    if [ -n "$puppet_deb" ]; then
         if type curl >/dev/null 2>&1; then
             curl -O http://apt.puppetlabs.com/$puppet_deb
         else
@@ -214,7 +230,7 @@ EOF
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes install -y --force-yes puppet git $rubypkg
+        --assume-yes install -y --force-yes $puppetpkg git $rubypkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
     if [ -f /bin/systemctl ]; then
@@ -222,6 +238,9 @@ EOF
     else
         update-rc.d -f puppet disable
     fi
+
+    # Puppet 4 puts binaries in /opt
+    grep '/opt/puppetlabs/bin' /root/.bashrc || echo 'export PATH=$PATH:/opt/puppetlabs/bin' >> /root/.bashrc
 }
 
 function setup_puppet_opensuse {
