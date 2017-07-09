@@ -26,6 +26,8 @@ SETUP_PIP=${SETUP_PIP:-true}
 #  it may not be installed yet)
 
 
+PUPPET_VERSION=${PUPPET_VERSION:-3}
+
 function is_fedora {
     [ -f /usr/bin/yum ] && cat /etc/*release | grep -q -e "Fedora"
 }
@@ -131,17 +133,28 @@ function setup_puppet_fedora {
 }
 
 function setup_puppet_rhel7 {
-    local puppet_pkg="https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
-
     _systemd_update
     yum update -y
+
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        puppetpkg=puppet
+        local puppet_repo="https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
+    elif [ "$PUPPET_VERSION" == "4" ] ; then
+        puppetpkg=puppet-agent
+        local puppet_repo="https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm"
+    else
+        echo "Unsupported puppet version ${PUPPET_VERSION}"
+        exit 1
+    fi
 
     # NOTE: we preinstall lsb_release to ensure facter sets lsbdistcodename
     yum install -y redhat-lsb-core git
 
     # Install puppetlabs repo & then puppet comes from there
-    rpm -ivh $puppet_pkg
-    yum install -y puppet
+    rpm -ivh $puppet_repo
+
+    $YUM install -y redhat-lsb-core git $puppetpkg \
+        redhat-rpm-config
 
     if $SETUP_PIP; then
         # see comments in setup_puppet_fedora
@@ -158,6 +171,9 @@ function setup_puppet_rhel7 {
     # early for things like openvswitch (XXX: should be installed via
     # dib before this?)
     yum install -y centos-release-openstack-ocata
+
+    # Puppet 4 puts binaries in /opt
+    grep '/opt/puppetlabs/bin' /root/.bashrc || echo 'export PATH=$PATH:/opt/puppetlabs/bin' >> /root/.bashrc
 }
 
 function setup_puppet_ubuntu {
@@ -173,10 +189,26 @@ function setup_puppet_ubuntu {
         rubypkg=ruby
     fi
 
-
-    PUPPET_VERSION=3.*
-    PUPPETDB_VERSION=2.*
-    FACTER_VERSION=2.*
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        if [ $lsbdistcodename != 'xenial' ] ; then
+            puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+        else
+            puppet_deb=''
+        fi
+        PUPPET_VERSION=3.*
+        puppetpkg=puppet
+        PUPPETDB_VERSION=2.*
+        FACTER_VERSION=2.*
+    elif [ "$PUPPET_VERSION" == "4" ] ; then
+        puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
+        puppetpkg=puppet-agent
+        PUPPET_VERSION=4.*
+        PUPPETDB_VERSION=4.*
+        FACTER_VERSION=3.*
+    else
+        echo "Unsupported puppet version ${PUPPET_VERSION}"
+        exit 1
+    fi
 
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
@@ -192,10 +224,10 @@ Pin: version $FACTER_VERSION
 Pin-Priority: 501
 EOF
 
-    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial. Instead use
+
+    # NOTE(pabelanger): Puppetlabs does not support ubuntu xenial for puppet 3. Instead use
     # the version of puppet ship by xenial.
-    if [ $lsbdistcodename != 'xenial' ]; then
-        puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
+    if [ -n "$puppet_deb" ]; then
         if type curl >/dev/null 2>&1; then
             curl -O http://apt.puppetlabs.com/$puppet_deb
         else
@@ -214,7 +246,7 @@ EOF
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-        --assume-yes install -y --force-yes puppet git $rubypkg
+        --assume-yes install -y --force-yes $puppetpkg git $rubypkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
     if [ -f /bin/systemctl ]; then
@@ -222,17 +254,33 @@ EOF
     else
         update-rc.d -f puppet disable
     fi
+
+    # Puppet 4 puts binaries in /opt
+    grep '/opt/puppetlabs/bin' /root/.bashrc || echo 'export PATH=$PATH:/opt/puppetlabs/bin' >> /root/.bashrc
 }
 
 function setup_puppet_opensuse {
-    zypper --non-interactive install --force-resolution puppet
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        puppetpkg=puppet
+    else
+        echo "Unsupported puppet version ${PUPPET_VERSION}"
+        exit 1
+    fi
+    zypper --non-interactive install --force-resolution $puppetpkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_gentoo {
     echo yes | emaint sync -a
-    emerge -q --jobs=4 puppet-agent
+
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        puppetpkg=puppet-agent
+    else
+        echo "Unsupported puppet version ${PUPPET_VERSION}"
+        exit 1
+    fi
+    emerge -q --jobs=4 $puppetpkg
     sed -i '/templatedir/d' /etc/puppetlabs/puppet/puppet.conf
 }
 
