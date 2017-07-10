@@ -230,6 +230,10 @@ class openstack_project::mirror (
   include ::httpd
 
   file { '/opt/apache_cache':
+    ensure => absent,
+  }
+
+  file { '/var/cache/apache2/proxy':
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
@@ -292,10 +296,10 @@ class openstack_project::mirror (
     # Clean apache cache once an hour, keep size down to 2GB.
     minute      => '0',
     hour        => '*',
-    command     => 'htcacheclean -n -p /opt/apache_cache -t -l 2048M > /dev/null',
+    command     => 'htcacheclean -n -p /var/cache/apache2/proxy -t -l 2048M > /dev/null',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
-       File['/opt/apache_cache'],
+       File['/var/cache/apache2/proxy'],
        Package['apache2-utils'],
     ],
   }
