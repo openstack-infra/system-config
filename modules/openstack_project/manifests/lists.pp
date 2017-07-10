@@ -287,15 +287,6 @@ class openstack_project::lists(
     mailserver  => $listdomain,
   }
 
-  maillist { 'enterprise-wg':
-    ensure      => present,
-    admin       => 'carol.l.barrett@intel.com',
-    password    => $listpassword,
-    description => 'Collaboration workspace for members of the Win The Enterprise Working Group of the User Commitee/Board.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
-  }
-
   maillist { 'product-wg':
     ensure      => present,
     admin       => 'stefano@openstack.org',
