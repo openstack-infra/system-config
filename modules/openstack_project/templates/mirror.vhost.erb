@@ -119,8 +119,8 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheLock on
     CacheLockPath "/tmp/mod_cache-lock"
     CacheLockMaxAge 5
-    # 100MB
-    CacheMaxFileSize 104857600
+    # 5GiB
+    CacheMaxFileSize 5368709120
 
     # Per site caching reverse proxy rules
     # Only cache specific backends, rely on afs cache otherwise.
@@ -157,8 +157,8 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheLock on
     CacheLockPath "/tmp/mod_cache-lock"
     CacheLockMaxAge 5
-    # 100MB
-    CacheMaxFileSize 104857600
+    # 5GiB
+    CacheMaxFileSize 5368709120
     # Ignore expire headers as the urls use sha256 hashes.
     CacheIgnoreQueryString On
     CacheStoreExpired On

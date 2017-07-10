@@ -293,10 +293,10 @@ class openstack_project::mirror (
   }
 
   cron { 'apache-cache-cleanup':
-    # Clean apache cache once an hour, keep size down to 2GB.
+    # Clean apache cache once an hour, keep size down to 80GiB.
     minute      => '0',
     hour        => '*',
-    command     => 'htcacheclean -n -p /var/cache/apache_cache -t -l 2048M > /dev/null',
+    command     => 'htcacheclean -n -p /var/cache/apache_cache -t -l 81920M > /dev/null',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
        File['/var/cache/apache_cache'],
