@@ -127,6 +127,8 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+    ProxyPass "/tarballs/" "https://tarballs.openstack.org/"
+    ProxyPassReverse "/tarballs/" "https://tarballs.openstack.org/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
