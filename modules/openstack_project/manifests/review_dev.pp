@@ -45,6 +45,7 @@ class openstack_project::review_dev (
     base => 'dev/',
   }
 
+  $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?user=gerrit2&password=${mysql_password}"
   class { 'openstack_project::gerrit':
     vhost_name                          => 'review-dev.openstack.org',
     canonicalweburl                     => 'https://review-dev.openstack.org/',
@@ -61,7 +62,7 @@ class openstack_project::review_dev (
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     email                               => 'review-dev@openstack.org',
     war                                 =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.22.e0c0f29.war',
+      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.13.9.4.2a605d5.war',
     contactstore                        => $contactstore,
     contactstore_appsec                 => $contactstore_appsec,
     contactstore_pubkey                 => $contactstore_pubkey,
@@ -77,6 +78,7 @@ class openstack_project::review_dev (
     github_project_password             => $github_project_password,
     mysql_host                          => $mysql_host,
     mysql_password                      => $mysql_password,
+    accountpatchreviewdb_url            => $accountpatchreviewdb_url,
     email_private_key                   => $email_private_key,
     gitweb                              => false,
     cgit                                => true,
@@ -124,12 +126,12 @@ class openstack_project::review_dev (
       {
         name  => 'changeid',
         match => '(I[0-9a-f]{8,40})',
-        link  => '/#q,$1,n,z',
+        link  => '/#/q/$1',
       },
       {
         name  => 'gitsha',
         match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
-        html  => '$1<a href=\"/#q,$2,n,z\">$2</a>$3',
+        html  => '$1<a href=\"/#/q/$2\">$2</a>$3',
       },
     ],
     its_plugins                        => [
@@ -187,9 +189,8 @@ class openstack_project::review_dev (
     require                         => $::project_config::config_dir,
   }
 
-  gerrit::plugin { 'javamelody': version       => '1de5d37' }
-  gerrit::plugin { 'delete-project': version   => '4b7410c' }
-  gerrit::plugin { 'its-storyboard': version   => 'a9cb131' }
+  gerrit::plugin { 'javamelody': version       => 'v2.13.3.e4233d6' }
+  gerrit::plugin { 'its-storyboard': version   => '805f9ac' }
 
   # create a file containing the ssl certificate
   file { '/home/gerrit2/storyboard-dev.crt':
