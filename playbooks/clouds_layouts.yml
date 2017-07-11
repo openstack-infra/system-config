@@ -71,7 +71,7 @@ profiles:
       - name: mirror
         ram: 8192
         vcpus: 4
-        disk: 100
+        disk: 250
 
   - name: openstackci-images
     images:
