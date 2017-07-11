@@ -19,43 +19,45 @@ BASE="/afs/.openstack.org/mirror/fedora"
 MIRROR="rsync://mirrors.kernel.org"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
-REPO=releases/25
-if ! [ -f $BASE/$REPO ]; then
-    $K5START mkdir -p $BASE/$REPO
-fi
+for REPO in releases/25 releases/26 ; do
+    if ! [ -f $BASE/$REPO ]; then
+        $K5START mkdir -p $BASE/$REPO
+    fi
 
-date --iso-8601=ns
-echo "Running rsync releases..."
-$K5START rsync -rlptDvz \
-    --delete \
-    --delete-excluded \
-    --exclude="CloudImages/x86_64/images/*.box" \
-    --exclude="Docker" \
-    --exclude="Everything/armhfp/" \
-    --exclude="Everything/i386/" \
-    --exclude="Everything/source/" \
-    --exclude="Everything/x86_64/debug/" \
-    --exclude="Server" \
-    --exclude="Spins" \
-    --exclude="Workstation" \
-    $MIRROR/fedora/$REPO/ $BASE/$REPO/
+    date --iso-8601=ns
+    echo "Running rsync releases..."
+    $K5START rsync -rlptDvz \
+        --delete \
+        --delete-excluded \
+        --exclude="CloudImages/x86_64/images/*.box" \
+        --exclude="Docker" \
+        --exclude="Everything/armhfp/" \
+        --exclude="Everything/i386/" \
+        --exclude="Everything/source/" \
+        --exclude="Everything/x86_64/debug/" \
+        --exclude="Server" \
+        --exclude="Spins" \
+        --exclude="Workstation" \
+        $MIRROR/fedora/$REPO/ $BASE/$REPO/
+done
 
-REPO=updates/25
-if ! [ -f $BASE/$REPO ]; then
-    $K5START mkdir -p $BASE/$REPO
-fi
+for REPO in updates/25 updates/26 ; do
+    if ! [ -f $BASE/$REPO ]; then
+        $K5START mkdir -p $BASE/$REPO
+    fi
 
-date --iso-8601=ns
-echo "Running rsync updates..."
-$K5START rsync -rlptDvz \
-    --delete \
-    --delete-excluded \
-    --exclude="armhfp/" \
-    --exclude="i386/" \
-    --exclude="SRPMS/" \
-    --exclude="x86_64/debug" \
-    --exclude="x86_64/drpms" \
-    $MIRROR/fedora/$REPO/ $BASE/$REPO/
+    date --iso-8601=ns
+    echo "Running rsync updates..."
+    $K5START rsync -rlptDvz \
+        --delete \
+        --delete-excluded \
+        --exclude="armhfp/" \
+        --exclude="i386/" \
+        --exclude="SRPMS/" \
+        --exclude="x86_64/debug" \
+        --exclude="x86_64/drpms" \
+        $MIRROR/fedora/$REPO/ $BASE/$REPO/
+done
 
 # TODO(pabelanger): Validate rsync process
 
