@@ -15,10 +15,12 @@ At a Glance
   * http://eavesdrop.openstack.org/
   * http://review.openstack.org/
   * https://wiki.openstack.org/wiki/Infrastructure_Status
+  * http://ptg.openstack.org/
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-meetbot/tree/
   * https://git.openstack.org/cgit/openstack-infra/puppet-statusbot/tree/
   * https://git.openstack.org/cgit/openstack-infra/puppet-gerritbot/tree/
+  * https://git.openstack.org/cgit/openstack-infra/puppet-ptgbot/tree/
   * :file:`modules/openstack_project/manifests/eavesdrop.pp`
   * :file:`modules/openstack_project/manifests/review.pp`
 :Configuration:
@@ -30,6 +32,7 @@ At a Glance
   * https://git.openstack.org/cgit/openstack-infra/meetbot
   * https://git.openstack.org/cgit/openstack-infra/gerritbot
   * https://git.openstack.org/cgit/openstack-infra/statusbot
+  * https://git.openstack.org/cgit/openstack/ptgbot
 :Bugs:
   * https://storyboard.openstack.org/#!/project/748
 
@@ -249,6 +252,21 @@ Example:
 
   - name: openstack-third-party-ci
     mask: full_mask
+
+PTG Bot
+=======
+
+Bot that `Project Teams Gathering <https://www.openstack.org/ptg>`_
+room moderators use to surface what's currently happening at the
+event. Usage instructions are provided in its `README.rst file
+<https://git.openstack.org/cgit/openstack/ptgbot/tree/README.rst>`_.
+It writes some static content into ``/var/lib/ptgbot/www`` on the
+eavesdrop.openstack.org server and then serves that from a
+http://ptg.openstack.org/ Apache vhost. It also updates a
+spreadsheet on https://ethercalc.openstack.org/ but the name of the
+sheet varies from one PTG to the next (naming format is
+``$CYCLE-PTG-Discussion-Rooms`` with ``$CYCLE`` being something like
+``Pike`` or ``Queens``).
 
 Basic Channel Operator Commands
 ===============================

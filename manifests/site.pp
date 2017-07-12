@@ -338,6 +338,8 @@ node 'eavesdrop.openstack.org' {
     accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password'),
     meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
+    ptgbot_nick             => hiera('ptgbot_nick', 'username'),
+    ptgbot_password         => hiera('ptgbot_password'),
   }
 }
 
