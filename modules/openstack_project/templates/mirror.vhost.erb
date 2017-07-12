@@ -110,7 +110,7 @@ NameVirtualHost <%= @vhost_name %>:8081
     # Caching reverse proxy for things that don't make sense in AFS
     #
     # General cache rules
-    CacheRoot "/opt/apache_cache"
+    CacheRoot "/var/cache/apache2/proxy"
     CacheDirLevels 5
     CacheDirLength 3
     # SSL support
@@ -148,7 +148,7 @@ NameVirtualHost <%= @vhost_name %>:8081
     # Caching reverse proxy for things that don't make sense in AFS
     #
     # General cache rules
-    CacheRoot "/opt/apache_cache"
+    CacheRoot "/var/cache/apache2/proxy"
     CacheDirLevels 5
     CacheDirLength 3
     # SSL support
