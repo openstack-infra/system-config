@@ -124,9 +124,16 @@ NameVirtualHost <%= @vhost_name %>:8081
 
     # Per site caching reverse proxy rules
     # Only cache specific backends, rely on afs cache otherwise.
+
+    # rdo
     CacheEnable disk  "/rdo"
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
+
+    # tarballs
+    CacheEnable disk  "/tarballs"
+    ProxyPass "/tarballs/" "https://tarballs.openstack.org/"
+    ProxyPassReverse "/tarballs/" "https://tarballs.openstack.org/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
