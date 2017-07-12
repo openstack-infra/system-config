@@ -1251,6 +1251,8 @@ node 'zuul.openstack.org' {
     'zl05.openstack.org',
     'zl06.openstack.org',
     'zl07.openstack.org',
+    'zl08.openstack.org',
+    'zl09.openstack.org',
     'zm01.openstack.org',
     'zm02.openstack.org',
     'zm03.openstack.org',
