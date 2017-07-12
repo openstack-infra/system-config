@@ -14,6 +14,13 @@ zuul_connections:
     user: 'zuul'
     sshkey: '/var/lib/zuul/ssh/id_rsa'
 
+  - name: 'mysql'
+    driver: 'sql'
+
+  - name: 'github'
+    driver: 'github'
+    sshkey: '/var/lib/zuul/ssh/id_rsa'
+
 gearman_server_ssl_cert: |
   -----BEGIN CERTIFICATE-----
   MIIEYTCCA0mgAwIBAgIJAKkAn3gh0LBPMA0GCSqGSIb3DQEBCwUAMIG5MQswCQYD
