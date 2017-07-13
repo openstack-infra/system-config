@@ -378,3 +378,42 @@ server that is operative. Switch the entries on /etc/hosts to choose
 the right one, and restart the service with:
 
     sudo service xxxbot restart
+
+Registering a Nick for a New Bot
+================================
+
+First and foremost, we use a separate alias for the ``infra-root@``
+E-mail address to distinguish the NickServ registration for each
+bot's nick. Presently, these E-mail alias additions must be
+requested from the OpenStack Foundation as they control the
+corresponding hosting account. This might take some time, so plan
+accordingly.
+
+Once you have the E-mail alias assigned, generate a lengthy (16+
+character) mixed-case alphanumeric string suitable as a NickServ
+registration password and record both of these pieces of information
+along with the nick in the secrets list for future reference.
+
+Now, use an IRC client you're comfortable with (possibly easier if
+you stick with default configuration rather than trying to do this
+from your normal client setup though) to temporarily connect with
+your newly chosen nick. For example, an unconfigured *weechat*
+client can be invoked as follows::
+
+  weechat irc6s://openstackbotname@chat.freenode.net:6697
+
+With the connection established, after you see the server MOTD echo,
+register the nick as follows::
+
+  /msg nickserv register some_strong_password email_alias
+
+You should hopefully get positive feedback from NickServ at this
+point, but don't disconnect yet. Moments later, the ``infra-root@``
+shared mailbox should contain a new message from Freenode support
+urging you to run the following additional command::
+
+  /msg nickserv verify register openstackbotname some_token
+
+This additional step completes the nick registration, though
+additional NickServ commands may be desirable to further secure the
+account against pranksters and ne'er-do-wells.
