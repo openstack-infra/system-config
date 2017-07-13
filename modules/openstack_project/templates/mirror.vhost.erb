@@ -134,6 +134,11 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/tarballs"
     ProxyPass "/tarballs/" "https://tarballs.openstack.org/"
     ProxyPassReverse "/tarballs/" "https://tarballs.openstack.org/"
+
+    # pypi
+    CacheEnable disk  "/pypi"
+    ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+    ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
