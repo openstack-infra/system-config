@@ -102,8 +102,9 @@ import yaml
 
 try:
     from string import maketrans
+    translate = maketrans(' -', '__')
 except ImportError:  # Python3
-    maketrans = bytes.maketrans
+    translate = bytes.maketrans(b' -', b'__')
 
 
 def dumper(data, stream):
@@ -124,7 +125,7 @@ def normalize_email(email):
 def normalize_project(project):
     """Replace spaces and hyphens with underscores in project teams
     and then lower-case them, for more convenient filenames"""
-    return project.translate(maketrans(' -', '__')).lower()
+    return project.translate(translate).lower()
 
 
 def date_merged(change, after=None, before=None):
