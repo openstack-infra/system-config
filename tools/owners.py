@@ -183,6 +183,36 @@ def query_gerrit(query):
     return decoded
 
 
+def lookup_member(email):
+    """A requests wrapper to querying the OSF member directory API"""
+    # TODO(fungi): this has a fair amount of setup duplication with
+    #              the query_gerrit() function which could be
+    #              extracted
+
+    # URL pattern for querying foundation members by E-mail address
+    MEMBER_LOOKUP_URL = ('https://openstackid-resources.openstack.org'
+                         '/api/public/v1/members'
+                         '?filter[]=group_slug==foundation-members'
+                         '&filter[]=email==')
+
+    # Retry http/https queries
+    retry = requests.Session()
+    retry.mount("http://", requests.adapters.HTTPAdapter(max_retries=3))
+    retry.mount("https://", requests.adapters.HTTPAdapter(max_retries=3))
+    raw = retry.get(MEMBER_LOOKUP_URL + email,
+                    headers={'Accept': 'application/json'})
+
+    # Trap decoding failures and provide more detailed errors
+    try:
+        decoded = json.loads(raw.text)
+    except:
+        print('\nrequest returned %s error to query:\n\n    %s\n'
+              '\nwith detail:\n\n    %s\n' % (raw, email, raw.text),
+              file=sys.stderr)
+        raise
+    return decoded
+
+
 def usage(argv):
     """Parse command line argument"""
     parser = argparse.ArgumentParser(
@@ -581,6 +611,13 @@ def main(argv=sys.argv):
                     'SKIPPING MALFORMED OWNER: no preferred or extra '
                     'addresses found for account %s' % owner, file=sys.stderr)
                 continue
+        for email in [owners[owner]['preferred']] + owners[owner]['extra']:
+            member = lookup_member(email)
+            if member['data']:
+                owners[owner]['member'] = member['data'][0]['id']
+                continue
+        if 'member' not in owners[owner]:
+            continue
         invite.append(owners[owner]['preferred'])
         invite += owners[owner]['extra']
         invites.append(invite)
