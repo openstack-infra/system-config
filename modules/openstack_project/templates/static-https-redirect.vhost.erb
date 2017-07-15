@@ -38,6 +38,12 @@
     AllowOverride None
     Satisfy Any
     Require all granted
+<%- if scope.lookupvar('openstack_project::static::expires').has_key? @vhost_name -%>
+    ExpiresActive On
+<%- scope.lookupvar('openstack_project::static::expires')[@vhost_name].each do |key,value| -%>
+    ExpiresByType <% key %> "<% value %>"
+<%- end -%>
+<%- end -%>
   </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
