@@ -38,6 +38,12 @@
     AllowOverride None
     Satisfy Any
     Require all granted
+<%- if @expires.has_key? @vhost_name -%>
+    ExpiresActive On
+<%- @expires[@vhost_name].each do |key,value| -%>
+    ExpiresByType <% key %> "<% value %>"
+<%- end -%>
+<%- end -%>
   </Directory>
   LogLevel warn
   ErrorLog /var/log/apache2/<%= @vhost_name %>_error.log
