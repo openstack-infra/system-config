@@ -1237,6 +1237,8 @@ node 'zuulv3.openstack.org' {
     layout_dir => $::project_config::zuul_layout_dir,
     require    => $::project_config::config_dir,
   }
+
+  class { '::zuul::web': }
 }
 
 # Node-OS: trusty
