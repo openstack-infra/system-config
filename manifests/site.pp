@@ -968,6 +968,7 @@ node /^nl\d+\.openstack\.org$/ {
     statsd_host              => 'graphite.openstack.org',
     statsd_prefix            => 'zuulv3-dev',
     revision                 => 'feature/zuulv3',
+    python_version           => 3,
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
