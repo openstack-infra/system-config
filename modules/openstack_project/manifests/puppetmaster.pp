@@ -351,9 +351,11 @@ class openstack_project::puppetmaster (
     source => 'puppet:///modules/openstack_project/puppetmaster/expand-groups.sh',
     notify => Exec['expand_groups'],
   }
+  # Temporarily pin paho-mqtt to 1.2.3 since 1.3.0 won't support TLS on
+  # Trusty's Python 2.7.
   if $enable_mqtt {
     package {'paho-mqtt':
-      ensure   => latest,
+      ensure   => '1.2.3',
       provider => openstack_pip,
       require  => Class['pip'],
     }
