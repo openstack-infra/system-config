@@ -166,7 +166,6 @@ meetbot_channels:
 - '#openstack-fwaas'
 - '#openstack-glance'
 - '#openstack-gluon'
-- '#openstack-gslb'
 - '#openstack-ha'
 - '#openstack-heat-translator'
 - '#openstack-horizon'
