@@ -1,4 +1,4 @@
----
+w---
 elasticsearch_nodes:
 - elasticsearch02.openstack.org
 - elasticsearch03.openstack.org
@@ -166,7 +166,6 @@ meetbot_channels:
 - '#openstack-fwaas'
 - '#openstack-glance'
 - '#openstack-gluon'
-- '#openstack-gslb'
 - '#openstack-ha'
 - '#openstack-heat-translator'
 - '#openstack-horizon'
