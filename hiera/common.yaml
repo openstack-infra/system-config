@@ -119,6 +119,7 @@ statusbot_channels:
 - openstack-zaqar
 - openstack-zephyr
 - openstack-zun
+- git-upstream
 - puppet-openstack
 - rdo
 - refstack
@@ -135,6 +136,7 @@ meetbot_channels:
 - '#congress'
 - '#craton'
 - '#dox'
+- '#git-upstream'
 - '#heat'
 - '#midonet'
 - '#murano'
