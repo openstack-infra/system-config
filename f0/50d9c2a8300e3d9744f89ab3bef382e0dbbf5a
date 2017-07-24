@@ -1,0 +1,11 @@
+Code-Review+1: Matthew Treinish <mtreinish@kortar.org>
+Code-Review+1: Lance Bragstad <lbragstad@gmail.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 24 Jul 2017 20:37:44 +0000
+Reviewed-on: https://review.openstack.org/486691
+Project: openstack-infra/system-config
+Branch: refs/heads/master
