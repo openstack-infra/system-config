@@ -149,12 +149,15 @@ source-files:
     tags:
       - screen
       - oslofmt
-  - name: logs/screen-key.txt
+    # This file is used on branches >= pike.
+  - name: logs/screen-keystone.txt
     tags:
       - screen
       - oslofmt
     # even though keystone is going through apache, it modifies log
-    # format to oslo format
+    # format to oslo format. This file is used on branches < pike.
+    # Note that it is also present on grenade jobs and does not have
+    # a new vs old split.
   - name: logs/apache/keystone.txt
     tags:
       - screen
@@ -350,11 +353,6 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
-  - name: logs/new/screen-key.txt
-    tags:
-      - screen
-      - oslofmt
-    job-filter: '.*grenade.*'
   - name: logs/new/screen-n-api.txt
     tags:
       - screen
@@ -472,11 +470,6 @@ source-files:
       - oslofmt
     job-filter: '.*grenade.*'
   - name: logs/old/screen-g-reg.txt
-    tags:
-      - screen
-      - oslofmt
-    job-filter: '.*grenade.*'
-  - name: logs/old/screen-key.txt
     tags:
       - screen
       - oslofmt
