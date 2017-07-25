@@ -211,6 +211,7 @@ class openstack_project::static (
       '/periodic*/*/*-tempest-dsvm*/*'       => '/help/tempest-overview.html',
       '/*/*/*/*/*-tempest-dsvm*/*/logs/'     => '/help/tempest-logs.html',
       '/periodic*/*/*-tempest-dsvm*/*/logs/' => '/help/tempest-logs.html',
+      '/*/*/*/*/*tripleo-ci-*/*/logs/'       => '/help/tripleo-quickstart-logs.html'
     }
   }
 
@@ -243,6 +244,21 @@ class openstack_project::static (
     mode    => '0444',
     source  => 'file:///opt/devstack-gate/help/tempest-overview.html',
     require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
+  }
+
+  vcsrepo { '/opt/tripleo-ci':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/tripleo-ci',
+  }
+  file { '/srv/static/logs/help/tripleo-quickstart-logs.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/tripleo-ci/docs/tripleo-quickstart-logs.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/tripleo-ci']],
   }
 
   ###########################################################
