@@ -206,6 +206,44 @@ class openstack_project::static (
     swift_tenant_name       => $swift_tenant_name,
     swift_region_name       => $swift_region_name,
     swift_default_container => $swift_default_container,
+    legacy                  => false,
+  }
+
+  vcsrepo { '/opt/devstack-gate':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/devstack-gate',
+  }
+  vcsrepo { '/opt/devstack-gate':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/devstack-gate',
+  }
+
+  file { '/srv/static/logs/help':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/srv/static/logs'],
+  }
+  file { '/srv/static/logs/help/tempest-logs.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/devstack-gate/help/tempest-logs.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
+  }
+  file { '/srv/static/logs/help/tempest-overview.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/devstack-gate/help/tempest-overview.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
   }
 
   ###########################################################
