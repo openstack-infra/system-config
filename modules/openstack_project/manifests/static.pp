@@ -240,6 +240,21 @@ class openstack_project::static (
     require => [File['/srv/static/logs/help'], Vcsrepo['/opt/devstack-gate']],
   }
 
+  vcsrepo { '/opt/tripleo-ci':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/tripleo-ci',
+  }
+  file { '/srv/static/logs/help/tripleo-quickstart-logs.html':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    source  => 'file:///opt/tripleo-ci/docs/tripleo-quickstart-logs.html',
+    require => [File['/srv/static/logs/help'], Vcsrepo['/opt/tripleo-ci']],
+  }
+
   ###########################################################
   # Docs-draft
 
