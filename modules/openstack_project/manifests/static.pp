@@ -211,6 +211,7 @@ class openstack_project::static (
       '/periodic*/*/*-tempest-dsvm*/*'       => '/help/tempest-overview.html',
       '/*/*/*/*/*-tempest-dsvm*/*/logs/'     => '/help/tempest-logs.html',
       '/periodic*/*/*-tempest-dsvm*/*/logs/' => '/help/tempest-logs.html',
+      '/*/*/*/*/*tripleo-ci-*/*/logs/'       => '/help/tripleo-quickstart-logs.html',
     }
   }
 
