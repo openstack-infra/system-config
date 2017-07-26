@@ -1209,6 +1209,7 @@ node 'zuulv3.openstack.org' {
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
     zuulv3                  => true,
     connections             => hiera('zuul_connections', []),
+    connection_secrets      => hiera('zuul_connection_secrets', []),
     zuul_status_url         => 'http://127.0.0.1:8001/openstack',
     gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
