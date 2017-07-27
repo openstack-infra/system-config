@@ -42,17 +42,6 @@ Major Systems
    signing
    firehose
    firehose_schema
-   pholio
    github
-
-.. NOTE(dhellmann): These projects were not listed above, or in any
-   other toctree, which breaks the build. It's not clear why they were
-   left out of the toctree but remained in the source dir. Rather than
-   deleting them, I've added them to a hidden toctree to eliminate
-   that build error.
-
-.. toctree::
-   :hidden:
-
    activity
    asterisk

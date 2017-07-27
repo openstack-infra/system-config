@@ -153,9 +153,8 @@ An example is::
 Ansible
 =======
 
-We have mqtt events emitted from ansible being run on
-:ref:`puppetmaster.openstack.org`. These events are generated using a
-`MQTT Ansible Callback Plugin`_.
+We have mqtt events emitted from ansible being run on :ref:`puppet-master`.
+These events are generated using a `MQTT Ansible Callback Plugin`_.
 
 .. _MQTT Ansible Callback Plugin: http://git.openstack.org/cgit/openstack-infra/system-config/tree/modules/openstack_project/files/puppetmaster/mqtt.py
 
