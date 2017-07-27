@@ -17,6 +17,7 @@
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
+    AllowOverrideList Redirect RedirectMatch
     Satisfy Any
     Require all granted
   </Directory>
@@ -45,6 +46,7 @@
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
+    AllowOverrideList Redirect RedirectMatch
     Satisfy Any
     Require all granted
   </Directory>
