@@ -266,19 +266,4 @@ class openstack_project::users {
     gid      => 2029,
   }
 
-  @user::virtual::localuser { 'andymccr':
-    realname => 'Andy McCrae',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDG/3cDOPknMabZaO2amysoe+rU0Yc1iVE2ZUR+p4IRv98tVRL37rf9y2JCNFDwk3iNzih7XJn8MJOHSG8MJZ6OvsBGT437IkArEwLb7pZvaJhQSiQ4othd6jct6ZQ99OO9UFkxGE5wQO1bUxdGyxjfRWDs4TrxS6hj0nLTnl+Ee+HLNsqRtVoUEfazsfDQhHOX/tKCFgKi/1zwk0NGsXFGzvuE47dXnEehdYSiSqpMNVtElzopTnI7xcgV+ZX8g3+kFxIGrS1tUH7DE2pTLo0H0J7DfwOLP6TiWUEPXd4ri9knljfhd1r6rQyqDkU/3I5iiXAl/5fpcgKLTFoxiIe6Tf+uhQOcr4xr+QVMQozW6IDkC8VYbm0/r3h+YU6alouuRfI5DAtdzY0HUUzemCCr33cOAp0wIkW257C6ch2mXq8qxr2QLMu9MWNQs2/Dbr1hNsPw3C/apQCnyNPh7tjYIuysjmbFU8pkzlNIq9258GkfgST6wEQ9HsaPpi3GscQ1lo8j6fdI75lvo+vCD+mis2liCGZDil8f0HM6kLX6kKQmVDkhjxcfrfqhCrE1/Q+yAfF4zECZUqlPh/SY/lS1wvRZZGyeBpOVq5/M1qTGjC7uQc9gH3nibp0lzjUFKYoMxqIHwmSBSHlE9tnkHhCrLKvaD9MNPVUT7OelvhCvLQ',
-    key_id   => 'andy@andy.mc.it',
-    uid      => 2030,
-    gid      => 2030,
-  }
-
-  @user::virtual::localuser { 'eumel8':
-    realname => 'Frank Kloeker',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAv+XM4O3w/R8Pok1Kfm2RESduUmvSNils5KOXzWWb9kNitndxj1jWPWaMi1did+kEuClzKaiR1cHi6K3KeJd2LuEkqo0Ky4w7AbItTUFS8T0IWOODe9aQBMO4Y2ALNwtj5MObN0oJ/NaV8x2Kz2gc1MVCj8hgMiG19hqi1mz1ZDhA02kOYfME8AeW3YvwWijyjOvQF3lz0TVGhAqe/0UrJk5+HCYyHIUjRJqDM8XK1diC3IFdXgn/95YrVYmOLKEOWW6ZvYi6/gE2mHTvToBHuHUvMVqROwdUB+l7k5rpXjN9Wm/l16K0iyMdt/Emd43qz9gx1NRnOJdq4dMCik3k6w',
-    key_id   => 'eumel@arcor.de',
-    uid      => 2031,
-    gid      => 2031,
-  }
 }
