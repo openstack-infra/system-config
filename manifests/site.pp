@@ -1219,8 +1219,10 @@ node 'zuulv3.openstack.org' {
   }
 
   class { '::zuul::scheduler':
-    layout_dir => $::project_config::zuul_layout_dir,
-    require    => $::project_config::config_dir,
+    layout_dir     => $::project_config::zuul_layout_dir,
+    require        => $::project_config::config_dir,
+    python_version => 3,
+    use_mysql      => true,
   }
 
   class { '::zuul::web': }
