@@ -37,5 +37,7 @@ timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
+# Installs i18n-checksite on the target machine and sync the newest code
+timeout -k 2m 180m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_i18n-checksite.yaml  
 # Run everything else. We do not care if the other things worked
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
