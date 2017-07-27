@@ -46,8 +46,9 @@
         Options Indexes FollowSymLinks MultiViews
         Satisfy any
         Require all granted
+        AllowOverride None
         # Allow mod_rewrite rules
-        AllowOverride FileInfo
+        AllowOverrideList Redirect RedirectMatch
         ErrorDocument 404 /errorpage.html
     </Directory>
 
