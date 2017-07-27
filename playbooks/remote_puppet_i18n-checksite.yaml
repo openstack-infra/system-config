@@ -1,0 +1,53 @@
+---
+- hosts: "i18n-checksite*:!disabled"
+  strategy: free
+  gather_facts: true
+  max_fail_percentage: 1
+  vars:
+    admin_email: ptl.i18n@gmail.com
+  tasks:
+    - name: install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - python
+        - git
+        - postfix
+        - bsd-mailx
+    - name: clone osa repo
+      git:
+        repo: https://git.openstack.org/openstack/openstack-ansible
+        dest: /opt/openstack-ansible
+        version: master
+
+    - name: install osa with translations
+      command: ./scripts/gate-check-commit.sh translations
+      args:
+        chdir: /opt/openstack-ansible
+        creates: /etc/openstack_deploy
+
+    - name: install cron for zanata sync
+      cron:
+        name: "sync zanata files"
+        minute: "1,31"
+        job: 'cd /opt/openstack-ansible/playbooks; openstack-ansible os-horizon-install.yml -e "horizon_translations_update=True" --tags "horizon-config" > /dev/null'
+
+    - name: grab admin password
+      shell: grep keystone_auth_admin_password /etc/openstack_deploy/user_secrets.yml | tee /tmp/send_osa_email
+      args:
+        creates: /tmp/send_osa_email
+      register: admin_password
+
+    - name: send admin password
+      mail:
+        host: localhost
+        port: 25
+        from: "I18n check-site <root@i18n.external.otc.telekomcloud.com>"
+        to: I18n Admin <{{ admin_email }}>
+        subject: I18n checksite login
+        body: 'Your admin password for horizon: {{ admin_password.stdout.split(":")[1] }}'
+      when: admin_password is defined and admin_password.stdout.split(":")[1] != ''
+
+  roles:
+    - role: puppet
