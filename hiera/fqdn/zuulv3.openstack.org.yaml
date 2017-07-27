@@ -19,7 +19,6 @@ zuul_connections:
 
   - name: 'github'
     driver: 'github'
-    sshkey: '/var/lib/zuul/ssh/id_rsa'
 
 gearman_server_ssl_cert: |
   -----BEGIN CERTIFICATE-----
