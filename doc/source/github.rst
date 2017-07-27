@@ -63,12 +63,16 @@ App can be found in the :ref:`zuul` page at :ref:`zuul_github_projects`.
 The OpenStack Zuul App is managed `OpenStack Zuul Settings Page`_ which is
 available to admins of the `openstack-infra Organization`_.
 
-The OpenStack Zuul App has a Private key, a Webhook secret and a set of OAuth
-Credentials which are all stored in hiera.
+The OpenStack Zuul App has an ID, a Private key, a Webhook secret and a set of
+OAuth Credentials which are all stored in hiera.
+
+The ID is a numerical identifier found on the App settings page labeled **ID**.
+The ID is placed into the ``app_id`` field in the ``github``
+entry in ``zuul_connection_secrets`` for the ``zuulv3.openstack.org`` FQDN.
 
 The Private key can only be retrieved when it is generated, so in the case it
 is lost a new one must be generated and the resulting value put into hiera.
-The Private key is placed into the ``api_token`` field in the ``github``
+The Private key is placed into the ``app_key`` field in the ``github``
 entry in ``zuul_connection_secrets`` for the ``zuulv3.openstack.org`` FQDN.
 
 GitHub sends JSON payloads via HTTP POST to the URL configured in the Webhook
