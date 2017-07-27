@@ -12,6 +12,7 @@ Major Systems
    grafana
    grafyaml
    zuul
+   zuulv3
    jjb
    logstash
    elastic-recheck
