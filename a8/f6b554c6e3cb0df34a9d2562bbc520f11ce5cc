@@ -1,0 +1,9 @@
+Code-Review+1: Tobias Henkel <tobias.henkel@bmw.de>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 27 Jul 2017 18:44:51 +0000
+Reviewed-on: https://review.openstack.org/487941
+Project: openstack-infra/system-config
+Branch: refs/heads/master
