@@ -159,6 +159,8 @@ in reviews.
 Periodic Tasks
 ==============
 
+.. _closing_pull_requests:
+
 Closing Github Pull Requests
 ----------------------------
 

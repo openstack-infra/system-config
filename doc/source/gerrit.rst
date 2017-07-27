@@ -113,6 +113,8 @@ using::
     --email openstack-infra@lists.openstack.org \
     --ssh-key - openstack-project-creator
 
+.. _gerrit_github_integration:
+
 GitHub Integration
 ==================
 

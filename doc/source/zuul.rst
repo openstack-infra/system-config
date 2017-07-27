@@ -177,3 +177,29 @@ manner, Ansible logs are available in the launcher-debug log file on
 the launcher host.  You may use the Zuul build UUID to track
 assignment of a given job from the Zuul scheduler to the Zuul launcher
 used by that job.
+
+.. note:: The following is Zuul v3 only, so is a little forward-looking.
+
+.. _zuul_github_projects:
+
+GitHub Projects
+===============
+
+OpenStack does not use GitHub for development purposes, but there are some
+non-OpenStack projects in the broader ecosystem that we care about who do.
+When we are interested in setting up jobs in Zuul to test the interaction
+between OpenStack projects and those ecosystem projects, we can add the
+OpenStack Zuul GitHub app to those projects, then configure them in Zuul.
+
+In order to add the GitHub app to a project, an admin on that project should
+nagivate to the `OpenStack Zuul`_ app in the GitHub UI. From there they can
+click "Install", then choose the project or organization they want to install
+the App on.
+
+The repository then needs to be added to the `zuul/main.yaml` file before Zuul
+can be configured to actually run jobs on it.
+
+Information about the configuration of the OpenStack Zuul App itself can be
+found on the :ref:`github` page at :ref:`openstack_zuul_app`.
+
+.. _OpenStack Zuul: https://github.com/apps/openstack-zuul
