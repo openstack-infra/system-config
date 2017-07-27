@@ -7,10 +7,12 @@ class openstack_project::lists(
   $listdomain = 'lists.openstack.org'
 
   class { 'exim':
-    sysadmins       => $listadmins,
-    queue_interval  => '1m',
-    queue_run_max   => '50',
-    mailman_domains => [$listdomain],
+    sysadmins                => $listadmins,
+    queue_interval           => '1m',
+    queue_run_max            => '50',
+    mailman_domains          => [$listdomain],
+    smtp_accept_max          => '100',
+    smtp_accept_max_per_host => '10',
   }
 
   class { 'mailman':
