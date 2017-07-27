@@ -1611,6 +1611,14 @@ node 'ask-staging.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node 'i18n-checksite.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+}
+
 # Node-OS: trusty
 node 'translate.openstack.org' {
   class { 'openstack_project::server':
