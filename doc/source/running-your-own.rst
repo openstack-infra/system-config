@@ -39,8 +39,7 @@ Initial setup
 =============
 
 #. Manually boot a machine or VM with 2G+ of ram to be the puppetmaster.
-   Average memory consumption is between 1GB-1.5GB with random peaks around
-   2GB for puppetdb and ruby processes.
+   Average memory consumption is between 1GB-1.5GB.
 
 #. Clone the CI config repository and adjust it as necessary. Avoiding forks
    and overriding the default config from Infra is a good practice to
@@ -127,8 +126,6 @@ The minimum set of things to port across is:
 
 * The puppetmaster definition in site.pp
 
-* The puppetdb definition in site.pp
-
 Then follow the :ref:`puppet-master` instructions for bringing up a
 puppetmaster, replacing openstack_project with your project name.
 You'll need to populate hiera at the end with the minimum set of keys:
@@ -141,23 +138,7 @@ Copy in your cloud credentials to /root/ci-launch - e.g. to
 Stage 2
 ~~~~~~~
 
-Migrate:
-
-* modules/openstack_project/manifests/puppetdb.pp
-
-Then start up your puppet db with puppet board (see :file:`launch/README`
-for full details)::
-
-    sudo su -
-    cd /opt/system-config/production/launch
-    . /root/ci-launch/
-    export FQDN=servername.project.example.com
-    puppet cert generate $FQDN
-    ./launch-node.py $FQDN --server puppetmaster.project.example.com
-
-* This will chug for a while.
-
-* Run the DNS update commands [nb: install your DNS API by hand at the moment]
+N/A
 
 Stage 3 - gerrit
 ~~~~~~~~~~~~~~~~
