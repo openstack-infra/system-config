@@ -647,11 +647,11 @@ def main(argv=sys.argv):
             if member['data']:
                 owners[owner]['member'] = member['data'][0]['id']
                 continue
-        if 'member' not in owners[owner]:
-            continue
         invite.append(owners[owner]['preferred'])
         invite += owners[owner]['extra']
         invites.append(invite)
+        if 'member' not in owners[owner]:
+            continue
 
         # Append preferred addresses to the TC electorate
         electorate.append(owners[owner]['preferred'] + '\n')
