@@ -617,13 +617,7 @@ def main(argv=sys.argv):
         owners[owner]['extra'].sort()
 
         # Build the data used for an invite
-        invite = []
-        if 'username' not in owners[owner] or not owners[owner]['username']:
-            print(
-                'SKIPPING MALFORMED OWNER: no username found for account %s' %
-                owner, file=sys.stderr)
-            continue
-        invite.append(owners[owner]['username'])
+        invite = [owners[owner].get('member','0')]
         if 'name' not in owners[owner] or not owners[owner]['name']:
             print(
                 'SKIPPING MALFORMED OWNER: no fullname found for account %s' %
