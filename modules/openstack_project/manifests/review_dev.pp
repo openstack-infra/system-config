@@ -45,7 +45,7 @@ class openstack_project::review_dev (
     base => 'dev/',
   }
 
-  $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?user=gerrit2&password=${mysql_password}"
+  $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
   class { 'openstack_project::gerrit':
     vhost_name                          => 'review-dev.openstack.org',
     canonicalweburl                     => 'https://review-dev.openstack.org/',
