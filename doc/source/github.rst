@@ -72,8 +72,10 @@ entry in ``zuul_connection_secrets`` for the ``zuulv3.openstack.org`` FQDN.
 
 The Private key can only be retrieved when it is generated, so in the case it
 is lost a new one must be generated and the resulting value put into hiera.
-The Private key is placed into the ``app_key`` field in the ``github``
-entry in ``zuul_connection_secrets`` for the ``zuulv3.openstack.org`` FQDN.
+The Private key content is stored as ``zuul_github_app_key`` in private hiera
+and is written to ``/etc/zuul/github.key``. That path is placed into
+``app_key`` field in the ``github`` entry in ``zuul_connections`` for the
+``zuulv3.openstack.org`` FQDN.
 
 GitHub sends JSON payloads via HTTP POST to the URL configured in the Webhook
 URL setting. The current value of this setting for Zuul v3 is:

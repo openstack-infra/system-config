@@ -1218,6 +1218,15 @@ node 'zuulv3.openstack.org' {
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
   }
 
+  file { "/etc/zuul/github.key":
+    ensure  => present,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    content => hiera('zuul_github_app_key'),
+    require => File['/etc/zuul'],
+  }
+
   class { '::zuul::scheduler':
     layout_dir     => $::project_config::zuul_layout_dir,
     require        => $::project_config::config_dir,
