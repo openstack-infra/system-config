@@ -313,6 +313,9 @@ def main(argv=sys.argv):
     PROJECTS_LIST = ('https://review.openstack.org/'
                      'gitweb?p=openstack/governance.git;a=blob_plain;'
                      'f=reference/projects.yaml;hb=%s')
+    PAST_PROJECTS = ('https://review.openstack.org/'
+                     'gitweb?p=openstack/governance.git;a=blob_plain;'
+                     'f=reference/legacy.yaml;hb=%s')
 
     # The query identifying relevant changes
     match = 'status:merged'
@@ -328,6 +331,34 @@ def main(argv=sys.argv):
     gov_projects = requests.get(PROJECTS_LIST % ref)
     gov_projects.encoding = 'utf-8'  # Workaround for Gitweb encoding
     gov_projects = yaml.safe_load(gov_projects.text)
+
+    # The set of retired or removed "legacy" projects from governance
+    # are merged into the main dict if their retired-on date falls
+    # later than the after parameter for the qualifying time period
+    # TODO(fungi): make this a configurable option
+    old_projects = requests.get(PAST_PROJECTS % ref)
+    old_projects.encoding = 'utf-8'  # Workaround for Gitweb encoding
+    old_projects = yaml.safe_load(old_projects.text)
+    for project in old_projects:
+        for deliverable in old_projects[project]['deliverables']:
+            if 'retired-on' in old_projects[project]['deliverables'][deliverable]:
+                retired = old_projects[project]['deliverables'][deliverable]['retired-on']
+            elif 'retired-on' in old_projects[project]:
+                retired = old_projects[project]['retired-on']
+            else:
+                retired = None
+            if retired:
+                retired = retired.isoformat()
+                if before and before < retired:
+                    continue
+                if after and after > retired:
+                    continue
+                if project not in gov_projects:
+                    gov_projects[project] = {'deliverables': {}}
+                if deliverable in gov_projects[project]['deliverables']:
+                    print('Skipping duplicate/partially retired deliverable: %s' % deliverable, file=sys.stderr)
+                    continue
+                gov_projects[project]['deliverables'][deliverable] = old_projects[project]['deliverables'][deliverable]
 
     # A mapping of short (no prefix) to full repo names existing in
     # Gerrit, used to handle repos which have a different namespace
