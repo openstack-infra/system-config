@@ -1099,7 +1099,7 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
-    trusted_ro_dirs         => ['/var/lib/zuul/ssh'],
+    trusted_ro_paths        => ['/var/lib/zuul/ssh'],
     disk_limit_per_job      => 500,  # Megabytes
   }
 
@@ -1227,6 +1227,14 @@ node 'zuulv3.openstack.org' {
     content => hiera('zuul_github_app_key'),
     require => File['/etc/zuul'],
   }
+
+  file { '/etc/zuul/executor.keytab':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    content => $zuul_launcher_keytab,
+  }
+
 
   class { '::zuul::scheduler':
     layout_dir     => $::project_config::zuul_layout_dir,
