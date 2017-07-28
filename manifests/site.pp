@@ -1216,6 +1216,7 @@ node 'zuulv3.openstack.org' {
     gearman_server_ssl_cert => hiera('gearman_server_ssl_cert'),
     gearman_server_ssl_key  => hiera('gearman_server_ssl_key'),
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
+    github_app_private_key  => hiera('zuul_github_app_key'),
   }
 
   class { '::zuul::scheduler':
