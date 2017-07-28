@@ -20,3 +20,4 @@ wiki ~wiki\d+\.openstack\.org
 wiki-dev ~wiki-dev\d+\.openstack\.org
 zuul-merger ~z[lm](static)?\d+\.openstack\.org
 zuul-executor ~ze\d+\.openstack\.org
+zuul-worker ~z[lem](static)?\d+\.openstack\.org
