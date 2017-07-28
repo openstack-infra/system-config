@@ -1103,7 +1103,7 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_client_ssl_cert  => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key   => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca           => hiera('gearman_ssl_ca'),
-    trusted_ro_paths         => ['/var/lib/zuul/ssh'],
+    trusted_ro_paths         => ['/var/lib/zuul/ssh:/etc/zuul/executor.keytab'],
     disk_limit_per_job       => 500,  # Megabytes
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
@@ -1125,6 +1125,14 @@ node /^ze\d+\.openstack\.org$/ {
     mode    => '0400',
     require => File['/var/lib/zuul/ssh'],
     content => $zuul_static_private_key,
+  }
+
+  file { '/etc/zuul/executor.keytab':
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0400',
+    require => File['/etc/zuul'],
+    content => hiera('zuul_executor_keytab'),
   }
 
   class { '::zuul::known_hosts':
