@@ -27,7 +27,7 @@ from string import Template
 
 class ATC(object):
     def __init__(self, row):
-        self.lpid = row[0]
+        self.osfid = row[0]
         self.name = unicode(row[1], 'utf8')
         self.emails = row[2:]
 
@@ -79,6 +79,6 @@ if __name__ == '__main__':
 
         session.sendmail(settings.EMAIL_FROM, committer.emails,
                          msg.as_string())
-        print "%s,ATC,%s" % (code, committer.name)
+        print "%s,%s,%s" % (code, committer.osfid, committer.name)
         session.quit()
         time.sleep(settings.EMAIL_PAUSE)

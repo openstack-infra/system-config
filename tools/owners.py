@@ -630,19 +630,11 @@ def main(argv=sys.argv):
         owners[owner]['extra'].sort()
 
         # Build the data used for an invite
-        invite = []
-        if 'username' not in owners[owner] or not owners[owner]['username']:
-            print(
-                'SKIPPING MALFORMED OWNER: no username found for account %s' %
-                owner, file=sys.stderr)
-            continue
-        invite.append(owners[owner]['username'])
         if 'name' not in owners[owner] or not owners[owner]['name']:
             print(
                 'SKIPPING MALFORMED OWNER: no fullname found for account %s' %
                 owner, file=sys.stderr)
             continue
-        invite.append(owners[owner]['name'].encode('utf-8'))
         if 'preferred' not in owners[owner]:
             if 'extra' in owners[owner] and owners[owner]['extra']:
                 owners[owner]['preferred'] = owners[owner]['extra'][0]
@@ -660,6 +652,8 @@ def main(argv=sys.argv):
             if member['data']:
                 owners[owner]['member'] = member['data'][0]['id']
                 continue
+        invite = [owners[owner].get('member','0')]
+        invite.append(owners[owner]['name'].encode('utf-8'))
         invite.append(owners[owner]['preferred'])
         invite += owners[owner]['extra']
         invites.append(invite)
