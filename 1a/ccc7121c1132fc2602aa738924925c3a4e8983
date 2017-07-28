@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 28 Jul 2017 16:05:41 +0000
+Reviewed-on: https://review.openstack.org/488333
+Project: openstack-infra/system-config
+Branch: refs/heads/master
