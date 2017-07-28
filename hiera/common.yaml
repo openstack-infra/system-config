@@ -235,7 +235,6 @@ meetbot_channels:
 - '#openstack-ux'
 - '#openstack-vitrage'
 - '#openstack-valence'
-- '#openstack-vmware-nsx'
 - '#openstack-watcher'
 - '#openstack-zaqar'
 - '#openstack-zephyr'
