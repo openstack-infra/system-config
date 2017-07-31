@@ -206,7 +206,6 @@ class openstack_project::static (
     swift_tenant_name       => $swift_tenant_name,
     swift_region_name       => $swift_region_name,
     swift_default_container => $swift_default_container,
-    legacy                  => false,
     readmes                 => {
       '/*/*/*/*/*-tempest-dsvm*/*'           => '/help/tempest-overview.html',
       '/periodic*/*/*-tempest-dsvm*/*'       => '/help/tempest-overview.html',
