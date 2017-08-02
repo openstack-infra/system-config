@@ -157,30 +157,51 @@ def date_merged(change, after=None, before=None):
     return date
 
 
-def query_gerrit(query):
-    """A requests wrapper to querying the Gerrit REST API"""
-    # TODO(fungi): this could be switched to call pygerrit instead
+def requester(url, params={}, headers={}):
+    """A requests wrapper to consistently retry HTTPS queries"""
+
+    # Try up to 3 times
+    retry = requests.Session()
+    retry.mount("https://", requests.adapters.HTTPAdapter(max_retries=3))
+    return retry.get(url=url, params=params, headers=headers)
+
+
+def decode_json(raw):
+    """Trap JSON decoding failures and provide more detailed errors"""
+
+    # Gerrit's REST API prepends a JSON-breaker to avoid XSS vulnerabilities
+    if raw.text.startswith(")]}'"):
+        trimmed = raw.text[4:]
+    else:
+        trimmed = raw.text
+
+    # Try to decode and bail with much detail if it fails
+    try:
+        decoded = json.loads(trimmed)
+    except:
+        print('\nrequest returned %s error to query:\n\n    %s\n'
+              '\nwith detail:\n\n    %s\n' % (raw, raw.url, trimmed),
+              file=sys.stderr)
+        raise
+    return decoded
+
+
+def query_gerrit(method, params={}):
+    """Query the Gerrit REST API"""
 
     # The base URL to Gerrit, for accessing both GitWeb and the REST
     # API
     GERRIT_API_URL = 'https://review.openstack.org/'
 
-    # Retry http/https queries
-    retry = requests.Session()
-    retry.mount("http://", requests.adapters.HTTPAdapter(max_retries=3))
-    retry.mount("https://", requests.adapters.HTTPAdapter(max_retries=3))
-    raw = retry.get(GERRIT_API_URL + query,
+    raw = requester(GERRIT_API_URL + method, params=params,
                     headers={'Accept': 'application/json'})
 
-    # Trap decoding failures and provide more detailed errors
-    try:
-        decoded = json.loads(raw.text[4:])
-    except:
-        print('\nrequest returned %s error to query:\n\n    %s\n'
-              '\nwith detail:\n\n    %s\n' % (raw, query, raw.text),
-              file=sys.stderr)
-        raise
-    return decoded
+    # Gitweb queries don't return JSON, so just pass them along as-is
+    if method is 'gitweb':
+        raw.encoding = 'utf-8'  # Workaround for Gitweb encoding
+        return yaml.safe_load(raw.text)
+    else:
+        return decode_json(raw)
 
 
 def usage(argv):
@@ -278,26 +299,25 @@ def main(argv=sys.argv):
     else:
         sieve = None
 
-    # Path to the governance projects list, needs a Git refname as a
-    # parameter
-    PROJECTS_LIST = ('https://review.openstack.org/'
-                     'gitweb?p=openstack/governance.git;a=blob_plain;'
-                     'f=reference/projects.yaml;hb=%s')
-
     # The query identifying relevant changes
     match = 'status:merged'
     if after:
-        match = '%s+after:"%s"' % (match, after)
+        match = '%s after:"%s"' % (match, after)
     if sieve:
-        match = '%s+%s' % (match, sieve)
+        match = '%s %s' % (match, sieve)
 
-    # The set of projects from the governance repo
+    # Retrieve the governance projects list, needs a Git refname as a
+    # parameter
     # TODO(fungi): make this a configurable option so that you can
     # for example supply a custom project list for running elections
     # in unofficial teams
-    gov_projects = requests.get(PROJECTS_LIST % ref)
-    gov_projects.encoding = 'utf-8'  # Workaround for Gitweb encoding
-    gov_projects = yaml.safe_load(gov_projects.text)
+    gov_projects = query_gerrit(
+        'gitweb', {
+            'p': 'openstack/governance.git',
+            'a': 'blob_plain',
+            'f': 'reference/projects.yaml',
+            'hb': ref,
+            })
 
     # A mapping of short (no prefix) to full repo names existing in
     # Gerrit, used to handle repos which have a different namespace
@@ -348,11 +368,16 @@ def main(argv=sys.argv):
                     offset = 0
                     changes = []
                     while offset >= 0:
-                        changes += query_gerrit(
-                            'changes/?q=project:%s+%s&n=100&start=%s'
-                            '&o=CURRENT_COMMIT&o=CURRENT_REVISION'
-                            '&o=DETAILED_ACCOUNTS'
-                            % (ger_repos[repo], match, offset))
+                        changes += query_gerrit('changes/', params={
+                            'q': 'project:%s %s' % (ger_repos[repo], match),
+                            'n': '100',
+                            'start': offset,
+                            'o': [
+                                'CURRENT_COMMIT',
+                                'CURRENT_REVISION',
+                                'DETAILED_ACCOUNTS',
+                                ],
+                            })
                         if changes and changes[-1].get('_more_changes', False):
                             offset += 100
                         else:
