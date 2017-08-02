@@ -66,8 +66,8 @@ class openstack_project::logstash_worker (
       ensure  => present,
       content => $mqtt_ca_cert_contents,
       replace => true,
-      owner   => 'subunit',
-      group   => 'subunit',
+      owner   => 'root',
+      group   => 'root',
       mode    => '0555',
   }
 
