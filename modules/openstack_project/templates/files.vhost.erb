@@ -23,6 +23,11 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       Require all granted
     </Directory>
 
+    Alias /404s.txt /var/www/docs-404s.txt
+    <Directory "/var/www/docs-404s.txt">
+      Require all granted
+    </Directory>
+
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
     CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_access.log combined
