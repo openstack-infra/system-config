@@ -12,7 +12,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
 <% end -%>
 
   RewriteEngine On
-  RewriteRule ^/(.*) http://docs.openstack.org/developer/<%= @name.split('.')[0] %>/$1 [last,redirect=permanent]
+  RewriteRule ^/(.*) https://docs.openstack.org/developer/<%= @name.split('.')[0] %>/$1 [last,redirect=permanent]
 
   ErrorLog /var/log/apache2/<%= @name %>_error.log
   LogLevel warn
