@@ -1,0 +1,11 @@
+Code-Review+1: David Moreau Simard <dms@redhat.com>
+Code-Review+1: Matthew Treinish <mtreinish@kortar.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 02 Aug 2017 18:16:00 +0000
+Reviewed-on: https://review.openstack.org/461214
+Project: openstack-infra/system-config
+Branch: refs/heads/master
