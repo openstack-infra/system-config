@@ -298,6 +298,23 @@ Or with ruby:
         puts message
         end
 
+Example Use Cases
+=================
+
+Event Notifications
+-------------------
+
+A common use case for the event bus is to get a notification when an event
+occurs. There is an open source tool, `mqttwarn`_ that makes setting this up
+off the firehose (or any other mqtt broker) very straightforward.
+
+.. _mqttwarn: https://github.com/jpmens/mqttwarn
+
+You can use mqttwarn to setup custom notifications to a large number of tools
+and services. (both local and remote). You can read the full docs on how to
+configure and use mqttwarn at https://github.com/jpmens/mqttwarn/wiki and
+https://github.com/jpmens/mqttwarn/blob/master/README.md
+
 
 IMAP and MX
 ===========
