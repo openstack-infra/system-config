@@ -9,3 +9,7 @@ zuul_connections:
 
   - name: 'github'
     driver: 'github'
+
+zuul_trusted_ro_paths:
+  - /etc/lsb-release
+  - /var/lib/zuul/ssh

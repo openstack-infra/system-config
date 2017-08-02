@@ -1099,7 +1099,7 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
-    trusted_ro_paths        => ['/var/lib/zuul/ssh'],
+    trusted_ro_paths        => hiera('zuul_trusted_ro_paths', []),
     disk_limit_per_job      => 500,  # Megabytes
   }
 
