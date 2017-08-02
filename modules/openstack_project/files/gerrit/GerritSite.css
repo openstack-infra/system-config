@@ -4,6 +4,10 @@ a:hover {color: #000 !important; text-decoration: underline}
 
 a.gwt-InlineHyperlink {background: none !important}
 
+#openstack-logo img { width: 200px; }
+#openstack-logo h1 { margin: 20px; }
+#gerrit_header #openstack-logo h1 { margin: 20px 0 0 0; }
+
 #gerrit_header {display: block !important; position: relative; top: -60px; margin-bottom: -60px; width: 200px; padding-left: 17px}
 #gerrit_header h1 {font-family: 'PT Sans', sans-serif; font-weight: normal; letter-spacing: -1px}
 
