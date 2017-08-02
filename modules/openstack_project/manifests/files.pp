@@ -132,6 +132,29 @@ class openstack_project::files (
     before  => File['/etc/ssl/certs/docs.openstack.org.pem'],
   }
 
+  file {'/usr/local/bin/404s.sh':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    content => 'puppet:///modules/openstack_project/files/404s.sh',
+  }
+  file {'/var/www/docs-404s':
+    ensure => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+  }
+  cron {'generate_docs_404s':
+    # This seems to be about half an hour after apache rotates logs.
+    hour        => '7',
+    minute      => '0',
+    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin',
+    command     => '404s.sh /var/log/apache2/docs.openstack.org_access.log /var/www/docs-404s/',
+    require     => File['/usr/local/bin/404s.sh'],
+  }
+
+
   ###########################################################
   # developer.openstack.org
 
