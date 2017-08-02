@@ -18,7 +18,7 @@ class openstack_project::logstash_worker (
   $discover_node = 'elasticsearch01.openstack.org',
   $filter_rev    = 'master',
   $filter_source = 'https://git.openstack.org/openstack-infra/logstash-filters',
-  $enable_mqtt = false,
+  $enable_mqtt = true,
   $mqtt_hostname = 'firehose.openstack.org',
   $mqtt_port = 8883,
   $mqtt_topic = "logstash/${::hostname}",
@@ -26,6 +26,15 @@ class openstack_project::logstash_worker (
   $mqtt_password = undef,
   $mqtt_ca_cert_contents = undef,
 ) {
+
+  file { '/etc/logprocessor/worker.yaml':
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    content => template('openstack_project/logstash/jenkins-log-worker.yaml.erb'),
+  }
+
   file { '/etc/default/logstash-indexer':
     ensure => present,
     owner  => 'root',
@@ -53,26 +62,33 @@ class openstack_project::logstash_worker (
     notify  => Service['logstash'],
   }
 
+  file { '/etc/logstash/mqtt-root-CA.pem.crt':
+      ensure  => present,
+      content => $mqtt_ca_cert_contents,
+      replace => true,
+      owner   => 'subunit',
+      group   => 'subunit',
+      mode    => '0555',
+  }
+
   validate_array($elasticsearch_nodes)  # needed by output.conf.erb
   class { '::logstash::indexer':
     input_template         => 'openstack_project/logstash/input.conf.erb',
     output_template        => 'openstack_project/logstash/output.conf.erb',
-    enable_mqtt            => $enable_mqtt,
-    mqtt_ca_cert_contents  => $mqtt_ca_cert_contents,
     require                => Logstash::Filter['openstack-logstash-filters'],
   }
 
   include ::log_processor
   log_processor::worker { 'A':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logprocessor/worker.yaml',
   }
   log_processor::worker { 'B':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logprocessor/worker.yaml',
   }
   log_processor::worker { 'C':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logprocessor/worker.yaml',
   }
   log_processor::worker { 'D':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-worker.yaml',
+    config_file => '/etc/logprocessor/worker.yaml',
   }
 }
