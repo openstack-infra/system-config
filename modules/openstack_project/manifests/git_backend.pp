@@ -57,7 +57,7 @@ class openstack_project::git_backend (
         'commit-filter'  => '/usr/local/bin/commit-filter.sh',
         'css'            => '/static/openstack.css',
         'favicon'        => '/static/favicon.ico',
-        'logo'           => '/static/openstack.png',
+        'logo'           => '/static/openstack.svg',
         'root-title'     => 'OpenStack git repository browser',
         'max-repo-count' => 2500,
     },
@@ -131,21 +131,15 @@ class openstack_project::git_backend (
     require     => User['cgit'],
   }
 
-  file { '/var/www/cgit/static/openstack.png':
+  file { '/var/www/cgit/static/openstack.svg':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.png',
+    source  => 'puppet:///modules/openstack_project/openstack.svg',
     require => File['/var/www/cgit/static'],
   }
 
   file { '/var/www/cgit/static/favicon.ico':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/status/favicon.ico',
-    require => File['/var/www/cgit/static'],
-  }
-
-  file { '/var/www/cgit/static/openstack-page-bkg.jpg':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack-page-bkg.jpg',
     require => File['/var/www/cgit/static'],
   }
 
