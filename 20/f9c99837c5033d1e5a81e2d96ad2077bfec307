@@ -1,0 +1,9 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 04 Aug 2017 15:05:39 +0000
+Reviewed-on: https://review.openstack.org/490693
+Project: openstack-infra/system-config
+Branch: refs/heads/master
