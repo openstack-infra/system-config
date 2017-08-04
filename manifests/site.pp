@@ -1081,26 +1081,32 @@ node /^ze\d+\.openstack\.org$/ {
     sysadmins                 => hiera('sysadmins', []),
   }
 
+  class { '::project_config':
+    url => 'https://git.openstack.org/openstack-infra/project-config',
+  }
+
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
-    gearman_server          => 'zuulv3.openstack.org',
-    gerrit_server           => $gerrit_server,
-    gerrit_user             => $gerrit_user,
-    zuul_ssh_private_key    => $gerrit_ssh_private_key,
-    git_email               => $git_email,
-    git_name                => $git_name,
-    worker_private_key_file => '/var/lib/zuul/ssh/nodepool_id_rsa',
-    revision                => $revision,
-    python_version          => 3,
-    zookeeper_hosts         => 'nodepool.openstack.org:2181',
-    zuulv3                  => true,
-    connections             => hiera('zuul_connections', []),
-    gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
-    gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
-    gearman_ssl_ca          => hiera('gearman_ssl_ca'),
-    trusted_ro_paths        => ['/var/lib/zuul/ssh'],
-    disk_limit_per_job      => 500,  # Megabytes
+    gearman_server           => 'zuulv3.openstack.org',
+    gerrit_server            => $gerrit_server,
+    gerrit_user              => $gerrit_user,
+    zuul_ssh_private_key     => $gerrit_ssh_private_key,
+    git_email                => $git_email,
+    git_name                 => $git_name,
+    worker_private_key_file  => '/var/lib/zuul/ssh/nodepool_id_rsa',
+    revision                 => $revision,
+    python_version           => 3,
+    zookeeper_hosts          => 'nodepool.openstack.org:2181',
+    zuulv3                   => true,
+    connections              => hiera('zuul_connections', []),
+    gearman_client_ssl_cert  => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key   => hiera('gearman_client_ssl_key'),
+    gearman_ssl_ca           => hiera('gearman_ssl_ca'),
+    trusted_ro_paths         => ['/var/lib/zuul/ssh'],
+    disk_limit_per_job       => 500,  # Megabytes
+    site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
+    require                  => $::project_config::config_dir,
   }
 
   class { '::zuul::executor': }
