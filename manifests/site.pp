@@ -1103,14 +1103,7 @@ node /^ze\d+\.openstack\.org$/ {
     disk_limit_per_job      => 500,  # Megabytes
   }
 
-  class { '::project_config':
-    url => 'https://git.openstack.org/openstack-infra/project-config',
-  }
-
-  class { '::zuul::executor':
-    site_variable_yaml_file => $::project_config::zuul_executor_site_variables_yaml,
-    require                 => $::project_config::config_dir,
-  }
+  class { '::zuul::executor': }
 
   file { '/var/lib/zuul/ssh/nodepool_id_rsa':
     owner   => 'zuul',
