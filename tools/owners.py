@@ -204,6 +204,25 @@ def query_gerrit(method, params={}):
         return decode_json(raw)
 
 
+def lookup_member(email):
+    """A requests wrapper to querying the OSF member directory API"""
+
+    # The OpenStack foundation member directory lookup API endpoint
+    MEMBER_LOOKUP_URL = 'https://openstackid-resources.openstack.org/'
+
+    # URL pattern for querying foundation members by E-mail address
+    raw = requester(
+            MEMBER_LOOKUP_URL + '/api/public/v1/members',
+            params={'filter[]': [
+                'group_slug==foundation-members',
+                'email==' + email,
+                ]},
+            headers={'Accept': 'application/json'},
+            )
+
+    return decode_json(raw)
+
+
 def usage(argv):
     """Parse command line argument"""
     parser = argparse.ArgumentParser(
@@ -606,12 +625,18 @@ def main(argv=sys.argv):
                     'SKIPPING MALFORMED OWNER: no preferred or extra '
                     'addresses found for account %s' % owner, file=sys.stderr)
                 continue
+        for email in [owners[owner]['preferred']] + owners[owner]['extra']:
+            member = lookup_member(email)
+            if member['data']:
+                owners[owner]['member'] = member['data'][0]['id']
+                continue
         invite.append(owners[owner]['preferred'])
         invite += owners[owner]['extra']
         invites.append(invite)
 
-        # Append preferred addresses to the TC electorate
-        electorate.append(owners[owner]['preferred'] + '\n')
+        # Append preferred addresses to the TC electorate for members only
+        if 'member' in owners[owner]:
+            electorate.append(owners[owner]['preferred'] + '\n')
 
     # Write out a YAML file covering all change owners
     fd = open(os.path.join(outdir, '_all_owners.yaml'), 'w')
