@@ -215,9 +215,6 @@ Migrate the manifests:
 
 * modules/openstack_project/manifests/review.pp.
 
-  * Contact store should be set to false as at this stage we don't have a
-    secure store setup.
-
   * Start with just local replication, plus github if you have a
     github organisation already.
 

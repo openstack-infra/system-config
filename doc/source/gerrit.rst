@@ -343,7 +343,6 @@ Next, edit `project.config` to look like::
   agreementUrl = static/cla.html
   autoVerify = group CLA Accepted - ICLA
   description = OpenStack Individual Contributor License Agreement
-  requireContactInformation = true
 
   [contributor-agreement "System CLA"]
   accepted = group System CLA
@@ -634,7 +633,7 @@ against the current DB contents:
   ssh review.openstack.org -p29418 gerrit flush-caches --all
 
 Make the user aware that these steps have also removed any group
-memberships, preferences, SSH keys, contact information, CLA
+memberships, preferences, SSH keys, CLA
 signatures, and so on associated with the old account so some of
 these may still need to be added to the new one via the Gerrit WebUI
 if they haven't been already. With a careful inspection of all
