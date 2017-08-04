@@ -74,11 +74,6 @@ class openstack_project::review (
   $lp_access_token='',
   $lp_access_secret='',
   $lp_consumer_key='',
-  # For gerrit's contactstore feature
-  # https://review.openstack.org/Documentation/config-contact.html
-  $contactstore = true,
-  $contactstore_appsec='',
-  $contactstore_pubkey='',
   # For openstackwatch.
   $swift_username = '',
   $swift_password = '',
@@ -130,11 +125,6 @@ class openstack_project::review (
     httpd_maxqueued                     => '200',
     war                                 =>
       'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.11.4.22.e0c0f29.war',
-    contactstore                        => $contactstore,
-    contactstore_appsec                 => $contactstore_appsec,
-    contactstore_pubkey                 => $contactstore_pubkey,
-    contactstore_url                    =>
-      'http://direct.openstack.org/verify/member/',
     acls_dir                            => $::project_config::gerrit_acls_dir,
     notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
     projects_file                       => $::project_config::jeepyb_project_file,
