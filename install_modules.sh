@@ -14,7 +14,17 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
+PUPPET_VERSION=${PUPPET_VERSION:-3}
+
+if [ "$PUPPET_VERSION" == "3" ] ; then
+    MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
+elif [ "$PUPPET_VERSION" == "4" ] ; then
+    MODULE_PATH=`puppet config print modulepath`
+else
+    echo "Unsupported puppet version ${PUPPET_VERSION}"
+    exit 1
+fi
+
 SCRIPT_NAME=$(basename $0)
 SCRIPT_DIR=$(readlink -f "$(dirname $0)")
 JUST_CLONED=0
