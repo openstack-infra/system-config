@@ -98,11 +98,11 @@ class openstack_project::files (
   }
 
   file {'/usr/local/bin/404s.sh':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    content => 'puppet:///modules/openstack_project/files/404s.sh',
+    ensure => present,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+    source => 'puppet:///modules/openstack_project/files/404s.sh',
   }
   file {'/var/www/docs-404s':
     ensure => directory,
