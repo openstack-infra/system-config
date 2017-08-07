@@ -144,6 +144,11 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/pypi"
     ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
     ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+
+    # fedorapeople.org/groups/magnum
+    CacheEnable disk  "/fedorapeople.org/groups/magnum"
+    ProxyPass "/fedorapeople.org/groups/magnum/" "https://fedorapeople.org/groups/magnum/"
+    ProxyPassReverse "/fedorapeople.org/groups/magnum/" "https://fedorapeople.org/groups/magnum/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
