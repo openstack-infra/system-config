@@ -159,6 +159,11 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/pypi"
     ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
     ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+
+    # fedorapeople.org
+    CacheEnable disk  "/fedorapeople.org"
+    ProxyPass "/fedorapeople.org/" "https://fedorapeople.org/"
+    ProxyPassReverse "/fedorapeople.org/" "https://fedorapeople.org/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
