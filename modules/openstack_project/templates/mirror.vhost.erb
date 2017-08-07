@@ -122,6 +122,21 @@ NameVirtualHost <%= @vhost_name %>:8081
     # 5GiB
     CacheMaxFileSize 5368709120
 
+    # Added Aug 2017 in an attempt to avoid occasional 502 errors (around
+    # 0.05% of requests) of the type:
+    #
+    #  End of file found: ... AH01102: error reading status line from remote server ...
+    #
+    # Per [1]:
+    #
+    #  This avoids the "proxy: error reading status line from remote
+    #  server" error message caused by the race condition that the backend
+    #  server closed the pooled connection after the connection check by the
+    #  proxy and before data sent by the proxy reached the backend.
+    #
+    # [1] https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html
+    SetEnv proxy-initial-not-pooled 1
+
     # Per site caching reverse proxy rules
     # Only cache specific backends, rely on afs cache otherwise.
 
