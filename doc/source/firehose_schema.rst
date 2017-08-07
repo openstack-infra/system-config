@@ -394,3 +394,41 @@ An example of a task event from the running system is::
         "playbook_id": "b259ac6d-6cb5-4403-bb8d-0ff2131c3d7a",
         "ansible_host": "compute014.chocolate.ic.openstack.org"
     }
+
+
+Logstash Workers
+================
+
+The messages for the subunit workers are generated directly in the
+`logstash gearman worker scripts`_.
+
+.. _logstash gearman worker scripts: http://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/log-gearman-worker.py
+
+Topics
+------
+
+The topics for the subunit workers follow a simple pattern::
+
+    gearman-logstash/<worker hostname>/<git namespace>/<repo name>/<change number>/<action>
+
+Where  ``worker hostname`` is the host which processed the log file. The
+``git namespace`` and ``repo name`` are pretty self explanatory, and are just
+for the git repo under test that the log was generated. ``change number`` is
+the gerrit change number for the job that launched the tests the subunit is for.
+In the case of periodic or post queue jobs, this will either say ``periodic`` or
+``post`` because there isn't an associated change number. The action field is
+the phase of the log processing that just completed. Right now the only
+possible value is ``retrieve_logs`` but there may be others in the future.
+
+Payload
+-------
+The payload for the messages from the logstash workers is pretty straightforward
+json that contains 3 fields: ``status``, ``build_uuid``, and ``source_url``.
+
+An example is::
+
+    {
+        'status': 'success',
+        'build_uuid': '45f7c1ddbfd74c6aba94662623bd61b8'
+        'source_url': 'A url',
+    }
