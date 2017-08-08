@@ -59,6 +59,20 @@ for REPO in updates/25 updates/26 ; do
         $MIRROR/fedora/$REPO/ $BASE/$REPO/
 done
 
+if ! [ -f $BASE/atomic ]; then
+    $K5START mkdir -p $BASE/atomic
+fi
+
+echo "Running rsync atomic..."
+date --iso-8601=ns
+$K5START rsync -rlptDvz \
+    --delete \
+    --delete-excluded \
+    --exclude="Atomic/" \
+    --exclude="CloudImages/x86_64/images/*.raw.xz" \
+    --exclude="CloudImages/x86_64/images/*.box" \
+    $MIRROR/fedora-alt/atomic/stable/ $BASE/atomic/
+
 # TODO(pabelanger): Validate rsync process
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
