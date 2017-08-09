@@ -192,7 +192,18 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*cells.*'
+  # Only nova-conductor in a singleconductor deployment.
   - name: logs/screen-n-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  # Top-level nova-conductor in a superconductor deployment.
+  - name: logs/screen-n-super-cond.txt
+    tags:
+      - screen
+      - oslofmt
+  # Cell-level conductor in a superconductor deployment.
+  - name: logs/screen-n-cond-cell1.txt
     tags:
       - screen
       - oslofmt
