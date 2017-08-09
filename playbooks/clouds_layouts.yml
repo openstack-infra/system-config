@@ -113,17 +113,6 @@ profiles:
         cidr: '10.0.1.0/24'
 
 clouds:
-  # osic-cloud1
-  - name: openstackci-osic-cloud1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-
-  - name: openstackjenkins-osic-cloud1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-
   # ovh
   - name: openstackci-ovh-bhs1
     oscc_cloud: openstackci-ovh

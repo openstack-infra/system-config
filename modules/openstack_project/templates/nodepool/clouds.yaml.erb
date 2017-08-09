@@ -61,42 +61,6 @@ clouds:
               routes_externally: True
             - name: inap-17304-LAN3326
               routes_externally: False
-  osic-cloud1:
-    region_name: RegionOne
-    auth:
-      auth_url: https://cloud1.osic.xyz:5000
-      username: <%= @osic_cloud1_username %>
-      password: <%= @osic_cloud1_password %>
-      project_name: <%= @osic_cloud1_project %>
-      project_domain_name: default
-      user_domain_name: default
-    networks:
-      - name: GATEWAY_NET
-        routes_externally: true
-      - name: GATEWAY_NET_V6
-        routes_externally: true
-        routes_ipv6_externally: true
-        routes_ipv4_externally: false
-    identity_api_version: '3'
-    floating_ip_source: None
-  osic-cloud8:
-    region_name: RegionOne
-    auth:
-      auth_url: https://cloud8.weareopenstack.org:9007
-      username: <%= @osic_cloud8_username %>
-      password: <%= @osic_cloud8_password %>
-      project_name: <%= @osic_cloud8_project %>
-      project_domain_name: default
-      user_domain_name: default
-    networks:
-      - name: external-v4
-        routes_externally: true
-      - name: external-v6
-        routes_externally: true
-        routes_ipv6_externally: true
-        routes_ipv4_externally: false
-    identity_api_version: '3'
-    floating_ip_source: None
   vexxhost:
     region_name: ca-ymq-1
     profile: vexxhost
