@@ -159,6 +159,12 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/pypi"
     ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
     ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+
+    # images.linuxcontainers.org
+    CacheEnable disk "/images.linuxcontainers"
+    ProxyPass "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
+    ProxyPassReverse "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
+
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
