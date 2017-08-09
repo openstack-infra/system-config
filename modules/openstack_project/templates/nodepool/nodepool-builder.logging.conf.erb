@@ -8,24 +8,22 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_opensuse-422, dib_opensuse-423, rax-dfw_upload,
- rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- internap-mtl01_upload, osic-cloud1-s3500_upload,
- osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload,
- citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
- citycloud-sto2_upload
+ dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
+ rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
+ ovh-bhs1_upload, internap-mtl01_upload,
+ tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
+ infracloud-chocolate_upload, citycloud-lon1_upload,
+ citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
 
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_opensuse-422, dib_opensuse-423, rax-dfw_upload,
- rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- internap-mtl01_upload, osic-cloud1-s3500_upload,
- osic-cloud1-s3700_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload,
- citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
- citycloud-sto2_upload
+ dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
+ rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
+ ovh-bhs1_upload, internap-mtl01_upload,
+ tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
+ infracloud-chocolate_upload, citycloud-lon1_upload,
+ citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
 
 [formatters]
 keys=simple
@@ -152,6 +150,18 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-25.log', 'H', 8, 30,)
 
+[logger_dib_fedora-26]
+level=DEBUG
+handlers=dib_fedora-26
+qualname=nodepool.image.build.fedora-26
+propagate=0
+
+[handler_dib_fedora-26]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.fedora-26.log', 'H', 8, 30,)
+
 [logger_dib_opensuse-422]
 level=DEBUG
 handlers=dib_opensuse-422
@@ -247,30 +257,6 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/internap-mtl01.log', 'H', 8, 30,)
-
-[logger_osic-cloud1-s3500_upload]
-level=DEBUG
-handlers=osic-cloud1-s3500_upload
-qualname=nodepool.image.upload.osic-cloud1-s3500
-propagate=0
-
-[handler_osic-cloud1-s3500_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/osic-cloud1-s3500.log', 'H', 8, 30,)
-
-[logger_osic-cloud1-s3700_upload]
-level=DEBUG
-handlers=osic-cloud1-s3700_upload
-qualname=nodepool.image.upload.osic-cloud1-s3700
-propagate=0
-
-[handler_osic-cloud1-s3700_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/osic-cloud1-s3700.log', 'H', 8, 30,)
 
 [logger_tripleo-test-cloud-rh1_upload]
 level=DEBUG
