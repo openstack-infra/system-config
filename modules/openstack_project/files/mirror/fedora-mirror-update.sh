@@ -65,7 +65,7 @@ fi
 
 echo "Running rsync atomic..."
 date --iso-8601=ns
-$K5START rsync -rlptDvz \
+$K5START rsync -rltDvz \
     --delete \
     --delete-excluded \
     --exclude="testing/" \
