@@ -165,6 +165,10 @@ NameVirtualHost <%= @vhost_name %>:8081
     ProxyPass "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
     ProxyPassReverse "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
 
+    # registry.npmjs.or
+    CacheEnable disk  "/registry.npmjs"
+    ProxyPass "/registry.npmjs/" "https://registry.npmjs.org/"
+    ProxyPassReverse "/registry.npmjs/" "https://registry.npmjs.org/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
