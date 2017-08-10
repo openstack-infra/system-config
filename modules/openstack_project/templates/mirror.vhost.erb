@@ -140,10 +140,15 @@ NameVirtualHost <%= @vhost_name %>:8081
     # Per site caching reverse proxy rules
     # Only cache specific backends, rely on afs cache otherwise.
 
-    # buildlogs.centos.org
+    # buildlogs.centos.org (302 redirects to buildlogs.cdn.centos.org)
     CacheEnable disk  "/buildlogs.centos"
     ProxyPass "/buildlogs.centos/" "https://buildlogs.centos.org/"
     ProxyPassReverse "/buildlogs.centos/" "https://buildlogs.centos.org/"
+
+    # buildlogs.cdn.centos.org
+    CacheEnable disk  "/buildlogs.cdn.centos"
+    ProxyPass "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/"
+    ProxyPassReverse "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/"
 
     # rdo
     CacheEnable disk  "/rdo"
