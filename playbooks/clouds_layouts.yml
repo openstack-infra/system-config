@@ -152,6 +152,19 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+  # inap
+  - name: openstackci-inap-mtl01
+    oscc_cloud: openstackci-inap
+    region_name: mtl01
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackjenkins-inap-mtl01
+    oscc_cloud: openstackjenkins-inap
+    region_name: mtl01
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
 
   # rackspace
   - name: openstackci-rax-dfw
