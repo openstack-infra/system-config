@@ -231,6 +231,7 @@ class openstack_project::mirror (
 
   file { '/opt/apache_cache':
     ensure => absent,
+    force  => true,
   }
 
   file { '/var/cache/apache2/proxy':
