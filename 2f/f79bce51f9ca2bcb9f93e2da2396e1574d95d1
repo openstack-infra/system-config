@@ -1,0 +1,11 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+1: zhongshengping <chdzsp@163.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 14 Aug 2017 13:54:16 +0000
+Reviewed-on: https://review.openstack.org/493112
+Project: openstack-infra/system-config
+Branch: refs/heads/master
