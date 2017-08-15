@@ -34,16 +34,16 @@ class openstack_project::users_install (
       User::Virtual::Localuser['corvus'],
       User::Virtual::Localuser['clarkb'],
       User::Virtual::Localuser['fungi'],
-      User::Virtual::Localuser['slukjanov'],
-      User::Virtual::Localuser['elizabeth'],
       User::Virtual::Localuser['jhesketh'],
-      User::Virtual::Localuser['nibz'],
       User::Virtual::Localuser['yolanda'],
       User::Virtual::Localuser['pabelanger'],
       User::Virtual::Localuser['rcarrillocruz'],
       User::Virtual::Localuser['ianw'],
       User::Virtual::Localuser['shrews'],
     )
+    user::virtual::disable{'slukjanov':}
+    user::virtual::disable{'elizabeth':}
+    user::virtual::disable{'nibz':}
   } else {
       user::virtual::disable{'mordred':}
       user::virtual::disable{'corvus':}

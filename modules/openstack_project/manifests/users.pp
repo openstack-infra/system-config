@@ -137,16 +137,14 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'slukjanov':
     realname => 'Sergey Lukjanov',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDHGuIVB/WxBd7k1R8x2FyfqT6KxRnoM7lE5RE8gvBk2r8cQeH5k1c+P5JrBvWpmqXv4satoivYOBiIb7JXEgIxx62YUx/JQ0J7k3w+av6h4iFe2OhOtEOjMF5F8/wO8a/95OeTZPzBZlUfA3hx754kuw3Q/aBKQUOHWxJOIedGyVHeJc7XiFj3RXIufFuUfng9+p4Z3q6d2/WpuKqs00WI0CLF17PkU4i8P9CraJR1dmsWW6zoxMT2G+DwMFI7ZMS3xrVBRuLwrLlbylVLW2kOJ0JeyjHnRh7X1kR7KG3cGOOjA1YQ0e+mXvremcO3/3o6Iop/N1AtqVuYCKlZc7Y9',
-    key_id   => 'slukjanov@mirantis.com',
+    sshkeys  => '',
     uid      => 2014,
     gid      => 2014,
   }
 
   @user::virtual::localuser { 'elizabeth':
     realname => 'Elizabeth K. Joseph',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDL9x1rhTVOEQEanrN+ecycaDtAbbh3kr41Rxx7galtLq0JwftjsZqv2Vwl9c8ARmm8HiHcLwDoaZB9gvs6teMScCB+5a1fcohiycJBl2olNFRzkGapDaTvl74aLXQBWaV84D8tUavEl26zcgwrv9WLUsy9pnHoo5K0BzbK7vT2g3VictCphveC2vdjCDeptocWvt4zxCmAY6O7QMKeUjKMlvuy+zCohJcR4BbDnw8EriFAmCeQZcAgfLTyeAvjo384NNIFWyhCwvbCLvpgTplMCp896DWLlXu9eaGUCNjT/sZM8zafAXbfc6OKYFQ5iANAiJktWwKaUaphJkbSVWT5',
-    key_id   => 'elizabeth@r2d2',
+    sshkeys  => '',
     uid      => 2015,
     gid      => 2015,
   }
@@ -161,8 +159,7 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'nibz':
     realname => 'Spencer Krum',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDTDia7zLp6NB/DdzhGW/4MDgaQ1yemfF+fGFctrSbBZzP2Aj3RUlBh4Mut3bTIqp/PKNMXVZQbvig5nqF3sB87ZPvmk+7WluFFcQN1RIZnvkYXjF64C+G5PkEZOQW9nqEeElSCV2lXgK98FPrGtK6HgQlYxH5RJa6cufRwYLXLsAwfKRcS3P5oRU2KDORNm6uBfUuX0TyPgtEjYsjCWcffoW+E8kvZbx1DKxF4+u0mWSdkg0P40aAY10mHACtJ4hnu7xNa5Z9Oru1rA1KWL5NHISgy9t5zC1/0jWfYi+tqToBgUCyB8stWgNpHh+QJrpS8CoCDzQLBar0ynnOxBfHH2+s9xJapQNi6ZOC3khWkoxUJn2Gs9FXqow3zGSmEuEKbbUvaGC58U4S0xFcZzF+sOzjRJtw66wE2pQN5Pj/Qw09w6gt05g4nxoxkRVCwMLdnyoIY1oFmywJX3xC1Utu2oCNfgZSn78rqVkE9e11LczPNGvYjl6xQo1r254E0w3QBgo+LaTK5FBRCAbJ76n0IBJ8SZe9foPWjKTGlbCevM6KO8lm58/0m0EfMf9457ZM9KhyXwYvnb+iR7huGC+pwgGemJ4D6vjeE9EUNGSq6igg+v+cl1DHOxVb0s0Tx2T6DMh3usB4C1uoNCR303cmzrNZ94KLXRICQArSClQI7OQ==',
-    key_id   => 'nibz@hertz',
+    sshkeys  => '',
     uid      => 2017,
     gid      => 2017,
   }
