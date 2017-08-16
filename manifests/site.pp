@@ -1167,6 +1167,9 @@ node 'zuulv3.openstack.org' {
 
   $gearman_workers = [
     'ze01.openstack.org',
+    'ze02.openstack.org',
+    'ze03.openstack.org',
+    'ze04.openstack.org',
   ]
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
@@ -1235,9 +1238,6 @@ node 'zuul.openstack.org' {
     'zl04.openstack.org',
     'zl05.openstack.org',
     'zl06.openstack.org',
-    'zl07.openstack.org',
-    'zl08.openstack.org',
-    'zl09.openstack.org',
     'zm01.openstack.org',
     'zm02.openstack.org',
     'zm03.openstack.org',

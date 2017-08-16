@@ -9,9 +9,6 @@ zmq-publishers:
   - tcp://zl04.openstack.org:8888
   - tcp://zl05.openstack.org:8888
   - tcp://zl06.openstack.org:8888
-  - tcp://zl07.openstack.org:8888
-  - tcp://zl08.openstack.org:8888
-  - tcp://zl09.openstack.org:8888
 
 subunit-files:
   - name: logs/testrepository.subunit

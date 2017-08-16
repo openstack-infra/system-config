@@ -469,6 +469,9 @@ cacti_hosts:
 - translate-dev.openstack.org
 - wiki.openstack.org
 - ze01.openstack.org
+- ze02.openstack.org
+- ze03.openstack.org
+- ze04.openstack.org
 - zlstatic01.openstack.org
 - zl01.openstack.org
 - zl02.openstack.org
@@ -476,9 +479,6 @@ cacti_hosts:
 - zl04.openstack.org
 - zl05.openstack.org
 - zl06.openstack.org
-- zl07.openstack.org
-- zl08.openstack.org
-- zl09.openstack.org
 - zm01.openstack.org
 - zm02.openstack.org
 - zm03.openstack.org
