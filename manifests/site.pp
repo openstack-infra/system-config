@@ -611,7 +611,8 @@ node 'mirror-update.openstack.org' {
 
 # Machines in each region to serve AFS mirrors.
 # Node-OS: trusty
-node /^mirror\..*\.openstack\.org$/ {
+# Node-OS: xenial
+node /^mirror\d*\..*\.openstack\.org$/ {
   $group = "mirror"
 
   class { 'openstack_project::server':
