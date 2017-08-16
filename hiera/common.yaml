@@ -443,6 +443,7 @@ cacti_hosts:
 - mirror.dfw.rax.openstack.org
 - mirror.gra1.ovh.openstack.org
 - mirror.iad.rax.openstack.org
+- mirror01.iad.rax.openstack.org
 - mirror.kna1.citycloud.openstack.org
 - mirror.la1.citycloud.openstack.org
 - mirror.lon1.citycloud.openstack.org
