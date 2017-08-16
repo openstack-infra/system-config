@@ -93,6 +93,11 @@ NameVirtualHost <%= @vhost_name %>:8081
 
 <VirtualHost <%= @vhost_name %>:8080>
     ServerName <%= @srvname %>:8080
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
 
     # Disable directory listing by default.
     <Directory />
@@ -183,6 +188,11 @@ NameVirtualHost <%= @vhost_name %>:8081
 
 <VirtualHost <%= @vhost_name %>:8081>
     ServerName <%= @srvname %>:8081
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%><%= "  ServerAlias #{name}\n" %><% end -%>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}" -%>
+    <% end -%>
 
     # Disable directory listing by default.
     <Directory />
