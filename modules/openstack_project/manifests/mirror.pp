@@ -4,6 +4,16 @@ class openstack_project::mirror (
   $vhost_name = $::fqdn,
 ) {
 
+  # Some hosts are mirror01, but we need the host to respond to
+  # "mirror."  Re-evaluate this if we end up doing multiple
+  # mirrors/load balancing etc.
+  $alias_name = regsubst($vhost_name, 'mirror\d*\.', 'mirror.')
+  if $alias_name != $vhost_name {
+    $serveraliases = [$alias_name]
+  } else {
+    $serveraliases = undef
+  }
+
   $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
@@ -283,6 +293,7 @@ class openstack_project::mirror (
     priority => '50',
     docroot  => "${www_root}",
     template => 'openstack_project/mirror.vhost.erb',
+    serveraliases => $serveraliases,
     require  => [
       File["${www_root}"],
     ]
