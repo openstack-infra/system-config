@@ -170,6 +170,11 @@ NameVirtualHost <%= @vhost_name %>:8081
     ProxyPass "/yum-mariadb/" "http://yum.mariadb.org/"
     ProxyPassReverse "/yum-mariadb/" "http://yum.mariadb.org/"
 
+    # erlang-solutions rpm/deb packages (required by RabbitMQ)
+    CacheEnable disk "/erlang-solutions"
+    ProxyPass "/erlang-solutions/" "https://packages.erlang-solutions.com/"
+    ProxyPassReverse "/erlang-solutions/" "https://packages.erlang-solutions.com/"
+
     # registry.npmjs.org
     CacheEnable disk  "/registry.npmjs"
     ProxyPass "/registry.npmjs/" "https://registry.npmjs.org/"
