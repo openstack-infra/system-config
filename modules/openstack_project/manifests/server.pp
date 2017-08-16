@@ -39,6 +39,23 @@ class openstack_project::server (
     require    => Package['rsyslog'],
   }
 
+  if ($::osfamily == 'RedHat') or
+      ($::osfamily == 'Debian' and $::operatingsystemrelease >= '16.04') {
+    # We want journald logging to be persistent and not be subject to ring
+    # buffer behavior (log turnover after a few megabytes and losing logs
+    # on rebooet). We set the storage scheme to persistent here. We don't
+    # create /var/log/journal manually as journald will do it for us with
+    # distro specific permissions and acls and ownership if we configure
+    # it this way.
+    file { '/etc/systemd/journald.conf':
+      ensure => present,
+      mode   => '0644',
+      owner  => 'root',
+      group  => 'root',
+      source => 'puppet:///modules/openstack_project/journald.conf',
+    }
+  }
+
   # Increase syslog message size in order to capture
   # python tracebacks with syslog.
   file { '/etc/rsyslog.d/99-maxsize.conf':
