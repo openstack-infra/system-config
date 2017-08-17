@@ -139,19 +139,6 @@ clouds:
       - openstackci-keypairs
       - openstackci-security
 
-  # internap
-  - name: openstackci-internap-mtl01
-    oscc_cloud: openstackci-internap
-    region_name: mtl01
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-  - name: openstackjenkins-internap-mtl01
-    oscc_cloud: openstackjenkins-internap
-    region_name: mtl01
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
   # inap
   - name: openstackci-inap-mtl01
     oscc_cloud: openstackci-inap

@@ -10,7 +10,7 @@ keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
  dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
  rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, internap-mtl01_upload,
+ ovh-bhs1_upload, inap-mtl01_upload,
  tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
  infracloud-chocolate_upload, citycloud-lon1_upload,
  citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
@@ -20,7 +20,7 @@ keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
  dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
  rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, internap-mtl01_upload,
+ ovh-bhs1_upload, inap-mtl01_upload,
  tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
  infracloud-chocolate_upload, citycloud-lon1_upload,
  citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
@@ -246,17 +246,17 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/ovh-bhs1.log', 'H', 8, 30,)
 
-[logger_internap-mtl01_upload]
+[logger_inap-mtl01_upload]
 level=DEBUG
-handlers=internap-mtl01_upload
-qualname=nodepool.image.upload.internap-mtl01
+handlers=inap-mtl01_upload
+qualname=nodepool.image.upload.inap-mtl01
 propagate=0
 
-[handler_internap-mtl01_upload]
+[handler_inap-mtl01_upload]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @upload_log_document_root %>/internap-mtl01.log', 'H', 8, 30,)
+args=('<%= @upload_log_document_root %>/inap-mtl01.log', 'H', 8, 30,)
 
 [logger_tripleo-test-cloud-rh1_upload]
 level=DEBUG

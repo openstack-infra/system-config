@@ -447,7 +447,7 @@ cacti_hosts:
 - mirror.kna1.citycloud.openstack.org
 - mirror.la1.citycloud.openstack.org
 - mirror.lon1.citycloud.openstack.org
-- mirror.mtl01.internap.openstack.org
+- mirror.mtl01.inap.openstack.org
 - mirror.ord.rax.openstack.org
 - mirror.regionone.infracloud-chocolate.openstack.org
 - mirror.regionone.infracloud-vanilla.openstack.org
