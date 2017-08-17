@@ -232,11 +232,6 @@ EOF
         fi
         dpkg -i $puppet_deb
         rm $puppet_deb
-
-        # ansible also requires python2 on the host to run correctly.
-        # Make sure we have it, as some images come without it
-        DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-            --assume-yes install python-minimal
     fi;
 
     apt-get update
@@ -328,6 +323,16 @@ function setup_pip {
 
     pip install -U setuptools
 }
+
+# Need to install python2 early as pip and ansible need it and it
+# isn't necessarily previously installed on newer Ubuntu releases.
+if is_ubuntu; then
+    if ! which python > /dev/null 2<&1 ; then
+        DEBIAN_FRONTEND=noninteractive apt-get update
+        DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
+            --assume-yes install -y --force-yes python-minimal
+    fi
+fi
 
 if $SETUP_PIP; then
     setup_pip
