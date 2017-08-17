@@ -450,7 +450,7 @@ cacti_hosts:
 - mirror.gra1.ovh.openstack.org
 - mirror.la1.citycloud.openstack.org
 - mirror.lon1.citycloud.openstack.org
-- mirror.mtl01.internap.openstack.org
+- mirror.mtl01.inap.openstack.org
 - mirror.regionone.tripleo-test-cloud-rh1.openstack.org
 - mirror.regionone.tripleo-test-cloud-rh2.openstack.org
 - mirror-update.openstack.org
