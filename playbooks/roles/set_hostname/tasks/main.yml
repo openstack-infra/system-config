@@ -11,3 +11,13 @@
 
 - name: Set /etc/mailname
   template: src=mailname.j2 dest=/etc/mailname mode=0644
+
+- name: Check for /etc/cloud
+  stat:
+    path: /etc/cloud
+  register: etc_cloud
+
+- name: Prevent cloud-init from borking things on reboot
+  file:
+    path: /etc/cloud/cloud-init.disabled
+  when: etc_cloud.stat.exists
