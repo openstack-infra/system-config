@@ -151,47 +151,47 @@ NameVirtualHost <%= @vhost_name %>:8081
 
     # buildlogs.centos.org (302 redirects to buildlogs.cdn.centos.org)
     CacheEnable disk  "/buildlogs.centos"
-    ProxyPass "/buildlogs.centos/" "https://buildlogs.centos.org/"
+    ProxyPass "/buildlogs.centos/" "https://buildlogs.centos.org/" ttl=120
     ProxyPassReverse "/buildlogs.centos/" "https://buildlogs.centos.org/"
 
     # buildlogs.cdn.centos.org
     CacheEnable disk  "/buildlogs.cdn.centos"
-    ProxyPass "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/"
+    ProxyPass "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/" ttl=120
     ProxyPassReverse "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/"
 
     # rdo
     CacheEnable disk  "/rdo"
-    ProxyPass "/rdo/" "https://trunk.rdoproject.org/"
+    ProxyPass "/rdo/" "https://trunk.rdoproject.org/" ttl=120
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
 
     # tarballs
     CacheEnable disk  "/tarballs"
-    ProxyPass "/tarballs/" "https://tarballs.openstack.org/"
+    ProxyPass "/tarballs/" "https://tarballs.openstack.org/" ttl=120
     ProxyPassReverse "/tarballs/" "https://tarballs.openstack.org/"
 
     # pypi
     CacheEnable disk  "/pypi"
-    ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+    ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/" ttl=120
     ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
 
     # images.linuxcontainers.org
     CacheEnable disk "/images.linuxcontainers"
-    ProxyPass "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
+    ProxyPass "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/" ttl=120
     ProxyPassReverse "/images.linuxcontainers/" "http://us.images.linuxcontainers.org/"
 
     # registry.npmjs.org
     CacheEnable disk  "/registry.npmjs"
-    ProxyPass "/registry.npmjs/" "https://registry.npmjs.org/"
+    ProxyPass "/registry.npmjs/" "https://registry.npmjs.org/" ttl=120
     ProxyPassReverse "/registry.npmjs/" "https://registry.npmjs.org/"
 
     # api.rubygems.org
     CacheEnable disk  "/api.rubygems"
-    ProxyPass "/api.rubygems/" "https://api.rubygems.org/"
+    ProxyPass "/api.rubygems/" "https://api.rubygems.org/" ttl=120
     ProxyPassReverse "/api.rubygems/" "https://api.rubygems.org/"
 
     # rubygems.org
     CacheEnable disk  "/rubygems"
-    ProxyPass "/rubygems/" "https://rubygems.org/"
+    ProxyPass "/rubygems/" "https://rubygems.org/" ttl=120
     ProxyPassReverse "/rubygems/" "https://rubygems.org/"
 </VirtualHost>
 
@@ -238,12 +238,12 @@ NameVirtualHost <%= @vhost_name %>:8081
 
     # registry-1.docker.io
     CacheEnable disk  "/registry-1.docker"
-    ProxyPass "/registry-1.docker/" "https://registry-1.docker.io/"
+    ProxyPass "/registry-1.docker/" "https://registry-1.docker.io/" ttl=120
     ProxyPassReverse "/registry-1.docker/" "https://registry-1.docker.io/"
 
     # dseasb33srnrn.cloudfront.net
     CacheEnable disk "/cloudfront"
-    ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
+    ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/" ttl=120
     ProxyPassReverse "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
 
 </VirtualHost>
