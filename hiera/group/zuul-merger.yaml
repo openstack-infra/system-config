@@ -15,28 +15,10 @@ zuul_sites:
     user: 'jenkins'
     root: '/srv/static'
 
-  - name: 'docs.openstack.org'
-    host: 'ftp3.ftptoyoursite.com'
-    user: 'openstackdocs'
-    pass: "%{hiera('openstackdocs_ftp_password')}"
-    root: '/web/content'
-
   - name: 'afs-docs'
     root: '/afs/.openstack.org/docs'
     keytab: '/etc/zuul-launcher.keytab'
     user: 'service/zuul-launcher'
-
-  - name: 'api.openstack.org'
-    host: 'ftp3.ftptoyoursite.com'
-    user: 'cloudapidocs'
-    pass: "%{hiera('cloudapidocs_ftp_password')}"
-    root: '/web/content'
-
-  - name: 'developer.openstack.org'
-    host: 'ftp3.ftptoyoursite.com'
-    user: 'clouddevdocs'
-    pass: "%{hiera('clouddevdocs_ftp_password')}"
-    root: '/web/content'
 
   - name: 'afs-developer-docs'
     root: '/afs/.openstack.org/developer-docs'
