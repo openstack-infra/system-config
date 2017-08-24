@@ -1,11 +1,13 @@
 ---
 - hosts: "controller*.ic.openstack.org:!disabled"
   gather_facts: true
+  serial: 1
   roles:
     - role: puppet
       manage_config: true
 - hosts: "compute*.ic.openstack.org:!disabled"
   gather_facts: true
+  serial: 1
   roles:
     - role: puppet
       manage_config: true
