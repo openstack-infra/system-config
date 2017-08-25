@@ -151,12 +151,12 @@ NameVirtualHost <%= @vhost_name %>:8081
 
     # buildlogs.centos.org (302 redirects to buildlogs.cdn.centos.org)
     CacheEnable disk  "/buildlogs.centos"
-    ProxyPass "/buildlogs.centos/" "https://buildlogs.centos.org/" ttl=120 keepalive=On
+    ProxyPass "/buildlogs.centos/" "https://buildlogs.centos.org/" ttl=120 disablereuse=On
     ProxyPassReverse "/buildlogs.centos/" "https://buildlogs.centos.org/"
 
     # buildlogs.cdn.centos.org
     CacheEnable disk  "/buildlogs.cdn.centos"
-    ProxyPass "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/" ttl=120 keepalive=On
+    ProxyPass "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/" ttl=120 disablereuse=On
     ProxyPassReverse "/buildlogs.cdn.centos/" "https://buildlogs.cdn.centos.org/"
 
     # rdo
