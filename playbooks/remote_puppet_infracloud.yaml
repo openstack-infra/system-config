@@ -7,7 +7,8 @@
       manage_config: true
 - hosts: "compute*.ic.openstack.org:!disabled"
   gather_facts: true
-  serial: 1
+  max_fail_percentage: 100
+  serial: "10%"
   roles:
     - role: puppet
       manage_config: true
