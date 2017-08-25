@@ -171,6 +171,22 @@ node 'puppetmaster.openstack.org' {
     mqtt_password                              => hiera('mqtt_service_user_password'),
     mqtt_ca_cert_contents                      => hiera('mosquitto_tls_ca_file'),
   }
+  file { '/etc/openstack/infracloud_vanilla_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
+    require => Class['::openstack_project::puppetmaster'],
+  }
+  file { '/etc/openstack/infracloud_chocolate_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
+    require => Class['::openstack_project::puppetmaster'],
+  }
 }
 
 # Node-OS: trusty
