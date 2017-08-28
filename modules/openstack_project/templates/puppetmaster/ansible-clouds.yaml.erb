@@ -90,7 +90,7 @@ clouds:
       user_domain_name: default
     identity_api_version: '3'
     floating_ip_source: None
-    cacert: /etc/ssl/certs/ca-certificates.crt
+    cacert: /etc/openstack/infracloud_vanilla_cacert.pem
   openstackci-infracloud-chocolate:
     region_name: RegionOne
     auth:
@@ -102,7 +102,7 @@ clouds:
       user_domain_name: default
     identity_api_version: '3'
     floating_ip_source: None
-    cacert: /etc/ssl/certs/ca-certificates.crt
+    cacert: /etc/openstack/infracloud_chocolate_cacert.pem
   openstackci-citycloud:
     regions:
       - Lon1
