@@ -59,14 +59,10 @@ Rotation
 The master key is rotated at the start of each development cycle,
 signed by a majority of Infra root sysadmins before being put into
 service, and has an expiration date set for shortly after the end of
-the targeted development cycle. As each new key is created and
-brought into rotation, an announcement should be signed by both the
-old and new keys and sent to the
-openstack-announce@lists.openstack.org mailing list. The new key
-should also be signed by the old, and this signature pushed to the
-public keyserver network. New key fingerprints are also submitted to
-the openstack/releases repository, for publication on the
-releases.openstack.org Web site.
+the targeted development cycle. The new key should also be signed by
+the old, and this signature pushed to the public keyserver network.
+New key fingerprints are also submitted to the openstack/releases
+repository, for publication on the releases.openstack.org Web site.
 
 
 Revocation
