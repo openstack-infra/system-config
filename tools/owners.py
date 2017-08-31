@@ -683,8 +683,9 @@ def main(argv=sys.argv):
             for field in ('count', 'newest', 'oldest'):
                 output[owner][field] = projects[project][owner][field]
 
-            # Append preferred addresses to the PTL electoral rolls
-            electorate.append(owners[owner]['preferred'] + '\n')
+            # Append preferred member addresses to the PTL electoral rolls
+            if 'member' in owners[owner]:
+                electorate.append(owners[owner]['preferred'] + '\n')
 
         # Write out a team-specific YAML file
         fd = open(os.path.join(outdir, '%s.yaml' % normalized_project), 'w')
