@@ -1099,7 +1099,9 @@ node /^ze\d+\.openstack\.org$/ {
     gearman_client_ssl_cert  => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key   => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca           => hiera('gearman_ssl_ca'),
-    trusted_ro_paths         => ['/var/lib/zuul/ssh'],
+    #TODO(pabelanger): Add openafs role for zuul-jobs to setup /etc/openafs
+    # properly. We need to revisting this post Queens PTG.
+    trusted_ro_paths         => ['/etc/openafs', '/var/lib/zuul/ssh'],
     disk_limit_per_job       => 500,  # Megabytes
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
