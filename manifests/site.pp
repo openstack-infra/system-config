@@ -1058,6 +1058,7 @@ node /^ze\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79],
     sysadmins                 => hiera('sysadmins', []),
+    afs                       => true,
   }
 
   class { '::project_config':
