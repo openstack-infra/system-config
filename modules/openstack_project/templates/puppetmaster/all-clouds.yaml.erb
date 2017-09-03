@@ -227,16 +227,3 @@ clouds:
       project_id: bed89257500340af8d0fbe7141b1bfd6
       project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
       user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
-  openstackzuul-entercloud:
-    regions:
-      - nl-ams1
-      - de-fra1
-      - it-mil1
-    profile: entercloudsuite
-    image_api_version: '1'
-    auth:
-      username: <%= @puppetmaster_clouds['openstackzuul_entercloud_username'] %>
-      password: <%= @puppetmaster_clouds['openstackzuul_entercloud_password'] %>
-      project_id: 1ceb779ea58d4e14b6238b3413f06634
-      user_domain_id: default
-      project_domain_id: default
