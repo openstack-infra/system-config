@@ -828,8 +828,6 @@ node 'nodepool.openstack.org' {
   $datacentred_project    = hiera('nodepool_datacentred_project', 'project')
   $citycloud_username = hiera('nodepool_citycloud_username', 'username')
   $citycloud_password = hiera('nodepool_citycloud_password')
-  $entercloud_username = hiera('nodepool_entercloud_username', 'username')
-  $entercloud_password = hiera('nodepool_entercloud_password')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
   $zk_receivers = [
@@ -935,8 +933,6 @@ node /^nl\d+\.openstack\.org$/ {
   $datacentred_project            = hiera('nodepool_datacentred_project', 'project')
   $citycloud_username             = hiera('nodepool_citycloud_username', 'username')
   $citycloud_password             = hiera('nodepool_citycloud_password')
-  $entercloud_username            = hiera('nodepool_entercloud_username', 'username')
-  $entercloud_password            = hiera('nodepool_entercloud_password')
   $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
@@ -1008,8 +1004,6 @@ node /^nb\d+\.openstack\.org$/ {
   $datacentred_project    = hiera('nodepool_datacentred_project', 'project')
   $citycloud_username = hiera('nodepool_citycloud_username', 'username')
   $citycloud_password = hiera('nodepool_citycloud_password')
-  $entercloud_username = hiera('nodepool_entercloud_username', 'username')
-  $entercloud_password = hiera('nodepool_entercloud_password')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
