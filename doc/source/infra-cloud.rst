@@ -196,6 +196,27 @@ there should be a second VLAN that is connected only to the NIC of the
 Ironic Cloud and is routed to the IPMI management network of all of the other
 nodes. Whether we use LinuxBridge or Open vSwitch is still TBD.
 
+SSL
+---
+
+Since we are the single user of Infracloud we have configured Vanilla and
+Chocolate controllers to use the snakeoil ssl certs for each controller.
+This gives us simple to generate certs with long lifetimes which we can trust
+directly by asserting trust against the public cert.
+
+If you need to update certs in one of the clouds simply run::
+
+  /usr/sbin/make-ssl-cert generate-default-snakeoil --force-overwrite
+
+on the controller in question. Then copy the contents of
+``/etc/ssl/certs/ssl-cert-snakeoil.pem`` to public system-config hiera and
+``/etc/ssl/private/ssl-cert-snakeoil.key`` to private hiera on the
+puppetmaster.
+
+Puppet will then ensure we trust the public key everywhere that talks to the
+controller (puppetmaster, nodepool, controller itself, compute nodes, etc)
+and deploy the private key so that it is used by services.
+
 Troubleshooting
 ===============
 
