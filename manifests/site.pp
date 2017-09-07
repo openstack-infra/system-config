@@ -967,7 +967,7 @@ node /^nl\d+\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^nb\d+\.openstack\.org$/ {
+node /^nb0[34].openstack\.org$/ {
   $group = 'nodepool'
   # TODO(pabelanger): Move all of this back into nodepool manifest, it has
   # grown too big.
