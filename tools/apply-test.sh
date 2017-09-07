@@ -14,6 +14,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# TODO(clarkb) remove this section once ssh keys are reliably put in place
+# Occasionally Puppet complains that root's authorized ssh keys are not valid.
+# These keys are put in place by glean which gets its info from config-drive.
+# To aid debugging of this problem we cat the authorized_keys file contents
+# and check the key value in the config drive.
+sudo cat /root/.ssh/authorized_keys
+sudo cat /mnt/config/openstack/latest/meta_data.json | \
+  python -c 'import sys; import json; print(json.load(sys.stdin)["public_keys"]);'
+
 . ./tools/prep-apply.sh
 
 if [[ ! -d applytest ]] ; then
