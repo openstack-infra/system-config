@@ -1330,10 +1330,6 @@ node 'zuul.openstack.org' {
     'zm02.openstack.org',
     'zm03.openstack.org',
     'zm04.openstack.org',
-    'zm05.openstack.org',
-    'zm06.openstack.org',
-    'zm07.openstack.org',
-    'zm08.openstack.org',
   ]
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
@@ -1415,7 +1411,7 @@ node /^zl\d+\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^zm\d+\.openstack\.org$/ {
+node /^zm0[1234].openstack\.org$/ {
   $group = "zuul-merger"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
