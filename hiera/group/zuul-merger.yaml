@@ -1,4 +1,5 @@
 ---
+# TODO(pabelanger): This can be deleted once we migration to zuulv3.
 zuul_sites:
   - name: 'tarballs.openstack.org'
     host: 'tarballs.openstack.org'
@@ -49,3 +50,15 @@ zuul_nodes:
   - name: 'wheel-mirror-ubuntu-xenial-amd64.slave.openstack.org'
     host: 'wheel-mirror-ubuntu-xenial-amd64.slave.openstack.org'
     labels: 'wheel-mirror-ubuntu-xenial-amd64'
+
+# NOTE(pabelanger): zuulv3 settings
+zuul_connections:
+  - name: 'gerrit'
+    driver: 'gerrit'
+    server: 'review.openstack.org'
+    canonical_hostname: 'git.openstack.org'
+    user: 'zuul'
+    sshkey: '/var/lib/zuul/ssh/id_rsa'
+
+  - name: 'github'
+    driver: 'github'
