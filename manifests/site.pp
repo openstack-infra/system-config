@@ -1427,6 +1427,54 @@ node /^zm0[1234].openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+node /^zm0[5678].openstack\.org$/ {
+  $group = "zuul-mergerv3"
+
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $zuul_url             = "http://${::fqdn}/p"
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'feature/zuulv3'
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gearman_server          => 'zuulv3.openstack.org',
+    gerrit_server           => $gerrit_server,
+    gerrit_user             => $gerrit_user,
+    zuul_ssh_private_key    => $zuul_ssh_private_key,
+    git_email               => $git_email,
+    git_name                => $git_name,
+    revision                => $revision,
+    python_version          => 3,
+    zookeeper_hosts         => 'nodepool.openstack.org:2181',
+    zuulv3                  => true,
+    connections             => hiera('zuul_connections', []),
+    gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
+    gearman_server_ssl_cert => hiera('gearman_server_ssl_cert'),
+    gearman_server_ssl_key  => hiera('gearman_server_ssl_key'),
+    gearman_ssl_ca          => hiera('gearman_ssl_ca'),
+  }
+
+  class { 'openstack_project::zuul_merger':
+    gerrit_server        => $gerrit_server,
+    gerrit_user          => $gerrit_user,
+    gerrit_ssh_host_key  => $gerrit_ssh_host_key,
+    zuul_ssh_private_key => $zuul_ssh_private_key,
+    manage_common_zuul   => false,
+  }
+}
+
 # Node-OS: trusty
 node 'zuul-dev.openstack.org' {
   $gearman_workers = []
