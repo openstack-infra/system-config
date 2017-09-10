@@ -41,8 +41,9 @@ for DISTVER in 42.2 42.3; do
     date --iso-8601=ns
     echo "Running rsync updates $DISTVER ..."
     $K5START rsync -rlptDvz \
-        --delete \
+        --delete-delay \
         --delete-excluded \
+        --delay-updates \
         --exclude="src/" \
         --exclude="nosrc/" \
         $MIRROR/opensuse/$REPO/ $BASE/$REPO/
