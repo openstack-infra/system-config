@@ -19,7 +19,10 @@ BASE="/afs/.openstack.org/mirror/opensuse"
 MIRROR="rsync://rsync.opensuse.org/opensuse-full"
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
-for DISTVER in 42.2 42.3; do
+# Remove obsolete stuff from mirrors
+rm -rf $BASE/{update,distribution}/leap/42.2 || :
+
+for DISTVER in 42.3; do
     REPO=distribution/leap/$DISTVER
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
