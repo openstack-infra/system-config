@@ -308,7 +308,7 @@ def main():
     parser.add_argument("--flavor", dest="flavor", default='1GB',
                         help="name (or substring) of flavor")
     parser.add_argument("--image", dest="image",
-                        default="Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)",
+                        default="Ubuntu 16.04 LTS (Xenial Xerus) (PVHVM)",
                         help="image name")
     parser.add_argument("--environment", dest="environment",
                         help="Puppet environment to use",
