@@ -1446,7 +1446,7 @@ node /^zm0[5678].openstack\.org$/ {
   $gerrit_server        = 'review.openstack.org'
   $gerrit_user          = 'zuul'
   $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
-  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $zuul_ssh_private_key = hiera('zuulv3_ssh_private_key_contents')
   $zuul_url             = "http://${::fqdn}/p"
   $git_email            = 'zuul@openstack.org'
   $git_name             = 'OpenStack Zuul'
