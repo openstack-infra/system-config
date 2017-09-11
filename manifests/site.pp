@@ -1177,6 +1177,14 @@ node /^ze\d+\.openstack\.org$/ {
 
   class { '::zuul::executor': }
 
+  # This is used by the log job submission playbook which runs under
+  # python2
+  package { 'gear':
+    ensure   => latest,
+    provider => openstack_pip,
+    require  => Class['pip'],
+  }
+
   file { '/var/lib/zuul/ssh/nodepool_id_rsa':
     owner   => 'zuul',
     group   => 'zuul',
