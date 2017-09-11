@@ -23,15 +23,30 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
     fi
 
     # Avoid using config drive device for swap
-    if [ -n "$DEV" ] && ! blkid | grep $DEV ; then
+    if [ -n "$DEV" ] && ! blkid | grep $DEV | grep TYPE ; then
         MEMKB=`grep MemTotal /proc/meminfo | awk '{print $2; }'`
         # Use the nearest power of two in MB as the swap size.
         # This ensures that the partitions below are aligned properly.
         MEM=`python -c "import math ; print 2**int(round(math.log($MEMKB/1024, 2)))"`
-        umount ${DEV}
-        parted ${DEV} --script -- mklabel msdos
-        parted ${DEV} --script -- mkpart primary linux-swap 1 ${MEM}
-        parted ${DEV} --script -- mkpart primary ext2 ${MEM} -1
+        if mount | grep ${DEV} > /dev/null; then
+            echo "*** ${DEV} appears to already be mounted"
+            echo "*** ${DEV} unmounting and reformating"
+            umount ${DEV}
+        fi
+
+        parted ${DEV} --script -- \
+          mklabel msdos \
+          mkpart primary linux-swap 1 ${MEM} \
+          mkpart primary ext2 ${MEM} -1
+        sync
+        # We are only interested in scanning $DEV, not all block devices
+        sudo partprobe ${DEV}
+        # The device partitions might not show up immediately, make sure
+        # they are ready and available for use
+        udevadm settle --timeout=0 || echo "Block device not ready yet. Waiting for up to 10 seconds for it to be ready"
+        udevadm settle --timeout=10 --exit-if-exists=${DEV}1
+        udevadm settle --timeout=10 --exit-if-exists=${DEV}2
+
         mkswap ${DEV}1
         mkfs.ext4 ${DEV}2
         swapon ${DEV}1
