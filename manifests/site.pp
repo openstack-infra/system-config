@@ -1909,6 +1909,22 @@ node /.*wheel-mirror-.*\.openstack\.org/ {
   }
 }
 
+# Node-OS: xenial
+node 'ci-dashboard.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { '::ciwatch::proxy':
+    port => 80,
+  }
+  class { '::ciwatch':
+    gerrit_user     => 'cidashboardbot',
+    ssh_private_key => hiera('cidashboardbot_ssh_rsa_key_contents'),
+    mysql_password  => hiera('cidashboard_mysql_password'),
+  }
+}
+
 # Node-OS: trusty
 node 'controller00.vanilla.ic.openstack.org' {
   $group = 'infracloud'
