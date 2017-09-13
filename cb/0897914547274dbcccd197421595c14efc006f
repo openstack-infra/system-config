@@ -1,0 +1,8 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 13 Sep 2017 21:20:43 +0000
+Reviewed-on: https://review.openstack.org/491955
+Project: openstack-infra/system-config
+Branch: refs/heads/master
