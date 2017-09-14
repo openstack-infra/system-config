@@ -36,6 +36,7 @@ $K5START rsync -rlptDvz \
     --exclude="isos" \
     --exclude="paas" \
     --exclude="sclo" \
+    --exclude="x86_64/drpms" \
     $MIRROR/centos/$REPO/ $BASE/$REPO/
 
 # TODO(pabelanger): Validate rsync process
