@@ -32,6 +32,7 @@ class openstack_project::zuul_prod(
     gearman_server                 => $gearman_server,
     gerrit_server                  => $gerrit_server,
     gerrit_user                    => $gerrit_user,
+    gerrit_strip_branch_ref        => 1,
     known_hosts_content            => "review.openstack.org,104.130.159.134,2001:4800:7818:102:be76:4eff:fe05:9b12 ${gerrit_ssh_host_key}",
     zuul_ssh_private_key           => $zuul_ssh_private_key,
     url_pattern                    => $url_pattern,
