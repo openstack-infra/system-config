@@ -81,16 +81,6 @@ class openstack_project::gerrit (
   $openidssourl = 'https://login.ubuntu.com/+openid',
 ) {
 
-  class { 'jeepyb::openstackwatch':
-    # The first four are required args - no sense doing more engineering
-    # than needed to remove this.
-    json_url       => 'https://review.openstack.org/query?q=status:open',
-    swift_username => '',
-    swift_password => '',
-    swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
-    ensure         => absent,
-  }
-
   class { '::gerrit':
     vhost_name                          => $vhost_name,
     canonicalweburl                     => $canonicalweburl,
