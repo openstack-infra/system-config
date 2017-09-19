@@ -194,6 +194,10 @@ class openstack_project::gerrit (
       {
         maxLineLength   => '72',
       },
+    cache_accounts                      => $cache_accounts,
+    cache_accounts_byemail              => $cache_accounts_byemail,
+    cache_accounts_byname               => $cache_accounts_byname,
+    cache_groups_byuuid                 => $cache_groups_byuuid,
   }
 
   mysql_backup::backup_remote { 'gerrit':
