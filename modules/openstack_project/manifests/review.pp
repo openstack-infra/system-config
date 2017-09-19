@@ -74,9 +74,6 @@ class openstack_project::review (
   $lp_access_token='',
   $lp_access_secret='',
   $lp_consumer_key='',
-  # For openstackwatch.
-  $swift_username = '',
-  $swift_password = '',
   $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
@@ -139,8 +136,6 @@ class openstack_project::review (
     accountpatchreviewdb_url            => $accountpatchreviewdb_url,
     email_private_key                   => $email_private_key,
     token_private_key                   => $token_private_key,
-    swift_username                      => $swift_username,
-    swift_password                      => $swift_password,
     commentlinks                        => [
       {
         name  => 'bugheader',
