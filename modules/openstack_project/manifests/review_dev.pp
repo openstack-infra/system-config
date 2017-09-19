@@ -20,8 +20,6 @@ class openstack_project::review_dev (
   $lp_access_token = '',
   $lp_access_secret = '',
   $lp_consumer_key = '',
-  $swift_username = '',
-  $swift_password = '',
   $storyboard_password = '',
   $storyboard_ssl_cert = '',
   $project_config_repo = '',
@@ -83,8 +81,6 @@ class openstack_project::review_dev (
       cgit                                => true,
       web_repo_url                        => 'https://git.openstack.org/cgit/',
       web_repo_url_encode                 => false,
-      swift_username                      => $swift_username,
-      swift_password                      => $swift_password,
       replication_force_update            => true,
       commentlinks                        => [
         {

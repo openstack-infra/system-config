@@ -90,8 +90,6 @@ node 'review01.openstack.org' {
     lp_access_token                     => hiera('gerrit_lp_access_token'),
     lp_access_secret                    => hiera('gerrit_lp_access_secret'),
     lp_consumer_key                     => hiera('gerrit_lp_consumer_key'),
-    swift_username                      => hiera('swift_store_user', 'username'),
-    swift_password                      => hiera('swift_store_key'),
     storyboard_password                 => hiera('gerrit_storyboard_token'),
   }
 }

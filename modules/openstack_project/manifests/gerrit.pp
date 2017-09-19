@@ -63,8 +63,6 @@ class openstack_project::gerrit (
   $cla_id = '2',
   $cla_name = 'ICLA',
   $testmode = false,
-  $swift_username = '',
-  $swift_password = '',
   $gitweb = false,
   $cgit = true,
   $web_repo_url = 'https://git.openstack.org/cgit/',
@@ -88,27 +86,13 @@ class openstack_project::gerrit (
 ) {
 
   class { 'jeepyb::openstackwatch':
-    projects       => [
-      'openstack/ceilometer',
-      'openstack/cinder',
-      'openstack/glance',
-      'openstack/heat',
-      'openstack/horizon',
-      'openstack/infra',
-      'openstack/keystone',
-      'openstack/nova',
-      'openstack/oslo',
-      'openstack/neutron',
-      'openstack/swift',
-      'openstack/tempest',
-      'openstack-dev/devstack',
-    ],
-    container      => 'rss',
+    # The first four are required args - no sense doing more engineering
+    # than needed to remove this.
     json_url       => 'https://review.openstack.org/query?q=status:open',
-    swift_username => $swift_username,
-    swift_password => $swift_password,
+    swift_username => '',
+    swift_password => '',
     swift_auth_url => 'https://auth.api.rackspacecloud.com/v1.0',
-    auth_version   => '1.0',
+    ensure         => absent,
   }
 
   class { '::gerrit':

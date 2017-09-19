@@ -168,9 +168,6 @@ Migrate the manifests:
   * the LP links that reference openstack specifically should instead point to
     your project (or project group) on Launchpad [or wherever you want them].
 
-  * openstackwatch creates an rss feed of the unified changes from many
-    projects - it is entirely optional.
-
   * The cla files should be skipped or forked; they are specific to OpenStack.
 
   * The title and page-bkg are OpenStack specific and should be replaced.

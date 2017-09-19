@@ -175,12 +175,6 @@ Some projects may have upstreams defined in Jeepyb; the
 commits are available in Gerrit. It will also ensure that project metadata
 is set up as defined in projects.yaml.
 
-RSS feeds
----------
-
-Jeepyb's ``openstackwatch`` command publishes RSS feeds of Gerrit
-projects.
-
 Pypi Mirror
 -----------
 
