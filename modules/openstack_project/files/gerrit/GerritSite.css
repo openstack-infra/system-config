@@ -21,7 +21,7 @@ a.gwt-InlineHyperlink {background: none !important}
 .gwt-TabBarItem {color: #353535; border-right: 0 !important}
 .gwt-TabBar .gwt-TabBarItem, .gwt-TabBar .gwt-TabBarRest, .gwt-TabPanelBottom {background: 0 !important;}
 
-#gerrit_topmenu .gwt-TextBox {width: 250px}
+#gerrit_topmenu .searchTextBox {width: 250px}
 
 #change_infoTable {
   border-collapse: collapse;
