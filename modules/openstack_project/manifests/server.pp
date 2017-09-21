@@ -321,4 +321,7 @@ class openstack_project::server (
     ensure  => file,
     require => File['/etc/cloud'],
   }
+  package { 'cloud-init':
+    ensure => absent,
+  }
 }
