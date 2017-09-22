@@ -313,4 +313,12 @@ class openstack_project::server (
     }
   }
 
+  # Disable cloud-init
+  file { '/etc/cloud':
+    ensure => directory,
+  }
+  file { '/etc/cloud/cloud-init.disabled':
+    ensure  => file,
+    require => File['/etc/cloud'],
+  }
 }
