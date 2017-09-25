@@ -104,6 +104,8 @@ function setup_puppet_fedora {
 
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+    # Wipe out server, as we don't have one.
+    sed -i '/server/d' /etc/puppet/puppet.conf
 
     # upstream is currently looking for /run/systemd files to check
     # for systemd.  This fails in a chroot where /run isn't mounted
@@ -162,6 +164,8 @@ function setup_puppet_rhel7 {
 
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+    # Wipe out server, as we don't have one.
+    sed -i '/server/d' /etc/puppet/puppet.conf
 
     # install CentOS OpenStack repos as well (rebuilds of RDO
     # packages).  We don't use openstack project rpm files, but covers
@@ -235,7 +239,8 @@ EOF
         --assume-yes install -y --force-yes $puppetpkg git $rubypkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
-
+    # Wipe out server, as we don't have one.
+    sed -i '/server/d' /etc/puppet/puppet.conf
     # ensure the agent is stopped and disabled
     if [ -f /bin/systemctl ]; then
         service puppet stop
@@ -256,6 +261,8 @@ function setup_puppet_opensuse {
     zypper --non-interactive install --force-resolution $puppetpkg
     # Wipe out templatedir so we don't get warnings about it
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
+    # Wipe out server, as we don't have one.
+    sed -i '/server/d' /etc/puppet/puppet.conf
 }
 
 function setup_puppet_gentoo {
@@ -269,6 +276,8 @@ function setup_puppet_gentoo {
     fi
     emerge -q --jobs=4 $puppetpkg
     sed -i '/templatedir/d' /etc/puppetlabs/puppet/puppet.conf
+    # Wipe out server, as we don't have one.
+    sed -i '/server/d' /etc/puppetlabs/puppet/puppet.conf
 }
 
 #
