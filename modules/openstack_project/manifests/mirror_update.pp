@@ -248,6 +248,28 @@ class openstack_project::mirror_update (
     ]
   }
 
+  ::openstack_project::reprepro { 'debian-ceph-luminous-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-ceph-luminous',
+    basedir       => '/afs/.openstack.org/mirror/ceph-deb-luminous',
+    distributions => 'openstack_project/reprepro/distributions.debian-ceph-luminous.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-luminous-updates',
+    releases      => ['xenial'],
+  }
+
+  cron { 'reprepro debian ceph luminous':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/debian-ceph-luminous.lock reprepro-mirror-update /etc/reprepro/debian-ceph-luminous mirror.deb-luminous >>/var/log/reprepro/debian-ceph-luminous-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['debian-ceph-luminous-reprepro-mirror'],
+    ]
+  }
+
   gnupg_key { 'Ceph Archive':
     ensure     => present,
     # 08B7 3419 AC32 B4E9 66C1  A330 E84A C2C0 460F 3994
