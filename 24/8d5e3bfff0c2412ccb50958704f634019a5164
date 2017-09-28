@@ -1,0 +1,8 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Monty Taylor <mordred@inaugust.com>
+Submitted-by: Monty Taylor <mordred@inaugust.com>
+Submitted-at: Thu, 28 Sep 2017 18:26:23 +0000
+Reviewed-on: https://review.openstack.org/508241
+Project: openstack-infra/system-config
+Branch: refs/heads/master
