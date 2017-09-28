@@ -1299,6 +1299,7 @@ node 'zuulv3.openstack.org' {
     revision                     => $revision,
     python_version               => 3,
     zookeeper_hosts              => 'nodepool.openstack.org:2181',
+    zookeeper_session_timeout    => 40,
     zuulv3                       => true,
     connections                  => hiera('zuul_connections', []),
     connection_secrets           => hiera('zuul_connection_secrets', []),
