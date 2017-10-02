@@ -219,7 +219,8 @@ node 'graphite.openstack.org' {
                    'nodepool.openstack.org',
                    'nl01.openstack.org',
                    'nl02.openstack.org',
-                   'zuul.openstack.org']
+                   'zuul.openstack.org',
+                   'zuulv3.openstack.org']
 
   # Turn a list of hostnames into a list of iptables rules
   $rules = regsubst ($statsd_hosts, '^(.*)$', '-m udp -p udp -s \1 --dport 8125 -j ACCEPT')
