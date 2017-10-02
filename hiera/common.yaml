@@ -33,6 +33,8 @@ elasticsearch_clients:
 - ze06.openstack.org
 - ze07.openstack.org
 - ze08.openstack.org
+- ze09.openstack.org
+- ze10.openstack.org
 infra_apache_serveradmin: noc@openstack.org
 statusbot_channels:
 - ara
@@ -472,6 +474,8 @@ cacti_hosts:
 - ze06.openstack.org
 - ze07.openstack.org
 - ze08.openstack.org
+- ze09.openstack.org
+- ze10.openstack.org
 - zlstatic01.openstack.org
 - zl01.openstack.org
 - zl02.openstack.org

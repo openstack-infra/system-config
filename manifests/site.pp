@@ -1269,6 +1269,8 @@ node 'zuulv3.openstack.org' {
     'ze06.openstack.org',
     'ze07.openstack.org',
     'ze08.openstack.org',
+    'ze09.openstack.org',
+    'ze10.openstack.org',
     'zm05.openstack.org',
     'zm06.openstack.org',
     'zm07.openstack.org',
