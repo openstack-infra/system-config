@@ -53,11 +53,6 @@ below.
 Adding a Project to StoryBoard
 ------------------------------
 
-.. note::
-   At this point, only OpenStack Infrastructure projects should be added to
-   StoryBoard, as key features such as release versioning are not yet
-   implemented.
-
 Projects loaded into StoryBoard are handled from the same file that drives our
 gerrit projects. Adding a new project is as simple as modifying a single
 file and adding the line ``use-storyboard: true``:
