@@ -849,7 +849,14 @@ node 'nodepool.openstack.org' {
     iptables_public_tcp_ports => [80],
   }
 
-  class { '::zookeeper': }
+  class { '::zookeeper':
+    # The frequency in hours to look for and purge old snapshots,
+    # defaults to 0 (disabled). The number of retained snapshots can
+    # be separately controlled through snap_retain_count and
+    # defaults to the minimum value of 3. This will quickly fill the
+    # disk in production if not enabled. Works on ZK >=3.4.
+    purge_interval => 6,
+  }
 
   include openstack_project
 
