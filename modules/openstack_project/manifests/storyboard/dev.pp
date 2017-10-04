@@ -10,7 +10,7 @@ class openstack_project::storyboard::dev(
   $ssl_cert_file_contents = undef,
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
-  $openid_url = 'https://login.launchpad.net/+openid',
+  $openid_url = 'https://login.ubuntu.com/+openid',
   $project_config_repo = '',
   $hostname = $::fqdn,
   $valid_oauth_clients = [$::fqdn],
