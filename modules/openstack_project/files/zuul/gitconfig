@@ -1,0 +1,3 @@
+[http]
+    lowSpeedLimit = 1000
+    lowSpeedTime = 30

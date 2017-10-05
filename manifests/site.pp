@@ -1208,6 +1208,15 @@ node /^ze\d+\.openstack\.org$/ {
     content => $zuul_static_private_key,
   }
 
+  file { '/home/zuul/.gitconfig':
+    ensure  => present,
+    group   => 'zuul',
+    mode    => '0644',
+    owner   => 'zuul',
+    require => File['/home/zuul'],
+    source  => 'puppet:///modules/openstack_project/zuul/gitconfig',
+  }
+
   class { '::zuul::known_hosts':
     known_hosts_content => "review.openstack.org,104.130.246.91,2001:4800:7819:103:be76:4eff:fe05:8525 ${gerrit_ssh_host_key}",
   }
@@ -1496,6 +1505,15 @@ node /^zm0[5678].openstack\.org$/ {
     gerrit_ssh_host_key  => $gerrit_ssh_host_key,
     zuul_ssh_private_key => $zuul_ssh_private_key,
     manage_common_zuul   => false,
+  }
+
+  file { '/home/zuul/.gitconfig':
+    ensure  => present,
+    group   => 'zuul',
+    mode    => '0644',
+    owner   => 'zuul',
+    require => File['/home/zuul'],
+    source  => 'puppet:///modules/openstack_project/zuul/gitconfig',
   }
 }
 
