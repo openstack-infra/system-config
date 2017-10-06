@@ -1,0 +1,30 @@
+---
+- hosts: 'ze*.openstack.org'
+  # Do the entire play completely for one host at a time
+  serial: 1
+  any_errors_fatal: true
+  tasks:
+    - name: Slurp pid of zuul-executor
+      slurp:
+        src: /var/run/zuul-executor/zuul-executor.pid
+      register: zuul_pid
+
+    - name: Hard stop zuul-executor
+      service:
+        name: zuul-executor
+        state: stopped
+      become: true
+      become_user: root
+
+    - name: Wait for 2 minutes for zuul-exector to stop
+      wait_for:
+        path: "/proc/{{ zuul_pid.content | b64decode }}/status"
+        state: absent
+        timeout: 120
+
+    - name: Start zuul-executor
+      service:
+        name: zuul-executor
+        state: started
+      become: true
+      become_user: root
