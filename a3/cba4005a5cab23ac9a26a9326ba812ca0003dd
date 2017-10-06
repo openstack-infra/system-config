@@ -1,0 +1,11 @@
+Code-Review+1: Thierry Carrez <thierry@openstack.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Kendall Nelson <kennelson11@gmail.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 06 Oct 2017 00:32:04 +0000
+Reviewed-on: https://review.openstack.org/473536
+Project: openstack-infra/system-config
+Branch: refs/heads/master
