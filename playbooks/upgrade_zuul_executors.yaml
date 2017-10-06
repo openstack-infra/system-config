@@ -1,0 +1,42 @@
+---
+- hosts: 'ze*.openstack.org'
+  # Do the entire play completely for one host at a time
+  serial: 1
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: Stop the executor
+      service:
+        name: zuul-executor
+        state: stopped
+
+    - name: Stop the executor with systemd
+      systemd:
+        name: zuul-executor
+        state: stopped
+
+    - name: Make sure pid file is gone
+      file:
+        path: /var/run/zuul-executor/zuul-executor.pid
+        state: absent
+
+    - name: Kill any stragglers
+      command: killall zuul-executor
+
+    - name: Kill any orphaned processes
+      command: killall -u zuul
+
+    - name: Pull latest git
+      command: git pull --ff-only
+      args:
+        chdir: /opt/zuul
+
+    - name: Update installation
+      command: 'pip3 install -U .'
+      args:
+        chdir: /opt/zuul
+
+    - name: Restart zuul-executor
+      service:
+        name: zuul-executor
+        state: started
