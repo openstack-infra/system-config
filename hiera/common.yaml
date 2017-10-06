@@ -109,6 +109,7 @@ statusbot_channels:
 - openstack-trove
 - openstack-uc
 - openstack-valence
+- openstack-valet
 - openstack-vitrage
 - openstack-zaqar
 - openstack-zun
@@ -210,6 +211,7 @@ meetbot_channels:
 - '#openstack-uc'
 - '#openstack-upstream-institute'
 - '#openstack-valence'
+- '#openstack-valet'
 - '#openstack-vitrage'
 - '#openstack-watcher'
 - '#openstack-zaqar'
