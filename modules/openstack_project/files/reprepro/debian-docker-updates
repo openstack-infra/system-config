@@ -1,5 +1,5 @@
 Name: debian-docker
-Method: https://apt.dockerproject.org/repo/
+Method: https://download.docker.com/linux/ubuntu/
 Components: main
 UDebComponents: main
 Architectures: amd64
