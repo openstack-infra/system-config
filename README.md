@@ -1,4 +1,4 @@
-Puppet Modules
+Puppet Modules!
 ==============
 
 These are a set of puppet manifests and modules that are currently being
