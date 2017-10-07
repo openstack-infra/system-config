@@ -1,0 +1,10 @@
+Verified+1: Zuul
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Sat, 07 Oct 2017 20:09:06 +0000
+Reviewed-on: https://review.openstack.org/510314
+Project: openstack-infra/system-config
+Branch: refs/heads/master
