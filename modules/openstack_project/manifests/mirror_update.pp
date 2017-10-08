@@ -263,7 +263,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/deb-docker',
     distributions => 'openstack_project/reprepro/distributions.debian-docker.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-docker-updates',
-    releases      => ['ubuntu-xenial'],
+    releases      => ['xenial'],
   }
 
   cron { 'reprepro debian docker':
