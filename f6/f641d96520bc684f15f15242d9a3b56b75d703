@@ -1,0 +1,11 @@
+Verified+1: Zuul
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: ShangXiao <shangxiaobj@inspur.com>
+Code-Review+1: Sam Yaple <sam@yaple.net>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 09 Oct 2017 03:00:54 +0000
+Reviewed-on: https://review.openstack.org/510393
+Project: openstack-infra/system-config
+Branch: refs/heads/master
