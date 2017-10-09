@@ -1,0 +1,9 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Sam Yaple <sam@yaple.net>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 09 Oct 2017 04:18:58 +0000
+Reviewed-on: https://review.openstack.org/507864
+Project: openstack-infra/system-config
+Branch: refs/heads/master
