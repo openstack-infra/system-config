@@ -282,7 +282,9 @@ class openstack_project::mirror_update (
 
   gnupg_key { 'Docker Archive':
     ensure     => present,
-    # 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+    # pub  4096R/0EBFCD88 2017-02-22 Docker Release (CE deb) <docker@docker.com>
+    # fingerprint: 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+    # Note the key that signs the release file is actually the subkey F273FCD8
     key_id     => '0EBFCD88',
     user       => 'root',
     key_type   => 'public',
