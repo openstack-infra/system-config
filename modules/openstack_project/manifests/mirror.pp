@@ -20,6 +20,7 @@ class openstack_project::mirror (
   $npm_root = "${mirror_root}/npm"
   $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
   $ceph_deb_jewel_root = "${mirror_root}/ceph-deb-jewel"
+  $ceph_deb_luminous_root = "${mirror_root}/ceph-deb-luminous"
   $gem_root = "${mirror_root}/gem"
 
   $www_base = '/var/www'
@@ -171,6 +172,17 @@ class openstack_project::mirror (
   file { "${www_root}/ceph-deb-jewel":
     ensure  => link,
     target  => "${ceph_deb_jewel_root}",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  # Create the symlink to ceph-deb-luminous.
+  file { "${www_root}/ceph-deb-luminous":
+    ensure  => link,
+    target  => "${ceph_deb_luminous_root}",
     owner   => root,
     group   => root,
     require => [
