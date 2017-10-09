@@ -1,4 +1,9 @@
 ---
+- name: Remove cloud-init
+  package:
+    name: cloud-init
+    state: absent
+
 # Set hostname and /etc/hosts
 # Inspired by:
 # https://github.com/ansible/ansible/pull/8482)
