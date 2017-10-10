@@ -220,7 +220,26 @@ node 'graphite.openstack.org' {
                    'nl01.openstack.org',
                    'nl02.openstack.org',
                    'zuul.openstack.org',
-                   'zuulv3.openstack.org']
+                   'zuulv3.openstack.org',
+                   'zm01.openstack.org',
+                   'zm02.openstack.org',
+                   'zm03.openstack.org',
+                   'zm04.openstack.org',
+                   'zm05.openstack.org',
+                   'zm06.openstack.org',
+                   'zm07.openstack.org',
+                   'zm08.openstack.org',
+                   'ze01.openstack.org',
+                   'ze02.openstack.org',
+                   'ze03.openstack.org',
+                   'ze04.openstack.org',
+                   'ze05.openstack.org',
+                   'ze06.openstack.org',
+                   'ze07.openstack.org',
+                   'ze08.openstack.org',
+                   'ze09.openstack.org',
+                   'ze10.openstack.org',
+		   ]
 
   # Turn a list of hostnames into a list of iptables rules
   $rules = regsubst ($statsd_hosts, '^(.*)$', '-m udp -p udp -s \1 --dport 8125 -j ACCEPT')
