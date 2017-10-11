@@ -284,6 +284,34 @@ Note if you created your working directory in a path that is not
 excluded by bup you will want to remove that directory when your work is
 done. /root/backup-restore-* is excluded so the path above is safe.
 
+Force-Merging a Change
+----------------------
+
+Occasionally it is necessary to bypass the CI system and merge a
+change directly.  Usually, this is only required if we have a hole in
+our testing of teh CI or related systems themselves and have merged a
+change which causes them to be unable to operate normally and
+therefore unable to merge a reversion of the problematic change.  In
+these cases, use the following procedure to force-merge a change.
+
+* Add yourself to the *Project Bootstrappers* group in Gerrit.
+
+* Navigate to the change which needs to be merged and reload the page.
+
+* Remove any -2 votes on the change.
+
+* Add +2 Code-Review, and +1 Workflow votes if necessary, then add +2
+  Verified.
+
+* At this point, a *Submit* Button should appear, click it.  The
+  change should now be merged.
+
+* Remove yourself from *Project Bootstrappers*
+
+This procedure is the safest way to force-merge a change, ensuring
+that all of the normal steps that Gerrit performs on repos still
+happen.
+
 Launching New Servers
 =====================
 
