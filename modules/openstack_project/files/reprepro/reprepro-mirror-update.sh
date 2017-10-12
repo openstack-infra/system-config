@@ -21,7 +21,7 @@ MIRROR_VOLUME=$2
 BASE=`cat ${REPREPRO_CONFIG}/options | grep base | cut -d' ' -f2`
 
 UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.unreferenced-files
-K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 30m"
+K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 90m"
 REPREPRO="$K5START reprepro --confdir $REPREPRO_CONFIG"
 
 date --iso-8601=ns
