@@ -119,6 +119,13 @@ class openstack_project::mirror_update (
     source  => 'puppet:///modules/openstack_project/reprepro/reprepro-mirror-update.sh',
   }
 
+  file { '/var/run/reprepro':
+    ensure   => directory,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
+  }
+
   ### Debian mirror ###
   ::openstack_project::reprepro { 'debian-reprepro-mirror':
     confdir       => '/etc/reprepro/debian',
