@@ -91,6 +91,13 @@ class openstack_project::mirror_update (
     content  => template('openstack_project/npm-mirror-update.sh'),
   }
 
+  file { '/var/run/bandersnatch':
+    ensure   => directory,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
+  }
+
   cron { 'bandersnatch':
     user        => $user,
     minute      => '*/5',
@@ -104,6 +111,13 @@ class openstack_project::mirror_update (
     ]
   }
 
+  file { '/var/run/rubygems':
+    ensure   => directory,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
+  }
+
   cron { 'rubygems-mirror':
     minute      => '*/5',
     command     => 'flock -n /var/run/rubygems/mirror.lock gem-mirror-update  >>/var/log/rubygems/mirror.log 2>&1',
@@ -113,6 +127,13 @@ class openstack_project::mirror_update (
       File['/etc/gem.keytab'],
       Class['openstack_project::gem_mirror'],
     ]
+  }
+
+  file { '/var/run/npm-mirror-update':
+    ensure   => directory,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
   }
 
   cron { 'npm-mirror-update':
@@ -141,6 +162,13 @@ class openstack_project::mirror_update (
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/reprepro/reprepro-mirror-update.sh',
+  }
+
+  file { '/var/run/reprepro':
+    ensure   => directory,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0755',
   }
 
   ### Debian mirror ###
