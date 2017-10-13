@@ -189,19 +189,23 @@ def decode_json(raw):
 def query_gerrit(method, params={}):
     """Query the Gerrit REST API"""
 
-    # The base URL to Gerrit, for accessing both GitWeb and the REST
-    # API
+    # The base URL to Gerrit REST API
     GERRIT_API_URL = 'https://review.openstack.org/'
 
     raw = requester(GERRIT_API_URL + method, params=params,
                     headers={'Accept': 'application/json'})
+    return decode_json(raw)
 
-    # Gitweb queries don't return JSON, so just pass them along as-is
-    if method is 'gitweb':
-        raw.encoding = 'utf-8'  # Workaround for Gitweb encoding
-        return yaml.safe_load(raw.text)
-    else:
-        return decode_json(raw)
+
+def get_from_cgit(project, obj, params={}):
+    """Retrieve a file from the cgit interface"""
+
+    url = 'http://git.openstack.org/cgit/' + project + '/plain/' + obj
+    raw = requester(url, params=params,
+                    headers={'Accept': 'application/json'})
+
+    raw.encoding = 'utf-8'  # Workaround for cgit encoding
+    return yaml.safe_load(raw.text)
 
 
 def lookup_member(email):
@@ -330,13 +334,9 @@ def main(argv=sys.argv):
     # TODO(fungi): make this a configurable option so that you can
     # for example supply a custom project list for running elections
     # in unofficial teams
-    gov_projects = query_gerrit(
-        'gitweb', {
-            'p': 'openstack/governance.git',
-            'a': 'blob_plain',
-            'f': 'reference/projects.yaml',
-            'hb': ref,
-            })
+    gov_projects = get_from_cgit('openstack/governance',
+                                 'reference/projects.yaml',
+                                 {'h': ref})
 
     # A mapping of short (no prefix) to full repo names existing in
     # Gerrit, used to handle repos which have a different namespace
