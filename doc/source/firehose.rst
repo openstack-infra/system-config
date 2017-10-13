@@ -161,7 +161,6 @@ This requires the `mqtt-hs`_ library to be installed.
 
 .. code-block:: haskell
 
-
   {-# Language DataKinds, OverloadedStrings #-}
 
   module Subscribe where
@@ -199,6 +198,7 @@ This requires the `mqtt-hs`_ library to be installed.
 Go
 ''
 .. code-block:: go
+
     package main
     import (
       "fmt"
