@@ -27,6 +27,7 @@ Major Systems
    stackalytics
    static
    bandersnatch
+   reprepro
    lists
    wiki
    git
