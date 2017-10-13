@@ -14,7 +14,7 @@ class openstack_project::mirror (
     $serveraliases = undef
   }
 
-  $mirror_root = '/afs/openstack.org/mirror'
+  $mirror_root = '/afs/.openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
   $npm_root = "${mirror_root}/npm"
