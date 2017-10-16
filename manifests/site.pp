@@ -1201,6 +1201,7 @@ node /^ze\d+\.openstack\.org$/ {
     disk_limit_per_job       => 5000,  # Megabytes
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
+    statsd_host              => 'graphite.openstack.org',
   }
 
   class { '::zuul::executor': }
@@ -1341,6 +1342,7 @@ node 'zuulv3.openstack.org' {
     gearman_ssl_ca               => hiera('gearman_ssl_ca'),
     proxy_ssl_cert_file_contents => hiera('zuul_ssl_cert_file_contents'),
     proxy_ssl_key_file_contents  => hiera('zuul_ssl_key_file_contents'),
+    statsd_host                  => 'graphite.openstack.org',
   }
 
   file { "/etc/zuul/github.key":
@@ -1509,6 +1511,7 @@ node /^zm0[5678].openstack\.org$/ {
     gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
+    statsd_host             => 'graphite.openstack.org',
   }
 
   class { 'openstack_project::zuul_merger':
