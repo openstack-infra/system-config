@@ -10,8 +10,7 @@ HOST_TEMPLATE_ID=`php -q /usr/share/cacti/cli/add_device.php \
 php -q add_device.php --description="$HOST_NAME" --ip="$HOST_NAME" \
     --template=$HOST_TEMPLATE_ID --version=2 --community="public"
 
-HOST_ID=`php -q add_graphs.php --list-hosts |grep $HOST_NAME|cut -f 1`
-
+HOST_ID=`php -q add_graphs.php --list-hosts |grep -P "\t$HOST_NAME"|cut -f 1`
 
 if [[ $HOST_NAME =~ vanilla\.ic\.openstack\.org ]]; then
     TREE_NAME='Infra Cloud Vanilla'
