@@ -44,6 +44,14 @@ function add_ds_graph {
     FIELD_NAME=$3
     FIELD_VALUE=$4
 
+    RESULT=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-fields | \
+        grep -v "Known SNMP" | grep $FIELD_NAME | tr -s '\n'`
+
+    if [ -z $RESULT ]; then
+        # The host doesn't currently have support for our field name, skip.
+        return
+    fi
+
     TEMPLATE_ID=`php -q add_graphs.php --list-graph-templates | \
         grep "$TEMPLATE_NAME"|cut -f 1`
     TYPE_ID=`php -q add_graphs.php --snmp-query-id=$SNMP_QUERY_ID \
