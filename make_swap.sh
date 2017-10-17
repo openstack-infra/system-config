@@ -48,7 +48,12 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
         udevadm settle --timeout=10 --exit-if-exists=${DEV}2
 
         mkswap ${DEV}1
-        mkfs.ext4 ${DEV}2
+        # The default ratio is 16384 bytes per inode or so. Reduce that to 8192
+        # bytes per inode so that we get roughly twice the number of inodes as
+        # by default. This should still be well above the block size of 4096.
+        # We do this because we have found in at least a couple locations that
+        # more inodes is useful and is painful to fix after the fact.
+        mkfs.ext4 -i 8192 ${DEV}2
         swapon ${DEV}1
         mount ${DEV}2 /mnt
         rsync -a /opt/ /mnt/
