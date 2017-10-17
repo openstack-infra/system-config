@@ -329,3 +329,47 @@ be expected.  Should the crm114 settings need to be tuned or expanded,
 a patch may be submitted for this file, which controls the process:
 https://git.openstack.org/cgit/openstack-infra/puppet-log_processor/tree/files/classify-log.crm
 
+Tips
+====
+
+Restarting client and workers
+-----------------------------
+
+In certain disconnection situations, it may be required to restart all
+the logstash client and workers.  You can do this in parallel with
+``pssh``.  Check the ``system-config:hiera/common.yaml`` to get all
+the workers, and put them into an inventory file ::
+
+  $ cat hosts-file
+  logstash-worker01.openstack.org
+  logstash-worker02.openstack.org
+  logstash-worker03.openstack.org
+  logstash-worker04.openstack.org
+  logstash-worker05.openstack.org
+  logstash-worker06.openstack.org
+  logstash-worker07.openstack.org
+  logstash-worker08.openstack.org
+  logstash-worker09.openstack.org
+  logstash-worker10.openstack.org
+  logstash-worker11.openstack.org
+  logstash-worker12.openstack.org
+  logstash-worker13.openstack.org
+  logstash-worker14.openstack.org
+  logstash-worker15.openstack.org
+
+You can then stop everything with ::
+
+  $ pssh -i -h hosts-file -l $USER -O StrictHostKeyChecking=no 'for i in A B C D; do sudo /etc/init.d/jenkins-log-worker-$i stop; done'
+
+Double check all processes have died with something like ::
+
+  $ pssh -i -h hosts-file -l $USER -O StrictHostKeyChecking=no 'ps -aef | grep [j]enkins'
+
+If they remain, they may require a manual ``kill -9``
+
+You can then do the opposite to start the processes again ::
+
+  $ pssh -i -h hosts-file -l $USER -O StrictHostKeyChecking=no 'for i in A B C D; do sudo /etc/init.d/jenkins-log-worker-$i stop; done'
+
+Then restart the ``jenkins-log-client`` on ``logstash.openstack.org``
+to finish the restart.
