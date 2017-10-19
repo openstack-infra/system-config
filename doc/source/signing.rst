@@ -446,19 +446,31 @@ session:
 
     gpg> save
 
-This leaves us with a temporary keyring containing only an
-unencrypted copy of the signing subkey. Push this into private hiera
-so that it will be installed onto the signing system by our
-configuration management:
+This leaves us with a temporary keyring containing only an unencrypted
+copy of the signing subkey. Export this keyring so that we can add it
+as a secret to Zuul for use by release jobs.
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
-    > /etc/puppet/hieradata/production/group/signing.yaml -f \
-    > temporary.gnupg/pubring.gpg pubring > /dev/null
-    root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py --yaml \
-    > /etc/puppet/hieradata/production/group/signing.yaml -f \
-    > temporary.gnupg/secring.gpg secring > /dev/null
+    root@puppetmaster:~# gpg --homedir temporary.gnupg \
+    > --output temporary.gnupg/for-zuul --armor \
+    > --export-secret-subkeys 0x421E6472811F9A81
+    root@puppetmaster:~# wget -O encrypt_secret.py \
+    > https://git.openstack.org/cgit/openstack-infra/zuul/plain/tools/encrypt_secret.py?\
+    > h=feature/zuulv3
+    root@puppetmaster:~# python encrypt_secret.py --infile temporary.gnupg/for-zuul \
+    > --outfile temporary.gnupg/zuul.yaml https://zuulv3.openstack.org gerrit \
+    > openstack-infra/project-config
+    writing RSA key
+    Public key length: 4096 bits (512 bytes)
+    Max plaintext length per chunk: 470 bytes
+    Input plaintext length: 3024 bytes
+    Number of chunks: 7
+
+Copy ``temporary.gnupg/zuul.yaml`` to your workstation and make a
+commit to ``project-config/zuul.d/secrets.yaml`` to update the
+``gpg_key`` secret with its contents.  Be user to replace ``<name>``
+and ``<fieldname>`` as appropriate.
 
 Safely clean up, doing your best to securely remove the temporary
 copy of the unencrypted signing subkey and any associated files:
@@ -467,43 +479,6 @@ copy of the unencrypted signing subkey and any associated files:
 
     root@puppetmaster:~# shred temporary.gnupg/*
     root@puppetmaster:~# rm -rf temporary.gnupg
-
-Finally, commit the hiera alterations:
-
-.. code-block:: shell-session
-
-    root@puppetmaster:~# echo -e "Updated signing key to Some cycle\n-me" | git \
-    > --git-dir /etc/puppet/hieradata/.git --work-tree /etc/puppet/hieradata \
-    > commit -F - production/group/signing.yaml
-
-Once the key updates on signing01.ci.openstack.org, as the jenkins
-user inspect the result. You should see the new cycle name and the
-`sec#` here again indicating the primary secret key is unusable, and
-if you try to sign some random data you shouldn't be prompted for a
-passphrase to use the signing subkey:
-
-.. code-block:: shell-session
-
-    jenkins@signing01:~$ gpg --list-secret-keys
-    /home/jenkins/.gnupg/secring.gpg
-    ---------------------------
-    sec#  2048R/C6D5584D 2016-07-07 [expires: 2017-02-02]
-    uid                  OpenStack Infra (Some Cycle) <infra-root@openstack.org>
-    ssb   2048R/F541FB68 2016-07-07
-
-    jenkins@signing01:~$ echo foo | gpg --sign --armor
-    -----BEGIN PGP MESSAGE-----
-    Version: GnuPG v1
-
-    owEBOgHF/pANAwACAbkGmxM1cAzcAcsKYgBYM654Zm9vCokBHAQAAQIABgUCWDOu
-    eAAKCRC5BpsTNXAM3CC0CAC4Lc4DkTCvQpK0EXDZvYBbktYFslYyqbUcgSLqWFIC
-    JxP5Zdz5G1gRABZ3NIfuerJczuy+Nd0ZBFrFEgw3JCzGYBydEyhlLJa1St64/JJy
-    uOJY3IAKI5i9jBlt53+0FyKyNqifpk+Grmrqi8W+74bHpoNMnnfPWL2Llb2fz4bK
-    DBlsATrCMj7IvgKpwNX2/IxFN5vqENd54v+J3jn/7Bxnf5UFLzowqOWjj1xaX3e0
-    E2m4r6PMJoGQwFLyiPW0cjZJa22wSU2u2MjFjMMukpA+axgxGqLzDLYa1tmtJ6p3
-    CMUalOq1Bxy5M4rU9VrffzNP9dSC38iYDm0BExxv3otM
-    =i1wq
-    -----END PGP MESSAGE-----
 
 To document this transition, export a minimal text version of the
 public master key:
