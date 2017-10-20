@@ -489,6 +489,19 @@ class openstack_project::gerrit (
         ],
         require => Exec['manage_projects'],
       }
+
+      logrotate::file { 'track_upstream.log':
+        log     => '/var/log/track_upstream.log',
+        options => [
+          'compress',
+          'missingok',
+          'rotate 30',
+          'daily',
+          'notifempty',
+          'copytruncate',
+        ],
+        require => Cron['track_upstream'],
+      }
     }
   }
   file { '/home/gerrit2/review_site/bin/set_agreements.sh':
