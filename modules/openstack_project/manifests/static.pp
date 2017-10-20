@@ -200,6 +200,7 @@ class openstack_project::static (
   class { 'openstackci::logserver':
     jenkins_ssh_key         => $openstack_project::jenkins_ssh_key,
     domain                  => 'openstack.org',
+    ara_middleware          => true,
     swift_authurl           => $swift_authurl,
     swift_user              => $swift_user,
     swift_key               => $swift_key,
