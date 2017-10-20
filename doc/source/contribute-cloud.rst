@@ -26,7 +26,7 @@ very appreciative of this.
 
 By visiting this page, you can see the system in action at any time:
 
-  http://status.openstack.org/zuul/
+  http://zuulv3.openstack.org/
 
 You'll see every job that's running currently, as well as some graphs
 that show activity over time.  Each of those jobs is running on its

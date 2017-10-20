@@ -28,9 +28,9 @@ var firstPartyCI = /^(Jenkins|Zuul)/;
 // this regex matches the pipeline markup
 var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
 // The url to full status information on running jobs
-var zuulStatusURL = 'http://status.openstack.org/zuul';
+var zuulStatusURL = 'http://zuulv3.openstack.org/';
 // The json URL to check for running jobs
-var zuulStatusJSON = 'https://zuul.openstack.org/status/change/';
+var zuulStatusJSON = 'http://zuulv3.openstack.org/status/change/';
 
 // This is a variable to determine if we're in debugging mode, which
 // lets you globally set it to see what's going on in the flow.
