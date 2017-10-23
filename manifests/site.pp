@@ -1198,6 +1198,7 @@ node /^ze\d+\.openstack\.org$/ {
     # properly. We need to revisting this post Queens PTG.
     trusted_ro_paths         => ['/etc/openafs', '/etc/ssl/certs', '/var/lib/zuul/ssh'],
     trusted_rw_paths         => ['/afs'],
+    untrusted_ro_paths       => ['/etc/ssl/certs'],
     disk_limit_per_job       => 5000,  # Megabytes
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
