@@ -26,7 +26,7 @@ var trustedCIRegex = /^(OpenStack CI|Jenkins|Zuul)$/;
 // this regex matches the name+pipeline that we want at the top of the CI list
 var firstPartyCI = /^(Jenkins|Zuul)/;
 // this regex matches the pipeline markup
-var pipelineNameRegex = /Build \w+ \((\w+) pipeline\)/;
+var pipelineNameRegex = /Build \w+ \(([-\w]+) pipeline\)/;
 // The url to full status information on running jobs
 var zuulStatusURL = 'http://status.openstack.org/zuul';
 // The json URL to check for running jobs
