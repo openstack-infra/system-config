@@ -1277,7 +1277,6 @@ node 'zuulv3-dev.openstack.org' {
     manage_common_zuul   => false,
   }
   # TODO(pabelanger): Add zuul_scheduler support
-  # TODO(pabelanger): Add zuul_launcher support
 }
 
 # Node-OS: xenial
@@ -1369,13 +1368,6 @@ node 'zuulv3.openstack.org' {
 node 'zuul.openstack.org' {
   $gearman_workers = [
     'nodepool.openstack.org',
-    'zlstatic01.openstack.org',
-    'zl01.openstack.org',
-    'zl02.openstack.org',
-    'zl03.openstack.org',
-    'zl04.openstack.org',
-    'zl05.openstack.org',
-    'zl06.openstack.org',
     'zm01.openstack.org',
     'zm02.openstack.org',
     'zm03.openstack.org',
@@ -1402,61 +1394,6 @@ node 'zuul.openstack.org' {
     proxy_ssl_chain_file_contents  => hiera('zuul_ssl_chain_file_contents'),
     zuul_url                       => 'http://zuul.openstack.org/p',
     statsd_host                    => 'graphite.openstack.org',
-  }
-}
-
-# Node-OS: trusty
-node /^zlstatic\d+\.openstack\.org$/ {
-  $group = "zuul-merger"
-  $zmq_event_receivers = ['logstash.openstack.org',
-                          'nodepool.openstack.org']
-  $zmq_iptables_rule = regsubst($zmq_event_receivers,
-                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
-  $iptables_rule = flatten([$zmq_iptables_rule])
-  class { 'openstack_project::server':
-    iptables_rules6     => $iptables_rule,
-    iptables_rules4     => $iptables_rule,
-    sysadmins           => hiera('sysadmins', []),
-    afs                 => true,
-  }
-  class { 'openstack_project::zuul_launcher':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
-    sites                => hiera('zuul_sites', []),
-    nodes                => hiera('zuul_nodes', []),
-    accept_nodes         => false,
-  }
-}
-
-# Node-OS: trusty
-node /^zl\d+\.openstack\.org$/ {
-  $group = "zuul-merger"
-  $zmq_event_receivers = ['logstash.openstack.org',
-                          'nodepool.openstack.org']
-  $zmq_iptables_rule = regsubst($zmq_event_receivers,
-                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 8888 -s \1 -j ACCEPT')
-  $iptables_rule = flatten([$zmq_iptables_rule])
-  class { 'openstack_project::server':
-    iptables_rules6     => $iptables_rule,
-    iptables_rules4     => $iptables_rule,
-    sysadmins           => hiera('sysadmins', []),
-    afs                 => true,
-  }
-  class { 'openstack_project::zuul_launcher':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('jenkins_ssh_private_key_contents'),
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins            => hiera('sysadmins', []),
-    sites                => hiera('zuul_sites', []),
-    zuul_launcher_keytab => hiera('zuul_launcher_keytab'),
   }
 }
 
