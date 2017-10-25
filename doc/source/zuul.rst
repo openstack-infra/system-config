@@ -16,7 +16,6 @@ At a Glance
   * http://zuul.openstack.org
   * http://zuul-dev.openstack.org
   * zm*.openstack.org
-  * zl*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
   * :file:`modules/openstack_project/manifests/zuul_prod.pp`
@@ -162,18 +161,3 @@ necessary to accommodate load.  If you remove a merger, be sure to
 leave Apache running for several hours until the last job that may
 have been launched with instructions to fetch from that merger has
 completed.
-
-Launchers
----------
-
-We use an Ansible based launcher in Zuul to actually run jobs.  This
-component runs on a horizontally scalable set of servers named
-zl*.openstack.org.  It reads job configuration from Jenkins Job
-Builder files in the project-config repository and translates that
-into Ansible playbooks which it runs on our workers.  Our jobs are
-configured to upload as much information as possible along with their
-logs, but if there is an error which can not be diagnosed in that
-manner, Ansible logs are available in the launcher-debug log file on
-the launcher host.  You may use the Zuul build UUID to track
-assignment of a given job from the Zuul scheduler to the Zuul launcher
-used by that job.
