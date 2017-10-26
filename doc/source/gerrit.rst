@@ -228,6 +228,9 @@ High level goals:
    $PROJECT-milestone (PTL and release minded people) exclusively can
    perform full code review (blocking or approving: +/- 2), and submit
    changes to be merged on pre-release stable/* branches.
+#. Members of Release Managers can create and remove stable
+   branches, tag stable branches for EOL and abandon changes on EOL
+   branches.
 #. Full code review (+/- 2) of API projects (documentation of the API,
    not implementation of the API) should be available to the -core
    group of the corresponding implementation project as well as to the
@@ -293,6 +296,7 @@ Next, edit `project.config` to look like::
   pushTag = group Release Managers
   read = group Anonymous Users
   editTopicName = group Registered Users
+  abandon = group Release Managers
 
   [access "refs/drafts/*"]
   push = block group Registered Users
