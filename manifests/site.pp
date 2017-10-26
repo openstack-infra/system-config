@@ -1375,10 +1375,6 @@ node 'zuul.openstack.org' {
     'zl04.openstack.org',
     'zl05.openstack.org',
     'zl06.openstack.org',
-    'zm01.openstack.org',
-    'zm02.openstack.org',
-    'zm03.openstack.org',
-    'zm04.openstack.org',
   ]
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
@@ -1459,25 +1455,8 @@ node /^zl\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
-node /^zm0[1234].openstack\.org$/ {
-  $group = "zuul-merger"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents'),
-  }
-}
-
 # Node-OS: xenial
-node /^zm0[5678].openstack\.org$/ {
+node /^zm0[12345678].openstack\.org$/ {
   $group = "zuul-merger"
 
   $gerrit_server        = 'review.openstack.org'
