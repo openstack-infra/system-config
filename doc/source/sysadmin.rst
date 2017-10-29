@@ -205,7 +205,7 @@ Backups
 
 Off-site backups are made to two servers:
 
- * ci-backup-rs-ord.openstack.org
+ * backup01.ord.rax.ci.openstack.org
  * TBD
 
 Puppet is used to perform the initial configuration of those machines,
@@ -239,7 +239,7 @@ and add this to the authorized_keys file::
 
 Switching back to the server to be backed up, run::
 
-  ssh $BUPUSER@ci-backup-rs-ord.openstack.org
+  ssh $BUPUSER@backup01.ord.rax.ci.openstack.org
 
 And verify the host key.  Note this will start the bup server on the
 remote end, you will not be given a pty. Use ^D to close the connection
