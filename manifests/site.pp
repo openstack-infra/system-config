@@ -1367,6 +1367,13 @@ node 'zuulv3.openstack.org' {
   }
 
   class { '::zuul::web': }
+
+  include bup
+  bup::site { 'rax.ord':
+    backup_user   => 'bup-zuulv3',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
+  }
+
 }
 
 # Node-OS: trusty
