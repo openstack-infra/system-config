@@ -205,7 +205,7 @@ Backups
 
 Off-site backups are made to two servers:
 
- * ci-backup-rs-ord.openstack.org
+ * backup01.ord.rax.ci.openstack.org
  * TBD
 
 Puppet is used to perform the initial configuration of those machines,
@@ -239,7 +239,7 @@ and add this to the authorized_keys file::
 
 Switching back to the server to be backed up, run::
 
-  ssh $BUPUSER@ci-backup-rs-ord.openstack.org
+  ssh $BUPUSER@backup01.ord.rax.ci.openstack.org
 
 And verify the host key.  Note this will start the bup server on the
 remote end, you will not be given a pty. Use ^D to close the connection
@@ -261,7 +261,7 @@ how we restore content from backups::
 
 At this point we can join the tar that was split by the backup cron::
 
-  bup join -r bup-<short-servername>@ci-backup-rs-ord.openstack.org: root > backup.tar
+  bup join -r bup-<short-servername>@backup01.ord.rax.ci.openstack.org: root > backup.tar
 
 At this point you may need to wait a while. These backups are stored on
 servers geographically distant from our normal servers resulting in less
