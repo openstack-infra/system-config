@@ -46,9 +46,9 @@ class openstack_project::etherpad (
   }
 
   include bup
-  bup::site { 'rs-ord':
+  bup::site { 'ord.rax':
     backup_user   => 'bup-etherpad',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 }
 
