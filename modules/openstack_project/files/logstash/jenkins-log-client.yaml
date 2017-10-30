@@ -59,6 +59,10 @@ source-files:
       - console
       - console.html
     job-filter: '.*grenade.*'
+  - name: logs/devstack-early.txt
+    tags:
+      - console
+      - console.html
   - name: logs/devstacklog.txt
     tags:
       - console
