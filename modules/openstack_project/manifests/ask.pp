@@ -153,9 +153,9 @@ class openstack_project::ask (
   }
 
   include bup
-  bup::site { 'rs-ord':
+  bup::site { 'ord.rax':
     backup_user   => 'bup-ask',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 
   class { '::httpd::logrotate':

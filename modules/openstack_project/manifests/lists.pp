@@ -28,9 +28,9 @@ class openstack_project::lists(
   user::virtual::disable { 'rockstar': }
 
   include bup
-  bup::site { 'rs-ord':
+  bup::site { 'ord.rax':
     backup_user   => 'bup-lists',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 
   Maillist {
