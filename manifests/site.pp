@@ -1562,20 +1562,8 @@ node 'pbx.openstack.org' {
   }
 }
 
-# Node-OS: trusty
-# A backup machine.  Don't run cron or puppet agent on it.
-node /^ci-backup-.*\.openstack\.org$/ {
-  $group = "ci-backup"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [],
-    manage_exim => false,
-    purge_apt_sources => false,
-  }
-  include openstack_project::backup_server
-}
-
 # Node-OS: xenial
-# A backup machine (new).  Don't run cron or puppet agent on it.
+# A backup machine.  Don't run cron or puppet agent on it.
 node /^backup\d+\..*\.ci\.openstack\.org$/ {
   $group = "ci-backup"
   class { 'openstack_project::server':
