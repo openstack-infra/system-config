@@ -131,11 +131,11 @@ The topics for the subunit workers follow a simple pattern::
     gearman-subunit/<worker hostname>/<git namespace/<repo name>/<change number>
 
 Where  ``worker hostname`` is the host which processed the subunit file, as
-of right now there are 2, subunit-worker01 and subunit-worker02, but there may
-be more (or fewer) in the future. The ``git namespace`` and ``repo name`` are
-pretty self explanatory, and are just for the git repo under test that the
-subunit was emitted from. ``change number`` is the gerrit change number for the
-job that launched the tests the subunit is for.
+of right now there are 1, subunit-worker02, but there may be more (or fewer) in
+the future. The ``git namespace`` and ``repo name`` are pretty self explanatory,
+and are just for the git repo under test that the subunit was emitted from.
+``change number`` is the gerrit change number for the job that launched the tests
+the subunit is for.
 
 Payload
 -------
