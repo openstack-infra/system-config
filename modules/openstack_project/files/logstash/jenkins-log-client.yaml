@@ -1,14 +1,7 @@
 source-url: http://logs.openstack.org
 
 # List of zmq event inputs.
-zmq-publishers:
-  - tcp://zlstatic01.openstack.org:8888
-  - tcp://zl01.openstack.org:8888
-  - tcp://zl02.openstack.org:8888
-  - tcp://zl03.openstack.org:8888
-  - tcp://zl04.openstack.org:8888
-  - tcp://zl05.openstack.org:8888
-  - tcp://zl06.openstack.org:8888
+zmq-publishers: []
 
 subunit-files:
   - name: logs/testrepository.subunit
