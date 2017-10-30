@@ -77,9 +77,9 @@ class openstack_project::wiki (
 
   if $bup_user != undef {
     include bup
-    bup::site { 'rs-ord':
+    bup::site { 'ord.rax':
       backup_user   => $bup_user,
-      backup_server => 'ci-backup-rs-ord.openstack.org',
+      backup_server => 'backup01.ord.rax.ci.openstack.org',
     }
   }
 

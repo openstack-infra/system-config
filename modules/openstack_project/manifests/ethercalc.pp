@@ -27,8 +27,8 @@ class openstack_project::ethercalc (
   # pick this file up during its normal operation so no other DB dumping
   # is required like with mysql.
   include bup
-  bup::site { 'rs-ord':
+  bup::site { 'ord.rax':
     backup_user   => 'bup-ethercalc01',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 }

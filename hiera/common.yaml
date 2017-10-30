@@ -236,7 +236,6 @@ cacti_hosts:
 - backup01.ord.rax.ci.openstack.org
 - baremetal00.vanilla.ic.openstack.org
 - cacti.openstack.org
-- ci-backup-rs-ord.openstack.org
 - controller00.vanilla.ic.openstack.org
 - compute000.vanilla.ic.openstack.org
 - compute001.vanilla.ic.openstack.org
