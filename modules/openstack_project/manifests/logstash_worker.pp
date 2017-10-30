@@ -69,6 +69,7 @@ class openstack_project::logstash_worker (
       owner   => 'root',
       group   => 'root',
       mode    => '0555',
+      require => Class['::logstash'],
   }
 
   validate_array($elasticsearch_nodes)  # needed by output.conf.erb
