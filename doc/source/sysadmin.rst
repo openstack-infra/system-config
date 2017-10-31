@@ -199,6 +199,23 @@ Some information is only relevant if you have root access to the system - e.g.
 you are an OpenStack CI root operator, or you are running a clone of the
 OpenStack CI infrastructure for another project.
 
+Force configuration run on a server
+===================================
+
+If you need to force a configuration run on a single server before the
+usual cron job time, you can use the ``kick.sh`` script on
+``bridge.openstack.org``.
+
+You could do a single server::
+
+  # /opt/system-config/production/tools/kick.sh 'review.openstack.org'
+
+Or use matching to cover a range of servers::
+
+  # /opt/system-config/production/tools/kick.sh 'ze*.openstack.org'
+
+  # /opt/system-config/production/tools/kick.sh 'ze0[1-4].openstack.org'
+
 Backups
 =======
 
