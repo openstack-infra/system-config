@@ -200,6 +200,42 @@ Some information is only relevant if you have root access to the system - e.g.
 you are an OpenStack CI root operator, or you are running a clone of the
 OpenStack CI infrastructure for another project.
 
+Force a puppet run on a server
+==============================
+
+If you need to force puppet to run on a single server before the usual
+cron job time, you can use the ``kick.sh`` script on
+``puppetmaster.openstack.org``, which simply runs the adoc puppet
+playbook for you.
+
+You could do a single server::
+
+  # /opt/system-config/production/tools/kick.sh 'review.openstack.org'
+
+Or use matching to cover a range of servers::
+
+  # /opt/system-config/production/tools/kick.sh 'ze*.openstack.org'
+
+  # /opt/system-config/production/tools/kick.sh 'ze0[1-4].openstack.org'
+
+Service Restarts
+================
+
+Although infrequent, there are times that services need to be
+restarted system-wide.  We have some orchestration scripts to help;
+examples are provided below.
+
+zuul-executors
+--------------
+
+Zuul exectors run on the ``ze[0-9][0-9].openstack.org`` hosts.
+Restarting exectors should be safe as existing jobs will be scheduled
+for retry::
+
+  # ansible-playbook -i 'ze*.openstack.org' \
+    /opt/system-config/production/playbooks/hard_restart_zuul_exectors.yaml
+
+
 Backups
 =======
 
