@@ -28,11 +28,13 @@ class openstack_project::logstash_worker (
 ) {
 
   file { '/etc/logprocessor/worker.yaml':
-    ensure => present,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     content => template('openstack_project/logstash/jenkins-log-worker.yaml.erb'),
+    require => Class['::log_processor'],
+    before  => Class['::log_processor:worker'],
   }
 
   file { '/etc/default/logstash-indexer':
