@@ -203,8 +203,6 @@ def get_from_cgit(project, obj, params={}):
     url = 'http://git.openstack.org/cgit/' + project + '/plain/' + obj
     raw = requester(url, params=params,
                     headers={'Accept': 'application/json'})
-
-    raw.encoding = 'utf-8'  # Workaround for cgit encoding
     return yaml.safe_load(raw.text)
 
 
