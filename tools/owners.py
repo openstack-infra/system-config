@@ -336,6 +336,36 @@ def main(argv=sys.argv):
                                  'reference/projects.yaml',
                                  {'h': ref})
 
+    # The set of retired or removed "legacy" projects from governance
+    # are merged into the main dict if their retired-on date falls
+    # later than the after parameter for the qualifying time period
+    # TODO(fungi): make this a configurable option
+    old_projects = query_gerrit(
+        'gitweb', {
+            'p': 'openstack/governance.git',
+            'a': 'blob_plain',
+            'f': 'reference/legacy.yaml',
+            'hb': ref,
+            })
+    for project in old_projects:
+        for deliverable in old_projects[project]['deliverables']:
+            if 'retired-on' in old_projects[project]['deliverables'][deliverable]:
+                retired = old_projects[project]['deliverables'][deliverable]['retired-on']
+            elif 'retired-on' in old_projects[project]:
+                retired = old_projects[project]['retired-on']
+            else:
+                retired = None
+            if retired:
+                retired = retired.isoformat()
+                if after and after > retired:
+                    continue
+                if project not in gov_projects:
+                    gov_projects[project] = {'deliverables': {}}
+                if deliverable in gov_projects[project]['deliverables']:
+                    print('Skipping duplicate/partially retired deliverable: %s' % deliverable, file=sys.stderr)
+                    continue
+                gov_projects[project]['deliverables'][deliverable] = old_projects[project]['deliverables'][deliverable]
+
     # A mapping of short (no prefix) to full repo names existing in
     # Gerrit, used to handle repos which have a different namespace
     # in governance during transitions and also to filter out repos
