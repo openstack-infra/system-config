@@ -95,6 +95,20 @@ class openstack_project::puppetmaster (
     require => Cron['updatepuppetmaster'],
   }
 
+  logrotate::file { 'updateinfracloud':
+    ensure  => present,
+    log     => '/var/log/puppet_run_all_infracloud.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updateinfracloud'],
+  }
+
   logrotate::file { 'updateinfracloudcron':
     ensure  => present,
     log     => '/var/log/puppet_run_infracloud_cron.log',
