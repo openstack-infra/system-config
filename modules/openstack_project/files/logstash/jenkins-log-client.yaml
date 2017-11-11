@@ -237,6 +237,10 @@ source-files:
     tags:
       - screen
       - oslofmt
+  - name: logs/screen-placement-api.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/screen-q-agt.txt
     tags:
       - screen
@@ -393,6 +397,10 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
+  - name: logs/new/screen-placement-api.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/new/screen-q-agt.txt
     tags:
       - screen
@@ -514,6 +522,10 @@ source-files:
       - screen
       - oslofmt
     job-filter: '.*grenade.*'
+  - name: logs/old/screen-placement-api.txt
+    tags:
+      - screen
+      - oslofmt
   - name: logs/old/screen-q-agt.txt
     tags:
       - screen
