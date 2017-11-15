@@ -25,6 +25,20 @@ subunit-files:
     build-queue-filter: 'post'
   - name: logs/testrepository.subunit
     build-queue-filter: 'post'
+subunit-check-files:
+  - name: logs/testrepository.subunit
+    build-queue-filter: 'check'
+  - name: logs/old/testrepository.subunit
+    job-filter: '.*grenade-dsvm.*'
+    build-queue-filter: 'check'
+  - name: testrepository.subunit
+    build-queue-filter: 'check'
+  - name: logs/karma.subunit
+    job-filter: '.*npm-run.*'
+    build-queue-filter: 'check'
+  - name: karma.subunit
+    job-filter: '.*npm-run.*'
+    build-queue-filter: 'check'
 # List of files to source logs from.
 source-files:
   - name: console.html
