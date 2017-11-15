@@ -532,6 +532,39 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   }
 }
 
+
+# Node-OS: xenial
+node /^subunit-check-worker\d+\.openstack\.org$/ {
+  $group = 'subunit-check-worker'
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+  class { 'openstack_project::subunit_worker':
+    subunit2sql_db_host   => 'subunit2sql-check-db.openstack.org',
+    subunit2sql_db_pass   => hiera('subunit2sql_check_db_password', ''),
+    mqtt_pass             => hiera('mqtt_service_user_password'),
+    mqtt_ca_cert_contents => hiera('mosquitto_tls_ca_file'),
+    check_queue           => true,
+  }
+}
+
+node 'subunit2sql-check-db.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 3306],
+    iptables_rules6           => $logstash_iptables_rule,
+    iptables_rules4           => $logstash_iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::subunit_db_server':
+    subunit2sql_db_host => 'subunit2sql-check-db.openstack.org',
+    subunit2sql_db_pass => hiera('subunit2sql_check_db_password', ''),
+    root_mysql_pass     => hiera('subunit2sql_check_db_root_password', ''),
+    expire_age          => '30',
+  }
+}
+
 # Node-OS: trusty
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
