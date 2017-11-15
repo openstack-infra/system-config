@@ -616,3 +616,38 @@ source-files:
       - console
       - postci
     job-filter: '.*-tripleo-ci-.*'
+  - name: logs/undercloud/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/subnode-2/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/overcloud-controller-0/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/overcloud-controller-1/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/overcloud-controller-2/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/overcloud-cephstorage-0/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
+  - name: logs/overcloud-novacompute-0/var/log/extra/errors.txt
+    tags:
+      - console
+      - errors
+    job-filter: '.*-tripleo-ci-.*'
