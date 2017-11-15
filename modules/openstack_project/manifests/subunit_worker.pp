@@ -20,14 +20,26 @@ class openstack_project::subunit_worker (
   $mqtt_user = 'infra',
   $mqtt_pass = undef,
   $mqtt_ca_cert_contents = undef,
+  $check_queue = false,
 ) {
 
-  file { '/etc/subunit2sql/subunit-woker.yaml':
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0555',
-    content => template('openstack_project/logstash/jenkins-subunit-worker.yaml.erb'),
+  if check_queue {
+    file { '/etc/subunit2sql/subunit-woker.yaml':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0555',
+      content => template('openstack_project/logstash/jenkins-subunit-check-worker.yaml.erb'),
+    }
+  }
+  else {
+    file { '/etc/subunit2sql/subunit-woker.yaml':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0555',
+      content => template('openstack_project/logstash/jenkins-subunit-worker.yaml.erb'),
+    }
   }
 
   file { '/etc/subunit2sql/mqtt-root-CA.pem.crt':
