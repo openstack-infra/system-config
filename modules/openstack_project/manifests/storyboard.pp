@@ -123,8 +123,8 @@ class openstack_project::storyboard(
   }
 
   include bup
-  bup::site { 'rs-ord':
+  bup::site { 'ord.rax':
     backup_user   => 'bup-storyboard',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 }
