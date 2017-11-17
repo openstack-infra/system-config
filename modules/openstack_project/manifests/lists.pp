@@ -406,4 +406,13 @@ class openstack_project::lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'edge-computing':
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Organizing efforts around the edge-computing focus area.',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
