@@ -1,0 +1,12 @@
+Code-Review+1: Kevin Carter (cloudnull) <kevin@cloudnull.com>
+Code-Review+1: Jesse Pretorius (odyssey4me) <jesse.pretorius@rackspace.co.uk>
+Code-Review+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 20 Nov 2017 20:47:23 +0000
+Reviewed-on: https://review.openstack.org/521508
+Project: openstack-infra/system-config
+Branch: refs/heads/master
