@@ -16,7 +16,7 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/opensuse"
-MIRROR="rsync://rsync.opensuse.org/opensuse-full"
+MIRROR="rsync://ftp.gwdg.de/pub/opensuse/"
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
 for DISTVER in 42.3; do
