@@ -1925,20 +1925,6 @@ node 'codesearch.openstack.org' {
 }
 
 # Node-OS: trusty
-# Node-OS: centos7
-# Node-OS: xenial
-node /.*wheel-mirror-.*\.openstack\.org/ {
-  $group = 'wheel-mirror'
-  include openstack_project
-
-  class { 'openstack_project::wheel_mirror_slave':
-    sysadmins                      => hiera('sysadmins', []),
-    jenkins_ssh_public_key         => $openstack_project::jenkins_ssh_key,
-    wheel_keytab                   => hiera("wheel_keytab"),
-  }
-}
-
-# Node-OS: trusty
 node 'controller00.vanilla.ic.openstack.org' {
   $group = 'infracloud'
   class { '::openstack_project::server':
