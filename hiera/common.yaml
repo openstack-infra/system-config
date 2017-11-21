@@ -108,6 +108,7 @@ statusbot_channels:
 - openstack-stable
 - openstack-state-management
 - openstack-swift
+- openstack-tc
 - openstack-telemetry
 - openstack-tricircle
 - openstack-trove
