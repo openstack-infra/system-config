@@ -1,0 +1,14 @@
+Code-Review+1: Melvin Hillsman (mrhillsman) <mrhillsman@gmail.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+1: Mike Perez <thingee@gmail.com>
+Code-Review+1: Chris Dent <cdent@anticdent.org>
+Verified+1: Jenkins
+Code-Review+1: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 21 Nov 2017 16:42:39 +0000
+Reviewed-on: https://review.openstack.org/510964
+Project: openstack-infra/system-config
+Branch: refs/heads/master
