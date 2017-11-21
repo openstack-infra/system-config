@@ -64,6 +64,7 @@ statusbot_channels:
 - openstack-cyborg
 - openstack-deployment
 - openstack-dev
+- openstack-diversity
 - openstack-dns
 - openstack-doc
 - openstack-entropy
