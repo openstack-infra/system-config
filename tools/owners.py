@@ -340,13 +340,9 @@ def main(argv=sys.argv):
     # are merged into the main dict if their retired-on date falls
     # later than the after parameter for the qualifying time period
     # TODO(fungi): make this a configurable option
-    old_projects = query_gerrit(
-        'gitweb', {
-            'p': 'openstack/governance.git',
-            'a': 'blob_plain',
-            'f': 'reference/legacy.yaml',
-            'hb': ref,
-            })
+    old_projects = get_from_cgit('openstack/governance',
+                                 'reference/legacy.yaml',
+                                 {'h': ref})
     for project in old_projects:
         for deliverable in old_projects[project]['deliverables']:
             if 'retired-on' in old_projects[project]['deliverables'][deliverable]:
