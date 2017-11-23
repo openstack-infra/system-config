@@ -148,9 +148,9 @@ running `zuul-changes.py
 to save the check and gate queues::
 
   python /opt/zuul/tools/zuul-changes.py http://zuulv3.openstack.org \
-    check >check.sh
+    openstack check >check.sh
   python /opt/zuul/tools/zuul-changes.py http://zuulv3.openstack.org \
-    gate >gate.sh
+    opentsack gate >gate.sh
 
 These check.sh and gate.sh scripts will be used after the restart to
 re-enqueue the changes.
@@ -164,7 +164,9 @@ Once you're ready, use `service zuul start` to start zuul again.
 To re-enqueue saved jobs, first run the gate.sh script and then check.sh to
 re-enqueue the changes from before the restart::
 
+  chmod 0755 gate.sh
   ./gate.sh
+  chmod 0755 check.sh
   ./check.sh
 
 You may watch the `Zuul Status Page`_ to confirm that changes are
