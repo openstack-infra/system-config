@@ -85,6 +85,7 @@ statusbot_channels:
 - openstack-kolla
 - openstack-lbaas
 - openstack-manila
+- openstack-masakari
 - openstack-meniscus
 - openstack-merges
 - openstack-metering
@@ -175,6 +176,7 @@ meetbot_channels:
 - '#openstack-kuryr'
 - '#openstack-lbaas'
 - '#openstack-manila'
+- '#openstack-masakari'
 - '#openstack-meeting'
 - '#openstack-meeting-3'
 - '#openstack-meeting-4'
