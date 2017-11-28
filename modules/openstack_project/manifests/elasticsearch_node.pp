@@ -50,7 +50,7 @@ class openstack_project::elasticsearch_node (
   }
 
   class { 'logstash::curator':
-    keep_for_days  => '7',
+    keep_for_days  => '10',
   }
 
 }
