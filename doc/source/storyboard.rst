@@ -61,7 +61,7 @@ Projects loaded into StoryBoard are handled from the same file that drives our
 gerrit projects. Adding a new project is as simple as modifying a single
 file and adding the line ``use-storyboard: true``:
 
-``:config:`gerrit/projects.yaml```::
+:config:`gerrit/projects.yaml`::
 
      - project: openstack-infra/storyboard
        description: OpenStack Task Tracking API
@@ -75,7 +75,7 @@ StoryBoard administrators are handled from a single configuration file, and
 are identified by OpenID. To add a new administator, simply add their
 Launchpad OpenID string and email as follows:
 
-``:config:`gerrit/projects.yaml```::
+:file:`modules/openstack_project/files/storyboard/superusers.yaml`::
 
     - openid: https://login.ubuntu.com/+id/LOLPONIES
       email: pinkie.pie@example.com
