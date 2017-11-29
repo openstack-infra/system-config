@@ -194,6 +194,26 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/rubygems"
     ProxyPass "/rubygems/" "https://rubygems.org/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/rubygems/" "https://rubygems.org/"
+
+    # opendaylight
+    CacheEnable disk "/opendaylight"
+    ProxyPass "/opendaylight/" "https://nexus.opendaylight.org/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/opendaylight/" "https://nexus.opendaylight.org/"
+
+    # elastico
+    CacheEnable disk "/elastic"
+    ProxyPass "/elastic/" "https://packages.elastic.co/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/elastic/" "https://packages.elastic.co/"
+
+    # grafana
+    CacheEnable disk "/grafana"
+    ProxyPass "/grafana" "https://packagecloud.io/grafana/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/grafana/" "https://packagecloud.io/grafana/"
+
+    # OracleLinux
+    CacheEnable disk "/oraclelinux
+    ProxyPass "/oraclelinux/" "http://yum.oracle.com/repo/OracleLinux/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/oraclelinux/" "http://yum.oracle.com/repo/OracleLinux/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
