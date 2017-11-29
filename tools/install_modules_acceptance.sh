@@ -68,6 +68,11 @@ EOF
         openstack-infra/project-config \
         $project_names
 
+    # Zuul v3 doesn't add remotes like origin but our use of puppet vcsrepo
+    # errors if it can't update itself against origin (because vcsrepo manages
+    # repos that it will initially clone). Address this by adding an origin
+    # for the vcsrepo managed repo here.
+    sudo git -C /etc/project-config remote add origin 'https://git.openstack.org/openstack-infra/project-config'
 }
 
 install_all() {
