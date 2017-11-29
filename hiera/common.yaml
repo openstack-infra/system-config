@@ -104,7 +104,6 @@ statusbot_channels:
 - openstack-sahara
 - openstack-sdks
 - openstack-searchlight
-- openstack-shade
 - openstack-sprint
 - openstack-stable
 - openstack-state-management
@@ -204,7 +203,6 @@ meetbot_channels:
 - '#openstack-sdks'
 - '#openstack-searchlight'
 - '#openstack-security'
-- '#openstack-shade'
 - '#openstack-sprint'
 - '#openstack-stable'
 - '#openstack-storlets'
