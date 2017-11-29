@@ -333,7 +333,7 @@ need to be run by a founder of the channels or a member of infra-root::
 
   /MSG ChanServ op #openstack-project-old
   /MSG ChanServ op #openstack-project-new
-  /TOPIC ##openstack-project-old We have moved to #openstack-project-new, please
+  /TOPIC #openstack-project-old We have moved to #openstack-project-new, please
     /part and then type /join #openstack-project-new to get to us
   /MSG ChanServ SET #openstack-project-old GUARD ON
   /MSG ChanServ SET #openstack-project-old MLOCK +tnsmif #openstack-project-new
