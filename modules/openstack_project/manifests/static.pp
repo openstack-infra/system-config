@@ -324,6 +324,7 @@ class openstack_project::static (
   # Extra aliases and directories needed for vhost template:
   $governance_aliases = {
     '/election/' => '/srv/static/election/',
+    '/sigs/'     => '/srv/static/sigs/',
     '/tc/'       => '/srv/static/tc/',
     '/uc/'       => '/srv/static/uc/',
   }
@@ -338,6 +339,7 @@ class openstack_project::static (
   $governance_directories = [
     '/srv/static/election',
     '/srv/static/governance',
+    '/srv/static/sigs',
     '/srv/static/tc',
     '/srv/static/uc',
   ]
