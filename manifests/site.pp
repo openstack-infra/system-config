@@ -797,6 +797,49 @@ node 'static.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node /^zk\d+\.openstack\.org$/ {
+  $zk_receivers = [
+    'nb03.openstack.org',
+    'nb04.openstack.org',
+    'nl01.openstack.org',
+    'nl02.openstack.org',
+    'zuulv3.openstack.org',
+  ]
+
+  $zk_cluster_members = [
+    # TODO(pabelanger): Remove nodepool.o.o.
+    'nodepool.openstack.org',
+    'zk01.openstack.org',
+    'zk02.openstack.org',
+    'zk03.openstack.org',
+  ]
+
+  $zk_receiver_rule = regsubst($zk_receivers,
+                               '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2181 -s \1 -j ACCEPT')
+  $zk_election_rule = regsubst($zk_cluster_members,
+                               '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2888 -s \1 -j ACCEPT')
+  $zk_leader_rule = regsubst($zk_cluster_members,
+                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 3889 -s \1 -j ACCEPT')
+  $iptables_rule = flatten([$zk_receiver_rule, $zk_election_rule, $zk_leader_rule])
+  class { 'openstack_project::server':
+    iptables_rules6           => $iptables_rule,
+    iptables_rules4           => $iptables_rule,
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { '::zookeeper':
+    id             => $::fqdn,
+    # The frequency in hours to look for and purge old snapshots,
+    # defaults to 0 (disabled). The number of retained snapshots can
+    # be separately controlled through snap_retain_count and
+    # defaults to the minimum value of 3. This will quickly fill the
+    # disk in production if not enabled. Works on ZK >=3.4.
+    purge_interval => 6,
+    servers        => $zk_cluster_members,
+  }
+}
+
 # A machine to serve various project status updates.
 # Node-OS: trusty
 node 'status.openstack.org' {

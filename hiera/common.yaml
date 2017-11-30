@@ -488,6 +488,9 @@ cacti_hosts:
 - ze08.openstack.org
 - ze09.openstack.org
 - ze10.openstack.org
+- zk01.openstack.org
+- zk02.openstack.org
+- zk03.openstack.org
 - zlstatic01.openstack.org
 - zl01.openstack.org
 - zl02.openstack.org
