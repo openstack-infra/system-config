@@ -308,6 +308,20 @@ node 'lists.openstack.org' {
 }
 
 # Node-OS: trusty
+node 'lists.katacontainers.io' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [25, 80, 465],
+    manage_exim => false,
+    purge_apt_sources => false,
+  }
+
+  class { 'openstack_project::kata_lists':
+    listadmins   => hiera('listadmins', []),
+    listpassword => hiera('listpassword'),
+  }
+}
+
+# Node-OS: trusty
 node 'paste.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],

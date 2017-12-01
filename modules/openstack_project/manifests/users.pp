@@ -241,4 +241,12 @@ class openstack_project::users {
     gid      => 2026,
   }
 
+  @user::virtual::localuser { 'jbryce':
+    realname => 'Jonathan Bryce',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEApFGM9q1gfiawBX5EnCQGxx2T1hwPDxrX2M64MfqcoBRpdrWRjxWm6Vhczfl+Ar2EQtGsuIm1QQiyiPL4zsJSQOfYXB0TqOQaAuFamSzZSNEm8coSa93E3zfXR9uln1lgCGutaWwH/KmGcSeAuuQCipKmKxc8QSAepGNP4Jx2L/EnXQh850xTQEIviJkJpA9oTRzXu12T7vzxsUCw041Q/KX16UvvGpt9IAoMAWFlQrMPzPFmqbUOIr7pRvv8TKcK9BNFS8S8jjT+wN0y/LY7cbTblgDfwSAl1P/naME5ugRVD5MZKixIE1F+x/j+M8+fpZ/EyR/6jSA3DYjEXOk2zQ==',
+    key_id   => 'jbryce@jbryce-mbp-3.local',
+    uid      => 2027,
+    gid      => 2027,
+  }
+
 }
