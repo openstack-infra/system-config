@@ -232,6 +232,29 @@ Go
         }
     }
 
+Common Lisp
+'''''''''''
+
+This requires the use of the `cl-mqtt`_ library.
+
+.. _cl-mqtt: https://github.com/ivan4th/cl-mqtt
+
+.. code-block:: common-lisp
+
+    (bb:alet ((conn (mqtt:connect
+                    firehose.openstack.org
+                    :port 1883
+                    :on-message #'(lambda (message)
+                                     (format t "~s~%: ~s~%"
+                                            (babel:octets-to-string
+                                            (mqtt:mqtt-message-topic message)
+                                            :encoding :utf-8)
+                                            (babel:octets-to-string
+                                            (mqtt:mqtt-message-payload message)
+                                            :encoding :utf-8))))))
+    (bb:walk
+      (mqtt:subscribe conn "#")))
+
 
 Websocket Example
 -----------------
