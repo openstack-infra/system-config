@@ -8,22 +8,22 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
- rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, inap-mtl01_upload,
- tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
- infracloud-chocolate_upload, citycloud-lon1_upload,
- citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
+ dib_fedora-26, dib_gentoo, dib_opensuse-423, rax-dfw_upload,
+ rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
+ inap-mtl01_upload, tripleo-test-cloud-rh1_upload,
+ infracloud-vanilla_upload, infracloud-chocolate_upload,
+ citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
+ citycloud-sto2_upload, vexxhost-ca-ymq-1_upload
 
 [handlers]
 keys=console,debug,normal,image,
  dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-25, dib_fedora-26, dib_opensuse-422, dib_opensuse-423,
- rax-dfw_upload, rax-ord_upload, rax-iad_upload, ovh-gra1_upload,
- ovh-bhs1_upload, inap-mtl01_upload,
- tripleo-test-cloud-rh1_upload, infracloud-vanilla_upload,
- infracloud-chocolate_upload, citycloud-lon1_upload,
- citycloud-kna1_upload, citycloud-la1_upload, citycloud-sto2_upload
+ dib_fedora-26, dib_gentoo, dib_opensuse-423, rax-dfw_upload,
+ rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
+ inap-mtl01_upload, tripleo-test-cloud-rh1_upload,
+ infracloud-vanilla_upload, infracloud-chocolate_upload,
+ citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
+ citycloud-sto2_upload, vexxhost-ca-ymq-1_upload
 
 [formatters]
 keys=simple
@@ -138,18 +138,6 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.centos-7.log', 'H', 8, 30,)
 
-[logger_dib_fedora-25]
-level=DEBUG
-handlers=dib_fedora-25
-qualname=nodepool.image.build.fedora-25
-propagate=0
-
-[handler_dib_fedora-25]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.fedora-25.log', 'H', 8, 30,)
-
 [logger_dib_fedora-26]
 level=DEBUG
 handlers=dib_fedora-26
@@ -162,17 +150,17 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-26.log', 'H', 8, 30,)
 
-[logger_dib_opensuse-422]
+[logger_dib_gentoo]
 level=DEBUG
-handlers=dib_opensuse-422
-qualname=nodepool.image.build.opensuse-422
+handlers=dib_gentoo
+qualname=nodepool.image.build.gentoo
 propagate=0
 
-[handler_dib_opensuse-422]
+[handler_dib_gentoo]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @image_log_document_root %>/dib.opensuse-422.log', 'H', 8, 30,)
+args=('<%= @image_log_document_root %>/dib.gentoo.log', 'H', 8, 30,)
 
 [logger_dib_opensuse-423]
 level=DEBUG
@@ -341,4 +329,16 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/citycloud-sto2.log', 'H', 8, 30,)
+
+[logger_vexxhost-ca-ymq-1_upload]
+level=DEBUG
+handlers=vexxhost-ca-ymq-1_upload
+qualname=nodepool.image.upload.vexxhost-ca-ymq-1
+propagate=0
+
+[handler_vexxhost-ca-ymq-1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/vexxhost-ca-ymq-1.log', 'H', 8, 30,)
 

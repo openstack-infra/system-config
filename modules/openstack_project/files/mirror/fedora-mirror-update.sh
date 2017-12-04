@@ -19,7 +19,7 @@ BASE="/afs/.openstack.org/mirror/fedora"
 MIRROR="rsync://mirrors.kernel.org"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
-for REPO in releases/25 releases/26 ; do
+for REPO in releases/26 releases/27 ; do
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
     fi
@@ -41,7 +41,7 @@ for REPO in releases/25 releases/26 ; do
         $MIRROR/fedora/$REPO/ $BASE/$REPO/
 done
 
-for REPO in updates/25 updates/26 ; do
+for REPO in updates/26 updates/27 ; do
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
     fi
