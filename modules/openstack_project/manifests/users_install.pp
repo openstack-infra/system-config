@@ -41,6 +41,7 @@ class openstack_project::users_install (
       User::Virtual::Localuser['ianw'],
       User::Virtual::Localuser['shrews'],
       User::Virtual::Localuser['dmsimard'],
+      User::Virtual::Localuser['frickler'],
     )
     user::virtual::disable{'slukjanov':}
     user::virtual::disable{'elizabeth':}
@@ -60,5 +61,6 @@ class openstack_project::users_install (
       user::virtual::disable{'ianw':}
       user::virtual::disable{'shrews':}
       user::virtual::disable{'dmsimard':}
+      user::virtual::disable{'frickler':}
   }
 }
