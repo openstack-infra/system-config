@@ -249,4 +249,12 @@ class openstack_project::users {
     gid      => 2027,
   }
 
+  @user::virtual::localuser { 'dmsimard':
+    realname => 'David Moreau-Simard',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDDyXfFj44OTsJZnHbecbYrwA8zXuMiULb+o326maOh3wh5/6fk+MzivkUzJC2uZqAlKvBnNXsrb/07eV1gRjaIQBQJxaV9HQUwMNX7AkjkDzaMXVDjG/JOium90R23gVGMukzp9IamezUscAqAxVK+2C10k3tq8dZ/GeZfHl3NFGRHlIAXsJ/SIQoxJAEA0IQ/8Y50nR1Hp2mV2xsfxH9oZhLR/eiFdhJpNupdfw/oE9+vpCHS8SG88KGeLYbn+EhH6LSCD+6WNthF6oE7NANnScqn1Fl0ZpSd3RlRb+kDVKGqNxfB7EJTeimYvqaYmrTiTZTaTJua5Bj5yBTudqnBgdHCz3xMb2Nv2s2INNcJmP/CKpivYQ8AJs6cVlqRWnLJiNQQYCj+xAXBvY5T0Xq/qOhVifLiWZvZQOTHFWqFP9asZkrGa1mFWIaR9VPQY0FoYlUOT9t6J6TRbzktJIuP5AiOVoJLL6wjZuUMjghHfkYbqtyBqE4BbCY8YF3JSf8jx+9eWy+sD+dRwKXBCrGV0dNidioZR7ZJpBb6ye8wElebjPZizKhppsNpwtRxPfiAM52f55lXGD7IDpz9CZrOKUcV2uc3Rhl50u7T3psZfX7GysZvlnAH+Yr+UM+LPBAabXAfKlMnJp+SskLuOplTeQrvAwMluBmFnla8TnwnxQ==',
+    key_id   => 'dmsimard@hostname',
+    uid      => 2028,
+    gid      => 2028,
+  }
+
 }
