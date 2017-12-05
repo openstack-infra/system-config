@@ -832,7 +832,7 @@ node /^zk\d+\.openstack\.org$/ {
   $zk_election_rule = regsubst($zk_cluster_members,
                                '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2888 -s \1 -j ACCEPT')
   $zk_leader_rule = regsubst($zk_cluster_members,
-                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 3889 -s \1 -j ACCEPT')
+                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 3888 -s \1 -j ACCEPT')
   $iptables_rule = flatten([$zk_receiver_rule, $zk_election_rule, $zk_leader_rule])
   class { 'openstack_project::server':
     iptables_rules6           => $iptables_rule,
