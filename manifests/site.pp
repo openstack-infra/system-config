@@ -841,7 +841,8 @@ node /^zk\d+\.openstack\.org$/ {
   }
 
   class { '::zookeeper':
-    id             => $::fqdn,
+    # ID needs to be numeric, so we use regex to extra numbers from fqdn.
+    id             => regsubst($::fqdn, '^zk(\d+)\.openstack\.org$', '\1')
     # The frequency in hours to look for and purge old snapshots,
     # defaults to 0 (disabled). The number of retained snapshots can
     # be separately controlled through snap_retain_count and
