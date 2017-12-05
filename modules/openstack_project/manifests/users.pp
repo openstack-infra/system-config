@@ -257,4 +257,13 @@ class openstack_project::users {
     gid      => 2028,
   }
 
+  @user::virtual::localuser { 'frickler':
+    realname => 'Jens Harbott',
+    key_type => 'ssh-ed25519',
+    sshkeys  => 'AAAAC3NzaC1lZDI1NTE5AAAAIGmc5fbzMptjAb5D86zSH13ZYCbf3QuV1jk9hL0r1qHw',
+    key_id   => 'frickler@os-infra-2017',
+    uid      => 2029,
+    gid      => 2029,
+  }
+
 }
