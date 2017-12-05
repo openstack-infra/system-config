@@ -822,9 +822,6 @@ node /^zk\d+\.openstack\.org$/ {
   ]
 
   $zk_cluster_members = [
-    'zk01.openstack.org',
-    'zk02.openstack.org',
-    'zk03.openstack.org',
   ]
 
   $zk_receiver_rule = regsubst($zk_receivers,
