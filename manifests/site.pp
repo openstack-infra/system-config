@@ -1568,58 +1568,6 @@ node /^backup\d+\..*\.ci\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'proposal.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::proposal_slave':
-    jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
-    proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents'),
-    proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents'),
-    zanata_server_url        => 'https://translate.openstack.org/',
-    zanata_server_user       => hiera('proposal_zanata_user'),
-    zanata_server_api_key    => hiera('proposal_zanata_api_key'),
-  }
-}
-
-# Node-OS: trusty
-node 'release.slave.openstack.org' {
-  $group = "afsadmin"
-
-  include openstack_project
-  class { 'openstack_project::release_slave':
-    pypi_username          => 'openstackci',
-    pypi_password          => hiera('pypi_password'),
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
-    jenkinsci_username     => hiera('jenkins_ci_org_user', 'username'),
-    jenkinsci_password     => hiera('jenkins_ci_org_password'),
-    mavencentral_username  => hiera('mavencentral_org_user', 'username'),
-    mavencentral_password  => hiera('mavencentral_org_password'),
-    puppet_forge_username  => hiera('puppet_forge_username', 'username'),
-    puppet_forge_password  => hiera('puppet_forge_password'),
-    npm_username           => 'openstackci',
-    npm_userpassword       => hiera('npm_user_password'),
-    npm_userurl            => 'https://openstack.org',
-    admin_keytab           => hiera('afsadmin_keytab'),
-    packaging_keytab       => hiera('packaging_keytab'),
-  }
-}
-
-# Node-OS: trusty
-node /^signing\d+\.ci\.openstack\.org$/ {
-  $group = "signing"
-  include openstack_project
-  class { 'openstack_project::signing_node':
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
-    packaging_keytab       => hiera('packaging_keytab'),
-    pubring                => hiera('pubring'),
-    secring                => hiera('secring'),
-    gerritkey              => hiera('gerritkey'),
-    lp_access_token        => hiera('lp_access_token'),
-    lp_access_secret       => hiera('lp_access_secret'),
-    lp_consumer_key        => hiera('lp_consumer_key'),
-  }
-}
-
-# Node-OS: trusty
 node 'openstackid.org' {
   class { 'openstack_project::openstackid_prod':
     sysadmins                   => hiera('sysadmins', []),
