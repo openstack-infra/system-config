@@ -449,7 +449,6 @@ cacti_hosts:
 - paste.openstack.org
 - pbx.openstack.org
 - planet01.openstack.org
-- proposal.slave.openstack.org
 - puppetmaster.openstack.org
 - mirror01.dfw.rax.openstack.org
 - mirror01.ord.rax.openstack.org
@@ -467,10 +466,8 @@ cacti_hosts:
 - mirror.regionone.tripleo-test-cloud-rh1.openstack.org
 - mirror.regionone.tripleo-test-cloud-rh2.openstack.org
 - mirror-update.openstack.org
-- release.slave.openstack.org
 - review-dev.openstack.org
 - review.openstack.org
-- signing01.ci.openstack.org
 - stackalytics.openstack.org
 - static.openstack.org
 - status.openstack.org

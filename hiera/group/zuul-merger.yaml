@@ -26,18 +26,7 @@ zuul_sites:
     keytab: '/etc/zuul-launcher.keytab'
     user: 'service/zuul-launcher'
 
-zuul_nodes:
-  - name: 'proposal.slave.openstack.org'
-    host: 'proposal.slave.openstack.org'
-    labels: 'proposal'
-
-  - name: 'release.slave.openstack.org'
-    host: 'release.slave.openstack.org'
-    labels: 'release'
-
-  - name: 'signing01.ci.openstack.org'
-    host: 'signing01.ci.openstack.org'
-    labels: 'signing'
+zuul_nodes: []
 
 # NOTE(pabelanger): zuulv3 settings
 zuul_connections:
