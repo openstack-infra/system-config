@@ -135,6 +135,8 @@ meetbot_channels:
 - '#congress'
 - '#dox'
 - '#heat'
+- '#kata-dev'
+- '#kata-general'
 - '#midonet'
 - '#murano'
 - '#openstack'
