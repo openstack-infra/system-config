@@ -11,11 +11,9 @@ git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
 nodepool nodepool*.openstack.org:nb*.openstack.org:nl*.openstack.org
-signing signing*.ci.openstack.org
 subunit-worker ~subunit-worker\d+\.openstack\.org
 translate ~translate\d+\.openstack\.org
 translate-dev ~translate-dev\d*\.openstack\.org
-wheel-mirror *wheel-mirror-*.openstack.org
 wiki ~wiki\d+\.openstack\.org
 wiki-dev ~wiki-dev\d+\.openstack\.org
 zuul-merger ~z[lm](static)?\d+\.openstack\.org
