@@ -755,11 +755,11 @@ node 'storyboard.openstack.org' {
     hostname                => $::fqdn,
     valid_oauth_clients     => [
       $::fqdn,
-      'docs-draft.openstack.org',
+      'logs.openstack.org',
     ],
     cors_allowed_origins     => [
       "https://${::fqdn}",
-      'http://docs-draft.openstack.org',
+      'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
   }
@@ -779,11 +779,11 @@ node 'storyboard-dev.openstack.org' {
     hostname                => $::fqdn,
     valid_oauth_clients     => [
       $::fqdn,
-      'docs-draft.openstack.org',
+      'logs.openstack.org',
     ],
     cors_allowed_origins     => [
       "https://${::fqdn}",
-      'http://docs-draft.openstack.org',
+      'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard-dev@storyboard-dev.openstack.org',
   }

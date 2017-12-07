@@ -13,7 +13,6 @@ At a Glance
 
 :Hosts:
   * http://logs.openstack.org
-  * http://docs-draft.openstack.org
   * http://status.openstack.org
   * http://mirror.openstack.org
   * http://specs.openstack.org

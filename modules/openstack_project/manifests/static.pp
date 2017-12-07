@@ -262,39 +262,6 @@ class openstack_project::static (
   }
 
   ###########################################################
-  # Docs-draft
-
-  ::httpd::vhost { 'docs-draft.openstack.org':
-    port       => 443, # Is required despite not being used.
-    docroot    => '/srv/static/docs-draft',
-    priority   => '50',
-    ssl        => true,
-    template   => 'openstack_project/static-http-and-https.vhost.erb',
-    vhost_name => 'docs-draft.openstack.org',
-    require    => [
-      File['/srv/static/docs-draft'],
-      File[$cert_file],
-      File[$key_file],
-    ],
-  }
-
-  file { '/srv/static/docs-draft':
-    ensure  => directory,
-    owner   => 'jenkins',
-    group   => 'jenkins',
-    require => User['jenkins'],
-  }
-
-  file { '/srv/static/docs-draft/robots.txt':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    source  => 'puppet:///modules/openstack_project/disallow_robots.txt',
-    require => File['/srv/static/docs-draft'],
-  }
-
-  ###########################################################
   # Security
 
   ::httpd::vhost { 'security.openstack.org':
