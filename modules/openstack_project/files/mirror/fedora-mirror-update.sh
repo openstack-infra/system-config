@@ -70,8 +70,10 @@ $K5START rsync -rltDvz \
     --delete-excluded \
     --exclude="testing/" \
     --exclude="Atomic/" \
-    --exclude="CloudImages/x86_64/images/*.raw.xz" \
-    --exclude="CloudImages/x86_64/images/*.box" \
+    --exclude="aarch64/" \
+    --exclude="ppc64le/" \
+    --exclude="CloudImages/*/images/*.raw.xz" \
+    --exclude="CloudImages/*/images/*.box" \
     $MIRROR/fedora-alt/atomic/ $BASE/atomic/
 
 # TODO(pabelanger): Validate rsync process
