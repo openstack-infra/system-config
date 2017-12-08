@@ -1385,55 +1385,29 @@ node 'zuulv3.openstack.org' {
     sysadmins                 => hiera('sysadmins', []),
   }
 
-  class { '::project_config':
-    url => 'https://git.openstack.org/openstack-infra/project-config',
+  class { '::openstackci::zuul_scheduler':
+    gearman_check_job_registration => true,
+    job_name_in_report             => false,
+    status_url                     => "https://${::fqdn}/",
+    statsd_host                    => 'graphite.openstack.org',
+    project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
+    proxy_ssl_cert_file_contents   => hiera('zuul_ssl_cert_file_contents'),
+    proxy_ssl_key_file_contents    => hiera('zuul_ssl_key_file_contents'),
+    python_version                 => 3,
+    zookeeper_hosts                => 'nodepool.openstack.org:2181',
+    zookeeper_session_timeout      => 40,
+    zuulv3                         => true,
+    connections                    => hiera('zuul_connections', []),
+    connection_secrets             => hiera('zuul_connection_secrets', []),
+    zuul_status_url                => 'http://127.0.0.1:8001/openstack',
+    zuul_web_url                   => 'http://127.0.0.1:9000/openstack',
+    gearman_client_ssl_cert        => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key         => hiera('gearman_client_ssl_key'),
+    gearman_server_ssl_cert        => hiera('gearman_server_ssl_cert'),
+    gearman_server_ssl_key         => hiera('gearman_server_ssl_key'),
+    gearman_ssl_ca                 => hiera('gearman_ssl_ca'),
+    github_key_content             => hiera('zuul_github_app_key'),
   }
-
-  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
-  # settings.
-  class { '::zuul':
-    gerrit_server                => $gerrit_server,
-    gerrit_user                  => $gerrit_user,
-    zuul_ssh_private_key         => $zuul_ssh_private_key,
-    git_email                    => $git_email,
-    git_name                     => $git_name,
-    revision                     => $revision,
-    python_version               => 3,
-    zookeeper_hosts              => 'nodepool.openstack.org:2181',
-    zookeeper_session_timeout    => 40,
-    zuulv3                       => true,
-    connections                  => hiera('zuul_connections', []),
-    connection_secrets           => hiera('zuul_connection_secrets', []),
-    zuul_status_url              => 'http://127.0.0.1:8001/openstack',
-    zuul_web_url                 => 'http://127.0.0.1:9000/openstack',
-    gearman_client_ssl_cert      => hiera('gearman_client_ssl_cert'),
-    gearman_client_ssl_key       => hiera('gearman_client_ssl_key'),
-    gearman_server_ssl_cert      => hiera('gearman_server_ssl_cert'),
-    gearman_server_ssl_key       => hiera('gearman_server_ssl_key'),
-    gearman_ssl_ca               => hiera('gearman_ssl_ca'),
-    proxy_ssl_cert_file_contents => hiera('zuul_ssl_cert_file_contents'),
-    proxy_ssl_key_file_contents  => hiera('zuul_ssl_key_file_contents'),
-    statsd_host                  => 'graphite.openstack.org',
-  }
-
-  file { "/etc/zuul/github.key":
-    ensure  => present,
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0600',
-    content => hiera('zuul_github_app_key'),
-    require => File['/etc/zuul'],
-  }
-
-  class { '::zuul::scheduler':
-    layout_dir     => $::project_config::zuul_layout_dir,
-    require        => $::project_config::config_dir,
-    python_version => 3,
-    use_mysql      => true,
-  }
-
-  class { '::zuul::web': }
-  class { '::zuul::fingergw': }
 
   include bup
   bup::site { 'rax.ord':
