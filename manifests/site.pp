@@ -1395,6 +1395,7 @@ node 'zuulv3.openstack.org' {
     connections                  => hiera('zuul_connections', []),
     connection_secrets           => hiera('zuul_connection_secrets', []),
     zuul_status_url              => 'http://127.0.0.1:8001/openstack',
+    zuul_web_url                 => 'http://127.0.0.1:9000/openstack',
     gearman_client_ssl_cert      => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key       => hiera('gearman_client_ssl_key'),
     gearman_server_ssl_cert      => hiera('gearman_server_ssl_cert'),
