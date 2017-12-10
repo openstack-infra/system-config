@@ -588,6 +588,7 @@ statusbot_auth_nicks:
 - rcarrillocruz
 - ianw
 - Shrews
+- dmsimard
 mosquitto_tls_ca_file: |
   -----BEGIN CERTIFICATE-----
   MIIE/DCCA+SgAwIBAgIQFpDDKbZ4BgdRHwWwNEhGyzANBgkqhkiG9w0BAQUFADBv
