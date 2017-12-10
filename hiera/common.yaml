@@ -589,6 +589,7 @@ statusbot_auth_nicks:
 - ianw
 - Shrews
 - dmsimard
+- frickler
 mosquitto_tls_ca_file: |
   -----BEGIN CERTIFICATE-----
   MIIE/DCCA+SgAwIBAgIQFpDDKbZ4BgdRHwWwNEhGyzANBgkqhkiG9w0BAQUFADBv
