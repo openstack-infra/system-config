@@ -1822,52 +1822,6 @@ node /^translate-dev\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
-node 'apps.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  class { '::apps_site':
-    ssl_cert_file           => '/etc/ssl/certs/apps.openstack.org.pem',
-    ssl_cert_file_contents  => hiera('apps_ssl_cert_file_contents'),
-    ssl_key_file            => '/etc/ssl/private/apps.openstack.org.key',
-    ssl_key_file_contents   => hiera('apps_ssl_key_file_contents'),
-    ssl_chain_file          => '/etc/ssl/certs/apps.openstack.org_intermediate.pem',
-    ssl_chain_file_contents => hiera('apps_ssl_chain_file_contents'),
-  }
-}
-
-# Node-OS: trusty
-node 'apps-dev.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  class { '::apps_site':
-    without_glare   => false,
-  }
-  class { '::apps_site::plugins::glare':
-    use_ssl         => false,
-    memcache_server => '127.0.0.1:11211',
-    vhost_name      => $::fqdn,
-  }
-  class { '::apps_site::wsgi::apache':
-    use_ssl    => false,
-    servername => $::fqdn,
-  }
-  class { '::apps_site::catalog':
-    import_assets   => true,
-    domain          => $::fqdn,
-    glare_url       => "http://${::fqdn}:9494",
-    memcache_server => '127.0.0.1:11211',
-  }
-
-  Class['::apps_site'] ->
-    Class['::apps_site::plugins::glare'] ->
-      Class['::apps_site::wsgi::apache'] ->
-        Class['::apps_site::catalog']
-}
 
 # Node-OS: trusty
 node 'odsreg.openstack.org' {
