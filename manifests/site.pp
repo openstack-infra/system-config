@@ -192,7 +192,8 @@ node 'puppetmaster.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'graphite.openstack.org' {
+# Node-OS: xenial
+node /^graphite\d*\.openstack\.org$/ {
   $statsd_hosts = ['git.openstack.org',
                    'firehose01.openstack.org',
                    'logstash.openstack.org',
