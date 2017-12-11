@@ -354,41 +354,41 @@ node /planet\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
-node 'eavesdrop.openstack.org' {
+# Node-OS: xenial
+node /^eavesdrop\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::eavesdrop':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    nickpass                => hiera('openstack_meetbot_password'),
-    statusbot_nick          => hiera('statusbot_nick', 'username'),
-    statusbot_password      => hiera('statusbot_nick_password'),
-    statusbot_server        => 'chat.freenode.net',
-    statusbot_channels      => hiera_array('statusbot_channels', ['openstack_infra']),
-    statusbot_auth_nicks    => hiera_array('statusbot_auth_nicks'),
-    statusbot_wiki_user     => hiera('statusbot_wiki_username', 'username'),
-    statusbot_wiki_password => hiera('statusbot_wiki_password'),
-    statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
+    project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
+    nickpass                       => hiera('openstack_meetbot_password'),
+    statusbot_nick                 => hiera('statusbot_nick', 'username'),
+    statusbot_password             => hiera('statusbot_nick_password'),
+    statusbot_server               => 'chat.freenode.net',
+    statusbot_channels             => hiera_array('statusbot_channels', ['openstack_infra']),
+    statusbot_auth_nicks           => hiera_array('statusbot_auth_nicks'),
+    statusbot_wiki_user            => hiera('statusbot_wiki_username', 'username'),
+    statusbot_wiki_password        => hiera('statusbot_wiki_password'),
+    statusbot_wiki_url             => 'https://wiki.openstack.org/w/api.php',
     # https://wiki.openstack.org/wiki/Infrastructure_Status
-    statusbot_wiki_pageid   => '1781',
+    statusbot_wiki_pageid          => '1781',
     # https://wiki.openstack.org/wiki/Successes
-    statusbot_wiki_successpageid => '7717',
+    statusbot_wiki_successpageid   => '7717',
     # https://wiki.openstack.org/wiki/Thanks
-    statusbot_wiki_thankspageid => '37700',
-    statusbot_irclogs_url   => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
-    statusbot_twitter                 => true,
-    statusbot_twitter_key             => hiera('statusbot_twitter_key'),
-    statusbot_twitter_secret          => hiera('statusbot_twitter_secret'),
-    statusbot_twitter_token_key       => hiera('statusbot_twitter_token_key'),
-    statusbot_twitter_token_secret    => hiera('statusbot_twitter_token_secret'),
-    accessbot_nick          => hiera('accessbot_nick', 'username'),
-    accessbot_password      => hiera('accessbot_nick_password'),
-    meetbot_channels        => hiera('meetbot_channels', ['openstack-infra']),
-    ptgbot_nick             => hiera('ptgbot_nick', 'username'),
-    ptgbot_password         => hiera('ptgbot_password'),
+    statusbot_wiki_thankspageid    => '37700',
+    statusbot_irclogs_url          => 'http://eavesdrop.openstack.org/irclogs/%(chan)s/%(chan)s.%(date)s.log.html',
+    statusbot_twitter              => true,
+    statusbot_twitter_key          => hiera('statusbot_twitter_key'),
+    statusbot_twitter_secret       => hiera('statusbot_twitter_secret'),
+    statusbot_twitter_token_key    => hiera('statusbot_twitter_token_key'),
+    statusbot_twitter_token_secret => hiera('statusbot_twitter_token_secret'),
+    accessbot_nick                 => hiera('accessbot_nick', 'username'),
+    accessbot_password             => hiera('accessbot_nick_password'),
+    meetbot_channels               => hiera('meetbot_channels', ['openstack-infra']),
+    ptgbot_nick                    => hiera('ptgbot_nick', 'username'),
+    ptgbot_password                => hiera('ptgbot_password'),
   }
 }
 
