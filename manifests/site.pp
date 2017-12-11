@@ -459,7 +459,8 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'logstash.openstack.org' {
+# Node-OS: xenial
+node /^logstash\d*\.openstack\.org$/ {
   $iptables_es_rule = regsubst($elasticsearch_nodes,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $iptables_gm_rule = regsubst($elasticsearch_clients,
