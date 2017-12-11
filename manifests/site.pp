@@ -271,7 +271,8 @@ node 'groups-dev.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'lists.openstack.org' {
+# Node-OS: xenial
+node /^lists\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
     manage_exim => false,
@@ -285,7 +286,8 @@ node 'lists.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'lists.katacontainers.io' {
+# Node-OS: xenial
+node /^lists\d*\.katacontainers\.io$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
     manage_exim => false,
