@@ -94,7 +94,8 @@ node 'review-dev.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'grafana.openstack.org' {
+# Node-OS: xenial
+node /^grafana\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
