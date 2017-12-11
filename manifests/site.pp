@@ -700,7 +700,8 @@ node 'files01.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'refstack.openstack.org' {
+# Node-OS: xenial
+node /^refstack\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
