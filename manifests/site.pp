@@ -719,7 +719,8 @@ node /^refstack\d*\.openstack\.org$/ {
 
 # A machine to run Storyboard
 # Node-OS: trusty
-node 'storyboard.openstack.org' {
+# Node-OS: xenial
+node /^storyboard\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
@@ -748,7 +749,8 @@ node 'storyboard.openstack.org' {
 
 # A machine to run Storyboard devel
 # Node-OS: trusty
-node 'storyboard-dev.openstack.org' {
+# Node-OS: xenial
+node /^storyboard-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
