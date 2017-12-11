@@ -16,7 +16,7 @@ Launching a node currently requires a different version of ansible
 than what is generally used on the puppetmaster.  Set up a
 virtualenv::
 
-  virtualenv ~/launch-env/
+  virtualenv -p python2 ~/launch-env/
   . ~/launch-env/bin/activate
   pip install ansible==2.1.1.0 shade==1.12.1
 
