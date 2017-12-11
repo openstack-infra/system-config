@@ -668,7 +668,8 @@ node 'design-summit-prep.openstack.org' {
 
 # Serve static AFS content for docs and other sites.
 # Node-OS: trusty
-node 'files01.openstack.org' {
+# Node-OS: xenial
+node /^files\d*\.openstack\.org$/ {
   $group = "files"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
