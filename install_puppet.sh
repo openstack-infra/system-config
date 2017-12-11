@@ -194,13 +194,11 @@ function setup_puppet_ubuntu {
         fi
         PUPPET_VERSION=3.*
         puppetpkg=puppet
-        PUPPETDB_VERSION=2.*
         FACTER_VERSION=2.*
     elif [ "$PUPPET_VERSION" == "4" ] ; then
         puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
         puppetpkg=puppet-agent
         PUPPET_VERSION=4.*
-        PUPPETDB_VERSION=4.*
         FACTER_VERSION=3.*
     else
         echo "Unsupported puppet version ${PUPPET_VERSION}"
@@ -210,10 +208,6 @@ function setup_puppet_ubuntu {
     cat > /etc/apt/preferences.d/00-puppet.pref <<EOF
 Package: puppet puppet-common puppetmaster puppetmaster-common puppetmaster-passenger
 Pin: version $PUPPET_VERSION
-Pin-Priority: 501
-
-Package: puppetdb puppetdb-terminus
-Pin: version $PUPPETDB_VERSION
 Pin-Priority: 501
 
 Package: facter

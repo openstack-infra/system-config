@@ -450,7 +450,6 @@ cacti_hosts:
 - pbx.openstack.org
 - planet01.openstack.org
 - proposal.slave.openstack.org
-- puppetdb.openstack.org
 - puppetmaster.openstack.org
 - mirror01.dfw.rax.openstack.org
 - mirror01.ord.rax.openstack.org
