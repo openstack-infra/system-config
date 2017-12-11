@@ -386,7 +386,8 @@ node /^ethercalc\d+\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'etherpad.openstack.org' {
+# Node-OS: xenial
+node /^etherpad\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
@@ -403,7 +404,8 @@ node 'etherpad.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'etherpad-dev.openstack.org' {
+# Node-OS: xenial
+node /^etherpad-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
