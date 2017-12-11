@@ -622,7 +622,8 @@ node /^git\d+\.openstack\.org$/ {
 
 # A machine to drive AFS mirror updates.
 # Node-OS: trusty
-node 'mirror-update.openstack.org' {
+# Node-OS: xenial
+node /^mirror-update\d*\.openstack\.org$/ {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
