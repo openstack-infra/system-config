@@ -136,18 +136,8 @@ node 'stackalytics.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'cacti.openstack.org' {
-  include openstack_project::ssl_cert_check
-  class { 'openstack_project::cacti':
-    sysadmins   => hiera('sysadmins', []),
-    cacti_hosts => hiera_array('cacti_hosts'),
-    vhost_name  => 'cacti.openstack.org',
-  }
-}
-
-# Node-OS: trusty
-node /^cacti\d+\.openstack\.org$/ {
-  $group = "cacti"
+# Node-OS: xenial
+node /^cacti\d*\.openstack\.org$/ {
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
     sysadmins   => hiera('sysadmins', []),
