@@ -236,7 +236,8 @@ node 'graphite.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'groups.openstack.org' {
+# Node-OS: xenial
+node /^groups\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
@@ -253,7 +254,8 @@ node 'groups.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'groups-dev.openstack.org' {
+# Node-OS: xenial
+node /^groups-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
