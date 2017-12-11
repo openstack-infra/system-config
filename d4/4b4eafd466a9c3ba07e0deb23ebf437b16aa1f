@@ -1,0 +1,9 @@
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 11 Dec 2017 20:21:17 +0000
+Reviewed-on: https://review.openstack.org/527183
+Project: openstack-infra/system-config
+Branch: refs/heads/master
