@@ -373,6 +373,7 @@ node 'eavesdrop.openstack.org' {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^ethercalc\d+\.openstack\.org$/ {
   $group = "ethercalc"
   class { 'openstack_project::server':
