@@ -782,7 +782,8 @@ node 'storyboard-dev.openstack.org' {
 
 # A machine to serve static content.
 # Node-OS: trusty
-node 'static.openstack.org' {
+# Node-OS: xenial
+node /^static\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
