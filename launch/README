@@ -18,7 +18,7 @@ virtualenv::
 
   virtualenv -p python2 ~/launch-env/
   . ~/launch-env/bin/activate
-  pip install ansible==2.1.1.0 shade==1.12.1
+  pip install "ansible<2.5" "shade<1.26"
 
 To launch a node in the OpenStack CI account (production servers)::
 
