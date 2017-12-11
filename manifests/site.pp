@@ -329,6 +329,7 @@ node /planet\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^eavesdrop\d*\.openstack\.org$/ {
+  $group = "eavesdrop"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
