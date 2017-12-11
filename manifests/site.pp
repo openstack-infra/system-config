@@ -303,19 +303,8 @@ node 'lists.katacontainers.io' {
 }
 
 # Node-OS: trusty
-node 'paste.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  class { 'openstack_project::paste':
-    db_password         => hiera('paste_db_password'),
-    db_host             => hiera('paste_db_host'),
-  }
-}
-
-# Node-OS: trusty
-node /^paste\d+\.openstack\.org$/ {
+# Node-OS: xenial
+node /^paste\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
