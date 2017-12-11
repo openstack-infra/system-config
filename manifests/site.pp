@@ -335,7 +335,8 @@ node /planet\d*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'eavesdrop.openstack.org' {
+# Node-OS: xenial
+node /^eavesdrop\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
