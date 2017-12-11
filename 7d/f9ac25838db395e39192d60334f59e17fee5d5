@@ -1,0 +1,9 @@
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 11 Dec 2017 23:23:09 +0000
+Reviewed-on: https://review.openstack.org/527184
+Project: openstack-infra/system-config
+Branch: refs/heads/master
