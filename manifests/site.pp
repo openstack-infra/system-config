@@ -112,7 +112,8 @@ node 'grafana.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'health.openstack.org' {
+# Node-OS: xenial
+node /^health\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
     sysadmins                 => hiera('sysadmins', []),
