@@ -1,0 +1,9 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Workflow+1: David Moreau Simard <dmsimard@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 11 Dec 2017 14:38:29 +0000
+Reviewed-on: https://review.openstack.org/527092
+Project: openstack-infra/system-config
+Branch: refs/heads/master
