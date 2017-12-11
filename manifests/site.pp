@@ -660,7 +660,8 @@ node /^mirror\d*\..*\.openstack\.org$/ {
 
 # A machine to run ODSREG in preparation for summits.
 # Node-OS: trusty
-node 'design-summit-prep.openstack.org' {
+# Node-OS: xenial
+node /^design-summit-prep\d*\.openstack\.org$/ {
   class { 'openstack_project::summit':
     sysadmins => hiera('sysadmins', []),
   }
