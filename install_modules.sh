@@ -113,9 +113,20 @@ for MOD in ${!SOURCE_MODULES[*]} ; do
             exit $clone_error
         fi
     fi
-    # make sure the correct revision is installed, I have to use rev-list b/c rev-parse does not work with tags
-    if [ `${GIT_CMD_BASE} rev-list HEAD --max-count=1` != `${GIT_CMD_BASE} rev-list ${SOURCE_MODULES[$MOD]} --max-count=1` ]; then
+
+    # make sure the correct revision is installed, I have to use
+    # rev-list b/c rev-parse does not work with tags
+    current_head=$(${GIT_CMD_BASE} rev-list HEAD --max-count=1)
+    wanted_head=$(${GIT_CMD_BASE} rev-list ${SOURCE_MODULES[$MOD]} --max-count=1)
+
+    if [[ -z ${wanted_head} ]]; then
+        echo "Could not find wanted revision: ${SOURCE_MODULES[$MOD]}"
+        echo "  (did you specify a non-existant tag?)"
+        exit 1
+    fi
+    if [[ ${current_head} != ${wanted_head} ]]; then
         # checkout correct revision
         $GIT_CMD_BASE checkout ${SOURCE_MODULES[$MOD]}
     fi
+
 done
