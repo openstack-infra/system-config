@@ -4,19 +4,77 @@ class openstack_project::lists(
   $listadmins,
   $listpassword = ''
 ) {
-  $listdomain = 'lists.openstack.org'
+
+  $mm_domains='lists.openstack.org'
+
+  class { 'mailman':
+    multihost => true,
+  }
 
   class { 'exim':
     sysadmins                => $listadmins,
     queue_interval           => '1m',
     queue_run_max            => '50',
-    mailman_domains          => [$listdomain],
     smtp_accept_max          => '100',
     smtp_accept_max_per_host => '10',
-  }
-
-  class { 'mailman':
-    vhost_name => $listdomain,
+    local_domains            => "@:$mm_domains",
+    routers                  => [
+      {'mailman_verp_router' => {
+         'driver' => 'dnslookup',
+         # we only consider messages sent in through loopback
+         'condition' => '${if or{{eq{$sender_host_address}{127.0.0.1}}\
+                          {eq{$sender_host_address}{::1}}}{yes}{no}}',
+         # we do not do this for traffic going to the local machine
+         'domains' => '!+local_domains:!+mm_domains',
+         'ignore_target_hosts' => '<; 0.0.0.0; \
+                                    64.94.110.11; \
+                                    127.0.0.0/8; \
+                                    ::1/128;fe80::/10;fe \
+                                    c0::/10;ff00::/8',
+         # only the un-VERPed bounce addresses are handled
+         'senders' => '"*-bounces@*"',
+         'transport' => 'mailman_verp_smtp',
+         }
+      },
+      {'mailman_router' => {
+        'driver'            => 'accept',
+        'domains'           => "$mm_domains",
+        'require_files'     => '${lookup{${lc::$domain}}lsearch{/etc/mailman/sites}}/lists/${lc::$local_part}/config.pck',
+        'local_part_suffix_optional' => true,
+        'local_part_suffix' => '-admin     : \
+                                -bounces   : -bounces+* : \
+                                -confirm   : -confirm+* : \
+                                -join      : -leave     : \
+                                -owner     : -request   : \
+                                -subscribe : -unsubscribe',
+        'transport'         => 'mailman_transport',
+        }
+      },
+    ],
+    transports                  => [
+      {'mailman_transport' => {
+        'driver'      => 'pipe',
+        'environment' => 'MAILMAN_INSTALL_DIR=${lookup{${lc:$domain}}lsearch{/etc/mailman/sites}}',
+        'command'     => '/var/lib/mailman/mail/mailman \
+                          \'${if def:local_part_suffix \
+                                 {${sg{$local_part_suffix}{-(\\w+)(\\+.*)?}{\$1}}} \
+                                 {post}}\' \
+                          $local_part',
+        'current_directory' => '/var/lib/mailman',
+        'home_directory'    => '/var/lib/mailman',
+        'user'              => 'list',
+        'group'             => 'list',
+        }
+      },
+      {'mailman_verp_smtp' => {
+        'driver'         => 'smtp',
+        'return_path'    => '${local_part:$return_path}+$local_part=$domain@${domain:$return_path}',
+        'max_rcpt'       => '1',
+        'headers_remove' => 'Errors-To',
+        'headers_add'    => 'Errors-To: ${return_path}',
+        }
+      },
+    ]
   }
 
   realize (
@@ -33,386 +91,358 @@ class openstack_project::lists(
     backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 
-  Maillist {
-    provider    => 'noaliasmailman',
+  # Begin user servicable parts
+
+  mailman::site { 'openstack':
+    default_email_host => 'lists.openstack.org',
+    default_url_host   => 'lists.openstack.org',
   }
 
-  maillist { 'openstack-es':
+  # Add new mailing lists below this line
+
+  mailman_list { 'mailman@openstack':
+    require     => Mailman::Site['openstack'],
+    ensure      => present,
+    admin       => 'nobody@openstack.org',
+    password    => $listpassword,
+    description => 'The mailman site list',
+  }
+
+  mailman_list { 'openstack-es@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'flavio@redhat.com',
     password    => $listpassword,
     description => 'Lista de correo acerca de OpenStack en español',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-fr':
+  mailman_list { 'openstack-fr@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'erwan@erwan.com',
     password    => $listpassword,
     description => 'List of the OpenStack french user group',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-de':
+  mailman_list { 'openstack-de@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'christian@berendt.io',
     password    => $listpassword,
     description => 'List for German-speaking OpenStack users',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-i18n':
+  mailman_list { 'openstack-i18n@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'guoyingc@cn.ibm.com',
     password    => $listpassword,
     description => 'List of the OpenStack Internationalization team.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-i18n-de':
+  mailman_list { 'openstack-i18n-de@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'robert.simai@suse.com',
     password    => $listpassword,
     description => 'List of the German OpenStack Internationalization team.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-ir':
+  mailman_list { 'openstack-ir@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'Roozbeh.Shafiee@Gmail.Com',
     password    => $listpassword,
     description => 'OpenStack IRAN Community Discussions in Persian/Farsi',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-it':
+  mailman_list { 'openstack-it@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'stefano@openstack.org',
     password    => $listpassword,
     description => 'Discussioni su OpenStack in italiano',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-el':
+  mailman_list { 'openstack-el@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'aparathyras@stackmasters.eu',
     password    => $listpassword,
     description => 'List of the OpenStack Greek User Group',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-travel-committee':
+  mailman_list { 'openstack-travel-committee@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'communitymngr@openstack.org',
     password    => $listpassword,
     description => 'Private discussions for the OpenStack Travel Program Committee for Hong Kong Summit 2013.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-personas':
+  mailman_list { 'openstack-personas@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'pieter.c.kruithof-jr@hp.com',
     password    => $listpassword,
     description => 'A group of designers, researchers, developers, writers and users that are creating a set of personas for OpenStack that are intended to help drive development around the needs of our users.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-vi':
+  mailman_list { 'openstack-vi@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'hang.tran@dtt.vn',
     password    => $listpassword,
     description => 'Discussions in Vietnamese - please add Vietnamese translation here',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-tw':
+  mailman_list { 'openstack-tw@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'macjacktw@hotmail.com',
     password    => $listpassword,
     description => 'OpenStack Taiwan User Group 臺灣使用者郵件群組)',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-ko':
+  mailman_list { 'openstack-ko@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'ianyrchoi@gmail.com',
     password    => $listpassword,
     description => 'OpenStack Korea Community Discussions in Korean (오픈스택 한국 커뮤니티 메일링리스트)',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-ru':
+  mailman_list { 'openstack-ru@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'ilyaalekseyev@acm.org',
     password    => $listpassword,
     description => 'Рассылка для обсуждения OpenStack на русском',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-zh':
+  mailman_list { 'openstack-zh@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'yeluaiesec@gmail.com',
     password    => $listpassword,
     description => 'OpenStack社区中文讨论群组',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'nov-2013-track-chairs':
+  mailman_list { 'nov-2013-track-chairs@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summit April 2013',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-track-chairs':
+  mailman_list { 'openstack-track-chairs@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Coordination of tracks at OpenStack Summits',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'summitsponsors':
+  mailman_list { 'summitsponsors@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Coordination among OpenStack Summit event sponsors',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-sos':
+  mailman_list { 'openstack-sos@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'dms@danplanet.com',
     password    => $listpassword,
     description => 'Coordination of activities for Significant Others at Summits',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'elections-committee':
+  mailman_list { 'elections-committee@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'markmc@redhat.com',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Elections Committee',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'defcore-committee':
+  mailman_list { 'defcore-committee@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'josh@openstack.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Core Definition Committee',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'interop-wg':
+  mailman_list { 'interop-wg@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'chris@openstack.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Foundation Board Interoperability Working Group',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'ambassadors':
+  mailman_list { 'ambassadors@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'tom@openstack.org',
     password    => $listpassword,
     description => 'Private discussions between OpenStack Ambassadors',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-content':
+  mailman_list { 'openstack-content@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'margie@openstack.org',
     password    => $listpassword,
     description => 'Discussions of the OpenStack Content team',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'superuser':
+  mailman_list { 'superuser@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'lauren@openstack.org',
     password    => $listpassword,
     description => 'Discussions for Superuser editorial advisors to collaborate, and for readers to be able to contact the editorial team to make suggestions, provide feedback',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'admin-cert-wg':
+  mailman_list { 'admin-cert-wg@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'heidi@openstack.org',
     password    => $listpassword,
     description => 'Collaboration workspace for members of the Certified OpenStack Administrator Working Group of the User Commitee/Board.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-api-consumers':
+  mailman_list { 'openstack-api-consumers@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'mordred@inaugust.com',
     password    => $listpassword,
     description => 'Discussions around consuming the OpenStack REST APIs and development of API-consuming SDKs and frameworks',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-sigs':
+  mailman_list { 'openstack-sigs@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'thierry@openstack.org',
     password    => $listpassword,
     description => 'OpenStack SIGs discussions, gathering users, operators and developers of OpenStack into common groups.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'enterprise-wg':
+  mailman_list { 'enterprise-wg@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'carol.l.barrett@intel.com',
     password    => $listpassword,
     description => 'Collaboration workspace for members of the Win The Enterprise Working Group of the User Commitee/Board.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'product-wg':
+  mailman_list { 'product-wg@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'stefano@openstack.org',
     password    => $listpassword,
     description => 'Collaboration workspace for OpenStack-related Product Managers working group.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'tax-affairs':
+  mailman_list { 'tax-affairs@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'seanroberts66@gmail.com',
     password    => $listpassword,
     description => 'board committee focused on tax issues.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'third-party-announce':
+  mailman_list { 'third-party-announce@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'anteaya@anteaya.info',
     password    => $listpassword,
     description => 'Announcements for third party CI operators.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'women-of-openstack':
+  mailman_list { 'women-of-openstack@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Women of OpenStack discussion list.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-internships':
+  mailman_list { 'openstack-internships@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'stefano@openstack.org',
     password    => $listpassword,
     description => 'List to coordinate mentors and interns of OpenStack programs.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'foundation-testing-standards':
+  mailman_list { 'foundation-testing-standards@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'seanroberts66@gmail.com',
     password    => $listpassword,
     description => 'OpenStack Foundation test standards (for humans, not
     drivers) working group list.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'analyst-relations':
+  mailman_list { 'analyst-relations@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'lauren@openstack.org',
     password    => $listpassword,
     description => 'Coordination of Analyst Relations Working Group.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'app-catalog-admin':
+  mailman_list { 'app-catalog-admin@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'doc@aedo.net',
     password    => $listpassword,
     description => 'Coordinate admin details for OpenStack Community App Catalog.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'openstack-i18n-fr':
+  mailman_list { 'openstack-i18n-fr@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'jftalta@gmail.com',
     password    => $listpassword,
     description => 'List of the OpenStack Internationalization team, french local group.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'release-job-failures':
+  mailman_list { 'release-job-failures@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'doug@doughellmann.com',
     password    => $listpassword,
     description => 'Notification messages for failures from release-related build jobs.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'embargo-notice':
+  mailman_list { 'embargo-notice@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'jeremy@openstack.org',
     password    => $listpassword,
     description => 'Announcements to stakeholders for embargoed security vulnerabilities.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'release-announce':
+  mailman_list { 'release-announce@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'thierry@openstack.org',
     password    => $listpassword,
     description => 'Announcement of official OpenStack releases.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
-  maillist { 'edge-computing':
+  mailman_list { 'edge-computing@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Organizing efforts around the edge-computing focus area.',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
+
 }
