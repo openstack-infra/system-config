@@ -308,6 +308,8 @@ node 'lists.katacontainers.io' {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^paste\d*\.openstack\.org$/ {
+  $group = "paste"
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
