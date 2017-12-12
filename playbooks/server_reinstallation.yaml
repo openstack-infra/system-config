@@ -1,0 +1,105 @@
+- name: OpenStack Infrastructure server reinstallation
+  hosts: localhost
+  gather_facts: yes
+  vars:
+  tasks:
+    - name: Fail if vars are not provided
+      fail:
+        msg: |
+          Need to provide the extra-vars file ("--extra-vars @file.yaml").
+          Here's some defaults:
+
+          ---
+          cloud: "openstackci-rax"
+          region: "DFW"
+          flavor: "4 GB Performance"
+          fqdn: "over9000.openstack.org"
+          keep: false
+      when: cloud is not defined or
+            region is not defined or
+            flavor is not defined or
+            fqdn is not defined or
+            keep is not defined
+
+    - name: "Validate configuration (CTRL+C to exit)"
+      pause:
+        prompt: "cloud: {{ cloud }} | region: {{ region }} | flavor: {{ flavor }} | fqdn: {{ fqdn }} | keep: {{ keep }}"
+
+    - name: Launch new node
+      shell:
+        executable: /bin/bash
+        chdir: /opt/system-config/production/launch/
+        cmd: |
+          source ~/launch-env/bin/activate
+          ./launch-node.py "{{ fqdn }}" \
+            --flavor "{{ flavor }}" \
+            --cloud="{{ cloud }}" \
+            --region="{{ region }}" {% if keep %}--keep{% endif %}
+      register: launch_node
+
+    - name: Ensure launch_node log directory exists
+      file:
+        path: "{{ ansible_user_dir }}/launch_logs"
+        state: directory
+
+    - name: Log this launch_node run
+      copy:
+        dest: "{{ ansible_user_dir }}/launch_logs/{{ fqdn }}_launch"
+        content: |
+          {{ ansible_date_time['iso8601'] }}
+
+          STDERR:
+          {{ launch_node.stderr }}
+
+          #####
+
+          STDOUT:
+          {{ launch_node.stdout }}
+
+    # TODO: Configure reverse DNS
+    # TODO: Configure forward DNS (delete+create with rackdns?)
+    # TODO: Task that retries a command "dig @127.0.0.1 fqdn until successful"
+    # TODO: logstash and elasticsearchXX iptables-persistent restart
+
+    - name: Remove previous SSH host key
+      become: yes
+      command: ssh-keygen -f /root/.ssh/known_hosts -R {{ fqdn }}
+
+    - when: '"logstash-worker" in fqdn'
+      block:
+        - name: Set up new host key for logstash workers
+          become: yes
+          shell: ssh {{ fqdn }} "tail -n10 /var/log/log*"
+          register: logstash_worker_logs
+
+        - name: "Log the logstash worker logs :)"
+          copy:
+            dest: "{{ ansible_user_dir }}/launch_logs/{{ fqdn }}_workerlogs"
+            content: |
+              {{ ansible_date_time['iso8601'] }}
+
+              STDERR:
+              {{ launch_node.stderr }}
+
+              #####
+
+              STDOUT:
+              {{ launch_node.stdout }}
+
+    # TODO: Use Ansible shade modules for this!
+    - name: Recover the two instances with the same FQDN
+      shell:
+        executable: /bin/bash
+        cmd: |
+          openstack --os-cloud {{ cloud }} --os-region {{ region }} server list | grep {{ fqdn }}
+        register: instances
+
+    - name: Manual steps
+      debug:
+        msg:
+          - "You need to configure the forward and reverse DNS"
+          - "You need to run a task to see if DNS resolution has completed"
+          - "You need to run a task to restart iptables-persistent on logstash and elasticsearch nodes"
+          - "You need to delete one of the two VMs at the end of this message"
+          - "See logs in {{ ansible_user_dir }}/launch_logs"
+          - "{{ instances.stdout }}"
