@@ -463,8 +463,7 @@ cacti_hosts:
 - mirror.bhs1.ovh.openstack.org
 - mirror.gra1.ovh.openstack.org
 - mirror.mtl01.inap.openstack.org
-- mirror.regionone.tripleo-test-cloud-rh1.openstack.org
-- mirror.regionone.tripleo-test-cloud-rh2.openstack.org
+- mirror01.regionone.tripleo-test-cloud-rh1.openstack.org
 - mirror-update.openstack.org
 - review-dev.openstack.org
 - review.openstack.org
