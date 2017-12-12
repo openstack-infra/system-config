@@ -514,6 +514,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
   class { 'openstack_project::server':
