@@ -842,7 +842,10 @@ node /^zk\d+\.openstack\.org$/ {
 
 # A machine to serve various project status updates.
 # Node-OS: trusty
-node 'status.openstack.org' {
+# Node-OS: xenial
+node /^status\d*\.openstack\.org$/ {
+  $group = 'status'
+
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
