@@ -645,7 +645,6 @@ node /^mirror-update\d*\.openstack\.org$/ {
 }
 
 # Machines in each region to serve AFS mirrors.
-# Node-OS: trusty
 # Node-OS: xenial
 node /^mirror\d*\..*\.openstack\.org$/ {
   $group = "mirror"
