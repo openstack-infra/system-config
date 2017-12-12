@@ -672,7 +672,6 @@ node /^design-summit-prep\d*\.openstack\.org$/ {
 }
 
 # Serve static AFS content for docs and other sites.
-# Node-OS: trusty
 # Node-OS: xenial
 node /^files\d*\.openstack\.org$/ {
   $group = "files"

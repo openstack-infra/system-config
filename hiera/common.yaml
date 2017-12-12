@@ -398,7 +398,7 @@ cacti_hosts:
 - ethercalc01.openstack.org
 - etherpad-dev.openstack.org
 - etherpad.openstack.org
-- files01.openstack.org
+- files.openstack.org
 - firehose01.openstack.org
 - git.openstack.org
 - git01.openstack.org
