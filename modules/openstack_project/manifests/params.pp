@@ -19,6 +19,8 @@ class openstack_project::params {
       $packages = concat($cross_platform_packages, ['iputils', 'bind-utils'])
       $user_packages = ['emacs-nox', 'vim-enhanced']
       $login_defs = 'puppet:///modules/openstack_project/login.defs.redhat'
+      $www_user = "apache"
+      $www_group = "apache"
     }
     'Debian': {
       $packages = concat($cross_platform_packages, ['iputils-ping', 'dnsutils'])
@@ -32,6 +34,8 @@ class openstack_project::params {
         }
       }
       $login_defs = 'puppet:///modules/openstack_project/login.defs.debian'
+      $www_user = "www-data"
+      $www_group = "www-data"
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'openstack_project' module only supports osfamily Debian or RedHat (slaves only).")

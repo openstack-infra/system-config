@@ -3,6 +3,7 @@
 class openstack_project::mirror (
   $vhost_name = $::fqdn,
 ) {
+  include ::openstack_project::params
 
   # Some hosts are mirror01, but we need the host to respond to
   # "mirror."  Re-evaluate this if we end up doing multiple
@@ -12,6 +13,27 @@ class openstack_project::mirror (
     $serveraliases = [$alias_name]
   } else {
     $serveraliases = undef
+  }
+
+  case $::osfamily {
+    'RedHat': {
+      $cache_root = '/var/cache/httpd/proxy'
+      $cleanup_requires = File['/var/cache/apache2/proxy']
+    }
+    'Debian': {
+      $cache_root = '/var/cache/apache2/proxy'
+      $cleanup_requires = [
+          File['/var/cache/apache2/proxy'],
+          Package['apache2-utils'],
+      ]
+    }
+    default: {
+      $cache_root = '/var/cache/apache2/proxy'
+      $cleanup_requires = [
+          File['/var/cache/apache2/proxy'],
+          Package['apache2-utils'],
+      ]
+    }
   }
 
   $mirror_root = '/afs/openstack.org/mirror'
@@ -257,9 +279,10 @@ class openstack_project::mirror (
   }
 
   file { '/var/cache/apache2/proxy':
+    path   => $cache_root,
     ensure => directory,
-    owner  => 'www-data',
-    group  => 'www-data',
+    owner  => $::openstack_project::params::www_user,
+    group  => $::openstack_project::params::www_group,
     mode   => '0755',
     require => Class['httpd']
   }
@@ -312,20 +335,19 @@ class openstack_project::mirror (
   }
 
   # Cache cleanup
-  package { 'apache2-utils':
-    ensure => present,
+  if $::osfamily == 'Debian' {
+    package { 'apache2-utils':
+      ensure => present,
+    }
   }
 
   cron { 'apache-cache-cleanup':
     # Clean apache cache once an hour, keep size down to 50GiB.
     minute      => '0',
     hour        => '*',
-    command     => 'flock -n /var/run/htcacheclean.lock htcacheclean -n -p /var/cache/apache2/proxy -t -l 40960M > /dev/null',
+    command     => "flock -n /var/run/htcacheclean.lock htcacheclean -n -p $cache_root -t -l 40960M > /dev/null",
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
-       File['/var/cache/apache2/proxy'],
-       Package['apache2-utils'],
-    ],
+    require     => $cleanup_requires,
   }
 
   class { '::httpd::logrotate':
