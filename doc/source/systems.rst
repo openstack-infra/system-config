@@ -8,6 +8,7 @@ Major Systems
 
    cacti
    certificate_authority
+   dns
    gerrit
    grafana
    grafyaml
