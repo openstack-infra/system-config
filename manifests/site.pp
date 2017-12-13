@@ -7,6 +7,7 @@
 #
 $elasticsearch_nodes = hiera_array('elasticsearch_nodes')
 $elasticsearch_clients = hiera_array('elasticsearch_clients')
+$logstash_gearman_clients = hiera_array('logstash_gearman_clients')
 
 #
 # Default: should at least behave like an openstack server
@@ -468,7 +469,7 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 node /^logstash\d*\.openstack\.org$/ {
   $iptables_es_rule = regsubst($elasticsearch_nodes,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
-  $iptables_gm_rule = regsubst($elasticsearch_clients,
+  $iptables_gm_rule = regsubst($logstash_gearman_clients,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
   $logstash_iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
 
