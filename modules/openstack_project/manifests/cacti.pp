@@ -83,9 +83,21 @@ class openstack_project::cacti (
   cron { 'add cacti hosts':
     ensure  => present,
     user    => root,
-    command => 'for host in $(cat /var/lib/cacti/devices); do /usr/local/bin/create_graphs.sh $host; done',
+    command => 'for host in $(cat /var/lib/cacti/devices); do /usr/local/bin/create_graphs.sh $host >> /var/log/cacti_update.log 2>&1; done',
     minute  => '0',
   }
 
-
+  include logrotate
+  logrotate::file { 'cacti_update.log':
+    log     => '/var/log/cacti_update.log',
+    options => [
+      'compress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+      'copytruncate',
+    ],
+    require => Cron['add cacti hosts'],
+  }
 }
