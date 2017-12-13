@@ -695,6 +695,15 @@ node /^files\d*\.openstack\.org$/ {
     docs_chain_file_contents      => hiera('docs_chain_file_contents'),
     require                       => Class['Openstack_project::Server'],
   }
+
+  openstack_project::website { 'zuul-ci.org':
+    aliases          => ['www.zuul-ci.org'],
+    ssl_cert         => hiera('zuul-ci_org_ssl_cert'),
+    ssl_key          => hiera('zuul-ci_org_ssl_key'),
+    ssl_intermediate => hiera('zuul-ci_org_ssl_intermediate'),
+    require          => Class['openstack_project::files'],
+  }
+
 }
 
 # Node-OS: trusty
