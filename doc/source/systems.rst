@@ -36,7 +36,6 @@ Major Systems
    kerberos
    afs
    askbot
-   apps_site
    translate
    openstack-health
    refstack
