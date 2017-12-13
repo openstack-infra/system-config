@@ -28,6 +28,7 @@ elasticsearch_clients:
 - logstash-worker18.openstack.org
 - logstash-worker19.openstack.org
 - logstash-worker20.openstack.org
+- subunit-worker01.openstack.org
 - subunit-worker02.openstack.org
 - ze01.openstack.org
 - ze02.openstack.org
@@ -471,6 +472,7 @@ cacti_hosts:
 - static.openstack.org
 - status01.openstack.org
 - storyboard.openstack.org
+- subunit-worker01.openstack.org
 - subunit-worker02.openstack.org
 - translate.openstack.org
 - translate-dev.openstack.org
