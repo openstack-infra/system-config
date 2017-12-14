@@ -48,15 +48,21 @@ class openstack_project::cacti (
     require => File['/usr/local/share/cacti/resource/snmp_queries'],
   }
 
+  file { '/var/lib/cacti':
+    ensure  => directory,
+    require => Package['cacti'],
+  }
+
   file { '/var/lib/cacti/linux_host.xml':
     ensure  => present,
     source  => 'puppet:///modules/openstack_project/cacti/linux_host.xml',
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    require => File[
-        '/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml'
-      ],
+    require => [
+      File['/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml'],
+      File['/var/lib/cacti'],
+    ],
   }
 
   file { '/usr/local/bin/create_graphs.sh':
@@ -79,6 +85,7 @@ class openstack_project::cacti (
     mode    => '0744',
     owner   => 'root',
     group   => 'root',
+    require => File['/var/lib/cacti'],
   }
 
   cron { 'add cacti hosts':
