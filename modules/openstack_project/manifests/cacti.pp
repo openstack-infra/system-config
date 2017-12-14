@@ -34,8 +34,9 @@ class openstack_project::cacti (
   }
 
   file { '/usr/local/share/cacti/resource/snmp_queries':
-    ensure => directory,
-    owner  => 'root',
+    ensure  => directory,
+    owner   => 'root',
+    require => Package['cacti'],
   }
 
   file { '/usr/local/share/cacti/resource/snmp_queries/net-snmp_devio.xml':
