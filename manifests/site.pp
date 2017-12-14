@@ -1782,7 +1782,9 @@ node 'odsreg.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'codesearch.openstack.org' {
+# Node-OS: xenial
+node /^codesearch\d*\.openstack\.org$/ {
+  group = "codesearch"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
     sysadmins                 => hiera('sysadmins', []),
