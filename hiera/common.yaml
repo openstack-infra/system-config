@@ -6,28 +6,34 @@ elasticsearch_nodes:
 - elasticsearch05.openstack.org
 - elasticsearch06.openstack.org
 - elasticsearch07.openstack.org
-elasticsearch_clients:
-- logstash.openstack.org
-- logstash-worker01.openstack.org
-- logstash-worker02.openstack.org
-- logstash-worker03.openstack.org
-- logstash-worker04.openstack.org
-- logstash-worker05.openstack.org
-- logstash-worker06.openstack.org
-- logstash-worker07.openstack.org
-- logstash-worker08.openstack.org
-- logstash-worker09.openstack.org
-- logstash-worker10.openstack.org
-- logstash-worker11.openstack.org
-- logstash-worker12.openstack.org
-- logstash-worker13.openstack.org
-- logstash-worker14.openstack.org
-- logstash-worker15.openstack.org
-- logstash-worker16.openstack.org
-- logstash-worker17.openstack.org
-- logstash-worker18.openstack.org
-- logstash-worker19.openstack.org
-- logstash-worker20.openstack.org
+elasticsearch_iptables_rule_data:
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch02.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch03.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch04.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch05.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch06.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'elasticsearch07.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker01.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker02.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker03.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker04.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker05.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker06.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker07.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker08.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker09.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker10.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker11.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker12.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker13.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker14.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker15.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker16.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker17.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker18.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker19.openstack.org'}
+- {protocol: 'tcp', port: '9200:9400', hostname: 'logstash-worker20.openstack.org'}
 logstash_iptables_rule_data:
 - {protocol: 'tcp', port: '4730', hostname: 'logstash-worker01.openstack.org'}
 - {protocol: 'tcp', port: '4730', hostname: 'logstash-worker02.openstack.org'}
