@@ -151,6 +151,7 @@ node 'cacti.openstack.org' {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^cacti\d+\.openstack\.org$/ {
   $group = "cacti"
   include openstack_project::ssl_cert_check
