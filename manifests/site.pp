@@ -468,11 +468,8 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^logstash\d*\.openstack\.org$/ {
-  $iptables_es_rule = regsubst($elasticsearch_nodes,
-  '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
-  $iptables_gm_rule = regsubst($logstash_gearman_clients,
+  $logstash_iptables_rule = regsubst($logstash_gearman_clients,
   '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-  $logstash_iptables_rule = flatten([$iptables_es_rule, $iptables_gm_rule])
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 3306],
@@ -498,14 +495,10 @@ node /^logstash\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^logstash-worker\d+\.openstack\.org$/ {
-  $logstash_worker_iptables_rule = regsubst(flatten([$elasticsearch_nodes, $elasticsearch_clients]),
-  '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 9200:9400 -s \1 -j ACCEPT')
   $group = 'logstash-worker'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
-    iptables_rules6           => $logstash_worker_iptables_rule,
-    iptables_rules4           => $logstash_worker_iptables_rule,
     sysadmins                 => hiera('sysadmins', []),
   }
 
