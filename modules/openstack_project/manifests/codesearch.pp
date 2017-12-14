@@ -19,18 +19,41 @@ class openstack_project::codesearch (
     ensure => 'present',
   }
 
-  exec { 'create-hound-config':
-    command     => 'create-hound-config',
-    path        => '/bin:/usr/bin:/usr/local/bin',
-    environment => "PROJECTS_YAML=${::project_config::jeepyb_project_file}",
-    user        => 'hound',
-    cwd         => '/home/hound',
-    require     => [
-      $::project_config::config_dir,
-      File['/home/hound'],
-    ],
-    notify      => Service['hound'],
-    refreshonly => true,
-    subscribe   => Class['project_config'],
+  file { '/usr/local/bin/resync-hound-config':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/openstack_project/resync-hound-config.sh',
   }
+
+  # Note: we could trigger this from project-config changes, but it
+  # does bring the service down for several minutes if something
+  # changes.  Once a day should be enough.
+  cron { 'hound':
+    user        => root,
+    hour        => '4',
+    command     => 'flock -n /var/run/hound/sync.lock resync-hound-config 2>&1 >> /var/log/hound.sync.log',
+    environment => [
+      'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+      "PROJECTS_YAML=${::project_config::jeepyb_project_file}",
+    ],
+    require     => [
+       File['/usr/local/bin/resync-hound-config'],
+       File['/home/hound/config.json'],
+    ],
+  }
+
+  logrotate::file { 'hound-sync':
+    log => '/var/log/hound.sync.log',
+    options => [
+      'compress',
+      'copytruncate',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+  }
+
 }
