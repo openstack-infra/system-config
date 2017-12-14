@@ -6,6 +6,7 @@ class openstack_project::server (
   $iptables_public_udp_ports = [],
   $iptables_rules4           = [],
   $iptables_rules6           = [],
+  $iptables_allowed_hosts    = [],
   $sysadmins                 = [],
   $pin_puppet                = '3.',
   $ca_server                 = undef,
@@ -222,6 +223,7 @@ class openstack_project::server (
     rules6           => $iptables_rules6,
     snmp_v4hosts     => $snmp_v4hosts,
     snmp_v6hosts     => $snmp_v6hosts,
+    allowed_hosts    => $iptables_allowed_hosts,
   }
 
   # We don't like byobu
