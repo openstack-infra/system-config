@@ -7,7 +7,6 @@
 #
 $elasticsearch_nodes = hiera_array('elasticsearch_nodes')
 $elasticsearch_clients = hiera_array('elasticsearch_clients')
-$logstash_gearman_clients = hiera_array('logstash_gearman_clients')
 
 #
 # Default: should at least behave like an openstack server
@@ -463,13 +462,9 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^logstash\d*\.openstack\.org$/ {
-  $logstash_iptables_rule = regsubst($logstash_gearman_clients,
-  '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 3306],
-    iptables_rules6           => $logstash_iptables_rule,
-    iptables_rules4           => $logstash_iptables_rule,
+    iptables_allowed_hosts    => hiera_array('logstash_iptables_rule_data'),
     sysadmins                 => hiera('sysadmins', []),
   }
 
