@@ -197,41 +197,36 @@ node 'puppetmaster.openstack.org' {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^graphite\d*\.openstack\.org$/ {
-  $statsd_hosts = ['git.openstack.org',
-                   'firehose01.openstack.org',
-                   'logstash.openstack.org',
-                   'nodepool.openstack.org',
-                   'nl01.openstack.org',
-                   'nl02.openstack.org',
-                   'zuul.openstack.org',
-                   'zuulv3.openstack.org',
-                   'zm01.openstack.org',
-                   'zm02.openstack.org',
-                   'zm03.openstack.org',
-                   'zm04.openstack.org',
-                   'zm05.openstack.org',
-                   'zm06.openstack.org',
-                   'zm07.openstack.org',
-                   'zm08.openstack.org',
-                   'ze01.openstack.org',
-                   'ze02.openstack.org',
-                   'ze03.openstack.org',
-                   'ze04.openstack.org',
-                   'ze05.openstack.org',
-                   'ze06.openstack.org',
-                   'ze07.openstack.org',
-                   'ze08.openstack.org',
-                   'ze09.openstack.org',
-                   'ze10.openstack.org',
-                   ]
-
-  # Turn a list of hostnames into a list of iptables rules
-  $rules = regsubst ($statsd_hosts, '^(.*)$', '-m udp -p udp -s \1 --dport 8125 -j ACCEPT')
-
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    iptables_rules6           => $rules,
-    iptables_rules4           => $rules,
+    iptables_allowed_hosts    => [
+      {protocol => 'udp', port => '8125', hostname => 'git.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'firehose01.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'logstash.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'nodepool.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'nl01.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'nl02.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zuul.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zuulv3.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm01.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm02.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm03.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm04.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm05.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm06.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm07.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zm08.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze01.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze02.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze03.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze04.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze05.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze06.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze07.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze08.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze09.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze10.openstack.org'},
+    ],
     sysadmins                 => hiera('sysadmins', [])
   }
 
