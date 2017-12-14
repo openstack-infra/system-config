@@ -17,7 +17,6 @@ class openstack_project::mirror (
   $mirror_root = '/afs/openstack.org/mirror'
   $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
-  $npm_root = "${mirror_root}/npm"
   $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
   $ceph_deb_jewel_root = "${mirror_root}/ceph-deb-jewel"
   $ceph_deb_luminous_root = "${mirror_root}/ceph-deb-luminous"
@@ -140,16 +139,6 @@ class openstack_project::mirror (
   file { "${www_root}/ubuntu":
     ensure  => link,
     target  => "${mirror_root}/ubuntu",
-    owner   => root,
-    group   => root,
-    require => [
-      File["${www_root}"],
-    ]
-  }
-
-  file { "${www_root}/npm":
-    ensure  => link,
-    target  => "${npm_root}",
     owner   => root,
     group   => root,
     require => [

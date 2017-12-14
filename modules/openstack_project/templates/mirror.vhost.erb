@@ -52,15 +52,6 @@ NameVirtualHost <%= @vhost_name %>:8081
     RewriteCond %{DOCUMENT_ROOT}/wheel/$1/$2/$2$3 -d
     RewriteRule ^/wheel/([^/]+)/([^/])([^/]*)(/.*)?$ /wheel/$1/$2/$2$3$4 [L]
 
-    # npm's URL's are:
-    # /npm/-/index.json
-    # /npm/a/aabc/index.json
-    # /npm/a/aabc/latest/index.json
-    # /npm/a/aabc/-/aabc-0.0.0.tgz
-    RewriteCond %{REQUEST_URI} ^/npm/([^/])([^/]*)
-    RewriteCond %{DOCUMENT_ROOT}/npm/$1/$1$2 -d
-    RewriteRule ^/npm/([^/])([^/]*)(/.*)?$ /npm/$1/$1$2$3 [L]
-
     # TODO(jhesketh): Remove this after bandersnatch implements pep503
     # https://bitbucket.org/pypa/bandersnatch/pull-requests/20/fully-implement-pep-503-normalization/diff
 
@@ -80,12 +71,6 @@ NameVirtualHost <%= @vhost_name %>:8081
     RewriteCond %{REQUEST_URI} ^/pypi/simple/([^/])([^/]*)
     RewriteCond %{DOCUMENT_ROOT}/pypi/simple/$1/$1$2 -d
     RewriteRule ^/pypi/simple/([^/])([^/]*)(/.*)?$ /pypi/simple/$1/$1$2$3 [L]
-
-    <DirectoryMatch "<%= @docroot %>\/npm\/[^/]+\/.*">
-      DirectoryIndex index.json
-      AddOutputFilterByType SUBSTITUTE application/json
-      Substitute "s|http://localhost|http://<%= @srvname %>/npm|ni"
-    </DirectoryMatch>
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_error.log
     LogLevel warn
