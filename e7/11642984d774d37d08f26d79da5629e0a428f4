@@ -1,0 +1,9 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Workflow+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 15 Dec 2017 16:09:23 +0000
+Reviewed-on: https://review.openstack.org/528133
+Project: openstack-infra/system-config
+Branch: refs/heads/master
