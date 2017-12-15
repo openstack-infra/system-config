@@ -1625,16 +1625,25 @@ node 'single-node-ci.test.only' {
 
 # Node-OS: trusty
 node 'kdc01.openstack.org' {
-  class { 'openstack_project::kdc':
-    sysadmins => hiera('sysadmins', []),
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [88, 464, 749, 754],
+    iptables_public_udp_ports => [88, 464, 749],
+    sysadmins                 => hiera('sysadmins', []),
   }
+
+  class { 'openstack_project::kdc': }
 }
 
 # Node-OS: trusty
 node 'kdc02.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [88, 464, 749, 754],
+    iptables_public_udp_ports => [88, 464, 749],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
   class { 'openstack_project::kdc':
-    sysadmins => hiera('sysadmins', []),
-    slave     => true,
+    slave => true,
   }
 }
 
