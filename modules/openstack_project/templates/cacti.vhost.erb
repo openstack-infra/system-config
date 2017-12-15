@@ -6,6 +6,7 @@
   ServerName <%= @vhost_name %>
 
   Alias /cacti /usr/share/cacti/site
+  Alias /javascript /usr/share/javascript
 
   RewriteEngine on
   RewriteRule ^/$ /cacti/graph_view.php [R,L]
