@@ -208,17 +208,11 @@ class openstack_project::server (
 
   include snmpd
 
-  # TODO(pabelanger): Clean out old firewall rules
   $snmp_v4hosts = [
-    '104.239.135.208',
-    '104.130.253.206',
-    '172.99.116.215',
+    '172.99.116.215', # cacti02.openstack.org
   ]
-  # TODO(pabelanger): Clean out old firewall rules
   $snmp_v6hosts = [
-    '2001:4800:7819:104:be76:4eff:fe05:1d6a',
-    '2001:4800:7818:103:be76:4eff:fe04:7ed0',
-    '2001:4800:7821:105:be76:4eff:fe04:b9a5',
+    '2001:4800:7821:105:be76:4eff:fe04:b9a5', # cacti02.opentsack.org
   ]
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
