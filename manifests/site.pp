@@ -845,6 +845,24 @@ node /^status\d*\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+node /^ns\d+\.openstack\.org$/ {
+  $group = 'ns'
+
+  class { 'openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+    iptables_public_udp_ports => [53],
+  }
+
+  class { '::nsd':
+    zones => {
+      'master_zones' => {
+        'zones' => ['zuul-ci.org'],
+      },
+    }
+  }
+}
+
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
   $group = 'nodepool'
