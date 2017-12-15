@@ -6,7 +6,6 @@ class openstack_project::mirror_update (
   $reprepro_keytab = '',
   $admin_keytab = '',
   $gem_keytab = '',
-  $npm_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
   $fedora_keytab = '',
@@ -18,13 +17,6 @@ class openstack_project::mirror_update (
   class { 'openstack_project::server':
     sysadmins => $sysadmins,
     afs       => true,
-  }
-
-  $data_directory = '/afs/.openstack.org/mirror/npm'
-  $uri_rewrite    = 'localhost'
-  class { 'openstack_project::npm_mirror':
-    data_directory => $data_directory,
-    uri_rewrite    => $uri_rewrite,
   }
 
   class { 'openstack_project::gem_mirror': }
@@ -53,13 +45,6 @@ class openstack_project::mirror_update (
     require  => Class['openstack_project::gem_mirror'],
   }
 
-  file { '/etc/npm.keytab':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0400',
-    content => $npm_keytab,
-  }
-
   file { '/etc/afsadmin.keytab':
     owner   => 'root',
     group   => 'root',
@@ -81,14 +66,6 @@ class openstack_project::mirror_update (
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/gem-mirror-update.sh',
-  }
-
-  file { '/usr/local/bin/npm-mirror-update':
-    ensure   => present,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0755',
-    content  => template('openstack_project/npm-mirror-update.sh'),
   }
 
   cron { 'bandersnatch':
