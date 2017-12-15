@@ -644,15 +644,6 @@ node /^mirror\d*\..*\.openstack\.org$/ {
   }
 }
 
-# A machine to run ODSREG in preparation for summits.
-# Node-OS: trusty
-# Node-OS: xenial
-node /^design-summit-prep\d*\.openstack\.org$/ {
-  class { 'openstack_project::summit':
-    sysadmins => hiera('sysadmins', []),
-  }
-}
-
 # Serve static AFS content for docs and other sites.
 # Node-OS: trusty
 # Node-OS: xenial
