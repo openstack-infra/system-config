@@ -1627,6 +1627,19 @@ node 'kdc02.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node 'kdc04.openstack.org' {
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [88, 464, 749, 754],
+    iptables_public_udp_ports => [88, 464, 749],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::kdc':
+    slave => true,
+  }
+}
+
 # Node-OS: trusty
 node 'afsdb01.openstack.org' {
   $group = "afsdb"

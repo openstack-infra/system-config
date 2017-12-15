@@ -444,6 +444,7 @@ cacti_hosts:
 - health.openstack.org
 - kdc01.openstack.org
 - kdc02.openstack.org
+- kdc04.openstack.org
 - lists.openstack.org
 - logstash-worker01.openstack.org
 - logstash-worker02.openstack.org
