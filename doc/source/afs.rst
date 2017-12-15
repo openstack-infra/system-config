@@ -497,3 +497,15 @@ Perform maintenance, then restart as above and check the status again::
 
   root@afsdb01:~# bos status afsdb01.dfw.openstack.org -localauth
   Auxiliary status is: file server running.
+
+DNS Entries
+-----------
+
+AFS uses the following DNS entries::
+
+  _afs3-prserver._udp.openstack.org. 300 IN SRV 10 10 7002 afsdb01.openstack.org.
+  _afs3-prserver._udp.openstack.org. 300 IN SRV 10 10 7002 afsdb02.openstack.org.
+  _afs3-vlserver._udp.openstack.org. 300 IN SRV 10 10 7003 afsdb01.openstack.org.
+  _afs3-vlserver._udp.openstack.org. 300 IN SRV 10 10 7003 afsdb02.openstack.org.
+
+Be sure to update them if volume location and PTS servers change.

@@ -119,3 +119,20 @@ You should see::
 Once this is done the standby server is ready and we can take kdc01
 offline. When kdc01 is back online rerun `run-kprop.sh` to ensure
 everything is working again.
+
+DNS Entries
+-----------
+
+Kerberos uses the following DNS entries::
+
+  _kpasswd._udp.openstack.org.         300 IN SRV 0 0 464 kdc01.openstack.org.
+  _kerberos-adm._tcp.openstack.org.    300 IN SRV 0 0 749 kdc01.openstack.org.
+  _kerberos-master._udp.openstack.org. 300 IN SRV 0 0 88 kdc01.openstack.org.
+  _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc02.openstack.org.
+  _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc01.openstack.org.
+  _kerberos.openstack.org.             300 IN TXT "OPENSTACK.ORG"
+
+Be sure to update them if kdc servers change.  We also maintain a
+CNAME for convenience which points to the master kdc::
+
+  kdc.openstack.org. 300 IN CNAME kdc01.openstack.org.
