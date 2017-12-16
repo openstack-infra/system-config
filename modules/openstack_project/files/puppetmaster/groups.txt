@@ -22,3 +22,5 @@ zuul-executor ~ze\d+\.openstack\.org
 grafana ~grafana\d*\.openstack\.org
 status ~status\d*\.openstack\.org
 paste ~paste\d*\.openstack\.org
+adns ~adns\d*\.openstack\.org
+ns ~ns\d*\.openstack\.org
