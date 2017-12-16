@@ -825,6 +825,20 @@ node /^status\d*\.openstack\.org$/ {
   }
 }
 
+# This is a hidden authoritative master nameserver, not publicly
+# accessible.
+# Node-OS: xenial
+node /^adns\d+\.openstack\.org$/ {
+  $group = 'adns'
+
+  class { 'openstack_project::server':
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::master_nameserver': }
+}
+
+# These are publicly accessible authoritative slave nameservers.
 # Node-OS: xenial
 node /^ns\d+\.openstack\.org$/ {
   $group = 'ns'
