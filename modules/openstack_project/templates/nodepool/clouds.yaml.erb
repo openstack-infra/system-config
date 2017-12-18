@@ -10,6 +10,7 @@ clouds:
       - DFW
       - ORD
       - IAD
+    api_timeout: 60
     auth:
       username: '<%= @rackspace_username %>'
       password: '<%= @rackspace_password %>'
@@ -23,12 +24,14 @@ clouds:
     regions:
       - BHS1
       - GRA1
+    api_timeout: 60
     auth:
       username: '<%= @ovh_username %>'
       password: '<%= @ovh_password %>'
       project_name: '<%= @ovh_project %>'
   tripleo-test-cloud-rh1:
     region_name: regionOne
+    api_timeout: 60
     auth:
       auth_url: https://ci-overcloud.rh1.tripleo.org:13000
       username: '<%= @tripleo_username %>'
@@ -40,6 +43,7 @@ clouds:
     identity_api_version: '3'
   tripleo-test-cloud-rh2:
     region_name: regionOne
+    api_timeout: 60
     auth:
       username: '<%= @tripleo_username %>'
       password: '<%= @tripleo_password %>'
@@ -48,6 +52,7 @@ clouds:
     floating_ip_source: neutron
   inap:
     profile: internap
+    api_timeout: 60
     auth:
       username: '<%= @internap_username %>'
       password: '<%= @internap_password %>'
@@ -61,11 +66,13 @@ clouds:
   vexxhost:
     region_name: ca-ymq-1
     profile: vexxhost
+    api_timeout: 60
     auth:
       username: '<%= @vexxhost_username %>'
       password: '<%= @vexxhost_password %>'
       project_name: '<%= @vexxhost_project %>'
   infracloud-vanilla:
+    api_timeout: 60
     auth:
       auth_url: https://controller00.vanilla.ic.openstack.org:5000
       username: '<%= @infracloud_vanilla_username %>'
@@ -77,6 +84,7 @@ clouds:
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem
   infracloud-chocolate:
+    api_timeout: 60
     auth:
       auth_url: https://controller00.chocolate.ic.openstack.org:5000
       username: '<%= @infracloud_chocolate_username %>'
@@ -94,6 +102,7 @@ clouds:
       - La1
       - Sto2
     profile: citycloud
+    api_timeout: 60
     auth:
       username: '<%= @citycloud_username %>'
       password: '<%= @citycloud_password %>'
