@@ -853,13 +853,25 @@ node /^ns\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_udp_ports => [53],
+    iptables_public_tcp_ports => [53],
   }
 
   class { '::nsd':
+    ip_addresses => [ $::ipaddress, $::ipaddress6 ],
     zones => {
-      'master_zones' => {
-        'zones' => ['zuul-ci.org'],
-      },
+      'adns1_zones' => {
+        allow_notify => dns_a('adns1.openstack.org'),
+        masters => dns_a('adns1.openstack.org'),
+        zones => ['zuul-ci.org'],
+        tsig_name => 'tsig',
+      }
+    }
+  }
+  $tsig_key = hiera('tsig_key', {})
+  if $tsig_key != {} {
+    nsd::tsig { 'tsig':
+      algo => $tsig_key[algorithm],
+      data => $tsig_key[secret],
     }
   }
 }
