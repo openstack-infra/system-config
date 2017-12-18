@@ -33,7 +33,8 @@ class openstack_project::codesearch (
   cron { 'hound':
     user        => root,
     hour        => '4',
-    command     => 'flock -n /var/run/hound/sync.lock resync-hound-config 2>&1 >> /var/log/hound.sync.log',
+    minute      => '0',
+    command     => 'flock -n /var/run/hound.sync.lock resync-hound-config 2>&1 >> /var/log/hound.sync.log',
     environment => [
       'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
       "PROJECTS_YAML=${::project_config::jeepyb_project_file}",
