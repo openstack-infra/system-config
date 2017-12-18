@@ -194,6 +194,7 @@ class openstack_project::server (
       kdcs         => [
         'kdc01.openstack.org',
         'kdc02.openstack.org',
+        'kdc04.openstack.org',
       ],
     }
     $all_udp = concat(
