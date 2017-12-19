@@ -352,6 +352,29 @@ class openstack_project::puppetmaster (
     source => 'puppet:///modules/openstack_project/puppetmaster/expand-groups.sh',
     notify => Exec['expand_groups'],
   }
+
+  cron { 'expandgroups':
+    user        => 'root',
+    minute      => 0,
+    hour        => 4,
+    command     => '/usr/local/bin/expand-groups.sh >> /var/log/expand_groups.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
+  logrotate::file { 'expandgroups':
+    ensure  => present,
+    log     => '/var/log/expand_groups.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['expandgroups'],
+  }
+
   # Temporarily pin paho-mqtt to 1.2.3 since 1.3.0 won't support TLS on
   # Trusty's Python 2.7.
   if $enable_mqtt {
