@@ -42,6 +42,7 @@ class openstack_project::eavesdrop (
     server       => 'chat.freenode.net:7000',
     use_ssl      => 'True',
     vhost_extra  => $vhost_extra,
+    vhost_name   => 'eavesdrop.openstack.org',
     manage_index => false,
     channels     => $meetbot_channels,
   }
