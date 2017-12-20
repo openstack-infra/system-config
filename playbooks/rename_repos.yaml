@@ -52,10 +52,3 @@
     with_items: "{{ gerrit_groups|default([]) }}"
 # TODO: online reindex accounts
 # TODO: online reindex projects
-- hosts: '*.ci.openstack.org:*.slave.openstack.org'
-  remote_user: root
-  gather_facts: False
-  tasks:
-  - include_vars: "{{ repolist }}"
-  - shell: 'rm -rf ~jenkins/workspace/*{{ item.old | basename }}*'
-    with_items: "{{ repos }}"
