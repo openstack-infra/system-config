@@ -230,6 +230,15 @@ class openstack_project::server (
     ensure => absent,
   }
 
+  # Setup RFC3339 bash history timestamps
+  file { '/etc/profile.d/bash-history.sh':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      source  => 'puppet:///modules/openstack_project/bash-history.sh',
+  }
+
   if $::osfamily == 'Debian' {
     # Ubuntu installs their whoopsie package by default, but it eats through
     # memory and we don't need it on servers
