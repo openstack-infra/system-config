@@ -21,20 +21,6 @@ clouds:
       user_domain_name: default
     identity_api_version: '3'
     cacert: /etc/openstack/infracloud_chocolate_cacert.pem
-  infra-files-ro:
-    profile: rackspace
-    auth:
-      username: <%= @puppetmaster_clouds['infra_files_ro_username'] %>
-      password: <%= @puppetmaster_clouds['infra_files_ro_password'] %>
-      project_name: <%= @puppetmaster_clouds['infra_files_ro_project_name'] %>
-    region_name: DFW
-  infra-files-rw:
-    profile: rackspace
-    auth:
-      username: <%= @puppetmaster_clouds['infra_files_rw_username'] %>
-      password: <%= @puppetmaster_clouds['infra_files_rw_password'] %>
-      project_name: <%= @puppetmaster_clouds['infra_files_rw_project_name'] %>
-    region_name: DFW
   openstackci-infracloud-vanilla:
     region_name: RegionOne
     auth:
