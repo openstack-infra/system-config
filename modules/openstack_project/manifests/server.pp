@@ -226,7 +226,10 @@ class openstack_project::server (
   }
 
   # We don't like byobu
-  file { '/etc/profile.d/Z98-byobu.sh':
+  file { [
+    '/etc/profile.d/Z97-byobu.sh',
+    '/etc/profile.d/Z98-byobu.sh'
+  ]:
     ensure => absent,
   }
 
