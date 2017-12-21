@@ -1431,6 +1431,7 @@ node 'zuulv3.openstack.org' {
   }
 
   class { '::zuul::web': }
+  class { '::zuul::fingergw': }
 
   include bup
   bup::site { 'rax.ord':
