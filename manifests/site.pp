@@ -268,6 +268,25 @@ node /^groups-dev\d*\.openstack\.org$/ {
 node /^lists\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
+    extra_aliases => {
+      'community-owner' => 'spam',
+      'foundation-owner' => 'spam',
+      'legal-discuss-owner' => 'spam',
+      'mailman-owner' => 'spam',
+      'marketing-owner' => 'spam',
+      'openstack-announce-owner' => 'spam',
+      'openstack-dev-owner' => 'spam',
+      'openstack-docs-owner' => 'spam',
+      'openstack-i18n-owner' => 'spam',
+      'openstack-operators-owner' => 'spam',
+      'openstack-owner' => 'spam',
+      'openstack-security-owner' => 'spam',
+      'openstack-tc-owner' => 'spam',
+      'openstack-vi-owner' => 'spam',
+      'user-committee-owner' => 'spam',
+      'women-of-openstack-owner' => 'spam',
+      'spam' => ':fail: delivery temporarily disabled due to ongoing spam flood',
+    },
     manage_exim => false,
     purge_apt_sources => false,
   }
