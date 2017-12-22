@@ -24,6 +24,7 @@ node 'review.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
     sysadmins                 => hiera('sysadmins', []),
+    extra_aliases             => { 'gerrit2' => 'root' },
   }
 
   class { 'openstack_project::review':
@@ -65,6 +66,7 @@ node 'review-dev.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 29418],
     sysadmins                 => hiera('sysadmins', []),
+    extra_aliases             => { 'gerrit2' => 'root' },
     afs                       => true,
   }
 
