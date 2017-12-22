@@ -8,6 +8,7 @@ class openstack_project::server (
   $iptables_rules6           = [],
   $iptables_allowed_hosts    = [],
   $sysadmins                 = [],
+  $extra_aliases             = {},
   $pin_puppet                = '3.',
   $ca_server                 = undef,
   $enable_unbound            = true,
@@ -181,7 +182,8 @@ class openstack_project::server (
 
   if $manage_exim {
     class { 'exim':
-      sysadmins => $sysadmins,
+      sysadmins     => $sysadmins,
+      extra_aliases => extra_aliases,
     }
   }
 
