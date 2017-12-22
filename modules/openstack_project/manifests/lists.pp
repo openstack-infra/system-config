@@ -13,6 +13,25 @@ class openstack_project::lists(
     mailman_domains          => [$listdomain],
     smtp_accept_max          => '100',
     smtp_accept_max_per_host => '10',
+    extra_aliases => {
+      'community-owner' => 'spam',
+      'foundation-owner' => 'spam',
+      'legal-discuss-owner' => 'spam',
+      'mailman-owner' => 'spam',
+      'marketing-owner' => 'spam',
+      'openstack-announce-owner' => 'spam',
+      'openstack-dev-owner' => 'spam',
+      'openstack-docs-owner' => 'spam',
+      'openstack-i18n-owner' => 'spam',
+      'openstack-operators-owner' => 'spam',
+      'openstack-owner' => 'spam',
+      'openstack-security-owner' => 'spam',
+      'openstack-tc-owner' => 'spam',
+      'openstack-vi-owner' => 'spam',
+      'user-committee-owner' => 'spam',
+      'women-of-openstack-owner' => 'spam',
+      'spam' => ':fail: delivery temporarily disabled due to ongoing spam flood',
+    },
   }
 
   class { 'mailman':
