@@ -836,14 +836,13 @@ node /^adns\d+\.openstack\.org$/ {
     iptables_allowed_hosts    => [
       {protocol => 'tcp', port => '53', hostname => 'ns1.openstack.org'},
       {protocol => 'tcp', port => '53', hostname => 'ns2.openstack.org'},
-      {protocol => 'tcp', port => '53', hostname => 'ns3.openstack.org'},
     ],
   }
 
   class { 'openstack_project::master_nameserver':
     tsig_key => hiera('tsig_key', {}),
     dnssec_keys => hiera_hash('dnssec_keys', {}),
-    notifies => concat(dns_a('ns1.openstack.org'), dns_a('ns2.openstack.org'), dns_a('ns3.openstack.org')),
+    notifies => concat(dns_a('ns1.openstack.org'), dns_a('ns2.openstack.org')),
   }
 }
 
