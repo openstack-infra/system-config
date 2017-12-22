@@ -73,7 +73,7 @@ class openstack_project::lists(
     transports                  => [
       {'mailman_transport' => {
         'driver'      => 'pipe',
-        'environment' => 'MAILMAN_INSTALL_DIR=${lookup{${lc:$domain}}lsearch{/etc/mailman/sites}}',
+        'environment' => 'MAILMAN_SITE_DIR=${lookup{${lc:$domain}}lsearch{/etc/mailman/sites}}',
         'command'     => '/var/lib/mailman/mail/mailman \
                           \'${if def:local_part_suffix \
                                  {${sg{$local_part_suffix}{-(\\w+)(\\+.*)?}{\$1}}} \
