@@ -33,6 +33,7 @@ class openstack_project::lists(
       'openstack-security-owner' => 'spam',
       'openstack-tc-owner' => 'spam',
       'openstack-vi-owner' => 'spam',
+      'superuser-owner' => 'spam',
       'user-committee-owner' => 'spam',
       'women-of-openstack-owner' => 'spam',
       'spam' => ':fail: delivery temporarily disabled due to ongoing spam flood',
