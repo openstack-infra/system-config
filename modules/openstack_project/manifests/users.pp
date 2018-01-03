@@ -266,4 +266,12 @@ class openstack_project::users {
     gid      => 2029,
   }
 
+  @user::virtual::localuser { 'eumel8':
+    realname => 'Frank Kloeker',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAABIwAAAQEAv+XM4O3w/R8Pok1Kfm2RESduUmvSNils5KOXzWWb9kNitndxj1jWPWaMi1did+kEuClzKaiR1cHi6K3KeJd2LuEkqo0Ky4w7AbItTUFS8T0IWOODe9aQBMO4Y2ALNwtj5MObN0oJ/NaV8x2Kz2gc1MVCj8hgMiG19hqi1mz1ZDhA02kOYfME8AeW3YvwWijyjOvQF3lz0TVGhAqe/0UrJk5+HCYyHIUjRJqDM8XK1diC3IFdXgn/95YrVYmOLKEOWW6ZvYi6/gE2mHTvToBHuHUvMVqROwdUB+l7k5rpXjN9Wm/l16K0iyMdt/Emd43qz9gx1NRnOJdq4dMCik3k6w',
+    key_id   => 'eumel@arcor.de',
+    uid      => 2031,
+    gid      => 2031,
+  }
+
 }
