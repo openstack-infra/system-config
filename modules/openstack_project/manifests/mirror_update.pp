@@ -266,6 +266,40 @@ class openstack_project::mirror_update (
     key_source => 'puppet:///modules/openstack_project/reprepro/docker-mirror-gpg-key.asc',
   }
 
+  ## Puppetlabs APT mirror
+  ::openstack_project::reprepro { 'ubuntu-puppetlabs-reprepro-mirror':
+    confdir       => '/etc/reprepro/ubuntu-puppetlabs',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu-puppetlabs',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu-puppetlabs.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/xenial-pc1',
+    releases      => ['xenial'],
+  }
+
+  cron { 'reprepro debian docker':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/ubuntu-puppetlabs.lock reprepro-mirror-update /etc/reprepro/ubuntu-puppetlabs mirror.ubuntu-puppetlabs >>/var/log/reprepro/ubuntu-puppetlabs-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['ubuntu-puppeltabs-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Puppetlabs Archive':
+    ensure     => present,
+    # pub  4096R/0EBFCD88 2017-02-22 Docker Release (CE deb) <docker@docker.com>
+    # fingerprint: 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88
+    # Note the key that signs the release file is actually the subkey F273FCD8
+    key_id     => 'EF8D349F',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/puppetlabs-mirror-gpg-key.asc',
+  }
+
   ### CentOS mirror ###
   file { '/etc/centos.keytab':
     owner   => 'root',
