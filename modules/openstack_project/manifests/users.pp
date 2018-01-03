@@ -235,8 +235,11 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'shrews':
     realname => 'David Shrewsbury',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCdzEzB2KpNLTTFJGLCNMY53sja37PXFzHHdjWEGaZtaTcuCn/ufV9ql5yhS5/414u9swoHM71H00+nT4uSWcXc2tTRXYWslaiwU47DOtQsD//CvGgIFBNO1EinWhYa5uTSfxI+Z/x4PBu7XFq5wi/JCfJ+iHIWsvXn8U44r1csURcZU0GMPAVG1MO+s3p1W7daVqF9RR7UuwCECb3hdPN1N/M4s6myBiuRXCeDND98dKLf8b342hw+pWvQ3g/OCLcVlYPWT4fy1YGQT8hT+jA2XPfwCtu/k7HKAGH3E8UcnBtY/RI9ibciIFe+Ro7q8t+tp5SgjGLq1NnE4Yp5rpsh',
-    key_id   => 'david@koala',
+    sshkeys  => 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtNtbgLw0dyRVnuwZz4oUcWTzEUtpO2V47t4ykijdH1hkEe7qkuusM5bD8pC4L3wDZP5U3lsIAvZ97LCQp+MNJz1j8cjXuAboqP5FC3TtCJR1WtCWmOBSO7sIvcsgwse/9KZN/TETOGA9no1oKS43Adi9bXrRFAKDAAM34IVt/UHNS51vxUhuGv+56yJmaki7CjxrGtXcB4hi+TCQAfKJPzhAMwcFQUyvXJkRei6NN6uYyHnVtLR3KXEkeTesZ2GQxmQ+1jmCMN1zUN2VLypmDqAvlKtuQW+3nY89q4HDwzCpuC1rscJgOuncdMahTMoKA3/dQtT4WuJIwLQa3tEEn'
+    key_id   => 'shrews2018',
+    old_keys => [
+      'david@koala',
+      ],
     uid      => 2026,
     gid      => 2026,
   }
