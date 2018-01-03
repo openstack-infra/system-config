@@ -212,6 +212,17 @@ class openstack_project::mirror (
     ]
   }
 
+  # Create the symlink to Ubuntu Puppetlabs.
+  file { "${www_root}/apt-puppetlabs":
+    ensure  => link,
+    target  => "${mirror_root}/apt-puppetlabs",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
   # TODO(pabelanger): We can remove this after puppet runs a few times.
   file { "${www_root}/mariadb":
     ensure  => absent,

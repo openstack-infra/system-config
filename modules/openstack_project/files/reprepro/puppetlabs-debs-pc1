@@ -1,0 +1,7 @@
+Name: puppetlabs-debs-pc1
+Method: https://apt.puppetlabs.com/
+Components: PC1
+UDebComponents:
+Architectures: amd64
+GetInRelease: no
+VerifyRelease: EF8D349F
