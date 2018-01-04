@@ -69,6 +69,19 @@ clouds:
           networks:
             - name: inap-17304-WAN1101
               routes_externally: True
+  openstackci-ovh:
+    regions:
+      - GRA1
+      - SBG1
+      - BHS1
+    profile: ovh
+    # OVH has a weird new ipv6 setup that we can't handle properly
+    # for now ignore ipv6
+    force_ipv4: true
+    auth:
+      username: <%= @puppetmaster_clouds['openstackci_ovh_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_ovh_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_ovh_project_name'] %>
   openstackci-rax:
     regions:
       - DFW
@@ -113,6 +126,19 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackjenkins_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackjenkins_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackjenkins_rax_project_id'] %>
+  openstackjenkins-ovh:
+    regions:
+      - GRA1
+      - SBG1
+      - BHS1
+    profile: ovh
+    # OVH has a weird new ipv6 setup that we can't handle properly
+    # for now ignore ipv6
+    force_ipv4: true
+    auth:
+      username: <%= @puppetmaster_clouds['openstackjenkins_ovh_username'] %>
+      password: <%= @puppetmaster_clouds['openstackjenkins_ovh_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackjenkins_ovh_project_name'] %>
   openstack-rax:
     regions:
       - DFW
