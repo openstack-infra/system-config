@@ -143,6 +143,13 @@ class openstack_project::server (
       enable => true,
       require => Package['ntpdate'],
     }
+    package { 'yum-crontab':
+      ensure => present,
+    }
+    service { 'yum-crontab':
+      enable  => true,
+      require => Package['yum-crontab'],
+    }
   }
 
   ###########################################################
