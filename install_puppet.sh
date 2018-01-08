@@ -166,15 +166,6 @@ function setup_puppet_rhel7 {
     sed -i '/templatedir/d' /etc/puppet/puppet.conf
     # Wipe out server, as we don't have one.
     sed -i '/server/d' /etc/puppet/puppet.conf
-
-    # install CentOS OpenStack repos as well (rebuilds of RDO
-    # packages).  We don't use openstack project rpm files, but covers
-    # a few things like qemu-kvm-ev (the forward port of qemu with
-    # later features) that aren't available in base.  We need this
-    # early for things like openvswitch (XXX: should be installed via
-    # dib before this?)
-    yum install -y centos-release-openstack-ocata
-
 }
 
 function setup_puppet_ubuntu {
