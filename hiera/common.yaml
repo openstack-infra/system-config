@@ -95,6 +95,7 @@ statusbot_channels:
 - openstack-diversity
 - openstack-dns
 - openstack-doc
+- openstack-dragonflow
 - openstack-entropy
 - openstack-foundation
 - openstack-fwaas
