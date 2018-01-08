@@ -27,6 +27,7 @@ class openstack_project::lists(
       'openstack-announce-owner' => 'spam',
       'openstack-dev-owner' => 'spam',
       'openstack-docs-owner' => 'spam',
+      'openstack-fr-owner' => 'spam',
       'openstack-i18n-owner' => 'spam',
       'openstack-infra-owner' => 'spam',
       'openstack-operators-owner' => 'spam',
