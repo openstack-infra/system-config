@@ -23,10 +23,11 @@ At a Glance
   * ze*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
-  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/zuul.pp
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/zuul_merger.pp
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/zuul_scheduler.pp
 :Configuration:
   * :config:`zuul/main.yaml`
-  * :config:`zuul.yaml`
+  * :config:`zuul.d`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/zuul/tree/?h=feature/zuulv3
 :Bugs:
