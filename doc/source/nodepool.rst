@@ -83,7 +83,7 @@ shortest age.
 Nodepool aggressively attempts to build and upload missing images, so
 if the problem with the image will not be solved with an immediate
 rebuild, image builds must first be disabled for that image.  To do
-so, add ``paused: True`` to the ``diskimage`` section for
+so, add ``pause: True`` to the ``diskimage`` section for
 ``ubuntu-precise`` in nodepool.yaml.
 
 Then delete the problematic image with::
