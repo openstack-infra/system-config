@@ -143,7 +143,7 @@ class openstack_project::server (
       enable => true,
       require => Package['ntpdate'],
     }
-    package { 'yum-crontab':
+    package { 'yum-cron':
       ensure => present,
     }
     file { '/etc/yum/yum-cron.conf':
@@ -153,12 +153,12 @@ class openstack_project::server (
       mode    => 0644,
       source  => 'puppet:///modules/openstack_project/yum/yum-cron.conf',
       replace => true,
-      require => Package['yum-crontab'],
-      notify  => Service['yum-crontab'],
+      require => Package['yum-cron'],
+      notify  => Service['yum-cron'],
     }
-    service { 'yum-crontab':
+    service { 'yum-cron':
       enable  => true,
-      require => Package['yum-crontab'],
+      require => Package['yum-cron'],
     }
   }
 
