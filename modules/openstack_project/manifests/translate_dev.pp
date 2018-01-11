@@ -55,8 +55,8 @@ class openstack_project::translate_dev(
     zanata_admin_users          => $admin_users,
     zanata_default_from_address => $from_address,
     zanata_main_version         => 4,
-    zanata_url                  => 'https://github.com/zanata/zanata-platform/releases/download/platform-4.3.1/zanata-4.3.1-wildfly.zip',
-    zanata_checksum             => 'f7c629e302c835d61789e26b2d382805f4e685c2',
+    zanata_url                  => 'https://github.com/zanata/zanata-platform/releases/download/platform-4.3.3/zanata-4.3.3-wildfly.zip',
+    zanata_checksum             => 'eaf8bd07401dade758b677007d2358f173193d17',
     zanata_wildfly_version      => '10.1.0',
     zanata_wildfly_install_url  => 'https://repo1.maven.org/maven2/org/wildfly/wildfly-dist/10.1.0.Final/wildfly-dist-10.1.0.Final.tar.gz',
     require                     => [
