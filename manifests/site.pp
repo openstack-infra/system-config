@@ -1233,7 +1233,7 @@ node /^ze\d+\.openstack\.org$/ {
   $revision                = 'feature/zuulv3'
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [79],
+    iptables_public_tcp_ports => [7900],
     sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
   }
