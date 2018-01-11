@@ -100,6 +100,11 @@ host keys as the zuul user. e.g.::
   sudo su - zuul
   ssh -p 29418 review.openstack.org
 
+To debug Zuul's gearman server, SSL is required.  Use the following
+command::
+
+  openssl s_client -connect localhost:4730 -cert /etc/zuul/ssl/client.pem  -key /etc/zuul/ssl/client.key
+
 Restarts
 --------
 
