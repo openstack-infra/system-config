@@ -121,6 +121,11 @@ class openstack_project::lists(
     default_url_host   => 'lists.openstack.org',
   }
 
+  mailman::site { 'zuul':
+    default_email_host => 'lists.zuul-ci.org',
+    default_url_host   => 'lists.zuul-ci.org',
+  }
+
   # Add new mailing lists below this line
 
   mailman_list { 'mailman@openstack':
@@ -466,6 +471,30 @@ class openstack_project::lists(
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Organizing efforts around the edge-computing focus area.',
+  }
+
+  mailman_list { 'mailman@zuul':
+    require     => Mailman::Site['zuul'],
+    ensure      => present,
+    admin       => 'nobody@openstack.org',
+    password    => $listpassword,
+    description => 'The mailman site list',
+  }
+
+  mailman_list { 'zuul-announce@zuul':
+    require     => Mailman::Site['zuul'],
+    ensure      => present,
+    admin       => 'corvus@inaugust.com',
+    password    => $listpassword,
+    description => 'Announcements of Zuul releases and other important information.',
+  }
+
+  mailman_list { 'zuul-discuss@zuul':
+    require     => Mailman::Site['zuul'],
+    ensure      => present,
+    admin       => 'corvus@inaugust.com',
+    password    => $listpassword,
+    description => 'Discussion of Zuul usage and development.',
   }
 
 }
