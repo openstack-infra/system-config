@@ -144,6 +144,7 @@ statusbot_channels:
 - openstack-valence
 - openstack-valet
 - openstack-vitrage
+- openstack-vpnaas
 - openstack-zaqar
 - openstack-zun
 - puppet-openstack
@@ -248,6 +249,7 @@ meetbot_channels:
 - '#openstack-valence'
 - '#openstack-valet'
 - '#openstack-vitrage'
+- '#openstack-vpnaas'
 - '#openstack-watcher'
 - '#openstack-women'
 - '#openstack-zaqar'
