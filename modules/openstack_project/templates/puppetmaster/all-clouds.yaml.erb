@@ -1,15 +1,4 @@
 clouds:
-  admin-infracloud-vanilla:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['admin_infracloud_vanilla_username'] %>
-      password: <%= @puppetmaster_clouds['admin_infracloud_vanilla_password'] %>
-      project_name: <%= @puppetmaster_clouds['admin_infracloud_vanilla_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    cacert: /etc/openstack/infracloud_vanilla_cacert.pem
   admin-infracloud-chocolate:
     region_name: RegionOne
     auth:
@@ -21,18 +10,6 @@ clouds:
       user_domain_name: default
     identity_api_version: '3'
     cacert: /etc/openstack/infracloud_chocolate_cacert.pem
-  openstackci-infracloud-vanilla:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_vanilla_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    floating_ip_source: None
-    cacert: /etc/openstack/infracloud_vanilla_cacert.pem
   openstackci-infracloud-chocolate:
     region_name: RegionOne
     auth:
@@ -92,18 +69,6 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
-  openstackzuul-infracloud-vanilla:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.vanilla.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_username'] %>
-      password: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackzuul_infracloud_vanilla_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    floating_ip_source: None
-    cacert: /etc/openstack/infracloud_vanilla_cacert.pem
   openstackzuul-infracloud-chocolate:
     region_name: RegionOne
     auth:
