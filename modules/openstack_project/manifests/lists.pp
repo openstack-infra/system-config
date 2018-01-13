@@ -5,7 +5,7 @@ class openstack_project::lists(
   $listpassword = ''
 ) {
 
-  $mm_domains='lists.openstack.org'
+  $mm_domains='lists.openstack.org:lists.zuul-ci.org'
 
   class { 'mailman':
     multihost => true,
@@ -48,7 +48,7 @@ class openstack_project::lists(
          'condition' => '${if or{{eq{$sender_host_address}{127.0.0.1}}\
                           {eq{$sender_host_address}{::1}}}{yes}{no}}',
          # we do not do this for traffic going to the local machine
-         'domains' => '!+local_domains:!+mm_domains',
+         'domains' => '!+local_domains',
          'ignore_target_hosts' => '<; 0.0.0.0; \
                                     64.94.110.11; \
                                     127.0.0.0/8; \
