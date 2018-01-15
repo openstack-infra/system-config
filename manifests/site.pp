@@ -1443,33 +1443,102 @@ node 'zuulv3.openstack.org' {
 
 }
 
-# Node-OS: trusty
-node 'zuul.openstack.org' {
+# Node-OS: xenial
+node /^zuul\d+\.openstack\.org$/ {
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $zuul_url             = "http://zuul.openstack.org/p"
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'feature/zuulv3'
+
   $gearman_workers = [
-    'nodepool.openstack.org',
+    'ze01.openstack.org',
+    'ze02.openstack.org',
+    'ze03.openstack.org',
+    'ze04.openstack.org',
+    'ze05.openstack.org',
+    'ze06.openstack.org',
+    'ze07.openstack.org',
+    'ze08.openstack.org',
+    'ze09.openstack.org',
+    'ze10.openstack.org',
+    'zm01.openstack.org',
+    'zm02.openstack.org',
+    'zm03.openstack.org',
+    'zm04.openstack.org',
+    'zm05.openstack.org',
+    'zm06.openstack.org',
+    'zm07.openstack.org',
+    'zm08.openstack.org',
   ]
   $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
+    iptables_public_tcp_ports => [79, 80, 443],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
     sysadmins                 => hiera('sysadmins', []),
   }
 
-  class { 'openstack_project::zuul_prod':
-    project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server                  => 'review.openstack.org',
-    gerrit_user                    => 'jenkins',
-    gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents'),
-    url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    proxy_ssl_cert_file_contents   => hiera('zuul_ssl_cert_file_contents'),
-    proxy_ssl_key_file_contents    => hiera('zuul_ssl_key_file_contents'),
-    proxy_ssl_chain_file_contents  => hiera('zuul_ssl_chain_file_contents'),
-    zuul_url                       => 'http://zuul.openstack.org/p',
-    statsd_host                    => 'graphite.openstack.org',
+  class { '::project_config':
+    url => 'https://git.openstack.org/openstack-infra/project-config',
   }
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gerrit_server                => $gerrit_server,
+    gerrit_user                  => $gerrit_user,
+    zuul_ssh_private_key         => $zuul_ssh_private_key,
+    git_email                    => $git_email,
+    git_name                     => $git_name,
+    revision                     => $revision,
+    python_version               => 3,
+    zookeeper_hosts              => 'nodepool.openstack.org:2181',
+    zookeeper_session_timeout    => 40,
+    zuulv3                       => true,
+    connections                  => hiera('zuul_connections', []),
+    connection_secrets           => hiera('zuul_connection_secrets', []),
+    zuul_status_url              => 'http://127.0.0.1:8001/openstack',
+    zuul_web_url                 => 'http://127.0.0.1:9000/openstack',
+    gearman_client_ssl_cert      => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key       => hiera('gearman_client_ssl_key'),
+    gearman_server_ssl_cert      => hiera('gearman_server_ssl_cert'),
+    gearman_server_ssl_key       => hiera('gearman_server_ssl_key'),
+    gearman_ssl_ca               => hiera('gearman_ssl_ca'),
+    proxy_ssl_cert_file_contents => hiera('zuul_ssl_cert_file_contents'),
+    proxy_ssl_key_file_contents  => hiera('zuul_ssl_key_file_contents'),
+    statsd_host                  => 'graphite.openstack.org',
+  }
+
+  file { "/etc/zuul/github.key":
+    ensure  => present,
+    owner   => 'zuul',
+    group   => 'zuul',
+    mode    => '0600',
+    content => hiera('zuul_github_app_key'),
+    require => File['/etc/zuul'],
+  }
+
+  class { '::zuul::scheduler':
+    layout_dir     => $::project_config::zuul_layout_dir,
+    require        => $::project_config::config_dir,
+    python_version => 3,
+    use_mysql      => true,
+  }
+
+  class { '::zuul::web': }
+  class { '::zuul::fingergw': }
+
+  include bup
+  bup::site { 'rax.ord':
+    backup_user   => 'bup-zuulv3',
+    backup_server => 'backup01.ord.rax.ci.openstack.org',
+  }
+
 }
 
 # Node-OS: xenial

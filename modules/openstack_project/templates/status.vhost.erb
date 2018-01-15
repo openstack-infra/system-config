@@ -76,7 +76,7 @@ NameVirtualHost <%= @vhost_name %>:<%= @port %>
       </IfVersion>
   </Directory>
 
-  RedirectMatch temp ^/zuul(.*) http://zuulv3.openstack.org/
+  RedirectMatch temp ^/zuul(.*) http://zuul.openstack.org/
 
   ErrorLog /var/log/apache2/<%= @name %>_error.log
   LogLevel warn

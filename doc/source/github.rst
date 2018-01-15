@@ -17,7 +17,7 @@ At a Glance
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/system-config/tree/
   * :file:`modules/openstack_project/manifests/gerrit.pp`
-  * :file:`hiera/fqdn/zuulv3.openstack.org.yaml`
+  * :file:`hiera/group/zuul-scheduler.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/zuul
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
@@ -68,22 +68,22 @@ OAuth Credentials which are all stored in hiera.
 
 The ID is a numerical identifier found on the App settings page labeled **ID**.
 The ID is placed into the ``app_id`` field in the ``github``
-entry in ``zuul_connection_secrets`` for the ``zuulv3.openstack.org`` FQDN.
+entry in ``zuul_connection_secrets`` for the ``zuul-scheduler`` group.
 
 The Private key can only be retrieved when it is generated, so in the case it
 is lost a new one must be generated and the resulting value put into hiera.
 The Private key content is stored as ``zuul_github_app_key`` in private hiera
 and is written to ``/etc/zuul/github.key``. That path is placed into
 ``app_key`` field in the ``github`` entry in ``zuul_connections`` for the
-``zuulv3.openstack.org`` FQDN.
+``zuul-scheduler`` group.
 
 GitHub sends JSON payloads via HTTP POST to the URL configured in the Webhook
 URL setting. The current value of this setting for Zuul v3 is:
-https://zuulv3.openstack.org/connection/github/payload. It includes the
+https://zuul.openstack.org/connection/github/payload. It includes the
 configured "Webhook Secret" so that Zuul can verify that the payload actually
 did come from GitHub. The "Webhook Secret" is placed into the ``webhook_token``
 field in the ``github`` entry in ``zuul_connection_secrets`` for the
-``zuulv3.openstack.org`` FQDN.
+``zuul-scheduler`` group.
 
 The OAuth credentials for the OpenStack Zuul App are currently unused.
 

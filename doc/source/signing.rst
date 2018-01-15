@@ -459,7 +459,7 @@ as a secret to Zuul for use by release jobs.
     > https://git.openstack.org/cgit/openstack-infra/zuul/plain/tools/encrypt_secret.py?\
     > h=feature/zuulv3
     root@puppetmaster:~# python encrypt_secret.py --infile temporary.gnupg/for-zuul \
-    > --outfile temporary.gnupg/zuul.yaml https://zuulv3.openstack.org gerrit \
+    > --outfile temporary.gnupg/zuul.yaml https://zuul.openstack.org gerrit \
     > openstack-infra/project-config
     writing RSA key
     Public key length: 4096 bits (512 bytes)
