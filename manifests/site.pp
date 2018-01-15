@@ -764,31 +764,24 @@ node /^static\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^zk\d+\.openstack\.org$/ {
-  $zk_receivers = [
-    'nb03.openstack.org',
-    'nb04.openstack.org',
-    'nl01.openstack.org',
-    'nl02.openstack.org',
-    'zuul01.openstack.org',
-    'zuulv3.openstack.org',
-  ]
-
-  $zk_cluster_members = [
-    'zk01.openstack.org',
-    'zk02.openstack.org',
-    'zk03.openstack.org',
-  ]
-
-  $zk_receiver_rule = regsubst($zk_receivers,
-                               '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2181 -s \1 -j ACCEPT')
-  $zk_election_rule = regsubst($zk_cluster_members,
-                               '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2888 -s \1 -j ACCEPT')
-  $zk_leader_rule = regsubst($zk_cluster_members,
-                             '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 3888 -s \1 -j ACCEPT')
-  $iptables_rule = flatten([$zk_receiver_rule, $zk_election_rule, $zk_leader_rule])
   class { 'openstack_project::server':
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
+    iptables_allowed_hosts    => [
+      # Zookeeper clients
+      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
+      # Zookeeper election
+      {protocol => 'tcp', port => '2888', hostname => 'zk01.openstack.org'},
+      {protocol => 'tcp', port => '2888', hostname => 'zk02.openstack.org'},
+      {protocol => 'tcp', port => '2888', hostname => 'zk03.openstack.org'},
+      # Zookeeper leader
+      {protocol => 'tcp', port => '3888', hostname => 'zk01.openstack.org'},
+      {protocol => 'tcp', port => '3888', hostname => 'zk02.openstack.org'},
+      {protocol => 'tcp', port => '3888', hostname => 'zk03.openstack.org'},
+    ],
     sysadmins                 => hiera('sysadmins', []),
   }
 
