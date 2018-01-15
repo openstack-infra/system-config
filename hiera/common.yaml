@@ -598,6 +598,7 @@ infracloud_chocolate_ssl_cert_file_contents: |
   -----END CERTIFICATE-----
 statusbot_auth_nicks:
 - jeblair
+- corvus
 - ttx
 - fungi
 - mordred
