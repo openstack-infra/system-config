@@ -14,7 +14,7 @@ define openstack_project::master_zone (
     source  => $source,
     recurse => remote,
     require => File['/var/lib/bind/zones'],
-    notify  => Service[$::dns::namedservicename],
+    notify  => Exec['rndc_reload'],
   }
   file { "/etc/bind/keys/${name}":
     require => File['/etc/bind/keys'],
@@ -115,6 +115,12 @@ class openstack_project::master_nameserver (
   openstack_project::master_zone { 'zuul-ci.org':
     source  => 'file:///opt/zone-zuul-ci.org/zones/zuul-ci.org',
     require => Vcsrepo['/opt/zone-zuul-ci.org'],
+  }
+
+  exec { 'rndc_reload' :
+    command     => 'rndc reload',
+    path        => '/sbin:/usr/sbin:/bin:/usr/bin',
+    refreshonly => true,
   }
 
 }
