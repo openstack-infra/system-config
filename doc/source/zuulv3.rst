@@ -18,8 +18,8 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://zuulv3.openstack.org
-  * zuulv3.openstack.org
+  * http://zuul.openstack.org
+  * zuul.openstack.org
   * ze*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
@@ -82,7 +82,7 @@ many changes may be tested in parallel while continuing to assure that
 each commit is correctly tested.
 
 Zuul's current status may be viewed at
-`<http://zuulv3.openstack.org/>`_.
+`<http://zuul.openstack.org/>`_.
 
 Zuul's configuration is stored in :config:`zuul/main.yaml`.  Anyone
 may propose a change to the configuration by editing that file and
@@ -111,7 +111,7 @@ Scheduler
 ---------
 
 The Zuul Scheduler and gear are all co-located on a single host,
-zuulv3.openstack.org.
+referred to by the ``zuul.openstack.org`` CNAME in DNS.
 
 Zuul is stateless, so the server does not need backing up. However
 zuul talks through git and ssh so you will need to manually check ssh
@@ -130,7 +130,7 @@ the executors using gear.
 OpenStack's Zuul installation is also configured to write job results into
 a MySQL database via the SQL Reporter plugin. The database for that is a
 Rackspace Cloud DB and is configured in the ``mysql`` entry of the
-``zuul_connection_secrets`` entry for the ``zuulv3.openstack.org`` FQDN.
+``zuul_connection_secrets`` entry for the ``zuul-scheduler`` group.
 
 Restarting the Scheduler
 ------------------------
@@ -147,9 +147,9 @@ running `zuul-changes.py
 <https://git.openstack.org/cgit/openstack-infra/zuul/tree/tools/zuul-changes.py>`_
 to save the check and gate queues::
 
-  python /opt/zuul/tools/zuul-changes.py http://zuulv3.openstack.org \
+  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
     check >check.sh
-  python /opt/zuul/tools/zuul-changes.py http://zuulv3.openstack.org \
+  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
     gate >gate.sh
 
 These check.sh and gate.sh scripts will be used after the restart to
@@ -191,7 +191,7 @@ Web
 ---
 
 Zuul Web is a horizontally scalable service. It is currently running colocated
-with the scheduler on zuulv3.openstack.org. Zuul Web provides live console
+with the scheduler on zuul.openstack.org. Zuul Web provides live console
 streaming and will be the home of various web dashboards such as the status
 page.
 
@@ -223,4 +223,4 @@ found on the :ref:`github` page at :ref:`openstack_zuul_app`.
 
 .. _OpenStack Zuul: https://github.com/apps/openstack-zuul
 .. _Zuul Reference Manual: https://docs.openstack.org/infra/zuul/feature/zuulv3
-.. _Zuul Status Page: http://zuulv3.openstack.org
+.. _Zuul Status Page: http://zuul.openstack.org
