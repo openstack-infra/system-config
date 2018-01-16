@@ -923,7 +923,6 @@ node 'nodepool.openstack.org' {
     'nb04.openstack.org',
     'nl01.openstack.org',
     'nl02.openstack.org',
-    'zuulv3-dev.openstack.org',
     'zuulv3.openstack.org',
   ]
   $zk_iptables_rule = regsubst($zk_receivers,
@@ -1300,49 +1299,6 @@ node /^ze\d+\.openstack\.org$/ {
   class { '::zuul::known_hosts':
     known_hosts_content => "review.openstack.org,104.130.246.91,2001:4800:7819:103:be76:4eff:fe05:8525 ${gerrit_ssh_host_key}",
   }
-}
-
-# Node-OS: trusty
-node 'zuulv3-dev.openstack.org' {
-  $gerrit_server        = 'review.openstack.org'
-  $gerrit_user          = 'zuul'
-  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
-  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
-  $zuul_url             = "http://${::fqdn}/p"
-  $git_email            = 'zuul@openstack.org'
-  $git_name             = 'OpenStack Zuul'
-  $revision             = 'feature/zuulv3'
-
-  $gearman_workers = []
-  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-    sysadmins                 => hiera('sysadmins', []),
-  }
-
-  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
-  # settings.
-  class { '::zuul':
-    gerrit_server        => $gerrit_server,
-    gerrit_user          => $gerrit_user,
-    zuul_ssh_private_key => $zuul_ssh_private_key,
-    git_email            => $git_email,
-    git_name             => $git_name,
-    revision             => $revision,
-  }
-
-  class { 'openstack_project::zuul_merger':
-    gerrit_server        => $gerrit_server,
-    gerrit_user          => $gerrit_user,
-    gerrit_ssh_host_key  => $gerrit_ssh_host_key,
-    zuul_ssh_private_key => $zuul_ssh_private_key,
-    revision             => $revision,
-    manage_common_zuul   => false,
-  }
-  # TODO(pabelanger): Add zuul_scheduler support
 }
 
 # Node-OS: xenial
