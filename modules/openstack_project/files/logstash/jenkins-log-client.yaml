@@ -237,6 +237,8 @@ source-files:
     tags:
       - screen
       - oslofmt
+
+  # lib/neutron-legacy services
   - name: logs/screen-q-agt.txt
     tags:
       - screen
@@ -265,6 +267,32 @@ source-files:
     tags:
       - screen
       - oslofmt
+  # lib/neutron services
+  - name: logs/screen-neutron-agent.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-neutron-dhcp.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-neutron-l3.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-neutron-metadata-agent.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-neutron-metering.txt
+    tags:
+      - screen
+      - oslofmt
+  - name: logs/screen-neutron-api.txt
+    tags:
+      - screen
+      - oslofmt
+
   - name: logs/screen-s-account.txt
     tags:
       - screen
