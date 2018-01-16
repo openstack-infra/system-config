@@ -1545,30 +1545,6 @@ node /^zm\d+.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'zuul-dev.openstack.org' {
-  $gearman_workers = []
-  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-    sysadmins                 => hiera('sysadmins', []),
-  }
-
-  class { 'openstack_project::zuul_dev':
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server        => 'review-dev.openstack.org',
-    gerrit_user          => 'jenkins',
-    gerrit_ssh_host_key  => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
-    zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents'),
-    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    zuul_url             => 'http://zuul-dev.openstack.org/p',
-    statsd_host          => 'graphite.openstack.org',
-  }
-}
-
-# Node-OS: trusty
 node 'pbx.openstack.org' {
   class { 'openstack_project::server':
     sysadmins                 => hiera('sysadmins', []),
