@@ -1108,6 +1108,7 @@ node /^nb0[12].openstack\.org$/ {
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
     revision                      => 'feature/zuulv3',
+    python_version                => 3,
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
