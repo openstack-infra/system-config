@@ -1445,6 +1445,7 @@ node 'zuulv3.openstack.org' {
 
 # Node-OS: xenial
 node /^zuul\d+\.openstack\.org$/ {
+  $group = "zuul-scheduler"
   $gerrit_server        = 'review.openstack.org'
   $gerrit_user          = 'zuul'
   $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
