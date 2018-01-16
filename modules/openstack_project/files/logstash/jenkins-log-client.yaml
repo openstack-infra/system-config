@@ -317,11 +317,11 @@ source-files:
   - name: logs/dsvm-functional-index.txt
     tags:
       - oslofmt
-    job-filter: '.*neutron-dsvm-functional.*'
+    job-filter: '.*neutron-.*functional.*'
   - name: logs/dsvm-fullstack-index.txt
     tags:
       - oslofmt
-    job-filter: '.*neutron-dsvm-fullstack.*'
+    job-filter: '.*neutron-.*fullstack.*'
 
 # Grenade new logs below
   - name: logs/new/screen-c-api.txt
