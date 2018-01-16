@@ -903,9 +903,6 @@ node 'nodepool.openstack.org' {
   $tripleo_username    = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password    = hiera('nodepool_tripleo_password')
   $tripleo_project     = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
   $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
   $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
   $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
@@ -966,12 +963,7 @@ node 'nodepool.openstack.org' {
     split_daemon                  => true,
   }
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool'],
+    ensure  => absent,
   }
   file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
     ensure  => present,
@@ -1013,9 +1005,6 @@ node /^nl\d+\.openstack\.org$/ {
   $tripleo_username               = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password               = hiera('nodepool_tripleo_password')
   $tripleo_project                = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
   $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
   $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
   $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
@@ -1042,12 +1031,7 @@ node /^nl\d+\.openstack\.org$/ {
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_launcher'],
+    ensure  => absent,
   }
   file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
     ensure  => present,
@@ -1079,9 +1063,6 @@ node /^nb0[12].openstack\.org$/ {
   $tripleo_username    = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password    = hiera('nodepool_tripleo_password')
   $tripleo_project     = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
   $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
   $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
   $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
@@ -1112,12 +1093,7 @@ node /^nb0[12].openstack\.org$/ {
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
+    ensure  => absent,
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
@@ -1160,9 +1136,6 @@ node /^nb0[34].openstack\.org$/ {
   $tripleo_username    = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password    = hiera('nodepool_tripleo_password')
   $tripleo_project     = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
   $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
   $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
   $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
@@ -1192,12 +1165,7 @@ node /^nb0[34].openstack\.org$/ {
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
+    ensure  => absent,
   }
   file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
     ensure  => present,
