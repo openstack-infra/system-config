@@ -917,20 +917,15 @@ node 'nodepool.openstack.org' {
   $citycloud_password = hiera('nodepool_citycloud_password')
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
-  $zk_receivers = [
-    'nb03.openstack.org',
-    'nb04.openstack.org',
-    'nl01.openstack.org',
-    'nl02.openstack.org',
-    'zuul01.openstack.org',
-    'zuulv3.openstack.org',
-  ]
-  $zk_iptables_rule = regsubst($zk_receivers,
-                               '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 2181 -s \1 -j ACCEPT')
-  $iptables_rule = flatten([$zk_iptables_rule])
   class { 'openstack_project::server':
-    iptables_rules6           => $iptables_rule,
-    iptables_rules4           => $iptables_rule,
+    iptables_allowed_hosts    => [
+      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
+    ],
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
