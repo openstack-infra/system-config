@@ -195,7 +195,7 @@ node /^graphite\d*\.openstack\.org$/ {
       {protocol => 'udp', port => '8125', hostname => 'nodepool.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl02.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zuul.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'zuul01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zuulv3.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm02.openstack.org'},
@@ -769,6 +769,7 @@ node /^zk\d+\.openstack\.org$/ {
     'nb04.openstack.org',
     'nl01.openstack.org',
     'nl02.openstack.org',
+    'zuul01.openstack.org',
     'zuulv3.openstack.org',
   ]
 
@@ -923,6 +924,7 @@ node 'nodepool.openstack.org' {
     'nb04.openstack.org',
     'nl01.openstack.org',
     'nl02.openstack.org',
+    'zuul01.openstack.org',
     'zuulv3.openstack.org',
   ]
   $zk_iptables_rule = regsubst($zk_receivers,
