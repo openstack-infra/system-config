@@ -1097,6 +1097,7 @@ node /^nb0[12].openstack\.org$/ {
     upload_workers                => '16',
     revision                      => 'feature/zuulv3',
     python_version                => 3,
+    zuulv3                        => true,
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
