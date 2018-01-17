@@ -1301,32 +1301,28 @@ node 'zuulv3.openstack.org' {
   $git_name             = 'OpenStack Zuul'
   $revision             = 'feature/zuulv3'
 
-  $gearman_workers = [
-    'ze01.openstack.org',
-    'ze02.openstack.org',
-    'ze03.openstack.org',
-    'ze04.openstack.org',
-    'ze05.openstack.org',
-    'ze06.openstack.org',
-    'ze07.openstack.org',
-    'ze08.openstack.org',
-    'ze09.openstack.org',
-    'ze10.openstack.org',
-    'zm01.openstack.org',
-    'zm02.openstack.org',
-    'zm03.openstack.org',
-    'zm04.openstack.org',
-    'zm05.openstack.org',
-    'zm06.openstack.org',
-    'zm07.openstack.org',
-    'zm08.openstack.org',
-  ]
-  $iptables_rules = regsubst ($gearman_workers, '^(.*)$', '-m state --state NEW -m tcp -p tcp --dport 4730 -s \1 -j ACCEPT')
-
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79, 80, 443],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
+    iptables_allowed_hosts    => [
+      {protocol => 'tcp', port => '4730', hostname => 'ze01.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze02.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze03.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze04.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze05.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze06.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze07.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze08.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze09.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze10.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm01.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm02.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm03.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm04.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm05.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm06.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm07.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zm08.openstack.org'},
+    ],
     sysadmins                 => hiera('sysadmins', []),
   }
 
