@@ -1,0 +1,10 @@
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 17 Jan 2018 23:05:58 +0000
+Reviewed-on: https://review.openstack.org/533758
+Project: openstack-infra/system-config
+Branch: refs/heads/master
