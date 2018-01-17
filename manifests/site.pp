@@ -917,8 +917,6 @@ node 'nodepool.openstack.org' {
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
   $zk_receivers = [
-    'nb01.openstack.org',
-    'nb02.openstack.org',
     'nb03.openstack.org',
     'nb04.openstack.org',
     'nl01.openstack.org',
