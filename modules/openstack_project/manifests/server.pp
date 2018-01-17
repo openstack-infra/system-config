@@ -4,8 +4,6 @@
 class openstack_project::server (
   $iptables_public_tcp_ports = [],
   $iptables_public_udp_ports = [],
-  $iptables_rules4           = [],
-  $iptables_rules6           = [],
   $iptables_allowed_hosts    = [],
   $sysadmins                 = [],
   $extra_aliases             = {},
@@ -236,8 +234,6 @@ class openstack_project::server (
   class { 'iptables':
     public_tcp_ports => $iptables_public_tcp_ports,
     public_udp_ports => $all_udp,
-    rules4           => $iptables_rules4,
-    rules6           => $iptables_rules6,
     snmp_v4hosts     => $snmp_v4hosts,
     snmp_v6hosts     => $snmp_v6hosts,
     allowed_hosts    => $iptables_allowed_hosts,
