@@ -767,6 +767,7 @@ node /^zk\d+\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_allowed_hosts    => [
       # Zookeeper clients
+      {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
@@ -912,6 +913,7 @@ node 'nodepool.openstack.org' {
 
   class { 'openstack_project::server':
     iptables_allowed_hosts    => [
+      {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
