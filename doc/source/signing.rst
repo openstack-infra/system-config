@@ -457,7 +457,7 @@ as a secret to Zuul for use by release jobs.
     > --export-secret-subkeys 0xC0224DB5F541FB68\!
     root@puppetmaster:~# wget -O encrypt_secret.py \
     > https://git.openstack.org/cgit/openstack-infra/zuul/plain/tools/encrypt_secret.py?\
-    > h=feature/zuulv3
+    > h=master
     root@puppetmaster:~# python encrypt_secret.py --infile temporary.gnupg/for-zuul \
     > --outfile temporary.gnupg/zuul.yaml https://zuul.openstack.org gerrit \
     > openstack-infra/project-config
