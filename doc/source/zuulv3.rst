@@ -28,7 +28,7 @@ At a Glance
   * :config:`zuul/main.yaml`
   * :config:`zuul.yaml`
 :Projects:
-  * https://git.openstack.org/cgit/openstack-infra/zuul/tree/?h=feature/zuulv3
+  * https://git.openstack.org/cgit/openstack-infra/zuul/tree
 :Bugs:
   * https://storyboard.openstack.org/#!/project/679
 :Resources:
@@ -222,5 +222,5 @@ Information about the configuration of the OpenStack Zuul App itself can be
 found on the :ref:`github` page at :ref:`openstack_zuul_app`.
 
 .. _OpenStack Zuul: https://github.com/apps/openstack-zuul
-.. _Zuul Reference Manual: https://docs.openstack.org/infra/zuul/feature/zuulv3
+.. _Zuul Reference Manual: https://docs.openstack.org/infra/zuul
 .. _Zuul Status Page: http://zuul.openstack.org

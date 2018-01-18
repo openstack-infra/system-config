@@ -1026,7 +1026,6 @@ node /^nl\d+\.openstack\.org$/ {
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents       => $clouds_yaml,
     statsd_host              => 'graphite.openstack.org',
-    revision                 => 'feature/zuulv3',
     python_version           => 3,
   }
 
@@ -1097,7 +1096,6 @@ node /^nb0[12].openstack\.org$/ {
     statsd_host                   => 'graphite.openstack.org',
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
-    revision                      => 'feature/zuulv3',
     python_version                => 3,
     zuulv3                        => true,
   }
@@ -1221,7 +1219,6 @@ node /^ze\d+\.openstack\.org$/ {
   $zuul_static_private_key = hiera('jenkins_ssh_private_key_contents')
   $git_email               = 'zuul@openstack.org'
   $git_name                = 'OpenStack Zuul'
-  $revision                = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79, 7900],
@@ -1243,7 +1240,6 @@ node /^ze\d+\.openstack\.org$/ {
     git_email                => $git_email,
     git_name                 => $git_name,
     worker_private_key_file  => '/var/lib/zuul/ssh/nodepool_id_rsa',
-    revision                 => $revision,
     python_version           => 3,
     zookeeper_hosts          => 'nodepool.openstack.org:2181',
     zuulv3                   => true,
@@ -1302,7 +1298,6 @@ node 'zuulv3.openstack.org' {
   $zuul_url             = "http://${::fqdn}/p"
   $git_email            = 'zuul@openstack.org'
   $git_name             = 'OpenStack Zuul'
-  $revision             = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79, 80, 443],
@@ -1341,7 +1336,6 @@ node 'zuulv3.openstack.org' {
     zuul_ssh_private_key         => $zuul_ssh_private_key,
     git_email                    => $git_email,
     git_name                     => $git_name,
-    revision                     => $revision,
     python_version               => 3,
     zookeeper_hosts              => 'nodepool.openstack.org:2181',
     zookeeper_session_timeout    => 40,
@@ -1397,7 +1391,6 @@ node /^zuul\d+\.openstack\.org$/ {
   $zuul_url             = "http://zuul.openstack.org/p"
   $git_email            = 'zuul@openstack.org'
   $git_name             = 'OpenStack Zuul'
-  $revision             = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79, 80, 443],
@@ -1436,7 +1429,6 @@ node /^zuul\d+\.openstack\.org$/ {
     zuul_ssh_private_key         => $zuul_ssh_private_key,
     git_email                    => $git_email,
     git_name                     => $git_name,
-    revision                     => $revision,
     python_version               => 3,
     zookeeper_hosts              => 'nodepool.openstack.org:2181',
     zookeeper_session_timeout    => 40,
@@ -1493,7 +1485,6 @@ node /^zm\d+.openstack\.org$/ {
   $zuul_url             = "http://${::fqdn}/p"
   $git_email            = 'zuul@openstack.org'
   $git_name             = 'OpenStack Zuul'
-  $revision             = 'feature/zuulv3'
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
@@ -1509,7 +1500,6 @@ node /^zm\d+.openstack\.org$/ {
     zuul_ssh_private_key    => $zuul_ssh_private_key,
     git_email               => $git_email,
     git_name                => $git_name,
-    revision                => $revision,
     python_version          => 3,
     zookeeper_hosts         => 'nodepool.openstack.org:2181',
     zuulv3                  => true,
