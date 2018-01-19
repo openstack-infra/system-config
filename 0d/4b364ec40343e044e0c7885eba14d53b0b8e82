@@ -1,0 +1,12 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review-1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Khai Do <zaro0508@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 19 Jan 2018 18:56:50 +0000
+Reviewed-on: https://review.openstack.org/427959
+Project: openstack-infra/system-config
+Branch: refs/heads/master
