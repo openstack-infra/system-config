@@ -471,8 +471,6 @@ cacti_hosts:
 - logstash.openstack.org
 - nb01.openstack.org
 - nb02.openstack.org
-- nb03.openstack.org
-- nb04.openstack.org
 - nl01.openstack.org
 - nl02.openstack.org
 - nodepool.openstack.org
