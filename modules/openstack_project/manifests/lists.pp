@@ -119,6 +119,18 @@ class openstack_project::lists(
   mailman::site { 'openstack':
     default_email_host => 'lists.openstack.org',
     default_url_host   => 'lists.openstack.org',
+    # en has customized templates, don't install it here
+    install_languages  => ['de', 'fr', 'it', 'ko', 'ru', 'vi', 'zh_TW'],
+  }
+
+  file { '/srv/mailman/openstack/templates/en':
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'list',
+    mode    => '0644',
+    recurse => true,
+    require => File['/srv/mailman/openstack/templates/en'],
+    source  => 'puppet:///modules/openstack_project/mailman/html-templates-en',
   }
 
   mailman::site { 'zuul':
