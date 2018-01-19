@@ -195,6 +195,7 @@ node /^graphite\d*\.openstack\.org$/ {
       {protocol => 'udp', port => '8125', hostname => 'nodepool.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl02.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'nl03.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zuul01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zuulv3.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm01.openstack.org'},
@@ -773,6 +774,7 @@ node /^zk\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
       # Zookeeper election
@@ -920,6 +922,7 @@ node 'nodepool.openstack.org' {
       {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
     ],
