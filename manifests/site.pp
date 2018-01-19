@@ -1241,7 +1241,7 @@ node /^ze\d+\.openstack\.org$/ {
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
-    gearman_server           => 'zuulv3.openstack.org',
+    gearman_server           => 'zuul01.openstack.org',
     gerrit_server            => $gerrit_server,
     gerrit_user              => $gerrit_user,
     zuul_ssh_private_key     => $gerrit_ssh_private_key,
@@ -1508,7 +1508,7 @@ node /^zm\d+.openstack\.org$/ {
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
-    gearman_server          => 'zuulv3.openstack.org',
+    gearman_server          => 'zuul01.openstack.org',
     gerrit_server           => $gerrit_server,
     gerrit_user             => $gerrit_user,
     zuul_ssh_private_key    => $zuul_ssh_private_key,
