@@ -1,4 +1,4 @@
-- hosts: '!review.openstack.org:!git0*:!zuul*:!afs*:!baremetal*:!controller*:!compute*:!puppetmaster*:!disabled'
+- hosts: '!review.openstack.org:!git0*:!zuulv3*:!zuul-scheduler:!afs*:!baremetal*:!controller*:!compute*:!puppetmaster*:!disabled'
   strategy: free
   gather_facts: true
   roles:
