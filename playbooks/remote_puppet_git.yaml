@@ -29,7 +29,7 @@
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
       vars:
         puppet_timeout: 60m
-- hosts: "zuulv3.openstack.org:zuul-scheduler:!disabled"
+- hosts: "zuul-scheduler:!disabled"
   strategy: free
   gather_facts: true
   roles:

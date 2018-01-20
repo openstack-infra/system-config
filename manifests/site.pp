@@ -197,7 +197,6 @@ node /^graphite\d*\.openstack\.org$/ {
       {protocol => 'udp', port => '8125', hostname => 'nl02.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl03.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zuul01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zuulv3.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm02.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'zm03.openstack.org'},
@@ -776,7 +775,6 @@ node /^zk\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
       # Zookeeper election
       {protocol => 'tcp', port => '2888', hostname => 'zk01.openstack.org'},
       {protocol => 'tcp', port => '2888', hostname => 'zk02.openstack.org'},
@@ -924,7 +922,6 @@ node 'nodepool.openstack.org' {
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'zuulv3.openstack.org'},
     ],
     sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
@@ -1296,100 +1293,6 @@ node /^ze\d+\.openstack\.org$/ {
   class { '::zuul::known_hosts':
     known_hosts_content => "review.openstack.org,104.130.246.91,2001:4800:7819:103:be76:4eff:fe05:8525 ${gerrit_ssh_host_key}",
   }
-}
-
-# Node-OS: xenial
-node 'zuulv3.openstack.org' {
-  $gerrit_server        = 'review.openstack.org'
-  $gerrit_user          = 'zuul'
-  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
-  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
-  $zuul_url             = "http://${::fqdn}/p"
-  $git_email            = 'zuul@openstack.org'
-  $git_name             = 'OpenStack Zuul'
-  $revision             = 'master'
-
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [79, 80, 443],
-    iptables_allowed_hosts    => [
-      {protocol => 'tcp', port => '4730', hostname => 'ze01.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze02.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze03.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze04.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze05.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze06.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze07.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze08.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze09.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze10.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm01.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm02.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm03.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm04.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm05.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm06.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm07.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm08.openstack.org'},
-    ],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-
-  class { '::project_config':
-    url => 'https://git.openstack.org/openstack-infra/project-config',
-  }
-
-  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
-  # settings.
-  class { '::zuul':
-    gerrit_server                => $gerrit_server,
-    gerrit_user                  => $gerrit_user,
-    zuul_ssh_private_key         => $zuul_ssh_private_key,
-    git_email                    => $git_email,
-    git_name                     => $git_name,
-    revision                     => $revision,
-    python_version               => 3,
-    zookeeper_hosts              => 'nodepool.openstack.org:2181',
-    zookeeper_session_timeout    => 40,
-    zuulv3                       => true,
-    connections                  => hiera('zuul_connections', []),
-    connection_secrets           => hiera('zuul_connection_secrets', []),
-    zuul_status_url              => 'http://127.0.0.1:8001/openstack',
-    zuul_web_url                 => 'http://127.0.0.1:9000/openstack',
-    gearman_client_ssl_cert      => hiera('gearman_client_ssl_cert'),
-    gearman_client_ssl_key       => hiera('gearman_client_ssl_key'),
-    gearman_server_ssl_cert      => hiera('gearman_server_ssl_cert'),
-    gearman_server_ssl_key       => hiera('gearman_server_ssl_key'),
-    gearman_ssl_ca               => hiera('gearman_ssl_ca'),
-    proxy_ssl_cert_file_contents => hiera('zuul_ssl_cert_file_contents'),
-    proxy_ssl_key_file_contents  => hiera('zuul_ssl_key_file_contents'),
-    statsd_host                  => 'graphite.openstack.org',
-  }
-
-  file { "/etc/zuul/github.key":
-    ensure  => present,
-    owner   => 'zuul',
-    group   => 'zuul',
-    mode    => '0600',
-    content => hiera('zuul_github_app_key'),
-    require => File['/etc/zuul'],
-  }
-
-  class { '::zuul::scheduler':
-    layout_dir     => $::project_config::zuul_layout_dir,
-    require        => $::project_config::config_dir,
-    python_version => 3,
-    use_mysql      => true,
-  }
-
-  class { '::zuul::web': }
-  class { '::zuul::fingergw': }
-
-  include bup
-  bup::site { 'rax.ord':
-    backup_user   => 'bup-zuulv3',
-    backup_server => 'backup01.ord.rax.ci.openstack.org',
-  }
-
 }
 
 # Node-OS: xenial

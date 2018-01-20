@@ -19,8 +19,9 @@ At a Glance
 
 :Hosts:
   * http://zuul.openstack.org
-  * zuul.openstack.org
+  * zuul*.openstack.org
   * ze*.openstack.org
+  * zm*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
   * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/zuul.pp
