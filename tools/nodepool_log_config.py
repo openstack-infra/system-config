@@ -153,13 +153,6 @@ propagate=0
 
 def _get_providers_and_images(config):
     ret = []
-    for provider in config['providers']:
-        for image in provider['images']:
-            if 'diskimage' not in image:
-                ret.append((provider['name'], image['name']))
-                logging.debug("Added snapshot image: %s:%s" % (
-                    provider['name'], image['name']))
-
     # diskimages have a special provider
     if 'diskimages' in config:
         for diskimage in config['diskimages']:
