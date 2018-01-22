@@ -778,8 +778,6 @@ node /^zk\d+\.openstack\.org$/ {
       # Zookeeper clients
       {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
@@ -925,8 +923,6 @@ node 'nodepool.openstack.org' {
     iptables_allowed_hosts    => [
       {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
@@ -1122,85 +1118,6 @@ node /^nb0[12].openstack\.org$/ {
     require => Class['::openstackci::nodepool_builder'],
   }
 
-  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
-  }
-
-  cron { 'mirror_gitgc':
-    user        => 'nodepool',
-    hour        => '20',
-    minute      => '0',
-    command     => 'find /opt/dib_cache/source-repositories/ -type d -name "*.git" -exec git --git-dir="{}" gc \; >/dev/null',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => Class['::openstackci::nodepool_builder'],
-  }
-}
-
-# Node-OS: trusty
-# Node-OS: xenial
-node /^nb0[34].openstack\.org$/ {
-  $group = 'nodepool'
-  # TODO(pabelanger): Move all of this back into nodepool manifest, it has
-  # grown too big.
-  $rackspace_username  = hiera('nodepool_rackspace_username', 'username')
-  $rackspace_password  = hiera('nodepool_rackspace_password')
-  $rackspace_project   = hiera('nodepool_rackspace_project', 'project')
-  $hpcloud_username    = hiera('nodepool_hpcloud_username', 'username')
-  $hpcloud_password    = hiera('nodepool_hpcloud_password')
-  $hpcloud_project     = hiera('nodepool_hpcloud_project', 'project')
-  $internap_username   = hiera('nodepool_internap_username', 'username')
-  $internap_password   = hiera('nodepool_internap_password')
-  $internap_project    = hiera('nodepool_internap_project', 'project')
-  $ovh_username        = hiera('nodepool_ovh_username', 'username')
-  $ovh_password        = hiera('nodepool_ovh_password')
-  $ovh_project         = hiera('nodepool_ovh_project', 'project')
-  $tripleo_username    = hiera('nodepool_tripleo_username', 'username')
-  $tripleo_password    = hiera('nodepool_tripleo_password')
-  $tripleo_project     = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
-  $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
-  $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
-  $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
-  $vexxhost_username   = hiera('nodepool_vexxhost_username', 'username')
-  $vexxhost_password   = hiera('nodepool_vexxhost_password')
-  $vexxhost_project    = hiera('nodepool_vexxhost_project', 'project')
-  $citycloud_username = hiera('nodepool_citycloud_username', 'username')
-  $citycloud_password = hiera('nodepool_citycloud_password')
-  $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
-  class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
-    iptables_public_tcp_ports => [80],
-  }
-
-  include openstack_project
-
-
-  class { '::openstackci::nodepool_builder':
-    nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
-    vhost_name                    => $::fqdn,
-    project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    oscc_file_contents            => $clouds_yaml,
-    image_log_document_root       => '/var/log/nodepool/image',
-    statsd_host                   => 'graphite.openstack.org',
-    builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
-    upload_workers                => '16',
-  }
-
-  file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
-  }
   file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
     ensure  => present,
     owner   => 'nodepool',
