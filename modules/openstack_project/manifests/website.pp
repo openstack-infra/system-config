@@ -28,9 +28,12 @@ define openstack_project::website (
     docroot       => "${afs_root}/project/${name}/www",
     priority      => '50',
     template      => $template,
+    require       => ["/etc/ssl/certs/${name}.pem",
+                      "/etc/ssl/private/${name}.key",
+                      "/etc/ssl/certs/${name}_intermediate.pem"],
   }
 
-  file { "/etc/ssl/certs/$name.pem":
+  file { "/etc/ssl/certs/${name}.pem":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -39,7 +42,7 @@ define openstack_project::website (
     require => File['/etc/ssl/certs'],
   }
 
-  file { "/etc/ssl/private/$name.key":
+  file { "/etc/ssl/private/${name}.key":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -48,7 +51,7 @@ define openstack_project::website (
     require => File['/etc/ssl/private'],
   }
 
-  file { "/etc/ssl/certs/$name_intermediate.pem":
+  file { "/etc/ssl/certs/${name}_intermediate.pem":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
