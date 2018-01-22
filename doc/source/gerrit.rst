@@ -456,8 +456,10 @@ To rename a project:
 
 #. Export and stop Zuul on zuul.openstack.org::
 
-     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org gate >gate.sh
-     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org check >check.sh
+     python /opt/zuul/tools/zuul-changes.py --url http://zuul.openstack.org \
+      openstack gate >gate.sh
+     python /opt/zuul/tools/zuul-changes.py --url http://zuul.openstack.org \
+      openstack check >check.sh
      sudo invoke-rc.d zuul stop
      sudo rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.listedock
 

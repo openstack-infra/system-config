@@ -120,10 +120,19 @@ running `zuul-changes.py
 <https://git.openstack.org/cgit/openstack-infra/zuul/tree/tools/zuul-changes.py>`_
 to save the check and gate queues::
 
-  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
-    check >check.sh
-  python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org \
-    gate >gate.sh
+  python /opt/zuul/tools/zuul-changes.py --url http://zuul.openstack.org \
+    openstack check >check.sh
+  python /opt/zuul/tools/zuul-changes.py --url http://zuul.openstack.org \
+    openstack gate >gate.sh
+
+Alternatively, you can also dump Zuul's queues from a status.json file
+downloaded on disk. This is particularly useful if the Zuul scheduler crashed
+without leaving you an opportunity to dump the queues first::
+
+  python /opt/zuul/tools/zuul-changes.py --file /path/to/status.json \
+    openstack check >check.sh
+  python /opt/zuul/tools/zuul-changes.py --file /path/to/status.json \
+    openstack gate >gate.sh
 
 These check.sh and gate.sh scripts will be used after the restart to
 re-enqueue the changes.
