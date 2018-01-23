@@ -332,3 +332,15 @@ clouds:
         network: ext-net
         interfaces:
           - openstackzuul-subnet1
+  - name: openstackci-linaro
+    oscc_cloud: openstackci-linaro
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-linaro
+    oscc_cloud: openstackzuul-linaro
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
