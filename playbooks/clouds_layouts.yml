@@ -332,3 +332,25 @@ clouds:
         network: ext-net
         interfaces:
           - openstackzuul-subnet1
+  - name: openstackci-linaro
+    oscc_cloud: openstackci-linaro
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+    images:
+      - name: ubuntu-xenial
+        download_image_url: https://cloud-images.ubuntu.com/releases/16.04/release/ubuntu-16.04-server-cloudimg-arm64-uefi1.img
+        download_image_dest: /tmp/ubuntu-xenial-aarch64-uefi.img
+        filename: /tmp/ubuntu-xenial-aarch64-uefi.img
+        properties:
+          hw_firmware_type: uefi
+          os_command_line: console=ttyAMA0
+          hw_disk_bus: scsi
+          hw_scsi_model: virtio-scsi
+  - name: openstackzuul-linaro
+    oscc_cloud: openstackzuul-linaro
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
