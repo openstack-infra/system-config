@@ -1,0 +1,9 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: zongyimin <2503634009@qq.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 24 Jan 2018 05:28:42 +0000
+Reviewed-on: https://review.openstack.org/537234
+Project: openstack-infra/system-config
+Branch: refs/heads/master
