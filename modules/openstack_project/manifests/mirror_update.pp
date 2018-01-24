@@ -8,7 +8,6 @@ class openstack_project::mirror_update (
   $gem_keytab = '',
   $centos_keytab = '',
   $epel_keytab = '',
-  $yum_puppetlabs_keytab = '',
   $fedora_keytab = '',
   $opensuse_keytab = '',
 ) {
@@ -366,35 +365,6 @@ class openstack_project::mirror_update (
        File['/usr/local/bin/epel-mirror-update'],
        File['/etc/afsadmin.keytab'],
        File['/etc/epel.keytab'],
-    ]
-  }
-
-  ### Puppetlabs / CentOS mirror ###
-  file { '/etc/yum-puppetlabs.keytab':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0400',
-    content => $yum_puppetlabs_keytab,
-  }
-
-  file { '/usr/local/bin/yum-puppetlabs-mirror-update':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/mirror/yum-puppetlabs-mirror-update.sh',
-  }
-
-  cron { 'yum-puppetlabs mirror':
-    user        => $user,
-    minute      => '0',
-    hour        => '*/2',
-    command     => 'flock -n /var/run/yum-puppetlabs-mirror.lock yum-puppetlabs-mirror-update mirror.yum-puppetlabs >>/var/log/yum-puppetlabs-mirror.log 2>&1',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
-       File['/usr/local/bin/yum-puppetlabs-mirror-update'],
-       File['/etc/afsadmin.keytab'],
-       File['/etc/yum-puppetlabs.keytab'],
     ]
   }
 

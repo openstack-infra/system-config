@@ -606,16 +606,15 @@ node /^mirror-update\d*\.openstack\.org$/ {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
-    bandersnatch_keytab   => hiera('bandersnatch_keytab'),
-    admin_keytab          => hiera('afsadmin_keytab'),
-    fedora_keytab         => hiera('fedora_keytab'),
-    opensuse_keytab       => hiera('opensuse_keytab'),
-    reprepro_keytab       => hiera('reprepro_keytab'),
-    gem_keytab            => hiera('gem_keytab'),
-    centos_keytab         => hiera('centos_keytab'),
-    epel_keytab           => hiera('epel_keytab'),
-    yum_puppetlabs_keytab => hiera('yum_puppetlabs_keytab'),
-    sysadmins             => hiera('sysadmins', []),
+    bandersnatch_keytab => hiera('bandersnatch_keytab'),
+    admin_keytab        => hiera('afsadmin_keytab'),
+    fedora_keytab       => hiera('fedora_keytab'),
+    opensuse_keytab     => hiera('opensuse_keytab'),
+    reprepro_keytab     => hiera('reprepro_keytab'),
+    gem_keytab          => hiera('gem_keytab'),
+    centos_keytab       => hiera('centos_keytab'),
+    epel_keytab         => hiera('epel_keytab'),
+    sysadmins           => hiera('sysadmins', []),
   }
 }
 

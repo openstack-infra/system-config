@@ -113,17 +113,6 @@ class openstack_project::mirror (
     ]
   }
 
-  # Create the symlink to yum-puppetlabs
-  file { "${www_root}/yum-puppetlabs":
-    ensure  => link,
-    target  => "${mirror_root}/yum-puppetlabs",
-    owner   => root,
-    group   => root,
-    require => [
-      File["${www_root}"],
-    ]
-  }
-
   # Create the symlink to fedora
   file { "${www_root}/fedora":
     ensure  => link,
