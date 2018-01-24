@@ -12,6 +12,8 @@
     - role: puppet
       copy_hieradata: False
       copy_puppet: False
+      manage_config: True
+      puppet_reports: none
 - hosts: "git0*:!disabled"
   strategy: free
   gather_facts: true
@@ -20,6 +22,8 @@
     - role: puppet
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
+      manage_config: True
+      puppet_reports: none
 - hosts: "review.openstack.org:!disabled"
   strategy: free
   gather_facts: true
@@ -27,8 +31,9 @@
     - role: puppet
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
-      vars:
-        puppet_timeout: 60m
+      puppet_timeout: 60m
+      manage_config: True
+      puppet_reports: none
 - hosts: "zuul-scheduler:!disabled"
   strategy: free
   gather_facts: true
@@ -36,5 +41,6 @@
     - role: puppet
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
-      vars:
-        puppet_timeout: 60m
+      puppet_timeout: 60m
+      manage_config: True
+      puppet_reports: none
