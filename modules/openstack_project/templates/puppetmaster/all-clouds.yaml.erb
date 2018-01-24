@@ -1,27 +1,4 @@
 clouds:
-  admin-infracloud-chocolate:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.chocolate.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['admin_infracloud_chocolate_username'] %>
-      password: <%= @puppetmaster_clouds['admin_infracloud_chocolate_password'] %>
-      project_name: <%= @puppetmaster_clouds['admin_infracloud_chocolate_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    cacert: /etc/openstack/infracloud_chocolate_cacert.pem
-  openstackci-infracloud-chocolate:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.chocolate.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    floating_ip_source: None
-    cacert: /etc/openstack/infracloud_chocolate_cacert.pem
   openstackci-inap:
     profile: internap
     auth:
@@ -69,18 +46,6 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackci_rax_username'] %>
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
-  openstackzuul-infracloud-chocolate:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.chocolate.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackzuul_infracloud_chocolate_username'] %>
-      password: <%= @puppetmaster_clouds['openstackzuul_infracloud_chocolate_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackzuul_infracloud_chocolate_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    floating_ip_source: None
-    cacert: /etc/openstack/infracloud_chocolate_cacert.pem
   openstackjenkins-rax:
     regions:
       - DFW

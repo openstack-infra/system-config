@@ -63,18 +63,6 @@ clouds:
       user_domain_name: default
     floating_ip_source: neutron
     identity_api_version: '3'
-  openstackci-infracloud-chocolate:
-    region_name: RegionOne
-    auth:
-      auth_url: https://controller00.chocolate.ic.openstack.org:5000
-      username: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_username'] %>
-      password: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_password'] %>
-      project_name: <%= @puppetmaster_clouds['openstackci_infracloud_chocolate_project_name'] %>
-      project_domain_name: default
-      user_domain_name: default
-    identity_api_version: '3'
-    floating_ip_source: None
-    cacert: /etc/openstack/infracloud_chocolate_cacert.pem
   openstackci-citycloud:
     regions:
       - Lon1
