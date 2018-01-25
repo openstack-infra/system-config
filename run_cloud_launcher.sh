@@ -30,6 +30,8 @@ set +e
 # We need access to all-clouds
 export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
 
-timeout -k 2m 120m ansible-playbook -f 1 \
+# Pass -i /dev/null to avoid the ansible-playbook run with all-clouds.yaml
+# being active messing with the normal inventory cache.
+timeout -k 2m 120m ansible-playbook -i /dev/null -f 1 \
     ${ANSIBLE_PLAYBOOKS}/run_cloud_launcher.yaml \
     -e@${ANSIBLE_PLAYBOOKS}/clouds_layouts.yml
