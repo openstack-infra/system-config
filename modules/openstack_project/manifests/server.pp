@@ -17,6 +17,8 @@ class openstack_project::server (
   $manage_exim               = true,
   $pypi_index_url            = 'https://pypi.python.org/simple',
   $purge_apt_sources         = true,
+  $large_fs                  = false,
+  $large_fs_scratch_dir      = '/tmp/fsck'
 ) {
   include sudoers
   include openstack_project::params
@@ -339,5 +341,27 @@ class openstack_project::server (
   file { '/etc/cloud/cloud-init.disabled':
     ensure  => file,
     require => File['/etc/cloud'],
+  }
+
+  if $large_fs {
+    # If a server has a large filesystem, this configures e2fsck to write
+    # scratch files to disk instead of buffering them in RAM.
+    # This allows the FSCK to run without starving the server's available RAM.
+
+    # Nested directory trees with the Puppet file resource are complicated
+    exec { 'create_scratch_dir':
+      command     => "mkdir -p ${large_fs_scratch_dir}",
+      creates     => $large_fs_scratch_dir,
+      path        => '/bin:/usr/bin',
+    }
+
+    file { '/etc/e2fsck.conf':
+      ensure  => present,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('openstack_project/e2fsck.conf.erb'),
+      require => Exec['create_scratch_dir']
+    }
   }
 }
