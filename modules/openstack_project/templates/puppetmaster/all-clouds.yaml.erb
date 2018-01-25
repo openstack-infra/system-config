@@ -69,16 +69,6 @@ clouds:
       username: <%= @puppetmaster_clouds['openstackjenkins_ovh_username'] %>
       password: <%= @puppetmaster_clouds['openstackjenkins_ovh_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackjenkins_ovh_project_name'] %>
-  openstack-rax:
-    regions:
-      - DFW
-      - ORD
-      - IAD
-    profile: rackspace
-    auth:
-      username: <%= @puppetmaster_clouds['openstack_rax_username'] %>
-      password: <%= @puppetmaster_clouds['openstack_rax_password'] %>
-      project_id: <%= @puppetmaster_clouds['openstack_rax_project_id'] %>
   openstackci-tripleo-test-cloud-rh1:
     auth:
       auth_url: https://ci-overcloud.rh1.tripleo.org:13000
