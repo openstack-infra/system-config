@@ -757,6 +757,8 @@ node /^static\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
+    large_fs                  => true,
+    large_fs_scratch_dir      => '/opt/fsck'
   }
   class { 'openstack_project::static':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
