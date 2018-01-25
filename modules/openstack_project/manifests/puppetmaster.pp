@@ -43,6 +43,34 @@ class openstack_project::puppetmaster (
     environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
+  logrotate::file { 'updatecloudlauncher':
+    ensure  => present,
+    log     => '/var/log/puppet_run_cloud_launcher.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updatepuppetmaster'],
+  }
+
+  logrotate::file { 'updatecloudlaunchercron':
+    ensure  => present,
+    log     => '/var/log/puppet_run_cloud_launcher_cron.log',
+    options => ['compress',
+      'copytruncate',
+      'delaycompress',
+      'missingok',
+      'rotate 7',
+      'daily',
+      'notifempty',
+    ],
+    require => Cron['updatepuppetmaster'],
+  }
+
   cron { 'updatepuppetmaster':
     user        => 'root',
     minute      => $puppetmaster_update_cron_interval[min],
