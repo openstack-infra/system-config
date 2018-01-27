@@ -3,4 +3,5 @@
   gather_facts: true
   roles:
   - role: puppet
-    manage_config: true
+    manage_config: True
+    puppet_reports: none

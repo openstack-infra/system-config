@@ -4,11 +4,13 @@
   serial: 1
   roles:
     - role: puppet
-      manage_config: true
+      manage_config: True
+      puppet_reports: none
 - hosts: "compute*.ic.openstack.org:!disabled"
   gather_facts: true
   max_fail_percentage: 100
   serial: "10%"
   roles:
     - role: puppet
-      manage_config: true
+      manage_config: True
+      puppet_reports: none
