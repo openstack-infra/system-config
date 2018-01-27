@@ -1,0 +1,10 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Colleen Murphy <colleen@gazlene.net>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Sat, 27 Jan 2018 18:49:58 +0000
+Reviewed-on: https://review.openstack.org/537422
+Project: openstack-infra/system-config
+Branch: refs/heads/master
