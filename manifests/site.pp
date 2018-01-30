@@ -1192,6 +1192,7 @@ node /^ze\d+\.openstack\.org$/ {
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
     statsd_host              => 'graphite.openstack.org',
+    status_url               => 'https://zuul.openstack.org',
   }
 
   class { '::zuul::executor': }
