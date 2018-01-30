@@ -103,7 +103,7 @@ class openstack_project::server (
          group  => 'root',
          mode   => '0444',
          owner  => 'root',
-         source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}",
+         source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}.${::architecture}",
        }
        exec { 'update-apt':
            command     => 'apt-get update',
