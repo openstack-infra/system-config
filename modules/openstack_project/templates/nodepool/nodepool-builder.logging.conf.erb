@@ -7,23 +7,23 @@
 
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
- dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-26, dib_gentoo, dib_opensuse-423, rax-dfw_upload,
- rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- inap-mtl01_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload,
- citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
- citycloud-sto2_upload, vexxhost-ca-ymq-1_upload
+ dib_centos-7, dib_debian-jessie, dib_fedora-26, dib_fedora-27,
+ dib_gentoo, dib_opensuse-423, dib_ubuntu-trusty, dib_ubuntu-xenial,
+ citycloud-kna1_upload, citycloud-la1_upload, citycloud-lon1_upload,
+ citycloud-sto2_upload, infracloud-chocolate_upload, ovh-bhs1_upload,
+ ovh-gra1_upload, inap-mtl01_upload, rax-dfw_upload, rax-iad_upload,
+ rax-ord_upload, tripleo-test-cloud-rh1_upload,
+ vexxhost-ca-ymq-1_upload
 
 [handlers]
 keys=console,debug,normal,image,
- dib_debian-jessie, dib_ubuntu-trusty, dib_ubuntu-xenial, dib_centos-7,
- dib_fedora-26, dib_gentoo, dib_opensuse-423, rax-dfw_upload,
- rax-ord_upload, rax-iad_upload, ovh-gra1_upload, ovh-bhs1_upload,
- inap-mtl01_upload, tripleo-test-cloud-rh1_upload,
- infracloud-vanilla_upload, infracloud-chocolate_upload,
- citycloud-lon1_upload, citycloud-kna1_upload, citycloud-la1_upload,
- citycloud-sto2_upload, vexxhost-ca-ymq-1_upload
+ dib_centos-7, dib_debian-jessie, dib_fedora-26, dib_fedora-27,
+ dib_gentoo, dib_opensuse-423, dib_ubuntu-trusty, dib_ubuntu-xenial,
+ citycloud-kna1_upload, citycloud-la1_upload, citycloud-lon1_upload,
+ citycloud-sto2_upload, infracloud-chocolate_upload, ovh-bhs1_upload,
+ ovh-gra1_upload, inap-mtl01_upload, rax-dfw_upload, rax-iad_upload,
+ rax-ord_upload, tripleo-test-cloud-rh1_upload,
+ vexxhost-ca-ymq-1_upload
 
 [formatters]
 keys=simple
@@ -90,42 +90,6 @@ datefmt=
 # ==== loggers and handlers ====
 
 
-[logger_dib_debian-jessie]
-level=DEBUG
-handlers=dib_debian-jessie
-qualname=nodepool.image.build.debian-jessie
-propagate=0
-
-[handler_dib_debian-jessie]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.debian-jessie.log', 'H', 8, 30,)
-
-[logger_dib_ubuntu-trusty]
-level=DEBUG
-handlers=dib_ubuntu-trusty
-qualname=nodepool.image.build.ubuntu-trusty
-propagate=0
-
-[handler_dib_ubuntu-trusty]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.ubuntu-trusty.log', 'H', 8, 30,)
-
-[logger_dib_ubuntu-xenial]
-level=DEBUG
-handlers=dib_ubuntu-xenial
-qualname=nodepool.image.build.ubuntu-xenial
-propagate=0
-
-[handler_dib_ubuntu-xenial]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @image_log_document_root %>/dib.ubuntu-xenial.log', 'H', 8, 30,)
-
 [logger_dib_centos-7]
 level=DEBUG
 handlers=dib_centos-7
@@ -138,6 +102,18 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.centos-7.log', 'H', 8, 30,)
 
+[logger_dib_debian-jessie]
+level=DEBUG
+handlers=dib_debian-jessie
+qualname=nodepool.image.build.debian-jessie
+propagate=0
+
+[handler_dib_debian-jessie]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.debian-jessie.log', 'H', 8, 30,)
+
 [logger_dib_fedora-26]
 level=DEBUG
 handlers=dib_fedora-26
@@ -149,6 +125,18 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.fedora-26.log', 'H', 8, 30,)
+
+[logger_dib_fedora-27]
+level=DEBUG
+handlers=dib_fedora-27
+qualname=nodepool.image.build.fedora-27
+propagate=0
+
+[handler_dib_fedora-27]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.fedora-27.log', 'H', 8, 30,)
 
 [logger_dib_gentoo]
 level=DEBUG
@@ -174,125 +162,29 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.opensuse-423.log', 'H', 8, 30,)
 
-[logger_rax-dfw_upload]
+[logger_dib_ubuntu-trusty]
 level=DEBUG
-handlers=rax-dfw_upload
-qualname=nodepool.image.upload.rax-dfw
+handlers=dib_ubuntu-trusty
+qualname=nodepool.image.build.ubuntu-trusty
 propagate=0
 
-[handler_rax-dfw_upload]
+[handler_dib_ubuntu-trusty]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @upload_log_document_root %>/rax-dfw.log', 'H', 8, 30,)
+args=('<%= @image_log_document_root %>/dib.ubuntu-trusty.log', 'H', 8, 30,)
 
-[logger_rax-ord_upload]
+[logger_dib_ubuntu-xenial]
 level=DEBUG
-handlers=rax-ord_upload
-qualname=nodepool.image.upload.rax-ord
+handlers=dib_ubuntu-xenial
+qualname=nodepool.image.build.ubuntu-xenial
 propagate=0
 
-[handler_rax-ord_upload]
+[handler_dib_ubuntu-xenial]
 level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
-args=('<%= @upload_log_document_root %>/rax-ord.log', 'H', 8, 30,)
-
-[logger_rax-iad_upload]
-level=DEBUG
-handlers=rax-iad_upload
-qualname=nodepool.image.upload.rax-iad
-propagate=0
-
-[handler_rax-iad_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/rax-iad.log', 'H', 8, 30,)
-
-[logger_ovh-gra1_upload]
-level=DEBUG
-handlers=ovh-gra1_upload
-qualname=nodepool.image.upload.ovh-gra1
-propagate=0
-
-[handler_ovh-gra1_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/ovh-gra1.log', 'H', 8, 30,)
-
-[logger_ovh-bhs1_upload]
-level=DEBUG
-handlers=ovh-bhs1_upload
-qualname=nodepool.image.upload.ovh-bhs1
-propagate=0
-
-[handler_ovh-bhs1_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/ovh-bhs1.log', 'H', 8, 30,)
-
-[logger_inap-mtl01_upload]
-level=DEBUG
-handlers=inap-mtl01_upload
-qualname=nodepool.image.upload.inap-mtl01
-propagate=0
-
-[handler_inap-mtl01_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/inap-mtl01.log', 'H', 8, 30,)
-
-[logger_tripleo-test-cloud-rh1_upload]
-level=DEBUG
-handlers=tripleo-test-cloud-rh1_upload
-qualname=nodepool.image.upload.tripleo-test-cloud-rh1
-propagate=0
-
-[handler_tripleo-test-cloud-rh1_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh1.log', 'H', 8, 30,)
-
-[logger_infracloud-vanilla_upload]
-level=DEBUG
-handlers=infracloud-vanilla_upload
-qualname=nodepool.image.upload.infracloud-vanilla
-propagate=0
-
-[handler_infracloud-vanilla_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/infracloud-vanilla.log', 'H', 8, 30,)
-
-[logger_infracloud-chocolate_upload]
-level=DEBUG
-handlers=infracloud-chocolate_upload
-qualname=nodepool.image.upload.infracloud-chocolate
-propagate=0
-
-[handler_infracloud-chocolate_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/infracloud-chocolate.log', 'H', 8, 30,)
-
-[logger_citycloud-lon1_upload]
-level=DEBUG
-handlers=citycloud-lon1_upload
-qualname=nodepool.image.upload.citycloud-lon1
-propagate=0
-
-[handler_citycloud-lon1_upload]
-level=DEBUG
-class=logging.handlers.TimedRotatingFileHandler
-formatter=simple
-args=('<%= @upload_log_document_root %>/citycloud-lon1.log', 'H', 8, 30,)
+args=('<%= @image_log_document_root %>/dib.ubuntu-xenial.log', 'H', 8, 30,)
 
 [logger_citycloud-kna1_upload]
 level=DEBUG
@@ -318,6 +210,18 @@ class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/citycloud-la1.log', 'H', 8, 30,)
 
+[logger_citycloud-lon1_upload]
+level=DEBUG
+handlers=citycloud-lon1_upload
+qualname=nodepool.image.upload.citycloud-lon1
+propagate=0
+
+[handler_citycloud-lon1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/citycloud-lon1.log', 'H', 8, 30,)
+
 [logger_citycloud-sto2_upload]
 level=DEBUG
 handlers=citycloud-sto2_upload
@@ -329,6 +233,102 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @upload_log_document_root %>/citycloud-sto2.log', 'H', 8, 30,)
+
+[logger_infracloud-chocolate_upload]
+level=DEBUG
+handlers=infracloud-chocolate_upload
+qualname=nodepool.image.upload.infracloud-chocolate
+propagate=0
+
+[handler_infracloud-chocolate_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/infracloud-chocolate.log', 'H', 8, 30,)
+
+[logger_ovh-bhs1_upload]
+level=DEBUG
+handlers=ovh-bhs1_upload
+qualname=nodepool.image.upload.ovh-bhs1
+propagate=0
+
+[handler_ovh-bhs1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/ovh-bhs1.log', 'H', 8, 30,)
+
+[logger_ovh-gra1_upload]
+level=DEBUG
+handlers=ovh-gra1_upload
+qualname=nodepool.image.upload.ovh-gra1
+propagate=0
+
+[handler_ovh-gra1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/ovh-gra1.log', 'H', 8, 30,)
+
+[logger_inap-mtl01_upload]
+level=DEBUG
+handlers=inap-mtl01_upload
+qualname=nodepool.image.upload.inap-mtl01
+propagate=0
+
+[handler_inap-mtl01_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/inap-mtl01.log', 'H', 8, 30,)
+
+[logger_rax-dfw_upload]
+level=DEBUG
+handlers=rax-dfw_upload
+qualname=nodepool.image.upload.rax-dfw
+propagate=0
+
+[handler_rax-dfw_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-dfw.log', 'H', 8, 30,)
+
+[logger_rax-iad_upload]
+level=DEBUG
+handlers=rax-iad_upload
+qualname=nodepool.image.upload.rax-iad
+propagate=0
+
+[handler_rax-iad_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-iad.log', 'H', 8, 30,)
+
+[logger_rax-ord_upload]
+level=DEBUG
+handlers=rax-ord_upload
+qualname=nodepool.image.upload.rax-ord
+propagate=0
+
+[handler_rax-ord_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/rax-ord.log', 'H', 8, 30,)
+
+[logger_tripleo-test-cloud-rh1_upload]
+level=DEBUG
+handlers=tripleo-test-cloud-rh1_upload
+qualname=nodepool.image.upload.tripleo-test-cloud-rh1
+propagate=0
+
+[handler_tripleo-test-cloud-rh1_upload]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @upload_log_document_root %>/tripleo-test-cloud-rh1.log', 'H', 8, 30,)
 
 [logger_vexxhost-ca-ymq-1_upload]
 level=DEBUG
