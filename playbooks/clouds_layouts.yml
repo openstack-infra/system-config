@@ -189,16 +189,6 @@ clouds:
     profiles:
       - openstackci-keypairs
 
-  # tripleo-test-cloud-rh1
-  - name: openstackci-tripleo-test-cloud-rh1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-  - name: openstackzuul-tripleo-test-cloud-rh1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-
   # Citycloud
   - name: openstackci-citycloud-Lon1
     oscc_cloud: openstackci-citycloud

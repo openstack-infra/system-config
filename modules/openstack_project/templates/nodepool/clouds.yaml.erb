@@ -29,27 +29,6 @@ clouds:
       username: '<%= @ovh_username %>'
       password: '<%= @ovh_password %>'
       project_name: '<%= @ovh_project %>'
-  tripleo-test-cloud-rh1:
-    region_name: regionOne
-    api_timeout: 60
-    auth:
-      auth_url: https://ci-overcloud.rh1.tripleo.org:13000
-      username: '<%= @tripleo_username %>'
-      password: '<%= @tripleo_password %>'
-      project_name: '<%= @tripleo_project %>'
-      project_domain_name: default
-      user_domain_name: default
-    floating_ip_source: neutron
-    identity_api_version: '3'
-  tripleo-test-cloud-rh2:
-    region_name: regionOne
-    api_timeout: 60
-    auth:
-      username: '<%= @tripleo_username %>'
-      password: '<%= @tripleo_password %>'
-      project_name: '<%= @tripleo_project %>'
-      auth_url: 'https://ci-overcloud.rh2.tripleo.org:13000/v2.0'
-    floating_ip_source: neutron
   inap:
     profile: internap
     api_timeout: 60
