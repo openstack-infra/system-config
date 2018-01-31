@@ -150,7 +150,7 @@ class openstack_project::server (
       ensure  => present,
       owner   => root,
       group   => root,
-      mode    => 0644,
+      mode    => '0644',
       source  => 'puppet:///modules/openstack_project/yum/yum-cron.conf',
       replace => true,
       require => Package['yum-cron'],
