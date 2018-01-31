@@ -482,6 +482,7 @@ cacti_hosts:
 - planet01.openstack.org
 - puppetmaster.openstack.org
 - mirror01.dfw.rax.openstack.org
+- mirror02.dfw.rax.openstack.org
 - mirror01.ord.rax.openstack.org
 - mirror01.iad.rax.openstack.org
 - mirror01.regionone.infracloud-chocolate.openstack.org
