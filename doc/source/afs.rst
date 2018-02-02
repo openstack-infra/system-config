@@ -191,10 +191,42 @@ Create an LVM volume named ``vicepa`` from cinder volumes.  See
 Finally, create the fileserver with::
 
   bos create NEWSERVER dafs dafs \
-    -cmd "/usr/lib/openafs/dafileserver -p 23 -busyat 600 -rxpck 400 -s 1200 -l  1200 -cb 65535 -b 240 -vc 1200" \
+    -cmd "/usr/lib/openafs/dafileserver -L -p 242 -busyat 600 -rxpck 700 \
+      -s 1200 -l 1200 -cb 1500000 -b 240 -vc 1200" \
+      -udpsize 131071 -sendsize 131071 \
     -cmd /usr/lib/openafs/davolserver \
     -cmd /usr/lib/openafs/salvageserver \
     -cmd /usr/lib/openafs/dasalvager
+
+It is worth evaluating these settings periodically
+
+* ``-L`` selects the large size, which ups a number of defaults
+* ``-p`` defines the worker threads for processing incoming calls.
+  Since they block until there is work to do, we should leave this at
+  around the maximum (which may increase across versions; see
+  documentation)
+* ``-udpsize`` and ``-sendsize`` should be increased above their default
+* ``-cb`` defines the callbacks.  For our use case, with a single
+  mirror writer, this should be around the number of files the client
+  is configured to cache (``-dcache``) multiplied by the number of
+  clients.
+
+Updating Settings
+~~~~~~~~~~~~~~~~~
+
+If you wish to update the settings for an existing server, you can
+stop and remove the existing ``bnode`` (the collection of processes
+the overseeer is monitoring, created via ``bos create`` above) and
+recreate it.
+
+For example ::
+
+  bos stop -server afs01.dfw.openstack.org \
+           -instance dafs \
+           -wait
+
+You can then run the ``bos create`` command above with any modified
+parameters to restart the server.
 
 Mirrors
 ~~~~~~~
