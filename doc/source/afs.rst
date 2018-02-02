@@ -191,10 +191,16 @@ Create an LVM volume named ``vicepa`` from cinder volumes.  See
 Finally, create the fileserver with::
 
   bos create NEWSERVER dafs dafs \
-    -cmd "/usr/lib/openafs/dafileserver -p 23 -busyat 600 -rxpck 400 -s 1200 -l  1200 -cb 65535 -b 240 -vc 1200" \
+    -cmd "/usr/lib/openafs/dafileserver -p 32 -busyat 600 -rxpck 400 -s 1200 -l  1200 -cb $(( 128 * 1024 )) -b 240 -vc 1200" \
     -cmd /usr/lib/openafs/davolserver \
     -cmd /usr/lib/openafs/salvageserver \
     -cmd /usr/lib/openafs/dasalvager
+
+It is worth evaluating these settings periodically
+
+* ``-p`` defines the worker threads for processing incoming calls.
+* ``-cb`` defines the callbacks.  A single client can request tens of
+  thousands of file object callbacks.
 
 Mirrors
 ~~~~~~~
