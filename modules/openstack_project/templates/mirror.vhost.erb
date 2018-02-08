@@ -11,6 +11,9 @@ NameVirtualHost <%= @vhost_name %>:8080
 Listen 8081
 NameVirtualHost <%= @vhost_name %>:8081
 
+Listen 8082
+NameVirtualHost <%= @vhost_name %>:8082
+
 <VirtualHost <%= @vhost_name %>:<%= @port %>>
     ServerName <%= @srvname %>
     <% if @serveraliases.is_a? Array -%>
@@ -246,6 +249,61 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheEnable disk  "/registry-1.docker"
     ProxyPass "/registry-1.docker/" "https://registry-1.docker.io/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/registry-1.docker/" "https://registry-1.docker.io/"
+
+    # dseasb33srnrn.cloudfront.net
+    CacheEnable disk "/cloudfront"
+    ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
+
+</VirtualHost>
+
+<VirtualHost <%= @vhost_name %>:8082>
+    ServerName <%= @srvname %>:8082
+    <% if @serveraliases.is_a? Array -%>
+      <% @serveraliases.each do |name| -%>
+        <%= "  ServerAlias #{name}:8082\n" %>
+      <% end %>
+    <% elsif @serveraliases != nil -%>
+      <%= "  ServerAlias #{@serveraliases}:8082" -%>
+    <% end %>
+
+    # Disable directory listing by default.
+    <Directory />
+      Order Deny,Allow
+      Deny from all
+      Options None
+      AllowOverride None
+    </Directory>
+
+    ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8082_error.log
+    LogLevel warn
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8082_access.log combined
+    ServerSignature Off
+
+    # Caching reverse proxy for things that don't make sense in AFS
+    #
+    # General cache rules
+    CacheRoot "/var/cache/apache2/proxy"
+    CacheDirLevels 5
+    CacheDirLength 2
+    # SSL support
+    SSLProxyEngine on
+    # Prevent thundering herds.
+    CacheLock on
+    CacheLockPath "/tmp/mod_cache-lock"
+    CacheLockMaxAge 5
+    # 5GiB
+    CacheMaxFileSize 5368709120
+    # Ignore expire headers as the urls use sha256 hashes.
+    CacheIgnoreQueryString On
+    CacheStoreExpired On
+
+    # NOTE(SamYaple): Docker has historically not allowed to have anything in
+    # the URI, but it wasn't enforced until they started validating the config
+    # in docker-ce 17.10. Prior to that, it was working fine.
+    CacheEnable disk  "/"
+    ProxyPass "/" "https://registry-1.docker.io/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/" "https://registry-1.docker.io/"
 
     # dseasb33srnrn.cloudfront.net
     CacheEnable disk "/cloudfront"
