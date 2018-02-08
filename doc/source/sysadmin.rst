@@ -579,3 +579,11 @@ Leaving us with just a single device::
 
 At this time, you are able to remove the original volume from openstack if
 no longer needed.
+
+Email
+=====
+
+There is a shared email account used for Infrastructure related mail
+(account sign-ups, support tickets, etc).  Root admins should ensure
+they have access to this account; access credentials are available
+from any existing member.
