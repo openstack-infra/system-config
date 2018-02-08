@@ -242,6 +242,13 @@ NameVirtualHost <%= @vhost_name %>:8081
     CacheIgnoreQueryString On
     CacheStoreExpired On
 
+    # NOTE(SamYaple): Docker has historically not allowed to have anything in
+    # the URI, but it wasn't enforced until they started validating the config
+    # in docker-ce 17.10. Prior to that, it was working fine.
+    CacheEnable disk  "/"
+    ProxyPass "/" "https://registry-1.docker.io/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/" "https://registry-1.docker.io/"
+
     # registry-1.docker.io
     CacheEnable disk  "/registry-1.docker"
     ProxyPass "/registry-1.docker/" "https://registry-1.docker.io/" ttl=120 keepalive=On retry=0
