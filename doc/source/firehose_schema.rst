@@ -85,7 +85,7 @@ Payload
 -------
 
 The payload of messages is dynamically generated and dependent on the
-notification recieved from launchpad, and launchpad isn't always consistent in
+notification received from launchpad, and launchpad isn't always consistent in
 what fields are present in those notifications.
 
 However, for bug event types there is a standard format. The fields which
@@ -181,7 +181,7 @@ that the event is for, this is either going to be ``start`` or ``finish``.
  * ``OK``
  * ``FAILED``
 
-to indicate whether the playbook succesfully executed or not.
+to indicate whether the playbook successfully executed or not.
 
 Playbook Stats Events
 '''''''''''''''''''''

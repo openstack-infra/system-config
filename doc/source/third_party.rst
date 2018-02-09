@@ -422,7 +422,7 @@ this list that your account has been disabled will include instructions for
 getting your system re-enabled. You are also welcome to join us in the
 #openstack-infra irc channel on freenode to discuss your situation.
 
-In order to get your Third Pary CI account to have voting permissions on
+In order to get your Third Party CI account to have voting permissions on
 repos in gerrit in addition to ``openstack-dev/ci-sandbox`` you have a greater
 chance of success if you follow these steps:
 
