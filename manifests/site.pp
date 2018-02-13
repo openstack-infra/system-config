@@ -1112,7 +1112,6 @@ node /^nb0[12].openstack\.org$/ {
     vhost_name                    => $::fqdn,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents            => $clouds_yaml,
-    image_log_document_root       => '/var/log/nodepool/image',
     statsd_host                   => 'graphite.openstack.org',
     builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
