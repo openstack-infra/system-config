@@ -1173,6 +1173,18 @@ node /^ze\d+\.openstack\.org$/ {
     url => 'https://git.openstack.org/openstack-infra/project-config',
   }
 
+  # We use later HWE kernels for better memory managment, requiring an
+  # updated AFS version which we install from our custom ppa.
+  include ::apt
+  apt::ppa { 'ppa:openstack-ci-core/openafs-amd64-hwe': }
+  package { 'linux-generic-hwe-16.04':
+    ensure  => present,
+    require => [
+      Apt:Ppa['ppa:openstack-ci-core/openafs-amd64-hwe'],
+      Class['apt::update'],
+    ],
+  }
+
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
