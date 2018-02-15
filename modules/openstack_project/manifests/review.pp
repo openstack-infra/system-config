@@ -82,18 +82,12 @@ class openstack_project::review (
   $projects_config = 'openstack_project/review.projects.ini.erb',
 ) {
 
-  $java_home = $::lsbdistcodename ? {
-    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
-    'trusty'  => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
-  }
-
   class { 'project_config':
     url  => $project_config_repo,
   }
 
   $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
   class { 'openstack_project::gerrit':
-    java_home                           => $java_home,
     git_http_url                        => 'https://git.openstack.org/',
     canonical_git_url                   => 'git://git.openstack.org/',
     ssl_cert_file                       => $ssl_cert_file,
