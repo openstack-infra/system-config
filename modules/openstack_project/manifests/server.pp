@@ -103,7 +103,7 @@ class openstack_project::server (
          group  => 'root',
          mode   => '0444',
          owner  => 'root',
-         source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}",
+         source => "puppet:///modules/openstack_project/sources.list.${::lsbdistcodename}.${::architecture}",
        }
        exec { 'update-apt':
            command     => 'apt-get update',
@@ -340,4 +340,13 @@ class openstack_project::server (
     ensure  => file,
     require => File['/etc/cloud'],
   }
+
+  if ($::lsbdistcodename == 'xenial' and $::architecture == 'aarch64') {
+    # Make sure we install the HWE kernel for arm64; it's 4.13 v 4.3
+    # and works much better on linaro cloud
+    package { 'linux-generic-hwe-16.04':
+      ensure => present,
+    }
+  }
+
 }
