@@ -1,0 +1,13 @@
+Code-Review+1: Rico Lin <rico.lin@easystack.cn>
+Code-Review+1: Nicolas Bock <nicolasbock@gmail.com>
+Code-Review+1: Ifat Afek <ifat.afek@nokia.com>
+Code-Review+1: Eric Kao <ekcs.openstack@gmail.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 16 Feb 2018 05:58:41 +0000
+Reviewed-on: https://review.openstack.org/531136
+Project: openstack-infra/system-config
+Branch: refs/heads/master
