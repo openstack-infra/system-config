@@ -1,0 +1,11 @@
+Code-Review+1: Louis Fourie <louis.fourie@huawei.com>
+Code-Review+1: Cong Phuoc Hoang <hoangphuocbk2.07@gmail.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 16 Feb 2018 05:58:32 +0000
+Reviewed-on: https://review.openstack.org/535390
+Project: openstack-infra/system-config
+Branch: refs/heads/master
