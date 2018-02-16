@@ -111,6 +111,7 @@ statusbot_channels:
 - openstack-infra-incident
 - openstack-interop
 - openstack-ironic
+- openstack-kayobe
 - openstack-keystone
 - openstack-kolla
 - openstack-lbaas
@@ -203,6 +204,7 @@ meetbot_channels:
 - '#openstack-ironic'
 - '#openstack-jjb'
 - '#openstack-karbor'
+- '#openstack-kayobe'
 - '#openstack-keystone'
 - '#openstack-ko'
 - '#openstack-kolla'
