@@ -788,6 +788,7 @@ node /^zk\d+\.openstack\.org$/ {
       # Zookeeper clients
       {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
