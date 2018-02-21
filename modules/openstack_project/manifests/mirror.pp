@@ -146,10 +146,21 @@ class openstack_project::mirror (
     ]
   }
 
-  # Create the symlink to apt.
+  # Create the symlink to Ubuntu
   file { "${www_root}/ubuntu":
     ensure  => link,
     target  => "${mirror_root}/ubuntu",
+    owner   => root,
+    group   => root,
+    require => [
+      File["${www_root}"],
+    ]
+  }
+
+  # Create the symlink to Ubuntu ports
+  file { "${www_root}/ubuntu-ports":
+    ensure  => link,
+    target  => "${mirror_root}/ubuntu-ports",
     owner   => root,
     group   => root,
     require => [
