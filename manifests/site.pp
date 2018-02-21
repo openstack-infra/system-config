@@ -788,6 +788,7 @@ node /^zk\d+\.openstack\.org$/ {
       # Zookeeper clients
       {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
@@ -934,6 +935,7 @@ node 'nodepool.openstack.org' {
     iptables_allowed_hosts    => [
       {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
+      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
@@ -1068,7 +1070,7 @@ node /^nl\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^nb0[12].openstack\.org$/ {
+node /^nb\d+\.openstack\.org$/ {
   $group = 'nodepool'
   # TODO(pabelanger): Move all of this back into nodepool manifest, it has
   # grown too big.
