@@ -8,20 +8,20 @@
 [loggers]
 keys=root,nodepool,requests,shade,image,kazoo,
  dib_centos-7, dib_debian-jessie, dib_fedora-26, dib_fedora-27,
- dib_gentoo, dib_opensuse-423, dib_ubuntu-trusty, dib_ubuntu-xenial,
- citycloud-kna1_upload, citycloud-la1_upload, citycloud-lon1_upload,
- citycloud-sto2_upload, ovh-bhs1_upload, ovh-gra1_upload,
- inap-mtl01_upload, rax-dfw_upload, rax-iad_upload, rax-ord_upload,
- vexxhost-ca-ymq-1_upload
+ dib_gentoo, dib_opensuse-423, dib_opensuse-tumbleweed,
+ dib_ubuntu-trusty, dib_ubuntu-xenial, citycloud-kna1_upload,
+ citycloud-la1_upload, citycloud-lon1_upload, citycloud-sto2_upload,
+ ovh-bhs1_upload, ovh-gra1_upload, inap-mtl01_upload, rax-dfw_upload,
+ rax-iad_upload, rax-ord_upload, vexxhost-ca-ymq-1_upload
 
 [handlers]
 keys=console,debug,normal,image,
  dib_centos-7, dib_debian-jessie, dib_fedora-26, dib_fedora-27,
- dib_gentoo, dib_opensuse-423, dib_ubuntu-trusty, dib_ubuntu-xenial,
- citycloud-kna1_upload, citycloud-la1_upload, citycloud-lon1_upload,
- citycloud-sto2_upload, ovh-bhs1_upload, ovh-gra1_upload,
- inap-mtl01_upload, rax-dfw_upload, rax-iad_upload, rax-ord_upload,
- vexxhost-ca-ymq-1_upload
+ dib_gentoo, dib_opensuse-423, dib_opensuse-tumbleweed,
+ dib_ubuntu-trusty, dib_ubuntu-xenial, citycloud-kna1_upload,
+ citycloud-la1_upload, citycloud-lon1_upload, citycloud-sto2_upload,
+ ovh-bhs1_upload, ovh-gra1_upload, inap-mtl01_upload, rax-dfw_upload,
+ rax-iad_upload, rax-ord_upload, vexxhost-ca-ymq-1_upload
 
 [formatters]
 keys=simple
@@ -159,6 +159,18 @@ level=DEBUG
 class=logging.handlers.TimedRotatingFileHandler
 formatter=simple
 args=('<%= @image_log_document_root %>/dib.opensuse-423.log', 'H', 8, 30,)
+
+[logger_dib_opensuse-tumbleweed]
+level=DEBUG
+handlers=dib_opensuse-tumbleweed
+qualname=nodepool.image.build.opensuse-tumbleweed
+propagate=0
+
+[handler_dib_opensuse-tumbleweed]
+level=DEBUG
+class=logging.handlers.TimedRotatingFileHandler
+formatter=simple
+args=('<%= @image_log_document_root %>/dib.opensuse-tumbleweed.log', 'H', 8, 30,)
 
 [logger_dib_ubuntu-trusty]
 level=DEBUG
