@@ -28,9 +28,18 @@ class openstack_project::review_dev (
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
 ) {
 
-  $java_home = $::lsbdistcodename ? {
-    'precise' => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
-    'trusty'  => '/usr/lib/jvm/java-7-openjdk-amd64/jre',
+  case $::lsbdistcodename {
+    'trusty': {
+      $jre_package = 'openjdk-7-jre-headless'
+      $java_home = '/usr/lib/jvm/java-7-openjdk-amd64/jre'
+    }
+    'xenial': {
+      $jre_package = 'openjdk-8-jre-headless'
+      $java_home = '/usr/lib/jvm/java-8-openjdk-amd64/jre'
+    }
+    default: {
+      fail("Operating system release ${::lsbdistcodename} not supported.")
+    }
   }
 
   realize (
@@ -202,7 +211,7 @@ class openstack_project::review_dev (
     unless      => "keytool -list -alias storyboard-dev.openstack.org -storepass changeit -keystore $java_home/lib/security/cacerts  >/dev/null 2>&1",
     path        => '/bin:/usr/bin',
     require     => [
-      Package['openjdk-7-jre-headless'],
+      Package[$jre_package],
       File['/home/gerrit2/storyboard-dev.crt'],
     ],
   }
