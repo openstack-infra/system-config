@@ -929,6 +929,10 @@ node 'nodepool.openstack.org' {
   $vexxhost_project    = hiera('nodepool_vexxhost_project', 'project')
   $citycloud_username = hiera('nodepool_citycloud_username', 'username')
   $citycloud_password = hiera('nodepool_citycloud_password')
+  $linaro_username = hiera('nodepool_linaro_username', 'username')
+  $linaro_password = hiera('nodepool_linaro_password')
+  $linaro_project = hiera('nodepool_linaro_project', 'project')
+
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
