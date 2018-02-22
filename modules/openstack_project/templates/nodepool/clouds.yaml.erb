@@ -76,3 +76,14 @@ clouds:
       project_id: bed89257500340af8d0fbe7141b1bfd6
       project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
       user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
+  linaro:
+    regions:
+      - RegionOne
+    identity_api_version: '3'
+    auth:
+      auth_url: https://cn1.linaro.cloud:35357
+      username: <%= @linaro_username %>
+      password: <%= @linaro_password %>
+      project_name: <%= @linaro_project %>
+      project_domain_name: default
+      user_domain_name: default
