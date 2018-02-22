@@ -228,7 +228,7 @@ The Gerrit Trigger plugin for Jenkins can be found on `the Jenkins
 repository`_.  You can install it using the Advanced tab in the
 Jenkins Plugin Manager.
 
-.. _the Jenkins repository: http://repo.jenkins-ci.org/repo/com/sonyericsson/hudson/plugins/gerrit/gerrit-trigger/
+.. _the Jenkins repository: https://plugins.jenkins.io/gerrit-trigger
 
 Once installed Jenkins will have a new `Gerrit Trigger` option in the `Manage
 Jenkins` menu.  This should be given the following options::
