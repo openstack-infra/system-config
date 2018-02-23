@@ -48,6 +48,19 @@ for DISTVER in 42.3; do
         $MIRROR/opensuse/$REPO/ $BASE/$REPO/
 done
 
+REPO=tumbleweed
+if ! [ -f $BASE/$REPO ]; then
+    $K5START mkdir -p $BASE/$REPO/repo/oss/
+fi
+
+date --iso-8601=ns
+echo "Running rsync distribution $REPO ..."
+$K5START rsync -rlptDvz \
+    --delete \
+    --delete-excluded \
+    --exclude="i586" \
+    $MIRROR/opensuse/$REPO/repo/oss/ $BASE/$REPO/repo/oss/
+
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
