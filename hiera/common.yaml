@@ -128,6 +128,7 @@ statusbot_channels:
 - openstack-outreachy
 - openstack-powervm
 - openstack-qa
+- openstack-qinling
 - openstack-raksha
 - openstack-rally
 - openstack-release
