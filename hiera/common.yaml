@@ -241,6 +241,7 @@ meetbot_channels:
 - '#openstack-sahara'
 - '#openstack-sdks'
 - '#openstack-searchlight'
+- '#openstack-self-healing'
 - '#openstack-security'
 - '#openstack-sprint'
 - '#openstack-stable'
