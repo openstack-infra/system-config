@@ -1045,6 +1045,7 @@ node /^nl\d+\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     sysadmins => hiera('sysadmins', []),
+    iptables_public_tcp_ports => [80],
   }
 
   include openstack_project
