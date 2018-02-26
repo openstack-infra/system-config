@@ -1056,6 +1056,7 @@ node /^nl\d+\.openstack\.org$/ {
     statsd_host              => 'graphite.openstack.org',
     revision                 => 'master',
     python_version           => 3,
+    enable_webapp            => true,
   }
 
   file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
@@ -1122,6 +1123,7 @@ node /^nb\d+\.openstack\.org$/ {
   class { '::openstackci::nodepool_builder':
     nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
     vhost_name                    => $::fqdn,
+    enable_build_log_via_http     => true,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents            => $clouds_yaml,
     statsd_host                   => 'graphite.openstack.org',
