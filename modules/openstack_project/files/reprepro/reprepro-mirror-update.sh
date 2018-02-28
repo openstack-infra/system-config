@@ -43,6 +43,10 @@ echo "Checking state of mirror"
 $REPREPRO checkpool fast
 $REPREPRO check
 
+date --iso-8601=ns
+echo "Exporting all repos"
+$REPREPRO export
+
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "reprepro completed successfully, running vos release."
 k5start -t -f /etc/afsadmin.keytab service/afsadmin -- vos release -v $MIRROR_VOLUME
