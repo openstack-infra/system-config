@@ -1,0 +1,13 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 28 Feb 2018 19:21:02 +0000
+Reviewed-on: https://review.openstack.org/529428
+Project: openstack-infra/system-config
+Branch: refs/heads/master
