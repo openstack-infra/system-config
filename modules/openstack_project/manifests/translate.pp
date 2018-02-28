@@ -26,6 +26,7 @@ class openstack_project::translate(
   $zanata_wildfly_install_url = 'https://repo1.maven.org/maven2/org/wildfly/wildfly-dist/9.0.1.Final/wildfly-dist-9.0.1.Final.tar.gz',
   $zanata_url = '',
   $zanata_checksum = '',
+  $zanata_main_version = '',
   $project_config_repo = '',
   $openid_url = '',
   $vhost_name = $::fqdn,
@@ -56,6 +57,7 @@ class openstack_project::translate(
     zanata_wildfly_install_url  => $zanata_wildfly_install_url,
     zanata_url                  => $zanata_url,
     zanata_checksum             => $zanata_checksum,
+    zanata_main_version         => $zanata_main_version
   }
 
   class { '::zanata::apache':
