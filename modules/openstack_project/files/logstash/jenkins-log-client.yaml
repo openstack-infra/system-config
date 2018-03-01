@@ -25,6 +25,9 @@ subunit-files:
     build-queue-filter: 'post'
   - name: logs/testrepository.subunit
     build-queue-filter: 'post'
+  - name: logs/controller/testr_results.subunit
+    job-filter: '.*tempest-full.*'
+    build-queue-filter: 'gate'
 # List of files to source logs from.
 source-files:
   - name: console.html
