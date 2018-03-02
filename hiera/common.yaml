@@ -72,6 +72,7 @@ statusbot_channels:
 - ara
 - congress
 - edeploy
+- edge-wg
 - fuel-dev
 - heat
 - midonet
