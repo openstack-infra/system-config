@@ -72,6 +72,7 @@ statusbot_channels:
 - ara
 - congress
 - edeploy
+- edge-computing-group
 - fuel-dev
 - heat
 - midonet
@@ -169,6 +170,7 @@ meetbot_channels:
 - '#cloudkitty'
 - '#congress'
 - '#dox'
+- '#edge-computing-group'
 - '#heat'
 - '#kata-dev'
 - '#kata-general'
