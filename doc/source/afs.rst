@@ -70,7 +70,7 @@ OpenStack has two fileservers in DFW and one in ORD.  They do not
 automatically contain copies of the same data.  A read-write volume in
 AFS can only exist on exactly one fileserver, and if that fileserver
 is out of service, the volumes it serves are not available.  However,
-volumes may have read-write copies which are stored on other
+volumes may have read-only copies which are stored on other
 fileservers.  If a client requests a read-only volume, as long as one
 site with a read-only volume is online, it will be available.
 
