@@ -150,6 +150,28 @@ class openstack_project::mirror_update (
     ]
   }
 
+  ::openstack_project::reprepro { 'ubuntu-ports-reprepro-mirror':
+    confdir       => '/etc/reprepro/ubuntu-ports',
+    basedir       => '/afs/.openstack.org/mirror/ubuntu-ports',
+    distributions => 'openstack_project/reprepro/distributions.ubuntu-ports.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
+    releases      => ['bionic', 'xenial'],
+  }
+
+  cron { 'reprepro ubuntu-ports':
+    user        => $user,
+    hour        => '*/2',
+    minute      => '0',
+    command     => 'flock -n /var/run/reprepro/ubuntu-ports.lock reprepro-mirror-update /etc/reprepro/ubuntu-ports mirror.ubuntu-ports >>/var/log/reprepro/ubuntu-ports-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['ubuntu-ports-reprepro-mirror'],
+    ]
+  }
+
   gnupg_key { 'Ubuntu Archive':
     ensure     => present,
     key_id     => '40976EAF437D05B5',
