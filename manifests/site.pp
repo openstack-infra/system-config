@@ -1292,6 +1292,7 @@ node /^zuul\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '4730', hostname => 'zm06.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm07.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm08.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'zuul-web-test.openstack.org'},
     ],
     sysadmins                 => hiera('sysadmins', []),
   }
@@ -1355,6 +1356,63 @@ node /^zuul\d+\.openstack\.org$/ {
     backup_user   => 'bup-zuulv3',
     backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
+
+}
+
+# Node-OS: xenial
+node zuul-web-test.openstack.org {
+  $group = "zuul-scheduler"
+  $gerrit_server        = 'review.openstack.org'
+  $gerrit_user          = 'zuul'
+  $gerrit_ssh_host_key  = hiera('gerrit_zuul_user_ssh_key_contents')
+  $zuul_ssh_private_key = hiera('zuul_ssh_private_key_contents')
+  $git_email            = 'zuul@openstack.org'
+  $git_name             = 'OpenStack Zuul'
+  $revision             = 'master'
+
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [79, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { '::project_config':
+    url => 'https://git.openstack.org/openstack-infra/project-config',
+  }
+
+  # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
+  # settings.
+  class { '::zuul':
+    gerrit_server                 => $gerrit_server,
+    gerrit_user                   => $gerrit_user,
+    zuul_ssh_private_key          => $zuul_ssh_private_key,
+    git_email                     => $git_email,
+    git_name                      => $git_name,
+    revision                      => $revision,
+    python_version                => 3,
+    zookeeper_hosts               => 'nodepool.openstack.org:2181',
+    zookeeper_session_timeout     => 40,
+    zuulv3                        => true,
+    connections                   => hiera('zuul_connections', []),
+    connection_secrets            => hiera('zuul_connection_secrets', []),
+    vhost_name                    => 'zuul-web-test.openstack.org',
+    zuul_status_url               => 'http://127.0.0.1:8001/openstack',
+    zuul_web_url                  => 'http://127.0.0.1:9000',
+    zuul_tenant_name              => 'openstack',
+    gearman_server                => 'zuul01.openstack.org',
+    gearman_client_ssl_cert       => hiera('gearman_client_ssl_cert'),
+    gearman_client_ssl_key        => hiera('gearman_client_ssl_key'),
+    gearman_server_ssl_cert       => hiera('gearman_server_ssl_cert'),
+    gearman_server_ssl_key        => hiera('gearman_server_ssl_key'),
+    gearman_ssl_ca                => hiera('gearman_ssl_ca'),
+    proxy_ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
+    proxy_ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
+    proxy_ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
+    statsd_host                   => 'graphite.openstack.org',
+    status_url                    => 'https://zuul.openstack.org',
+  }
+
+  class { '::zuul::web': }
+  class { '::zuul::fingergw': }
 
 }
 
