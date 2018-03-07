@@ -117,6 +117,7 @@ statusbot_channels:
 - openstack-keystone
 - openstack-kolla
 - openstack-lbaas
+- openstack-loci
 - openstack-manila
 - openstack-meniscus
 - openstack-merges
@@ -216,6 +217,7 @@ meetbot_channels:
 - '#openstack-kolla'
 - '#openstack-kuryr'
 - '#openstack-lbaas'
+- '#openstack-loci'
 - '#openstack-manila'
 - '#openstack-meeting'
 - '#openstack-meeting-3'
