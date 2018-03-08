@@ -143,12 +143,10 @@ be created, but will appear empty. When trying replication from Gerrit,
 it will show a `Permission denied` error when trying to push content.
 To solve that, following steps are needed:
 
- #. Login into github.com, using openstack-project-creator user.
-
- #. Navigate to the failed repository, and enter on Settings > Collaborators
- & teams option.
-
- #. Add Gerrit as Team member to that project.
+#. Login into github.com, using openstack-project-creator user.
+#. Navigate to the failed repository, and enter on Settings > Collaborators
+   & teams option.
+#. Add Gerrit as Team member to that project.
 
 After the team has been added, project will start replicating successfully
 to GitHub.
