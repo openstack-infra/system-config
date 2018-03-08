@@ -16,12 +16,22 @@
 
 set -e
 
+# For initial clones, and debugging, set this for more verbose output
+# that doesn't time out.
+if [[ ${NO_TIMEOUT:-0} -eq 1 ]]; then
+    echo "Running interactively"
+    TIMEOUT=""
+    set -x
+else
+    TIMEOUT="timeout -k 2m 90m"
+fi
+
 REPREPRO_CONFIG=$1
 MIRROR_VOLUME=$2
 BASE=`cat ${REPREPRO_CONFIG}/options | grep base | cut -d' ' -f2`
 
 UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.unreferenced-files
-K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- timeout -k 2m 90m"
+K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- ${TIMEOUT} "
 REPREPRO="$K5START reprepro --confdir $REPREPRO_CONFIG"
 
 date --iso-8601=ns
