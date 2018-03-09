@@ -18,29 +18,31 @@ tools and scripts reviewed by the Infra team.
 At a Glance
 ===========
 
-:Hosts:
-  * signing*.ci.openstack.org
-:Puppet:
-  * :file:`modules/openstack_project/manifests/signing_node.pp`
+:Secrets:
+  * `gpg_key
+    <http://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/secrets.yaml>`_
+:Roles:
+  * `add-gpgkey
+    <https://docs.openstack.org/infra/zuul-jobs/roles.html#role-add-gpgkey>`_
+  * `sign-artifacts
+    <https://docs.openstack.org/infra/zuul-jobs/roles.html#role-sign-artifacts>`_
 
 
 Key Management Overview
 =======================
 
-The signing server is a fairly typical long-lived job node,
-distinguished primarily by having the signing subkey pair installed
-by Puppet into the job runner account's home directory from binary
-blobs in hiera. These blobs correspond to the
-``~/.gnupg/pubring.gpg`` and ``~/.gnupg/secring.gpg`` files of a
-freshly initialized gpg config after importing a minimal unencrypted
-export on the management bastion of only the desired signing subkey
-from the ``/root/signing.gunpg`` directory.
+The signing system is implemented as a set of Zuul v3 jobs; these
+utilize the signing subkey via an encrypted Zuul secret imported
+into a job's ``~/.gnupg/secring.gpg`` at runtime. It's used by jobs
+to create detached signatures of release artifacts and to sign Git
+tags under release management automation.
 
 
 Storage
 -------
 
-While the signing subkey is present unencrypted on this system, the
+While the signing subkey is installed unencrypted on some job nodes,
+so that it can be used unattended by job automation, the
 corresponding master key is kept symmetrically encrypted in the root
 home directory of the Infra systems management bastion instead. At
 the time of key creation a revocation certificate is also generated,
@@ -56,10 +58,11 @@ similar to what `the Debian Project does for its archive keys
 Rotation
 --------
 
-The master key is rotated at the start of each development cycle,
+The master key is rotated at the start of each development cycle
+(usually shortly after cycle-trailing deliverables are released),
 signed by a majority of Infra root sysadmins before being put into
-service, and has an expiration date set for shortly after the end of
-the targeted development cycle. The new key should also be signed by
+service, and has an expiration date set for a month after the end of
+the targeted development cycle. The newly-created key gets signed by
 the old, and this signature pushed to the public keyserver network.
 New key fingerprints are also submitted to the openstack/releases
 repository, for publication on the releases.openstack.org Web site.
@@ -222,12 +225,13 @@ case extreme case that this master key itself becomes inaccessible,
 for example because the decryption passphrase is lost (under any
 other circumstances, a revocation certificate with a more detailed
 description can be generated using the master key on an as-needed
-basis):
+basis). Replace `some` in the output filename with the lower-cased
+cycle name:
 
 .. code-block:: shell-session
 
     root@puppetmaster:~# gpg --homedir signing.gnupg --output \
-    > signing.gnupg/revoke.asc --gen-revoke 0x120D3C23C6D5584D
+    > signing.gnupg/some.revoke.asc --gen-revoke 0x120D3C23C6D5584D
     sec  2048R/0x120D3C23C6D5584D 2016-07-07 OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
     Create a revocation certificate for this key? (y/N) y
@@ -586,9 +590,10 @@ and push the signature back to the keyserver network:
     gpg: sending key 0x120D3C23C6D5584D to hkps server hkps.pool.sks-keyservers.net
 
 Also, please retrieve a copy of the
-``/root/signing.gnupg/revoke.asc`` fallback revocation certificate
-from the management bastion and keep it stashed somewhere secure,
-for emergency use in the (hopefully very unlikely) event that our
-OpenPGP master private key is completely lost to us (for example, if
-we lose the file containing its decryption passphrase and all
-backups thereof).
+``/root/signing.gnupg/some.revoke.asc`` fallback revocation
+certificate (`some` to be replaced with the lower-cased release
+name) from the management bastion and keep it stashed somewhere
+secure, for emergency use in the (hopefully very unlikely) event
+that our OpenPGP master private key is completely lost to us (for
+example, if we lose the file containing its decryption passphrase
+and all backups thereof).
