@@ -40,6 +40,7 @@ class openstack_project::storyboard::dev(
   realize (
     User::Virtual::Localuser['SotK'],
     User::Virtual::Localuser['Zara'],
+    User::Virtual::Localuser['diablo_rojo'],
   )
 
 

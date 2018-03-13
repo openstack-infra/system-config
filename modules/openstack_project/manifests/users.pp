@@ -269,4 +269,11 @@ class openstack_project::users {
     gid      => 2029,
   }
 
+  @user::virtual::localuser { 'diablo_rojo':
+    realname => 'Kendall Nelson',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCx96P1BVbRALeCz8jktUtT9qWzeXbG5yQrwQZ6n3NWsqEueCHp9DaVPDQLWIFAyvL0PKtlSOktClsUYuGfxB+dBuAFFMsx1Apk78EID4wvdXfEUDxZOsKX7zE9teJSxPEMppHAJIcnPu7dMFzZWxh+sA+fR8ZddPRunxtztGayNdYsCqDGIc9GqemjOqXDIFMIXgJLxNaHGSR56UcDHwgqmXXANkpTKsLW+U+VdNofHKpRhbXNS07jPFAAe1rBmoU/TRitzQFz7WYA4ml54ZiB7Q1O7RIyJWVBihHVrxSZbjn2a46CVeLo5Xw7loWF32wY/hA98hmpBNiF8tGSI6mh',
+    key_id   => 'kennelson11@gmail.com',
+    uid      => 2030,
+    gid      => 2030,
+  }
 }
