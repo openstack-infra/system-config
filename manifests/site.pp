@@ -65,6 +65,43 @@ node 'review.openstack.org' {
   }
 }
 
+# Node-OS: xenial
+node /^review-dev\d*\.openstack\.org$/ {
+  $iptables_rules =
+    ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [80, 443, 29418],
+    iptables_rules6           => $iptables_rules,
+    iptables_rules4           => $iptables_rules,
+    sysadmins                 => hiera('sysadmins', []),
+    extra_aliases             => { 'gerrit2' => 'root' },
+    afs                       => true,
+  }
+
+  class { 'openstack_project::review_dev':
+    project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
+    github_oauth_token                  => hiera('gerrit_dev_github_token'),
+    github_project_username             => hiera('github_dev_project_username', 'username'),
+    github_project_password             => hiera('github_dev_project_password'),
+    mysql_host                          => hiera('gerrit_dev_mysql_host', 'localhost'),
+    mysql_password                      => hiera('gerrit_dev_mysql_password'),
+    email_private_key                   => hiera('gerrit_dev_email_private_key'),
+    ssh_dsa_key_contents                => hiera('gerrit_dev_ssh_dsa_key_contents'),
+    ssh_dsa_pubkey_contents             => hiera('gerrit_dev_ssh_dsa_pubkey_contents'),
+    ssh_rsa_key_contents                => hiera('gerrit_dev_ssh_rsa_key_contents'),
+    ssh_rsa_pubkey_contents             => hiera('gerrit_dev_ssh_rsa_pubkey_contents'),
+    ssh_project_rsa_key_contents        => hiera('gerrit_dev_project_ssh_rsa_key_contents'),
+    ssh_project_rsa_pubkey_contents     => hiera('gerrit_dev_project_ssh_rsa_pubkey_contents'),
+    ssh_replication_rsa_key_contents    => hiera('gerrit_dev_replication_ssh_rsa_key_contents'),
+    ssh_replication_rsa_pubkey_contents => hiera('gerrit_dev_replication_ssh_rsa_pubkey_contents'),
+    lp_access_token                     => hiera('gerrit_dev_lp_access_token'),
+    lp_access_secret                    => hiera('gerrit_dev_lp_access_secret'),
+    lp_consumer_key                     => hiera('gerrit_dev_lp_consumer_key'),
+    storyboard_password                 => hiera('gerrit_dev_storyboard_token'),
+    storyboard_ssl_cert                 => hiera('gerrit_dev_storyboard_ssl_crt'),
+  }
+}
+
 # Node-OS: trusty
 node 'review-dev.openstack.org' {
   $iptables_rules =
