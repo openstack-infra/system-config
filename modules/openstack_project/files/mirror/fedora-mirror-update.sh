@@ -16,7 +16,10 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/fedora"
-MIRROR="rsync://mirrors.kernel.org"
+# NOTE(pabelanger): #fedora-admin:
+# tibbs | I run pubmirror[12].math.uh.edu.
+# tibbs | It polls the masters every ten minutes.
+MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/fedora/linux"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
 for REPO in releases/26 releases/27 ; do
@@ -38,7 +41,7 @@ for REPO in releases/26 releases/27 ; do
         --exclude="Server" \
         --exclude="Spins" \
         --exclude="Workstation" \
-        $MIRROR/fedora/$REPO/ $BASE/$REPO/
+        $MIRROR/$REPO/ $BASE/$REPO/
 done
 
 for REPO in updates/26 updates/27 ; do
@@ -56,8 +59,10 @@ for REPO in updates/26 updates/27 ; do
         --exclude="SRPMS/" \
         --exclude="x86_64/debug" \
         --exclude="x86_64/drpms" \
-        $MIRROR/fedora/$REPO/ $BASE/$REPO/
+        $MIRROR/$REPO/ $BASE/$REPO/
 done
+
+MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/alt/atomic"
 
 if ! [ -f $BASE/atomic ]; then
     $K5START mkdir -p $BASE/atomic
@@ -72,7 +77,7 @@ $K5START rsync -rltDvz \
     --exclude="Atomic/" \
     --exclude="CloudImages/x86_64/images/*.raw.xz" \
     --exclude="CloudImages/x86_64/images/*.box" \
-    $MIRROR/fedora-alt/atomic/ $BASE/atomic/
+    $MIRROR/ $BASE/atomic/
 
 # TODO(pabelanger): Validate rsync process
 
