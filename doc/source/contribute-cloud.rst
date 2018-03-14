@@ -97,6 +97,6 @@ If this sounds interesting, and you have some capacity to spare, it
 would be very much appreciated.  You are welcome to contact the
 Infrastructure team on our public mailing list at
 <openstack-infra@lists.openstack.org>, or in our IRC channel,
-`#openstack-infra` on Freenode.  You are also welcome to contact the
-Infrastructure Project Team lead privately at <fungi@yuggoth.org> or
-`fungi` on Freenode.
+`#openstack-infra` on Freenode.  You are also welcome to privately
+contact the `Infrastructure Project Team lead
+<https://governance.openstack.org/tc/reference/projects/infrastructure.html>`_.
