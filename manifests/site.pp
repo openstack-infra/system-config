@@ -191,6 +191,14 @@ node 'puppetmaster.openstack.org' {
     content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstack_project::puppetmaster'],
   }
+  file { '/etc/openstack/limestone_cacert.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0444',
+    content => hiera('limestone_ssl_cert_file_contents'),
+    require => Class['::openstack_project::puppetmaster'],
+  }
 }
 
 # Node-OS: trusty
