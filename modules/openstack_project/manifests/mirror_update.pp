@@ -132,7 +132,7 @@ class openstack_project::mirror_update (
     ensure     => present,
     key_id     => '9d6d8f6bc857c906',
     user       => 'root',
-    key_source => 'puppet:///modules/openstack_project/reprepo/debian-jessie-security-mirror-gpg-key.asc',
+    key_source => 'puppet:///modules/openstack_project/reprepro/debian-jessie-security-mirror-gpg-key.asc',
     key_type   => 'public',
   }
 
