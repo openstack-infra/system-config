@@ -1,5 +1,5 @@
 afs afs*.*.openstack.org
-afsadmin mirror-update.openstack.org
+afsadmin mirror-update\d+\.openstack\.org
 afsdb afsdb*.openstack.org
 cacti ~cacti\d+\.openstack\.org
 ci-backup backup\d+.*\ci\.openstack\.org
