@@ -188,6 +188,14 @@ class openstack_project::mirror_update (
     key_type   => 'public',
   }
 
+  gnupg_key { 'Ubuntu Archive (2012)':
+    ensure     => present,
+    key_id     => '3B4FE6ACC0B21F32',
+    user       => 'root',
+    key_server => 'hkp://keyserver.ubuntu.com',
+    key_type   => 'public',
+  }
+
   ::openstack_project::reprepro { 'debian-ceph-hammer-reprepro-mirror':
     confdir       => '/etc/reprepro/debian-ceph-hammer',
     basedir       => '/afs/.openstack.org/mirror/ceph-deb-hammer',
