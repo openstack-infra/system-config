@@ -129,3 +129,27 @@ clouds:
       project_name: <%= @puppetmaster_clouds['openstackzuul_linaro_project_name'] %>
       project_domain_name: default
       user_domain_name: default
+  openstackci-limestone:
+    regions:
+      - RegionOne
+    auth:
+      auth_url: https://osa.continuous.pw:5000
+      username: <%= @puppetmaster_clouds['openstackci_limestone_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_limestone_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_limestone_project_name'] %>
+      user_domain_name: default
+      project_domain_name: default
+    identity_api_version: 3
+    cacert: /etc/openstack/limestone_cacert.pem
+  openstackzuul-limestone:
+    regions:
+      - RegionOne
+    auth:
+      auth_url: https://osa.continuous.pw:5000
+      username: <%= @puppetmaster_clouds['openstackzuul_limestone_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_limestone_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_limestone_project_name'] %>
+      user_domain_name: default
+      project_domain_name: default
+    identity_api_version: 3
+    cacert: /etc/openstack/limestone_cacert.pem
