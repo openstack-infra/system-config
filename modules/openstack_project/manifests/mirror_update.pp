@@ -120,11 +120,19 @@ class openstack_project::mirror_update (
     ]
   }
 
-  gnupg_key { 'Debian Archive':
+  gnupg_key { 'Debian 8/jessie Archive':
     ensure     => present,
     key_id     => '7638d0442b90d010',
     user       => 'root',
-    key_source => 'puppet:///modules/openstack_project/reprepro/debian-mirror-gpg-key.asc',
+    key_source => 'puppet:///modules/openstack_project/reprepro/debian-jessie-mirror-gpg-key.asc',
+    key_type   => 'public',
+  }
+
+  gnupg_key { 'Debian 8/jessie Security':
+    ensure     => present,
+    key_id     => 'D21169141CECD440F2EB8DDA9D6D8F6BC857C906',
+    user       => 'root',
+    key_source => 'puppet:///modules/openstack_project/reprepo/debian-jessie-security-mirror-gpg-key.asc',
     key_type   => 'public',
   }
 
