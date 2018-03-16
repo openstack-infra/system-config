@@ -308,3 +308,15 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+  - name: openstackci-limestone
+    oscc_cloud: openstackci-limestone
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-limestone
+    oscc_cloud: openstackzuul-limestone
+    region_name: RegionOne
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
