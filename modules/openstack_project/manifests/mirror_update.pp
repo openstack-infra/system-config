@@ -109,7 +109,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro debian':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '5',
     command     => 'flock -n /var/run/reprepro/debian.lock reprepro-mirror-update /etc/reprepro/debian mirror.debian >>/var/log/reprepro/debian-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -147,7 +147,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro ubuntu':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '10',
     command     => 'flock -n /var/run/reprepro/ubuntu.lock reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu >>/var/log/reprepro/ubuntu-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -169,7 +169,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro ubuntu-ports':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '15',
     command     => 'flock -n /var/run/reprepro/ubuntu-ports.lock reprepro-mirror-update /etc/reprepro/ubuntu-ports mirror.ubuntu-ports >>/var/log/reprepro/ubuntu-ports-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -207,7 +207,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro debian ceph hammer':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '20',
     command     => 'flock -n /var/run/reprepro/debian-ceph-hammer.lock reprepro-mirror-update /etc/reprepro/debian-ceph-hammer mirror.deb-hammer >>/var/log/reprepro/debian-ceph-hammer-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -229,7 +229,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro debian ceph jewel':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '25',
     command     => 'flock -n /var/run/reprepro/debian-ceph-jewel.lock reprepro-mirror-update /etc/reprepro/debian-ceph-jewel mirror.deb-jewel >>/var/log/reprepro/debian-ceph-jewel-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -251,7 +251,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro debian ceph luminous':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '30',
     command     => 'flock -n /var/run/reprepro/debian-ceph-luminous.lock reprepro-mirror-update /etc/reprepro/debian-ceph-luminous mirror.deb-luminous >>/var/log/reprepro/debian-ceph-luminous-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -283,7 +283,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro debian docker':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '35',
     command     => 'flock -n /var/run/reprepro/debian-docker.lock reprepro-mirror-update /etc/reprepro/debian-docker mirror.deb-docker >>/var/log/reprepro/debian-docker-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -317,7 +317,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro ubuntu puppetlabs':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '40',
     command     => 'flock -n /var/run/reprepro/apt-puppetlabs.lock reprepro-mirror-update /etc/reprepro/apt-puppetlabs mirror.apt-puppetlabs >>/var/log/reprepro/apt-puppetlabs-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
@@ -506,7 +506,7 @@ class openstack_project::mirror_update (
   cron { 'reprepro ubuntu-cloud-archive':
     user        => $user,
     hour        => '*/2',
-    minute      => '0',
+    minute      => '15',
     command     => 'flock -n /var/run/reprepro/ubuntu-cloud-archive.lock reprepro-mirror-update /etc/reprepro/ubuntu-cloud-archive mirror.ubuntu-cloud >>/var/log/reprepro/ubuntu-cloud-archive-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
