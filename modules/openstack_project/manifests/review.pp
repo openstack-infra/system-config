@@ -167,6 +167,11 @@ class openstack_project::review (
         html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\" rel=\"nofollow\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
       },
       {
+        name  => 'testresultnourl',
+        match => '<li>([^ ]+) None : ([^ ]+)([^<]*)</li>',
+        html  => '<li class=\"comment_test\"><span class=\"comment_test_name\">$1</span> <span class=\"comment_test_result\"><span class=\"result_$2\">$2</span>$3</span></li>',
+      },
+      {
         name  => 'launchpadbug',
         match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
         html  => '<a href=\"$1\">$1</a>'
