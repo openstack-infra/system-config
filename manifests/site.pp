@@ -81,6 +81,9 @@ node /^review-dev\d*\.openstack\.org$/ {
   }
 
   class { 'openstack_project::review_dev':
+    # TODO(pabelanger): Remove once we've attached volume to server with git
+    # repos for gerrit.
+    gerrit_initial_init                 => false,
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_dev_github_token'),
     github_project_username             => hiera('github_dev_project_username', 'username'),
