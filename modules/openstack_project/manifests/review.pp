@@ -88,6 +88,7 @@ class openstack_project::review (
 
   $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
   class { 'openstack_project::gerrit':
+    gerrit_initial_init                 => $gerrit_initial_init,
     git_http_url                        => 'https://git.openstack.org/',
     canonical_git_url                   => 'git://git.openstack.org/',
     ssl_cert_file                       => $ssl_cert_file,

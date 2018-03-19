@@ -26,6 +26,7 @@ class openstack_project::review_dev (
   $storyboard_ssl_cert = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review-dev.projects.ini.erb',
+  $gerrit_initial_init = true,
 ) {
 
   case $::lsbdistcodename {
@@ -53,6 +54,7 @@ class openstack_project::review_dev (
 
   $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
   class { 'openstack_project::gerrit':
+    gerrit_initial_init                 => $gerrit_initial_init,
     vhost_name                          => 'review-dev.openstack.org',
     canonicalweburl                     => 'https://review-dev.openstack.org/',
     ssl_cert_file                       => '/etc/ssl/certs/ssl-cert-snakeoil.pem',

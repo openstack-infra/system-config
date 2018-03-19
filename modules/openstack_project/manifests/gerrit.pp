@@ -85,6 +85,7 @@ class openstack_project::gerrit (
   $its_rules = [],
   $java_home = '',
   $openidssourl = 'https://login.ubuntu.com/+openid',
+  $gerrit_initial_init = true,
 ) {
 
   class { 'jeepyb::openstackwatch':
@@ -112,6 +113,7 @@ class openstack_project::gerrit (
   }
 
   class { '::gerrit':
+    gerrit_initial_init                 => $gerrit_initial_init,
     vhost_name                          => $vhost_name,
     canonicalweburl                     => $canonicalweburl,
     git_http_url                        => $git_http_url,
