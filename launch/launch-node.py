@@ -225,13 +225,15 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
 def build_server(cloud, name, image, flavor,
                  volume, keep, network, boot_from_volume, config_drive,
-                 mount_path, fs_label, availability_zone, environment):
+                 mount_path, fs_label, availability_zone, environment,
+                 volume_size):
     key = None
     server = None
 
     create_kwargs = dict(image=image, flavor=flavor, name=name,
                          reuse_ips=False, wait=True,
                          boot_from_volume=boot_from_volume,
+                         volume_size, volume_size,
                          network=network,
                          config_drive=config_drive)
 
@@ -326,6 +328,9 @@ def main():
                         help="Create a boot volume for the server and use it.",
                         action='store_true',
                         default=False)
+    parser.add_argument("--volume-size", dest="volume_size",
+                        help="Size of volume (GB) when using --boot-from-volume
+                        flag", default="50")
     parser.add_argument("--keep", dest="keep",
                         help="Don't clean up or delete the server on error.",
                         action='store_true',
@@ -377,7 +382,7 @@ def main():
                           options.config_drive,
                           options.mount_path, options.fs_label,
                           options.availability_zone,
-                          options.environment)
+                          options.environment, options.volume_size)
     dns.print_dns(cloud, server)
 
 if __name__ == '__main__':
