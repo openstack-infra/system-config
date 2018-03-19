@@ -424,10 +424,10 @@ in-progress changes do not need to be merged before the move.
 To rename a project:
 
 #. Prepare a change to the project-config repo to update things like
-   projects.yaml/ACLs, jenkins-job-builder and gerritbot for the new
-   name. Also add changes to update projects.txt in all branches of
-   the requirements repo, devstack-vm-gate-wrap.sh in the
-   devstack-gate repo, reference/projects.yaml in the
+   projects.yaml, Gerrit ACLs, zuul and gerritbot for the new name.
+   Also add changes to update projects.txt in all branches of the
+   requirements repo, project matrix in the devstack-gate repo and
+   all branches of devstack, reference/projects.yaml in the
    openstack/governance repo, and .gitmodules in the
    openstack/openstack repo if necessary.
 
@@ -454,25 +454,13 @@ To rename a project:
    not currently in progress.  When it finishes, make sure the entry
    has not been added back to the crontab.
 
-#. Export and stop Zuul on zuul.openstack.org::
-
-     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org gate >gate.sh
-     python /opt/zuul/tools/zuul-changes.py http://zuul.openstack.org check >check.sh
-     sudo invoke-rc.d zuul stop
-     sudo rm -f /var/run/zuul/zuul.pid /var/run/zuul/zuul.listedock
-
 #. Run the ansible rename repos playbook, passing in the path to your yaml
    file::
 
      sudo ansible-playbook -f 10 /opt/system-config/production/playbooks/rename_repos.yaml -e repolist=ABSOLUTE_PATH_TO_VARS_FILE
 
-#. Start Zuul on zuul.openstack.org::
-
-     sudo invoke-rc.d zuul start
-     sudo bash gate.sh
-     sudo bash check.sh
-
-#. Merge the prepared Puppet configuration changes.
+#. :ref:`Force-merge <force-merging-a-change>` the prepared Puppet
+   configuration changes.
 
 #. Rename the project or transfer ownership in GitHub
 
