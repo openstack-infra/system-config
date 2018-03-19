@@ -18,7 +18,7 @@ Contents:
 .. sidebar:: HOWTOs
 
    * :doc:`third_party`
-   * :doc:`stackforge`
+   * :doc:`unofficial_project_hosting`
    * :doc:`running-your-own`
    * :doc:`contribute-cloud`
 
@@ -35,7 +35,7 @@ Contents:
    :hidden:
 
    running-your-own
-   stackforge
+   unofficial_project_hosting
    third_party
    contribute-cloud
 
