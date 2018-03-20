@@ -100,7 +100,7 @@ For convenience, setup the common ``reprepo`` options for verbose
 logging, the configuration directory and to work on the local
 database::
 
-  # export REPREPRO=reprepro -VVV --confdir /etc/reprepro/ubuntu --dbdir ~/db
+  # export REPREPRO="reprepro -VVV --confdir /etc/reprepro/ubuntu --dbdir ~/db"
 
 From the upstream recovery document, the ``references.db`` can be
 removed and recreated quickly with::
@@ -140,6 +140,22 @@ to be corrupt, you can remove ``xenial-security`` from
 You can then re-add the entries and run another update, which should
 resync everything from fresh.
 
+You may also see errors relating to individual packages not being
+referenced correctly::
+
+  checking references to 'bionic|main|arm64' for 'texlive-latex-base': pool/main/t/texlive-base/texlive-latex-base_2017.20180305-1_all.deb
+  Missing reference to 'pool/main/t/texlive-base/texlive-latex-base_2017.20180305-1_all.deb' by 'bionic|main|arm64'
+  ...
+  There have been errors!
+
+In this case, the ``_addreference`` command can be useful.  The
+parameters are the *filekey*, which is the path to the file, and the
+*identifier*, which is the tuple ``bionic|main|arm64`` above.  To
+restore the reference try::
+
+  # $REPREPRO _addreference pool/main/t/texlive-base/texlive-latex-base_2017.20180305-1_all.deb 'bionic|main|arm64'
+  Adding reference to 'pool/main/t/texlive-base/texlive-latex-base_2017.20180305-1_all.deb' by 'bionic|main|arm64'
+
 Remember to put the databases back in place::
 
   # mv /afs/.openstack.org/mirror/ubuntu/db /afs/.openstack.org/mirror/ubuntu/db.old
@@ -147,9 +163,10 @@ Remember to put the databases back in place::
 
 To stage a recovery prior to release, you can modify the
 ``mirror_root`` argument in ``openstack_project::mirror`` puppet to
-point to the RW mirror ``/afs/.openstack.org/mirror`` (rather than the
-released RO ``/afs/openstack.org/mirror``).  This way you can switch
-back quickly if things don't work.
+point Apache to the RW mirror ``/afs/.openstack.org/mirror`` where
+fixes are deployed, rather than the released RO
+``/afs/openstack.org/mirror``.  This way you can avoid having to
+release the RO mirror and switch back quickly if things don't work.
 
-You can then either manually run ``vos release``, or restore cron and
-let the next ``reprepro-mirror-update`` run do it.
+When fixed, you can either manually run ``vos release``, or restore
+cron and let the next ``reprepro-mirror-update`` run do it.
