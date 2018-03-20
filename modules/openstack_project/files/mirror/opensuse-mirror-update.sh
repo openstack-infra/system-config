@@ -16,7 +16,7 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/opensuse"
-MIRROR="rsync://ftp.gwdg.de/pub"
+MIRROR="rsync://mirrors.rit.edu/opensuse"
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
 for DISTVER in 42.3; do
@@ -28,10 +28,10 @@ for DISTVER in 42.3; do
     date --iso-8601=ns
     echo "Running rsync distribution $DISTVER ..."
     $K5START rsync -rlptDvz \
-        --delete \
+        --delete --stats \
         --delete-excluded \
         --exclude="iso" \
-        $MIRROR/opensuse/$REPO/ $BASE/$REPO/
+        $MIRROR/$REPO/ $BASE/$REPO/
 
     REPO=update/leap/$DISTVER
     if ! [ -f $BASE/$REPO ]; then
@@ -41,11 +41,11 @@ for DISTVER in 42.3; do
     date --iso-8601=ns
     echo "Running rsync updates $DISTVER ..."
     $K5START rsync -rlptDvz \
-        --delete \
+        --delete --stats \
         --delete-excluded \
         --exclude="src/" \
         --exclude="nosrc/" \
-        $MIRROR/opensuse/$REPO/ $BASE/$REPO/
+        $MIRROR/$REPO/ $BASE/$REPO/
 done
 
 REPO=tumbleweed
@@ -56,10 +56,10 @@ fi
 date --iso-8601=ns
 echo "Running rsync distribution $REPO ..."
 $K5START rsync -rlptDvz \
-    --delete \
+    --delete --stats \
     --delete-excluded \
     --exclude="i586" \
-    $MIRROR/opensuse/$REPO/repo/oss/ $BASE/$REPO/repo/oss/
+    $MIRROR/$REPO/repo/oss/ $BASE/$REPO/repo/oss/
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
