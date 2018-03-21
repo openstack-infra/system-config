@@ -1,0 +1,7 @@
+launch:
+  fqdn: mirror01.regionone.limestone.openstack.org.yml
+  cloud: openstackci-limestone
+  region: RegionOne
+  image: ubuntu 16.04
+  image_username: ubuntu
+  flavor: small

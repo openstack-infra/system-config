@@ -1,0 +1,66 @@
+- include_tasks: validation.yml
+- include_tasks: ssh_key.yml
+
+- name: Create virtual machine
+  os_server:
+    state: "present"
+    name: "{{ launch.fqdn }}"
+    cloud: "{{ launch.cloud }}"
+    image: "{{ launch.image }}"
+    flavor: "{{ launch.flavor }}"
+    network: "{{ launch.network | default(omit) }}"
+    reuse_ips: "{{ launch.reuse_ips }}"
+    timeout: "{{ launch.timeout }}"
+    config_drive: "{{ launch.config_drive }}"
+    boot_from_volume: "{{ launch.boot_from_volume }}"
+    volume_size: "{{ launch.boot_from_volume | ternary(launch.boot_from_volume_size, omit) }}"
+    wait: true
+    meta:
+      created_by: "{{ lookup('env','USER') }}"
+    no_log: "{{ launch.verbose | ternary(false, true) }}"
+    register: vm
+
+- name: Dump complete virtual machine info
+  copy:
+    content: "{{ vm | to_nice_json }}"
+    dest: "{{ log_directory }}/vminfo.json"
+  no_log: "{{ launch.verbose | ternary(false, true) }}"
+
+- name: Wait until server is up and runnning
+  local_action:
+    module: "wait_for"
+    port: 22
+    host: "{{ vm.openstack.accessIPv4 }}"
+    search_regex: OpenSSH
+    delay: 60
+
+- name: Add server to ephemeral inventory
+  add_host:
+    hostname: "{{ vm.openstack.name }}"
+    group: launched_nodes
+    ansible_ssh_host: "{{ vm.openstack.accessIPv4 }}"
+    ansible_user: "{{ launch.image_user }}"
+    ansible_become: yes
+    ansible_become_user: root
+    ansible_ssh_private_key_file: "{{ log_directory }}/id_rsa"
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
+- name: Ensure the server is reachable
+  ping:
+  register: ping
+  until: ping | success
+  retries: 6
+  delay: 5
+  delegate_to: "{{ vm.openstack.name }}"
+
+- name: Write ephemeral standalone inventory
+  lineinfile:
+    dest: "{{ log_directory }}/hosts"
+    line: >-
+      {{ vm.openstack.name }}
+      ansible_host={{ vm.openstack.accessIPv4 }}
+      ansible_user={{ launch.image_user }}
+      ansible_become=yes
+      ansible_become_user=root
+      ansible_ssh_private_key_file={{ log_directory }}/id_rsa
+      ansible_ssh_common_args='-o StrictHostKeyChecking=no'

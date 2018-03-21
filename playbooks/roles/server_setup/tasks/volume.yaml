@@ -1,0 +1,42 @@
+# TODO: Should this create a new volume instead ?
+- when:
+    - launch.volume is defined
+    - launch.volume.id is defined and launch.volume.id != ''
+  block:
+    - name: Validate mount path and fs_label
+      assert:
+        that:
+          - launch.volume.path is defined and launch.volume.path != ''
+          - launch.volume.fs_label is defined and launch.volume.fs_label != ''
+
+    - name: Ensure the volume is attached
+      os_server_volume:
+        cloud: "{{ cloud }}"
+        state: present
+        server: "{{ vm.openstack.id }}"
+        volume: "{{ launch.volume.id }}"
+        wait: true
+      register: volume
+      no_log: "{{ launch.verbose | ternary(false, true) }}"
+
+    - name: Copy the volume mount script
+      copy:
+        src: mount_volume.sh
+        dest: /usr/local/bin/mount_volume.sh
+        owner: root
+        group: root
+        mode: 0750
+
+    - name: Run the volume mount script
+      vars:
+        device: >
+          {% for volume in volume.attachments -%}
+          {% if volume.id == launch.volume.id -%}
+          {{- volume.device -}}
+          {% endif -%}
+          {% endfor -%}
+      shell: >-
+       bash -x /usr/local/bin/mount_volume.sh
+       {{ device }}
+       {{ launch.volume.mount_path }}
+       {{ launch.volume.fs_label }}

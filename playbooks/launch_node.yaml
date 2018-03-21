@@ -1,0 +1,50 @@
+- name: Create host
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Assert that required parameters are set
+      assert:
+        that:
+          - launch.cloud is defined and launch.cloud != ''
+          - launch.flavor is defined and launch.flavor != ''
+          - launch.image is defined and launch.image != ''
+          - launch.region is defined and launch.region != ''
+          - fqdn is defined and fqdn != '' or
+            launch.fqdn is defined and launch.fqdn != ''
+
+    - name: "Validate configuration (CTRL+C to interrupt and exit)"
+      pause:
+        prompt: "{{ hostvars[inventory_hostname] }}"
+
+    - block:
+        - name: Create temporary log directory
+          tempfile:
+            state: directory
+            prefix: "{{ lookup('ENV', 'USER' }}_{{ fqdn }}_"
+          register: tmpdir
+
+        - name: Set temporary log directory
+          set_fact:
+            log_directory: "{{ file.path }}"
+
+        - name: Include the launch_create role
+          include_role:
+            name: server_create
+      rescue:
+        - name: Warn about failure during server launch
+          debug:
+            msg: A failure occurred when launching the server.
+      always:
+        - import_playbook: launch_cleanup.yaml
+
+- name: Set up host
+  hosts: launched_nodes
+  vars:
+    target: launched_nodes
+  tasks:
+     - import_playbook: set_hostnames.yaml
+     - import_playbook: remote_puppet_adhoc.yaml
+
+     - name: Include the server_setup role
+       include_role:
+         name: server_setup

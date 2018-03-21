@@ -10,3 +10,51 @@ puppet:
   copy_puppet: true
   manifest: /opt/system-config/production/manifests/site.pp
   manifest_base: /opt/system-config
+
+# This dictionary contains default variables for launch-node
+# They can be overridden by host_vars or extra_vars.
+launch:
+  #######################
+  # Required variables
+  #######################
+  # Hostname of the server
+  fqdn:
+  # Name of the cloud
+  cloud: 'openstackci-rax'
+  # Region in the cloud
+  region: 'DFW'
+  # Image name or ID
+  image: 'Ubuntu 16.04 LTS (Xenial Xerus) (PVHVM)'
+  # SSH username for the image
+  image_username: ubuntu
+  # Flavor name or ID
+  flavor: '4 GB Performance'
+  #######################
+  # Optional variables
+  #######################
+  # If the playbook output should be verbose
+  verbose: false
+  # If a config drive should be attached
+  config_drive: false
+  # Duration to wait for the virtual machine creation
+  timeout: 300
+  # Network label to attach the instance to
+  network:
+  # If the VM should be kept in case of failure or error
+  keep: false
+  # Availability zone to spawn the virtual machine in
+  availability_zone:
+  # If unallocated floating IPs should be used
+  reuse_ips: false
+  # Use boot from volume (without ephemeral storage)
+  boot_from_volume: false
+  # Size when booting from volume
+  boot_from_volume_size: 80
+  # Extra volume to attach ot the VM
+  volume:
+    # ID of the volume
+    id:
+    # Mount path where it should be mounted
+    mount_path:
+    # FS Label that should be defined
+    fs_label:

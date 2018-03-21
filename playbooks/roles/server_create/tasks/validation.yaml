@@ -1,0 +1,38 @@
+- name: Validate log directory
+  assert:
+    that:
+      - log_directory is defined
+
+- name: Validate cloud authentication
+  os_auth:
+    cloud: "{{ cloud }}"
+  no_log: "{{ verbose | ternary(false, true) }}"
+
+- name: Check if a server with the same name exists
+  os_server_facts:
+    cloud: "{{ cloud }}"
+    server: "{{ fqdn }}"
+  no_log: "{{ verbose | ternary(false, true) }}"
+  register: servers
+
+- debug:
+    var: servers
+
+# TODO: Handle reinstallation or something like that ?
+- when: servers.openstack_servers | length != 0
+  block:
+    - name: Warn about existing server
+      debug: "{{ fqdn }} already exists in {{ cloud }}, aborting playbook."
+    - meta: end_play
+
+- name: Validate flavor
+  os_flavor_facts:
+    cloud: "{{ cloud }}"
+    name: "{{ flavor }}"
+  no_log: "{{ verbose | ternary(false, true) }}"
+
+- name: Validate image
+  os_image_facts:
+    cloud: "{{ cloud }}"
+    image: "{{ image }}"
+  no_log: "{{ verbose | ternary(false, true) }}"

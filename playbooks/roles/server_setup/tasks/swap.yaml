@@ -1,0 +1,11 @@
+# TODO: Align with devstack's zuul v3 implementation of this ?
+- name: Copy the swap configuration script
+  copy:
+    src: make_swap.sh
+    dest: /usr/local/bin/make_swap.sh
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Run the swap configuration script
+  shell: bash -x /usr/local/bin/make_swap.sh

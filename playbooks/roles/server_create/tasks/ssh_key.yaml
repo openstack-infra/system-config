@@ -1,0 +1,12 @@
+- name: Create ephemeral keypair files
+  command: ssh-keygen -f {{ log_directory }}/id_rsa -t rsa -N ''
+  args:
+    creates: "{{ log_directory }}/id_rsa"
+
+- name: Create ephemeral keypair in Nova
+  os_keypair:
+    cloud: "{{ cloud }}"
+    state: present
+    name: "launch-{{ fqdn }}_{{ lookup('pipe', 'date +%s' }}"
+    public_key_file: "{{ log_directory }}/id_rsa.pub"
+  register: keypair

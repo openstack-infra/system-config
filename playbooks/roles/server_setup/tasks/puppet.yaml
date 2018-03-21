@@ -1,0 +1,10 @@
+- name: Copy the puppet instalation script
+  copy:
+    src: install_puppet.sh
+    dest: /usr/local/bin/install_puppet.sh
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Run the puppet installation script
+  shell: bash -x /usr/local/bin/install_puppet.sh

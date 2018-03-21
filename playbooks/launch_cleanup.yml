@@ -1,0 +1,30 @@
+- name: Clean up a server launch
+  hosts: localhost
+  tasks:
+    - when: not keep
+      block:
+        - name: Delete the log directory
+          file:
+            path: "{{ log_directory }}"
+            state: absent
+          when: log_directory is defined
+
+        - name: Delete the keypair
+          os_keypair:
+            name: "{{ keypair }}"
+            state: absent
+          when: keypair is defined
+
+        # Using id instead of name on purpose here so we don't delete an old
+        # server with the same name (ex: reinstallation)
+        - name: Delete the server
+          os_server:
+            name: "{{ vm.openstack.id }}"
+            state: absent
+          when: vm is defined
+
+    - when: keep
+      block:
+        - name: Print the log directory
+          debug:
+            msg: "Data was kept in {{ log_directory }}."

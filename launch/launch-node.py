@@ -206,7 +206,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
         # Run the remote puppet apply playbook limited to just this server
         # we just created
         for playbook in [
-                'set_hostnames.yml',
+                'set_hostnames.yaml',
                 'remote_puppet_adhoc.yaml']:
             run(ansible_cmd + [
                 os.path.join(SCRIPT_DIR, '..', 'playbooks', playbook)],
