@@ -18,8 +18,11 @@ PROJECTS_YAML=${PROJECTS_YAML:-/etc/project-config/gerrit/projects.yaml}
 REINDEX_LOCK=/var/www/hound/reindex.lock
 
 TEMP_DIR=$(mktemp -d)
+trap "rm -rf ${TEMP_DIR} EXIT"
+
 pushd ${TEMP_DIR}
 
+echo $(date)
 echo "Starting hound config update"
 
 # Generate the new config
@@ -30,7 +33,6 @@ NEW="$(md5sum config.json | awk '{print $1}')"
 OLD="$(md5sum /home/hound/config.json  | awk '{print $1}')"
 if [[ ${NEW} == ${OLD} ]]; then
     echo "Nothing to do"
-    rm -rf ${TEMP_DIR}
     exit 0
 fi
 
@@ -60,5 +62,3 @@ rm ${REINDEX_LOCK}
 
 echo "... done"
 
-popd
-rm -rf ${TEMP_DIR}
