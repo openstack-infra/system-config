@@ -77,7 +77,16 @@ clouds:
       user_domain_name: default
   openstackci-limestone:
     regions:
-      - RegionOne
+      - name: RegionOne
+        values:
+          networks:
+            - name: "Gateway Network"
+              routes_externally: false
+              routes_ipv6_externally: true
+              nat_destination: true
+            - name: "Flat External"
+              routes_externally: true
+              nat_source: true
     auth:
       auth_url: https://osa.continuous.pw:5000
       username: <%= @puppetmaster_clouds['openstackci_limestone_username'] %>
