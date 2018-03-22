@@ -33,9 +33,10 @@ def print_dns(cloud, server):
     ip4 = server.public_v4
     ip6 = server.public_v6
 
-    for raw_server in cloud.nova_client.servers.list():
-        if raw_server.id == server.id:
-            href = get_href(raw_server)
+    # Get the server object from the sdk layer so that we can pull the
+    # href data out of the links dict.
+    raw_server = cloud.compute.get_server(server.id)
+    href = get_href(raw_server)
 
     print
     print "Run the following commands to set up DNS:"
@@ -77,8 +78,10 @@ def main():
     parser.add_argument("name", help="server name")
     options = parser.parse_args()
 
-    import shade
-    cloud = shade.openstack_cloud()
+    import openstack
+    cloud = openstack.connect()
+    # Get the server using the shade layer so that we have server.public_v4
+    # and server.public_v6
     server = cloud.get_server(options.name)
     print_dns(cloud, server)
 
