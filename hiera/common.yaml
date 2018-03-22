@@ -514,7 +514,7 @@ cacti_hosts:
 - mirror.gra1.ovh.openstack.org
 - mirror.mtl01.inap.openstack.org
 - mirror-update.openstack.org
-- review-dev.openstack.org
+- review-dev01.openstack.org
 - review.openstack.org
 - stackalytics.openstack.org
 - static.openstack.org
