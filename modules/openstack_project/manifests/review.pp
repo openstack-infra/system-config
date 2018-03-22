@@ -80,231 +80,237 @@ class openstack_project::review (
   $storyboard_password = '',
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
+  $gerrit_configure = true,
 ) {
 
   class { 'project_config':
     url  => $project_config_repo,
   }
 
-  $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
-  class { 'openstack_project::gerrit':
-    git_http_url                        => 'https://git.openstack.org/',
-    canonical_git_url                   => 'git://git.openstack.org/',
-    ssl_cert_file                       => $ssl_cert_file,
-    ssl_key_file                        => $ssl_key_file,
-    ssl_chain_file                      => $ssl_chain_file,
-    ssl_cert_file_contents              => $ssl_cert_file_contents,
-    ssl_key_file_contents               => $ssl_key_file_contents,
-    ssl_chain_file_contents             => $ssl_chain_file_contents,
-    ssh_dsa_key_contents                => $ssh_dsa_key_contents,
-    ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
-    ssh_rsa_key_contents                => $ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents             => $ssh_rsa_pubkey_contents,
-    ssh_project_rsa_key_contents        => $ssh_project_rsa_key_contents,
-    ssh_project_rsa_pubkey_contents     => $ssh_project_rsa_pubkey_contents,
-    ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
-    ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
-    ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
-    ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
-    email                               => 'review@openstack.org',
-      # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
-    database_poollimit                  => '225',
-    container_heaplimit                 => '48g',
-    core_packedgitopenfiles             => '4096',
-    core_packedgitlimit                 => '400m',
-    core_packedgitwindowsize            => '16k',
-    sshd_threads                        => '100',
-    index_threads                       => 4,
-    httpd_minthreads                    => '20',
-    httpd_maxthreads                    => '100',
-    httpd_maxqueued                     => '200',
-    war                                 =>
-      'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.13.9.4.2a605d5.war',
-    acls_dir                            => $::project_config::gerrit_acls_dir,
-    notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
-    projects_file                       => $::project_config::jeepyb_project_file,
-    projects_config                     => $projects_config,
-    github_username                     => 'openstack-gerrit',
-    github_oauth_token                  => $github_oauth_token,
-    github_project_username             => $github_project_username,
-    github_project_password             => $github_project_password,
-    mysql_host                          => $mysql_host,
-    mysql_password                      => $mysql_password,
-    accountpatchreviewdb_url            => $accountpatchreviewdb_url,
-    email_private_key                   => $email_private_key,
-    token_private_key                   => $token_private_key,
-    swift_username                      => $swift_username,
-    swift_password                      => $swift_password,
-    commentlinks                        => [
-      {
-        name  => 'bugheader',
-        match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
-        link  => 'https://launchpad.net/bugs/$2',
+  if ($gerrit_configure) {
+    $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
+    class { 'openstack_project::gerrit':
+      git_http_url                        => 'https://git.openstack.org/',
+      canonical_git_url                   => 'git://git.openstack.org/',
+      ssl_cert_file                       => $ssl_cert_file,
+      ssl_key_file                        => $ssl_key_file,
+      ssl_chain_file                      => $ssl_chain_file,
+      ssl_cert_file_contents              => $ssl_cert_file_contents,
+      ssl_key_file_contents               => $ssl_key_file_contents,
+      ssl_chain_file_contents             => $ssl_chain_file_contents,
+      ssh_dsa_key_contents                => $ssh_dsa_key_contents,
+      ssh_dsa_pubkey_contents             => $ssh_dsa_pubkey_contents,
+      ssh_rsa_key_contents                => $ssh_rsa_key_contents,
+      ssh_rsa_pubkey_contents             => $ssh_rsa_pubkey_contents,
+      ssh_project_rsa_key_contents        => $ssh_project_rsa_key_contents,
+      ssh_project_rsa_pubkey_contents     => $ssh_project_rsa_pubkey_contents,
+      ssh_replication_rsa_key_contents    => $ssh_replication_rsa_key_contents,
+      ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
+      ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
+      ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
+      email                               => 'review@openstack.org',
+        # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
+      database_poollimit                  => '225',
+      container_heaplimit                 => '48g',
+      core_packedgitopenfiles             => '4096',
+      core_packedgitlimit                 => '400m',
+      core_packedgitwindowsize            => '16k',
+      sshd_threads                        => '100',
+      index_threads                       => 4,
+      httpd_minthreads                    => '20',
+      httpd_maxthreads                    => '100',
+      httpd_maxqueued                     => '200',
+      war                                 =>
+        'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.13.9.4.2a605d5.war',
+      acls_dir                            => $::project_config::gerrit_acls_dir,
+      notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
+      projects_file                       => $::project_config::jeepyb_project_file,
+      projects_config                     => $projects_config,
+      github_username                     => 'openstack-gerrit',
+      github_oauth_token                  => $github_oauth_token,
+      github_project_username             => $github_project_username,
+      github_project_password             => $github_project_password,
+      mysql_host                          => $mysql_host,
+      mysql_password                      => $mysql_password,
+      accountpatchreviewdb_url            => $accountpatchreviewdb_url,
+      email_private_key                   => $email_private_key,
+      token_private_key                   => $token_private_key,
+      swift_username                      => $swift_username,
+      swift_password                      => $swift_password,
+      commentlinks                        => [
+        {
+          name  => 'bugheader',
+          match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
+          link  => 'https://launchpad.net/bugs/$2',
+        },
+        {
+          name  => 'bug',
+          match => '\\b[Bb]ug:? #?(\\d+)',
+          link  => 'https://launchpad.net/bugs/$1',
+        },
+        {
+          name  => 'story',
+          match => '\\b[Ss]tory:? #?(\\d+)',
+          link  => 'https://storyboard.openstack.org/#!/story/$1',
+        },
+        {
+          name  => 'its-storyboard',
+          match => '\\b[Tt]ask:? #?(\\d+)',
+          link  => 'task: $1',
+        },
+        {
+          name  => 'blueprint',
+          match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
+          link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
+        },
+        {
+          name  => 'testresult',
+          match => '<li>([^ ]+) <a href=\"[^\"]+\" target=\"_blank\" rel=\"nofollow\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
+          html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\" rel=\"nofollow\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
+        },
+        {
+          name  => 'launchpadbug',
+          match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
+          html  => '<a href=\"$1\">$1</a>'
+        },
+        {
+          name  => 'changeid',
+          match => '(I[0-9a-f]{8,40})',
+          link  => '/#/q/$1',
+        },
+        {
+          name  => 'gitsha',
+          match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
+          html  => '$1<a href=\"/#/q/$2\">$2</a>$3',
+        },
+      ],
+      its_plugins                        => [
+        {
+          name     => 'its-storyboard',
+          password => $storyboard_password,
+          url      => 'https://storyboard.openstack.org',
+        },
+      ],
+      its_rules                          => [
+        {
+          name       => 'change_abandoned',
+          event_type => 'change-abandoned',
+          action     => 'set-status TODO',
+        },
+        {
+          name       => 'change_in_progress',
+          event_type => 'patchset-created,change-restored',
+          action     => 'set-status REVIEW',
+        },
+        {
+          name       => 'change_merged',
+          event_type => 'change-merged',
+          action     => 'set-status MERGED',
+        },
+      ],
+      download                            => {
+          'command' => ['checkout', 'cherry_pick', 'pull', 'format_patch'],
+          'scheme'  => ['ssh', 'anon_http', 'anon_git'],
+          'archive' => ['tar', 'tbz2', 'tgz', 'txz'],
       },
-      {
-        name  => 'bug',
-        match => '\\b[Bb]ug:? #?(\\d+)',
-        link  => 'https://launchpad.net/bugs/$1',
-      },
-      {
-        name  => 'story',
-        match => '\\b[Ss]tory:? #?(\\d+)',
-        link  => 'https://storyboard.openstack.org/#!/story/$1',
-      },
-      {
-        name  => 'its-storyboard',
-        match => '\\b[Tt]ask:? #?(\\d+)',
-        link  => 'task: $1',
-      },
-      {
-        name  => 'blueprint',
-        match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
-        link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
-      },
-      {
-        name  => 'testresult',
-        match => '<li>([^ ]+) <a href=\"[^\"]+\" target=\"_blank\" rel=\"nofollow\">([^<]+)</a> : ([^ ]+)([^<]*)</li>',
-        html  => '<li class=\"comment_test\"><span class=\"comment_test_name\"><a href=\"$2\" rel=\"nofollow\">$1</a></span> <span class=\"comment_test_result\"><span class=\"result_$3\">$3</span>$4</span></li>',
-      },
-      {
-        name  => 'launchpadbug',
-        match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
-        html  => '<a href=\"$1\">$1</a>'
-      },
-      {
-        name  => 'changeid',
-        match => '(I[0-9a-f]{8,40})',
-        link  => '/#/q/$1',
-      },
-      {
-        name  => 'gitsha',
-        match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
-        html  => '$1<a href=\"/#/q/$2\">$2</a>$3',
-      },
-    ],
-    its_plugins                        => [
-      {
-        name     => 'its-storyboard',
-        password => $storyboard_password,
-        url      => 'https://storyboard.openstack.org',
-      },
-    ],
-    its_rules                          => [
-      {
-        name       => 'change_abandoned',
-        event_type => 'change-abandoned',
-        action     => 'set-status TODO',
-      },
-      {
-        name       => 'change_in_progress',
-        event_type => 'patchset-created,change-restored',
-        action     => 'set-status REVIEW',
-      },
-      {
-        name       => 'change_merged',
-        event_type => 'change-merged',
-        action     => 'set-status MERGED',
-      },
-    ],
-    download                            => {
-        'command' => ['checkout', 'cherry_pick', 'pull', 'format_patch'],
-        'scheme'  => ['ssh', 'anon_http', 'anon_git'],
-        'archive' => ['tar', 'tbz2', 'tgz', 'txz'],
-    },
-    replication_force_update            => true,
-    replication                         => [
-      {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
-        replicationDelay     => '1',
-        replicatePermissions => false,
-        mirror               => true,
-      },
-      {
-        name                 => 'local',
-        url                  => 'file:///opt/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git02',
-        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git03',
-        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git04',
-        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git05',
-        url                  => 'cgit@git05.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git06',
-        url                  => 'cgit@git06.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git07',
-        url                  => 'cgit@git07.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git08',
-        url                  => 'cgit@git08.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-    ],
-    require                             => $::project_config::config_dir,
-  }
+      replication_force_update            => true,
+      replication                         => [
+        {
+          name                 => 'github',
+          url                  => 'git@github.com:',
+          authGroup            => 'Anonymous Users',
+          replicationDelay     => '1',
+          replicatePermissions => false,
+          mirror               => true,
+        },
+        {
+          name                 => 'local',
+          url                  => 'file:///opt/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git01',
+          url                  => 'cgit@git01.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git02',
+          url                  => 'cgit@git02.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git03',
+          url                  => 'cgit@git03.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git04',
+          url                  => 'cgit@git04.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git05',
+          url                  => 'cgit@git05.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git06',
+          url                  => 'cgit@git06.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git07',
+          url                  => 'cgit@git07.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+        {
+          name                 => 'git08',
+          url                  => 'cgit@git08.openstack.org:/var/lib/git/',
+          replicationDelay     => '1',
+          threads              => '4',
+          mirror               => true,
+        },
+      ],
+      require                             => $::project_config::config_dir,
+    }
 
-  gerrit::plugin { 'javamelody': version       => 'v2.13.3.e4233d6' }
-  gerrit::plugin { 'its-storyboard': version   => '805f9ac' }
+    gerrit::plugin { 'javamelody': version       => 'v2.13.3.e4233d6' }
+    gerrit::plugin { 'its-storyboard': version   => '805f9ac' }
 
+    class { 'gerritbot':
+      nick                    => 'openstackgerrit',
+      password                => $gerritbot_password,
+      server                  => 'irc.freenode.net',
+      user                    => 'gerritbot',
+      vhost_name              => $::fqdn,
+      ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
+      ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+      channel_file            => $::project_config::gerritbot_channel_file,
+      require                 => $::project_config::config_dir,
+    }
 
-  class { 'gerritbot':
-    nick                    => 'openstackgerrit',
-    password                => $gerritbot_password,
-    server                  => 'irc.freenode.net',
-    user                    => 'gerritbot',
-    vhost_name              => $::fqdn,
-    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
-    channel_file            => $::project_config::gerritbot_channel_file,
-    require                 => $::project_config::config_dir,
-  }
-  class { 'gerrit::remotes':
-    ensure => absent,
+    class { 'gerrit::remotes':
+      ensure => absent,
+    }
+  } else {
+    # Only create gerrit user / group so we can bring a server online.
+    include ::gerrit::user
   }
 
   package { 'python-launchpadlib':
