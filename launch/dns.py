@@ -33,7 +33,12 @@ def print_dns(cloud, server):
     ip4 = server.public_v4
     ip6 = server.public_v6
 
-    for raw_server in cloud.nova_client.servers.list():
+    try:
+        servers = cloud.nova_client.servers.list()
+    except ImportError as e:
+        # novaclient is no longer used by shade in recent versions
+        servers = cloud.list_servers()
+    for raw_server in servers:
         if raw_server.id == server.id:
             href = get_href(raw_server)
 
