@@ -449,6 +449,15 @@ class openstack_project::gerrit (
     }
 
     if ($testmode == false) {
+      file { '/root/.ssh/known_hosts':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0600',
+        content => "${::fqdn},${::ipaddress},${::ipaddress6} ${ssh_rsa_pubkey_contents}",
+        replace => true,
+        require => File['/root/.ssh'],
+      }
       exec { 'manage_projects':
         command     => '/usr/local/bin/manage-projects -v -l /var/log/manage_projects.log',
         timeout     => 1800, # 30 minutes
