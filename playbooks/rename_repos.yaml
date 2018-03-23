@@ -50,5 +50,7 @@
   - include_vars: "{{ repolist }}"
   - shell: ssh -p 29418 -i /home/gerrit2/review_site/etc/ssh_project_rsa_key openstack-project-creator@review.openstack.org gerrit rename-group {{ item.old }} {{ item.new }}
     with_items: "{{ gerrit_groups|default([]) }}"
-# TODO: online reindex accounts
-# TODO: online reindex projects
+  - name: Start online reindex of accounts
+    shell: ssh -p 29418 -i /home/gerrit2/review_site/etc/ssh_project_rsa_key openstack-project-creator@review.openstack.org gerrit index start accounts --force
+  - name: Start online reindex of changes
+    shell: ssh -p 29418 -i /home/gerrit2/review_site/etc/ssh_project_rsa_key openstack-project-creator@review.openstack.org gerrit index start changes --force
