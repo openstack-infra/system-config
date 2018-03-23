@@ -380,7 +380,9 @@ our mirror update cron jobs, manually perform the first mirror update:
   If using one of the mirror update scripts (from ``/usr/local/bin``)
   be aware that they generally run the update process under
   ``timeout`` with shorter periods than may be required for the
-  initial full sync.
+  initial full sync.  e.g. for ``reprepro`` mirrors
+
+    NO_TIMEOUT=1 /usr/local/bin/reprepro-mirror-update /etc/reprepro/ubuntu mirror.ubuntu
 
 * Log into ``afs01.dfw.openstack.org`` and run ``screen``.  Within
   that session, periodically during the sync, and once again after it
