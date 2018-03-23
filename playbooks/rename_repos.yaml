@@ -85,5 +85,8 @@
       shell: "{{ gerrit_ssh_command }} rename-group {{ item.old }} {{ item.new }}"
       with_items: "{{ gerrit_groups|default([]) }}"
 
-# TODO: online reindex accounts
-# TODO: online reindex projects
+    - name: Start online reindex of accounts
+      shell: "{{ gerrit_ssh_command }} index start accounts --force"
+
+    - name: Start online reindex of changes
+      shell: "{{ gerrit_ssh_command }} index start changes --force"
