@@ -1055,7 +1055,7 @@ node 'nodepool.openstack.org' {
     content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
-  file { '/etc/openstack/limestone_cacert.pem':
+  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -1147,7 +1147,7 @@ node /^nl\d+\.openstack\.org$/ {
     content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool_launcher'],
   }
-  file { '/etc/openstack/limestone_cacert.pem':
+  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -1234,7 +1234,7 @@ node /^nb\d+\.openstack\.org$/ {
     content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool_builder'],
   }
-  file { '/etc/openstack/limestone_cacert.pem':
+  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
