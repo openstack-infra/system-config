@@ -1057,9 +1057,9 @@ node 'nodepool.openstack.org' {
   }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
     content => hiera('limestone_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool'],
   }
@@ -1149,9 +1149,9 @@ node /^nl\d+\.openstack\.org$/ {
   }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
     content => hiera('limestone_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool_launcher'],
   }
@@ -1236,9 +1236,9 @@ node /^nb\d+\.openstack\.org$/ {
   }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
+    owner   => 'nodepool',
+    group   => 'nodepool',
+    mode    => '0600',
     content => hiera('limestone_ssl_cert_file_contents'),
     require => Class['::openstackci::nodepool_builder'],
   }
