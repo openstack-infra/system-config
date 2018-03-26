@@ -503,6 +503,7 @@ cacti_hosts:
 - mirror01.iad.rax.openstack.org
 - mirror01.regionone.infracloud-chocolate.openstack.org
 - mirror01.regionone.infracloud-vanilla.openstack.org
+- mirror01.regionone.limestone.openstack.org
 - mirror01.kna1.citycloud.openstack.org
 - mirror01.sto2.citycloud.openstack.org
 - mirror01.la1.citycloud.openstack.org
