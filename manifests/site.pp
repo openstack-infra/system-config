@@ -1405,18 +1405,11 @@ node /^zuul\d+\.openstack\.org$/ {
     zuulv3                        => true,
     connections                   => hiera('zuul_connections', []),
     connection_secrets            => hiera('zuul_connection_secrets', []),
-    vhost_name                    => 'zuul.openstack.org',
-    zuul_status_url               => 'http://127.0.0.1:8001/openstack',
-    zuul_web_url                  => 'http://127.0.0.1:9000',
-    zuul_tenant_name              => 'openstack',
     gearman_client_ssl_cert       => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key        => hiera('gearman_client_ssl_key'),
     gearman_server_ssl_cert       => hiera('gearman_server_ssl_cert'),
     gearman_server_ssl_key        => hiera('gearman_server_ssl_key'),
     gearman_ssl_ca                => hiera('gearman_ssl_ca'),
-    proxy_ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
-    proxy_ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
-    proxy_ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
     statsd_host                   => 'graphite.openstack.org',
     status_url                    => 'https://zuul.openstack.org',
   }
@@ -1437,7 +1430,14 @@ node /^zuul\d+\.openstack\.org$/ {
     use_mysql      => true,
   }
 
-  class { '::zuul::web': }
+  class { '::zuul::web':
+    tenant_name             => 'openstack',
+    vhost_name              => 'zuul.openstack.org',
+    ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
+    ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
+    ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
+  }
+
   class { '::zuul::fingergw': }
 
   include bup
