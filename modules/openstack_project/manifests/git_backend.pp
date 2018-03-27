@@ -21,6 +21,9 @@ class openstack_project::git_backend (
   $ssl_cert_file_contents = '',
   $ssl_key_file_contents = '',
   $ssl_chain_file_contents = '',
+  $git_zuul_ci_org_ssl_cert_file_contents = '',
+  $git_zuul_ci_org_ssl_key_file_contents = '',
+  $git_zuul_ci_org_ssl_chain_file_contents = '',
   $behind_proxy = false,
   $project_config_repo = '',
   $selinux_mode = 'enforcing',
@@ -63,6 +66,34 @@ class openstack_project::git_backend (
         'robots'         => 'index',
     },
     manage_cgitrc           => true,
+    selinux_mode            => $selinux_mode
+  }
+
+  ::cgit::site { 'git.zuul-ci.org':
+    cgit_vhost_name         => 'git.zuul-ci.org',
+    ssl_cert_file           => "/etc/pki/tls/certs/git.zuul-ci.org.pem",
+    ssl_key_file            => "/etc/pki/tls/private/git.zuul-ci.org.key",
+    ssl_chain_file          => '/etc/pki/tls/certs/git.zuul-ci.org.intermediate.pem',
+    ssl_cert_file_contents  => $git_zuul_ci_org_ssl_cert_file_contents,
+    ssl_key_file_contents   => $git_zuul_ci_org_ssl_key_file_contents,
+    ssl_chain_file_contents => $git_zuul_ci_org_ssl_chain_file_contents,
+    behind_proxy            => $behind_proxy,
+    cgitrc_settings         => {
+        'clone-prefix'   => 'https://git.zuul-ci.org',
+        'commit-filter'  => '/usr/local/bin/commit-filter.sh',
+        'css'            => '/cgit-data/cgit.css',
+        'favicon'        => '/cgit-data/favicon.ico',
+        'logo'           => '/cgit-data/cgit.png',
+        'root-title'     => 'Zuul git repository browser',
+        'max-repo-count' => 2500,
+        'robots'         => 'index',
+        'include'        => '/etc/cgitrepos_git.zuul-ci.org',
+    },
+    manage_cgitrc           => true,
+    cgitrc_path             => '/etc/cgitrc_git.zuul-ci.org',
+    local_git_dir           => '/var/lib/git-alias/git.zuul-ci.org',
+    cgitdir                 => '/var/www/cgit_git.zuul-ci.org',
+    staticfiles             => '/var/www/cgit_git.zuul-ci.org/static',
     selinux_mode            => $selinux_mode
   }
 
