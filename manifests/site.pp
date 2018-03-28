@@ -1440,7 +1440,14 @@ node /^zuul\d+\.openstack\.org$/ {
     use_mysql      => true,
   }
 
-  class { '::zuul::web': }
+  class { '::zuul::web':
+    tenant_name             => 'openstack',
+    vhost_name              => 'zuul.openstack.org',
+    ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
+    ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
+    ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
+  }
+
   class { '::zuul::fingergw': }
 
   include bup
