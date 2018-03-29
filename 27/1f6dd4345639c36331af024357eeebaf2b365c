@@ -1,0 +1,8 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 29 Mar 2018 02:17:30 +0000
+Reviewed-on: https://review.openstack.org/553085
+Project: openstack-infra/system-config
+Branch: refs/heads/master
