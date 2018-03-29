@@ -67,6 +67,8 @@ node 'review.openstack.org' {
 
 # Node-OS: xenial
 node 'review01.openstack.org' {
+  $group = "review"
+
   $iptables_rules =
     ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
   class { 'openstack_project::server':

@@ -12,6 +12,7 @@ git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
 nodepool nodepool*.openstack.org:nb*.openstack.org:nl*.openstack.org
+review ~review\d+\.openstack\.org
 review-dev ~review-dev\d*\.openstack\.org
 subunit-worker ~subunit-worker\d+\.openstack\.org
 translate ~translate\d+\.openstack\.org
