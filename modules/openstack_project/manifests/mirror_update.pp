@@ -550,4 +550,13 @@ class openstack_project::mirror_update (
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-gpg-key.asc',
   }
+
+  gnupg_key { 'MariaDB Package Signing Key (new)':
+    ensure     => present,
+    # 177F 4010 FE56 CA33 3630 0305 F165 6F24 C74C D1D8
+    key_id     => 'F1656F24C74CD1D8',
+    user       => 'root',
+    key_type   => 'public',
+    key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-new-gpg-key.asc',
+  }
 }
