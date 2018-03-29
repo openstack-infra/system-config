@@ -28,9 +28,10 @@ fi
 
 REPREPRO_CONFIG=$1
 MIRROR_VOLUME=$2
-BASE=`cat ${REPREPRO_CONFIG}/options | grep base | cut -d' ' -f2`
+BASE=$(cat ${REPREPRO_CONFIG}/options | grep base | cut -d' ' -f2)
+CONFIG_KEY=$(basename $REPREPRO_CONFIG)
 
-UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.unreferenced-files
+UNREF_FILE=/var/run/reprepro/${MIRROR_VOLUME}.${CONFIG_KEY}.unreferenced-files
 K5START="k5start -t -f /etc/reprepro.keytab service/reprepro -- ${TIMEOUT} "
 REPREPRO="$K5START reprepro --confdir $REPREPRO_CONFIG"
 
