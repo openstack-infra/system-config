@@ -904,6 +904,27 @@ node /^status\d*\.openstack\.org$/ {
   }
 }
 
+# Node-OS: xenial
+node /^survey\d+\.openstack\.org$/ {
+  $group = "survey"
+  class { 'openstack_project::server':
+    iptables_public_tcp_ports => [22, 80, 443],
+    sysadmins                 => hiera('sysadmins', []),
+  }
+
+  class { 'openstack_project::survey':
+    vhost_name              => 'survey.openstack.org',
+    ssl_cert_file_contents  => hiera('ssl_cert_file_contents'),
+    ssl_key_file_contents   => hiera('ssl_key_file_contents'),
+    ssl_chain_file_contents => hiera('ssl_chain_file_contents'),
+    dbpassword              => hiera('dbpassword'),
+    dbhost                  => hiera('dbhost'),
+    adminuser               => hiera('adminuser'),
+    adminpass               => hiera('adminpass'),
+    adminmail               => hiera('adminmail'),
+  }
+}
+
 # This is a hidden authoritative master nameserver, not publicly
 # accessible.
 # Node-OS: xenial

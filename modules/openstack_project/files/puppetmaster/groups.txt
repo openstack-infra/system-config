@@ -15,6 +15,7 @@ nodepool nodepool*.openstack.org:nb*.openstack.org:nl*.openstack.org
 review ~review\d+\.openstack\.org
 review-dev ~review-dev\d*\.openstack\.org
 subunit-worker ~subunit-worker\d+\.openstack\.org
+survey ~survey\d+\.openstack\.org
 translate ~translate\d+\.openstack\.org
 translate-dev ~translate-dev\d*\.openstack\.org
 wiki ~wiki\d+\.openstack\.org
