@@ -35,7 +35,7 @@ def print_dns(cloud, server):
 
     # Get the server object from the sdk layer so that we can pull the
     # href data out of the links dict.
-    raw_server = cloud.compute.get_server(server.id)
+    raw_server = cloud.get_server(server.id)
     href = get_href(raw_server)
 
     print
