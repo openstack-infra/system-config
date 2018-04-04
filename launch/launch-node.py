@@ -31,9 +31,9 @@ import traceback
 import dns
 import utils
 
+import openstack
 import os_client_config
 import paramiko
-import shade
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
 
@@ -343,15 +343,12 @@ def main():
                         help="AZ to boot in.")
     options = parser.parse_args()
 
-    shade.simple_logging(debug=options.verbose)
+    openstack.enable_logging(debug=options.verbose)
 
     cloud_kwargs = {}
     if options.region:
         cloud_kwargs['region_name'] = options.region
-    cloud_config = os_client_config.OpenStackConfig().get_one_cloud(
-        options.cloud, **cloud_kwargs)
-
-    cloud = shade.OpenStackCloud(cloud_config)
+    cloud = openstack.connect(cloud=options.cloud, **cloud_kwargs)
 
     flavor = cloud.get_flavor(options.flavor)
     if flavor:
