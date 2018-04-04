@@ -35,7 +35,12 @@ def print_dns(cloud, server):
 
     # Get the server object from the sdk layer so that we can pull the
     # href data out of the links dict.
-    raw_server = cloud.compute.get_server(server.id)
+    try:
+        raw_server = cloud.compute.get_server(server.id)
+    except AttributeError:
+        print("Please update your version of shade/openstacksdk."
+              " openstacksdk >= 0.12 is required")
+        raise
     href = get_href(raw_server)
 
     print
@@ -82,7 +87,12 @@ def main():
     cloud = openstack.connect()
     # Get the server using the shade layer so that we have server.public_v4
     # and server.public_v6
-    server = cloud.get_server(options.name)
+    try:
+        server = cloud.get_server(options.name)
+    except AttributeError:
+        print("Please update your version of shade/openstacksdk."
+              " openstacksdk >= 0.12 is required")
+        raise
     print_dns(cloud, server)
 
 if __name__ == '__main__':
