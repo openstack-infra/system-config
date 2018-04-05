@@ -32,6 +32,8 @@ function git_clone {
     local MOD=$1
     local DEST=$2
 
+    echo "Cloning $MOD to $DEST"
+
     JUST_CLONED=1
     for attempt in $(seq 0 3); do
         clone_error=0
