@@ -11,7 +11,8 @@ groups:
     - afs[0-9]*.*.openstack.org
   afsadmin: mirror-update[0-9]*.openstack.org
   afsdb: afsdb[0-9]*.openstack.org
-  ask: ask*
+  ask: ask[0-9]*.openstack.org
+  ask-staging: ask-staging[0-9]*.openstack.org
   cacti: cacti[0-9]*.openstack.org
   disabled:
     - ask-staging.openstack.org
@@ -199,8 +200,8 @@ groups:
   translate:
     - translate01.openstack.org
   webservers:
-    - ask-staging.openstack.org
-    - ask.openstack.org
+    - ask-staging[0-9]*.openstack.org
+    - ask[0-9]*.openstack.org
     - cacti02.openstack.org
     - codesearch01.openstack.org
     - eavesdrop01.openstack.org

@@ -1203,7 +1203,9 @@ node /^afs.*\..*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'ask.openstack.org' {
+# Node-OS: xenial
+node /^ask\d*\.openstack\.org$/ {
+  $group = "ask"
 
   class { 'openstack_project::server': }
 
@@ -1218,7 +1220,10 @@ node 'ask.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'ask-staging.openstack.org' {
+# Node-OS: xenial
+node /^ask-staging\d*\.openstack\.org$/ {
+  $group = "ask-staging"
+
   class { 'openstack_project::server': }
 
   class { 'openstack_project::ask_staging':
