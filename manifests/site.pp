@@ -1627,7 +1627,8 @@ node /^afs.*\..*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'ask.openstack.org' {
+# Node-OS: xenial
+node /^ask\d*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
@@ -1645,7 +1646,8 @@ node 'ask.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'ask-staging.openstack.org' {
+# Node-OS: xenial
+node /^ask-staging\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
