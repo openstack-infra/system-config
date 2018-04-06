@@ -79,7 +79,6 @@ statusbot_channels:
 - murano
 - networking-sfc
 - openstack
-- openstack-101
 - openstack-ansible
 - openstack-anvil
 - openstack-bacon
@@ -180,7 +179,6 @@ meetbot_channels:
 - '#murano'
 - '#networking-sfc'
 - '#openstack'
-- '#openstack-101'
 - '#openstack-ansible'
 - '#openstack-barbican'
 - '#openstack-blazar'
