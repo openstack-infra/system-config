@@ -547,4 +547,8 @@ AFS uses the following DNS entries::
   _afs3-vlserver._udp.openstack.org. 300 IN SRV 10 10 7003 afsdb01.openstack.org.
   _afs3-vlserver._udp.openstack.org. 300 IN SRV 10 10 7003 afsdb02.openstack.org.
 
-Be sure to update them if volume location and PTS servers change.
+Be sure to update them if volume location and PTS servers change. Also note
+that only A (IPv4 address) records are used in the SRV data. Since OpenAFS
+lacks support for IPv6, avoid entering corresponding AAAA (IPv6 address)
+records for these so that it won't cause fallback delays for other
+v6-supporting AFS client implementations.
