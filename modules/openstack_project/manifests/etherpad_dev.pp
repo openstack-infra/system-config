@@ -6,7 +6,7 @@ class openstack_project::etherpad_dev (
 ) {
   class { 'etherpad_lite':
     ep_ensure      => 'latest',
-    nodejs_version => 'system',
+    nodejs_version => '6.x',
   }
 
   class { 'etherpad_lite::apache':
