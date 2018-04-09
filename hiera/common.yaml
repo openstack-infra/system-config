@@ -129,6 +129,7 @@ statusbot_channels:
 - openstack-nova
 - openstack-oslo
 - openstack-outreachy
+- openstack-placement
 - openstack-powervm
 - openstack-qa
 - openstack-qinling
@@ -237,6 +238,7 @@ meetbot_channels:
 - '#openstack-oslo'
 - '#openstack-outreachy'
 - '#openstack-performance'
+- '#openstack-placement'
 - '#openstack-powervm'
 - '#openstack-ptg'
 - '#openstack-publiccloud'
