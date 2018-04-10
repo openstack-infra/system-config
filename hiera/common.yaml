@@ -78,6 +78,7 @@ statusbot_channels:
 - midonet
 - murano
 - networking-sfc
+- oooq
 - openstack
 - openstack-101
 - openstack-ansible
