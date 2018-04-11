@@ -271,25 +271,49 @@ class openstack_project::server (
 
   ###########################################################
   # Manage  python/pip
-
   $desired_virtualenv = '15.1.0'
+
+  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
+    $virtualenv_upgrade = 'yes'
+  } else {
+    $virtualenv_upgrade = 'no'
+  }
+
+  # Ensure pip, dev and virtualenv packages are present
+  class { '::python':
+    dev        => 'present',
+    pip        => 'present',
+    virtualenv => 'present',
+  } ->
   class { '::pip':
     index_url       => $pypi_index_url,
     optional_settings => {
       'extra-index-url' => '',
     },
     manage_pip_conf => true,
-  }
-
-  if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
-    $virtualenv_ensure = $desired_virtualenv
-  } else {
-    $virtualenv_ensure = present
-  }
-  package { 'virtualenv':
-    ensure   => $virtualenv_ensure,
-    provider => openstack_pip,
-    require  => Class['pip'],
+  } ->
+  # If we need to update virtualenv with pip, do it now.  Note this
+  # will overwrite any packaged version -- but we still want the
+  # packaged version installed!  Otherwise something might come along
+  # later and do the equivalanet of an 'apt-get install
+  # python-virtualenv' and everything gets messed up.
+  #
+  # This is a hack because puppet3 can not have two packages with a
+  # different provider.  You'd think the logical thing here was
+  #
+  # package { 'virtualenv':
+  #  ensure   => $virtualenv_ensure,
+  #  provider => openstack_pip,
+  #  require  => Class['pip'],
+  # }
+  #
+  # but this just conflicts with the package using the deb/yum
+  # provider (apparently fixed in puppet >4? see [1].  Thus we just
+  # hack in a pip install if it seems like we need to upgrade.
+  #  [1] https://tickets.puppetlabs.com/browse/PUP-1073
+  exec { 'pip-install-virtualenv':
+    command => 'pip install --upgrade virtualenv',
+    onlyif  => 'test "$virtualenv_upgrade" = "yes"',
   }
 
   ###########################################################
