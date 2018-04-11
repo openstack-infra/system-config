@@ -271,25 +271,33 @@ class openstack_project::server (
 
   ###########################################################
   # Manage  python/pip
-
   $desired_virtualenv = '15.1.0'
-  class { '::pip':
-    index_url       => $pypi_index_url,
-    optional_settings => {
-      'extra-index-url' => '',
-    },
-    manage_pip_conf => true,
-  }
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
     $virtualenv_ensure = $desired_virtualenv
   } else {
     $virtualenv_ensure = present
   }
-  package { 'virtualenv':
+
+  # Ensure pip, dev and virtualenv packages are present
+  class { '::python':
+    dev        => 'present',
+    pip        => 'present',
+    virtualenv => 'present',
+  } ->
+  class { '::pip':
+    index_url       => $pypi_index_url,
+    optional_settings => {
+      'extra-index-url' => '',
+    },
+    manage_pip_conf => true,
+  } ->
+  # If we need to update virtualenv with pip, do it now.
+  # Note this will overwrite any packaged version
+  package { 'pip-installed-virtualenv':
+    name     => virtualenv,
     ensure   => $virtualenv_ensure,
     provider => openstack_pip,
-    require  => Class['pip'],
   }
 
   ###########################################################
