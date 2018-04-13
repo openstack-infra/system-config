@@ -36,9 +36,11 @@ class openstack_project::firehose (
     infra_service_username => $mqtt_username,
     infra_service_password => $mqtt_password,
     enable_tls             => true,
+    enable_tls_websocket   => true,
     ca_file                => $ca_file,
     cert_file              => $cert_file,
     key_file               => $key_file,
+    websocket_tls_port     => 443,
   }
 
   include germqtt

@@ -42,6 +42,7 @@ firehose.openstack.org has 2 open ports for MQTT traffic:
  * **1883** - The default MQTT port
  * **80** - Uses websockets for the MQTT communication
  * **8883** - The default SSL/TLS MQTT port
+ * **443** - The SSL/TLS websockets port
 
 
 Topics
