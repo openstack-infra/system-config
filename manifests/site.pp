@@ -594,7 +594,7 @@ node /^firehose\d+\.openstack\.org$/ {
     # NOTE(mtreinish) Port 80 and 8080 are disabled because websocket
     # connections seem to crash mosquitto. Once this is fixed we should add
     # them back
-    iptables_public_tcp_ports => [22, 25, 80, 1883, 8883],
+    iptables_public_tcp_ports => [22, 25, 80, 1883, 8883, 443],
     sysadmins                 => hiera('sysadmins', []),
     manage_exim               => false,
   }

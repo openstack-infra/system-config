@@ -39,6 +39,7 @@ class openstack_project::firehose (
     ca_file                => $ca_file,
     cert_file              => $cert_file,
     key_file               => $key_file,
+    websocket_tls_port     => 443,
   }
 
   include germqtt
