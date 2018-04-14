@@ -191,7 +191,16 @@ class openstack_project::review (
           url      => 'https://storyboard.openstack.org',
         },
       ],
+      # See https://gerrit.googlesource.com/plugins/its-storyboard
+      #   /+/stable-2.13/src/main/resources/Documentation
+      #   /quick-install-guide.md#its_actions_its_actionsconfigure-its-actions
+      # for documentation on these options.
       its_rules                          => [
+        {
+          name       => 'comment-on-status-update',
+          event_type => 'patchset-created,change-abandoned,change-restored,change-merged',
+          action     => 'add-standard-comment',
+        },
         {
           name       => 'change_abandoned',
           event_type => 'change-abandoned',
