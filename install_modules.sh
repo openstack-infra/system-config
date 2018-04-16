@@ -14,7 +14,17 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
+export PUPPET_VERSION=${PUPPET_VERSION:-3}
+
+if [ "$PUPPET_VERSION" == "3" ] ; then
+    export MODULE_PATH=/etc/puppet/modules
+elif [ "$PUPPET_VERSION" == "4" ] ; then
+    export MODULE_PATH=/etc/puppetlabs/code/modules
+else
+    echo "ERROR: unsupported puppet version $PUPPET_VERSION"
+    exit 1
+fi
+
 SCRIPT_NAME=$(basename $0)
 SCRIPT_DIR=$(readlink -f "$(dirname $0)")
 JUST_CLONED=0
@@ -70,7 +80,7 @@ if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
     exit 0
 fi
 
-MODULE_LIST=`puppet module list --color=false`
+MODULE_LIST=`PATH=$PATH:/opt/puppetlabs/bin puppet module list --color=false`
 
 # Install modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
