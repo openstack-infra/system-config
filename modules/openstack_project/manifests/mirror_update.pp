@@ -27,10 +27,20 @@ class openstack_project::mirror_update (
   }
 
   class { 'bandersnatch::mirror':
-    mirror_root => '/afs/.openstack.org/mirror/pypi',
-    static_root => '/afs/.openstack.org/mirror',
-    hash_index  => true,
-    require     => Class['bandersnatch'],
+    mirror_root       => '/afs/.openstack.org/mirror/pypi',
+    static_root       => '/afs/.openstack.org/mirror',
+    hash_index        => true,
+    package_blacklist => [
+      # These packages are quite large and release often. Ignore them.
+      tensorflow,
+      tf-nightly,
+      tf-nightly-gpu,
+      tfp-nightly,
+      tfp-nightly-gpu,
+      tensorboard,
+      tb-nightly,
+    ],
+    require           => Class['bandersnatch'],
   }
 
   file { '/etc/bandersnatch.keytab':
