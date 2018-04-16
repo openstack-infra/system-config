@@ -15,18 +15,15 @@
 # under the License.
 
 ROOT=$(readlink -fn $(dirname $0)/..)
-export MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 # MODULE_ENV_FILE sets the list of modules to read from and install and can be
 # overridden by setting it outside the script.
 export MODULE_ENV_FILE=${MODULE_ENV_FILE:-modules.env}
 # PUPPET_MANIFEST sets the manifest that is being tested and can be overridden
 # by setting it outside the script.
 export PUPPET_MANIFEST=${PUPPET_MANIFEST:-manifests/site.pp}
+export PUPPET_VERSION=${PUPPET_VERSION:-3}
 
 export PUPPET_INTEGRATION_TEST=1
-
-# Remove previously-installed modules
-sudo rm -rf /etc/puppet/modules/*
 
 # These arrays are initialized here and populated in modules.env
 
@@ -45,6 +42,13 @@ source $MODULE_ENV_FILE
 
 # Install puppet
 SETUP_PIP=false sudo -E bash -x $ROOT/install_puppet.sh
+if [ "$PUPPET_VERSION" == "3" ] ; then
+    MODULE_PATH=/etc/puppet/modules
+elif [ "$PUPPET_VERSION" == "4" ] ; then
+    MODULE_PATH=/etc/puppetlabs/code/modules
+fi
+# Remove previously-installed modules
+sudo rm -rf $MODULE_PATH/*
 # Install SOURCE_MODULES
 sudo -E bash -x $ROOT/install_modules.sh
 
@@ -52,12 +56,12 @@ sudo -E bash -x $ROOT/install_modules.sh
 cat > clonemap.yaml <<EOF
 clonemap:
   - name: '(.*?)/puppet-(.*)'
-    dest: '/etc/puppet/modules/\2'
+    dest: '$MODULE_PATH/\2'
   - name: '(.*?)/ansible-role-(.*)'
     dest: '/etc/ansible/roles/\2'
 EOF
 
-project_names="openstack-infra/ansible-role-puppet"
+#project_names="openstack-infra/ansible-role-puppet"
 
 for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_scope=$(basename `dirname $MOD`)
@@ -65,9 +69,13 @@ for MOD in ${!INTEGRATION_MODULES[*]}; do
     project_names+=" $project_scope/$repo_name"
 done
 
-sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
-    git://git.openstack.org \
-    $project_names
+#sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
+#    git://git.openstack.org \
+#    $project_names
+for project in $project_names ; do
+    git clone git://git.openstack.org/$project $MODULE_PATH/${project##openstack-infra/puppet-}
+done
+git clone git://git.openstack.org/openstack-infra/ansible-role-puppet /etc/ansible/roles/puppet
 
 # Fix hostname lookups
 grep -v 127.0.1.1 /etc/hosts >/tmp/hosts
@@ -80,7 +88,7 @@ sudo mv /tmp/hosts /etc/hosts
 sudo mkdir -p /opt/system-config
 sudo ln -sf $(pwd) /opt/system-config/production
 # Really make sure that the openstack_project module is in the module path
-sudo ln -sf /opt/system-config/production/modules/openstack_project /etc/puppet/modules
+sudo ln -sf /opt/system-config/production/modules/openstack_project $MODULE_PATH
 sudo -H mkdir -p ~/.ansible/tmp
 
 virtualenv --system-site-packages /tmp/apply-ansible-env
