@@ -22,7 +22,9 @@ class openstack_project::mirror_update (
 
   class { 'openstack_project::gem_mirror': }
 
-  class { 'bandersnatch': }
+  class { 'bandersnatch':
+    bandersnatch_source => 'pip3',
+  }
 
   class { 'bandersnatch::mirror':
     mirror_root => '/afs/.openstack.org/mirror/pypi',
