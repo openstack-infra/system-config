@@ -176,10 +176,12 @@ EOF
         ln -s /usr/bin/pip /usr/bin/pip-python
     fi
 
-    # Wipe out templatedir so we don't get warnings about it
-    sed -i '/templatedir/d' /etc/puppet/puppet.conf
-    # Wipe out server, as we don't have one.
-    sed -i '/server/d' /etc/puppet/puppet.conf
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        # Wipe out templatedir so we don't get warnings about it
+        sed -i '/templatedir/d' /etc/puppet/puppet.conf
+        # Wipe out server, as we don't have one.
+        sed -i '/server/d' /etc/puppet/puppet.conf
+    fi
 }
 
 function setup_puppet_ubuntu {
@@ -242,10 +244,12 @@ EOF
         --assume-yes dist-upgrade
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes install -y --force-yes $puppetpkg git $rubypkg
-    # Wipe out templatedir so we don't get warnings about it
-    sed -i '/templatedir/d' /etc/puppet/puppet.conf
-    # Wipe out server, as we don't have one.
-    sed -i '/server/d' /etc/puppet/puppet.conf
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        # Wipe out templatedir so we don't get warnings about it
+        sed -i '/templatedir/d' /etc/puppet/puppet.conf
+        # Wipe out server, as we don't have one.
+        sed -i '/server/d' /etc/puppet/puppet.conf
+    fi
     # ensure the agent is stopped and disabled
     if [ -f /bin/systemctl ]; then
         service puppet stop
