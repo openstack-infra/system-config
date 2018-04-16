@@ -14,6 +14,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+# Load puppet 4 bin path if applicable
+source /etc/profile
 MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
 SCRIPT_NAME=$(basename $0)
 SCRIPT_DIR=$(readlink -f "$(dirname $0)")
