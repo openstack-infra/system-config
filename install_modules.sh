@@ -14,7 +14,14 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-MODULE_PATH=`puppet config print modulepath | cut -d ':' -f 1`
+# Load puppet 4 bin path if applicable
+source /etc/profile
+export PUPPET_VERSION=${PUPPET_VERSION:-3}
+if [ "$PUPPET_VERSION" == "3" ] ; then
+    MODULE_PATH=/etc/puppet/modules
+elif [ "$PUPPET_VERSION" == "4" ] ; then
+    MODULE_PATH=/etc/puppetlabs/code/modules
+fi
 SCRIPT_NAME=$(basename $0)
 SCRIPT_DIR=$(readlink -f "$(dirname $0)")
 JUST_CLONED=0
