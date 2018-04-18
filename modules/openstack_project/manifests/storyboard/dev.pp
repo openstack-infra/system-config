@@ -16,6 +16,7 @@ class openstack_project::storyboard::dev(
   $valid_oauth_clients = [$::fqdn],
   $cors_allowed_origins = ["https://${::fqdn}"],
   $sender_email_address = undef,
+  $default_url = undef,
 ) {
 
   class { 'openstack_project::storyboard':
@@ -35,6 +36,7 @@ class openstack_project::storyboard::dev(
     valid_oauth_clients     => $valid_oauth_clients,
     cors_allowed_origins    => $cors_allowed_origins,
     sender_email_address    => $sender_email_address,
+    default_url             => $default_url,
   }
 
   realize (

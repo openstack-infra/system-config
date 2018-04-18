@@ -792,6 +792,7 @@ node /^storyboard\d*\.openstack\.org$/ {
       'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
+    default_url          => 'https://storyboard.openstack.org',
   }
 }
 
@@ -817,6 +818,7 @@ node /^storyboard-dev\d*\.openstack\.org$/ {
       'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard-dev@storyboard-dev.openstack.org',
+    default_url          => 'https://storyboard-dev.openstack.org',
   }
 
 }
