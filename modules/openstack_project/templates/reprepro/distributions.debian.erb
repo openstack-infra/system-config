@@ -29,14 +29,4 @@ Contents: .gz
 Update: debian
 Log: <%= @logdir %>/debian-<%= release %>-backports.log
 
-Origin: Debian
-Codename: <%= release %>-security
-Description: OpenStack Debian <%= release.capitalize %> Security mirror
-Architectures: amd64 arm64 source
-Components: main
-UDebComponents: main
-Contents: .gz
-Update: debian-<%= release %>-security
-Log: <%= @logdir %>/debian-<%= release %>-security.log
-
 <% end -%>
