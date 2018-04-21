@@ -37,7 +37,7 @@ At a Glance
   * `Nodepool Reference Manual <http://docs.openstack.org/infra/nodepool>`_
   * `ZooKeeper Programmer's Guide <https://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html>`_
   * `ZooKeeper Administrator's Guide <https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html>`_
-  * `zk_shell <https://pypi.python.org/pypi/zk_shell/>`_
+  * `zk_shell <https://pypi.org/project/zk_shell/>`_
 
 Overview
 ========
