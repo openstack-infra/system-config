@@ -104,7 +104,7 @@ The MQTT community wiki maintains a page that lists available client bindings
 for many languages here: https://github.com/mqtt/mqtt.github.io/wiki/libraries
 For python using the `paho-mqtt`_ library is recommended
 
-.. _paho-mqtt: https://pypi.python.org/pypi/paho-mqtt/
+.. _paho-mqtt: https://pypi.org/project/paho-mqtt/
 
 CLI Example
 -----------
