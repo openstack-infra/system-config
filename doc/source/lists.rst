@@ -88,3 +88,16 @@ argument to withlist.  To run the same script on a single list, use:
 Note that the ban list accepts regular expressions, so to ban an
 address and all suffixes, use '^address.*@example.com' as the "address
 to ban".
+
+Lock Files
+----------
+
+If a list stops handling traffic for some time, it may be due to a
+stale lock file.  Mailman locks are in /srv/mailman/openstack/locks.
+If a lock is held for a list, then ``listname.lock`` will exist.  The
+contents of the file will be the name of the lock sequence file which
+was used to obtain the lock.  That file is in the form
+``listname.lock.hostname.pid.sequence``.  If the process id in that
+string no longer exists, it's safe to assume the process died without
+cleaning up the lock.  It should generally be safe to remove the
+lockfile in that case.
