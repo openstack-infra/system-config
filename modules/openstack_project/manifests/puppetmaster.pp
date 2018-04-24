@@ -83,15 +83,7 @@ class openstack_project::puppetmaster (
   }
 
   cron { 'updateinfracloud':
-    user        => 'root',
-    minute      => $puppetmaster_update_cron_interval[min],
-    hour        => $puppetmaster_update_cron_interval[hour],
-    monthday    => $puppetmaster_update_cron_interval[day],
-    month       => $puppetmaster_update_cron_interval[month],
-    weekday     => $puppetmaster_update_cron_interval[weekday],
-    command     => 'flock -n /var/run/puppet/puppet_run_infracloud.lock bash /opt/system-config/production/run_infracloud.sh >> /var/log/puppet_run_infracloud_cron.log 2>&1',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-  }
+    ensure => absent,
 
   logrotate::file { 'updatepuppetmaster':
     ensure  => present,
@@ -122,31 +114,11 @@ class openstack_project::puppetmaster (
   }
 
   logrotate::file { 'updateinfracloud':
-    ensure  => present,
-    log     => '/var/log/puppet_run_all_infracloud.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['updateinfracloud'],
+    ensure  => absent,
   }
 
   logrotate::file { 'updateinfracloudcron':
-    ensure  => present,
-    log     => '/var/log/puppet_run_infracloud_cron.log',
-    options => ['compress',
-      'copytruncate',
-      'delaycompress',
-      'missingok',
-      'rotate 7',
-      'daily',
-      'notifempty',
-    ],
-    require => Cron['updateinfracloud'],
+    ensure  => absent,
   }
 
   cron { 'deleteoldreports':
@@ -344,11 +316,7 @@ class openstack_project::puppetmaster (
   }
 
   file { '/etc/ansible/hosts/infracloud':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    source  => 'puppet:///modules/openstack_project/puppetmaster/infracloud',
+    ensure  => absent,
   }
 
   file { '/etc/ansible/groups.txt':
