@@ -224,22 +224,6 @@ node 'puppetmaster.openstack.org' {
     mqtt_password                              => hiera('mqtt_service_user_password'),
     mqtt_ca_cert_contents                      => hiera('mosquitto_tls_ca_file'),
   }
-  file { '/etc/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstack_project::puppetmaster'],
-  }
-  file { '/etc/openstack/infracloud_chocolate_cacert.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    require => Class['::openstack_project::puppetmaster'],
-  }
   file { '/etc/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'root',
@@ -982,12 +966,6 @@ node 'nodepool.openstack.org' {
   $tripleo_username               = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password               = hiera('nodepool_tripleo_password')
   $tripleo_project                = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
-  $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
-  $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
-  $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
   $vexxhost_username              = hiera('nodepool_vexxhost_username', 'username')
   $vexxhost_password              = hiera('nodepool_vexxhost_password')
   $vexxhost_project               = hiera('nodepool_vexxhost_project', 'project')
@@ -1046,22 +1024,6 @@ node 'nodepool.openstack.org' {
     jenkins_masters               => [],
     split_daemon                  => true,
   }
-  file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool'],
-  }
-  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool'],
-  }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'nodepool',
@@ -1102,12 +1064,6 @@ node /^nl\d+\.openstack\.org$/ {
   $tripleo_username               = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password               = hiera('nodepool_tripleo_password')
   $tripleo_project                = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username    = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password    = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project     = hiera('nodepool_infracloud_vanilla_project', 'project')
-  $infracloud_chocolate_username  = hiera('nodepool_infracloud_chocolate_username', 'username')
-  $infracloud_chocolate_password  = hiera('nodepool_infracloud_chocolate_password')
-  $infracloud_chocolate_project   = hiera('nodepool_infracloud_chocolate_project', 'project')
   $vexxhost_username              = hiera('nodepool_vexxhost_username', 'username')
   $vexxhost_password              = hiera('nodepool_vexxhost_password')
   $vexxhost_project               = hiera('nodepool_vexxhost_project', 'project')
@@ -1138,22 +1094,6 @@ node /^nl\d+\.openstack\.org$/ {
     enable_webapp            => true,
   }
 
-  file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_launcher'],
-  }
-  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_launcher'],
-  }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'nodepool',
@@ -1184,12 +1124,6 @@ node /^nb\d+\.openstack\.org$/ {
   $tripleo_username              = hiera('nodepool_tripleo_username', 'username')
   $tripleo_password              = hiera('nodepool_tripleo_password')
   $tripleo_project               = hiera('nodepool_tripleo_project', 'project')
-  $infracloud_vanilla_username   = hiera('nodepool_infracloud_vanilla_username', 'username')
-  $infracloud_vanilla_password   = hiera('nodepool_infracloud_vanilla_password')
-  $infracloud_vanilla_project    = hiera('nodepool_infracloud_vanilla_project', 'project')
-  $infracloud_chocolate_username = hiera('nodepool_infracloud_chocolate_username', 'username')
-  $infracloud_chocolate_password = hiera('nodepool_infracloud_chocolate_password')
-  $infracloud_chocolate_project  = hiera('nodepool_infracloud_chocolate_project', 'project')
   $vexxhost_username             = hiera('nodepool_vexxhost_username', 'username')
   $vexxhost_password             = hiera('nodepool_vexxhost_password')
   $vexxhost_project              = hiera('nodepool_vexxhost_project', 'project')
@@ -1224,23 +1158,6 @@ node /^nb\d+\.openstack\.org$/ {
     zuulv3                        => true,
   }
 
-  file { '/home/nodepool/.config/openstack/infracloud_vanilla_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
-  }
-
-  file { '/home/nodepool/.config/openstack/infracloud_chocolate_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
-  }
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
     ensure  => present,
     owner   => 'nodepool',
@@ -1779,147 +1696,6 @@ node /^codesearch\d*\.openstack\.org$/ {
   }
   class { 'openstack_project::codesearch':
     project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
-  }
-}
-
-# Node-OS: trusty
-node 'controller00.vanilla.ic.openstack.org' {
-  $group = 'infracloud'
-  class { '::openstack_project::server':
-    iptables_public_tcp_ports => [80,5000,5671,8774,9292,9696,35357], # logs,keystone,rabbit,nova,glance,neutron,keystone
-    sysadmins                 => hiera('sysadmins', []),
-    enable_unbound            => false,
-    purge_apt_sources         => false,
-  }
-  class { '::openstack_project::infracloud::controller':
-    keystone_rabbit_password         => hiera('keystone_rabbit_password'),
-    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
-    nova_rabbit_password             => hiera('nova_rabbit_password'),
-    root_mysql_password              => hiera('infracloud_mysql_password'),
-    keystone_mysql_password          => hiera('keystone_mysql_password'),
-    glance_mysql_password            => hiera('glance_mysql_password'),
-    neutron_mysql_password           => hiera('neutron_mysql_password'),
-    nova_mysql_password              => hiera('nova_mysql_password'),
-    keystone_admin_password          => hiera('keystone_admin_password'),
-    glance_admin_password            => hiera('glance_admin_password'),
-    neutron_admin_password           => hiera('neutron_admin_password'),
-    nova_admin_password              => hiera('nova_admin_password'),
-    keystone_admin_token             => hiera('keystone_admin_token'),
-    ssl_key_file_contents            => hiera('ssl_key_file_contents'),
-    ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => hiera('bridge_name'),
-    controller_public_address        => $::fqdn,
-    neutron_subnet_cidr              => '15.184.64.0/19',
-    neutron_subnet_gateway           => '15.184.64.1',
-    neutron_subnet_allocation_pools  => [
-                                          'start=15.184.65.2,end=15.184.65.254',
-                                          'start=15.184.66.2,end=15.184.66.254',
-                                          'start=15.184.67.2,end=15.184.67.254'
-                                        ],
-    mysql_max_connections            => hiera('mysql_max_connections'),
-  }
-}
-
-node /^compute\d{3}\.vanilla\.ic\.openstack\.org$/ {
-  $group = 'infracloud'
-  class { '::openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
-    enable_unbound            => false,
-    purge_apt_sources         => false,
-  }
-  class { '::openstack_project::infracloud::compute':
-    nova_rabbit_password             => hiera('nova_rabbit_password'),
-    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
-    neutron_admin_password           => hiera('neutron_admin_password'),
-    ssl_key_file_contents            => hiera('ssl_key_file_contents'),
-    ssl_cert_file_contents           => hiera('infracloud_vanilla_ssl_cert_file_contents'),
-    br_name                          => hiera('bridge_name'),
-    controller_public_address        => 'controller00.vanilla.ic.openstack.org',
-  }
-}
-
-# Node-OS: trusty
-node 'controller00.chocolate.ic.openstack.org' {
-  $group = 'infracloud'
-  class { '::openstack_project::server':
-    iptables_public_tcp_ports => [80,5000,5671,8774,9292,9696,35357], # logs,keystone,rabbit,nova,glance,neutron,keystone
-    sysadmins                 => hiera('sysadmins', []),
-    enable_unbound            => false,
-    purge_apt_sources         => false,
-  }
-  class { '::openstack_project::infracloud::controller':
-    keystone_rabbit_password         => hiera('keystone_rabbit_password'),
-    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
-    nova_rabbit_password             => hiera('nova_rabbit_password'),
-    root_mysql_password              => hiera('infracloud_mysql_password'),
-    keystone_mysql_password          => hiera('keystone_mysql_password'),
-    glance_mysql_password            => hiera('glance_mysql_password'),
-    neutron_mysql_password           => hiera('neutron_mysql_password'),
-    nova_mysql_password              => hiera('nova_mysql_password'),
-    keystone_admin_password          => hiera('keystone_admin_password'),
-    glance_admin_password            => hiera('glance_admin_password'),
-    neutron_admin_password           => hiera('neutron_admin_password'),
-    nova_admin_password              => hiera('nova_admin_password'),
-    keystone_admin_token             => hiera('keystone_admin_token'),
-    ssl_key_file_contents            => hiera('infracloud_chocolate_ssl_key_file_contents'),
-    ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
-    controller_public_address        => $::fqdn,
-    neutron_subnet_cidr              => '15.184.64.0/19',
-    neutron_subnet_gateway           => '15.184.64.1',
-    neutron_subnet_allocation_pools  => [
-                                          'start=15.184.68.2,end=15.184.68.254',
-                                          'start=15.184.69.2,end=15.184.69.254',
-                                          'start=15.184.70.2,end=15.184.70.254'
-                                        ]
-  }
-}
-
-node /^compute\d{3}\.chocolate\.ic\.openstack\.org$/ {
-  $group = 'infracloud'
-  class { '::openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
-    enable_unbound            => false,
-    purge_apt_sources         => false,
-  }
-  class { '::openstack_project::infracloud::compute':
-    nova_rabbit_password             => hiera('nova_rabbit_password'),
-    neutron_rabbit_password          => hiera('neutron_rabbit_password'),
-    neutron_admin_password           => hiera('neutron_admin_password'),
-    ssl_key_file_contents            => hiera('infracloud_chocolate_ssl_key_file_contents'),
-    ssl_cert_file_contents           => hiera('infracloud_chocolate_ssl_cert_file_contents'),
-    br_name                          => 'br-vlan2551',
-    controller_public_address        => 'controller00.chocolate.ic.openstack.org',
-  }
-}
-
-# Node-OS: trusty
-# Upgrade-Modules
-node /^baremetal\d{2}\.vanilla\.ic\.openstack\.org$/ {
-  $group = 'infracloud'
-  class { '::openstack_project::server':
-    iptables_public_udp_ports => [67,69],
-    sysadmins                 => hiera('sysadmins', []),
-    enable_unbound            => false,
-    purge_apt_sources         => false,
-  }
-
-  class { '::openstack_project::infracloud::baremetal':
-    ironic_inventory          => hiera('ironic_inventory', {}),
-    ironic_db_password        => hiera('ironic_db_password'),
-    mysql_password            => hiera('bifrost_mysql_password'),
-    ipmi_passwords            => hiera('ipmi_passwords'),
-    ssh_private_key           => hiera('bifrost_vanilla_ssh_private_key'),
-    ssh_public_key            => hiera('bifrost_vanilla_ssh_public_key'),
-    bridge_name               => hiera('bridge_name'),
-    vlan                      => hiera('vlan'),
-    gateway_ip                => hiera('gateway_ip'),
-    default_network_interface => hiera('default_network_interface'),
-    dhcp_pool_start           => hiera('dhcp_pool_start'),
-    dhcp_pool_end             => hiera('dhcp_pool_end'),
-    network_interface         => hiera('network_interface'),
-    ipv4_nameserver           => hiera('ipv4_nameserver'),
-    ipv4_subnet_mask          => hiera('ipv4_subnet_mask'),
   }
 }
 
