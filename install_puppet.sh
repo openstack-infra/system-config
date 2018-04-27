@@ -211,6 +211,11 @@ function setup_puppet_ubuntu {
         puppetpkg=puppet-agent
         PUPPET_VERSION=4.*
         FACTER_VERSION=3.*
+    elif [ "$PUPPET_VERSION" == "5" ] ; then
+        puppet_deb=''
+        puppetpkg=puppet
+        PUPPET_VERSION=5.*
+        FACTER_VERSION=3.*
     else
         echo "Unsupported puppet version ${PUPPET_VERSION}"
         exit 1
