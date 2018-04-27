@@ -22,7 +22,7 @@ BASE="/afs/.openstack.org/mirror/fedora"
 MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/fedora/linux"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
-for REPO in releases/27 releases/28 ; do
+for REPO in releases/27 ; do
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
     fi
@@ -32,15 +32,18 @@ for REPO in releases/27 releases/28 ; do
     $K5START rsync -rlptDvz \
         --delete \
         --delete-excluded \
+        --exclude="Cloud/x86_64/images/*.box" \
         --exclude="CloudImages/x86_64/images/*.box" \
+        --exclude="Container" \
         --exclude="Docker" \
-        --exclude="Everything/armhfp/" \
-        --exclude="Everything/i386/" \
-        --exclude="Everything/source/" \
-        --exclude="Everything/x86_64/debug/" \
+        --exclude="aarch64/" \
+        --exclude="armhfp/" \
+        --exclude="source/" \
         --exclude="Server" \
         --exclude="Spins" \
         --exclude="Workstation" \
+        --exclude="x86_64/debug/" \
+        --exclude="x86_64/drpms/" \
         $MIRROR/$REPO/ $BASE/$REPO/
 done
 
@@ -54,8 +57,10 @@ for REPO in updates/27 updates/28 ; do
     $K5START rsync -rlptDvz \
         --delete \
         --delete-excluded \
+        --exclude="aarch64/" \
         --exclude="armhfp/" \
         --exclude="i386/" \
+        --exclude="source/" \
         --exclude="SRPMS/" \
         --exclude="x86_64/debug" \
         --exclude="x86_64/drpms" \
