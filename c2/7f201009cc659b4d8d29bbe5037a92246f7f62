@@ -1,0 +1,9 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 27 Apr 2018 11:42:15 +0000
+Reviewed-on: https://review.openstack.org/564725
+Project: openstack-infra/system-config
+Branch: refs/heads/master
