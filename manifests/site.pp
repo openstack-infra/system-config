@@ -371,6 +371,7 @@ node /planet\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
+# Node-OS: bionic
 node /^eavesdrop\d*\.openstack\.org$/ {
   $group = "eavesdrop"
   class { 'openstack_project::server':
