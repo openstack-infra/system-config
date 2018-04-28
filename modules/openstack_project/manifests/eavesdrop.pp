@@ -28,7 +28,7 @@ class openstack_project::eavesdrop (
   $ptgbot_nick = '',
   $ptgbot_password = '',
 ) {
-  include ::httpd
+  include ::apache
   include meetbot
 
   $vhost_extra = '
@@ -77,11 +77,7 @@ class openstack_project::eavesdrop (
     require => Class['statusbot'],
   }
 
-  if ! defined(Httpd::Mod['headers']) {
-    httpd::mod { 'headers':
-        ensure => present,
-    }
-  }
+  include ::apache::mod::headers
 
   class { 'project_config':
     url  => $project_config_repo,
