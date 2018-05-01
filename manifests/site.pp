@@ -80,7 +80,6 @@ node 'review01.openstack.org' {
   }
 
   class { 'openstack_project::review':
-    gerrit_configure                    => false,
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token'),
     github_project_username             => hiera('github_project_username', 'username'),
