@@ -106,6 +106,7 @@ statusbot_channels:
 - openstack-glance
 - openstack-ha
 - openstack-heat-translator
+- openstack-helm
 - openstack-horizon
 - openstack-hyper-v
 - openstack-i18n
