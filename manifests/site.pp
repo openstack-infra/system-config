@@ -19,7 +19,7 @@ node default {
 #
 # Long lived servers:
 #
-# Node-OS: trusty
+# Node-OS: xenial
 node 'review.openstack.org' {
   $iptables_rules =
     ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
@@ -153,7 +153,6 @@ node /^review-dev\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^grafana\d*\.openstack\.org$/ {
   $group = "grafana"
@@ -330,7 +329,6 @@ node /^lists\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^lists\d*\.katacontainers\.io$/ {
   class { 'openstack_project::server':
@@ -345,7 +343,6 @@ node /^lists\d*\.katacontainers\.io$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^paste\d*\.openstack\.org$/ {
   $group = "paste"
@@ -361,7 +358,6 @@ node /^paste\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /planet\d*\.openstack\.org$/ {
   class { 'openstack_project::planet':
@@ -369,7 +365,6 @@ node /planet\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^eavesdrop\d*\.openstack\.org$/ {
   $group = "eavesdrop"
@@ -524,7 +519,6 @@ node /^logstash\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^logstash-worker\d+\.openstack\.org$/ {
   $group = 'logstash-worker'
@@ -542,7 +536,6 @@ node /^logstash-worker\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
@@ -558,7 +551,6 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
@@ -654,7 +646,6 @@ node /^git\d+\.openstack\.org$/ {
 }
 
 # A machine to drive AFS mirror updates.
-# Node-OS: trusty
 # Node-OS: xenial
 node /^mirror-update\d*\.openstack\.org$/ {
   $group = "afsadmin"
@@ -692,7 +683,6 @@ node /^mirror\d*\..*\.openstack\.org$/ {
 }
 
 # Serve static AFS content for docs and other sites.
-# Node-OS: trusty
 # Node-OS: xenial
 node /^files\d*\.openstack\.org$/ {
   $group = "files"
@@ -1043,7 +1033,6 @@ node 'nodepool.openstack.org' {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^nl\d+\.openstack\.org$/ {
   $group = 'nodepool'
