@@ -1,4 +1,4 @@
-- hosts: review.openstack.org
+- hosts: review
   gather_facts: False
   remote_user: root
   tasks:
@@ -45,7 +45,7 @@
       shell: echo 'update projects set name="{{ item.new }}" where name="{{ item.old }}";' | mysql --defaults-file=/root/.storyboard_db.cnf storyboard
       with_items: "{{ repos }}"
 
-- hosts: review.openstack.org
+- hosts: review
   gather_facts: False
   remote_user: root
   become: yes
@@ -55,7 +55,7 @@
     - name: Make backup of gerrit index
       shell: cp -ax /home/gerrit2/review_site/index /home/gerrit2/index.backup.$(date +%s)
 
-- hosts: review.openstack.org
+- hosts: review
   gather_facts: False
   remote_user: root
   tasks:
@@ -64,7 +64,7 @@
     - name: Start gerrit
       shell: invoke-rc.d gerrit start
 
-- hosts: review.openstack.org
+- hosts: review
   gather_facts: False
   remote_user: root
   become: yes
