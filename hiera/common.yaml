@@ -140,6 +140,7 @@ statusbot_channels:
 - openstack-sahara
 - openstack-sdks
 - openstack-searchlight
+- openstack-security
 - openstack-self-healing
 - openstack-sprint
 - openstack-stable
