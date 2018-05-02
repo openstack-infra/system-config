@@ -24,7 +24,7 @@
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
       manage_config: True
       puppet_reports: none
-- hosts: "review.openstack.org:!disabled"
+- hosts: "review:!disabled"
   strategy: free
   gather_facts: true
   roles:
