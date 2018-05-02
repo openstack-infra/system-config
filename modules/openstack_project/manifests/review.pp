@@ -90,6 +90,8 @@ class openstack_project::review (
   if ($gerrit_configure) {
     $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
     class { 'openstack_project::gerrit':
+      vhost_name                          => 'review.openstack.org',
+      canonicalweburl                     => 'https://review.openstack.org/',
       git_http_url                        => 'https://git.openstack.org/',
       canonical_git_url                   => 'git://git.openstack.org/',
       ssl_cert_file                       => $ssl_cert_file,
@@ -307,7 +309,7 @@ class openstack_project::review (
       password                => $gerritbot_password,
       server                  => 'irc.freenode.net',
       user                    => 'gerritbot',
-      vhost_name              => $::fqdn,
+      vhost_name              => 'review.openstack.org',
       ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
       ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
       channel_file            => $::project_config::gerritbot_channel_file,
