@@ -543,7 +543,7 @@ window.onload = function() {
         $.each(mutations, function(i, mutation) {
             if (mutation.target === span[0] &&
                 mutation.attributeName === "style" &&
-                (!(span.is(":visible:")))) {
+                (!(span.is(":visible")))) {
                 ci_page_loaded();
             }
         });
