@@ -23,10 +23,9 @@
 
 # Rationale: It was done as a demonstration to a representative of a
 # foundation member company who requested a list of the "core
-# reviewers" for official projects, optionally broken down by
-# integrated vs. other. I'm attempting to show that this data is
-# already publicly available and can be extracted/analyzed by anyone
-# without needing to request it.
+# reviewers" for official projects. I'm attempting to show that this
+# data is already publicly available and can be extracted/analyzed
+# by anyone who has a Gerrit account.
 
 # Use: This needs your Gerrit username passed as the command-line
 # parameter, found at https://review.openstack.org/#/settings/ when
@@ -34,8 +33,8 @@
 # which https://review.openstack.org/#/settings/http-password will
 # allow you to generate. The results end up in files named
 # approvers.json and approvers.yaml. At the time of writing, it
-# takes approximately 6.5 minutes to run on a well-connected machine
-# with 70-80ms round-trip latency to review.openstack.org.
+# takes approximately 8 minutes to run on a well-connected machine
+# with 35ms round-trip latency to review.openstack.org.
 
 # Example:
 #
@@ -59,22 +58,15 @@
 #     ...
 #     >>> p = yaml.safe_load(open('approvers.yaml'))
 #     >>> print('Total repos: %s' % len(p))
-#     Total repos: 751
+#     Total repos: 1911
 #     >>> print('Total approvers: %s' % len(get_approvers(p)))
-#     Total approvers: 849
+#     Total approvers: 1386
 #     >>>
 #     >>> o = {k: v for k, v in p.iteritems() if 'team' in v}
 #     >>> print('Repos for official teams: %s' % len(o))
-#     Repos for official teams: 380
+#     Repos for official teams: 801
 #     >>> print('OpenStack repo approvers: %s' % len(get_approvers(o)))
-#     OpenStack repo approvers: 456
-#     >>>
-#     >>> i = {k: v for k, v in p.iteritems() if 'tags' in v
-#     ...      and 'release:managed' in v['tags']}
-#     >>> print('Repos under release management: %s' % len(i))
-#     Repos under release management: 77
-#     >>> print('Managed release repo approvers: %s' % len(get_approvers(i)))
-#     Managed release repo approvers: 245
+#     OpenStack repo approvers: 760
 
 import getpass
 import json
@@ -90,14 +82,14 @@ try:
 except IndexError:
     sys.stderr.write("Usage: %s USERNAME\n" % sys.argv[0])
     sys.exit(1)
-acl_path = 'gitweb?p=%s.git;a=blob_plain;f=project.config;hb=refs/meta/config'
+acl_path = ('https://git.openstack.org/cgit/%s/plain/'
+            'project.config?h=refs/meta/config')
 group_path = 'a/groups/%s/members/?recursive&pp=0'
-projects_file = ('gitweb?p=openstack/governance.git;a=blob_plain;'
-                 'f=reference/projects.yaml;hb=%s')
+projects_file = ('https://git.openstack.org/cgit/openstack/governance/plain/'
+                 'reference/projects.yaml?h=%s')
 ref_name = 'refs/heads/master'
 aprv_pattern = 'label-Workflow = .*\.\.\+1 group (.*)'
-projects = requests.get(gerrit_url + projects_file % ref_name)
-projects.encoding = 'utf-8'  # Workaround for Gitweb encoding
+projects = requests.get(projects_file % ref_name)
 projects = yaml.safe_load(projects.text)
 repos_dump = json.loads(requests.get(
     gerrit_url + 'projects/?pp=0').text[4:])
@@ -107,7 +99,7 @@ repos = {}
 aprv_groups = {}
 for repo in repos_dump:
     repos[repo.encode('utf-8')] = {'approvers': {}}
-    acl_ini = requests.get(gerrit_url + acl_path % repo).text
+    acl_ini = requests.get(acl_path % repo).text
     for aprv_group in [str(x) for x in re.findall(aprv_pattern, acl_ini)]:
         if aprv_group not in repos[repo]['approvers']:
             repos[repo]['approvers'][aprv_group] = []
@@ -151,7 +143,7 @@ for repo in repos:
             repos[repo]['approvers'][aprv_group].append(
                 approver_details.encode('utf-8'))
 approvers_yaml = open('approvers.yaml', 'w')
-yaml.dump(repos, approvers_yaml, allow_unicode=True, encoding='utf-8',
-          default_flow_style=False)
+yaml.safe_dump(repos, approvers_yaml, allow_unicode=True, encoding='utf-8',
+               default_flow_style=False)
 approvers_json = open('approvers.json', 'w')
 json.dump(repos, approvers_json, indent=2)
