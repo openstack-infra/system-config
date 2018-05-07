@@ -17,6 +17,8 @@ MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/opensuse"
 MIRROR="rsync://mirrors.rit.edu/opensuse"
+OBS_MIRROR="rsync://ftp.gwdg.de/pub/opensuse/repositories/"
+OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Pike' 'Cloud:/OpenStack:/Queens')
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
 for DISTVER in 42.3; do
@@ -46,6 +48,22 @@ for DISTVER in 42.3; do
         --exclude="src/" \
         --exclude="nosrc/" \
         $MIRROR/$REPO/ $BASE/$REPO/
+
+    date --iso-8601=ns
+    for obs_repo in ${OBS_REPOS[@]}; do
+        REPO=repositories/${obs_repo}/openSUSE_Leap_${DISTVER}/
+        if ! [ -f $BASE/$REPO ]; then
+            $K5START mkdir -p $BASE/$REPO
+        fi
+        echo "Running rsync ${obs_repo} $DISTVER ..."
+        $K5START rsync -rlptDvz \
+            --delete --stats \
+            --delete-excluded \
+            --exclude="src/" \
+            --exclude="nosrc/" \
+            $OBS_MIRROR/$obs_repo/ $BASE/$REPO/
+    done
+
 done
 
 REPO=tumbleweed
