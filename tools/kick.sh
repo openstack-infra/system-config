@@ -14,5 +14,5 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-ansible-playbook -f1 --limit $1:localhost \
+ansible-playbook -f1 --limit $1 \
     /opt/system-config/production/playbooks/remote_puppet_adhoc.yaml
