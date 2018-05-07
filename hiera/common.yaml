@@ -502,13 +502,13 @@ cacti_hosts:
 - mirror02.dfw.rax.openstack.org
 - mirror01.ord.rax.openstack.org
 - mirror01.iad.rax.openstack.org
-- mirror01.regionone.limestone.openstack.org
 - mirror01.kna1.citycloud.openstack.org
 - mirror01.sto2.citycloud.openstack.org
 - mirror01.la1.citycloud.openstack.org
 - mirror01.lon1.citycloud.openstack.org
 - mirror01.ca-ymq-1.vexxhost.openstack.org
 - mirror02.ca-ymq-1.vexxhost.openstack.org
+- mirror02.regionone.limestone.openstack.org
 - mirror.bhs1.ovh.openstack.org
 - mirror.gra1.ovh.openstack.org
 - mirror.mtl01.inap.openstack.org
