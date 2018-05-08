@@ -333,7 +333,7 @@ class openstack_project::mirror_update (
     confdir       => '/etc/reprepro/apt-puppetlabs',
     basedir       => '/afs/.openstack.org/mirror/apt-puppetlabs',
     distributions => 'openstack_project/reprepro/distributions.apt-puppetlabs.erb',
-    updates_file  => 'puppet:///modules/openstack_project/reprepro/puppetlabs-debs-pc1',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/puppetlabs-debs',
     releases      => ['xenial', 'stretch'],
   }
 

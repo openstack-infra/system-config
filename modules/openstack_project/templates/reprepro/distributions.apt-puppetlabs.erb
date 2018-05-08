@@ -1,11 +1,11 @@
 <% @releases.each do |release| -%>
 Origin: Puppetlabs
 Codename: <%= release %>
-Description: Puppetlabs <%= release.capitalize %> mirror
+Description: PuppetLabs <%= release.capitalize %> mirror
 Architectures: amd64
-Components: PC1
+Components: PC1 puppet5
 Contents: .gz
-Update: puppetlabs-debs-pc1
+Update: puppetlabs-debs
 Log: <%= @logdir %>/ubuntu-puppetlabs-<%= release %>.log
 
 <% end -%>
