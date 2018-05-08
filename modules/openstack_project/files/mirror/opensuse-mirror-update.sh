@@ -61,7 +61,7 @@ for DISTVER in 42.3; do
             --delete-excluded \
             --exclude="src/" \
             --exclude="nosrc/" \
-            $OBS_MIRROR/$obs_repo/ $BASE/$REPO/
+            $OBS_MIRROR/$obs_repo/openSUSE_Leap_${DISTVER}/ $BASE/$REPO/
     done
 
 done
