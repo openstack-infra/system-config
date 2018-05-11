@@ -27,10 +27,30 @@ if ! [ -f $BASE/$REPO ]; then
     $K5START mkdir -p $BASE/$REPO
 fi
 
+# We start a two-stage sync here for RPM
+#
+# The idea is to prevent temporary situations where metadata points to files
+# which do not exist
+#
+
+# Exclude all metadata files
 date --iso-8601=ns
-echo "Running rsync..."
+echo "Running rsync only for packages update..."
 $K5START rsync -rlptDvz \
-    --delete \
+    --exclude="repodata/*" \
+    --exclude="SRPMS" \
+    --exclude="aarch64" \
+    --exclude="ppc64" \
+    --exclude="ppc64le" \
+    --exclude="x86_64/debug" \
+    --exclude="x86_64/repoview" \
+    $MIRROR/$REPO/ $BASE/$REPO/
+
+# Now also transfer the metadata and delete afterwards
+date --iso-8601=ns
+echo "Running rsync with update..."
+$K5START rsync -rlptDvz \
+    --delete-after \
     --delete-excluded \
     --exclude="SRPMS" \
     --exclude="aarch64" \

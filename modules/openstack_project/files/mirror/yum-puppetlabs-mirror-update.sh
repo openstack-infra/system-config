@@ -23,12 +23,27 @@ if ! [ -f $BASE ]; then
     $K5START mkdir -p $BASE
 fi
 
+# We start a two-stage sync here for RPM
+#
+# The idea is to prevent temporary situations where metadata points to files
+# which do not exist
+#
+
+# Exclude all metadata files
 date --iso-8601=ns
-echo "Running rsync..."
+echo "Running rsync only for packages update..."
 
 # We don't need cisco-wrlinux arch in OpenStack Infra.
 $K5START rsync -rlptDvz \
-    --delete \
+    --exclude="repodata/*" \
+    --exclude="cisco-wrlinux" \
+    $MIRROR/yum/ $BASE
+
+# Now also transfer the metadata and delete afterwards
+date --iso-8601=ns
+echo "Running rsync with update..."
+$K5START rsync -rlptDvz \
+    --delete-after \
     --delete-excluded \
     --exclude="cisco-wrlinux" \
     $MIRROR/yum/ $BASE

@@ -22,15 +22,41 @@ BASE="/afs/.openstack.org/mirror/fedora"
 MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/fedora/linux"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
+# We start a two-stage sync here for RPM
+#
+# The idea is to prevent temporary situations where metadata points to files
+# which do not exist
+#
+
 for REPO in releases/27 releases/28; do
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
     fi
 
+    # Exclude all metadata files
     date --iso-8601=ns
-    echo "Running rsync releases..."
+    echo "Running rsync releases only for packages update..."
     $K5START rsync -rlptDvz \
-        --delete \
+        --exclude="repodata/*" \
+        --exclude="Cloud/x86_64/images/*.box" \
+        --exclude="CloudImages/x86_64/images/*.box" \
+        --exclude="Container" \
+        --exclude="Docker" \
+        --exclude="aarch64/" \
+        --exclude="armhfp/" \
+        --exclude="source/" \
+        --exclude="Server" \
+        --exclude="Spins" \
+        --exclude="Workstation" \
+        --exclude="x86_64/debug/" \
+        --exclude="x86_64/drpms/" \
+        $MIRROR/$REPO/ $BASE/$REPO/
+
+    # Now also transfer the metadata and delete afterwards
+    date --iso-8601=ns
+    echo "Running rsync releases with update..."
+    $K5START rsync -rlptDvz \
+        --delete-after \
         --delete-excluded \
         --exclude="Cloud/x86_64/images/*.box" \
         --exclude="CloudImages/x86_64/images/*.box" \
@@ -52,10 +78,26 @@ for REPO in updates/27 updates/28 ; do
         $K5START mkdir -p $BASE/$REPO
     fi
 
+    # Exclude all metadata files
     date --iso-8601=ns
-    echo "Running rsync updates..."
+    echo "Running rsync updates only for packages update..."
     $K5START rsync -rlptDvz \
         --delete \
+        --delete-excluded \
+        --exclude="aarch64/" \
+        --exclude="armhfp/" \
+        --exclude="i386/" \
+        --exclude="source/" \
+        --exclude="SRPMS/" \
+        --exclude="x86_64/debug" \
+        --exclude="x86_64/drpms" \
+        $MIRROR/$REPO/ $BASE/$REPO/
+
+    # Now also transfer the metadata and delete afterwards
+    date --iso-8601=ns
+    echo "Running rsync updates with update..."
+    $K5START rsync -rlptDvz \
+        --delete-after \
         --delete-excluded \
         --exclude="aarch64/" \
         --exclude="armhfp/" \
