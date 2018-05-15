@@ -704,7 +704,7 @@ node /^files\d*\.openstack\.org$/ {
   }
 
   openstack_project::website { 'zuul-ci.org':
-    aliases          => ['www.zuul-ci.org'],
+    aliases          => ['www.zuul-ci.org', 'zuulci.org', 'www.zuulci.org'],
     ssl_cert         => hiera('zuul-ci_org_ssl_cert'),
     ssl_key          => hiera('zuul-ci_org_ssl_key'),
     ssl_intermediate => hiera('zuul-ci_org_ssl_intermediate'),
