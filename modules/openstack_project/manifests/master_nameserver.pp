@@ -116,6 +116,10 @@ class openstack_project::master_nameserver (
     source  => 'file:///opt/zone-zuul-ci.org/zones/zuul-ci.org',
     require => Vcsrepo['/opt/zone-zuul-ci.org'],
   }
+  openstack_project::master_zone { 'zuulci.org':
+    source  => 'file:///opt/zone-zuul-ci.org/zones/zuulci.org',
+    require => Vcsrepo['/opt/zone-zuul-ci.org'],
+  }
 
   exec { 'rndc_reload' :
     command     => 'rndc reload',

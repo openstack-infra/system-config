@@ -928,7 +928,7 @@ node /^ns\d+\.openstack\.org$/ {
       'adns1_zones' => {
         allow_notify => dns_a('adns1.openstack.org'),
         masters => dns_a('adns1.openstack.org'),
-        zones => ['zuul-ci.org'],
+        zones => ['zuul-ci.org', 'zuulci.org'],
         tsig_name => $tsig_name,
       }
     }
