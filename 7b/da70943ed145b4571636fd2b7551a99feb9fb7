@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Mark Burnett <mark.m.burnett@gmail.com>
+Code-Review+1: Felipe Monteiro <felipe.monteiro@att.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 16 May 2018 16:41:56 +0000
+Reviewed-on: https://review.openstack.org/568857
+Project: openstack-infra/system-config
+Branch: refs/heads/master
