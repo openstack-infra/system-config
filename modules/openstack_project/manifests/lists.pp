@@ -5,7 +5,7 @@ class openstack_project::lists(
   $listpassword = ''
 ) {
 
-  $mm_domains='lists.openstack.org:lists.zuul-ci.org'
+  $mm_domains='lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org'
 
   class { 'mailman':
     multihost => true,
@@ -138,6 +138,11 @@ class openstack_project::lists(
   mailman::site { 'zuul':
     default_email_host => 'lists.zuul-ci.org',
     default_url_host   => 'lists.zuul-ci.org',
+  }
+
+  mailman::site { 'airship':
+    default_email_host => 'lists.airshipit.org',
+    default_url_host   => 'lists.airshipit.org',
   }
 
   # Add new mailing lists below this line
@@ -511,4 +516,27 @@ class openstack_project::lists(
     description => 'Discussion of Zuul usage and development.',
   }
 
+  mailman_list { 'mailman@airship':
+    require     => Mailman::Site['airship'],
+    ensure      => present,
+    admin       => 'nobody@openstack.org',
+    password    => $listpassword,
+    description => 'The mailman site list',
+  }
+
+  mailman_list { 'airship-announce@airship':
+    require     => Mailman::Site['airship'],
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Announcements of Airship releases and other important information.',
+  }
+
+  mailman_list { 'airship-discuss@airship':
+    require     => Mailman::Site['airship'],
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Discussion of Airship usage and development.',
+  }
 }
