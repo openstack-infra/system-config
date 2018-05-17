@@ -1144,6 +1144,8 @@ node /^nb\d+\.openstack\.org$/ {
     revision                      => 'master',
     python_version                => 3,
     zuulv3                        => true,
+    ssl_cert_file                 => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
+    ssl_key_file                  => '/etc/ssl/private/ssl-cert-snakeoil.key',
   }
 
   file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
