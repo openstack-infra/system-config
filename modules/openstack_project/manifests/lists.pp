@@ -5,7 +5,7 @@ class openstack_project::lists(
   $listpassword = ''
 ) {
 
-  $mm_domains='lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org'
+  $mm_domains='lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.starlingx.io'
 
   class { 'mailman':
     multihost => true,
@@ -143,6 +143,11 @@ class openstack_project::lists(
   mailman::site { 'airship':
     default_email_host => 'lists.airshipit.org',
     default_url_host   => 'lists.airshipit.org',
+  }
+
+  mailman::site { 'starlingx':
+    default_email_host => 'lists.starlingx.io',
+    default_url_host   => 'lists.starlingx.io',
   }
 
   # Add new mailing lists below this line
@@ -538,5 +543,29 @@ class openstack_project::lists(
     admin       => 'jonathan@openstack.org',
     password    => $listpassword,
     description => 'Discussion of Airship usage and development.',
+  }
+
+  mailman_list { 'mailman@starlingx':
+    require     => Mailman::Site['starlingx'],
+    ensure      => present,
+    admin       => 'nobody@openstack.org',
+    password    => $listpassword,
+    description => 'The mailman site list',
+  }
+
+  mailman_list { 'starlingx-announce@starlingx':
+    require     => Mailman::Site['starlingx'],
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Announcements of StarlingX releases and other important information.',
+  }
+
+  mailman_list { 'starlingx-discuss@starlingx':
+    require     => Mailman::Site['starlingx'],
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Discussion of StarlingX usage and development.',
   }
 }
