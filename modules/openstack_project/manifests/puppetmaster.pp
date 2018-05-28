@@ -281,7 +281,7 @@ class openstack_project::puppetmaster (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => '/opt/ansible/contrib/inventory/openstack.py',
+    source  => '/opt/ansible/contrib/inventory/openstack_inventory.py',
     replace => true,
     require => Vcsrepo['/opt/ansible'],
   }
