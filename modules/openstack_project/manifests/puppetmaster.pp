@@ -262,7 +262,10 @@ class openstack_project::puppetmaster (
   vcsrepo { '/opt/ansible':
     ensure   => latest,
     provider => git,
-    revision => 'devel',
+    # Pinned here because the shade + openstacksdk merger resulted in the
+    # openstack.py inventory script below getting renamed and may require new
+    # deps.
+    revision => 'v2.5.3',
     source   => 'https://github.com/ansible/ansible',
   }
 
