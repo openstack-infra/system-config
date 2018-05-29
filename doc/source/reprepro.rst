@@ -25,15 +25,60 @@ At a Glance
 Overview
 ========
 
-reprepro is the tool we use to mirror Debian repositories (including
-Ubuntu) to the AFS mirrors.
+``reprepro`` is the tool we use to mirror Debian repositories
+(including Ubuntu) to the AFS mirrors.
+
+When updating package mirrors, it is undesirable for the index to be
+out of sync with the actual packages on disk, and vice-versa.  This is
+generally achieved by syncing in two stages -- firstly obtaining new
+files in the mirror and then secondly updating the indexes (and
+removing no-longer referenced files).
+
+Problems occur if the upstream mirror updates itself during this
+process (which may happen up to 4 times a day).  Debian, for example
+runs a "push" model where first-tier mirrors are notified of
+in-progress updates (see
+`<https://salsa.debian.org/mirror-team/archvsync/>`__) and can restart
+any in-progress syncs to maintain consistency.  OpenStack Infra is not
+suitable to apply for these notifications, as our mirror is not
+intended to be public and may be incomplete (we may not mirror all
+suites, or architectures, etc. as our needs dictate).  This means we
+are very likely to have periods where our mirror gets out of sync
+(with subsequent job failures).
+
+``reprepro`` is more commonly used to build and manage private
+repositories, but has a number of features making it suitable for our
+use.
+
+Rather than sync upstream indexes, it recreates them based upon files
+gathered from the upstream mirror.  Since the upstream mirror remains
+consistent, ``reprepro`` will always download a consistent set of
+files.  Then thanks to the release of the AFS mirror volume being
+atomic, we do not have any period where the repository becomes out of
+sync to clients.
+
+Since this does not require coordination with upstream, the same
+pattern is suitable across Ubuntu, Debian and other various apt
+repositories that may require integration (or perhaps do not provide
+facilities) for correct mirroring.  Although ``reprepro`` can be more
+complicated to configure, it is consistent across these different
+distributions.
+
+``reprepro`` also makes it fairly easy to mirror only certain suites
+or architectures for a given repository, and to modify these
+configurations as required.
 
 Repository signing
 ==================
 
-Note our repositories are not signed.  ``apt`` will require
-``--no-check-gpg`` or similar settings in configuration to use
-OpenStack mirrors.
+Note our repositories are not signed since ``reprepro`` recreates the
+indexes from scratch.  This is actually somewhat helpful in avoiding
+the infra mirrors become defacto mirrors for a range of unrelated jobs
+(since we really do not guarantee contents for anything other than
+infra jobs).
+
+``apt`` will require ``--no-check-gpg`` or similar settings in
+configuration to use OpenStack mirrors.
 
 Normal operation
 ================
