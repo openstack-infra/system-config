@@ -262,10 +262,7 @@ class openstack_project::puppetmaster (
   vcsrepo { '/opt/ansible':
     ensure   => latest,
     provider => git,
-    # Pinned here because the shade + openstacksdk merger resulted in the
-    # openstack.py inventory script below getting renamed and may require new
-    # deps.
-    revision => 'v2.5.3',
+    revision => 'devel',
     source   => 'https://github.com/ansible/ansible',
   }
 
@@ -281,12 +278,23 @@ class openstack_project::puppetmaster (
   }
 
   file { '/etc/ansible/hosts/openstack':
+    ensure  => absent,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    source  => '/opt/ansible/contrib/inventory/openstack.py',
-    replace => true,
     require => Vcsrepo['/opt/ansible'],
+  }
+
+  file { '/etc/ansible/hosts/openstack_inventory':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => '/opt/ansible/contrib/inventory/openstack_inventory.py',
+    replace => true,
+    require => [
+      File['/etc/ansible/hosts/openstack'].
+      Vcsrepo['/opt/ansible'],
+    ],
   }
 
   file { '/etc/ansible/hosts/static':
