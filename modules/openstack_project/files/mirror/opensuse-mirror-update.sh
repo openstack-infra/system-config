@@ -21,7 +21,8 @@ OBS_MIRROR="rsync://ftp.gwdg.de/pub/opensuse/repositories/"
 OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Pike' 'Cloud:/OpenStack:/Queens')
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
-for DISTVER in 42.3; do
+# NOTE(hwoarang): 15.0 is newer than 42.3
+for DISTVER in 42.3 15.0; do
     REPO=distribution/leap/$DISTVER
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
@@ -61,7 +62,7 @@ for DISTVER in 42.3; do
             --delete-excluded \
             --exclude="src/" \
             --exclude="nosrc/" \
-            $OBS_MIRROR/$obs_repo/ $BASE/$REPO/
+            $OBS_MIRROR/$obs_repo/openSUSE_Leap_${DISTVER}/ $BASE/$REPO/
     done
 
 done
