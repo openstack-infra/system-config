@@ -1,0 +1,10 @@
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: kaka <huang.zhiping@99cloud.net>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 30 May 2018 16:28:05 +0000
+Reviewed-on: https://review.openstack.org/571045
+Project: openstack-infra/system-config
+Branch: refs/heads/master
