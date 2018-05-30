@@ -34,13 +34,12 @@ example:
 
 .. code-block:: ruby
 
-  maillist { 'openstack-foo':
+  mailman_list { 'openstack-foo@openstack':
+    require     => Mailman::Site['openstack'],
     ensure      => present,
     admin       => 'admin@example.com',
     password    => $listpassword,
     description => 'Discussion of OpenStack Foo',
-    webserver   => $listdomain,
-    mailserver  => $listdomain,
   }
 
 Scripted Changes to Lists
