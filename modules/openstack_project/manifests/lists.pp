@@ -492,6 +492,14 @@ class openstack_project::lists(
     description => 'Organizing efforts around the edge-computing focus area.',
   }
 
+  mailman_list { 'openstack-mentoring@openstack':
+    require     => Mailman::Site['openstack'],
+    ensure      => present,
+    admin       => 'amy@demarco.com',
+    password    => $listpassword,
+    description => 'List to coordinate interactions between mentors and mentees of the OpenStack mentoring program. Also for questions about the mentoring program (i.e. how to get involved, how it works, etc.',
+  }
+
   mailman_list { 'mailman@zuul':
     require     => Mailman::Site['zuul'],
     ensure      => present,
