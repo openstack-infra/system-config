@@ -35,4 +35,13 @@ class openstack_project::kata_lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'kata-hypervisor':
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Discussion of security and virtualization targeted at container use cases',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
