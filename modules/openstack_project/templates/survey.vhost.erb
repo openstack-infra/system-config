@@ -43,7 +43,7 @@
   SSLCertificateFile <%= scope.lookupvar("openstack_project::survey::ssl_cert_file") %>
   SSLCertificateKeyFile <%= scope.lookupvar("openstack_project::survey::ssl_key_file") %>
   <% if scope.lookupvar("openstack_project::survey::ssl_chain_file") != "" %>
-    SSLCertficateChainFile <%= scope.lookupvar("openstack_project::survey::ssl_chain_file") %>
+    SSLCertificateChainFile <%= scope.lookupvar("openstack_project::survey::ssl_chain_file") %>
   <% end %>
 
   ErrorLog /var/log/apache2/<%= @name %>_error.log
