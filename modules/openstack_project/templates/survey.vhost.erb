@@ -30,8 +30,8 @@
       AuthName "Welcome"
       AuthOpenIDSecureCookie On
       AuthOpenIDCookieLifespan 3600
-      AuthOpenIDTrustRoot https://survey01.openstack.org
-      AuthOpenIDServerName https://survey01.openstack.org
+      AuthOpenIDTrustRoot https://<%= @srvname %>
+      AuthOpenIDServerName https://<%= @srvname %>
       AuthOpenIDSingleIdP https://openstackid.org
       AuthOpenIDTrusted ^https://openstackid.org/.*$
       Require valid-user
