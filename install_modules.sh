@@ -14,7 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-export PUPPET_VERSION=${PUPPET_VERSION:-3}
+function puppet_version {
+    PATH=/opt/puppetlabs/bin:$PATH puppet --version | cut -d '.' -f 1
+}
+export PUPPET_VERSION=$(puppet_version)
 
 if [ "$PUPPET_VERSION" == "3" ] ; then
     export MODULE_PATH=/etc/puppet/modules
