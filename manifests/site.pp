@@ -240,6 +240,7 @@ node /^graphite\d*\.openstack\.org$/ {
     iptables_allowed_hosts    => [
       {protocol => 'udp', port => '8125', hostname => 'git.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'firehose01.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'mirror-update01.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'logstash.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nodepool.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'nl01.openstack.org'},
