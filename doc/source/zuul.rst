@@ -12,8 +12,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://status.openstack.org/zuul
-  * http://zuul.openstack.org
+  * https://zuul.openstack.org
   * zm*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
@@ -76,7 +75,7 @@ many changes may be tested in parallel while continuing to assure that
 each commit is correctly tested.
 
 Zuul's current status may be viewed at
-`<http://status.openstack.org/zuul/>`_.
+`<https://zuul.openstack.org/>`_.
 
 Zuul's configuration is stored in :config:`zuul/layout.yaml`.  Anyone
 may propose a change to the configuration by editing that file and
@@ -110,7 +109,7 @@ Restarts
 Zuul restarts are disruptive, so non-emergency restarts should always be
 scheduled for quieter times of the day, week and cycle. To be as
 courteous to developers as possible, just prior to a restart the `Zuul
-Status Page <http://status.openstack.org/zuul/>`_ should be checked to
+Status Page <https://zuul.openstack.org/>`_ should be checked to
 see the status of the gate. If there is a series of changes nearly
 merged, wait until that has been completed.
 
@@ -150,7 +149,7 @@ before the restart::
   ./check.sh
 
 You may watch the `Zuul Status Page
-<http://status.openstack.org/zuul/>`_ to confirm that changes are
+<https://zuul.openstack.org/>`_ to confirm that changes are
 returning to the queues.
 
 Mergers

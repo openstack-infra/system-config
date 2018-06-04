@@ -6,7 +6,7 @@ Contributing Cloud Test Resources
 #################################
 
 OpenStack utilizes a "project gating" system based on `Zuul
-<http://docs.openstack.org/infra/zuul/>`_ to ensure that every change
+<https://docs.openstack.org/infra/zuul/>`_ to ensure that every change
 proposed to any OpenStack project passes tests before being added to
 its source code repository.  Each change may run several jobs which
 test the change in various configurations, and each job may run
@@ -26,7 +26,7 @@ very appreciative of this.
 
 By visiting this page, you can see the system in action at any time:
 
-  http://status.openstack.org/zuul/
+  https://zuul.openstack.org/
 
 You'll see every job that's running currently, as well as some graphs
 that show activity over time.  Each of those jobs is running on its
