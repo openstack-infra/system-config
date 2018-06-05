@@ -15,6 +15,13 @@ zuul_connections:
     sshkey: '/var/lib/zuul/ssh/id_rsa'
     gitweb_url_template: 'https://git.openstack.org/cgit/{project.name}/commit/?id={sha}'
 
+  - name: 'opendaylight'
+    driver: 'gerrit'
+    server: 'git.opendaylight.org'
+    baseurl: 'git.opendaylight.org/gerrit'
+    user: 'openstack-zuul'
+    sshkey: '/var/lib/zuul/ssh/id_rsa'
+
   - name: 'mysql'
     driver: 'sql'
 
