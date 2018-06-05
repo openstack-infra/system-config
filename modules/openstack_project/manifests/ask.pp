@@ -118,7 +118,6 @@ class openstack_project::ask (
     site_ssl_cert_file_contents  => $site_ssl_cert_file_contents,
     site_ssl_key_file_contents   => $site_ssl_key_file_contents,
     site_ssl_chain_file_contents => $site_ssl_chain_file_contents,
-    template_settings            => 'openstack_project/askbot/settings.py.erb',
   }
 
   # askbot-theme openstack theme
