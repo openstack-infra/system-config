@@ -112,7 +112,7 @@ class openstack_project::survey (
     ssl      => true,
   }
 
-  if !defined(Mod['rewrite']) {
+  if !defined(Httpd::Mod['rewrite']) {
     httpd::mod { 'rewrite':
       ensure => present,
     }
@@ -123,7 +123,7 @@ class openstack_project::survey (
         ensure => present,
       }
     }
-    if !defined(Mod['auth_openid']) {
+    if !defined(Httpd::Mod['auth_openid']) {
       # Workaround for https://bugs.debian.org/759209
       file { '/etc/apache2/mods-available/auth_openid.load':
         ensure  => present,
