@@ -14,6 +14,7 @@
       copy_puppet: False
       manage_config: True
       puppet_reports: none
+      futureparser: "{{ True if 'futureparser' in hostvars[inventory_hostname].group_names else False }}"
 - hosts: "git0*:!disabled"
   strategy: free
   gather_facts: true
@@ -24,6 +25,7 @@
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
       manage_config: True
       puppet_reports: none
+      futureparser: "{{ True if 'futureparser' in hostvars[inventory_hostname].group_names else False }}"
 - hosts: "review:!disabled"
   strategy: free
   gather_facts: true
@@ -34,6 +36,7 @@
       puppet_timeout: 60m
       manage_config: True
       puppet_reports: none
+      futureparser: "{{ True if 'futureparser' in hostvars[inventory_hostname].group_names else False }}"
 - hosts: "zuul-scheduler:!disabled"
   strategy: free
   gather_facts: true
@@ -44,3 +47,4 @@
       puppet_timeout: 60m
       manage_config: True
       puppet_reports: none
+      futureparser: "{{ True if 'futureparser' in hostvars[inventory_hostname].group_names else False }}"
