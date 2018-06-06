@@ -992,6 +992,9 @@ node 'nodepool.openstack.org' {
   $limestone_username             = hiera('nodepool_limestone_username', 'username')
   $limestone_password             = hiera('nodepool_limestone_password')
   $limestone_project              = hiera('nodepool_limestone_project', 'project')
+  $packethost_username             = hiera('nodepool_packethost_username', 'username')
+  $packethost_password             = hiera('nodepool_packethost_password')
+  $packethost_project              = hiera('nodepool_packethost_project', 'project')
 
   $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
@@ -1089,6 +1092,9 @@ node /^nl\d+\.openstack\.org$/ {
   $limestone_username             = hiera('nodepool_limestone_username', 'username')
   $limestone_password             = hiera('nodepool_limestone_password')
   $limestone_project              = hiera('nodepool_limestone_project', 'project')
+  $packethost_username             = hiera('nodepool_packethost_username', 'username')
+  $packethost_password             = hiera('nodepool_packethost_password')
+  $packethost_project              = hiera('nodepool_packethost_project', 'project')
   $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
@@ -1149,6 +1155,9 @@ node /^nb\d+\.openstack\.org$/ {
   $limestone_username            = hiera('nodepool_limestone_username', 'username')
   $limestone_password            = hiera('nodepool_limestone_password')
   $limestone_project             = hiera('nodepool_limestone_project', 'project')
+  $packethost_username            = hiera('nodepool_packethost_username', 'username')
+  $packethost_password            = hiera('nodepool_packethost_password')
+  $packethost_project             = hiera('nodepool_packethost_project', 'project')
   $clouds_yaml                   = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
