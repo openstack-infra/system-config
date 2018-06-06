@@ -152,6 +152,35 @@ superuser::
   bos adduser -server afs01.ord.openstack.org -user $USERNAME.admin
   pts adduser -user $USERNAME.admin -group system:administrators
 
+Deleting Files
+~~~~~~~~~~~~~~
+
+.. note::
+  This is a basic example of write operations for AFS-hosted
+  content, so applies more generally to manually adding or changing
+  files as well. As we semi-regularly get requests to delete
+  subtrees of documentation, this serves as a good demonstration.
+
+First, as a prerequisite, make sure you've followed the `Client
+Configuration`_ and `Adding a Superuser`_ steps for yourself and
+that you know the password for your ``$USERNAME/admin`` kerberos
+principal. Authenticate your superuser's principal as follows::
+
+  kinit $USERNAME/admin
+  aklog
+
+When deleting files, note that you should use the read-write
+``/afs/.openstack.org`` path rather than the read-only
+``/afs/openstack.org`` path, but normal Unix file manipulation
+commands work as expected (do _not_ use ``sudo`` for this)::
+
+  rm -rf /afs/.openstack.org/docs/project-install-guide/baremetal/draft
+
+Now you can clean up your session and destroy your ticket thusly::
+
+  unlog
+  kdestroy
+
 Creating a Volume
 ~~~~~~~~~~~~~~~~~
 
