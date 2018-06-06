@@ -27,6 +27,9 @@ class openstack_project::git_backend (
   $git_airshipit_org_ssl_cert_file_contents = '',
   $git_airshipit_org_ssl_key_file_contents = '',
   $git_airshipit_org_ssl_chain_file_contents = '',
+  $git_starlingx_io_ssl_cert_file_contents = '',
+  $git_starlingx_io_ssl_key_file_contents = '',
+  $git_starlingx_io_ssl_chain_file_contents = '',
   $behind_proxy = false,
   $project_config_repo = '',
   $selinux_mode = 'enforcing',
@@ -125,6 +128,34 @@ class openstack_project::git_backend (
     local_git_dir           => '/var/lib/git-alias/git.airshipit.org',
     cgitdir                 => '/var/www/cgit_git.airshipit.org',
     staticfiles             => '/var/www/cgit_git.airshipit.org/static',
+    selinux_mode            => $selinux_mode
+  }
+
+  ::cgit::site { 'git.starlingx.io':
+    cgit_vhost_name         => 'git.starlingx.io',
+    ssl_cert_file           => "/etc/pki/tls/certs/git.starlingx.io.pem",
+    ssl_key_file            => "/etc/pki/tls/private/git.starlingx.io.key",
+    ssl_chain_file          => '/etc/pki/tls/certs/git.starlingx.io.intermediate.pem',
+    ssl_cert_file_contents  => $git_starlingx_io_ssl_cert_file_contents,
+    ssl_key_file_contents   => $git_starlingx_io_ssl_key_file_contents,
+    ssl_chain_file_contents => $git_starlingx_io_ssl_chain_file_contents,
+    behind_proxy            => $behind_proxy,
+    cgitrc_settings         => {
+        'clone-prefix'   => 'https://git.starlingx.io',
+        'commit-filter'  => '/usr/local/bin/commit-filter.sh',
+        'css'            => '/cgit-data/cgit.css',
+        'favicon'        => '/cgit-data/favicon.ico',
+        'logo'           => '/cgit-data/cgit.png',
+        'root-title'     => 'StarlingX git repository browser',
+        'max-repo-count' => 2500,
+        'robots'         => 'index',
+        'include'        => '/etc/cgitrepos_git.starlingx.io',
+    },
+    manage_cgitrc           => true,
+    cgitrc_path             => '/etc/cgitrc_git.starlingx.io',
+    local_git_dir           => '/var/lib/git-alias/git.starlingx.io',
+    cgitdir                 => '/var/www/cgit_git.starlingx.io',
+    staticfiles             => '/var/www/cgit_git.starlingx.io/static',
     selinux_mode            => $selinux_mode
   }
 
