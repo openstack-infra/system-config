@@ -96,3 +96,13 @@ clouds:
     identity_api_version: 3
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/limestone_cacert.pem
+  packethost:
+    regions:
+      - us-west-1
+    auth:
+      auth_url: https://packet.platform9.net/keystone
+      username: <%= @packethost_username %>
+      password: <%= @packethost_password %>
+      project_name: <%= @packethost_project %>
+      user_domain_name: default
+      project_domain_name: default
