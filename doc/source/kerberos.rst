@@ -98,6 +98,15 @@ Then save the principal's keytab::
 
   kadmin: ktadd -k /path/to/$NAME.keytab service/$NAME@OPENSTACK.ORG
 
+Resetting A User Principal's Password
+-------------------------------------
+
+If you've forgotten your user password (it happens!) then from a
+shell on one of the KDCs, execute ``sudo kadmin.local`` and use the
+``cpw $USERNAME@OPENSTACK.ORG`` command and enter your new password
+twice as prompted. If you need to reset your admin principal, use
+``cpw $USERNAME/admin@OPENSTACK.ORG`` instead.
+
 No Service Outage Server Maintenance
 ------------------------------------
 
