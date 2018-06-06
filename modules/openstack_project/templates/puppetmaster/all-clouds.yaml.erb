@@ -171,3 +171,23 @@ clouds:
       project_domain_name: default
     identity_api_version: 3
     cacert: /etc/openstack/limestone_cacert.pem
+  openstackci-packethost:
+    regions:
+      - us-west-1
+    auth:
+      auth_url: https://packet.platform9.net/keystone
+      username: <%= @puppetmaster_clouds['openstackci_packethost_username'] %>
+      password: <%= @puppetmaster_clouds['openstackci_packethost_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackci_packethost_project_name'] %>
+      user_domain_name: default
+      project_domain_name: default
+  openstackzuul-packethost:
+    regions:
+      - us-west-1
+    auth:
+      auth_url: https://packet.platform9.net/keystone
+      username: <%= @puppetmaster_clouds['openstackzuul_packethost_username'] %>
+      password: <%= @puppetmaster_clouds['openstackzuul_packethost_password'] %>
+      project_name: <%= @puppetmaster_clouds['openstackzuul_packethost_project_name'] %>
+      user_domain_name: default
+      project_domain_name: default

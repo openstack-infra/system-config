@@ -320,3 +320,15 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+  - name: openstackci-packethost
+    oscc_cloud: openstackci-packethost
+    region_name: us-west-1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackzuul-packethost
+    oscc_cloud: openstackzuul-packethost
+    region_name: us-west-1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
