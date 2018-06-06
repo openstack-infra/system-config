@@ -53,6 +53,12 @@ class openstack_project::grafana (
 
   $grafana_cfg_merged = merge($grafana_cfg_defaults, $grafana_cfg)
 
+  if ( ::$hostname == "graphite02" ) {
+    $version = '5.1.3'
+  } else {
+    $version = '2.6.0'
+  }
+
   class { '::grafana':
     cfg            => $grafana_cfg_merged,
     # Note that we can't use archive because that install_method requires
@@ -60,7 +66,7 @@ class openstack_project::grafana (
     # in modules.env, and puppet only supports having one in the modulepath
     # at a time.
     install_method => 'repo',
-    version        => '2.6.0',
+    version        => $version,
   }
 
   ::httpd::vhost { $vhost_name:
