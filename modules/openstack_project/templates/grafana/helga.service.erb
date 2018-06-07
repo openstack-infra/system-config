@@ -1,0 +1,8 @@
+[Unit]
+Description = Helga
+
+[Service]
+Type = simple
+ExecStart = /usr/helga-env/bin/helga --settings=/etc/helga/settings.py
+User = helga
+Group = helga

@@ -103,4 +103,57 @@ class openstack_project::grafana (
     grafana_url => "http://${admin_user}:${admin_password}@${http_host}:${http_port}",
     require     => Class['grafana'],
   }
+
+
+  group { 'helga':
+    ensure => 'present',
+    before => User['helga'],
+  }
+
+  user { 'helga':
+    ensure     => 'present',
+    comment    => 'User to run Helga IRC bridge',
+    managehome => true,
+  }
+
+  python::virtualenv { '/usr/helga-env':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    timeout => 0,
+  }
+
+  python::pip { 'helga-grafana':
+    ensure     => '0.1.1',
+    pkgname    => 'helga-grafana',
+    virtualenv => '/usr/helga-env',
+    require    => [ Python::Virtualenv['/usr/helga-env'] ],
+  }
+
+  file { '/etc/helga':
+      ensure => directory,
+  }
+
+  file { '/etc/helga/settings.py':
+    ensure  => present,
+    content => template('openstack_project/grafana/settings.py.erb'),
+    require => File['/etc/helga'],
+    replace => true,
+    notify  => Service['helga'],
+  }
+
+  file { '/etc/systemd/system/helga.service':
+    ensure  => present,
+    content => template('openstack_project/grafana/helga.service.erb'),
+    replace => true,
+  }
+
+  service { 'helga':
+    ensure     => running,
+    enable     => true,
+    hasrestart => false,
+    require    => File['/etc/systemd/system/helga.service'],
+  }
+
+
 }
