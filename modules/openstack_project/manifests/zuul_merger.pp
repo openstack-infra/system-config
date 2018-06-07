@@ -18,7 +18,7 @@ class openstack_project::zuul_merger(
     gearman_server           => $gearman_server,
     gerrit_server            => $gerrit_server,
     gerrit_user              => $gerrit_user,
-    known_hosts_content      => "review.openstack.org,23.253.232.87,2001:4800:7815:104:3bc3:d7f6:ff03:bf5d ${gerrit_ssh_host_key}",
+    known_hosts_content      => "review.openstack.org,104.130.246.32,2001:4800:7819:103:be76:4eff:fe04:9229 ${gerrit_ssh_host_key}",
     zuul_ssh_private_key     => $zuul_ssh_private_key,
     zuul_url                 => $zuul_url,
     git_email                => $git_email,
