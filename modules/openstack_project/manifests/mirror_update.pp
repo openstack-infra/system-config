@@ -582,4 +582,51 @@ class openstack_project::mirror_update (
     key_type   => 'public',
     key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-new-gpg-key.asc',
   }
+
+  # AFS Monitoring
+  file { '/etc/afsmon.cfg':
+    ensure => present,
+    content => template('openstack_project/mirror-update/afsmon.cfg.erb'),
+    replace => true,
+  }
+
+  vcsrepo { '/opt/afsmon':
+    ensure   => latest,
+    provider => git,
+    revision => 'master',
+    source   => 'https://git.openstack.org/openstack-infra/afsmon',
+  }
+
+  python::virtualenv { '/usr/afsmon-env':
+    ensure     => present,
+    owner      => 'root',
+    group      => 'root',
+    timeout    => 0,
+    # puppet-python 1.9.4 wants to guess we want "virtualenv-3", which
+    # we don't.  Fixed in later versions.
+    virtualenv => 'virtualenv'
+    version    => 3,
+  }
+
+  # It's possible python::pip could do this, with more arguments for
+  # much less clarity...
+  exec { 'install_afsmon' :
+    command     => '/usr/afsmon-env/bin/pip install --upgrade /opt/afsmon',
+    path        => '/usr/local/bin:/usr/bin:/bin',
+    refreshonly => true,
+    subscribe   => Vcsrepo['/opt/afsmon'],
+    require     => Virutalenv['/usr/afsmon-env'],
+  }
+
+  cron { 'afsmon':
+    minute      => '*/0,30',
+    command     => '/usr/afsmon-env/bin/afsmon stats >> /var/log/afsmon.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+                    Python::Virtualenv['/usr/afsmon-env'],
+                    Exec['install_afsmon'],
+                    File['/etc/afsmon.cfg'],
+                   ]
+  }
+
 }
