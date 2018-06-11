@@ -145,12 +145,13 @@ class HAProxy(object):
         return ret
 
     def reportStats(self, stats):
+        pipe = statsd.pipeline()
         for row in stats:
             base = 'haproxy.%s.%s.' % (row['pxname'], row['svname'])
             for key in GAUGES:
                 value = row[key]
                 if value != '':
-                    statsd.gauge(base + key, int(value))
+                    pipe.gauge(base + key, int(value))
             for key in COUNTERS:
                 metric = base + key
                 newvalue = row[key]
@@ -160,8 +161,9 @@ class HAProxy(object):
                 oldvalue = self.prevdata.get(metric)
                 if oldvalue is not None:
                     value = newvalue - oldvalue
-                    statsd.incr(metric, value)
+                    pipe.incr(metric, value)
                 self.prevdata[metric] = newvalue
+        pipe.send()
 
     def run(self):
         while True:
