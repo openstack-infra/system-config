@@ -158,6 +158,7 @@ class openstack_project::server (
     }
     service { 'yum-cron':
       enable  => true,
+      ensure  => running,
       require => Package['yum-cron'],
     }
   }
