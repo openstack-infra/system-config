@@ -145,6 +145,7 @@ class openstack_project::server (
     }
     package { 'yum-cron':
       ensure => present,
+      ensure => running,
     }
     file { '/etc/yum/yum-cron.conf':
       ensure  => present,
