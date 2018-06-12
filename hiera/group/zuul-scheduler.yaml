@@ -22,6 +22,13 @@ zuul_connections:
     driver: 'github'
     app_key: '/etc/zuul/github.key'
 
+  - name: 'mqtt'
+    driver: 'mqtt'
+    server: 'firehose.openstack.org'
+    port: 8883
+    username: 'infra'
+    password: '%{mqtt_service_user_password}'
+
 gearman_server_ssl_cert: |
   -----BEGIN CERTIFICATE-----
   MIIEYTCCA0mgAwIBAgIJAKkAn3gh0LBPMA0GCSqGSIb3DQEBCwUAMIG5MQswCQYD
