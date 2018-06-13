@@ -618,7 +618,7 @@ class openstack_project::mirror_update (
 
   cron { 'afsmon':
     minute      => [0, 30],
-    command     => '/usr/afsmon-env/bin/afsmon stats >> /var/log/afsmon.log 2>&1',
+    command     => '/usr/afsmon-env/bin/afsmon statsd >> /var/log/afsmon.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
                     Python::Virtualenv['/usr/afsmon-env'],
