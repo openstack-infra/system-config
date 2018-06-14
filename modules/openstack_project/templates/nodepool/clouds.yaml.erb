@@ -99,8 +99,11 @@ clouds:
     floating_ip_source: None
     cacert: /home/nodepool/.config/openstack/limestone_cacert.pem
   packethost:
-    regions:
-      - us-west-1
+      - name: us-west-1
+        values:
+          networks:
+            - name: openstackzuul-net
+              default: True
     auth:
       auth_url: https://packet.platform9.net/keystone
       username: <%= @packethost_username %>
