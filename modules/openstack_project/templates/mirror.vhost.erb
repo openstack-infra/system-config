@@ -14,6 +14,9 @@ NameVirtualHost <%= @vhost_name %>:8081
 Listen 8082
 NameVirtualHost <%= @vhost_name %>:8082
 
+
+LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-agent}i\"" combined-cache
+
 <VirtualHost <%= @vhost_name %>:<%= @port %>>
     ServerName <%= @srvname %>
     <% if @serveraliases.is_a? Array -%>
@@ -101,7 +104,7 @@ NameVirtualHost <%= @vhost_name %>:8082
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8080_error.log
     LogLevel warn
-    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8080_access.log combined
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8080_access.log combined-cache
     ServerSignature Off
 
     # Caching reverse proxy for things that don't make sense in AFS
@@ -224,7 +227,7 @@ NameVirtualHost <%= @vhost_name %>:8082
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8081_error.log
     LogLevel warn
-    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8081_access.log combined
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8081_access.log combined-cache
     ServerSignature Off
 
     # Caching reverse proxy for things that don't make sense in AFS
@@ -277,7 +280,7 @@ NameVirtualHost <%= @vhost_name %>:8082
 
     ErrorLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8082_error.log
     LogLevel warn
-    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8082_access.log combined
+    CustomLog /var/log/<%= scope.lookupvar("httpd::params::apache_name") %>/<%= @name %>_8082_access.log combined-cache
     ServerSignature Off
 
     # Caching reverse proxy for things that don't make sense in AFS
