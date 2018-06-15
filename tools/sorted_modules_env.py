@@ -8,9 +8,9 @@ def assert_sorted(lines):
     if lines == sorted(lines):
         return True
     else:
-        print "Modules not sorted:"
+        print("Modules not sorted:")
         for line in difflib.context_diff(lines, sorted(lines)):
-            print line
+            print(line)
         sys.exit(1)
 
 
