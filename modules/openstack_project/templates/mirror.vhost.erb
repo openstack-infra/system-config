@@ -258,6 +258,11 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
 
+    # production.cloudflare.docker.com
+    CacheEnable disk "/cloudflare"
+    ProxyPass "/cloudflare/" "https://production.cloudflare.docker.com/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/cloudflare/" "https://production.cloudflare.docker.com/"
+
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8082>
@@ -312,5 +317,10 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     CacheEnable disk "/cloudfront"
     ProxyPass "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/cloudfront/" "https://dseasb33srnrn.cloudfront.net/"
+
+    # production.cloudflare.docker.com
+    CacheEnable disk "/cloudflare"
+    ProxyPass "/cloudflare/" "https://production.cloudflare.docker.com/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/cloudflare/" "https://production.cloudflare.docker.com/"
 
 </VirtualHost>
