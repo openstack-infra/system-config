@@ -176,8 +176,11 @@ clouds:
     identity_api_version: 3
     cacert: /etc/openstack/limestone_cacert.pem
   openstackci-packethost:
-    regions:
-      - us-west-1
+      - name: us-west-1
+        values:
+          networks:
+            - name: openstackci-net
+              default: True
     auth:
       auth_url: https://packet.platform9.net/keystone
       username: <%= @puppetmaster_clouds['openstackci_packethost_username'] %>
@@ -186,8 +189,11 @@ clouds:
       user_domain_name: default
       project_domain_name: default
   openstackzuul-packethost:
-    regions:
-      - us-west-1
+      - name: us-west-1
+        values:
+          networks:
+            - name: openstackzuul-net
+              default: True
     auth:
       auth_url: https://packet.platform9.net/keystone
       username: <%= @puppetmaster_clouds['openstackzuul_packethost_username'] %>
