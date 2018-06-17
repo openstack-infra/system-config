@@ -202,9 +202,14 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPassReverse "/grafana/" "https://packagecloud.io/grafana/"
 
     # OracleLinux
-    CacheEnable disk "/oraclelinux
+    CacheEnable disk "/oraclelinux"
     ProxyPass "/oraclelinux/" "http://yum.oracle.com/repo/OracleLinux/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/oraclelinux/" "http://yum.oracle.com/repo/OracleLinux/"
+
+    # Percona
+    CacheEnable disk "/percona"
+    ProxyPass "/percona/" "https://repo.percona.com/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/percona/" "https://repo.percona.com/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
