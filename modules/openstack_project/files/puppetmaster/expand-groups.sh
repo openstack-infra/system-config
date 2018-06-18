@@ -26,9 +26,9 @@ unset OS_REGION_NAME
 
 # Because we are generating "generated-groups", we need to work on an
 # inventory without out it ... otherwise entries that have actually
-# disappeared (according to /etc/ansible/hosts/openstack's live list)
-# will keep coming back as "ansible --list" finds them in the
-# generated-groups file.  Later versions of ansible have a
+# disappeared (according to /etc/ansible/hosts/openstack_inventory's
+# live list) will keep coming back as "ansible --list" finds them in
+# the generated-groups file.  Later versions of ansible have a
 # "inventory_ignore_patterns" that might help, we just copy & remove
 # in a separate inventory
 inv=${outdir}/hosts

@@ -162,7 +162,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
         # Regenerate inventory cache, throwing an error if there is an issue
         # so that we don't generate a bogus groups file
         try:
-            run(['/etc/ansible/hosts/openstack', '--list'],
+            run(['/etc/ansible/hosts/openstack_inventory', '--list'],
                 env=expand_env)
         except subprocess.CalledProcessError as e:
             print "Inventory regeneration failed"
