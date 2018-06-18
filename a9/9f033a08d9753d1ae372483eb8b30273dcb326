@@ -1,0 +1,10 @@
+Code-Review+1: Sorin Sbarnea <ssbarnea@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 18 Jun 2018 13:25:11 +0000
+Reviewed-on: https://review.openstack.org/575982
+Project: openstack-infra/system-config
+Branch: refs/heads/master
