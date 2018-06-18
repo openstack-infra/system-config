@@ -285,6 +285,28 @@ class openstack_project::mirror_update (
     ]
   }
 
+  ::openstack_project::reprepro { 'debian-ceph-mimic-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-ceph-mimic',
+    basedir       => '/afs/.openstack.org/mirror/ceph-deb-mimic',
+    distributions => 'openstack_project/reprepro/distributions.debian-ceph-mimic.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-ceph-mimic-updates',
+    releases      => ['stretch', 'xenial', 'bionic'],
+  }
+
+  cron { 'reprepro debian ceph mimic':
+    user        => $user,
+    hour        => '*/2',
+    minute      => fqdn_rand(45, 'debian-ceph-mimic'),
+    command     => 'flock -n /var/run/reprepro/debian-ceph-mimic.lock reprepro-mirror-update /etc/reprepro/debian-ceph-mimic mirror.deb-mimic >>/var/log/reprepro/debian-ceph-mimic-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['debian-ceph-mimic-reprepro-mirror'],
+    ]
+  }
+
   gnupg_key { 'Ceph Archive':
     ensure     => present,
     # 08B7 3419 AC32 B4E9 66C1  A330 E84A C2C0 460F 3994
