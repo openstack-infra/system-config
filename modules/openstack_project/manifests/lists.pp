@@ -18,6 +18,7 @@ class openstack_project::lists(
     smtp_accept_max          => '100',
     smtp_accept_max_per_host => '10',
     extra_aliases => {
+      'ambassadors-owner' => 'spam',
       'community-owner' => 'spam',
       'foundation-board-confidential-owner' => 'spam',
       'foundation-board-owner' => 'spam',
