@@ -143,19 +143,44 @@ class openstack_project::mirror_update (
     ]
   }
 
-  gnupg_key { 'Debian 8/jessie Archive':
+  gnupg_key { 'Debian 9/stretch Archive':
     ensure     => present,
-    key_id     => '7638d0442b90d010',
+    key_id     => 'E0B11894F66AEC98',
     user       => 'root',
-    key_source => 'puppet:///modules/openstack_project/reprepro/debian-jessie-mirror-gpg-key.asc',
+    key_source => 'puppet:///modules/openstack_project/reprepro/debian-stretch-mirror-gpg-key.asc',
     key_type   => 'public',
   }
 
-  gnupg_key { 'Debian 8/jessie Security':
+  # Note debian-security needs it's own mirroring process, as we found
+  # that including it in the main "debuntu-updates" config lead to
+  # weird conflicts of package names breaking the mirror.
+  ::openstack_project::reprepro { 'debian-security-reprepro-mirror':
+    confdir       => '/etc/reprepro/debian-security',
+    basedir       => '/afs/.openstack.org/mirror/debian-security',
+    distributions => 'openstack_project/reprepro/distributions.debian-security.erb',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-security',
+    releases      => ['stretch'],
+  }
+
+  cron { 'reprepro debian security':
+    user        => $user,
+    hour        => '*/2',
+    minute      => fqdn_rand(45, 'reprepro-debian-security'),
+    command     => 'flock -n /var/run/reprepro/debian-security.lock reprepro-mirror-update /etc/reprepro/debian-security mirror.debian-security >>/var/log/reprepro/debian-security-mirror.log 2>&1',
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    require     => [
+       File['/usr/local/bin/reprepro-mirror-update'],
+       File['/etc/afsadmin.keytab'],
+       File['/etc/reprepro.keytab'],
+       ::Openstack_project::Reprepro['debian-security-reprepro-mirror'],
+    ]
+  }
+
+  gnupg_key { 'Debian 9/stretch Security':
     ensure     => present,
-    key_id     => '9d6d8f6bc857c906',
+    key_id     => 'EDA0D2388AE22BA9',
     user       => 'root',
-    key_source => 'puppet:///modules/openstack_project/reprepro/debian-jessie-security-mirror-gpg-key.asc',
+    key_source => 'puppet:///modules/openstack_project/reprepro/debian-stretch-security-mirror-gpg-key.asc',
     key_type   => 'public',
   }
 
