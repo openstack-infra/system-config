@@ -730,8 +730,11 @@ node /^refstack\d*\.openstack\.org$/ {
     mysql_user          => hiera('refstack_mysql_user', 'refstack'),
     mysql_user_password => hiera('refstack_mysql_password'),
     ssl_cert_content    => hiera('refstack_ssl_cert_file_contents'),
+    ssl_cert            => '/etc/ssl/certs/refstack.pem',
     ssl_key_content     => hiera('refstack_ssl_key_file_contents'),
+    ssl_key             => '/etc/ssl/private/refstack.key',
     ssl_ca_content      => hiera('refstack_ssl_chain_file_contents'),
+    ssl_ca              => '/etc/ssl/certs/refstack.ca.pem',
     protocol            => 'https',
   }
   mysql_backup::backup_remote { 'refstack':
