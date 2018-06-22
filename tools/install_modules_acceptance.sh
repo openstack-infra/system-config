@@ -27,7 +27,6 @@
 # in a zuul environment or not.
 
 ROOT=$(readlink -fn $(dirname $0)/..)
-MODULE_PATH="${ROOT}/modules:/etc/puppet/modules"
 
 # These arrays are initialized here and populated in modules.env
 
@@ -47,12 +46,19 @@ install_external() {
 }
 
 install_openstack() {
+    local modulepath
+    if [ "$PUPPET_VERSION" == "3" ] ; then
+        modulepath='/etc/puppet/modules'
+    else
+        modulepath='/etc/puppetlabs/code/modules'
+    fi
+
     cat > clonemap.yaml <<EOF
 clonemap:
   - name: openstack-infra/project-config
     dest: /etc/project-config
   - name: '(.*?)/puppet-(.*)'
-    dest: '/etc/puppet/modules/\2'
+    dest: '$modulepath/\2'
 EOF
 
     project_names=""
