@@ -571,40 +571,6 @@ class openstack_project::mirror_update (
     key_source => 'puppet:///modules/openstack_project/reprepro/ubuntu-cloud-archive-gpg-key.asc',
   }
 
-  ### MariaDB mirror ###
-  ::openstack_project::mariadb_mirror { '10.0':
-    require => [
-       File['/usr/local/bin/reprepro-mirror-update'],
-       File['/etc/afsadmin.keytab'],
-       File['/etc/reprepro.keytab'],
-    ]
-  }
-  ::openstack_project::mariadb_mirror { '10.1':
-    require => [
-       File['/usr/local/bin/reprepro-mirror-update'],
-       File['/etc/afsadmin.keytab'],
-       File['/etc/reprepro.keytab'],
-    ]
-  }
-
-  gnupg_key { 'MariaDB Package Signing Key':
-    ensure     => present,
-    # 1993 69E5 404B D5FC 7D2F E43B CBCB 082A 1BB9 43DB
-    key_id     => 'CBCB082A1BB943DB',
-    user       => 'root',
-    key_type   => 'public',
-    key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-gpg-key.asc',
-  }
-
-  gnupg_key { 'MariaDB Package Signing Key (new)':
-    ensure     => present,
-    # 177F 4010 FE56 CA33 3630 0305 F165 6F24 C74C D1D8
-    key_id     => 'F1656F24C74CD1D8',
-    user       => 'root',
-    key_type   => 'public',
-    key_source => 'puppet:///modules/openstack_project/reprepro/mariadb-mirror-new-gpg-key.asc',
-  }
-
   # AFS Monitoring
   file { '/etc/afsmon.cfg':
     ensure => present,
