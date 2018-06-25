@@ -16,7 +16,7 @@ At a Glance
   * http://grafana.openstack.org
 :Puppet:
   * https://github.com/bfraser/puppet-grafana
-  * :file:`modules/openstack_project/manifests/grafana.pp`
+  * :cgit_file:`modules/openstack_project/manifests/grafana.pp`
 :Projects:
   * http://grafana.org
 :Bugs:

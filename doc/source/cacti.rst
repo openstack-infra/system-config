@@ -14,7 +14,7 @@ At a Glance
 :Hosts:
   * http://cacti.openstack.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/cacti.pp`
+  * :cgit_file:`modules/openstack_project/manifests/cacti.pp`
 :Projects:
   * http://www.cacti.net
 :Bugs:
@@ -31,4 +31,4 @@ Cacti is accessible via the web here:
 http://cacti.openstack.org/cacti/graph_view.php
 
 New servers are added to our cacti instance by adding the host to the
-:file:`modules/openstack_project/manifests/cacti.pp` file.
+:cgit_file:`modules/openstack_project/manifests/cacti.pp` file.

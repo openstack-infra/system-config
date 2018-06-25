@@ -16,7 +16,7 @@ At a Glance
   * https://openstackid.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-openstackid/tree/
-  * :file:`modules/openstack_project/manifests/openstackid_dev.pp`
+  * :cgit_file:`modules/openstack_project/manifests/openstackid_dev.pp`
 :Projects:
   * http://git.openstack.org/cgit/openstack-infra/openstackid/
 :Bugs:

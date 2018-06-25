@@ -21,8 +21,8 @@ At a Glance
   * https://git.openstack.org/cgit/openstack-infra/puppet-statusbot/tree/
   * https://git.openstack.org/cgit/openstack-infra/puppet-gerritbot/tree/
   * https://git.openstack.org/cgit/openstack-infra/puppet-ptgbot/tree/
-  * :file:`modules/openstack_project/manifests/eavesdrop.pp`
-  * :file:`modules/openstack_project/manifests/review.pp`
+  * :cgit_file:`modules/openstack_project/manifests/eavesdrop.pp`
+  * :cgit_file:`modules/openstack_project/manifests/review.pp`
 :Configuration:
   * :config:`gerritbot/channels.yaml`
   * :config:`accessbot/channels.yaml`
@@ -172,7 +172,7 @@ of logging channel activity, not just meetings. Standard channel logs
 are sent to http://eavesdrop.openstack.org/irclogs/
 
 The configuration for specific channel logging can be found in the
-public Hiera data file, :file:`hiera/common.yaml`.
+public Hiera data file, :cgit_file:`hiera/common.yaml`.
 
 .. _statusbot:
 
@@ -214,7 +214,7 @@ the channels the bot is listening to:
   in OpenStack development.
 
 A channel can be added to statusbot by editing the public Hiera data
-file, :file:`hiera/common.yaml`.
+file, :cgit_file:`hiera/common.yaml`.
 
 The wiki password for the StatusBot account can be (re)set using the
 `ChangePassword.php <https://www.mediawiki.org/wiki/Manual:ChangePassword.php>`_

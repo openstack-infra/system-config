@@ -17,7 +17,7 @@ At a Glance
 :Hosts:
   * puppetmaster.openstack.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/puppetmaster.pp`
+  * :cgit_file:`modules/openstack_project/manifests/puppetmaster.pp`
 :Projects:
   * https://puppetlabs.com/
 :Bugs:
@@ -37,7 +37,7 @@ The cron jobs, current configuration files and more can be done with ``puppet
 apply`` but first some bootstrapping needs to be done.
 
 You want to install these from puppetlabs' apt repo. There is a script,
-:file:`install_puppet.sh` in the root of the system-config repository that
+:cgit_file:`install_puppet.sh` in the root of the system-config repository that
 will setup and install the puppet client. After that you must install the
 ansible playbooks and hiera config (used to maintain secrets).
 
@@ -83,7 +83,7 @@ Adding a node
 
 For adding a new node to your puppet master, you can either use the
 ``/opt/system-config/production/launch/launch-node.py`` script
-(see :file:`launch/README` for full details) or bootstrap puppet manually.
+(see :cgit_file:`launch/README` for full details) or bootstrap puppet manually.
 
 For manual bootstrap, you need to run on the new server connecting
 (for example, review.openstack.org) to the puppet master:

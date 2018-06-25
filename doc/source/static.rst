@@ -17,7 +17,7 @@ At a Glance
   * http://mirror.openstack.org
   * http://specs.openstack.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/static.pp`
+  * :cgit_file:`modules/openstack_project/manifests/static.pp`
 :Configuration:
   * :config:`specs/index.html`
 :Projects:

@@ -15,7 +15,7 @@ At a Glance
   * ns1.openstack.org
   * ns2.openstack.org
 :Puppet:
-  * :file:`manifests/site.pp`
+  * :cgit_file:`manifests/site.pp`
 :Projects:
   * https://github.com/icann-dns/puppet-nsd
   * https://www.nlnetlabs.nl/projects/nsd/
@@ -23,8 +23,8 @@ At a Glance
 Adding a Zone
 =============
 
-To add a new zone, add an entry to :file:`manifests/site.pp`,
-:file:`modules/openstack_project/manifests/master_nameserver.pp` and
+To add a new zone, add an entry to :cgit_file:`manifests/site.pp`,
+:cgit_file:`modules/openstack_project/manifests/master_nameserver.pp` and
 create a new git repository to hold the contents of the zone.
 
 Run::

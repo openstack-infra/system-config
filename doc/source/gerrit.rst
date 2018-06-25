@@ -21,10 +21,10 @@ At a Glance
   * http://review-dev.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-gerrit/tree/
-  * :file:`modules/openstack_project/manifests/review.pp`
-  * :file:`modules/openstack_project/manifests/review_dev.pp`
+  * :cgit_file:`modules/openstack_project/manifests/review.pp`
+  * :cgit_file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
+  * :cgit_file:`modules/openstack_project/templates/review.projects.ini.erb`
   * :config:`gerrit/projects.yaml`
 :Projects:
   * http://code.google.com/p/gerrit/
@@ -103,7 +103,7 @@ account name and add ssh keys - you'll need those.
 Once you've created your groups you should create the
 ``openstack-project-creator`` account by hand (the account name is
 referenced from
-:file:`modules/openstack_project/templates/review.projects.ini.erb`)
+:cgit_file:`modules/openstack_project/templates/review.projects.ini.erb`)
 using::
 
   cat $pubkey | ssh -p 29418 $USER@$HOST gerrit create-account \

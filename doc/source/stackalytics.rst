@@ -21,7 +21,7 @@ At a Glance
   * http://stackalytics.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-stackalytics/tree/
-  * :file:`modules/openstack_project/manifests/stackalytics.pp`
+  * :cgit_file:`modules/openstack_project/manifests/stackalytics.pp`
 :Projects:
   * https://git.openstack.org/cgit/openstack/stackalytics
 :Documentation:

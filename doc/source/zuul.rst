@@ -16,8 +16,8 @@ At a Glance
   * zm*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zuul/tree/
-  * :file:`modules/openstack_project/manifests/zuul_prod.pp`
-  * :file:`modules/openstack_project/manifests/zuul_dev.pp`
+  * :cgit_file:`modules/openstack_project/manifests/zuul_prod.pp`
+  * :cgit_file:`modules/openstack_project/manifests/zuul_dev.pp`
 :Configuration:
   * :config:`zuul/layout.yaml`
 :Projects:

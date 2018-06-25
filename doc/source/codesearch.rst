@@ -15,7 +15,7 @@ At a Glance
   * http://codesearch.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-hound/tree/
-  * :file:`modules/openstack_project/manifests/codesearch.pp`
+  * :cgit_file:`modules/openstack_project/manifests/codesearch.pp`
 :Projects:
   * https://github.com/etsy/Hound
 :Bugs:
