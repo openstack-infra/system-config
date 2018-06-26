@@ -213,8 +213,8 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
 
     # MariaDB
     CacheEnable disk "/MariaDB"
-    ProxyPass "/MariaDB/" "https://downloads.mariadb.com/MariaDB" ttl=120 keepalive=On retry=0
-    ProxyPassReverse "/MariaDB/" "https://downloads.mariadb.com/MariaDB"
+    ProxyPass "/MariaDB/" "https://downloads.mariadb.com/MariaDB/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/MariaDB/" "https://downloads.mariadb.com/MariaDB/"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
