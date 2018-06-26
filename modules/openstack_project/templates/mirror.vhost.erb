@@ -212,9 +212,9 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPassReverse "/percona/" "https://repo.percona.com/"
 
     # MariaDB
-    CacheEnable disk "/mariadb"
-    ProxyPass "/mariadb/" "https://downloads.mariadb.org/" ttl=120 keepalive=On retry=0
-    ProxyPassReverse "/mariadb/" "https://downloads.mariadb.org/"
+    CacheEnable disk "/MariaDB"
+    ProxyPass "/MariaDB/" "https://downloads.mariadb.com/MariaDB" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/MariaDB/" "https://downloads.mariadb.com/MariaDB"
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
