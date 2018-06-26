@@ -158,7 +158,7 @@ class openstack_project::mirror_update (
     confdir       => '/etc/reprepro/debian-security',
     basedir       => '/afs/.openstack.org/mirror/debian-security',
     distributions => 'openstack_project/reprepro/distributions.debian-security.erb',
-    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-security',
+    updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-security-updates',
     releases      => ['stretch'],
   }
 
