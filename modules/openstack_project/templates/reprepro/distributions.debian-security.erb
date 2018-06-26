@@ -1,13 +1,14 @@
 <% @releases.each do |release| -%>
 
 Origin: Debian Security
-Codename: <%= release %>-security
+Codename: <%= release %>
+Suite: updates
 Description: OpenStack Debian Security <%= release.capitalize %> mirror
 Architectures: amd64 arm64 source
 Components: main
 UDebComponents: main
 Contents: .gz
-Update: debian-<%= release %>-security
+Update: debian-security
 Log: <%= @logdir %>/debian-security-<%= release %>.log
 
 <% end -%>
