@@ -643,6 +643,9 @@ node /^git\d+\.openstack\.org$/ {
     git_airshipit_org_ssl_cert_file_contents  => hiera('git_airshipit_org_ssl_cert_file_contents'),
     git_airshipit_org_ssl_key_file_contents   => hiera('git_airshipit_org_ssl_key_file_contents'),
     git_airshipit_org_ssl_chain_file_contents => hiera('git_airshipit_org_ssl_chain_file_contents'),
+    git_starlingx_io_ssl_cert_file_contents  => hiera('git_starlingx_io_ssl_cert_file_contents'),
+    git_starlingx_io_ssl_key_file_contents   => hiera('git_starlingx_io_ssl_key_file_contents'),
+    git_starlingx_io_ssl_chain_file_contents => hiera('git_starlingx_io_ssl_chain_file_contents'),
     behind_proxy                            => true,
     selinux_mode                            => 'enforcing'
   }
