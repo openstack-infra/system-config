@@ -18,3 +18,7 @@ translate.openstack.org 443
 wiki.openstack.org 443
 www.openstack.org 443
 zuul.openstack.org 443
+git.airshipit.org 443
+git.starlingx.io 443
+git.zuul-ci.org 443
+zuul-ci.org 443
