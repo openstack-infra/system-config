@@ -1,0 +1,10 @@
+Code-Review+1: Felipe de Jesus Ruiz Garcia <felipe.de.jesus.ruiz.garcia@intel.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 27 Jun 2018 21:30:28 +0000
+Reviewed-on: https://review.openstack.org/572793
+Project: openstack-infra/system-config
+Branch: refs/heads/master
