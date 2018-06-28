@@ -1,0 +1,11 @@
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Amy Marrich (spotz) <amy@demarco.com>
+Code-Review+1: daixianmeng <daixianmeng@yovole.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Joshua Hesketh <josh@nitrotech.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 28 Jun 2018 04:58:41 +0000
+Reviewed-on: https://review.openstack.org/577678
+Project: openstack-infra/system-config
+Branch: refs/heads/master
