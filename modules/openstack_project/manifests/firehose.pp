@@ -72,6 +72,7 @@ class openstack_project::firehose (
   class {'::exim':
     sysadmins => $sysadmins,
     local_domains => "@:firehose.openstack.org",
+    default_localuser_router => false,
     routers  => [
       {'cyrus' => {
         'driver'                     => 'accept',
@@ -79,6 +80,12 @@ class openstack_project::firehose (
         'local_part_suffix'          => '+*',
         'local_part_suffix_optional' => true,
         'transport'                  => 'cyrus',
+      }},
+      {'localuser' => {
+        'driver'               => 'accept',
+        'check_local_user'     => true,
+        'transport'            => 'local_delivery',
+        'cannot_route_message' => 'Unknown user',
       }}
     ],
     transports => [
