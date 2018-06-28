@@ -1,0 +1,10 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Amy Marrich (spotz) <amy@demarco.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Joshua Hesketh <josh@nitrotech.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 28 Jun 2018 05:16:01 +0000
+Reviewed-on: https://review.openstack.org/576539
+Project: openstack-infra/system-config
+Branch: refs/heads/master
