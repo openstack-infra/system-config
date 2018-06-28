@@ -16,8 +16,8 @@ At a Glance
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-askbot/tree/
   * https://github.com/vamsee/puppet-solr
-  * :file:`modules/openstack_project/manifests/ask.pp`
-  * :file:`modules/openstack_project/manifests/ask-staging.pp`
+  * :cgit_file:`modules/openstack_project/manifests/ask.pp`
+  * :cgit_file:`modules/openstack_project/manifests/ask-staging.pp`
 :Projects:
   * https://askbot.com
   * http://lucene.apache.org/solr
@@ -80,8 +80,8 @@ Application management tool can be found under /srv/askbot-sites/slot0/config:
 
 Configuration files:
 
-* :file:`modules/askbot/templates/askbot.vhost.erb`
-* :file:`modules/askbot/templates/settings.py.erb`
+* :cgit_file:`modules/askbot/templates/askbot.vhost.erb`
+* :cgit_file:`modules/askbot/templates/settings.py.erb`
 
 In addition to the file-based configuration, Askbot provides a web interface
 to tweak its own settings. Toggles and fields for reputation thresholds,
@@ -122,8 +122,8 @@ the English (en) and Chinese (zh) languages are supported.
 
 Solr schema templates can be found at:
 
-* :file:`modules/askbot/templates/solr/schema.en.xml.erb`
-* :file:`modules/askbot/templates/solr/schema.cn.xml.erb`
+* :cgit_file:`modules/askbot/templates/solr/schema.en.xml.erb`
+* :cgit_file:`modules/askbot/templates/solr/schema.cn.xml.erb`
 
 Operational notes
 =================

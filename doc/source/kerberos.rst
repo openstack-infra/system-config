@@ -17,7 +17,7 @@ At a Glance
   * kdc*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-kerberos/tree/
-  * :file:`modules/openstack_project/manifests/kdc.pp`
+  * :cgit_file:`modules/openstack_project/manifests/kdc.pp`
 :Projects:
   * http://web.mit.edu/kerberos
 :Bugs:

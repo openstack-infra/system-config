@@ -16,8 +16,8 @@ At a Glance
   * review.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/system-config/tree/
-  * :file:`modules/openstack_project/manifests/gerrit.pp`
-  * :file:`hiera/group/zuul-scheduler.yaml`
+  * :cgit_file:`modules/openstack_project/manifests/gerrit.pp`
+  * :cgit_file:`hiera/group/zuul-scheduler.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/zuul
   * https://git.openstack.org/cgit/openstack-infra/jeepyb

@@ -18,7 +18,7 @@ At a Glance
   * http://mirror.iad.rax.openstack.org/pypi
   * http://mirror.ord.rax.openstack.org/pypi
 :Puppet:
-  * :file:`modules/openstack_project/manifests/static.pp`
+  * :cgit_file:`modules/openstack_project/manifests/static.pp`
 :Projects:
   * https://pypi.python.org/pypi/bandersnatch
   * https://git.openstack.org/cgit/openstack-infra/puppet-bandersnatch

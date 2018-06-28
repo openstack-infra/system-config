@@ -13,10 +13,10 @@ At a Glance
   * Frontend: http://status.openstack.org/openstack-health
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-openstack_health/tree/
-  * :file:`modules/openstack_project/manifests/openstack_health_api.pp`
-  * :file:`modules/openstack_project/manifests/status.pp`
+  * :cgit_file:`modules/openstack_project/manifests/openstack_health_api.pp`
+  * :cgit_file:`modules/openstack_project/manifests/status.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/git/cgitrc`
+  * :cgit_file:`modules/openstack_project/files/git/cgitrc`
 :Projects:
   * https://git.openstack.org/cgit/openstack/openstack-health/tree
 

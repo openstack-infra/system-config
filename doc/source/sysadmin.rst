@@ -117,10 +117,10 @@ Adding a New Server
 
 To create a new server, do the following:
 
- * Add a file in :file:`modules/openstack_project/manifests/` that defines a
+ * Add a file in :cgit_file:`modules/openstack_project/manifests/` that defines a
    class which specifies the configuration of the server.
 
- * Add a node pattern entry in :file:`manifests/site.pp` for the server
+ * Add a node pattern entry in :cgit_file:`manifests/site.pp` for the server
    that uses that class. Make sure it supports an ordinal naming pattern
    (e.g., fooserver01.openstack.org not just fooserver.openstack.org, even
    if you're replacing an existing server) and that another server with the
@@ -132,14 +132,14 @@ To create a new server, do the following:
 
  * You should be able to install and configure most software only with
    puppet.  Nonetheless, if you need SSH access to the host, add your
-   public key to :file:`modules/openstack_project/manifests/users.pp` and
+   public key to :cgit_file:`modules/openstack_project/manifests/users.pp` and
    include a stanza like this in your server class::
 
      realize (
         User::Virtual::Localuser['USERNAME'],
      )
 
- * Add an RST file with documentation about the server in :file:`doc/source`
+ * Add an RST file with documentation about the server in :cgit_file:`doc/source`
    and add it to the index in that directory.
 
 SSH Access
@@ -327,7 +327,7 @@ Launching New Servers
 
 New servers are launched using the ``launch/launch-node.py`` tool from the git
 repository ``https://git.openstack.org/openstack-infra/system-config``. This
-tool is run from a checkout on the puppetmaster - please see :file:`launch/README`
+tool is run from a checkout on the puppetmaster - please see :cgit_file:`launch/README`
 for detailed instructions.
 
 .. _disable-enable-puppet:
@@ -353,7 +353,7 @@ to take.
 
 In the case of needing to disable the running of puppet on a node, it's a
 simple matter of adding an entry to the ansible inventory "disabled" group
-in :file:`modules/openstack_project/files/puppetmaster/groups.txt`. The
+in :cgit_file:`modules/openstack_project/files/puppetmaster/groups.txt`. The
 disabled entry is an input to `ansible --list-hosts` so you can check your
 entry simply by running it with `ansible $hostlist --list-hosts` as root
 on the puppetmaster host and ensuring that the list of hosts returned is as

@@ -16,12 +16,12 @@ At a Glance
   * elasticsearch\*.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-logstash/tree/
-  * :file:`modules/openstack_project/manifests/logstash.pp`
-  * :file:`modules/openstack_project/manifests/logstash_worker.pp`
-  * :file:`modules/openstack_project/manifests/elasticsearch.pp`
+  * :cgit_file:`modules/openstack_project/manifests/logstash.pp`
+  * :cgit_file:`modules/openstack_project/manifests/logstash_worker.pp`
+  * :cgit_file:`modules/openstack_project/manifests/elasticsearch.pp`
 :Configuration:
-  * :file:`modules/openstack_project/files/logstash`
-  * :file:`modules/openstack_project/templates/logstash`
+  * :cgit_file:`modules/openstack_project/files/logstash`
+  * :cgit_file:`modules/openstack_project/templates/logstash`
 :Projects:
   * http://logstash.net/
   * http://kibana.org/
@@ -178,23 +178,23 @@ schema.
 
 The config file that tells Logstash how to do this flattening can be
 found at
-:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+:cgit_file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
 
 This works via the tags that are associated with a given message.
 
 The tags in
-:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+:cgit_file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
 are used to tell logstash how to parse a given file's messages, based
 on the file's message format.
 
 When adding a new file to be indexed to
-:file:`modules/openstack_project/files/logstash/jenkins-log-client.yaml`
+:cgit_file:`modules/openstack_project/files/logstash/jenkins-log-client.yaml`
 at least one tag from the indexer.conf.erb file should be associated
 with the new file.  One can expect to see '{%logmessage%}' instead of
 actual message data if indexing is not working properly.
 
 In the event a new file's format is not covered, a patch for
-:file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
+:cgit_file:`modules/openstack_project/templates/logstash/indexer.conf.erb`
 should be submitted with an appropriate parsing pattern.
 
 ElasticSearch

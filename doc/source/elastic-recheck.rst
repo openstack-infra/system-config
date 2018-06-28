@@ -14,7 +14,7 @@ At a Glance
   * http://status.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-elastic_recheck/tree/
-  * :file:`modules/openstack_project/manifests/status.pp`
+  * :cgit_file:`modules/openstack_project/manifests/status.pp`
 :Projects:
  * https://git.openstack.org/cgit/openstack-infra/elastic-recheck
 :Bugs:

@@ -16,8 +16,8 @@ At a Glance
   * https://translate-dev.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-zanata/tree/
-  * :file:`modules/openstack_project/manifests/translate.pp`
-  * :file:`modules/openstack_project/manifests/translate-dev.pp`
+  * :cgit_file:`modules/openstack_project/manifests/translate.pp`
+  * :cgit_file:`modules/openstack_project/manifests/translate-dev.pp`
 :Projects:
   * http://zanata.org/
   * https://github.com/zanata/

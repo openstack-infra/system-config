@@ -17,12 +17,12 @@ At a Glance
   * http://review-dev.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-jeepyb/tree/
-  * :file:`modules/openstack_project/manifests/review.pp`
-  * :file:`modules/openstack_project/manifests/review_dev.pp`
+  * :cgit_file:`modules/openstack_project/manifests/review.pp`
+  * :cgit_file:`modules/openstack_project/manifests/review_dev.pp`
 :Configuration:
-  * :file:`modules/openstack_project/templates/review.projects.ini.erb`
+  * :cgit_file:`modules/openstack_project/templates/review.projects.ini.erb`
   * :config:`gerrit/projects.yaml`
-  * :file:`modules/openstack_project/files/pypi-mirror.yaml`
+  * :cgit_file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
 :Bugs:
@@ -39,7 +39,7 @@ and create new groups in Gerrit.
 
 The global configuration data needed for ``manage-projects`` to know how to
 connect to things or how to operate is in
-:file:`modules/openstack_project/templates/review.projects.ini.erb`.
+:cgit_file:`modules/openstack_project/templates/review.projects.ini.erb`.
 
 #. Config values::
 

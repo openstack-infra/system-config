@@ -22,7 +22,7 @@
 from docutils import nodes
 
 
-def file_role(name, rawtext, text, lineno, inliner,
+def cgit_file_role(name, rawtext, text, lineno, inliner,
               options={}, content=[]):
     """Link a local path to a cgit file view.
 
@@ -75,6 +75,6 @@ def setup(app):
 
     :param app: Sphinx application context.
     """
-    app.add_role('file', file_role)
+    app.add_role('cgit_file', cgit_file_role)
     app.add_role('config', config_role)
     return

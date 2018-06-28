@@ -13,7 +13,7 @@ At a Glance
 :Hosts:
   * http://mirror-update.openstack.org
 :Puppet:
-  * :file:`modules/openstack_project/manifests/mirror_update.pp`
+  * :cgit_file:`modules/openstack_project/manifests/mirror_update.pp`
 :Projects:
   * https://mirrorer.alioth.debian.org
 :Documentation:

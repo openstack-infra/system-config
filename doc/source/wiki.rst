@@ -15,7 +15,7 @@ At a Glance
   * https://wiki.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-mediawiki/tree/
-  * :file:`modules/openstack_project/manifests/wiki.pp`
+  * :cgit_file:`modules/openstack_project/manifests/wiki.pp`
 :Projects:
   * http://www.mediawiki.org/wiki/MediaWiki
 :Bugs:

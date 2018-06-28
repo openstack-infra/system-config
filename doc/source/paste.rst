@@ -17,7 +17,7 @@ At a Glance
   * http://paste.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-lodgeit/tree/
-  * :file:`modules/openstack_project/manifests/paste.pp`
+  * :cgit_file:`modules/openstack_project/manifests/paste.pp`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/lodgeit
   * https://bitbucket.org/dcolish/lodgeit-main

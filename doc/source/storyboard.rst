@@ -19,14 +19,14 @@ At a Glance
   * https://storyboard.openstack.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-storyboard/tree/
-  * :file:`modules/openstack_project/manifests/storyboard.pp`
+  * :cgit_file:`modules/openstack_project/manifests/storyboard.pp`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/storyboard
   * https://git.openstack.org/cgit/openstack-infra/storyboard-webclient
   * https://git.openstack.org/cgit/openstack-infra/puppet-storyboard
 :Configuration:
   * :config:`gerrit/projects.yaml`
-  * :file:`modules/openstack_project/files/storyboard/superusers.yaml`
+  * :cgit_file:`modules/openstack_project/files/storyboard/superusers.yaml`
 :Bugs:
   * https://storyboard.openstack.org/#!/project/456
 :Resources:
