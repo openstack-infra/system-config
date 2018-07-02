@@ -5,4 +5,4 @@
   - role: puppet
     manage_config: True
     puppet_reports: none
-    futureparser: "{{ True if 'futureparser' in hostvars[inventory_hostname].group_names else False }}"
+    futureparser: "{{ True if 'futureparser' in group_names else False }}"
