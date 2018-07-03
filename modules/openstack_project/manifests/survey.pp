@@ -46,7 +46,7 @@ class openstack_project::survey (
   $docroot = '/var/www',
   $runtime_dir_mode = '0755',
   $download_url = 'https://github.com/LimeSurvey/LimeSurvey/archive/',
-  $version = '3.7.0+180418',
+  $version = '3.13.0+180628',
   $www_group = 'www-data',
   $www_user = 'www-data',
   # These are required for bootstrapping, so do not have defaults.
