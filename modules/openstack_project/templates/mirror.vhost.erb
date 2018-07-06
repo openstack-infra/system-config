@@ -256,6 +256,10 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     CacheMaxFileSize 5368709120
     # Ignore expire headers as the urls use sha256 hashes.
     CacheIgnoreQueryString On
+    # NOTE(pabelanger): In the case of docker, if neither an expiry date nor
+    # last-modified date are provided default expire to 1 day. This is up from
+    # 1 hour.
+    CacheDefaultExpire 86400
     CacheStoreExpired On
 
     # registry-1.docker.io
@@ -314,6 +318,10 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     CacheMaxFileSize 5368709120
     # Ignore expire headers as the urls use sha256 hashes.
     CacheIgnoreQueryString On
+    # NOTE(pabelanger): In the case of docker, if neither an expiry date nor
+    # last-modified date are provided default expire to 1 day. This is up from
+    # 1 hour.
+    CacheDefaultExpire 86400
     CacheStoreExpired On
 
     # NOTE(SamYaple): Docker has historically not allowed to have anything in
