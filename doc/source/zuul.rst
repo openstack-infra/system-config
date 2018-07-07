@@ -39,7 +39,7 @@ The OpenStack project uses a number of pipelines in Zuul:
   +/-1 Verified vote.
 
 **gate**
-  Changes that have been approved by core developers are enqueued in
+  Changes that have been approved by core reviewers are enqueued in
   order in this pipeline, and if they pass tests, will be merged.
 
 **post**
