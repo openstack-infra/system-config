@@ -110,8 +110,13 @@ var ci_parse_results = function($panel) {
     if (test_results !== null) {
         test_results.each(function(i, li) {
             var result = {};
-            result["name"] = $(li).find("span.comment_test_name").find("a")[0].innerHTML;
-            result["link"] = $(li).find("span.comment_test_name").find("a")[0];
+            if ($(li).find("a").length > 0) {
+                result["name"] = $(li).find("span.comment_test_name").find("a")[0].innerHTML;
+                result["link"] = $(li).find("span.comment_test_name").find("a")[0];
+            }
+            else {
+                result["name"] = $(li).find("span.comment_test_name")[0].innerHTML;
+            }
             result["result"] = $(li).find("span.comment_test_result")[0];
             result_list.push(result);
         });
@@ -315,7 +320,12 @@ var ci_display_results = function(comments) {
         for (var j = 0; j < comment.results.length; j++) {
             var result = comment.results[j];
             var tr = $("<tr>");
-            tr.append($("<td>").append($(result["link"]).clone()));
+            if ("link" in result) {
+                tr.append($("<td>").append($(result["link"]).clone()));
+            }
+            else {
+                tr.append($("<td>").text(result["name"]));
+            }
             tr.append($("<td>").append($(result["result"]).clone()));
             $(table).append(tr);
         }
