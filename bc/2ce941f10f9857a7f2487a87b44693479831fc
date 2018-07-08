@@ -1,0 +1,9 @@
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Sun, 08 Jul 2018 14:25:07 +0000
+Reviewed-on: https://review.openstack.org/559006
+Project: openstack-infra/system-config
+Branch: refs/heads/master
