@@ -1,0 +1,10 @@
+HOSTS:
+  centos-70-x64:
+    roles:
+      - master
+    platform: el-7-x86_64
+    hypervisor: none
+    ip: 127.0.0.1
+CONFIG:
+  type: foss
+  set_env: false
