@@ -1,0 +1,37 @@
+- job:
+    name: puppet-beaker-rspec-infra-system-config
+    parent: puppet-beaker-rspec-infra
+    vars:
+      project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
+
+- job:
+    name: puppet-beaker-rspec-infra-centos-7-system-config
+    parent: puppet-beaker-rspec-centos-7-infra
+    vars:
+      project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
+
+- job:
+    name: puppet-beaker-rspec-puppet-4-infra-system-config
+    parent: puppet-beaker-rspec-puppet-4-infra
+    vars:
+      project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
+
+- job:
+    name: puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+    parent: puppet-beaker-rspec-puppet-4-infra
+    vars:
+      project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
+
+- project:
+    check:
+      jobs:
+        - puppet-beaker-rspec-infra-system-config
+        - puppet-beaker-rspec-infra-centos-7-system-config
+        - puppet-beaker-rspec-puppet-4-infra-system-config:
+            voting: false
+        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config:
+            voting: false
+    gate:
+      jobs:
+        - puppet-beaker-rspec-infra-system-config
+        - puppet-beaker-rspec-infra-centos-7-system-config
