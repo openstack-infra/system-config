@@ -171,6 +171,7 @@ statusbot_channels:
 # Note that freenode only allows a single account to connect to 120
 # channel.
 meetbot_channels:
+- '#airshipit'
 - '#ara'
 - '#cloudkitty'
 - '#congress'
