@@ -27,11 +27,11 @@
       jobs:
         - puppet-beaker-rspec-infra-system-config
         - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config:
-            voting: false
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config:
-            voting: false
+        - puppet-beaker-rspec-puppet-4-infra-system-config
+        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
     gate:
       jobs:
         - puppet-beaker-rspec-infra-system-config
         - puppet-beaker-rspec-infra-centos-7-system-config
+        - puppet-beaker-rspec-puppet-4-infra-system-config
+        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
