@@ -220,6 +220,11 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     CacheEnable disk "/docker"
     ProxyPass "/docker/" "https://download.docker.com/linux/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/docker/" "https://download.docker.com/linux/"
+
+    # Alpine
+    CacheEnable disk "/alpine"
+    ProxyPass "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
