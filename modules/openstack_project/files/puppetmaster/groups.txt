@@ -28,3 +28,4 @@ status ~status\d*\.openstack\.org
 paste ~paste\d*\.openstack\.org
 adns ~adns\d*\.openstack\.org
 ns ~ns\d*\.openstack\.org
+futureparser ~review-dev\d*\.openstack\.org
