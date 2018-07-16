@@ -1,0 +1,13 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Jean-Philippe Evrard <jean-philippe@evrard.me>
+Code-Review+1: zhongshengping <chdzsp@163.com>
+Code-Review+1: Filippo Inzaghi <zhao.daqing@99cloud.net>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 16 Jul 2018 23:02:50 +0000
+Reviewed-on: https://review.openstack.org/579334
+Project: openstack-infra/system-config
+Branch: refs/heads/master
