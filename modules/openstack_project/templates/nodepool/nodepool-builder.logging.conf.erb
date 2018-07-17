@@ -1,5 +1,5 @@
 [loggers]
-keys=root,nodepool,requests,shade,openstack,kazoo
+keys=root,nodepool,requests,openstack,kazoo
 
 [handlers]
 keys=console,debug,normal
@@ -15,11 +15,6 @@ handlers=console
 level=WARNING
 handlers=debug,normal
 qualname=requests
-
-[logger_shade]
-level=WARNING
-handlers=debug,normal
-qualname=shade
 
 [logger_openstack]
 level=WARNING
