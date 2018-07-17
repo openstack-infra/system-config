@@ -173,7 +173,7 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
 
     # Rewrite the locations of the actual files
     <Location /pypi>
-      SetOutputFilter SUBSTITUTE
+      SetOutputFilter INFLATE;SUBSTITUTE;DEFLATE
       Substitute "s|https://files.pythonhosted.org/|/pypifiles/|ni"
     </Location>
 
