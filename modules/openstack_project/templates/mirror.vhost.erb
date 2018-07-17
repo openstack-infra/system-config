@@ -163,8 +163,19 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
 
     # pypi
     CacheEnable disk  "/pypi"
-    ProxyPass "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/" ttl=120 keepalive=On retry=0
-    ProxyPassReverse "/pypi/" "http://mirror.dfw.rax.openstack.org/pypi/"
+    ProxyPass "/pypi/" "https://pypi.org/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/pypi/" "https://pypi.org/
+
+    # files.pythonhosted.org
+    CacheEnable disk  "/pypifiles"
+    ProxyPass "/pypifiles/" "https://files.pythonhosted.org/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/pypifiles/" "https://files.pythonhosted.org/"
+
+    # Rewrite the locations of the actual files
+    <Location /pypi>
+      SetOutputFilter SUBSTITUTE
+      Substitute "s|https://files.pythonhosted.org/|/pypifiles/|ni"
+    </Location>
 
     # images.linuxcontainers.org
     CacheEnable disk "/images.linuxcontainers"
@@ -225,6 +236,7 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     CacheEnable disk "/alpine"
     ProxyPass "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/
+
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
