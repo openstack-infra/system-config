@@ -252,7 +252,7 @@ class openstack_project::lists(
   mailman_list { 'openstack-tw@openstack':
     require     => Mailman::Site['openstack'],
     ensure      => present,
-    admin       => 'macjacktw@hotmail.com',
+    admin       => 'gene@openstack.org',
     password    => $listpassword,
     description => 'OpenStack Taiwan User Group 臺灣使用者郵件群組)',
   }
