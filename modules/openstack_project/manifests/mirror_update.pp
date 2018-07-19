@@ -93,6 +93,9 @@ class openstack_project::mirror_update (
   }
 
   cron { 'bandersnatch':
+    # Disabled until we sort out how to mirror without unbound growth.
+    # We may just switch to caching proxy long term.
+    ensure      => absent,
     user        => $user,
     minute      => '*/5',
     command     => 'flock -n /var/run/bandersnatch/mirror.lock bandersnatch-mirror-update /var/log/bandersnatch/mirror.log',
