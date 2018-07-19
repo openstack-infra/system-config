@@ -1,0 +1,9 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 19 Jul 2018 19:02:05 +0000
+Reviewed-on: https://review.openstack.org/582765
+Project: openstack-infra/system-config
+Branch: refs/heads/master
