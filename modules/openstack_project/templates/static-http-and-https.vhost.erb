@@ -7,7 +7,7 @@
 <% if @serveraliases.is_a? Array -%>
   # Permanently redirect these ServerAlias entries to ServerName
 <% @serveraliases.each do |name| -%><%= " ServerAlias #{name}\n" %><% end -%>
-<% elsif @serveraliases != '' -%>
+<% elsif ! ['', nil].include?(@serveraliases) -%>
 <%= " ServerAlias #{@serveraliases}" %>
   RewriteEngine On
   RewriteCond %{HTTP_HOST} !<%= @vhost_name %>$ [NC]
