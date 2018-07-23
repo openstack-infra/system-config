@@ -34,6 +34,7 @@ class openstack_project::lists(
       'openstack-infra-owner' => 'spam',
       'openstack-operators-owner' => 'spam',
       'openstack-owner' => 'spam',
+      'openstack-qa-owner' => 'spam',
       'openstack-security-owner' => 'spam',
       'openstack-tc-owner' => 'spam',
       'openstack-vi-owner' => 'spam',
