@@ -266,6 +266,7 @@ node /^graphite\d*\.openstack\.org$/ {
       {protocol => 'udp', port => '8125', hostname => 'ze08.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'ze09.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'ze10.openstack.org'},
+      {protocol => 'udp', port => '8125', hostname => 'ze11.openstack.org'},
     ],
     sysadmins                 => hiera('sysadmins', [])
   }
@@ -1326,6 +1327,7 @@ node /^zuul\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '4730', hostname => 'ze08.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'ze09.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'ze10.openstack.org'},
+      {protocol => 'tcp', port => '4730', hostname => 'ze11.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm01.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm02.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm03.openstack.org'},
