@@ -37,6 +37,7 @@ groups:
   futureparser:
     - afs[0-9]*.open*.org
     - afsdb[0-9]*.open*.org
+    - ask*.open*.org
     - ask-staging[0-9]*.open*.org
     - cacti[0-9]*.open*.org
     - codesearch[0-9]*.open*.org
