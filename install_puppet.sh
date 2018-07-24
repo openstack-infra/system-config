@@ -135,10 +135,14 @@ function setup_puppet_fedora {
 }
 
 function setup_puppet_rhel7 {
-    # install a bootstrap epel repo to install latest epel-release
-    # package (which provides correct gpg keys, etc); then remove
-    # boostrap
-    cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
+    # NOTE(pabelanger): In openstack-infra, we already have epel on our nodes,
+    # properly configured for mirrors and gpg keys, check to see if epel.repo
+    # exists first.
+    if [ ! -f /etc/yum.repos.d/epel.repo ]; then
+        # install a bootstrap epel repo to install latest epel-release
+        # package (which provides correct gpg keys, etc); then remove
+        # boostrap
+        cat > /etc/yum.repos.d/epel-bootstrap.repo <<EOF
 [epel-bootstrap]
 name=Bootstrap EPEL
 mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=\$basearch
@@ -146,8 +150,9 @@ failovermethod=priority
 enabled=0
 gpgcheck=0
 EOF
-    yum --enablerepo=epel-bootstrap -y install epel-release
-    rm -f /etc/yum.repos.d/epel-bootstrap.repo
+        yum --enablerepo=epel-bootstrap -y install epel-release
+        rm -f /etc/yum.repos.d/epel-bootstrap.repo
+    fi
 
     _systemd_update
     yum update -y
