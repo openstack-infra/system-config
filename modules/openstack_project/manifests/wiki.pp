@@ -2,7 +2,6 @@
 #
 class openstack_project::wiki (
   $site_hostname,
-  $sysadmins = [],
   $bup_user = undef,
   $serveradmin = undef,
   $ssl_cert_file_contents = undef,
@@ -26,7 +25,6 @@ class openstack_project::wiki (
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => $sysadmins,
   }
 
   realize (
