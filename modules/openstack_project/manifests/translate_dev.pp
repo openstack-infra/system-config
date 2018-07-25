@@ -20,7 +20,6 @@ class openstack_project::translate_dev(
   $mysql_user = 'zanata',
   $mysql_password,
   $admin_users = '',
-  $sysadmins = [],
   $zanata_server_user = '',
   $zanata_server_api_key = '',
   $project_config_repo = '',
@@ -37,7 +36,6 @@ class openstack_project::translate_dev(
   ) {
 
   class { 'openstack_project::server':
-    sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
   }
 

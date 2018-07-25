@@ -6,7 +6,6 @@ class openstack_project::storyboard::dev(
   $mysql_user = '',
   $rabbitmq_user = 'storyboard',
   $rabbitmq_password,
-  $sysadmins = [],
   $ssl_cert_file_contents = undef,
   $ssl_key_file_contents = undef,
   $ssl_chain_file_contents = undef,
@@ -21,7 +20,6 @@ class openstack_project::storyboard::dev(
 
   class { 'openstack_project::storyboard':
     project_config_repo     => $project_config_repo,
-    sysadmins               => $sysadmins,
     superusers              =>
       'puppet:///modules/openstack_project/storyboard/dev_superusers.yaml',
     mysql_host              => $mysql_host,
@@ -38,12 +36,5 @@ class openstack_project::storyboard::dev(
     sender_email_address    => $sender_email_address,
     default_url             => $default_url,
   }
-
-  realize (
-    User::Virtual::Localuser['SotK'],
-    User::Virtual::Localuser['Zara'],
-    User::Virtual::Localuser['diablo_rojo'],
-  )
-
 
 }
