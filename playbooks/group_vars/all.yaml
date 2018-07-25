@@ -3,6 +3,7 @@ copy_puppet: true
 manifest: /opt/system-config/production/manifests/site.pp
 manifest_base: /opt/system-config
 puppet_logdest: syslog
+puppet_version: '3'
 distro_lookup_path:
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.yaml"
