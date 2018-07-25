@@ -17,10 +17,6 @@ class openstack_project::ask (
   $askbot_revision              = '87086ebcefc5be29e80d3228e465e6bec4523fcf'
 ) {
 
-  realize (
-    User::Virtual::Localuser['mkiss'],
-  )
-
   file { '/srv/dist':
     ensure => directory,
     owner  => 'root',
