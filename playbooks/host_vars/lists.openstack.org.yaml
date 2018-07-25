@@ -73,3 +73,5 @@ exim_transports:
       headers_remove = Errors-To
       max_rcpt = 1
       return_path = ${local_part:$return_path}+$local_part=$domain@${domain:$return_path}
+extra_users:
+  - smaffulli
