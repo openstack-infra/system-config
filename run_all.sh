@@ -30,7 +30,10 @@ set +e
 # Run all the ansible playbooks under timeout to prevent them from getting
 # stuck if they are oomkilled
 
-# First, sync the puppet repos with all the machines
+# Run base server playbook everywhere
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/base.yaml
+
+# Sync the puppet repos with all the machines
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet.yaml
 # Update the puppet version
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml

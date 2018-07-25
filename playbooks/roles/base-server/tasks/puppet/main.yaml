@@ -1,0 +1,19 @@
+- name: Include OS-specific tasks
+  include: "{{ item }}"
+  static: no
+  with_first_found:
+    - "{{ ansible_distribution }}.{{ ansible_lsb.codename }}.{{ ansible_architecture }}.yaml"
+    - "{{ ansible_distribution }}.{{ ansible_architecture }}.yaml"
+    - "{{ ansible_distribution }}.yaml"
+    - "{{ ansible_os_family }}.yaml"
+
+- name: Make sure puppet is installed
+  package:
+    state: present
+    name: puppet
+
+- name: Make sure puppet service is turned off
+  service:
+    name: puppet
+    enabled: no
+    state: stopped

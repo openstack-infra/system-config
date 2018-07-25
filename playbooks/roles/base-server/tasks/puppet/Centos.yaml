@@ -1,0 +1,6 @@
+- name: Add puppetlabs repo for CentOS
+  copy:
+    state: present
+    src: centos7-puppetlabs.repo
+    dest: /etc/yum.repos.d/puppetlabs.repo
+    mode: 0444

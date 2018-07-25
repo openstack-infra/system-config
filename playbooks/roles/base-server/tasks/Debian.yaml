@@ -1,0 +1,22 @@
+- name: Remove packages that make no sense for servers
+  apt:
+    name: '{{ item }}'
+    state: absent
+  with_items:
+    - whoopsie
+    - popularity-contest
+
+- name: Configure file limits
+  copy:
+    state: present
+    mode: 0644
+    src: debian_limits.conf
+    dest: /etc/security/limits.d/60-nofile-limit.conf
+
+- name: Custom rsyslog config to disable /dev/xconsole noise
+  copy:
+    state: present
+    mode: 0644
+    src: rsyslog.d_50-default.conf
+    dest: /etc/rsyslog.d/50-default.conf
+  notify: Restart rsyslog

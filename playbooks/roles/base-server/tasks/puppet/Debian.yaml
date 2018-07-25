@@ -1,0 +1,6 @@
+- name: Setup puppet defaults
+  copy:
+    state: present
+    src: puppet.default
+    dest: /etc/default/puppet
+    mode: 0444

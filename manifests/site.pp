@@ -321,7 +321,6 @@ node /^lists\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
     manage_exim => false,
-    purge_apt_sources => false,
   }
 
   class { 'openstack_project::lists':
@@ -335,7 +334,6 @@ node /^lists\d*\.katacontainers\.io$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
     manage_exim => false,
-    purge_apt_sources => false,
   }
 
   class { 'openstack_project::kata_lists':
@@ -1489,7 +1487,6 @@ node /^backup\d+\..*\.ci\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
     manage_exim => false,
-    purge_apt_sources => false,
   }
   include openstack_project::backup_server
 }
