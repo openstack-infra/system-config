@@ -8,7 +8,6 @@ class openstack_project::params {
     'git',
     'lvm2',
     'parted',
-    'puppet',
     'rsync',
     'strace',
     'tcpdump',
