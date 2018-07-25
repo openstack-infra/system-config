@@ -35,8 +35,4 @@ class openstack_project::infracloud::baremetal (
     ipv4_subnet_mask          => $ipv4_subnet_mask,
   }
 
-  realize (
-    User::Virtual::Localuser['colleen'],
-  )
-
 }
