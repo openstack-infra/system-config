@@ -20,6 +20,7 @@ groups:
   nodepool: inventory_hostname|regex_match('^(nodepool|nb|nl)')
   ns: inventory_hostname.startswith('ns')
   paste: inventory_hostname.startswith('paste')
+  puppet: not inventory_hostname.startswith('bridge')
   review-dev: inventory_hostname|regex_match('review-dev\d+\.openstack\.org')
   review: inventory_hostname|regex_match('review\d+\.openstack\.org')
   status: inventory_hostname.startswith('status')

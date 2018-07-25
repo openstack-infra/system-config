@@ -1,0 +1,16 @@
+- hosts: puppet
+  gather_facts: false
+  tasks:
+
+    - name: Clone system-config repo
+      git:
+        repo: https://git.openstack.org/openstack-infra/system-config
+        dest: /opt/system-config/production
+        force: yes
+
+    - name: Install puppet
+      shell: ./install_puppet.sh
+      args:
+        chdir: /opt/system-config/production
+      environment:
+        PUPPET_VERSION: '{{ puppet.version }}'

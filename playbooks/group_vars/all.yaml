@@ -10,6 +10,7 @@ puppet:
   copy_puppet: true
   manifest: /opt/system-config/production/manifests/site.pp
   manifest_base: /opt/system-config
+  version: 3
 
 all_users:
   mordred:
