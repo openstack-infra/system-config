@@ -1,0 +1,4 @@
+- name: Include OS-specific tasks
+  include_tasks: "{{ lookup('first_found', file_list) }}"
+  vars:
+    file_list: "{{ distro_lookup_path }}"

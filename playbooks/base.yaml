@@ -9,6 +9,10 @@
   roles:
     - base-server
 
+- hosts: "puppet:!disabled"
+  roles:
+    - disable-puppet-agent
+
 - hosts: "!ci-backup:!disabled"
   roles:
     - exim

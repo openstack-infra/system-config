@@ -47,19 +47,21 @@ describe 'openstack_project::server' do
    'clarkb',
    'fungi',
    'jhesketh',
-   'yolanda',
    'pabelanger',
-   'rcarrillocruz',
    'ianw',
    'shrews',
    'dmsimard',
+   'yolanda',
+   'rcarrillocruz',
    'frickler'].each do |user|
     describe user(user) do
       it { should exist }
     end
   end
 
-  ['slukjanov', 'elizabeth', 'nibz'].each do |user|
+  ['slukjanov',
+   'elizabeth',
+   'nibz'].each do |user|
     describe user(user) do
       it { should_not exist }
     end
