@@ -15,7 +15,6 @@
 # openstackid idp(sso-openid) dev server
 #
 class openstack_project::openstackid_dev (
-  $sysadmins = [],
   $site_admin_password = '',
   $id_mysql_host = '',
   $id_mysql_user = '',
@@ -69,7 +68,6 @@ class openstack_project::openstackid_dev (
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => $sysadmins,
   }
 
   class { 'openstackid':
