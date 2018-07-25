@@ -50,9 +50,4 @@ class openstack_project::infracloud::controller (
     neutron_subnet_allocation_pools  => $neutron_subnet_allocation_pools,
     mysql_max_connections            => $mysql_max_connections,
   }
-
-  realize (
-    User::Virtual::Localuser['colleen'],
-  )
-
 }

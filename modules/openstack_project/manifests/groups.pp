@@ -28,10 +28,6 @@ class openstack_project::groups (
   $site_ssl_chain_file = '/etc/ssl/certs/groups.openstack.org_ca.pem',
 ) {
 
-  realize (
-    User::Virtual::Localuser['mkiss'],
-  )
-
   vcsrepo { '/srv/groups-static-pages':
     ensure   => latest,
     provider => git,

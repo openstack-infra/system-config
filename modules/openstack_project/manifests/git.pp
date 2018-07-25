@@ -16,14 +16,12 @@
 #
 # == Class: openstack_project::git
 class openstack_project::git (
-  $sysadmins = [],
   $balancer_member_names = [],
   $balancer_member_ips = [],
   $selinux_mode = 'enforcing'
 ) {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443, 9418],
-    sysadmins                 => $sysadmins,
   }
 
   if ($::osfamily == 'RedHat') {
@@ -148,6 +146,13 @@ class openstack_project::git (
     notify => Service['rsyslog'],
   }
 
+  # TODO(mordred) We should get this haproxy stuff ported to ansible ASAP.
+  # Ansible is the one installing rsyslog.
+  service { 'rsyslog':
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+  }
 
   # haproxy statsd
 
