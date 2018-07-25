@@ -1,6 +1,5 @@
 # Class to configure cacti on a node.
 class openstack_project::cacti (
-  $sysadmins = [],
   $cacti_hosts = [],
   $vhost_name = '',
 ) {
@@ -11,7 +10,6 @@ class openstack_project::cacti (
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => $sysadmins,
   }
 
   class { '::apache':

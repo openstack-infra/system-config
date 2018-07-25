@@ -1,107 +1,11 @@
 # == Class: openstack_project::lists
 #
 class openstack_project::lists(
-  $listadmins,
   $listpassword = ''
 ) {
 
-  $mm_domains='lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.starlingx.io'
-
   class { 'mailman':
     multihost => true,
-  }
-
-  class { 'exim':
-    sysadmins                => $listadmins,
-    queue_interval           => '1m',
-    queue_run_max            => '50',
-    smtp_accept_max          => '100',
-    smtp_accept_max_per_host => '10',
-    extra_aliases => {
-      'ambassadors-owner' => 'spam',
-      'community-owner' => 'spam',
-      'foundation-board-confidential-owner' => 'spam',
-      'foundation-board-owner' => 'spam',
-      'foundation-owner' => 'spam',
-      'legal-discuss-owner' => 'spam',
-      'mailman-owner' => 'spam',
-      'marketing-owner' => 'spam',
-      'openstack-announce-owner' => 'spam',
-      'openstack-dev-owner' => 'spam',
-      'openstack-docs-owner' => 'spam',
-      'openstack-fr-owner' => 'spam',
-      'openstack-i18n-owner' => 'spam',
-      'openstack-infra-owner' => 'spam',
-      'openstack-operators-owner' => 'spam',
-      'openstack-owner' => 'spam',
-      'openstack-qa-owner' => 'spam',
-      'openstack-security-owner' => 'spam',
-      'openstack-tc-owner' => 'spam',
-      'openstack-vi-owner' => 'spam',
-      'product-wg-owner' => 'spam',
-      'superuser-owner' => 'spam',
-      'user-committee-owner' => 'spam',
-      'women-of-openstack-owner' => 'spam',
-      'spam' => ':fail: delivery temporarily disabled due to ongoing spam flood',
-    },
-    local_domains            => "@:$mm_domains",
-    routers                  => [
-      {'mailman_verp_router' => {
-         'driver' => 'dnslookup',
-         # we only consider messages sent in through loopback
-         'condition' => '${if or{{eq{$sender_host_address}{127.0.0.1}}\
-                          {eq{$sender_host_address}{::1}}}{yes}{no}}',
-         # we do not do this for traffic going to the local machine
-         'domains' => '!+local_domains',
-         'ignore_target_hosts' => '<; 0.0.0.0; \
-                                    64.94.110.11; \
-                                    127.0.0.0/8; \
-                                    ::1/128;fe80::/10;fe \
-                                    c0::/10;ff00::/8',
-         # only the un-VERPed bounce addresses are handled
-         'senders' => '"*-bounces@*"',
-         'transport' => 'mailman_verp_smtp',
-         }
-      },
-      {'mailman_router' => {
-        'driver'            => 'accept',
-        'domains'           => "$mm_domains",
-        'require_files'     => '${lookup{${lc::$domain}}lsearch{/etc/mailman/sites}}/lists/${lc::$local_part}/config.pck',
-        'local_part_suffix_optional' => true,
-        'local_part_suffix' => '-admin     : \
-                                -bounces   : -bounces+* : \
-                                -confirm   : -confirm+* : \
-                                -join      : -leave     : \
-                                -owner     : -request   : \
-                                -subscribe : -unsubscribe',
-        'transport'         => 'mailman_transport',
-        }
-      },
-    ],
-    transports                  => [
-      {'mailman_transport' => {
-        'driver'      => 'pipe',
-        'environment' => 'MAILMAN_SITE_DIR=${lookup{${lc:$domain}}lsearch{/etc/mailman/sites}}',
-        'command'     => '/var/lib/mailman/mail/mailman \
-                          \'${if def:local_part_suffix \
-                                 {${sg{$local_part_suffix}{-(\\w+)(\\+.*)?}{\$1}}} \
-                                 {post}}\' \
-                          $local_part',
-        'current_directory' => '/var/lib/mailman',
-        'home_directory'    => '/var/lib/mailman',
-        'user'              => 'list',
-        'group'             => 'list',
-        }
-      },
-      {'mailman_verp_smtp' => {
-        'driver'         => 'smtp',
-        'return_path'    => '${local_part:$return_path}+$local_part=$domain@${domain:$return_path}',
-        'max_rcpt'       => '1',
-        'headers_remove' => 'Errors-To',
-        'headers_add'    => 'Errors-To: ${return_path}',
-        }
-      },
-    ]
   }
 
   realize (
