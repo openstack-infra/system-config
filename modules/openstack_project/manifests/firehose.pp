@@ -15,7 +15,6 @@
 # firehose glue class.
 #
 class openstack_project::firehose (
-  $sysadmins = [],
   $gerrit_username = 'germqtt',
   $gerrit_public_key,
   $gerrit_private_key,
@@ -31,6 +30,8 @@ class openstack_project::firehose (
   $cert_file,
   $key_file,
 ) {
+  # workaround for apt module variable definition issue
+  include apt::params
   include mosquitto
   class {'mosquitto::server':
     infra_service_username => $mqtt_username,
@@ -67,36 +68,6 @@ class openstack_project::firehose (
 
   service {'cyrus-imapd':
     ensure => running,
-  }
-
-  class {'::exim':
-    sysadmins => $sysadmins,
-    local_domains => "@:firehose.openstack.org",
-    default_localuser_router => false,
-    routers  => [
-      {'cyrus' => {
-        'driver'                     => 'accept',
-        'domains'                    => '+local_domains',
-        'local_part_suffix'          => '+*',
-        'local_part_suffix_optional' => true,
-        'transport'                  => 'cyrus',
-      }},
-      {'localuser' => {
-        'driver'               => 'accept',
-        'check_local_user'     => true,
-        'transport'            => 'local_delivery',
-        'cannot_route_message' => 'Unknown user',
-      }}
-    ],
-    transports => [
-      {'cyrus' => {
-        'driver'    => 'lmtp',
-        'socket'    => '/var/run/cyrus/socket/lmtp',
-        'user'      => 'cyrus',
-        'batch_max' => '35',
-      }}
-    ],
-    require  => Package['cyrus-imapd'],
   }
 
   include lpmqtt

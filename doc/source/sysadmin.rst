@@ -131,13 +131,12 @@ To create a new server, do the following:
    to manually add the private information to hiera.
 
  * You should be able to install and configure most software only with
-   puppet.  Nonetheless, if you need SSH access to the host, add your
-   public key to :cgit_file:`modules/openstack_project/manifests/users.pp` and
+   ansible or puppet.  Nonetheless, if you need SSH access to the host,
+   add your public key to :cgit_file:`playbooks/group_vars/all.yaml` and
    include a stanza like this in your server class::
 
-     realize (
-        User::Virtual::Localuser['USERNAME'],
-     )
+     extra_users:
+       - your_user_name
 
  * Add an RST file with documentation about the server in :cgit_file:`doc/source`
    and add it to the index in that directory.
