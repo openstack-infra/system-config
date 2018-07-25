@@ -28,7 +28,6 @@ class openstack_project::storyboard(
   }
 
   class { 'openstack_project::server':
-    sysadmins                 => $sysadmins,
     iptables_public_tcp_ports => [80, 443],
     manage_exim               => false,
   }
