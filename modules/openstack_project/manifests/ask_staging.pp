@@ -13,10 +13,6 @@ class openstack_project::ask_staging (
   $solr_version     = '4.10.4'
 ) {
 
-  realize (
-    User::Virtual::Localuser['mkiss'],
-  )
-
   file { '/srv/dist':
     ensure => directory,
     owner  => 'root',

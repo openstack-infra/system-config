@@ -18,9 +18,6 @@
 class openstack_project::pbx (
   $sip_providers = [],
 ) {
-  realize (
-    User::Virtual::Localuser['rbryant'],
-  )
 
   class { 'asterisk':
     modules_conf_source   => 'puppet:///modules/openstack_project/pbx/asterisk/modules.conf',

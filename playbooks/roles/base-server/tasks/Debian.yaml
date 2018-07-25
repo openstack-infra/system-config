@@ -18,3 +18,9 @@
     src: rsyslog.d_50-default.conf
     dest: /etc/rsyslog.d/50-default.conf
   notify: Restart rsyslog
+
+- name: Prevent puppet agent from running
+  copy:
+    mode: 0644
+    src: puppet.default
+    dest: /etc/default/puppet

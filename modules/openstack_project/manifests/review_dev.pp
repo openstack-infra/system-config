@@ -43,10 +43,6 @@ class openstack_project::review_dev (
     }
   }
 
-  realize (
-    User::Virtual::Localuser['zaro'],
-  )
-
   class { 'project_config':
     url  => $project_config_repo,
     base => 'dev/',

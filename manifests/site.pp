@@ -12,7 +12,6 @@ $elasticsearch_nodes = hiera_array('elasticsearch_nodes')
 #
 node default {
   class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins', []),
   }
 }
 
@@ -27,8 +26,6 @@ node 'review.openstack.org' {
     iptables_public_tcp_ports => [80, 443, 29418],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
-    sysadmins                 => hiera('sysadmins', []),
-    extra_aliases             => { 'gerrit2' => 'root' },
   }
 
   class { 'openstack_project::review':
@@ -75,8 +72,6 @@ node 'review01.openstack.org' {
     iptables_public_tcp_ports => [80, 443, 29418],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
-    sysadmins                 => hiera('sysadmins', []),
-    extra_aliases             => { 'gerrit2' => 'root' },
   }
 
   class { 'openstack_project::review':
@@ -123,8 +118,6 @@ node /^review-dev\d*\.openstack\.org$/ {
     iptables_public_tcp_ports => [80, 443, 29418],
     iptables_rules6           => $iptables_rules,
     iptables_rules4           => $iptables_rules,
-    sysadmins                 => hiera('sysadmins', []),
-    extra_aliases             => { 'gerrit2' => 'root' },
     afs                       => true,
   }
 
@@ -157,7 +150,6 @@ node /^grafana\d*\.openstack\.org$/ {
   $group = "grafana"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::grafana':
     admin_password      => hiera('grafana_admin_password'),
@@ -176,7 +168,6 @@ node /^grafana\d*\.openstack\.org$/ {
 node /^health\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::openstack_health_api':
     subunit2sql_db_host => hiera('subunit2sql_db_host', 'localhost'),
@@ -188,7 +179,6 @@ node /^cacti\d+\.openstack\.org$/ {
   $group = "cacti"
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
-    sysadmins   => hiera('sysadmins', []),
     cacti_hosts => hiera_array('cacti_hosts'),
     vhost_name  => 'cacti.openstack.org',
   }
@@ -198,7 +188,6 @@ node /^cacti\d+\.openstack\.org$/ {
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [8140],
-    sysadmins                 => hiera('sysadmins', []),
     pin_puppet                => '3.6.',
   }
   class { 'openstack_project::puppetmaster':
@@ -254,7 +243,6 @@ node /^graphite\d*\.openstack\.org$/ {
       {protocol => 'udp', port => '8125', hostname => 'ze10.openstack.org'},
       {protocol => 'udp', port => '8125', hostname => 'ze11.openstack.org'},
     ],
-    sysadmins                 => hiera('sysadmins', [])
   }
 
   class { '::graphite':
@@ -269,7 +257,6 @@ node /^graphite\d*\.openstack\.org$/ {
 node /^groups\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::groups':
     site_admin_password          => hiera('groups_site_admin_password'),
@@ -287,7 +274,6 @@ node /^groups\d*\.openstack\.org$/ {
 node /^groups-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::groups_dev':
     site_admin_password          => hiera('groups_dev_site_admin_password'),
@@ -306,12 +292,9 @@ node /^groups-dev\d*\.openstack\.org$/ {
 node /^lists\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
-    manage_exim => false,
-    purge_apt_sources => false,
   }
 
   class { 'openstack_project::lists':
-    listadmins   => hiera('listadmins', []),
     listpassword => hiera('listpassword'),
   }
 }
@@ -320,12 +303,9 @@ node /^lists\d*\.openstack\.org$/ {
 node /^lists\d*\.katacontainers\.io$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
-    manage_exim => false,
-    purge_apt_sources => false,
   }
 
   class { 'openstack_project::kata_lists':
-    listadmins   => hiera('listadmins', []),
     listpassword => hiera('listpassword'),
   }
 }
@@ -336,7 +316,6 @@ node /^paste\d*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::paste':
     db_password         => hiera('paste_db_password'),
@@ -348,7 +327,6 @@ node /^paste\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /planet\d*\.openstack\.org$/ {
   class { 'openstack_project::planet':
-    sysadmins => hiera('sysadmins', []),
   }
 }
 
@@ -357,7 +335,6 @@ node /^eavesdrop\d*\.openstack\.org$/ {
   $group = "eavesdrop"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::eavesdrop':
@@ -397,7 +374,6 @@ node /^ethercalc\d+\.openstack\.org$/ {
   $group = "ethercalc"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::ethercalc':
@@ -413,7 +389,6 @@ node /^ethercalc\d+\.openstack\.org$/ {
 node /^etherpad\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::etherpad':
@@ -431,7 +406,6 @@ node /^etherpad\d*\.openstack\.org$/ {
 node /^etherpad-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::etherpad_dev':
@@ -445,7 +419,6 @@ node /^etherpad-dev\d*\.openstack\.org$/ {
 node /^wiki\d+\.openstack\.org$/ {
   $group = "wiki"
   class { 'openstack_project::wiki':
-    sysadmins                 => hiera('sysadmins', []),
     bup_user                  => 'bup-wiki',
     serveradmin               => hiera('infra_apache_serveradmin'),
     site_hostname             => 'wiki.openstack.org',
@@ -468,7 +441,6 @@ node /^wiki\d+\.openstack\.org$/ {
 node /^wiki-dev\d+\.openstack\.org$/ {
   $group = "wiki-dev"
   class { 'openstack_project::wiki':
-    sysadmins             => hiera('sysadmins', []),
     serveradmin           => hiera('infra_apache_serveradmin'),
     site_hostname         => 'wiki-dev.openstack.org',
     wg_dbserver           => hiera('wg_dbserver'),
@@ -489,7 +461,6 @@ node /^logstash\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 3306],
     iptables_allowed_hosts    => hiera_array('logstash_iptables_rule_data'),
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::logstash':
@@ -512,7 +483,6 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::logstash_worker':
@@ -528,7 +498,6 @@ node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::subunit_worker':
     subunit2sql_db_host   => hiera('subunit2sql_db_host', ''),
@@ -544,7 +513,6 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22],
     iptables_allowed_hosts    => hiera_array('elasticsearch_iptables_rule_data'),
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::elasticsearch_node':
     discover_nodes => $elasticsearch_nodes,
@@ -558,11 +526,8 @@ node /^firehose\d+\.openstack\.org$/ {
     # connections seem to crash mosquitto. Once this is fixed we should add
     # them back
     iptables_public_tcp_ports => [22, 25, 80, 1883, 8883, 443],
-    sysadmins                 => hiera('sysadmins', []),
-    manage_exim               => false,
   }
   class { 'openstack_project::firehose':
-    sysadmins           => hiera('sysadmins', []),
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
     gerrit_public_key   => hiera('germqtt_gerrit_ssh_public_key'),
     gerrit_private_key  => hiera('germqtt_gerrit_ssh_private_key'),
@@ -582,7 +547,6 @@ node /^firehose\d+\.openstack\.org$/ {
 node /^git(-fe\d+)?\.openstack\.org$/ {
   $group = "git-loadbalancer"
   class { 'openstack_project::git':
-    sysadmins               => hiera('sysadmins', []),
     balancer_member_names   => [
       'git01.openstack.org',
       'git02.openstack.org',
@@ -614,7 +578,6 @@ node /^git\d+\.openstack\.org$/ {
   include openstack_project
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [4443, 8080, 29418],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::git_backend':
@@ -653,7 +616,6 @@ node /^mirror-update\d*\.openstack\.org$/ {
     centos_keytab         => hiera('centos_keytab'),
     epel_keytab           => hiera('epel_keytab'),
     yum_puppetlabs_keytab => hiera('yum_puppetlabs_keytab'),
-    sysadmins             => hiera('sysadmins', []),
   }
 }
 
@@ -664,7 +626,6 @@ node /^mirror\d*\..*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 8080, 8081, 8082],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
     afs_cache_size            => 50000000,  # 50GB
   }
@@ -681,7 +642,6 @@ node /^files\d*\.openstack\.org$/ {
   $group = "files"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
     afs_cache_size            => 10000000,  # 10GB
   }
@@ -712,7 +672,6 @@ node /^files\d*\.openstack\.org$/ {
 node /^refstack\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'refstack':
     mysql_host          => hiera('refstack_mysql_host', 'localhost'),
@@ -741,7 +700,6 @@ node /^refstack\d*\.openstack\.org$/ {
 node /^storyboard\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
     mysql_password          => hiera('storyboard_db_password'),
@@ -772,7 +730,6 @@ node /^storyboard\d*\.openstack\.org$/ {
 node /^storyboard-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
     mysql_password          => hiera('storyboard_db_password'),
@@ -799,7 +756,6 @@ node /^storyboard-dev\d*\.openstack\.org$/ {
 node /^static\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::static':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -837,7 +793,6 @@ node /^zk\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '3888', hostname => 'zk02.openstack.org'},
       {protocol => 'tcp', port => '3888', hostname => 'zk03.openstack.org'},
     ],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { '::zookeeper':
@@ -861,7 +816,6 @@ node /^status\d*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::status':
@@ -881,7 +835,6 @@ node /^survey\d+\.openstack\.org$/ {
   $group = "survey"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::survey':
@@ -905,7 +858,6 @@ node /^adns\d+\.openstack\.org$/ {
   $group = 'adns'
 
   class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
     iptables_allowed_hosts    => [
       {protocol => 'tcp', port => '53', hostname => 'ns1.openstack.org'},
       {protocol => 'tcp', port => '53', hostname => 'ns2.openstack.org'},
@@ -925,7 +877,6 @@ node /^ns\d+\.openstack\.org$/ {
   $group = 'ns'
 
   class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
     iptables_public_udp_ports => [53],
     iptables_public_tcp_ports => [53],
   }
@@ -969,7 +920,6 @@ node 'nodepool.openstack.org' {
       {protocol => 'tcp', port => '2181', hostname => 'nl04.openstack.org'},
       {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
     ],
-    sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
 
@@ -1023,7 +973,6 @@ node /^nl\d+\.openstack\.org$/ {
   $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
-    sysadmins => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80],
   }
 
@@ -1086,7 +1035,6 @@ node /^nb\d+\.openstack\.org$/ {
   $clouds_yaml                   = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
     iptables_public_tcp_ports => [80, 443],
   }
 
@@ -1142,7 +1090,6 @@ node /^ze\d+\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [79, 7900],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
   }
 
@@ -1257,7 +1204,6 @@ node /^zuul\d+\.openstack\.org$/ {
       {protocol => 'tcp', port => '4730', hostname => 'zm07.openstack.org'},
       {protocol => 'tcp', port => '4730', hostname => 'zm08.openstack.org'},
     ],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { '::project_config':
@@ -1348,7 +1294,6 @@ node /^zm\d+.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
@@ -1383,7 +1328,6 @@ node /^zm\d+.openstack\.org$/ {
 # Node-OS: trusty
 node 'pbx.openstack.org' {
   class { 'openstack_project::server':
-    sysadmins                 => hiera('sysadmins', []),
     # SIP signaling is either TCP or UDP port 5060.
     # RTP media (audio/video) uses a range of UDP ports.
     iptables_public_tcp_ports => [5060],
@@ -1408,8 +1352,6 @@ node /^backup\d+\..*\.ci\.openstack\.org$/ {
   $group = "ci-backup"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
-    manage_exim => false,
-    purge_apt_sources => false,
   }
   include openstack_project::backup_server
 }
@@ -1417,7 +1359,6 @@ node /^backup\d+\..*\.ci\.openstack\.org$/ {
 # Node-OS: trusty
 node 'openstackid.org' {
   class { 'openstack_project::openstackid_prod':
-    sysadmins                   => hiera('sysadmins', []),
     site_admin_password         => hiera('openstackid_site_admin_password'),
     id_mysql_host               => hiera('openstackid_id_mysql_host', 'localhost'),
     id_mysql_password           => hiera('openstackid_id_mysql_password'),
@@ -1447,7 +1388,6 @@ node 'openstackid.org' {
 # Node-OS: trusty
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
-    sysadmins                   => hiera('sysadmins', []),
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
     id_mysql_host               => hiera('openstackid_dev_id_mysql_host', 'localhost'),
     id_mysql_password           => hiera('openstackid_dev_id_mysql_password'),
@@ -1484,7 +1424,6 @@ node 'kdc01.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [88, 464, 749, 754],
     iptables_public_udp_ports => [88, 464, 749],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::kdc': }
@@ -1495,7 +1434,6 @@ node 'kdc04.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [88, 464, 749, 754],
     iptables_public_udp_ports => [88, 464, 749],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::kdc':
@@ -1509,9 +1447,7 @@ node 'afsdb01.openstack.org' {
 
   class { 'openstack_project::server':
     iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
-    manage_exim               => true,
   }
 
   include openstack_project::afsdb
@@ -1524,9 +1460,7 @@ node /^afsdb.*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
-    manage_exim               => true,
   }
 
   include openstack_project::afsdb
@@ -1538,9 +1472,7 @@ node /^afs.*\..*\.openstack\.org$/ {
 
   class { 'openstack_project::server':
     iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
-    sysadmins                 => hiera('sysadmins', []),
     afs                       => true,
-    manage_exim               => true,
   }
 
   include openstack_project::afsfs
@@ -1551,7 +1483,6 @@ node 'ask.openstack.org' {
 
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::ask':
@@ -1568,7 +1499,6 @@ node 'ask.openstack.org' {
 node 'ask-staging.openstack.org' {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::ask_staging':
@@ -1583,7 +1513,6 @@ node /^translate\d+\.openstack\.org$/ {
   $group = "translate"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80, 443],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::translate':
     admin_users                => 'aeng,cboylan,eumel8,ianw,ianychoi,infra,jaegerandi,mordred,stevenk',
@@ -1612,7 +1541,6 @@ node /^translate\d+\.openstack\.org$/ {
 node /^translate-dev\d*\.openstack\.org$/ {
   $group = "translate-dev"
   class { 'openstack_project::translate_dev':
-    sysadmins             => hiera('sysadmins', []),
     admin_users           => 'aeng,cboylan,eumel,eumel8,ianw,ianychoi,infra,jaegerandi,mordred,stevenk',
     openid_url            => 'https://openstackid-dev.openstack.org',
     listeners             => ['ajp'],
@@ -1633,7 +1561,6 @@ node /^codesearch\d*\.openstack\.org$/ {
   $group = "codesearch"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
   }
   class { 'openstack_project::codesearch':
     project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
