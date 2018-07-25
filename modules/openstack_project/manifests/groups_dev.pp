@@ -25,10 +25,6 @@ class openstack_project::groups_dev (
   $site_ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key',
 ) {
 
-  realize (
-    User::Virtual::Localuser['mkiss'],
-  )
-
 #  include drupal
 
   vcsrepo { '/srv/groups-static-pages':
