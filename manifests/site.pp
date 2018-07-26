@@ -1178,7 +1178,6 @@ node /^nb\d+\.openstack\.org$/ {
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
     oscc_file_contents            => $clouds_yaml,
     statsd_host                   => 'graphite.openstack.org',
-    builder_logging_conf_template => 'openstack_project/nodepool/nodepool-builder.logging.conf.erb',
     upload_workers                => '16',
     revision                      => 'master',
     python_version                => 3,
