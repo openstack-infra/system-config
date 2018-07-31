@@ -1,0 +1,21 @@
+- name: Configure apt retries
+  copy:
+    state: present
+    mode: 0444
+    src: 80retry
+    dest: /etc/apt/apt.conf.d/80retry
+
+- name: Disable apt translations
+  copy:
+    state: present
+    mode: 0444
+    src: 90no-translations
+    dest: /etc/apt/apt.conf.d/90no-translations
+
+- name: Replace sources.list file
+  when: purge_apt_sources
+  copy:
+    state: present
+    src: 'sources.list.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}'
+    dest: /etc/apt/sources.list
+  notify: Update apt cache

@@ -1,0 +1,39 @@
+- name: Setup login.defs file
+  copy:
+    dest: /etc/login.defs
+    src: '{{ ansible_facts.os_family }}/login.defs'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Delete old users
+  loop: disabled_users
+  user:
+    name: "{{ item }}"
+    state: absent
+    remove: yes
+
+- name: Add users
+  loop: "{{ base_users + extra_users }}"
+  user:
+    name: "{{ item }}"
+    state: present
+    uid: "{{ all_users[item].uid }}"
+    gid: "{{ all_users[item].gid|default(omit) }}"
+    comment: "{{ all_users[item].fullname }}"
+    groups: "{{ all_users[item].groups|default(groups) }}"
+    shell: "{{ all_users[item].shell|default(shell) }}"
+  when:
+    - item in all_users
+    - 'uid' in all_users[item]
+
+- name: Add ssh keys to users
+  loop: "{{ base_users + extra_users }}"
+  authorized_key:
+    user: "{{ item }}"
+    state: present
+    key: "{{ all_users[item].key }}"
+    exclusive: yes
+  when:
+    - item in all_users
+    - 'key' in all_users[item]

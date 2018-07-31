@@ -1,0 +1,6 @@
+- name: Set up additional repos
+  include: "{{ item }}"
+  static: no
+  with_first_found:
+    - "{{ ansible_facts.distribution }}.yaml"
+    - "{{ ansible_facts.os_family }}.yaml"
