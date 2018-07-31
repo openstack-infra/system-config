@@ -1,0 +1,5 @@
+- hosts: "!disabled"
+  roles:
+    - users
+    - base-repos
+    - base-server

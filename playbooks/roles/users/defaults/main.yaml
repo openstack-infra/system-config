@@ -1,0 +1,7 @@
+all_users: {}
+disabled_users: []
+extra_users: []
+groups:
+  - admin
+  - sudo
+shell: /bin/bash
