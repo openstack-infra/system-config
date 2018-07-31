@@ -1,0 +1,12 @@
+bastion_ipv4: 23.253.245.198
+bastion_ipv6: 2001:4800:7818:101:3c21:a454:23ed:4072
+base_packages:
+  - at
+  - git
+  - lvm2
+  - parted
+  - rsync
+  - rsyslog
+  - strace
+  - tcpdump
+  - wget
