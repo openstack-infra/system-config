@@ -3,7 +3,7 @@ afsadmin ~mirror-update\d+\.openstack\.org
 afsdb afsdb*.openstack.org
 cacti ~cacti\d+\.openstack\.org
 ci-backup backup\d+.*\ci\.openstack\.org
-disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org
+disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org:bridge.openstack.org
 eavesdrop ~eavesdrop\d*\.openstack\.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 ethercalc ~ethercalc\d+\.openstack\.org
@@ -11,6 +11,7 @@ files ~files\d+\.openstack\.org
 git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
 logstash-worker ~logstash-worker\d+\.openstack\.org
+mailman ~lists\d*\.openstack\.org:~lists\d*\.katacontainers\.io
 nodepool nodepool*.openstack.org:nb*.openstack.org:nl*.openstack.org
 review ~review\d+\.openstack\.org
 review-dev ~review-dev\d*\.openstack\.org
