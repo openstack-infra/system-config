@@ -43,7 +43,7 @@ def ssh_connect(ip, username, connect_kwargs={}, timeout=60):
             client = SSHClient(ip, username, **connect_kwargs)
             break
         except socket.error as e:
-            print "While testing ssh access:", e
+            print("While testing ssh access:", e)
             time.sleep(5)
         except paramiko.ssh_exception.AuthenticationException:
             return None
