@@ -1,0 +1,4 @@
+- name: Install HWE kernel for arm64
+  apt:
+    name: linux-generic-hwe-16.04
+    state: present

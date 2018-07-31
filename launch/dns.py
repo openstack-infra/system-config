@@ -43,35 +43,35 @@ def print_dns(cloud, server):
         raise
     href = get_href(raw_server)
 
-    print
-    print "Run the following commands to set up DNS:"
-    print
-    print ". ~root/ci-launch/openstackci-rs-nova.sh"
-    print ". ~root/rackdns-venv/bin/activate"
-    print
-    print (
+    print("\n")
+    print("Run the following commands to set up DNS:")
+    print("\n")
+    print(". ~root/ci-launch/openstackci-rs-nova.sh")
+    print(". ~root/rackdns-venv/bin/activate")
+    print("\n")
+    print(
         "rackdns rdns-create --name %s \\\n"
         "    --data %s \\\n"
         "    --server-href %s \\\n"
         "    --ttl 3600" % (
             server.name, ip6, href))
-    print
-    print (
+    print("\n")
+    print(
         "rackdns rdns-create --name %s \\\n"
         "    --data %s \\\n"
         "    --server-href %s \\\n"
         "    --ttl 3600" % (
             server.name, ip4, href))
-    print
-    print ". ~root/ci-launch/openstack-rs-nova.sh"
-    print
-    print (
+    print("\n")
+    print(". ~root/ci-launch/openstack-rs-nova.sh")
+    print("\n")
+    print(
         "rackdns record-create --name %s \\\n"
         "    --type AAAA --data %s \\\n"
         "    --ttl 3600 openstack.org" % (
             server.name, ip6))
-    print
-    print (
+    print("\n")
+    print(
         "rackdns record-create --name %s \\\n"
         "    --type A --data %s \\\n"
         "    --ttl 3600 openstack.org" % (

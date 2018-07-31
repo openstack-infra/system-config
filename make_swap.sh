@@ -27,7 +27,7 @@ if [ `grep SwapTotal /proc/meminfo | awk '{ print $2; }'` -eq 0 ]; then
         MEMKB=`grep MemTotal /proc/meminfo | awk '{print $2; }'`
         # Use the nearest power of two in MB as the swap size.
         # This ensures that the partitions below are aligned properly.
-        MEM=`python -c "import math ; print 2**int(round(math.log($MEMKB/1024, 2)))"`
+        MEM=`python3 -c "import math ; print(2**int(round(math.log($MEMKB/1024, 2))))"`
         if mount | grep ${DEV} > /dev/null; then
             echo "*** ${DEV} appears to already be mounted"
             echo "*** ${DEV} unmounting and reformating"
