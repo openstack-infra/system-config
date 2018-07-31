@@ -3,7 +3,7 @@ afsadmin ~mirror-update\d+\.openstack\.org
 afsdb afsdb*.openstack.org
 cacti ~cacti\d+\.openstack\.org
 ci-backup backup\d+.*\ci\.openstack\.org
-disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org
+disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org:bridge.openstack.org
 eavesdrop ~eavesdrop\d*\.openstack\.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 ethercalc ~ethercalc\d+\.openstack\.org
