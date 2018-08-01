@@ -168,7 +168,7 @@ class openstack_project::server (
 
   class { 'ssh':
     trusted_ssh_type   => 'address',
-    trusted_ssh_source => '23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072',
+    trusted_ssh_source => '23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,23.253.234.219,2001:4800:7817:103:be76:4eff:fe04:5a1d',
   }
 
   if ! defined(File['/root/.ssh']) {
@@ -184,7 +184,7 @@ class openstack_project::server (
     type    => 'ssh-rsa',
     key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
     options => [
-      'from="23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,localhost"',
+      'from="23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,23.253.234.219,2001:4800:7817:103:be76:4eff:fe04:5a1d,localhost"',
     ],
     require => File['/root/.ssh'],
   }
