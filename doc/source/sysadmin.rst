@@ -291,8 +291,10 @@ Note if you created your working directory in a path that is not
 excluded by bup you will want to remove that directory when your work is
 done. /root/backup-restore-* is excluded so the path above is safe.
 
+.. _force-merging-a-change:
+
 Force-Merging a Change
-----------------------
+======================
 
 Occasionally it is necessary to bypass the CI system and merge a
 change directly.  Usually, this is only required if we have a hole in
