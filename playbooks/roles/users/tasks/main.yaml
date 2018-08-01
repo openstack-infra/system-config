@@ -1,3 +1,20 @@
+- name: Add sudo admin groups
+  loop:
+    - sudo
+    - admin
+  group:
+    name: "{{ item }}"
+    state: present
+  when:
+
+- name: Setup sudoers file
+  copy:
+    dest: /etc/sudoers
+    src: sudoers
+    owner: root
+    group: root
+    mode: 0440
+
 - name: Setup login.defs file
   copy:
     dest: /etc/login.defs
