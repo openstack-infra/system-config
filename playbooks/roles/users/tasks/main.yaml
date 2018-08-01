@@ -1,3 +1,24 @@
+- name: Add sudo admin groups
+  loop:
+    - sudo
+    - admin
+  group:
+    name: "{{ item }}"
+    state: present
+  when:
+
+# NOTE(mordred): We replace the main file rather than dropping a file in to
+# /etc/sudoers.d to deal with divergent base sudoers files from our distros.
+# We also want to change some default behavior (we want nopassword sudo, for
+# instance).
+- name: Setup sudoers file
+  copy:
+    dest: /etc/sudoers
+    src: sudoers
+    owner: root
+    group: root
+    mode: 0440
+
 - name: Setup login.defs file
   copy:
     dest: /etc/login.defs
