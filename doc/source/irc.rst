@@ -321,6 +321,16 @@ accompany the removal message.
 Banning of disruptive users is also available with the `/ban` command, see your
 client documentation for syntax.
 
+Setting channel for registered users
+====================================
+
+During periods of abuse, we may need to restrict access to only
+registered users.  This can be set via ::
+
+  /MSG ChanServ set #openstack-channel mlock +r
+
+The value can be removed with ``-r``
+
 Renaming an IRC Channel
 =======================
 
