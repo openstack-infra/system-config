@@ -1,0 +1,43 @@
+- name: Install ansible
+  pip:
+    name: ansible
+
+- name: Install openstacksdk
+  pip:
+    name: openstacksdk
+
+- name: Ensure /etc/ansible and /etc/ansible/hosts
+  file:
+    state: directory
+    path: /etc/ansible/hosts
+
+- name: Ensure /etc/ansible/inventory_plugins
+  file:
+    state: directory
+    path: /etc/ansible/inventory_plugins
+
+- name: Ensure /var/cache/ansible
+  file:
+    state: directory
+    path: /var/cache/ansible
+
+- name: Copy ansible.cfg in to place
+  copy:
+    src: ansible.cfg
+    dest: /etc/ansible/ansible.cfg
+
+- name: Copy inventory config into place
+  loop:
+    - openstack.yaml
+    - groups.yaml
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/ansible/hosts/{{ item }}"
+
+# NOTE(mordred) The copy of the openstack inventory plugin from 2.6 is busted.
+# It doesn't proerly deal with caching. A fix has been submitted upstream, but
+# for now this is a fixed copy.
+- name: Copy fixed openstack inventory in place
+  copy:
+    src: openstack.py
+    dest: /etc/ansible/inventory_plugins/openstack.py
