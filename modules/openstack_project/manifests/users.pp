@@ -207,10 +207,11 @@ class openstack_project::users {
 
   @user::virtual::localuser { 'SotK':
     realname => 'Adam Coldrick',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDL2oe+2lRld58OiTjpdR3yUTobWcDWaYhWpU3bWz36rQAcbtYQmCBJRF8Ec2ZazvLNrmv075k/kb18eWjBLzItorBppIlNkIazG002LsrvlME6FDrZ3MoeDiswXG8a0P0IJyUyvfald7EBkjjiCVO3CwyMdFF2fXb+oqKxrSL9nKyPZtSXAzHmq01Eqm6Jok971+C+tvk47W4w7LXy+H/1GfMJdppwIWD6fQ5NmxQp9fHowh3ztNthhEk6Vn46qGrtMru4HImIw6nVU+0tHNRgxRjn9SRTPSsYPiBKJJ90rXl7WB5Ep42hGZySdz7l0LjxXAGxZgiHso/ANPYzRgpr',
-    key_id   => 'adam@arreliam',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCaE7gafwJQHQ9E2vlcjx8ufcGpyTdQdaBal/ZRt3aPbKXNqsDH4jOWvSXZxE0NlOGo+rWBSu0DxdyM7O5BwYxC79BaFq9JMPn1Q/p1WplOeLENX7jd6lsrLIo2x1MQ134+MliO5FNXmSF2m2il4GCQuiUdGORs/caF1mMPTDeQmf9rRS2fYW0dZ3wZgRzzehtg9LmeW8+DoU+dAeKj4igPcsDsvALmya1JB0XP1UNEG9XMdrYJCoj3K/ALQvJIVB0qwNDYdJ59erVZTvYGe5v6GMUHjIKkmaXJjJyT22hcmnRPk5yIktMrGwkiHGr4Pu0T+lyopSqLEm8HJWp6hc53',
+    key_id   => 'adam@wrackside',
     old_keys => [
       'adam.coldrick@codethink.co.uk',
+      'adam@arreliam',
       ],
     uid      => 2023,
     gid      => 2023,
