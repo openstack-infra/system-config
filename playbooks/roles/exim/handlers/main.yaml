@@ -1,0 +1,4 @@
+- name: Restart exim
+  service:
+    name: "{{ service_name }}"
+    state: restarted
