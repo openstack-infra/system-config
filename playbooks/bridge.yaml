@@ -1,0 +1,3 @@
+- hosts: bridge.openstack.org
+  roles:
+    - pip3
