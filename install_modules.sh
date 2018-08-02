@@ -15,7 +15,8 @@
 # under the License.
 
 function puppet_version {
-    PATH=/opt/puppetlabs/bin:$PATH puppet --version | cut -d '.' -f 1
+    # Default to 3 for the cases, like bridge, where there is no puppet
+    (PATH=/opt/puppetlabs/bin:$PATH puppet --version || echo 3) | cut -d '.' -f 1
 }
 export PUPPET_VERSION=$(puppet_version)
 
@@ -83,7 +84,7 @@ if [ -z "${!MODULES[*]}" ] && [ -z "${!SOURCE_MODULES[*]}" ] ; then
     exit 0
 fi
 
-MODULE_LIST=`PATH=$PATH:/opt/puppetlabs/bin puppet module list --color=false`
+MODULE_LIST=$(find $MODULE_PATH -maxdepth 1 | sed "s,$MODULE_PATH,,")
 
 # Install modules from source
 for MOD in ${!SOURCE_MODULES[*]} ; do
