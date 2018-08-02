@@ -1,0 +1,21 @@
+---
+- hosts: "localhost:!disabled"
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: Make sure system-config repo is up to date
+      git:
+        repo: https://git.openstack.org/openstack-infra/system-config
+        dest: /opt/system-config/production
+        force: yes
+
+    - name: Clone puppet modules to /etc/puppet/modules
+      command: ./install_modules.sh
+      args:
+        chdir: /opt/system-config/production
+
+    - name: Install ansible roles to /etc/ansible/roles
+      command: ansible-galaxy install --force -r roles.yaml
+      args:
+        chdir: /opt/system-config/production
