@@ -34,6 +34,16 @@
     src: "{{ item }}"
     dest: "/etc/ansible/hosts/{{ item }}"
 
+# host_vars and group_vars are loaded from locations adjacent to inventory.
+# This adds a simple inventory entry for bridge.openstack.org that sets
+# ansible_connection to local. The more important thing is does is put a
+# static inventory in place so that the host_vars and group_vars from this
+# /etc/ansible/secrets get picked up.
+- name: Copy secret inventory in place
+  copy:
+    src: secret.ini
+    dest: /etc/ansible/secrets/secret.ini
+
 # NOTE(mordred) The copy of the openstack inventory plugin from 2.6 is busted.
 # It doesn't proerly deal with caching. A fix has been submitted upstream, but
 # for now this is a fixed copy.
