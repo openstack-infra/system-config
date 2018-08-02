@@ -35,10 +35,11 @@
   authorized_key:
     state: present
     user: root
+    exclusive: yes
     key: |
       ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp puppet-remote-2014-09-15
     key_options: |
-      from="{{ bastion_ipv4 }}:{{ bastion_ipv6 }},localhost"
+      from="{{ bastion_ipv4 }},{{ bastion_ipv6 }},localhost"
 
 - name: Disable byobu
   file:
