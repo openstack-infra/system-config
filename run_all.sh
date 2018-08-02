@@ -31,7 +31,7 @@ set +e
 # stuck if they are oomkilled
 
 # First, sync the puppet repos with all the machines
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet.yaml
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
 # Update the puppet version
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
 # Run the git/gerrit/zuul sequence, since it's important that they all work together
