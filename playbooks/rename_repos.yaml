@@ -9,11 +9,11 @@
       shell: invoke-rc.d gerrit stop
 
     - name: Update account_project_watches in gerrit database
-      shell: echo 'update account_project_watches set project_name = "{{ item.new }}" where project_name = "{{ item.old }}";' | mysql reviewdb
+      shell: echo 'update account_project_watches set project_name = "{{ item.new }}" where project_name = "{{ item.old }}";' | mysql reviewdb --defaults-file=/root/.gerrit_db.cfg
       with_items: "{{ repos }}"
 
     - name: Update changes in gerrit database
-      shell: echo 'update changes set dest_project_name = "{{ item.new }}", created_on = created_on where dest_project_name = "{{ item.old }}";' | mysql reviewdb
+      shell: echo 'update changes set dest_project_name = "{{ item.new }}", created_on = created_on where dest_project_name = "{{ item.old }}";' | mysql reviewdb --defaults-file=/root/.gerrit_db.cfg
       with_items: "{{ repos }}"
 
     - name: Rename git repos on gerrit
