@@ -1,16 +1,17 @@
 - name: Include OS-specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
-    - "{{ ansible_facts.distribution }}.yaml"
-    - "{{ ansible_facts.os_family }}.yaml"
-    - "default.yaml"
+  include_vars: "{{ lookup('first_found', file_list) }}"
+  vars:
+    file_list:
+      - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
+      - "{{ ansible_facts.distribution }}.yaml"
+      - "{{ ansible_facts.os_family }}.yaml"
+      - "default.yaml"
 
 - name: Include OS-specific tasks
-  include_tasks: "{{ item }}"
-  static: no
-  with_first_found:
-    - files:
+  include_tasks: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
         - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
         - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
         - "{{ ansible_facts.distribution }}.yaml"
