@@ -24,33 +24,11 @@ all_users:
     uid: 2001
     gid: 2001
 
-  smaffulli:
-    comment: Stefano Maffulli
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDD/zAvXaOUXCAT6/B4sCMu/38d/PyOIg/tYsYFAMgfDUzuZwkjZWNGrTpp/HFrOAZISER5KmOg48DKPvm91AeZOHfAXHCP6x9/FcogP9rmc48ym1B5XyIc78QVQjgN6JMSlEZsl0GWzFhQsPDjXundflY07TZfSC1IhpG9UgzamEVFcRjmNztnBuvq2uYVGpdI+ghmqFw9kfvSXJvUbj/F7Pco5XyJBx2e+gofe+X/UNee75xgoU/FyE2a6dSSc4uP4oUBvxDNU3gIsUKrSCmV8NuVQvMB8C9gXYR+JqtcvUSS9DdUAA8StP65woVsvuU+lqb+HVAe71JotDfOBd6f stefano@mattone-E6420
-    uid: 2002
-    gid: 2002
-
-  oubiwann:
-    comment: Duncan McGreggor
-    uid: 2003
-    gid: 2003
-
-  rockstar:
-    comment: Paul Hummer
-    uid: 2004
-    gid: 2004
-
   clarkb:
     comment: Clark Boylan
     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnfoVhOTkrY7uoebL8PoHXb0Fg4jJqGCbwkxUdNUdheIdbnfyjuRG3iL8WZnzf7nzWnD+IGo6kkAo8BkNMK9L0P0Y+5IjI8NH49KU22tQ1umij4EIf5tzLh4gsqkJmy6QLrlbf10m6UF4rLFQhKzOd4b2H2K6KbP00CIymvbW3BwvNDODM4xRE2uao387qfvXZBUkB0PpRD+7fWPoN58gpFUm407Eba3WwX5PCD+1DD+RVBsG8maIDXerQ7lvFLoSuyMswv1TfkvCj0ZFhSFbfTd2ZysCu6eryFfeixR7NY9SNcp9YTqG6LrxGA7Ci6wz+hycFHXlDrlBgfFJDe5At clark@work
     uid: 2005
     gid: 2005
-
-  rlane:
-    comment: Ryan Lane
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdtI7H+fsgSrjrdG8aGVcrN0GFW3XqLVsLG4n7JW4qH2W//hqgdL7A7cNVQNPoB9I1jAqvnO2Ct6wrVSh84QU89Uufw412M3qNSNeiGgv2c2KdxP2XBrnsLYAaJRbgOWJX7nty1jpO0xwF503ky2W3OMUsCXMAbYmYNSod6gAdzf5Xgo/3+eXRh7NbV1eKPrzwWoMOYh9T0Mvmokon/GXV5PiAA2bIaQvCy4BH/BzWiQwRM7KtiEt5lHahY172aEu+dcWxciuxHqkYqlKhbU+x1fwZJ+MpXSj5KBU+L0yf3iKySob7g6DZDST/Ylcm4MMjpOy8/9Cc6Xgpx77E/Pvd laner@Free-Public-Wifi.local
-    uid: 2006
-    gid: 2006
 
   fungi:
     comment: Jeremy Stanley
@@ -63,12 +41,6 @@ all_users:
     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCGpMtSehQNZL0/EJ7VUbklJygsxvii2Qi4HPSUFcLJUWAx4VltsmPkmx43D9ITwnRPRMPNtZrOvhY7v0myVlFuRnyTYAqZwigf5gxrktb+4PwCWb+2XobziUVnfJlbOTjneWSTYoZ+OjTaWd5AcVbUvgYAP2qbddycc5ACswpPDo5VrS6fQfCwE4z3BqLFNeOnqxbECHwHeFYIR6Kd6mnKAzDNZxZIkviWg9eIwwuFf5V5bUPiVkeFHVL3EJlCoYs2Em4bvYZBtrV7kUseN85X/+5Uail4uYBEcB3GLL32e6HeD1Qk4xIxLTI2bFPGUp0Oq7iPgrQQe4zCBsGi7Dx+JVy+U0JqLLAN94UPCn2fhsX7PdKfTPcxFPFKeX/PRutkb7qxdbS2ubCdOEhc6WN7OkQmbdK8lk6ms4v4dFc0ooMepWELqKC6thICsVdizpuij0+h8c4SRD3gtwGDPxrkJcodPoAimVVlW1p+RpMxsCFrK473TzgeNPVeAdSZVpqZ865VOwFqoFQB6WpmCDZQPFlkS2VDe9R54ePDHWKYLvVW6yvQqWTx3KrIrS1twSoydj+gADgBYsZaW5MNkWYHAWotEX67j6fMZ6ZSTS5yaTeLywB2Ykh0kjo4jpTFk5JNL7DINkfmCEZMLw60da29iN4QzAJr9cP1bwjf/QDqw== ttx@mercury
     uid: 2008
     gid: 2008
-
-  rbryant:
-    comment: Russell Bryant
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZVikFz5KoRg3gKdiSa3PQ0i2bN5+bUyc4lMMg6P+jEStVddwN+nAgpa3zJaokmNAOp+MjcGa7K1Zi4b9Fe2ufusTzSKdNVlRDiw0R4Lk0LwTIfkhLywKvgcAz8hkqWPUIgTMU4xIizh50KTL9Ttsu9ULop8t7urTpPE4TthHX4nz1Y9NwYLU0W8cWhzgRonBbqtGs/Lif0NC+TdWGkVyTaP3x1A48s0SMPcZKln1hDv7KbKdknG4XyS4jlr4qI+R+har7m2ED/PH93PSXi5QnT4U6laWRg03HTxpPKWq077u/tPW9wcbkgpBcYMmDKTo/NDPtoN+r/jkbdW7zKJHx russel@russelbryant.net
-    uid: 2009
-    gid: 2009
 
   pabelanger:
     comment: Paul Belanger
@@ -87,50 +59,11 @@ all_users:
     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDP5ce0Ywtbgi3LGMZWA5Zlv/EQ07F/gWnZOMN6TRfiCiiBNyf8ARtKgmYSINS8W537HJYBt3qTfa5xkZmpBrtE6x8OTfR5y1L+x/PrLTUkQhVDY19EixD9wDIrQIIjo2ZVq+zErXBRQuGmJ3Hl+OGw+wtvGS8f768kMnwhKUgyITjWV2tKr/q88J8mBOep48XUcRhidDWsOjgIDJQeY2lbsx1bbZ7necrJS17PHqxhUbWntyR/VKKbBbrNmf2bhtTRUSYoJuqabyGDTZ0J25A88Qt2IKELy6jsVTxHj9Y5D8oH57uB7GaNsNiU+CaOcVfwOenES9mcWOr1t5zNOdrp smarcet@gmail.com
     uid: 2012
     gid: 2012
-
-  zaro:
-    comment: Khai Do
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJqB//ilMx7Y1tKzviAn/6yeXSRAi2VnaGN0/bfaa5Gciz+SWt8vAEAUE99fzuqeJ/ezjkuIXDFm/sjZr93y567a6sDT6CuhVUac1FZIhXRTs0J+pBOiENbwQ7RZxbkyNHQ0ndvtz3kBA1DF5D+MDkluBlIWb085Z31rFJmetsB2Zb8s1FKUjHVk/skyeKSj0qAK5KN3Wme6peWhYjwBiM0gUlxIsEZM6JLYdoPIbD5B8GYAktMN2FvJU9LgKGL93jLZ/vnMtoQIHHAG/85NdPURL1Zbi92Xlxbm4LkbcHnruBdmtPfSgaEupwJ+zFmK264OHD7QFt10ztPMbAFCFn khaido@khaido-HP-EliteBook-Folio-9470m
-    uid: 2013
-    gid: 2013
-
-  slukjanov:
-    comment: Sergey Lukjanov
-    uid: 2014
-    gid: 2014
-
-  elizabeth:
-    comment: Elizabeth K. Joseph
-    uid: 2015
-    gid: 2015
-
   jhesketh:
     comment: Joshua Hesketh
     key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3onVLOZiiGpQWTCIV0QwHmc3Jvqyl7UaJxIu7D49OQcLHqVZsozI9pSiCdTnWyAaM+E+5wD9yVcSTqMWqn2AZmZSwQ+Fh6KnCgPZ/o63+iCZPGL0RNk20M1iNh5dvdStDnn+j2fpeV/JONF0tBn07QvNL2eF4BwtbTG9Zhl186QNsXjXDghrSO3Etl6DSfcUhxyvMoA2LnclWWD5hLmiRhcBm+PIxveVsr4B+o0k1HV5SUOvJMWtbEC37AH5I818O4fNOob6CnOFaCsbA9oUDzB5rqxutPZb9SmNJpNoLqYqDgyppM0yeql0Kn97tUt7H4j5xHrWoGnJ4IXfuDc0AMmmy4fpcLGkNf7zcBftKS6iz/3AlOXjlp5WZvKxngJj9HIir2SE/qV4Lxw9936BzvAcQyw5+bEsLQJwi+LPZxEqLC6oklkX9dg/+1yBFHsz6mulA0b4Eq7VF9omRzrhhN4iPpU5KQYPRNz7yRYckXDxYnp2lz6yHgSYh2/lqMc+UqmCL9EAWcDw3jsgvJ6kH/YUVUojiRHD9QLqlhOusu1wrTfojjwF05mqkXKmH+LH8f8AJAlMdYg0c2WLlrcxnwCkLLxzU5cYmKcZ41LuLtQR3ik+EKjYzBXXyCEzFm6qQEbR2akpXyxvONgrf7pijrgNOi0GeatUt0bUQcAONYw== jhesketh@infra
     uid: 2016
     gid: 2016
-
-  nibz:
-    comment: Spencer Krum
-    uid: 2017
-    gid: 2017
-
-  yolanda:
-    comment: Yolanda Robla
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSR2NmJC8PSanHUpKJuaMmohG80COO2IPkE3Mxhr7US8P1B3p1c6lOrT6M1txRzBY8FlbxfOinGtutP+ADCB2taXfpO8UiaG9eOqojAT/PeP2Y2ov72rVMSWupLozUv2uAR5yyFVFHOjKPYGAa01aJtfzfJujSak8dM0ifFeFwgp/8RBGEfC7atq+45TdrfAURRcEgcOLiF5Aq6fprCOwpllnrH6VoId9YS7u/5xF2/zBjr9PuOP7jEgCaL/+FNqu7jgj87aG5jiZPlweb7GTLJON9H6eFpyfpoJE0sZ1yR9Q+e9FAqQIA44Zi748qKBlFKbLxzoC4mc0SbNUAleEL yolanda@infra
-    uid: 2018
-    gid: 2018
-
-  rcarrillocruz:
-    comment: Ricardo Carrillo Cruz
-    key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCz1CW5E87v8o7O8B5fe7j1uaPCToRdaBukjH2HzQZ+DSGTIPjirLpp5ZXPuyNnmtRMzwld6mlHYlevVEwuZTNyQwS7ut5o0LjyW6yoEcvPq0xMEZLxaso5dZAtzNgf3FzbtaUYBnkhSwX7c24lf8wPGAl7TC3yO0dePQh2lXVdaBiGB9ybVeQr+kwJIxleUE4puuQ+ONJE2D+hHjoQ/huUMpb996pb/YzkjkAxqHguMid0c1taelyW8n17nEDoWvlV9Qqbo8cerhgURo1OBt2zENLjQQ0kOkPxJx4qx3652e0kbkr11y50r9BMs418mnJdWselMxkSqQNZ+XotoH5Dwn+3K2a6Wv4OX3Dqb9SF/JTD7lA/tIkNfxgsRlzfEQ01rK1+g7Je10EnDCLEzHpFjvZ5q4EEMcYqY+osLFpHAOWGLMx+3eY4pz/xEzRP/x3sjGU09uNOZ3oCWUfSkE4xebnnWtxwWZKyFmv3GHtaqJn2UvpAbODPEYyYcOS3XV3zd233W3C09YYnFUyZbGLXpD05Yet5fZfGTnveMRn5/9LZai+dBPwoMWUJdX4yPnGXgOG8zk0u1nWfcNJfYg+xajSUDiMKjDhlkuFK/GXNYuINe42s1TxzL7pJ4X4UhqLiopeJvPg/U5xdCV5pxVKf1MVenrGe2pfwf1Yr2WMv5w== rcarrillocruz@infra
-    uid: 2019
-    gid: 2019
-
-  krotscheck:
-    comment: Michael Krotscheck
-    uid: 2020
-    gid: 2020
 
   colleen:
     comment: Colleen Murphy
