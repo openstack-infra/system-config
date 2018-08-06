@@ -21,8 +21,14 @@ export PUPPET_VERSION=$(puppet_version)
 
 if [ "$PUPPET_VERSION" == "3" ] ; then
     export MODULE_PATH=/etc/puppet/modules
-elif [ "$PUPPET_VERSION" == "4" ] ; then
+elif [ "$PUPPET_VERSION" == "4" ]; then
+    # Using puppetlabs builds for wider compatability across distros
+    # than system packages provide.
     export MODULE_PATH=/etc/puppetlabs/code/modules
+elif [ "$PUPPET_VERSION" == "5" ]; then
+    # NOTE(ianw): As at Aug 2018, correct for Ubuntu's Bionic puppet
+    # packages
+    export MODULE_PATH=/etc/puppet/modules
 else
     echo "ERROR: unsupported puppet version $PUPPET_VERSION"
     exit 1

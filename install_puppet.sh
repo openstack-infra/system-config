@@ -24,10 +24,6 @@ SETUP_PIP=${SETUP_PIP:-true}
 # Distro identification functions
 #  note, can't rely on lsb_release for these as we're bare-bones and
 #  it may not be installed yet)
-
-
-PUPPET_VERSION=${PUPPET_VERSION:-3}
-
 function is_fedora {
     [ -f /usr/bin/yum ] && cat /etc/*release | grep -q -e "Fedora"
 }
@@ -57,6 +53,13 @@ if is_fedora && [[ $(lsb_release -rs) -ge 22 ]]; then
     YUM=dnf
 fi
 
+# Set the puppet version
+if cat /etc/os-release | grep -qi bionic; then
+    # bionic only supports puppet 5
+    PUPPET_VERSION=${PUPPET_VERSION:-5}
+else
+    PUPPET_VERSION=${PUPPET_VERSION:-3}
+fi
 
 #
 # Distro specific puppet installs
@@ -215,6 +218,10 @@ function setup_puppet_ubuntu {
         puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
         puppetpkg=puppet-agent
         PUPPET_VERSION=4.*
+        FACTER_VERSION=3.*
+    elif [ "$PUPPET_VERSION" == "5" ] ; then
+        puppet_deb='' # use distro
+        PUPPET_VERSION=5.*
         FACTER_VERSION=3.*
     else
         echo "Unsupported puppet version ${PUPPET_VERSION}"
