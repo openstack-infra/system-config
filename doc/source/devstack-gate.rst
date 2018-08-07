@@ -52,10 +52,9 @@ previously configured nodes and invokes the devstack-vm-gate-wrap.sh
 script which checks out code from all of the involved repositories, and
 merges the proposed change.  That script then calls devstack-vm-gate.sh
 which installs a devstack configuration file, and invokes devstack. Once
-devstack is finished, it runs exercise.sh and Tempest, which perform
-integration testing. After everything is done, devstack-gate copies
-and formats all of the logs for archival. A jenkins jobs then copies
-these logs to the log archive.
+devstack is finished, it runs Tempest, which performs integration testing.
+After everything is done, devstack-gate copies and formats all of the logs
+for archival. A jenkins jobs then copies these logs to the log archive.
 
 How to Debug a Devstack Gate Failure
 ====================================
