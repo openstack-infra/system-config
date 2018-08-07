@@ -29,6 +29,6 @@ groups:
   translate: inventory_hostname|regex_match('translate\d+\.openstack\.org')
   wiki-dev: inventory_hostname|regex_match('wiki-dev\d+\.openstack\.org')
   wiki: inventory_hostname|regex_match('wiki\d+\.openstack\.org')
+  zuul-executor: inventory_hostname.startswith('ze')
   zuul-merger: inventory_hostname|regex_match('z[lm](static)?\d+\.openstack\.org')
-  zuul-scheduler: inventory_hostname.startswith('ze')
   zuul-scheduler: inventory_hostname.startswith('zuul')
