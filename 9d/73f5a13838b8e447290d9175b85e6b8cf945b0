@@ -1,0 +1,11 @@
+Code-Review+1: wangqi <wang.qi@99cloud.net>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 07 Aug 2018 22:43:27 +0000
+Reviewed-on: https://review.openstack.org/588089
+Project: openstack-infra/system-config
+Branch: refs/heads/master
