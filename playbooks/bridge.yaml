@@ -1,3 +1,4 @@
 - hosts: bridge.openstack.org
   roles:
     - pip3
+    - install-ansible
