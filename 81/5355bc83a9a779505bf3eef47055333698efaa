@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: daixianmeng <daixianmeng@yovole.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 07 Aug 2018 22:47:36 +0000
+Reviewed-on: https://review.openstack.org/588396
+Project: openstack-infra/system-config
+Branch: refs/heads/master
