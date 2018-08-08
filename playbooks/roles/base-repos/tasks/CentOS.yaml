@@ -1,0 +1,41 @@
+- name: Check to see if epel-release is installed
+  yum:
+    list: epel-release
+  register: epel_release
+
+- block:
+
+    - name: Install a bootstrap epel repo to install latest epel-release
+      copy:
+        src: epel-bootstrap.repo
+        dest: /etc/yum.repos.d/epel-bootstrap.repo
+
+    - name: Install epel-release package from epel-bootstrap
+      yum:
+        name: epel-release
+        enablerepo: epel-bootstrap
+
+    - name: Remove bootstrap repo
+      file:
+        path: /etc/yum.repos.d/epel-bootstrap.repo
+        state: absent
+
+  when: not epel_release.results
+
+# there is a bug (rhbz#1261747) where systemd can fail to enable
+# services due to selinux errors after upgrade.  A work-around is
+# to install the latest version of selinux and systemd here and
+# restart the daemon for good measure after it is upgraded.
+- name: Install latest selinux-policy and systemd
+  yum:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - selinux-policy
+    - systemd
+  register: systemd_updated
+
+- name: Restart systemd
+  systemd:
+    daemon_reload: yes
+  when: systemd_updated|changed

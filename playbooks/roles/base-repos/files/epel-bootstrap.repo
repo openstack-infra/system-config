@@ -1,0 +1,7 @@
+[epel-bootstrap]
+name=Bootstrap EPEL
+mirrorlist=https://mirrors.fedoraproject.org/mirrorlist?repo=epel-7&arch=\$basearch
+failovermethod=priority
+enabled=0
+gpgcheck=0
+EOF

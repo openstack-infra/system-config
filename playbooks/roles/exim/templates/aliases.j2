@@ -13,5 +13,7 @@ noc: root
 security: root
 
 {% for k, v in aliases|dictsort %}
+{% if v %}
 {{ k }}: {{ v }}
+{% endif %}
 {% endfor %}
