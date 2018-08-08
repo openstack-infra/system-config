@@ -158,8 +158,7 @@ all_users:
 
   ianw:
     comment: Ian Wienand
-    key_type: ssh-ed25519
-    key: ssh-rsa AAAAC3NzaC1lZDI1NTE5AAAAILOjz+dkwRWTJcW9Gt3iGHSzRBsvVlTAK6G2oH3+0D41 iwienand+osinfra@redhat.com
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILOjz+dkwRWTJcW9Gt3iGHSzRBsvVlTAK6G2oH3+0D41 iwienand+osinfra@redhat.com
     uid: 2025
     gid: 2025
 
@@ -183,8 +182,7 @@ all_users:
 
   frickler:
     comment: Jens Harbott
-    key_type: ssh-ed25519
-    key: ssh-rsa AAAAC3NzaC1lZDI1NTE5AAAAIGmc5fbzMptjAb5D86zSH13ZYCbf3QuV1jk9hL0r1qHw frickler@os-infra-2017
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmc5fbzMptjAb5D86zSH13ZYCbf3QuV1jk9hL0r1qHw frickler@os-infra-2017
     uid: 2029
     gid: 2029
 
