@@ -7,3 +7,6 @@
 # before we run base-server
 - hosts: "!disabled"
     - base-server
+    - role: exim
+      aliases:
+        root: "{{ ','.join(sysadmins) }}"
