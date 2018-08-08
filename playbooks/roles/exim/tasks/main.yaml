@@ -14,11 +14,6 @@
       skip: true
   loop: "{{ query('first_found', params) }}"
 
-- name: Install Exim
-  package:
-    state: present
-    name: '{{ package }}'
-
 - name: Write Exim defaults file
   template:
     src: "{{ sysdefault_template }}"

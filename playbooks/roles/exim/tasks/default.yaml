@@ -1,0 +1,4 @@
+- name: Install Exim
+  package:
+    state: present
+    name: '{{ package }}'

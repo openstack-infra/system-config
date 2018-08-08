@@ -3,3 +3,8 @@
     name: postfix
     enabled: false
     state: stopped
+
+- name: Install exim
+  yum:
+    name: "{{ package }}"
+    enablerepo: epel
