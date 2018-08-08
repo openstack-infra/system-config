@@ -47,6 +47,7 @@ groups:
     - firehose[0-9]*.openstack.org
     - grafana[0-9]*.openstack.org
     - graphite[0-9]*.openstack.org
+    - eavesdrop[0-9]*.openstack.org
     - groups-dev[0-9]*.openstack.org
     - groups[0-9]*.openstack.org
     - health[0-9]*.openstack.org
