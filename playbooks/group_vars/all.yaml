@@ -10,6 +10,8 @@ distro_lookup_path:
   - "{{ ansible_facts.distribution }}.yaml"
   - "{{ ansible_facts.os_family }}.yaml"
   - default.yaml
+# Default empty value so that tests work properly
+sysadmins: []
 
 puppet:
   logdest: syslog
