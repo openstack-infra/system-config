@@ -8,3 +8,6 @@
 - hosts: "!disabled"
   roles:
     - base-server
+    - role: exim
+      aliases:
+        root: "{{ ','.join(sysadmins) }}"
