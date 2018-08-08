@@ -3,3 +3,6 @@
     - users
     - base-repos
     - base-server
+    - role: exim
+      aliases:
+        root: "{{ ','.join(sysadmins) }}"
