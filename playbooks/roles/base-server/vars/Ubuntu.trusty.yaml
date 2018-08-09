@@ -1,5 +1,5 @@
 distro_packages:
   - dnsutils
-  - emacs-nox
+  - emacs32-nox
   - iputils-ping
   - vim-nox

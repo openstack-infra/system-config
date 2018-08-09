@@ -2,7 +2,6 @@ bastion_ipv4: 23.253.245.198,23.253.234.219
 bastion_ipv6: 2001:4800:7818:101:3c21:a454:23ed:4072,2001:4800:7817:103:be76:4eff:fe04:5a1d
 base_packages:
   - at
-  - emacs-nox
   - git
   - lvm2
   - parted
@@ -10,5 +9,4 @@ base_packages:
   - rsyslog
   - strace
   - tcpdump
-  - vim-nox
   - wget
