@@ -1,3 +1,4 @@
 distro_packages:
   - dnsutils
   - iputils-ping
+  - vim-nox

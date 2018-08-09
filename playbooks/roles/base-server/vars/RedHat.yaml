@@ -1,4 +1,4 @@
-- distro_packages:
+distro_packages:
   - bind-utils
   - iputils
   # Utils in ntp-perl are included in Debian's ntp package; we
@@ -6,4 +6,5 @@
   # https://tickets.puppetlabs.com/browse/MODULES-3660
   - ntp-perl
   - ntpdate
+  - vim-minimal
   - yum-cron
