@@ -6,4 +6,5 @@
   # https://tickets.puppetlabs.com/browse/MODULES-3660
   - ntp-perl
   - ntpdate
+  - vim-minimal
   - yum-cron

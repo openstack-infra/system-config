@@ -10,5 +10,4 @@ base_packages:
   - rsyslog
   - strace
   - tcpdump
-  - vim-nox
   - wget
