@@ -183,20 +183,6 @@ node /^health\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
-# Node-OS: xenial
-node /^stackalytics\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-
-  class { 'openstack_project::stackalytics':
-    gerrit_ssh_user              => hiera('stackalytics_gerrit_ssh_user'),
-    stackalytics_ssh_private_key => hiera('stackalytics_ssh_private_key_contents'),
-  }
-}
-
 # Node-OS: xenial
 node /^cacti\d+\.openstack\.org$/ {
   $group = "cacti"

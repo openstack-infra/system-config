@@ -525,7 +525,6 @@ cacti_hosts:
 - mirror-update.openstack.org
 - review-dev01.openstack.org
 - review.openstack.org
-- stackalytics.openstack.org
 - static.openstack.org
 - status01.openstack.org
 - storyboard.openstack.org
