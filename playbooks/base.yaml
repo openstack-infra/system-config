@@ -2,4 +2,8 @@
   roles:
     - users
     - base-repos
+
+# Split into two plays so that the update apt cache handler fires
+# before we run base-server
+- hosts: "!disabled"
     - base-server
