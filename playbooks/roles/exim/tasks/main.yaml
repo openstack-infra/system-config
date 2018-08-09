@@ -1,14 +1,18 @@
 - name: Include OS-specific variables
-  include_vars: "{{ lookup('first_found', file_list) }}"
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
-    file_list:
-      - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
-      - "{{ ansible_facts.distribution }}.yaml"
-      - "{{ ansible_facts.os_family }}.yaml"
-      - "default.yaml"
+    params:
+      files:
+        - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
+        - "{{ ansible_facts.distribution }}.yaml"
+        - "{{ ansible_facts.os_family }}.yaml"
+        - "default.yaml"
+      paths:
+        - 'vars'
 
 - name: Include OS-specific tasks
-  include_tasks: "{{ lookup('first_found', params) }}"
+  include_tasks: "{{ found_tasks }}"
+  when: found_tasks
   vars:
     params:
       files:
@@ -17,6 +21,7 @@
         - "{{ ansible_facts.distribution }}.yaml"
         - "{{ ansible_facts.os_family }}.yaml"
       skip: true
+    found_tasks: "{{ lookup('first_found', params) }}"
 
 - name: Install Exim
   package:
