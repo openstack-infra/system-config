@@ -15,7 +15,7 @@ groups:
   etherpad: inventory_hostname.startswith('etherpad')
   files: inventory_hostname.startswith('files')
   firehose: inventory_hostname.startswith('firehose')
-  futureparser: inventory_hostname is match('(review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|ask-staging\d*|codesearch\d*)\.openstack\.org')
+  futureparser: inventory_hostname is match('(review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|paste\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|ask-staging\d*|codesearch\d*)\.openstack\.org')
   gerrit: inventory_hostname is match('review.*\.openstack\.org')
   git-loadbalancer: inventory_hostname is match('git(-fe\d+)?\.openstack\.org')
   git-server: inventory_hostname is match('git\d+\.openstack\.org')
