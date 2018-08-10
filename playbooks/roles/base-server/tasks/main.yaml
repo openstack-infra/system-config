@@ -5,13 +5,12 @@
   loop: '{{ base_packages }}'
 
 - name: Include OS-specific variables
-  include_vars: "{{ lookup('first_found', file_list) }}"
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
-    file_list:
-      - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
-      - "{{ ansible_facts.distribution }}.yaml"
-      - "{{ ansible_facts.os_family }}.yaml"
-      - "default.yaml"
+    params:
+      files: "{{ distro_lookup_path }}"
+      paths:
+        - 'vars'
 
 - name: Install distro specific packages
   package:
@@ -56,8 +55,4 @@
 - name: Include OS-specific tasks
   include_tasks: "{{ lookup('first_found', file_list) }}"
   vars:
-    file_list:
-      - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
-      - "{{ ansible_facts.distribution }}.{{ ansible_facts.architecture }}.yaml"
-      - "{{ ansible_facts.distribution }}.yaml"
-      - "{{ ansible_facts.os_family }}.yaml"
+    file_list: "{{ distro_lookup_path }}"
