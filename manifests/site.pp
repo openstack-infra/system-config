@@ -411,12 +411,14 @@ node /^ethercalc\d+\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad\d*\.openstack\.org$/ {
+  $group = "etherpad"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::etherpad':
+    vhost_name              => 'etherpad.openstack.org',
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
     ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents'),
@@ -429,15 +431,17 @@ node /^etherpad\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad-dev\d*\.openstack\.org$/ {
+  $group = "etherpad-dev"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [22, 80, 443],
     sysadmins                 => hiera('sysadmins', []),
   }
 
   class { 'openstack_project::etherpad_dev':
-    mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
-    mysql_user          => hiera('etherpad-dev_db_user', 'username'),
-    mysql_password      => hiera('etherpad-dev_db_password'),
+    vhost_name     => 'etherpad-dev.openstack.org',
+    mysql_host     => hiera('etherpad-dev_db_host', 'localhost'),
+    mysql_user     => hiera('etherpad-dev_db_user', 'username'),
+    mysql_password => hiera('etherpad-dev_db_password'),
   }
 }
 

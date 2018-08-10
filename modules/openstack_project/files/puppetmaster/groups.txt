@@ -7,6 +7,8 @@ disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org:bridge.openstack.org
 eavesdrop ~eavesdrop\d*\.openstack\.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 ethercalc ~ethercalc\d+\.openstack\.org
+etherpad ~etherpad\d+\.openstack\.org
+etherpad-dev ~etherpad-dev\d+\.openstack\.org
 files ~files\d+\.openstack\.org
 git-loadbalancer ~git(-fe\d+)?\.openstack\.org
 git-server ~git\d+\.openstack\.org
