@@ -32,6 +32,13 @@ set +e
 
 # First, sync the puppet repos with all the machines
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
+
+# Update the code on bridge
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/bridge.yaml
+
+# Run the base playbook everywhere
+timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/base.yaml
+
 # Update the puppet version
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
 

@@ -2,3 +2,4 @@
   roles:
     - pip3
     - install-ansible
+    - ansible-cron
