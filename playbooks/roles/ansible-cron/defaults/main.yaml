@@ -1,0 +1,6 @@
+update_cron_interval:
+  min: '*/15'
+  hour: '*'
+  day: '*'
+  month: '*'
+  weekday: '*'

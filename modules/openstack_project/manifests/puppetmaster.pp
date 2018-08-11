@@ -3,12 +3,6 @@
 class openstack_project::puppetmaster (
   $puppetmaster_clouds,
   $root_rsa_key = 'xxx',
-  $puppetmaster_update_cron_interval = { min     => '*/15',
-                                         hour    => '*',
-                                         day     => '*',
-                                         month   => '*',
-                                         weekday => '*',
-                                       },
   $enable_mqtt = false,
   $mqtt_hostname = 'firehose.openstack.org',
   $mqtt_port = 8883,
