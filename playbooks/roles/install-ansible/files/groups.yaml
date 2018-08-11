@@ -6,7 +6,7 @@ groups:
   afsdb: inventory_hostname|regex_match('afsdb.*openstack.org')
   cacti: inventory_hostname|regex_match('cacti\d+\.openstack\.org')
   ci-backup: inventory_hostname|regex_match('backup\d+.*\ci\.openstack\.org')
-  disabled: inventory_hostname.startswith('backup') or inventory_hostname.startswith('wiki')
+  disabled: inventory_hostname.startswith('backup') or inventory_hostname.startswith('wiki') or inventory_hostname.startswith('puppetmaster')
   eavesdrop: inventory_hostname.startswith('eavesdrop')
   elasticsearch: inventory_hostname|regex_match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
