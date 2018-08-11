@@ -3,7 +3,7 @@ afsadmin ~mirror-update\d+\.openstack\.org
 afsdb afsdb*.openstack.org
 cacti ~cacti\d+\.openstack\.org
 ci-backup backup\d+.*\ci\.openstack\.org
-disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org:bridge.openstack.org
+disabled backup\d+.*\ci\.openstack\.org:wiki.openstack.org
 eavesdrop ~eavesdrop\d*\.openstack\.org
 elasticsearch ~elasticsearch0[1-7]\.openstack\.org
 ethercalc ~ethercalc\d+\.openstack\.org
@@ -30,3 +30,4 @@ paste ~paste\d*\.openstack\.org
 adns ~adns\d*\.openstack\.org
 ns ~ns\d*\.openstack\.org
 futureparser ~review-dev\d*\.openstack\.org:~graphite\d*\.openstack\.org:~groups\d*\.openstack\.org:~groups-dev\d*\.openstack\.org:~etherpad-dev\d*\.openstack\.org:~ask-staging\d*\.openstack\.org:~codesearch\d*\.openstack\.org
+puppet !bridge.openstack.org
