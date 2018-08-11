@@ -3,3 +3,4 @@
     - pip3
     - install-ansible
     - root-keys
+    - ansible-cron
