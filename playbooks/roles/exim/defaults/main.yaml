@@ -1,0 +1,6 @@
+exim_aliases: {}
+exim_local_domains: '@'
+exim_queue_interval: 30m
+exim_queue_run_max: 5
+exim_routers: []
+exim_transports: []

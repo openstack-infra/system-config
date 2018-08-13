@@ -11,6 +11,12 @@ distro_lookup_path:
   - "{{ ansible_facts.os_family }}.yaml"
   - default.yaml
 
+exim_sysadmins: "{{ ','.join(sysadmins|default([])) }}"
+exim_extra_aliases: {}
+exim_base_aliases:
+  root: "{{ exim_sysadmins }}"
+exim_aliases: "{{ exim_base_aliases|combine(exim_extra_aliases) }}"
+
 puppet:
   logdest: syslog
   copy_hieradata: true
