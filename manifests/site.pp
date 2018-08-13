@@ -1694,19 +1694,6 @@ node /^translate-dev\d*\.openstack\.org$/ {
 
 
 # Node-OS: trusty
-node 'odsreg.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-    sysadmins                 => hiera('sysadmins', []),
-  }
-  realize (
-    User::Virtual::Localuser['ttx'],
-  )
-  class { '::odsreg':
-  }
-}
-
-# Node-OS: trusty
 # Node-OS: xenial
 node /^codesearch\d*\.openstack\.org$/ {
   $group = "codesearch"
