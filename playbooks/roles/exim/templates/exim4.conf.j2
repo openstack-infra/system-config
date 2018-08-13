@@ -61,7 +61,8 @@ keep_environment =
 # +local_domains, +relay_to_domains, and +relay_from_hosts, respectively. They
 # are all colon-separated lists:
 
-domainlist local_domains = {{ local_domains }}
+domainlist local_domains = {{ exim_local_domains }}
+
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
 
@@ -319,6 +320,34 @@ queue_run_max = {{ queue_run_max }}
 
 # queue_smtp_domains =
 
+{% if mailman_domains %}
+# Home dir for your Mailman installation -- aka Mailman's prefix
+# directory.
+MM_HOME=/var/lib/mailman
+#
+# User and group for Mailman, should match your --with-mail-gid
+# switch to Mailman's configure script.
+# Value is normally "mailman"
+MM_UID=list
+MM_GID=list
+#
+# Domains that your lists are in - colon separated list
+# you may wish to add these into local_domains as well
+domainlist mm_domains={{ ":".join(mailman_domains) }}
+#
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+#
+# These values are derived from the ones above and should not need
+# editing unless you have munged your mailman installation
+#
+# The path of the Mailman mail wrapper script
+MM_WRAP=MM_HOME/mail/mailman
+#
+# The path of the list config file (used as a required file when
+# verifying list addresses)
+MM_LISTCHK=MM_HOME/lists/${lc::$local_part}/config.pck
+{% endif %}
+
 # Google is way behind the times on IPv6 and tends to reject mail from
 # new v6 addrs:
 
@@ -543,7 +572,7 @@ acl_check_data:
 
 begin routers
 
-{% for router in routers %}
+{% for router in exim_routers %}
 {% for name, values in router.iteritems() %}
 
 {{ name }}:
@@ -716,7 +745,7 @@ address_reply:
   driver = autoreply
 
 
-{% for transport in transports %}
+{% for transport in exim_transports %}
 {% for name, values in transport.iteritems() %}
 
 {{ name }}:

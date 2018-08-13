@@ -1,0 +1,33 @@
+mm_domains: 'lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.starlingx.io'
+exim_local_domains: "@:{{ mm_domains }}"
+exim_aliases:
+  root: "{{ ','.join(listadmins|default([])) }}"
+  ambassadors-owner: spam
+  community-owner: spam
+  foundation-board-confidential-owner: spam
+  foundation-board-owner: spam
+  foundation-owner: spam
+  legal-discuss-owner: spam
+  mailman-owner: spam
+  marketing-owner: spam
+  openstack-announce-owner: spam
+  openstack-dev-owner: spam
+  openstack-docs-owner: spam
+  openstack-fr-owner: spam
+  openstack-i18n-owner: spam
+  openstack-infra-owner: spam
+  openstack-operators-owner: spam
+  openstack-owner: spam
+  openstack-qa-owner: spam
+  openstack-security-owner: spam
+  openstack-tc-owner: spam
+  openstack-vi-owner: spam
+  product-wg-owner: spam
+  superuser-owner: spam
+  user-committee-owner: spam
+  women-of-openstack-owner: spam
+  spam: ':fail: delivery temporarily disabled due to ongoing spam flood'
+queue_interval: '1m'
+queue_run_max: '50'
+smtp_accept_max: '100'
+smtp_accept_max_per_host: '10'

@@ -296,11 +296,9 @@ node /^groups-dev\d*\.openstack\.org$/ {
 node /^lists\d*\.openstack\.org$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
-    manage_exim => false,
   }
 
   class { 'openstack_project::lists':
-    listadmins   => hiera('listadmins', []),
     listpassword => hiera('listpassword'),
   }
 }
@@ -309,11 +307,9 @@ node /^lists\d*\.openstack\.org$/ {
 node /^lists\d*\.katacontainers\.io$/ {
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [25, 80, 465],
-    manage_exim => false,
   }
 
   class { 'openstack_project::kata_lists':
-    listadmins   => hiera('listadmins', []),
     listpassword => hiera('listpassword'),
   }
 }

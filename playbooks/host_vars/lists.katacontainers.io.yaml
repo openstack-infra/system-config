@@ -1,0 +1,6 @@
+mm_domains: 'lists.katacontainers.io'
+exim_local_domains: "@:{{ mm_domains }}"
+queue_interval: '1m'
+queue_run_max: '50'
+smtp_accept_max: '100'
+smtp_accept_max_per_host: '10'

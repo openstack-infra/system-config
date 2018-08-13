@@ -4,6 +4,7 @@ manifest: /opt/system-config/production/manifests/site.pp
 manifest_base: /opt/system-config
 puppet_logdest: syslog
 puppet_version: 3
+
 distro_lookup_path:
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.yaml"
@@ -11,6 +12,12 @@ distro_lookup_path:
   - "{{ ansible_facts.distribution }}.yaml"
   - "{{ ansible_facts.os_family }}.yaml"
   - default.yaml
+
+exim_sysadmins: "{{ ','.join(sysadmins|default([])) }}"
+exim_extra_aliases: {}
+exim_base_aliases:
+  root: "{{ exim_sysadmins }}"
+exim_aliases: "{{ exim_base_aliases|combine(exim_extra_aliases }}"
 
 puppet:
   logdest: syslog
