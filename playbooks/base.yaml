@@ -3,9 +3,12 @@
     - users
     - base-repos
 
-# Split into two plays so that the update apt cache handler fires
-# before we run base-server
+# Run base-server seperately so that the update apt cache handler in base-repos
+# fires before we run base-server
 - hosts: "!disabled"
   roles:
     - base-server
+
+- hosts: "!ci-backup:!disabled"
+  roles:
     - exim
