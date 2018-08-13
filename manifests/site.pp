@@ -957,36 +957,6 @@ node /^ns\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'nodepool.openstack.org' {
   $group = 'nodepool'
-  # TODO(pabelanger): Move all of this back into nodepool manifest, it has
-  # grown too big.
-  $rackspace_username             = hiera('nodepool_rackspace_username', 'username')
-  $rackspace_password             = hiera('nodepool_rackspace_password')
-  $rackspace_project              = hiera('nodepool_rackspace_project', 'project')
-  $hpcloud_username               = hiera('nodepool_hpcloud_username', 'username')
-  $hpcloud_password               = hiera('nodepool_hpcloud_password')
-  $hpcloud_project                = hiera('nodepool_hpcloud_project', 'project')
-  $internap_username              = hiera('nodepool_internap_username', 'username')
-  $internap_password              = hiera('nodepool_internap_password')
-  $internap_project               = hiera('nodepool_internap_project', 'project')
-  $ovh_username                   = hiera('nodepool_ovh_username', 'username')
-  $ovh_password                   = hiera('nodepool_ovh_password')
-  $ovh_project                    = hiera('nodepool_ovh_project', 'project')
-  $tripleo_username               = hiera('nodepool_tripleo_username', 'username')
-  $tripleo_password               = hiera('nodepool_tripleo_password')
-  $tripleo_project                = hiera('nodepool_tripleo_project', 'project')
-  $vexxhost_username              = hiera('nodepool_vexxhost_username', 'username')
-  $vexxhost_password              = hiera('nodepool_vexxhost_password')
-  $vexxhost_project               = hiera('nodepool_vexxhost_project', 'project')
-  $citycloud_username             = hiera('nodepool_citycloud_username', 'username')
-  $citycloud_password             = hiera('nodepool_citycloud_password')
-  $linaro_username                = hiera('nodepool_linaro_username', 'username')
-  $linaro_password                = hiera('nodepool_linaro_password')
-  $linaro_project                 = hiera('nodepool_linaro_project', 'project')
-  $limestone_username             = hiera('nodepool_limestone_username', 'username')
-  $limestone_password             = hiera('nodepool_limestone_password')
-  $limestone_project              = hiera('nodepool_limestone_project', 'project')
-
-  $clouds_yaml = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server':
     iptables_allowed_hosts    => [
@@ -1014,40 +984,6 @@ node 'nodepool.openstack.org' {
 
   include openstack_project
 
-  class { '::openstackci::nodepool':
-    vhost_name                    => 'nodepool.openstack.org',
-    project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    mysql_password                => hiera('nodepool_mysql_password'),
-    mysql_root_password           => hiera('nodepool_mysql_root_password'),
-    nodepool_ssh_public_key       => hiera('zuul_worker_ssh_public_key_contents'),
-    # TODO(pabelanger): Switch out private key with zuul_worker once we are
-    # ready.
-    nodepool_ssh_private_key      => hiera('jenkins_ssh_private_key_contents'),
-    oscc_file_contents            => $clouds_yaml,
-    image_log_document_root       => '/var/log/nodepool/image',
-    statsd_host                   => 'graphite.openstack.org',
-    logging_conf_template         => 'openstack_project/nodepool/nodepool.logging.conf.erb',
-    upload_workers                => '16',
-    jenkins_masters               => [],
-    split_daemon                  => true,
-  }
-  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('limestone_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool'],
-  }
-
-  cron { 'mirror_gitgc':
-    user        => 'nodepool',
-    hour        => '20',
-    minute      => '0',
-    command     => 'find /opt/dib_cache/source-repositories/ -maxdepth 1 -type d -name "*.git" -exec git --git-dir="{}" gc \; >/dev/null',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => Class['::openstackci::nodepool'],
-  }
 }
 
 # Node-OS: xenial
