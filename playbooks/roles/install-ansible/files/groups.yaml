@@ -24,6 +24,7 @@ groups:
   review-dev: inventory_hostname|regex_match('review-dev\d+\.openstack\.org')
   review: inventory_hostname|regex_match('review\d+\.openstack\.org')
   status: inventory_hostname.startswith('status')
+  storyboard: inventory_hostname.startswith('storyboard')
   subunit-worker: inventory_hostname.startswith('subunit-worker')
   survey: inventory_hostname.startswith('survey')
   translate-dev: inventory_hostname|regex_match('translate-dev\d+\.openstack\.org')
