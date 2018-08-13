@@ -11,7 +11,7 @@ groups:
   elasticsearch: inventory_hostname|regex_match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
   files: inventory_hostname.startswith('files')
-  futureparser: inventory_hostname|regex_match('(review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|paste\d*|planet\d*|eavesdrop\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|logstash-worker\d+|firehose\d+|ask-staging\d*|codesearch\d*)\.openstack\.org')
+  futureparser: inventory_hostname|regex_match('(review\d*|review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|paste\d*|planet\d*|eavesdrop\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|logstash-worker\d+|firehose\d+|ask-staging\d*|codesearch\d*)\.openstack\.org')
   git-loadbalancer: inventory_hostname|regex_match('~git(-fe\d+)?\.openstack\.org')
   git-server: inventory_hostname|regex_match('~git\d+\.openstack\.org')
   grafana: inventory_hostname.startswith('grafana')
