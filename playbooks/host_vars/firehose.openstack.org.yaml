@@ -1,0 +1,14 @@
+exim_local_domains: "@:firehose.openstack.org"
+exim_routers:
+  - cyrus:
+      driver: accept
+      domains: '+local_domains'
+      local_part_suffix: '+*'
+      local_part_suffix_optional: true
+      transport: cyrus
+exim_transports:
+  - cyrus:
+      driver: lmtp
+      socket: /var/run/cyrus/socket/lmtp
+      user: cyrus
+      batch_max: '35'
