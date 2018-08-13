@@ -61,7 +61,8 @@ keep_environment =
 # +local_domains, +relay_to_domains, and +relay_from_hosts, respectively. They
 # are all colon-separated lists:
 
-domainlist local_domains = {{ local_domains }}
+domainlist local_domains = {{ exim_local_domains }}
+
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
 
@@ -303,7 +304,7 @@ timeout_frozen_after = 7d
 # interlock with other processes, so additional queue runners can be
 # started by other means, or by killing and restarting the daemon.
 
-queue_run_max = {{ queue_run_max }}
+queue_run_max = {{ exim_queue_run_max }}
 
 # When this option is set, a delivery process is started whenever a
 # message is received, routing is performed, and local deliveries take
@@ -324,14 +325,14 @@ queue_run_max = {{ queue_run_max }}
 
 dns_ipv4_lookup = *.gmail.com : *.google.com
 
-{% if smtp_accept_max is defined %}
+{% if exim_smtp_accept_max is defined %}
 # simultaneous incoming connections
-smtp_accept_max = {{ smtp_accept_max }}
+smtp_accept_max = {{ exim_smtp_accept_max }}
 {% endif %}
 
-{% if smtp_accept_max_per_host is defined %}
+{% if exim_smtp_accept_max_per_host is defined %}
 # connections from one host
-smtp_accept_max_per_host = {{ smtp_accept_max_per_host }}
+smtp_accept_max_per_host = {{ exim_smtp_accept_max_per_host }}
 {% endif %}
 
 ######################################################################
@@ -543,7 +544,7 @@ acl_check_data:
 
 begin routers
 
-{% for router in routers %}
+{% for router in exim_routers %}
 {% for name, values in router.iteritems() %}
 
 {{ name }}:
@@ -716,7 +717,7 @@ address_reply:
   driver = autoreply
 
 
-{% for transport in transports %}
+{% for transport in exim_transports %}
 {% for name, values in transport.iteritems() %}
 
 {{ name }}:
