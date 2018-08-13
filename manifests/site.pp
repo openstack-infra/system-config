@@ -530,7 +530,6 @@ node /^firehose\d+\.openstack\.org$/ {
     # connections seem to crash mosquitto. Once this is fixed we should add
     # them back
     iptables_public_tcp_ports => [22, 25, 80, 1883, 8883, 443],
-    manage_exim               => false,
   }
   class { 'openstack_project::firehose':
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
@@ -705,7 +704,6 @@ node /^refstack\d*\.openstack\.org$/ {
 node /^storyboard\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
     mysql_password          => hiera('storyboard_db_password'),
@@ -736,7 +734,6 @@ node /^storyboard\d*\.openstack\.org$/ {
 node /^storyboard-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
     mysql_password          => hiera('storyboard_db_password'),
@@ -1425,7 +1422,6 @@ node /^backup\d+\..*\.ci\.openstack\.org$/ {
   $group = "ci-backup"
   class { 'openstack_project::server':
     iptables_public_tcp_ports => [],
-    manage_exim => false,
   }
   include openstack_project::backup_server
 }

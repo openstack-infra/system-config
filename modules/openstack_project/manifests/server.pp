@@ -12,7 +12,6 @@ class openstack_project::server (
   $enable_unbound            = true,
   $afs                       = false,
   $afs_cache_size            = 500000,
-  $manage_exim               = true,
   $pypi_index_url            = 'https://pypi.python.org/simple',
 ) {
   include openstack_project::params
