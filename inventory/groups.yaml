@@ -13,7 +13,7 @@ groups:
   ethercalc: inventory_hostname.startswith('ethercalc')
   files: inventory_hostname.startswith('files')
   firehose: inventory_hostname.startswith('firehose')
-  futureparser: inventory_hostname is match('(review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|paste\d*|planet\d*|eavesdrop\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|logstash-worker\d+|firehose\d+|ask-staging\d*|codesearch\d*)\.openstack\.org')
+  futureparser: inventory_hostname is match('(review\d*|review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|paste\d*|planet\d*|eavesdrop\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|logstash-worker\d+|firehose\d+|ask-staging\d*|codesearch\d*)\.openstack\.org')
   git-loadbalancer: inventory_hostname is match('git(-fe\d+)?\.openstack\.org')
   git-server: inventory_hostname is match('git\d+\.openstack\.org')
   grafana: inventory_hostname.startswith('grafana')
