@@ -61,7 +61,8 @@ keep_environment =
 # +local_domains, +relay_to_domains, and +relay_from_hosts, respectively. They
 # are all colon-separated lists:
 
-domainlist local_domains = {{ local_domains }}
+domainlist local_domains = {{ exim_local_domains }}
+
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
 
@@ -543,7 +544,7 @@ acl_check_data:
 
 begin routers
 
-{% for router in routers %}
+{% for router in exim_routers %}
 {% for name, values in router.iteritems() %}
 
 {{ name }}:
@@ -716,7 +717,7 @@ address_reply:
   driver = autoreply
 
 
-{% for transport in transports %}
+{% for transport in exim_transports %}
 {% for name, values in transport.iteritems() %}
 
 {{ name }}:
