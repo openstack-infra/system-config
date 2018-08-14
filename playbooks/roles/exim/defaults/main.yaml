@@ -1,6 +1,6 @@
 queue_interval: 30m
 queue_run_max: 5
-exim_local_domains: '@'
-exim_routers: []
-exim_transports: []
-exim_aliases: {}
+local_domains: '@'
+routers: []
+transports: []
+aliases: {}

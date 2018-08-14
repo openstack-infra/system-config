@@ -12,7 +12,7 @@ abuse: root
 noc: root
 security: root
 
-{% for k, v in exim_aliases|dictsort %}
+{% for k, v in aliases|dictsort %}
 {% if v %}
 {{ k }}: {{ v }}
 {% endif %}

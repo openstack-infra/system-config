@@ -8,4 +8,8 @@
 - hosts: "!disabled"
   roles:
     - base-server
-    - exim
+    - role: exim
+      local_domains: "{{ exim_local_domains|default(omit) }}"
+      routers: "{{ exim_routers|default(omit) }}"
+      transports: "{{ exim_transports|default(omit) }}"
+      aliases: "{{ exim_aliases|default(omit) }}"
