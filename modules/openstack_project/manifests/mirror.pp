@@ -276,6 +276,12 @@ class openstack_project::mirror (
     require  => File["${www_root}"],
   }
 
+
+  # TODO(ianw): remove after cleared out
+  file { "${www_root}/ubuntu-mariadb":
+    ensure => absent,
+  }
+
   #####################################################
   # Build VHost
   include ::httpd
