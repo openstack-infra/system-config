@@ -28,7 +28,7 @@ class openstack_project::ethercalc (
   # is required like with mysql.
   include bup
   bup::site { 'ord.rax':
-    backup_user   => 'bup-ethercalc01',
+    backup_user   => "bup-$::hostname",
     backup_server => 'backup01.ord.rax.ci.openstack.org',
   }
 }
