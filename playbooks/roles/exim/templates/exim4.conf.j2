@@ -634,22 +634,9 @@ localuser:
 {% for name, values in router.items() %}
 
 {{ name }}:
-{% if 'driver' in values %}
-  driver = {{ values.driver }}
-{% endif %}
-
-{% for k, v in values|dictsort %}
-{% if k != 'driver' %}
-{% if v|true %}
-  {{ k }}
-{% else %}
-  {{ k }} = {{ v }}
-{% endif %}
-{% endif %}
+  {{ values }}
 {% endfor %}
 {% endfor %}
-{% endfor %}
-
 
 ######################################################################
 #                      TRANSPORTS CONFIGURATION                      #
@@ -718,22 +705,10 @@ address_reply:
 
 
 {% for transport in exim_transports %}
-{% for name, values in transport.items() %}
+{% for name, value in transport.items() %}
 
 {{ name }}:
-{% if 'driver' in values %}
-  driver = {{ values.driver }}
-{% endif %}
-
-{% for k, v in values|dictsort %}
-{% if k != 'driver' %}
-{% if v|true %}
-  {{ k }}
-{% else %}
-  {{ k }} = {{ v }}
-{% endif %}
-{% endif %}
-{% endfor %}
+  {{ values }}
 {% endfor %}
 {% endfor %}
 
