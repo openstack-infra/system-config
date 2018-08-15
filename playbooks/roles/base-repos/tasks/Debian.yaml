@@ -11,7 +11,6 @@
     dest: /etc/apt/apt.conf.d/90no-translations
 
 - name: Replace sources.list file
-  when: purge_apt_sources
   copy:
     src: 'sources.list.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}'
     dest: /etc/apt/sources.list
