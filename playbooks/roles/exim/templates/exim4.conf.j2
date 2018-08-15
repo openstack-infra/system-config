@@ -62,7 +62,6 @@ keep_environment =
 # are all colon-separated lists:
 
 domainlist local_domains = {{ exim_local_domains }}
-
 domainlist relay_to_domains =
 hostlist   relay_from_hosts = 127.0.0.1
 
@@ -634,22 +633,11 @@ localuser:
 {% for name, values in router.items() %}
 
 {{ name }}:
-{% if 'driver' in values %}
-  driver = {{ values.driver }}
-{% endif %}
-
-{% for k, v in values|dictsort %}
-{% if k != 'driver' %}
-{% if v|true %}
-  {{ k }}
-{% else %}
-  {{ k }} = {{ v }}
-{% endif %}
-{% endif %}
+{% for value in values.split('\n') %}
+  {{ value }}
 {% endfor %}
 {% endfor %}
 {% endfor %}
-
 
 ######################################################################
 #                      TRANSPORTS CONFIGURATION                      #
@@ -721,18 +709,8 @@ address_reply:
 {% for name, values in transport.items() %}
 
 {{ name }}:
-{% if 'driver' in values %}
-  driver = {{ values.driver }}
-{% endif %}
-
-{% for k, v in values|dictsort %}
-{% if k != 'driver' %}
-{% if v|true %}
-  {{ k }}
-{% else %}
-  {{ k }} = {{ v }}
-{% endif %}
-{% endif %}
+{% for value in values.split('\n') %}
+  {{ value }}
 {% endfor %}
 {% endfor %}
 {% endfor %}
