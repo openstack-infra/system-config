@@ -3,10 +3,10 @@
   tasks:
   - git:
       repo: https://git.openstack.org/openstack-infra/system-config
-      dest: /opt/system-config/production
+      dest: /opt/system-config
       force: yes
   - shell: ./install_puppet.sh
     args:
-      chdir: /opt/system-config/production
+      chdir: /opt/system-config
     environment:
       PUPPET_VERSION: 4

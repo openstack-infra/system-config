@@ -1,7 +1,8 @@
 copy_hieradata: true
 copy_puppet: true
-manifest: /opt/system-config/production/manifests/site.pp
+manifest: /opt/system-config/manifests/site.pp
 manifest_base: /opt/system-config
+mgmt_manifest_base: /opt/system-config
 puppet_logdest: syslog
 distro_lookup_path:
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
@@ -21,7 +22,7 @@ puppet:
   logdest: syslog
   copy_hieradata: true
   copy_puppet: true
-  manifest: /opt/system-config/production/manifests/site.pp
+  manifest: /opt/system-config/manifests/site.pp
   manifest_base: /opt/system-config
 
 # When adding new users, always pick a UID larger than the last UID, do not
