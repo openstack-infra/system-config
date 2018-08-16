@@ -5,8 +5,10 @@ exim_routers:
   - storyboard_verp_router: |
       driver = dnslookup
       # we only consider messages sent in through loopback
+      {% raw -%}
       condition = ${if or{{eq{$sender_host_address}{127.0.0.1}}\
                           {eq{$sender_host_address}{::1}}}{yes}{no}}
+      {% endraw %}
       # we do not do this for traffic going to the local machine
       domains = '!+local_domains'
       ignore_target_hosts = <; \
