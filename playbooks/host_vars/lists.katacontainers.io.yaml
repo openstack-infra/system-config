@@ -3,6 +3,9 @@ exim_local_domains: "@:{{ mm_domains }}"
 exim_aliases:
   root: "{{ ','.join(listadmins|default([])) }}"
 exim_routers:
+  - dnslookup: '{{ exim_dnslookup_router }}'
+  - system_aliases: '{{ exim_system_aliases_router }}'
+  - localuser: '{{ exim_localuser_router }}'
   - mailman_verp_router: |
       {% raw -%}
       driver = dnslookup
