@@ -457,7 +457,7 @@ To rename a project:
 #. Run the ansible rename repos playbook, passing in the path to your yaml
    file::
 
-     sudo ansible-playbook -f 10 /opt/system-config/production/playbooks/rename_repos.yaml -e repolist=ABSOLUTE_PATH_TO_VARS_FILE
+     sudo ansible-playbook -f 10 /opt/system-config/playbooks/rename_repos.yaml -e repolist=ABSOLUTE_PATH_TO_VARS_FILE
 
 #. :ref:`Force-merge <force-merging-a-change>` the prepared Puppet
    configuration changes.

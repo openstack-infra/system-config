@@ -1,6 +1,6 @@
 copy_hieradata: true
 copy_puppet: true
-manifest: /opt/system-config/production/manifests/site.pp
+manifest: /opt/system-config/manifests/site.pp
 manifest_base: /opt/system-config
 puppet_logdest: syslog
 distro_lookup_path:
@@ -21,7 +21,7 @@ puppet:
   logdest: syslog
   copy_hieradata: true
   copy_puppet: true
-  manifest: /opt/system-config/production/manifests/site.pp
+  manifest: /opt/system-config/manifests/site.pp
   manifest_base: /opt/system-config
 
 # When adding new users, always pick a UID larger than the last UID, do not

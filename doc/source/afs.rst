@@ -368,7 +368,7 @@ read-write volumes.
 
   .. code-block:: console
 
-    root@puppetmaster:~# /opt/system-config/production/tools/hieraedit.py \
+    root@puppetmaster:~# /opt/system-config/tools/hieraedit.py \
       --yaml /etc/puppet/hieradata/production/fqdn/mirror-update.openstack.org.yaml \
       -f /path/to/foo.keytab KEYNAME
 
