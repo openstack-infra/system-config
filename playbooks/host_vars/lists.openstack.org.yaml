@@ -28,6 +28,9 @@ exim_aliases:
   women-of-openstack-owner: spam
   spam: ':fail: delivery temporarily disabled due to ongoing spam flood'
 exim_routers:
+  - dnslookup: '{{ exim_dnslookup_router }}'
+  - system_aliases: '{{ exim_system_aliases_router }}'
+  - localuser: '{{ exim_localuser_router }}'
   - mailman_verp_router: |
       {% raw -%}
       driver = dnslookup

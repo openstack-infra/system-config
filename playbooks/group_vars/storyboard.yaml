@@ -1,4 +1,7 @@
 exim_routers:
+  - dnslookup: '{{ exim_dnslookup_router }}'
+  - system_aliases: '{{ exim_system_aliases_router }}'
+  - localuser: '{{ exim_localuser_router }}'
   - storyboard_verp_router: |
       driver = dnslookup
       # we only consider messages sent in through loopback
