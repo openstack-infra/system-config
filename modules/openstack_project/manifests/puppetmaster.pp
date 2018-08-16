@@ -33,14 +33,7 @@ class openstack_project::puppetmaster (
   }
 
   cron { 'updatecloudlauncher':
-    user        => 'root',
-    minute      => '0',
-    hour        => '*/1',
-    monthday    => '*',
-    month       => '*',
-    weekday     => '*',
-    command     => 'flock -n /var/run/puppet/puppet_run_cloud_launcher.lock bash /opt/system-config/production/run_cloud_launcher.sh >> /var/log/puppet_run_cloud_launcher_cron.log 2>&1',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    ensure => absent,
   }
 
   logrotate::file { 'updatecloudlauncher':
@@ -72,14 +65,7 @@ class openstack_project::puppetmaster (
   }
 
   cron { 'updatepuppetmaster':
-    user        => 'root',
-    minute      => $puppetmaster_update_cron_interval[min],
-    hour        => $puppetmaster_update_cron_interval[hour],
-    monthday    => $puppetmaster_update_cron_interval[day],
-    month       => $puppetmaster_update_cron_interval[month],
-    weekday     => $puppetmaster_update_cron_interval[weekday],
-    command     => 'flock -n /var/run/puppet/puppet_run_all.lock bash /opt/system-config/production/run_all.sh >> /var/log/puppet_run_all_cron.log 2>&1',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    ensure => absent,
   }
 
   logrotate::file { 'updatepuppetmaster':
@@ -111,19 +97,11 @@ class openstack_project::puppetmaster (
   }
 
   cron { 'deleteoldreports':
-    user        => 'root',
-    hour        => '3',
-    minute      => '0',
-    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.yaml\' -mtime +5 -execdir rm {} \;',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    ensure => absent,
   }
 
   cron { 'deleteoldreports-json':
-    user        => 'root',
-    hour        => '3',
-    minute      => '0',
-    command     => 'sleep $((RANDOM\%600)) && find /var/lib/puppet/reports -name \'*.json\' -mtime +5 -execdir rm {} \;',
-    environment => 'PATH=/var/lib/gems/1.8/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    ensure => absent,
   }
 
   file { '/etc/puppet/hieradata':
@@ -346,11 +324,7 @@ class openstack_project::puppetmaster (
   }
 
   cron { 'expandgroups':
-    user        => 'root',
-    minute      => 0,
-    hour        => 4,
-    command     => '/usr/local/bin/expand-groups.sh >> /var/log/expand_groups.log 2>&1',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+    ensure => absent,
   }
 
   logrotate::file { 'expandgroups':
