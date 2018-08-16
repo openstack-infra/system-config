@@ -7,15 +7,15 @@
     - name: Make sure system-config repo is up to date
       git:
         repo: https://git.openstack.org/openstack-infra/system-config
-        dest: /opt/system-config/production
+        dest: /opt/system-config
         force: yes
 
     - name: Clone puppet modules to /etc/puppet/modules
       command: ./install_modules.sh
       args:
-        chdir: /opt/system-config/production
+        chdir: /opt/system-config
 
     - name: Install ansible roles to /etc/ansible/roles
       command: ansible-galaxy install --force -r roles.yaml
       args:
-        chdir: /opt/system-config/production
+        chdir: /opt/system-config

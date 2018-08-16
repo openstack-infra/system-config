@@ -46,12 +46,12 @@ Ansible and Puppet 3 is known to run on Precise, Trusty, Centos 6 and Centos 7.
 .. code-block:: bash
 
    sudo su -
-   git clone https://git.openstack.org/openstack-infra/system-config /opt/system-config/production
-   bash /opt/system-config/production/install_puppet.sh
-   bash /opt/system-config/production/install_modules.sh
+   git clone https://git.openstack.org/openstack-infra/system-config /opt/system-config
+   bash /opt/system-config/install_puppet.sh
+   bash /opt/system-config/install_modules.sh
    echo $REAL_HOSTNAME > /etc/hostname
    service hostname restart
-   puppet apply --modulepath='/opt/system-config/production/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
+   puppet apply --modulepath='/opt/system-config/modules:/etc/puppet/modules' -e 'include openstack_project::puppetmaster'
 
 Hiera uses a systemwide configuration file in ``/etc/puppet/hiera.yaml``
 and this setup supports multiple configurations. The two sets of environments
@@ -82,7 +82,7 @@ Adding a node
 -------------
 
 For adding a new node to your puppet master, you can either use the
-``/opt/system-config/production/launch/launch-node.py`` script
+``/opt/system-config/launch/launch-node.py`` script
 (see :cgit_file:`launch/README` for full details) or bootstrap puppet manually.
 
 For manual bootstrap, you need to run on the new server connecting
@@ -101,7 +101,7 @@ In OpenStack's Infrastructure, puppet runs are triggered from a cronjob
 running on the puppetmaster which in turn runs a single run of puppet apply on
 each host we know about.
 
-The entry point for this process is ``/opt/system-config/production/run_all.sh``
+The entry point for this process is ``/opt/system-config/run_all.sh``
 
 There are a few sets of nodes which have their own playbooks so that they
 are run in sequence before the rest of the nodes are run in parallel.
@@ -110,12 +110,12 @@ creation of the master repos on the gerrit server.
 
 If an admin needs to run puppet by hand, it's a simple matter of either
 logging in to the server in question and running
-`puppet apply /opt/system-config/production/manifests/site.pp` or, on the
+`puppet apply /opt/system-config/manifests/site.pp` or, on the
 puppetmaster, running:
 
 .. code-block:: bash
 
-  ansible-playbook --limit="$HOST:localhost" /opt/system-config/production/playbooks/remote_puppet_adhoc.yaml
+  ansible-playbook --limit="$HOST:localhost" /opt/system-config/playbooks/remote_puppet_adhoc.yaml
 
 as root, where `$HOST` is the host you want to run puppet on.
 The `:localhost` is important as some of the plays depend on performing a task

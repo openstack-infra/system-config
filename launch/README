@@ -27,7 +27,7 @@ To launch a node in the OpenStack CI account (production servers)::
   export OS_REGION_NAME=DFW
   export FLAVOR="8 GB Performance"
   export FQDN=servername01.openstack.org
-  cd /opt/system-config/production/launch/
+  cd /opt/system-config/launch/
   ./launch-node.py $FQDN --flavor "$FLAVOR" \
     --cloud=$OS_CLOUD --region=$OS_REGION_NAME
 

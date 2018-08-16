@@ -379,7 +379,7 @@ An example of a task event from the running system is::
                     "puppetmaster": null,
                     "show_diff": false,
                     "certname": null,
-                    "manifest": "/opt/system-config/production/manifests/site.pp",
+                    "manifest": "/opt/system-config/manifests/site.pp",
                     "environment": "production",
                     "debug": false,
                     "noop": false,

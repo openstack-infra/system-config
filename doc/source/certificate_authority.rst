@@ -244,10 +244,10 @@ then deleted from disk.
 .. code-block:: bash
 
     root@puppetmaster:~# cd /etc/zuul-ca
-    root@puppetmaster:/etc/zuul-ca# /opt/system-config/production/tools/hieraedit.py \
+    root@puppetmaster:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
     > --yaml /etc/puppet/hieradata/production/group/gearman.yaml \
     > -f newreq.pem gearman_ssl_key
-    root@puppetmaster:/etc/zuul-ca# /opt/system-config/production/tools/hieraedit.py \
+    root@puppetmaster:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
     > --yaml /etc/puppet/hieradata/production/group/gearman.yaml \
     > -f newcert.pem gearman_ssl_cert
     root@puppetmaster:/etc/zuul-ca# shred newreq.pem
