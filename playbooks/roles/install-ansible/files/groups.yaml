@@ -11,6 +11,7 @@ groups:
   elasticsearch: inventory_hostname is match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
   files: inventory_hostname.startswith('files')
+  firehose: inventory_hostname.startswith('firehose')
   futureparser: inventory_hostname is match('(review-dev\d*|groups\d*|groups-dev\d*|graphite\d*|etherpad-dev\d*|ask-staging\d*|codesearch\d*)\.openstack\.org')
   git-loadbalancer: inventory_hostname is match('git(-fe\d+)?\.openstack\.org')
   git-server: inventory_hostname is match('git\d+\.openstack\.org')
