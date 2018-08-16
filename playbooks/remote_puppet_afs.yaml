@@ -6,4 +6,3 @@
   - role: puppet
     manage_config: True
     puppet_reports: none
-    futureparser: "{{ True if 'futureparser' in group_names else False }}"
