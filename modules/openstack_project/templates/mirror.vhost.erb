@@ -184,6 +184,11 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPass "/rdo/" "https://trunk.rdoproject.org/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/rdo/" "https://trunk.rdoproject.org/"
 
+    # cbs.centos.org
+    CacheEnable disk  "/cbs"
+    ProxyPass "/rdo/" "https://cbs.centos.org/repos/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/cbs/" "https://cbs.centos.org/repos/"
+
     # tarballs
     CacheEnable disk  "/tarballs"
     ProxyPass "/tarballs/" "https://tarballs.openstack.org/" ttl=120 keepalive=On retry=0
