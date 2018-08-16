@@ -37,14 +37,6 @@
     src: ansible.cfg
     dest: /etc/ansible/ansible.cfg
 
-- name: Copy inventory config into place
-  loop:
-    - openstack.yaml
-    - groups.yaml
-  copy:
-    src: "{{ item }}"
-    dest: "/etc/ansible/hosts/{{ item }}"
-
 # NOTE(mordred) The copy of the openstack inventory plugin from 2.6 is busted.
 # It doesn't proerly deal with caching. A fix has been submitted upstream, but
 # for now this is a fixed copy.
