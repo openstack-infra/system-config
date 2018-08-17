@@ -1,0 +1,3 @@
+openstack_config_dir: /etc/openstack
+openstack_config_owner: root
+openstack_config_group: root
