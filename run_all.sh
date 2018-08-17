@@ -18,7 +18,7 @@
 # fails then abort the puppet run as we will not get the results we
 # expect.
 set -e
-export ANSIBLE_LOG_PATH=/var/log/puppet_run_all.log
+
 SYSTEM_CONFIG=/opt/system-config
 ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
 
