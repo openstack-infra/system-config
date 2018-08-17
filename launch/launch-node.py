@@ -72,15 +72,16 @@ class JobDir(object):
 def run(cmd, **args):
     args['stdout'] = subprocess.PIPE
     args['stderr'] = subprocess.STDOUT
-    print "Running: %s" % (cmd,)
+    print("Running: %s" % (cmd,))
     proc = subprocess.Popen(cmd, **args)
     out = ''
-    for line in iter(proc.stdout.readline, ''):
+    for line in iter(proc.stdout.readline, b''):
+        line = line.decode('utf-8')
         sys.stdout.write(line)
         sys.stdout.flush()
         out += line
     ret = proc.wait()
-    print "Return code: %s" % (ret,)
+    print("Return code: %s" % (ret,))
     if ret != 0:
         raise subprocess.CalledProcessError(ret, cmd, out)
     return ret
@@ -90,7 +91,7 @@ def stream_syslog(ssh_client):
     try:
         ssh_client.ssh('tail -f /var/log/syslog')
     except Exception:
-        print "Syslog stream terminated"
+        print("Syslog stream terminated")
 
 
 def bootstrap_server(server, key, name, volume_device, keep,
@@ -137,16 +138,10 @@ def bootstrap_server(server, key, name, volume_device, keep,
         ssh_client.ssh('bash -x mount_volume.sh %s %s %s' %
                        (volume_device, mount_path, fs_label))
 
-    # This next chunk should really exist as a playbook, but whatev
-    ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
-                   'install_puppet.sh')
-    ssh_client.ssh('bash -x install_puppet.sh')
-
     # Zero the ansible inventory cache so that next run finds the new server
-    inventory_cache = '/var/cache/ansible-inventory/ansible-inventory.cache'
-    if os.path.exists(inventory_cache):
-        with open(inventory_cache, 'w'):
-            pass
+    inventory_cache_dir = '/var/cache/ansible/inventory'
+    for inventory_cache in os.listdir(inventory_cache_dir):
+        os.unlink(inventory_cache)
 
     with JobDir(keep) as jobdir:
         # Update the generated-groups file globally and incorporate it
@@ -154,24 +149,10 @@ def bootstrap_server(server, key, name, volume_device, keep,
         # Remove cloud and region from the environment to work
         # around a bug in occ
         expand_env = os.environ.copy()
-        for env_key in expand_env.keys():
+        for env_key in list(expand_env.keys()):
             if env_key.startswith('OS_'):
                 expand_env.pop(env_key, None)
         expand_env['ANSIBLE_LOG_PATH'] = jobdir.ansible_log
-
-        # Regenerate inventory cache, throwing an error if there is an issue
-        # so that we don't generate a bogus groups file
-        try:
-            run(['/etc/ansible/hosts/openstack_inventory', '--list'],
-                env=expand_env)
-        except subprocess.CalledProcessError as e:
-            print "Inventory regeneration failed"
-            print e.output
-            raise
-
-        run('/usr/local/bin/expand-groups.sh',
-            env=expand_env,
-            stderr=subprocess.STDOUT)
 
         # Write out the private SSH key we generated
         with open(jobdir.key, 'w') as key_file:
@@ -181,11 +162,9 @@ def bootstrap_server(server, key, name, volume_device, keep,
         # Write out inventory
         with open(jobdir.hosts, 'w') as inventory_file:
             inventory_file.write(
-                "{host} ansible_host={ip} ansible_user=root".format(
-                    host=name, ip=server.interface_ip))
-
-        os.symlink('/etc/ansible/hosts/generated-groups',
-                   jobdir.groups)
+                "{host} ansible_host={ip} ansible_user=root {python}".format(
+                    host=name, ip=server.interface_ip,
+                    python='ansible_python_interpreter=/usr/bin/python3'))
 
         t = threading.Thread(target=stream_syslog, args=(ssh_client,))
         t.daemon = True
@@ -199,15 +178,11 @@ def bootstrap_server(server, key, name, volume_device, keep,
             '-e', 'target={name}'.format(name=name),
         ]
 
-        if environment is not None:
-            ansible_cmd += [
-                '-e',
-                'puppet_environment={env}'.format(env=environment)]
-        # Run the remote puppet apply playbook limited to just this server
-        # we just created
+        # Run the base playbook limited to just this server we just created
         for playbook in [
                 'set-hostnames.yaml',
-                'remote_puppet_adhoc.yaml']:
+                'base.yaml',
+        ]:
             run(ansible_cmd + [
                 os.path.join(SCRIPT_DIR, '..', 'playbooks', playbook)],
                 env=jobdir.env)
@@ -253,7 +228,7 @@ def build_server(cloud, name, image, flavor,
         try:
             cloud.delete_keypair(key_name)
         except Exception:
-            print "Exception encountered deleting keypair:"
+            print("Exception encountered deleting keypair:")
             traceback.print_exc()
         raise
 
@@ -272,26 +247,27 @@ def build_server(cloud, name, image, flavor,
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
-        print "****"
-        print "Server %s failed to build!" % (server.id)
+        print("****")
+        print("Server %s failed to build!" % (server.id))
         try:
             if keep:
-                print "Keeping as requested"
+                print("Keeping as requested")
                 # Write out the private SSH key we generated, as we
                 # may not have got far enough for ansible to run
                 with open('/tmp/%s.id_rsa' % server.id, 'w') as key_file:
                     key.write_private_key(key_file)
                     os.chmod(key_file.name, 0o600)
-                    print "Private key saved in %s" % key_file.name
-                print "Run to delete -> openstack server delete %s" % \
-                    (server.id)
+                    print("Private key saved in %s" % key_file.name)
+                print(
+                    "Run to delete -> openstack server delete %s" % \
+                    (server.id))
             else:
                 cloud.delete_server(server.id, delete_ips=True)
         except Exception:
-            print "Exception encountered deleting server:"
+            print("Exception encountered deleting server:")
             traceback.print_exc()
-        print "The original exception follows:"
-        print "****"
+        print("The original exception follows:")
+        print("****")
         # Raise the important exception that started this
         raise
 
@@ -308,7 +284,7 @@ def main():
     parser.add_argument("--flavor", dest="flavor", default='1GB',
                         help="name (or substring) of flavor")
     parser.add_argument("--image", dest="image",
-                        default="Ubuntu 16.04 LTS (Xenial Xerus) (PVHVM)",
+                        default="Ubuntu 18.04 LTS (Bionic Beaver) (PVHVM)",
                         help="image name")
     parser.add_argument("--environment", dest="environment",
                         help="Puppet environment to use",
@@ -352,20 +328,20 @@ def main():
 
     flavor = cloud.get_flavor(options.flavor)
     if flavor:
-        print "Found flavor", flavor.name
+        print("Found flavor", flavor.name)
     else:
-        print "Unable to find matching flavor; flavor list:"
+        print("Unable to find matching flavor; flavor list:")
         for i in cloud.list_flavors():
-            print i.name
+            print(i.name)
         sys.exit(1)
 
     image = cloud.get_image_exclude(options.image, 'deprecated')
     if image:
-        print "Found image", image.name
+        print("Found image", image.name)
     else:
-        print "Unable to find matching image; image list:"
+        print("Unable to find matching image; image list:")
         for i in cloud.list_images():
-            print i.name
+            print(i.name)
         sys.exit(1)
 
     server = build_server(cloud, options.name, image, flavor,
