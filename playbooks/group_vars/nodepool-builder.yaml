@@ -1,0 +1,3 @@
+openstack_config_dir: /home/nodepool/.config/openstack
+openstack_config_owner: nodepool
+openstack_config_group: nodepool

@@ -147,3 +147,20 @@ def test_unattended_upgrades(host):
         cfg_file = host.file("/etc/yum/yum-cron.conf")
         assert cfg_file.exists
         assert cfg_file.contains('apply_updates = yes')
+
+
+def test_openstacksdk_config(host):
+    f = host.file('/etc/openstack')
+    assert f.exists
+    assert f.is_directory
+    assert f.user == 'root'
+    assert f.group == 'root'
+    assert f.mode == 0o750
+    del f
+
+    f = host.file('/etc/openstack/limestone_cacert.pem')
+    assert f.exists
+    assert f.is_file
+    assert f.user == 'root'
+    assert f.group == 'root'
+    assert f.mode == 0o640
