@@ -1,7 +1,6 @@
 # == Class: openstack_project::mirror_update
 #
 class openstack_project::mirror_update (
-  $sysadmins = [],
   $bandersnatch_keytab = '',
   $reprepro_keytab = '',
   $admin_keytab = '',
@@ -16,7 +15,6 @@ class openstack_project::mirror_update (
   include ::openstack_project::reprepro_mirror
 
   class { 'openstack_project::server':
-    sysadmins => $sysadmins,
     afs       => true,
   }
 
