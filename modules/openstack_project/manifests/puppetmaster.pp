@@ -29,19 +29,6 @@ class openstack_project::puppetmaster (
     ],
   }
 
-  if ! defined(File['/root/.ssh']) {
-    file { '/root/.ssh':
-      ensure => directory,
-      mode   => '0700',
-    }
-  }
-
-  file { '/root/.ssh/id_rsa':
-    ensure  => present,
-    mode    => '0400',
-    content => $root_rsa_key,
-  }
-
 # Cloud credentials are stored in this directory for launch-node.py.
   file { '/root/ci-launch':
     ensure => directory,
