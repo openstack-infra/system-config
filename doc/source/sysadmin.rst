@@ -107,7 +107,7 @@ Accessing Clouds
 ================
 
 As an unprivileged user who is a member of the `admin` group on
-puppetmaster, you can access any of the clouds with::
+bridge, you can access any of the clouds with::
 
   export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
   openstack --os-cloud <cloud name> --os-cloud-region <region name>
@@ -328,7 +328,7 @@ Launching New Servers
 
 New servers are launched using the ``launch/launch-node.py`` tool from the git
 repository ``https://git.openstack.org/openstack-infra/system-config``. This
-tool is run from a checkout on the puppetmaster - please see :cgit_file:`launch/README`
+tool is run from a checkout on the bridge - please see :cgit_file:`launch/README`
 for detailed instructions.
 
 .. _disable-enable-puppet:
@@ -354,14 +354,14 @@ to take.
 
 In the case of needing to disable the running of puppet on a node, it's a
 simple matter of adding an entry to the ansible inventory "disabled" group
-in :cgit_file:`modules/openstack_project/files/puppetmaster/groups.txt`. The
+in :cgit_file:`inventory/groups.yaml`. The
 disabled entry is an input to `ansible --list-hosts` so you can check your
 entry simply by running it with `ansible $hostlist --list-hosts` as root
-on the puppetmaster host and ensuring that the list of hosts returned is as
+on the bridge host and ensuring that the list of hosts returned is as
 expected. Globs, group names and server UUIDs should all be acceptable input.
 
 If you need to disable a host immediately without waiting for a patch to land
-to `system-config`, there is a file on the puppetmaster host,
+to `system-config`, there is a file on the bridge host,
 `/etc/ansible/hosts/emergency` that can be edited directly.
 
 `/etc/ansible/hosts/emergency` is a file that should normally be empty, but
@@ -376,15 +376,10 @@ have that have more than one host with the same name (such as in the case of
 being in the midst of a migration) will show up as a group with the name of
 the hostname and the individual servers will be listed by UUID.
 
-Because of the way static and dynamic inventories get merged by ansible, the
-emergency file needs to stand alone. If you need to disable a group of servers
-from OpenStack you need to not only add it to `disabled:children`, you need to
-add an emtpy group into the emergency file too.
-
 Disabling puppet via ansible inventory does not disable puppet from being
 able to be run directly on the host, it merely prevents ansible from
 attempting to run it. If you choose to run puppet manually on a host, take care
-to ensure that it has not been disabled at the puppetmaster level first.
+to ensure that it has not been disabled at the bridge level first.
 
 Examples
 --------
@@ -416,11 +411,12 @@ hosts.
   pypi
 
 To disable a staticly defined host that is not an OpenStack host, such as
-the Infra cloud controller hosts, put the following in groups.txt.
+the Infra cloud controller hosts, update the ``disabled`` entry in
+groups.yaml with something like:
 
 ::
 
-  disabled controller.useast.openstack.org
+  disabled: inventory_hostname == 'controller.useast.openstack.org'
 
 .. _cinder:
 
@@ -433,7 +429,7 @@ Adding a New Device
 If the main volume group doesn't have enough space for what you want
 to do, this is how you can add a new volume.
 
-Log into puppetmaster.openstack.org and run::
+Log into bridge.openstack.org and run::
 
   export OS_CLOUD=openstackci-rax
   export OS_REGION_NAME=DFW
