@@ -1,0 +1,14 @@
+- name: Ensure openstack config directory
+  file:
+    state: directory
+    path: '{{ openstack_config_dir }}'
+    owner: '{{ openstack_config_owner }}'
+    group: '{{ openstack_config_group }}'
+
+- name: Install limestone cacert
+  copy:
+    src: limestone_cacert.pem
+    mode: 0600
+    dest: '{{ openstack_config_dir }}/limestone_cacert.pem'
+    owner: '{{ openstack_config_owner }}'
+    group: '{{ openstack_config_group }}'
