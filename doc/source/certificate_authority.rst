@@ -12,7 +12,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * puppetmaster.openstack.org
+  * bridge.openstack.org
 :Projects:
   * https://www.openssl.org/
 :Documentation:
@@ -21,29 +21,29 @@ At a Glance
 Overview
 ========
 
-Today we have a single CA service setup on puppetmaster.o.o:
+Today we have a single CA service setup on bridge.o.o:
 
   /etc/zuul-ca
 
 This is used for generating SSL certificates needed by our CI systems.  As we
 need to create more SSL certificates for new services, we'll create additional
-directories on puppetmaster.openstack.org, having multiple CA services.
+directories on bridge.openstack.org, having multiple CA services.
 
 Generating a CA certificate
 ---------------------------
 
 Below are the steps for create a new certificicate authority. Today we do this
-on puppetmaster.openstack.org.  Some important things to note, our pass phrase
+on bridge.openstack.org.  Some important things to note, our pass phrase
 for our cakey.pem file is stored in our GPG password.txt file. Additionally, by
 default our cacert.pem file will only be valid for 3 years.
 
 *NOTE* In the example below we'll be using the /etc/zuul-ca folder on
-puppetmaster.openstack.org.
+bridge.openstack.org.
 
 .. code-block:: bash
 
-    root@puppetmaster:~# cd /etc/zuul-ca
-    root@puppetmaster:/etc/zuul-ca# env CN=zuulv3.openstack.org CATOP=. SSLEAY_CONFIG="-config ./openssl.cnf" /usr/lib/ssl/misc/CA.sh -newca
+    root@bridge:~# cd /etc/zuul-ca
+    root@bridge:/etc/zuul-ca# env CN=zuul.openstack.org CATOP=. SSLEAY_CONFIG="-config ./openssl.cnf" /usr/lib/ssl/misc/CA.sh -newca
     CA certificate filename (or enter to create)
 
     Making CA certificate ...
@@ -68,7 +68,7 @@ puppetmaster.openstack.org.
                 stateOrProvinceName       = Texas
                 organizationName          = OpenStack Foundation
                 organizationalUnitName    = Infrastructure
-                commonName                = zuulv3.openstack.org
+                commonName                = zuul.openstack.org
                 emailAddress              = openstack-infra@lists.openstack.org
             X509v3 extensions:
                 X509v3 Subject Key Identifier:
@@ -91,9 +91,9 @@ certificate.  Below we'll be create the private key for a gearman server.
 
 .. code-block:: bash
 
-    root@puppetmaster:~# umask 077
-    root@puppetmaster:~# cd /etc/zuul-ca
-    root@puppetmaster:/etc/zuul-ca# env CN=gearman.server CATOP=. SSLEAY_CONFIG="-config ./openssl.cnf" /usr/lib/ssl/misc/CA.sh -newreq-nodes
+    root@bridge:~# umask 077
+    root@bridge:~# cd /etc/zuul-ca
+    root@bridge:/etc/zuul-ca# env CN=gearman.server CATOP=. SSLEAY_CONFIG="-config ./openssl.cnf" /usr/lib/ssl/misc/CA.sh -newreq-nodes
     Generating a 2048 bit RSA private key
     .......+++
     ....+++
@@ -243,15 +243,15 @@ then deleted from disk.
 
 .. code-block:: bash
 
-    root@puppetmaster:~# cd /etc/zuul-ca
-    root@puppetmaster:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
-    > --yaml /etc/puppet/hieradata/production/group/gearman.yaml \
+    root@bridge:~# cd /etc/zuul-ca
+    root@bridge:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
+    > --yaml /etc/ansible/hosts/group_vars/gearman.yaml \
     > -f newreq.pem gearman_ssl_key
-    root@puppetmaster:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
-    > --yaml /etc/puppet/hieradata/production/group/gearman.yaml \
+    root@bridge:/etc/zuul-ca# /opt/system-config/tools/hieraedit.py \
+    > --yaml /etc/ansible/hosts/group_vars/gearman.yaml \
     > -f newcert.pem gearman_ssl_cert
-    root@puppetmaster:/etc/zuul-ca# shred newreq.pem
-    root@puppetmaster:/etc/zuul-ca# rm newcert.pem newreq.pem
+    root@bridge:/etc/zuul-ca# shred newreq.pem
+    root@bridge:/etc/zuul-ca# rm newcert.pem newreq.pem
 
 **NOTE** Be sure to delete newcert.pem and newreq.pem from the top-level
 directory once complete. This helps avoid leaking our private keys.
