@@ -16,6 +16,6 @@
         chdir: /opt/system-config
 
     - name: Install ansible roles to /etc/ansible/roles
-      command: ansible-galaxy install --force -r roles.yaml
+      command: ansible-galaxy install --roles-path /etc/ansible/roles --force -r roles.yaml
       args:
         chdir: /opt/system-config
