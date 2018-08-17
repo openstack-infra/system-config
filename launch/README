@@ -38,7 +38,7 @@ To launch a node in the OpenStack Jenkins account (slave nodes)::
   export OS_REGION_NAME=DFW
   export FQDN=slavename01.slave.openstack.org
   openstack image list
-  export IMAGE='Ubuntu 12.04 LTS (Precise Pangolin) (PVHVM)'
+  export IMAGE='Ubuntu 18.04 LTS (Bionic Beaver) (PVHVM)'
   openstack flavor list
   export FLAVOR="8 GB Performance"
   ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" \
