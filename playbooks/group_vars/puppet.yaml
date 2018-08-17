@@ -3,9 +3,10 @@ copy_hieradata: true
 copy_puppet: true
 puppet_reports: none
 manage_config: true
-manifest: /opt/system-config/manifests/site.pp
-manifest_base: /opt/system-config
+manifest: /opt/system-config/production/manifests/site.pp
+manifest_base: /opt/system-config/production
 mgmt_manifestpath: /opt/system-config
 puppet_logdest: syslog
+puppet_module_dir: /opt/system-config/production
 mgmt_hieradata: /etc/ansible/hosts
 mgmt_puppet_module_dir: /etc/puppet/modules
