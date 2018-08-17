@@ -24,6 +24,8 @@ remote_tmp=$ansible_root/remote_tmp
 EOF
 cat > $ansible_root/hosts <<EOF
 localhost ansible_connection=local
+[puppet]
+localhost
 EOF
 echo "##" > $fileout
 cat $file > $fileout

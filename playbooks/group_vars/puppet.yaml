@@ -1,0 +1,10 @@
+# Puppet related variables
+copy_hieradata: true
+copy_puppet: true
+puppet_reports: none
+manage_config: true
+manifest: /opt/system-config/manifests/site.pp
+manifest_base: /opt/system-config
+mgmt_manifestpath: /opt/system-config
+puppet_logdest: syslog
+
