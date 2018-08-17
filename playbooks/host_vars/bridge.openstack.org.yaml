@@ -1,3 +1,1 @@
 ansible_python_interpreter: python3
-mgmt_hieradata: /etc/ansible/hosts
-mgmt_puppet_module_dir: /etc/puppet/modules
