@@ -11,6 +11,11 @@
     - timezone
     - unbound
 
+- hosts: nodepool-launcher:nodepool-builder:bridge.openstack.org:!disabled
+  strategy: free
+  roles:
+    - configure-openstack
+
 - hosts: "puppet:!disabled"
   roles:
     - puppet-install
