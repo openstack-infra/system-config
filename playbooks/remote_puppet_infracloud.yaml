@@ -1,16 +1,10 @@
----
 - hosts: "controller*.ic.openstack.org:!disabled"
-  gather_facts: true
   serial: 1
   roles:
-    - role: puppet
-      manage_config: True
-      puppet_reports: none
+    - puppet
+
 - hosts: "compute*.ic.openstack.org:!disabled"
-  gather_facts: true
   max_fail_percentage: 100
   serial: "10%"
   roles:
-    - role: puppet
-      manage_config: True
-      puppet_reports: none
+    - puppet
