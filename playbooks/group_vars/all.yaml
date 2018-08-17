@@ -1,9 +1,3 @@
-copy_hieradata: true
-copy_puppet: true
-manifest: /opt/system-config/manifests/site.pp
-manifest_base: /opt/system-config
-mgmt_manifest_base: /opt/system-config
-puppet_logdest: syslog
 distro_lookup_path:
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.yaml"
@@ -17,13 +11,6 @@ exim_extra_aliases: {}
 exim_base_aliases:
   root: "{{ exim_sysadmins }}"
 exim_aliases: "{{ exim_base_aliases|combine(exim_extra_aliases) }}"
-
-puppet:
-  logdest: syslog
-  copy_hieradata: true
-  copy_puppet: true
-  manifest: /opt/system-config/manifests/site.pp
-  manifest_base: /opt/system-config
 
 # When adding new users, always pick a UID larger than the last UID, do not
 # fill in holes in the middle of the range.

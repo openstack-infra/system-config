@@ -1,8 +1,5 @@
 ---
 - hosts: "afs*:!disabled"
   strategy: free
-  gather_facts: true
   roles:
-  - role: puppet
-    manage_config: True
-    puppet_reports: none
+    - puppet
