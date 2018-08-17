@@ -1,4 +1,4 @@
-- hosts: 'puppet:!review:!git0*:!zuul-scheduler:!afs*:!baremetal*:!controller*:!compute*:!puppetmaster*:!disabled'
+- hosts: 'puppet:!review:!git0*:!zuul-scheduler:!afs*:!puppetmaster*:!disabled'
   strategy: free
   roles:
     - puppet
