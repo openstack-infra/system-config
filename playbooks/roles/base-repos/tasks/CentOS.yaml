@@ -20,4 +20,4 @@
 - name: Restart systemd
   systemd:
     daemon_reload: yes
-  when: systemd_updated|changed
+  when: systemd_updated is changed
