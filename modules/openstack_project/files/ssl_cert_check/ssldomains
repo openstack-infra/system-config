@@ -8,7 +8,6 @@ git.openstack.org 443
 groups.openstack.org 443
 openstackid.org 443
 openstackid-dev.openstack.org 443
-openstackid-resources.openstack.org 443
 refstack.openstack.org 443
 review.openstack.org 443
 static.openstack.org 443
