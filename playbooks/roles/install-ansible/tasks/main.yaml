@@ -24,13 +24,13 @@
     group: admin
     mode: 0770
 
-- name: Ensure ansible log file is writable
+- name: Ensure ansible log dir is writable
   file:
-    path: /var/log/ansible.log
-    state: touch
+    path: /var/log/ansible
+    state: directory
     owner: root
     group: admin
-    mode: 0660
+    mode: 0775
 
 - name: Copy ansible.cfg in to place
   copy:
