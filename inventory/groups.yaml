@@ -29,6 +29,8 @@ groups:
   mailman: inventory_hostname.startswith('lists')
   mirror: inventory_hostname is match('mirror\d*\..*\.openstack\.org')
   nodepool: inventory_hostname is match('(nodepool|nb|nl)')
+  nodepool-builder: inventory_hostname is match('nb\d*\.openstack\.org)')
+  nodepool-launcher: inventory_hostname is match('nl\d*\.openstack\.org)')
   ns: inventory_hostname.startswith('ns')
   paste: inventory_hostname.startswith('paste')
   pbx: inventory_hostname.startswith('pbx')
