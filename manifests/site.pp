@@ -197,14 +197,6 @@ node 'puppetmaster.openstack.org' {
     mqtt_password                              => hiera('mqtt_service_user_password'),
     mqtt_ca_cert_contents                      => hiera('mosquitto_tls_ca_file'),
   }
-  file { '/etc/openstack/limestone_cacert.pem':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0444',
-    content => hiera('limestone_ssl_cert_file_contents'),
-    require => Class['::openstack_project::puppetmaster'],
-  }
 }
 
 # Node-OS: trusty
@@ -987,15 +979,6 @@ node /^nl\d+\.openstack\.org$/ {
     python_version           => 3,
     enable_webapp            => true,
   }
-
-  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('limestone_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_launcher'],
-  }
 }
 
 # Node-OS: xenial
@@ -1053,15 +1036,6 @@ node /^nb\d+\.openstack\.org$/ {
     zuulv3                        => true,
     ssl_cert_file                 => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file                  => '/etc/ssl/private/ssl-cert-snakeoil.key',
-  }
-
-  file { '/home/nodepool/.config/openstack/limestone_cacert.pem':
-    ensure  => present,
-    owner   => 'nodepool',
-    group   => 'nodepool',
-    mode    => '0600',
-    content => hiera('limestone_ssl_cert_file_contents'),
-    require => Class['::openstackci::nodepool_builder'],
   }
 
   cron { 'mirror_gitgc':
