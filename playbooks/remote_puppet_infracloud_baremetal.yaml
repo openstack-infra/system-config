@@ -1,4 +1,0 @@
----
-- hosts: "baremetal*.ic.openstack.org:!disabled"
-  roles:
-    - puppet
