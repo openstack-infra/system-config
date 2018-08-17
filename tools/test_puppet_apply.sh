@@ -14,6 +14,18 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+function puppet_version {
+    # Default to 3 for the cases, like bridge, where there is no puppet
+    (PATH=/opt/puppetlabs/bin:$PATH puppet --version || echo 3) | cut -d '.' -f 1
+}
+export PUPPET_VERSION=$(puppet_version)
+
+if [ "$PUPPET_VERSION" == "3" ] ; then
+    export MODULE_PATH=/etc/puppet/modules
+elif [ "$PUPPET_VERSION" == "4" ] ; then
+    export MODULE_PATH=/etc/puppetlabs/code/modules
+fi
+
 file=$1
 fileout=`pwd`/${file}.out
 ansible_root=`mktemp -d`
@@ -30,7 +42,7 @@ EOF
 echo "##" > $fileout
 cat $file > $fileout
 export ANSIBLE_CONFIG=$ansible_root/ansible.cfg
-sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -i $ansible_root/hosts -f1 playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout
+sudo -H -E /tmp/apply-ansible-env/bin/ansible-playbook -i $ansible_root/hosts -f1 playbooks/remote_puppet_adhoc.yaml -e puppet_environment=production -e manifest=`pwd`/$file -e puppet_noop=true -e puppet_logdest=$fileout -e mgmt_puppet_module_dir=$MODULE_PATH
 ret=$?
 if [ $ret -ne 0 ]; then
     mv $fileout $fileout.FAILED
