@@ -1,7 +1,10 @@
 - name: Include OS-specific tasks
-  include_tasks: "{{ lookup('first_found', file_list) }}"
+  include_tasks: "{{ item }}"
   vars:
-    file_list: "{{ distro_lookup_path }}"
+    params:
+      files: "{{ distro_lookup_path }}"
+      skip: true
+  loop: "{{ query('first_found', params) }}"
 
 - name: Disable the puppet service
   service:
