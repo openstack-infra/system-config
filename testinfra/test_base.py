@@ -96,3 +96,12 @@ def test_timezone(host):
 def test_unbound(host):
     output = host.check_output('host git.openstack.org')
     assert 'has address' in output
+
+
+def test_etc_openstack(host):
+    f = host.file('/etc/openstack')
+    assert f.exists
+    assert f.is_directory
+    assert f.user == 'root'
+    assert f.group == 'root'
+    assert f.mode == 0o755
