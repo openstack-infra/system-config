@@ -16,5 +16,5 @@
 
 for playbook in base.yaml remote_puppet_adhoc.yaml ; do
     ansible-playbook -f1 --limit $1 \
-        /opt/system-config/production/playbooks/$playbook
+        /opt/system-config/playbooks/$playbook
 done
