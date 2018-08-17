@@ -8,11 +8,13 @@
 # restart the daemon for good measure after it is upgraded.
 - name: Install latest selinux-policy and systemd
   yum:
-    name: "{{ item }}"
+    name: "{{ package_item }}"
     state: latest
   loop:
     - selinux-policy
     - systemd
+  loop_control:
+    loop_var: package_item
   register: systemd_updated
 
 - name: Restart systemd
