@@ -1,7 +1,4 @@
 - hosts: 'puppet:!review:!git0*:!zuul-scheduler:!afs*:!baremetal*:!controller*:!compute*:!puppetmaster*:!disabled'
   strategy: free
-  gather_facts: true
   roles:
-  - role: puppet
-    manage_config: True
-    puppet_reports: none
+    - puppet
