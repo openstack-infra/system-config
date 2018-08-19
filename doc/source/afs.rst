@@ -363,13 +363,13 @@ read-write volumes.
     kadmin: ktadd -k /path/to/foo.keytab service/foo-mirror@OPENSTACK.ORG
 
 * Add the service principal's keytab to hiera.  Copy the binary key to
-  ``puppetmaster.openstack.org`` and then use ``hieraedit`` to update
+  ``bridge.openstack.org`` and then use ``hieraedit`` to update
   the files
 
   .. code-block:: console
 
-    root@puppetmaster:~# /opt/system-config/tools/hieraedit.py \
-      --yaml /etc/puppet/hieradata/production/fqdn/mirror-update.openstack.org.yaml \
+    root@bridge:~# /opt/system-config/tools/hieraedit.py \
+      --yaml /etc/ansible/hosts/host_vars/mirror-update.openstack.org.yaml \
       -f /path/to/foo.keytab KEYNAME
 
   (don't forget to ``git commit`` and save the change; you can remove
