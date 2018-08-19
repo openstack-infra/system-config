@@ -191,7 +191,6 @@ node 'puppetmaster.openstack.org' {
     pin_puppet                => '3.6.',
   }
   class { 'openstack_project::puppetmaster':
-    root_rsa_key                               => hiera('puppetmaster_root_rsa_key'),
     puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
   }
   file { '/etc/openstack/limestone_cacert.pem':
