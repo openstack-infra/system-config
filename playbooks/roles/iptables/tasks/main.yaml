@@ -1,0 +1,4 @@
+- name: Install iptables
+  package:
+    name: '{{ package_name }}'
+    state: present

@@ -1,0 +1,5 @@
+- name: Restart iptables
+  when: not ansible_facts.is_chroot
+  service:
+
+
