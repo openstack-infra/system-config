@@ -2,3 +2,9 @@
   service:
     name: rsyslog
     state: restarted
+
+- name: Restart ssh
+  service:
+    name: '{{ ssh_service_name }}'
+    state: restarted
+  when: not ansible_facts.is_chroot
