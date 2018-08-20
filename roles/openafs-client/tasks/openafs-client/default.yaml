@@ -1,0 +1,2 @@
+- fail:
+    msg: "Platform currently unsupported"
