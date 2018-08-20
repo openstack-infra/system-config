@@ -62,9 +62,7 @@ class openstack_project::openstackid_prod (
   $session_cookie_secure = false,
 ) {
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstackid':
     site_admin_password        => $site_admin_password,
