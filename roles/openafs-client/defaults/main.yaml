@@ -1,0 +1,2 @@
+openafs_client_cell: 'openstack.org'
+openafs_client_cache_size: 500000
