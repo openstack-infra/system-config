@@ -1,0 +1,2 @@
+package: snmpd
+service_name: snmpd
