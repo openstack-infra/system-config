@@ -26,9 +26,7 @@ class openstack_project::storyboard(
     url  => $project_config_repo,
   }
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
 
   mysql_backup::backup_remote { 'storyboard':

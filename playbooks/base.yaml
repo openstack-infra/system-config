@@ -16,3 +16,4 @@
 - hosts: "!ci-backup:!disabled"
   roles:
     - exim
+    - iptables

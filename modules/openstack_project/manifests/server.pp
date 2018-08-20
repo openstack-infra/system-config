@@ -2,11 +2,6 @@
 #
 # A server that we expect to run for some time
 class openstack_project::server (
-  $iptables_public_tcp_ports = [],
-  $iptables_public_udp_ports = [],
-  $iptables_rules4           = [],
-  $iptables_rules6           = [],
-  $iptables_allowed_hosts    = [],
   $pin_puppet                = '3.',
   $ca_server                 = undef,
   $enable_unbound            = true,
@@ -49,10 +44,6 @@ class openstack_project::server (
         'kdc04.openstack.org',
       ],
     }
-    $all_udp = concat(
-      $iptables_public_udp_ports, [7001])
-  } else {
-    $all_udp = $iptables_public_udp_ports
   }
 
   class { 'openstack_project::automatic_upgrades':
@@ -60,21 +51,5 @@ class openstack_project::server (
   }
 
   include snmpd
-
-  $snmp_v4hosts = [
-    '172.99.116.215', # cacti02.openstack.org
-  ]
-  $snmp_v6hosts = [
-    '2001:4800:7821:105:be76:4eff:fe04:b9a5', # cacti02.opentsack.org
-  ]
-  class { 'iptables':
-    public_tcp_ports => $iptables_public_tcp_ports,
-    public_udp_ports => $all_udp,
-    rules4           => $iptables_rules4,
-    rules6           => $iptables_rules6,
-    snmp_v4hosts     => $snmp_v4hosts,
-    snmp_v6hosts     => $snmp_v6hosts,
-    allowed_hosts    => $iptables_allowed_hosts,
-  }
 
 }

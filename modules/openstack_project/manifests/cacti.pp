@@ -8,9 +8,7 @@ class openstack_project::cacti (
     fail("${::osfamily} is not supported.")
   }
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { '::apache':
     default_vhost => false,

@@ -79,14 +79,4 @@ describe 'openstack_project::server' do
     end
   end
 
-  describe command('iptables -S') do
-    its(:stdout) { should contain('-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT') }
-    its(:stdout) { should contain('-A openstack-INPUT -s 172.99.116.215/32 -p udp -m udp --dport 161 -j ACCEPT') }
-    its(:stdout) { should contain('-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT') }
-    its(:stdout) { should contain('-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT') }
-    its(:stdout) { should contain('-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 29418 -j ACCEPT') }
-    its(:stdout) { should contain('-A openstack-INPUT -p tcp -m tcp --dport 29418 --tcp-flags FIN,SYN,RST,ACK SYN -m connlimit --connlimit-above 100 --connlimit-mask 32 --connlimit-saddr -j REJECT --reject-with icmp-port-unreachable') }
-    its(:stdout) { should contain('-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited') }
-  end
-
 end
