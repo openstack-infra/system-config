@@ -41,6 +41,15 @@
     key_options: |
       from="{{ bastion_ipv4 }},{{ bastion_ipv6 }},localhost"
 
+- name: Install sshd config
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0444
+  notify: Restart rsyslog
+
 - name: Disable byobu
   file:
     path: /etc/profile.d/Z98-byobu.sh

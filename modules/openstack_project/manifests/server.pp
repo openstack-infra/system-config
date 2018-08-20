@@ -30,14 +30,6 @@ class openstack_project::server (
   include '::ntp'
 
   ###########################################################
-  # Manage Root ssh
-
-  class { 'ssh':
-    trusted_ssh_type   => 'address',
-    trusted_ssh_source => '23.253.245.198,2001:4800:7818:101:3c21:a454:23ed:4072,23.253.234.219,2001:4800:7817:103:be76:4eff:fe04:5a1d',
-  }
-
-  ###########################################################
   # Process if ( $high_level_directive ) blocks
 
   if ($enable_unbound) {
