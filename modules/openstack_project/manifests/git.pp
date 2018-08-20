@@ -137,21 +137,14 @@ class openstack_project::git (
     before  => Service['haproxy'],
   }
 
+  # TODO(mordred) We should get this haproxy stuff ported to ansible ASAP.
+  # Ansible is the one installing rsyslog.
   file { '/etc/rsyslog.d/haproxy.conf':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
     source => 'puppet:///modules/openstack_project/git/rsyslog.haproxy.conf',
-    notify => Service['rsyslog'],
-  }
-
-  # TODO(mordred) We should get this haproxy stuff ported to ansible ASAP.
-  # Ansible is the one installing rsyslog.
-  service { 'rsyslog':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
   }
 
   # haproxy statsd
