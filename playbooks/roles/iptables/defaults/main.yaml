@@ -1,0 +1,7 @@
+iptables_allowed_hosts: []
+iptables_public_tcp_ports: []
+iptables_public_udp_ports: []
+iptables_rules_v4: []
+iptables_rules_v6: []
+iptables_snmp_v4_hosts: []
+iptables_snmp_v6_hosts: []
