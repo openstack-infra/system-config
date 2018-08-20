@@ -1,0 +1,3 @@
+admin_server: '{{ ansible_fqdn }}'
+kdcs:
+  - '{{ ansible_fqdn }}'
