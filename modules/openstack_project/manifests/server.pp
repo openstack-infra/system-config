@@ -41,6 +41,4 @@ class openstack_project::server (
     origins => ["Puppetlabs:${lsbdistcodename}"],
   }
 
-  include snmpd
-
 }
