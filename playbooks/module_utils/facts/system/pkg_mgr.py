@@ -126,6 +126,11 @@ class PkgMgrFactCollector(BaseFactCollector):
             if pkg_mgr_name == 'apt':
                 pkg_mgr_name = 'apt_rpm'
 
+        elif collected_facts['ansible_os_family'] == 'Debian' and pkg_mgr_name != 'apt':
+            # It's possible to install yum, dnf, zypper, rpm, etc inside of
+            # Debian. Doing so does not mean the system wants to use them.
+            pkg_mgr_name = 'apt'
+
         # Check if /usr/bin/apt-get is ordinary (dpkg-based) APT or APT-RPM
         if pkg_mgr_name == 'apt':
             pkg_mgr_name = self._check_apt_flavor(pkg_mgr_name)
