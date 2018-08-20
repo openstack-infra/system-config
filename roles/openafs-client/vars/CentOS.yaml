@@ -1,0 +1,3 @@
+openafs_config_path: '/usr/vice/etc'
+openafs_yum_repo_url: https://tarballs.openstack.org/project-config/package-afs-centos7
+openafs_yum_repo_gpg_check: no
