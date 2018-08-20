@@ -3,3 +3,5 @@ distro_packages:
   - emacs23-nox
   - iputils-ping
   - vim-nox
+sftp_path: /usr/lib/openssh/sftp-server
+ssh_service_name: ssh
