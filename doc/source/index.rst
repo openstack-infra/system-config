@@ -29,6 +29,7 @@ Contents:
    test-infra-requirements
    sysadmin
    systems
+   roles
 
 .. toctree::
    :hidden:
