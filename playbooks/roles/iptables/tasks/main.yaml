@@ -1,0 +1,55 @@
+- name: Include OS-specific variables
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files: "{{ distro_lookup_path }}"
+      paths:
+        - 'vars'
+
+- name: Install iptables
+  package:
+    name: '{{ package_name }}'
+    state: present
+
+- name: Ensure iptables rules directory
+  file:
+    state: directory
+    path: '{{ rules_dir }}'
+
+- name: Install symlink
+  file:
+    src: '{{ rules_dir }}/rules.v4'
+    dest: '{{ rules_dir }}/rules'
+    state: link
+
+- name: Install IPv4 rules files
+  template:
+    src: rules.v4.j2
+    dest: '{{ rules_dir }}/rules.v4'
+    owner: root
+    group: root
+    mode: 0640
+    setype: '{{ setype | default(omit) }}'
+  notify:
+    - Reload iptables Debian
+    - Reload iptables RedHat
+
+- name: Install IPv6 rules files
+  template:
+    src: rules.v6.j2
+    dest: '{{ rules_dir }}/rules.v6'
+    owner: root
+    group: root
+    mode: 0640
+    setype: '{{ setype | default(omit) }}'
+  notify:
+    - Reload iptables Debian
+    - Reload iptables RedHat
+
+- name: Include OS specific tasks
+  include_tasks: "{{ item }}"
+  vars:
+    params:
+      files: "{{ distro_lookup_path }}"
+      skip: true
+  loop: "{{ query('first_found', params) }}"
