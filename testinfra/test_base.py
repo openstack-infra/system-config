@@ -80,3 +80,9 @@ def test_ntp(host):
         service = host.service("ntpd")
     assert service.is_running
     assert service.is_enabled
+
+
+def test_ntp(host):
+    service = host.service("snmpd")
+    assert service.is_running
+    assert service.is_enabled
