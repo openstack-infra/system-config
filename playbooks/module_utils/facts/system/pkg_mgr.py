@@ -28,8 +28,8 @@ from ansible.module_utils.facts.collector import BaseFactCollector
 # ansible module, use that as the value for the 'name' key.
 PKG_MGRS = [{'path': '/usr/bin/yum', 'name': 'yum'},
             {'path': '/usr/bin/dnf', 'name': 'dnf'},
-            {'path': '/usr/bin/apt-get', 'name': 'apt'},
             {'path': '/usr/bin/zypper', 'name': 'zypper'},
+            {'path': '/usr/bin/apt-get', 'name': 'apt'},
             {'path': '/usr/sbin/urpmi', 'name': 'urpmi'},
             {'path': '/usr/bin/pacman', 'name': 'pacman'},
             {'path': '/bin/opkg', 'name': 'opkg'},
