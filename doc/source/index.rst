@@ -30,6 +30,7 @@ Contents:
    sysadmin
    systems
    infra-cloud
+   roles
 
 .. toctree::
    :hidden:
