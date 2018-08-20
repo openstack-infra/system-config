@@ -39,7 +39,7 @@ Installs and configures the exim mail server
    The maximum number of simultaneous incoming SMTP calls that Exim will
    accept. If the value is set to zero, no limit is applied. However, it
    is required to be non-zero if
-   :zuul:rolevar:`exim_smtp_accept_max_per_host` is set.
+   :zuul:rolevar:`exim.exim_smtp_accept_max_per_host` is set.
 
 .. zuul:rolevar:: exim_smtp_accept_max_per_host
    :default: null
@@ -51,4 +51,4 @@ Installs and configures the exim mail server
    additional connection attempts from the same host are rejected with error
    code 421. The option’s default value imposes no limit. If this option is
    set greater than zero, it is required that
-   :zuul:rolevar:`exim_smtp_accept_max` be non-zero.
+   :zuul:rolevar:`exim.exim_smtp_accept_max` be non-zero.
