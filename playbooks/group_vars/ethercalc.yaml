@@ -1,6 +1,5 @@
-extra_users:
-  - mkiss
 iptables_public_tcp_ports:
   - 22
   - 80
   - 443
+
