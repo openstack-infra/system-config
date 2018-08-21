@@ -20,13 +20,7 @@ node default {
 #
 # Node-OS: xenial
 node 'review.openstack.org' {
-  $iptables_rules =
-    ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
@@ -66,13 +60,7 @@ node 'review.openstack.org' {
 node 'review01.openstack.org' {
   $group = "review"
 
-  $iptables_rules =
-    ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::review':
     project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
@@ -112,12 +100,7 @@ node 'review01.openstack.org' {
 node /^review-dev\d*\.openstack\.org$/ {
   $group = "review-dev"
 
-  $iptables_rules =
-    ['-p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT']
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443, 29418],
-    iptables_rules6           => $iptables_rules,
-    iptables_rules4           => $iptables_rules,
     afs                       => true,
   }
 
@@ -148,9 +131,7 @@ node /^review-dev\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /^grafana\d*\.openstack\.org$/ {
   $group = "grafana"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::grafana':
     admin_password      => hiera('grafana_admin_password'),
     admin_user          => hiera('grafana_admin_user', 'username'),
@@ -166,9 +147,7 @@ node /^grafana\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^health\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::openstack_health_api':
     subunit2sql_db_host => hiera('subunit2sql_db_host', 'localhost'),
   }
@@ -187,7 +166,6 @@ node /^cacti\d+\.openstack\.org$/ {
 # Node-OS: trusty
 node 'puppetmaster.openstack.org' {
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [8140],
     pin_puppet                => '3.6.',
   }
   class { 'openstack_project::puppetmaster':
@@ -206,40 +184,7 @@ node 'puppetmaster.openstack.org' {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^graphite\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-    iptables_allowed_hosts    => [
-      {protocol => 'udp', port => '8125', hostname => 'git.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'firehose01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'mirror-update01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'logstash.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'nodepool.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'nl01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'nl02.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'nl03.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'nl04.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zuul01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm02.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm03.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm04.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm05.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm06.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm07.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'zm08.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze01.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze02.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze03.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze04.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze05.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze06.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze07.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze08.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze09.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze10.openstack.org'},
-      {protocol => 'udp', port => '8125', hostname => 'ze11.openstack.org'},
-    ],
-  }
+  class { 'openstack_project::server': }
 
   class { '::graphite':
     graphite_admin_user     => hiera('graphite_admin_user', 'username'),
@@ -251,9 +196,7 @@ node /^graphite\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^groups\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::groups':
     site_admin_password          => hiera('groups_site_admin_password'),
     site_mysql_host              => hiera('groups_site_mysql_host', 'localhost'),
@@ -268,9 +211,7 @@ node /^groups\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^groups-dev\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::groups_dev':
     site_admin_password          => hiera('groups_dev_site_admin_password'),
     site_mysql_host              => hiera('groups_dev_site_mysql_host', 'localhost'),
@@ -286,9 +227,7 @@ node /^groups-dev\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^lists\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [25, 80, 465],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::lists':
     listpassword => hiera('listpassword'),
@@ -297,9 +236,7 @@ node /^lists\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^lists\d*\.katacontainers\.io$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [25, 80, 465],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::kata_lists':
     listpassword => hiera('listpassword'),
@@ -310,9 +247,7 @@ node /^lists\d*\.katacontainers\.io$/ {
 node /^paste\d*\.openstack\.org$/ {
   $group = "paste"
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::paste':
     db_password         => hiera('paste_db_password'),
     db_host             => hiera('paste_db_host'),
@@ -329,9 +264,7 @@ node /planet\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /^eavesdrop\d*\.openstack\.org$/ {
   $group = "eavesdrop"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::eavesdrop':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -368,9 +301,7 @@ node /^eavesdrop\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /^ethercalc\d+\.openstack\.org$/ {
   $group = "ethercalc"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::ethercalc':
     vhost_name              => 'ethercalc.openstack.org',
@@ -383,9 +314,7 @@ node /^ethercalc\d+\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::etherpad':
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents'),
@@ -400,9 +329,7 @@ node /^etherpad\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad-dev\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::etherpad_dev':
     mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
@@ -454,10 +381,7 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^logstash\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 3306],
-    iptables_allowed_hosts    => hiera_array('logstash_iptables_rule_data'),
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::logstash':
     discover_nodes      => [
@@ -477,9 +401,7 @@ node /^logstash\d*\.openstack\.org$/ {
 node /^logstash-worker\d+\.openstack\.org$/ {
   $group = 'logstash-worker'
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::logstash_worker':
     discover_node         => 'elasticsearch03.openstack.org',
@@ -492,9 +414,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 # Node-OS: xenial
 node /^subunit-worker\d+\.openstack\.org$/ {
   $group = "subunit-worker"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::subunit_worker':
     subunit2sql_db_host   => hiera('subunit2sql_db_host', ''),
     subunit2sql_db_pass   => hiera('subunit2sql_db_password', ''),
@@ -506,10 +426,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 # Node-OS: xenial
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
   $group = "elasticsearch"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22],
-    iptables_allowed_hosts    => hiera_array('elasticsearch_iptables_rule_data'),
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::elasticsearch_node':
     discover_nodes => $elasticsearch_nodes,
   }
@@ -517,12 +434,7 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^firehose\d+\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    # NOTE(mtreinish) Port 80 and 8080 are disabled because websocket
-    # connections seem to crash mosquitto. Once this is fixed we should add
-    # them back
-    iptables_public_tcp_ports => [22, 25, 80, 1883, 8883, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::firehose':
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
     gerrit_public_key   => hiera('germqtt_gerrit_ssh_public_key'),
@@ -572,9 +484,7 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
 node /^git\d+\.openstack\.org$/ {
   $group = "git-server"
   include openstack_project
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [4443, 8080, 29418],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::git_backend':
     project_config_repo                     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -621,7 +531,6 @@ node /^mirror\d*\..*\.openstack\.org$/ {
   $group = "mirror"
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 8080, 8081, 8082],
     afs                       => true,
     afs_cache_size            => 50000000,  # 50GB
   }
@@ -637,7 +546,6 @@ node /^mirror\d*\..*\.openstack\.org$/ {
 node /^files\d*\.openstack\.org$/ {
   $group = "files"
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
     afs                       => true,
     afs_cache_size            => 10000000,  # 10GB
   }
@@ -666,9 +574,7 @@ node /^files\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^refstack\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'refstack':
     mysql_host          => hiera('refstack_mysql_host', 'localhost'),
     mysql_database      => hiera('refstack_mysql_db_name', 'refstack'),
@@ -750,9 +656,7 @@ node /^storyboard-dev\d*\.openstack\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^static\d*\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::static':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
@@ -769,27 +673,7 @@ node /^static\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^zk\d+\.openstack\.org$/ {
-  class { 'openstack_project::server':
-    iptables_allowed_hosts    => [
-      # Zookeeper clients
-      {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl04.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
-      # Zookeeper election
-      {protocol => 'tcp', port => '2888', hostname => 'zk01.openstack.org'},
-      {protocol => 'tcp', port => '2888', hostname => 'zk02.openstack.org'},
-      {protocol => 'tcp', port => '2888', hostname => 'zk03.openstack.org'},
-      # Zookeeper leader
-      {protocol => 'tcp', port => '3888', hostname => 'zk01.openstack.org'},
-      {protocol => 'tcp', port => '3888', hostname => 'zk02.openstack.org'},
-      {protocol => 'tcp', port => '3888', hostname => 'zk03.openstack.org'},
-    ],
-  }
+  class { 'openstack_project::server': }
 
   class { '::zookeeper':
     # ID needs to be numeric, so we use regex to extra numbers from fqdn.
@@ -810,9 +694,7 @@ node /^zk\d+\.openstack\.org$/ {
 node /^status\d*\.openstack\.org$/ {
   $group = 'status'
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::status':
     gerrit_host                   => 'review.openstack.org',
@@ -829,9 +711,7 @@ node /^status\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /^survey\d+\.openstack\.org$/ {
   $group = "survey"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::survey':
     vhost_name              => 'survey.openstack.org',
@@ -853,12 +733,7 @@ node /^survey\d+\.openstack\.org$/ {
 node /^adns\d+\.openstack\.org$/ {
   $group = 'adns'
 
-  class { 'openstack_project::server':
-    iptables_allowed_hosts    => [
-      {protocol => 'tcp', port => '53', hostname => 'ns1.openstack.org'},
-      {protocol => 'tcp', port => '53', hostname => 'ns2.openstack.org'},
-    ],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::master_nameserver':
     tsig_key => hiera('tsig_key', {}),
@@ -872,10 +747,7 @@ node /^adns\d+\.openstack\.org$/ {
 node /^ns\d+\.openstack\.org$/ {
   $group = 'ns'
 
-  class { 'openstack_project::server':
-    iptables_public_udp_ports => [53],
-    iptables_public_tcp_ports => [53],
-  }
+  class { 'openstack_project::server': }
 
   $tsig_key = hiera('tsig_key', {})
   if $tsig_key != {} {
@@ -905,19 +777,7 @@ node /^ns\d+\.openstack\.org$/ {
 node 'nodepool.openstack.org' {
   $group = 'nodepool'
 
-  class { 'openstack_project::server':
-    iptables_allowed_hosts    => [
-      {protocol => 'tcp', port => '2181', hostname => 'nb01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nb03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl01.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl02.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl03.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'nl04.openstack.org'},
-      {protocol => 'tcp', port => '2181', hostname => 'zuul01.openstack.org'},
-    ],
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
 
   class { '::zookeeper':
     # The frequency in hours to look for and purge old snapshots,
@@ -968,9 +828,7 @@ node /^nl\d+\.openstack\.org$/ {
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
   $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
 
   include openstack_project
 
@@ -1030,9 +888,7 @@ node /^nb\d+\.openstack\.org$/ {
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
   $clouds_yaml                   = template("openstack_project/nodepool/clouds.yaml.erb")
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
   include openstack_project
 
@@ -1085,7 +941,6 @@ node /^ze\d+\.openstack\.org$/ {
   $revision                = 'master'
 
   class { 'openstack_project::server':
-    iptables_public_tcp_ports => [79, 7900],
     afs                       => true,
   }
 
@@ -1177,30 +1032,7 @@ node /^zuul\d+\.openstack\.org$/ {
   $git_name             = 'OpenStack Zuul'
   $revision             = 'master'
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [79, 80, 443],
-    iptables_allowed_hosts    => [
-      {protocol => 'tcp', port => '4730', hostname => 'ze01.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze02.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze03.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze04.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze05.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze06.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze07.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze08.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze09.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze10.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'ze11.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm01.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm02.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm03.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm04.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm05.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm06.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm07.openstack.org'},
-      {protocol => 'tcp', port => '4730', hostname => 'zm08.openstack.org'},
-    ],
-  }
+  class { 'openstack_project::server': }
 
   class { '::project_config':
     url => 'https://git.openstack.org/openstack-infra/project-config',
@@ -1288,9 +1120,7 @@ node /^zm\d+.openstack\.org$/ {
   $git_name             = 'OpenStack Zuul'
   $revision             = 'master'
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
 
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
@@ -1323,12 +1153,7 @@ node /^zm\d+.openstack\.org$/ {
 
 # Node-OS: trusty
 node 'pbx.openstack.org' {
-  class { 'openstack_project::server':
-    # SIP signaling is either TCP or UDP port 5060.
-    # RTP media (audio/video) uses a range of UDP ports.
-    iptables_public_tcp_ports => [5060],
-    iptables_public_udp_ports => ['5060', '10000:20000'],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::pbx':
     sip_providers => [
       {
@@ -1346,9 +1171,7 @@ node 'pbx.openstack.org' {
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^backup\d+\..*\.ci\.openstack\.org$/ {
   $group = "ci-backup"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [],
-  }
+  class { 'openstack_project::server': }
   include openstack_project::backup_server
 }
 
@@ -1417,20 +1240,14 @@ node 'single-node-ci.test.only' {
 
 # Node-OS: trusty
 node 'kdc01.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [88, 464, 749, 754],
-    iptables_public_udp_ports => [88, 464, 749],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc': }
 }
 
 # Node-OS: xenial
 node 'kdc04.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [88, 464, 749, 754],
-    iptables_public_udp_ports => [88, 464, 749],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc':
     slave => true,
@@ -1442,7 +1259,6 @@ node 'afsdb01.openstack.org' {
   $group = "afsdb"
 
   class { 'openstack_project::server':
-    iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
     afs                       => true,
   }
 
@@ -1455,7 +1271,6 @@ node /^afsdb.*\.openstack\.org$/ {
   $group = "afsdb"
 
   class { 'openstack_project::server':
-    iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
     afs                       => true,
   }
 
@@ -1467,7 +1282,6 @@ node /^afs.*\..*\.openstack\.org$/ {
   $group = "afs"
 
   class { 'openstack_project::server':
-    iptables_public_udp_ports => [7000,7002,7003,7004,7005,7006,7007],
     afs                       => true,
   }
 
@@ -1477,9 +1291,7 @@ node /^afs.*\..*\.openstack\.org$/ {
 # Node-OS: trusty
 node 'ask.openstack.org' {
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::ask':
     db_user                      => hiera('ask_db_user', 'ask'),
@@ -1493,9 +1305,7 @@ node 'ask.openstack.org' {
 
 # Node-OS: trusty
 node 'ask-staging.openstack.org' {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [22, 80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'openstack_project::ask_staging':
     db_password                  => hiera('ask_staging_db_password'),
@@ -1507,9 +1317,7 @@ node 'ask-staging.openstack.org' {
 # Node-OS: xenial
 node /^translate\d+\.openstack\.org$/ {
   $group = "translate"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::translate':
     admin_users                => 'aeng,cboylan,eumel8,ianw,ianychoi,infra,jaegerandi,mordred,stevenk',
     openid_url                 => 'https://openstackid.org',
@@ -1555,9 +1363,7 @@ node /^translate-dev\d*\.openstack\.org$/ {
 # Node-OS: xenial
 node /^codesearch\d*\.openstack\.org$/ {
   $group = "codesearch"
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
   class { 'openstack_project::codesearch':
     project_config_repo => 'https://git.openstack.org/openstack-infra/project-config',
   }
