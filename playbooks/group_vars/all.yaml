@@ -12,6 +12,11 @@ exim_base_aliases:
   root: "{{ exim_sysadmins }}"
 exim_aliases: "{{ exim_base_aliases|combine(exim_extra_aliases) }}"
 
+iptables_base_allowed_hosts:
+  - {'protocol': 'udp', 'port': 161, 'hostname': 'cacti.openstack.org'}
+iptables_extra_allowed_hosts:
+iptables_allowed_hosts: "{{ iptables_base_allowed_hosts|combine(iptables_extra_allowed_hosts) }}"
+
 # When adding new users, always pick a UID larger than the last UID, do not
 # fill in holes in the middle of the range.
 all_users:
