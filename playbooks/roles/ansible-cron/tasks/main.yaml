@@ -3,6 +3,12 @@
     state: directory
     path: /var/run/ansible
 
+- name: Set PATH for cron
+  cron:
+    name: PATH
+    env: yes
+    value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 - name: Set up cron job for running run_all.sh
   cron:
     name: run_all.sh
