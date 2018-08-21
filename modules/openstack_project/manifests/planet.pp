@@ -2,9 +2,7 @@
 #
 class openstack_project::planet (
 ) {
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80],
-  }
+  class { 'openstack_project::server': }
   include ::planet
 
   planet::site { 'openstack':
