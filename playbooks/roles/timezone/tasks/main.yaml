@@ -1,0 +1,6 @@
+- name: Set timezone to Etc/UTC
+  timezone:
+    name: Etc/UTC
+  # The timezone Ansible module recommends restarting cron after tz change.
+  notify:
+    - restart crond

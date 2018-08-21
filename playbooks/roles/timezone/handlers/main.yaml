@@ -1,0 +1,6 @@
+- name: restart crond
+  service:
+    name: crond
+    state: restarted
+  # We can error if crond is not installed
+  ignore_errors: yes
