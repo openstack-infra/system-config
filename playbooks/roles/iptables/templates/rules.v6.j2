@@ -9,10 +9,6 @@
 -A openstack-INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 # SSH from anywhere
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
-# SNMP
-{% for host in iptables_snmp_v6_hosts %}
--A openstack-INPUT -m udp -p udp --dport 161 -s {% host %} -j ACCEPT
-{% end -%}
 # Public TCP ports
 {% for port in iptables_public_tcp_ports %}
 -A openstack-INPUT -m state --state NEW -m tcp -p tcp --dport <%= port %> -j ACCEPT
