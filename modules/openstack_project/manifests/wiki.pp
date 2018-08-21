@@ -23,9 +23,7 @@ class openstack_project::wiki (
     ensure => present;
   }
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'mediawiki':
     role                       => 'all',

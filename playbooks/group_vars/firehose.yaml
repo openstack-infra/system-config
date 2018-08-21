@@ -17,3 +17,9 @@ exim_transports:
       socket = /var/run/cyrus/socket/lmtp
       user = cyrus
       batch_max = 35
+iptables_public_tcp_ports:
+  - 25
+  - 80
+  - 443
+  - 1883
+  - 8883

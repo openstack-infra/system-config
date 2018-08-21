@@ -161,3 +161,10 @@ disabled_users:
   - elizabeth
   - nibz
   - slukjanov
+
+iptables_snmp_v4_hosts:
+  # cacti02.openstack.org
+  - 172.99.116.215
+iptables_snmp_v6_hosts:
+  # cacti02.openstack.org
+  - 2001:4800:7821:105:be76:4eff:fe04:b9a5
