@@ -33,24 +33,24 @@ set +e
 # stuck if they are oomkilled
 
 # Clone system-config and install modules and roles
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
+timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
 
 # Update the code on bridge
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/bridge.yaml
+timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/bridge.yaml
 
 # Run the base playbook everywhere
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/base.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/base.yaml
 
 # Update the puppet version
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
 
 # Run the git/gerrit/zuul sequence, since it's important that they all work together
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
-timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
 
 echo "--- end run @ $(date -Is) ---"
 echo
