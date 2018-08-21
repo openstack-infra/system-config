@@ -4,5 +4,3 @@ iptables_public_udp_ports: []
 iptables_rules: []
 iptables_rules_v4: '{{ iptables_rules }}'
 iptables_rules_v6: '{{ iptables_rules }}'
-iptables_snmp_v4_hosts: []
-iptables_snmp_v6_hosts: []
