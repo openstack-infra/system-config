@@ -35,9 +35,7 @@ class openstack_project::translate_dev(
   $from_address,
   ) {
 
-  class { 'openstack_project::server':
-    iptables_public_tcp_ports => [80, 443],
-  }
+  class { 'openstack_project::server': }
 
   class { 'project_config':
     url  => $project_config_repo,
