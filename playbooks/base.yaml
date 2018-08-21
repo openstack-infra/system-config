@@ -8,6 +8,7 @@
 - hosts: "!disabled"
   roles:
     - base-server
+    - timezone
 
 - hosts: "puppet:!disabled"
   roles:
