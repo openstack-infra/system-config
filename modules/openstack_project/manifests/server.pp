@@ -10,10 +10,6 @@ class openstack_project::server (
   $pypi_index_url            = 'https://pypi.python.org/simple',
 ) {
 
-  class { 'timezone':
-    timezone => 'Etc/UTC',
-  }
-
   # Include ::apt while we work on the puppet->ansible transition
   if ($::osfamily == 'Debian') {
     include ::apt
