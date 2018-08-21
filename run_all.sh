@@ -22,6 +22,8 @@ set -e
 SYSTEM_CONFIG=/opt/system-config
 ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
 
+echo "--- begin run @ $(date -Is) ---"
+
 # It's possible for connectivity to a server or manifest application to break
 # for indeterminate periods of time, so the playbooks should be run without
 # errexit
@@ -49,3 +51,6 @@ timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
 timeout -k 2m 120m ansible-playbook -f 10 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+
+echo "--- end run @ $(date -Is) ---"
+echo
