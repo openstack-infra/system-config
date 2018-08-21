@@ -1,4 +1,4 @@
-iptables_allowed_hosts:
+iptables_extra_allowed_hosts:
   - hostname: git.openstack.org
     port: 8125
     protocol: udp

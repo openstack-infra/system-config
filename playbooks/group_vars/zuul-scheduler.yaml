@@ -2,7 +2,7 @@ iptables_public_tcp_ports:
   - 79
   - 80
   - 443
-iptables_allowed_hosts:
+iptables_extra_allowed_hosts:
   - protocol: tcp
     port: 4730
     hostname: ze01.openstack.org

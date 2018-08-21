@@ -1,4 +1,4 @@
-iptables_allowed_hosts:
+iptables_extra_allowed_hosts:
   - {'protocol': 'tcp', 'port': '2181', 'hostname': 'nb01.openstack.org'}
   - {'protocol': 'tcp', 'port': '2181', 'hostname': 'nb02.openstack.org'}
   - {'protocol': 'tcp', 'port': '2181', 'hostname': 'nb03.openstack.org'}
