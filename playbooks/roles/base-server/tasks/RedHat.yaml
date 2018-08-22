@@ -8,6 +8,12 @@
     name: ntpdate
     enabled: yes
 
+- name: Ensure ntp service is running
+  service:
+    name: ntpd
+    enabled: yes
+    state: started
+
 - name: Configure yum cron
   copy:
     mode: 0644

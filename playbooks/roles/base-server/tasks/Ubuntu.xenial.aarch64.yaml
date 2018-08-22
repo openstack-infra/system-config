@@ -2,3 +2,9 @@
   apt:
     name: linux-generic-hwe-16.04
     state: present
+
+- name: Ensure ntp service is running
+  service:
+    name: ntp
+    enabled: yes
+    state: started
