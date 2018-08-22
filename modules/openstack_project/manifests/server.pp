@@ -20,11 +20,6 @@ class openstack_project::server (
   }
 
   ###########################################################
-  # Manage  ntp
-
-  include '::ntp'
-
-  ###########################################################
   # Process if ( $high_level_directive ) blocks
 
   if ($enable_unbound) {
