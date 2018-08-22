@@ -22,6 +22,22 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+- job:
+    name: system-config-run-base
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+#        - name: trusty
+#          label: ubuntu-trusty
+        - name: xenial
+          label: ubuntu-xenial
+#        - name: bionic
+#          label: ubuntu-bionic
+#        - name: centos7
+#          label: centos-7
+    run: playbooks/zuul/run-base.yaml
+
 - project:
     check:
       jobs:
