@@ -1,0 +1,34 @@
+- import_playbook: ../bridge.yaml
+  vars:
+    root_rsa_key: "{{ lookup('file', zuul.executor.work_root + '/' + zuul.build + '_id_rsa') }}"
+
+- hosts: bridge.openstack.org
+  become: true
+  tasks:
+    - name: Copy job inventory to bridge
+      copy:
+        src: "{{ zuul.executor.log_root }}/zuul-info/inventory.yaml"
+        dest: inventory.yaml
+    - name: Update ansible.cfg to use job inventory
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: defaults
+        option: inventory
+        value: /home/zuul/inventory.yaml
+    - name: Make hostvars directory
+      file:
+        path: "/etc/ansible/hosts/host_vars"
+        state: directory
+    - name: Write hostvars files
+      template:
+        src: "templates/{{ item }}"
+        dest: "/etc/ansible/hosts/{{ item }}"
+      loop:
+        - host_vars/bridge.openstack.org
+    - name: Run base.yaml
+      command: ansible-playbook /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
+    - name: Run testinfra to validate configuration
+      include_role:
+        name: tox
+      vars:
+        tox_envlist: testinfra

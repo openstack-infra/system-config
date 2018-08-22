@@ -1,0 +1,5 @@
+- hosts: bridge.openstack.org
+  roles:
+    - ensure-tox
+    - multi-node-known-hosts
+    - copy-build-sshkey
