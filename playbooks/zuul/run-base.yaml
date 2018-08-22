@@ -1,0 +1,18 @@
+- import_playbook: ../bridge.yaml
+
+- hosts: bridge.openstack.org
+  tasks:
+    - name: Copy job inventory to bridge
+      copy:
+        src: "{{ zuul.executor.log_root }}/zuul-info/inventory.yaml"
+        dest: inventory.yaml
+    - name: Update ansible.cfg to use job inventory
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: defaults
+        option: inventory
+        value: /home/zuul/inventory.yaml
+    - name: Run base.yaml
+      command: ansible-playbook /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
+
+        
