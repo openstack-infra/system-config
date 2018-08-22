@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Joshua Hesketh <josh@nitrotech.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 22 Aug 2018 03:57:09 +0000
+Reviewed-on: https://review.openstack.org/593965
+Project: openstack-infra/system-config
+Branch: refs/heads/master
