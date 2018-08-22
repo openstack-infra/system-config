@@ -11,3 +11,4 @@ distro_packages:
   - yum-cron
 sftp_path: /usr/libexec/openssh/sftp-server
 ssh_service_name: sshd
+ntp_service_name: ntpd

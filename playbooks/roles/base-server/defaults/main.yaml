@@ -4,6 +4,7 @@ base_packages:
   - at
   - git
   - lvm2
+  - ntp
   - openssh-server
   - parted
   - rsync
