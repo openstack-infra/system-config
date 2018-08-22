@@ -61,6 +61,12 @@
     src: bash-history.sh
     dest: /etc/profile.d/bash-history.sh
 
+- name: Ensure NTP service is running
+  service:
+    name: "{{ ntp_service_name }}"
+    enabled: yes
+    state: started
+
 - name: Include OS-specific tasks
   include_tasks: "{{ lookup('first_found', file_list) }}"
   vars:
