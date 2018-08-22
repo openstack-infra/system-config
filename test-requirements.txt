@@ -6,3 +6,4 @@ bashate>=0.2 # Apache-2.0
 PyYAML>=3.10.0 # MIT
 ansible-lint
 openstacksdk
+testinfra
