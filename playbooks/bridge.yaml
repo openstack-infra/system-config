@@ -1,5 +1,7 @@
 - hosts: bridge.openstack.org
+  become: true
   roles:
+    - users
     - pip3
     - install-ansible
     - root-keys
