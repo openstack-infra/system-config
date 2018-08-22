@@ -7,3 +7,4 @@ PyYAML>=3.10.0 # MIT
 ansible-lint
 openstacksdk
 zuul-sphinx>=0.2.3
+testinfra
