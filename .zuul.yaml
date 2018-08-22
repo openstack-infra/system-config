@@ -22,6 +22,26 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+- job:
+    name: system-config-run-base
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: trusty
+          label: ubuntu-trusty
+        - name: xenial
+          label: ubuntu-xenial
+        - name: bionic
+          label: ubuntu-bionic
+        - name: centos7
+          label: centos-7
+    pre-run: playbooks/zuul/run-base-pre.yaml
+    run: playbooks/zuul/run-base.yaml
+    files:
+      - playbooks/.*
+      - roles/.*
+
 - project:
     check:
       jobs:
@@ -29,6 +49,7 @@
         - puppet-beaker-rspec-infra-centos-7-system-config
         - puppet-beaker-rspec-puppet-4-infra-system-config
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+        - system-config-run-base
     gate:
       jobs:
         - puppet-beaker-rspec-infra-system-config
