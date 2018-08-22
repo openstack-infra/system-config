@@ -14,5 +14,8 @@
         value: /home/zuul/inventory.yaml
     - name: Run base.yaml
       command: ansible-playbook /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
-
-        
+    - name: Run testinfra to validate configuration
+      include_role:
+        name: tox
+      vars:
+        tox_envlist: testinfra
