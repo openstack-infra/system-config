@@ -7,3 +7,7 @@ PyYAML>=3.10.0 # MIT
 ansible-lint
 openstacksdk
 zuul-sphinx>=0.2.3
+testinfra
+# pytest-xdist is a plugin for pytest which allows parallel execution,
+# used by testinfra
+pytest-xdist
