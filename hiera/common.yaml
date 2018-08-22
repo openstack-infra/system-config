@@ -301,6 +301,7 @@ cacti_hosts:
 - ask.openstack.org
 - backup01.ord.rax.ci.openstack.org
 - baremetal00.vanilla.ic.openstack.org
+- bridge.openstack.org
 - cacti.openstack.org
 - controller00.vanilla.ic.openstack.org
 - compute000.vanilla.ic.openstack.org
