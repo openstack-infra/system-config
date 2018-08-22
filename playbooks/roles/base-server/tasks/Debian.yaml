@@ -18,3 +18,9 @@
     src: rsyslog.d_50-default.conf
     dest: /etc/rsyslog.d/50-default.conf
   notify: Restart rsyslog
+
+- name: Ensure ntp service is running
+  service:
+    name: ntp
+    enabled: yes
+    state: started
