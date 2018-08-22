@@ -22,7 +22,9 @@ export PUPPET_VERSION=$(puppet_version)
 
 if [ "$PUPPET_VERSION" == "3" ] ; then
     export MODULE_PATH=/etc/puppet/modules
-elif [ "$PUPPET_VERSION" == "4" ] ; then
+elif [ "$PUPPET_VERSION" == "4" ] || [ "$PUPPET_VERSION" == "5" ]; then
+    # Using puppetlabs builds for wider compatability across distros
+    # than system packages provide.
     export MODULE_PATH=/etc/puppetlabs/code/modules
 else
     echo "ERROR: unsupported puppet version $PUPPET_VERSION"
