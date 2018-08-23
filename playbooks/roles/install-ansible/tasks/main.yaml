@@ -21,7 +21,7 @@
     state: directory
     path: /var/cache/ansible
     owner: root
-    group: admin
+    group: root
     mode: 0770
 
 - name: Ensure ansible log dir is writable
@@ -29,7 +29,7 @@
     path: /var/log/ansible
     state: directory
     owner: root
-    group: admin
+    group: root
     mode: 0775
 
 - name: Copy ansible.cfg in to place
