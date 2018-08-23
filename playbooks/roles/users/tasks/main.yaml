@@ -1,11 +1,7 @@
-- name: Add sudo admin groups
-  loop:
-    - sudo
-    - admin
+- name: Add sudo group
   group:
-    name: "{{ item }}"
+    name: "sudoers"
     state: present
-  when:
 
 # NOTE(mordred): We replace the main file rather than dropping a file in to
 # /etc/sudoers.d to deal with divergent base sudoers files from our distros.
@@ -52,7 +48,7 @@
     uid: "{{ all_users[item].uid }}"
     group: "{{ item }}"
     comment: "{{ all_users[item].comment }}"
-    groups: admin,sudo
+    groups: sudo
     shell: /bin/bash
   when:
     - item in all_users
