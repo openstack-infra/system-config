@@ -221,6 +221,7 @@ function setup_puppet_ubuntu {
         FACTER_VERSION=3.*
     elif [ "$PUPPET_VERSION" == "5" ] ; then
         puppet_deb=puppet5-release-bionic.deb
+        puppetpkg=puppet-agent
         PUPPET_VERSION=5.*
         FACTER_VERSION=3.*
     else
