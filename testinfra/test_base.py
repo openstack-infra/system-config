@@ -12,6 +12,20 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import socket
+
+
+def get_ips(value, family=None):
+    ret = set()
+    try:
+        addr_info = socket.getaddrinfo(value, None, family)
+    except socket.gaierror:
+        return ret
+    for addr in addr_info:
+        ret.add(addr[4][0])
+    return ret
+
+
 def test_exim_is_installed(host):
     if host.system_info.distribution in ['ubuntu', 'debian']:
         exim = host.package("exim4-base")
@@ -21,3 +35,36 @@ def test_exim_is_installed(host):
 
     cmd = host.run("exim -bt root")
     assert cmd.rc == 0
+
+
+def test_iptables(host):
+    rules = host.iptables.rules()
+    rules = [x.strip() for x in rules]
+
+    start = [
+        '-P INPUT ACCEPT',
+        '-P FORWARD ACCEPT',
+        '-P OUTPUT ACCEPT',
+        '-N openstack-INPUT',
+        '-A INPUT -j openstack-INPUT',
+        '-A openstack-INPUT -i lo -j ACCEPT',
+        '-A openstack-INPUT -p icmp -m icmp --icmp-type any -j ACCEPT',
+        '-A openstack-INPUT -p tcp -m tcp --dport 22 -j ACCEPT',
+        '-A openstack-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
+    ]
+    assert rules[:len(start)] == start
+
+    reject = '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
+    assert reject in rules
+
+    # Make sure that the zuul console stream rule has been removed
+    # from the test node
+    zuul = ('-A openstack-INPUT -p tcp -m state --state NEW'
+            ' -m tcp --dport 19885 -j ACCEPT')
+    assert zuul not in rules
+
+    # Ensure all IPv4 addresses for cacti are allowed
+    for ip in get_ips('cacti.openstack.org', socket.AF_INET):
+        snmp = ('-A openstack-INPUT -s %s/32 -p udp -m udp'
+                ' --dport 161 -j ACCEPT' % ip)
+        assert snmp in rules
