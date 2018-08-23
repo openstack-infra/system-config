@@ -54,7 +54,9 @@ html_theme = 'openstackdocs'
 # variable, sidebar_dropdown, should be set to `api_ref`.
 # Otherwise, the list of links for the User and Ops docs
 # appear in the sidebar dropdown menu.
-#html_theme_options = {'show_other_versions': True}
+html_theme_options = {
+    "display_badge": False
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
