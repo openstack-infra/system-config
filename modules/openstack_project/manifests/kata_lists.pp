@@ -12,6 +12,7 @@ class openstack_project::kata_lists(
     provider    => 'noaliasmailman',
   }
 
+  # deprecated in favor of kata-discuss
   maillist { 'kata-dev':
     ensure      => present,
     admin       => 'jonathan@openstack.org',
@@ -26,6 +27,15 @@ class openstack_project::kata_lists(
     admin       => 'jonathan@openstack.org',
     password    => $listpassword,
     description => 'Discussion of security and virtualization targeted at container use cases',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
+
+  maillist { 'kata-discuss':
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Discussion of Kata Containers usage and development',
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
