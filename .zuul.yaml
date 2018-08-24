@@ -22,9 +22,30 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+
+- job:
+    name: zuul-role-integration
+    description: |
+      Test roles provided by system-config with Zuul
+    abstract: true
+    parent: base
+    run: roles-test/base.yaml
+
+- job:
+    name: zuul-role-integration-centos-7
+    parent: zuul-role-integration
+    nodeset: centos-7
+
+- job:
+    name: zuul-role-integration-xenial
+    parent: zuul-role-integration
+    nodeset: ubuntu-xenial
+
 - project:
     check:
       jobs:
+        - zuul-role-integration-centos-7
+        - zuul-role-integration-xenial
         - puppet-beaker-rspec-infra-system-config
         - puppet-beaker-rspec-infra-centos-7-system-config
         - puppet-beaker-rspec-puppet-4-infra-system-config
