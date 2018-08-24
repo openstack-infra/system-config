@@ -1,0 +1,10 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 24 Aug 2018 04:34:51 +0000
+Reviewed-on: https://review.openstack.org/595363
+Project: openstack-infra/system-config
+Branch: refs/heads/master
