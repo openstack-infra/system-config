@@ -3,6 +3,7 @@
     name:
       - whoopsie
       - popularity-contest
+      - open-vm-tools
     state: absent
 
 - name: Configure file limits
