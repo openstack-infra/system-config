@@ -38,3 +38,8 @@
   service:
     name: "{{ service_name }}"
     enabled: true
+
+# If we need to restart exim, do it now since our handler uses a
+# variable which may be overwritten by other roles.
+- name: Flush handlers
+  meta: flush_handlers
