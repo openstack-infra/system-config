@@ -68,3 +68,15 @@ def test_iptables(host):
         snmp = ('-A openstack-INPUT -s %s/32 -p udp -m udp'
                 ' --dport 161 -j ACCEPT' % ip)
         assert snmp in rules
+
+
+def test_ntp(host):
+    package = host.package("ntp")
+    assert package.is_installed
+
+    if host.system_info.distribution in ['ubuntu', 'debian']:
+        service = host.service("ntp")
+    else:
+        service = host.service("ntpd")
+    assert service.is_running
+    assert service.is_enabled
