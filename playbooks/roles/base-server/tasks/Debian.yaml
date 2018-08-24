@@ -5,6 +5,7 @@
   loop:
     - whoopsie
     - popularity-contest
+    - open-vm-tools
 
 - name: Configure file limits
   copy:
