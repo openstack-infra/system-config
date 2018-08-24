@@ -1,0 +1,10 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 24 Aug 2018 19:57:28 +0000
+Reviewed-on: https://review.openstack.org/595454
+Project: openstack-infra/system-config
+Branch: refs/heads/master
