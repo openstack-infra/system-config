@@ -22,7 +22,65 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+# Role integration jobs.  These test the top-level generic roles/*
+# under Zuul.  The range of platforms should be the same as those for
+# openstack-zuul-jobs.
+#
+# NOTE(ianw): 2018-08 have left off Fedora & OpenSUSE because
+#  no roles currently run on them.
+- job:
+    name: zuul-role-integration
+    description: |
+      Test roles provided by system-config with Zuul
+    abstract: true
+    parent: base
+    run: roles-test/base.yaml
+
+- job:
+    name: zuul-role-integration-centos-7
+    parent: zuul-role-integration
+    nodeset: centos-7
+
+- job:
+    name: zuul-role-integration-trusty
+    parent: zuul-role-integration
+    nodeset: ubuntu-trusty
+
+- job:
+    name: zuul-role-integration-xenial
+    parent: zuul-role-integration
+    nodeset: ubuntu-xenial
+
+- job:
+    name: zuul-role-integration-bionic
+    parent: zuul-role-integration
+    nodeset: ubuntu-bionic
+
+- job:
+    name: zuul-role-integration-debian-stable
+    parent: zuul-role-integration
+    nodeset: debian-stable
+
+- project-template:
+    name: zuul-role-integration
+    check:
+      jobs:
+        - zuul-role-integration-centos-7
+        - zuul-role-integration-trusty
+        - zuul-role-integration-xenial
+        - zuul-role-integration-bionic
+        - zuul-role-integration-debian-stable
+    gate:
+      jobs:
+        - zuul-role-integration-centos-7
+        - zuul-role-integration-trusty
+        - zuul-role-integration-xenial
+        - zuul-role-integration-bionic
+        - zuul-role-integration-debian-stable
+
 - project:
+    templates:
+      - zuul-role-integration
     check:
       jobs:
         - puppet-beaker-rspec-infra-system-config
