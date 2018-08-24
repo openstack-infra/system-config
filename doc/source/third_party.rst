@@ -166,32 +166,32 @@ Once you have created this account with the OpenID provider you can log
 into Gerrit with that new account as you would with your normal user
 account. Once logged in you will need to do several things:
 
-  1. Set an SSH username at https://review.openstack.org/#/settings/ if
-  it isn't already set. This is the username your CI system will use to
-  SSH to Gerrit in order to read the event stream.
+1. Set an SSH username at https://review.openstack.org/#/settings/ if
+   it isn't already set. This is the username your CI system will use to
+   SSH to Gerrit in order to read the event stream.
 
-  2. Set the account's fullname at https://review.openstack.org/#/settings/contact
-  This name should follow a few rules in order to make it clear in Gerrit
-  comments what this CI system exists to test. The name should have three
-  pieces ``Organization`` ``Product/technology`` ``CI designator``. The
-  organization value should be your company name or other organization
-  affiliation. Product/technology should describe the product or technology
-  you are testing in conjunction with OpenStack. This should be the name of
-  a component which cannot be tested in the official OpenStack
-  infrastructure (requires particular physical hardware, proprietary
-  software, some hypervisor feature not available in public clouds,
-  et cetera). Note this should not be the name of an OpenStack project but
-  rather the thing you are testing with OpenStack projects. And finally
-  the CI designator is used to denote this is a CI system so that automatic
-  Gerrit comment parsers can filter these comments out. This value should
-  be ``CI`` for most CI systems but can be ``Bot`` if you are not
-  performing continuous integration. An example of a proper name would be
-  something like ``IBM DB2 CI``.
+2. Set the account's fullname at https://review.openstack.org/#/settings/contact
+   This name should follow a few rules in order to make it clear in Gerrit
+   comments what this CI system exists to test. The name should have three
+   pieces ``Organization`` ``Product/technology`` ``CI designator``. The
+   organization value should be your company name or other organization
+   affiliation. Product/technology should describe the product or technology
+   you are testing in conjunction with OpenStack. This should be the name of
+   a component which cannot be tested in the official OpenStack
+   infrastructure (requires particular physical hardware, proprietary
+   software, some hypervisor feature not available in public clouds,
+   et cetera). Note this should not be the name of an OpenStack project but
+   rather the thing you are testing with OpenStack projects. And finally
+   the CI designator is used to denote this is a CI system so that automatic
+   Gerrit comment parsers can filter these comments out. This value should
+   be ``CI`` for most CI systems but can be ``Bot`` if you are not
+   performing continuous integration. An example of a proper name would be
+   something like ``IBM DB2 CI``.
 
-  3. Add the SSH public key you will be using to the Gerrit account at
-  https://review.openstack.org/#/settings/ssh-keys You can generate an
-  ssh key using ``ssh-keygen``. You want to give Gerrit the contents of
-  the generated id_rsa.pub file.
+3. Add the SSH public key you will be using to the Gerrit account at
+   https://review.openstack.org/#/settings/ssh-keys You can generate an
+   ssh key using ``ssh-keygen``. You want to give Gerrit the contents of
+   the generated id_rsa.pub file.
 
 Note you should also subscribe to the `third-party-announce
 <http://lists.openstack.org/cgi-bin/mailman/listinfo/third-party-announce>`_
@@ -278,7 +278,7 @@ should configure as follows::
 To format the result's message in a way that works with the current OpenStack
 Gerrit GUI parser, configure the ``URL to post`` parameter (under the
 ``Gerrit Reporting Values`` section) for each job. The correct value for this
-paramater is:
+parameter is::
 
   \* $JOB_NAME $BUILD_URL
 
@@ -441,10 +441,10 @@ chance of success if you follow these steps:
   * send an email to the openstack-dev mailing list nominating your
     system for voting permissions
 
-      * openstack-dev@lists.openstack.org
-      * use tags [Infra][Nova] for the Nova program, please replace
-        [Nova] with [Program], where [Program] is the name of the
-        program your CI account will test
+    * openstack-dev@lists.openstack.org
+    * use tags [Infra][Nova] for the Nova program, please replace
+      [Nova] with [Program], where [Program] is the name of the
+      program your CI account will test
 
   * present your account history
   * address any questions and concerns with your system

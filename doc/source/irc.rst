@@ -278,17 +278,17 @@ commands which may be required for channel operators.
 Operator status is sometimes required to perform certain commands in your
 channel (though most everything can be done through `/msg chanserv` commands
 instead if permission flags are set correctly). To give yourself operator
-status in a channel, use the following command:
+status in a channel, use the following command::
 
   /msg chanserv op #channel
 
 You don't need to become an operator to change the topic, this can be done
-via Chanserv:
+via Chanserv::
 
   /msg chanserv topic #channel New topic goes here.
 
 If you are curious as to who has access to a channel, you can issue this
-command:
+command::
 
   /msg chanserv access #channel list
 
@@ -347,37 +347,39 @@ channel.
 Tips
 ----
 
- * Collect the list of users and send a message in channel to each of them
-   explaining that the channel has moved.
- * Some folks simply won't leave and join the new channel, you can /kick
-   them after a bit of time (a day? a week?) to get their client to join
-   the new channel.
- * Don't leave the channel until everything is done, it's non-trivial to
-   rejoin because you've set up a forward!
+* Collect the list of users and send a message in channel to each of them
+  explaining that the channel has moved.
+* Some folks simply won't leave and join the new channel, you can /kick
+  them after a bit of time (a day? a week?) to get their client to join
+  the new channel.
+* Don't leave the channel until everything is done, it's non-trivial to
+  rejoin because you've set up a forward!
 
 Troubleshooting
 ===============
 
 Bots may stop responding, common steps to troubleshoot the problem are:
 
-1. Check status of the bot, with:
+1. Check status of the bot, with::
 
-    service xxxbot status
+     service xxxbot status
 
-If bot is stopped, start it again. Restart the bot if you see it's running
-but not operating properly.
+   If the bot is stopped, start it again. Restart the bot if you see
+   it's running but not operating properly.
 
 2. On bot restart, it may show problems connecting to chat.freenode.net.
-If bot logs show it's stopped on connection, you can manually try with:
+   If bot logs show it's stopped on connection, you can manually try
+   with::
 
-    telnet chat.freenode.net 6667
+     telnet chat.freenode.net 6667
 
-3. For bots on the eavesdrop server: if you don't have connection to that
-port, check entries on /etc/hosts for chat.freenode.net, until you find one
-server that is operative. Switch the entries on /etc/hosts to choose
-the right one, and restart the service with:
+3. For bots on the eavesdrop server: if you don't have connection to
+   that port, check entries on ``/etc/hosts`` for
+   ``chat.freenode.net``, until you find one server that is operative.
+   Switch the entries on ``/etc/hosts`` to choose the right one, and
+   restart the service with::
 
-    sudo service xxxbot restart
+     sudo service xxxbot restart
 
 Registering a Nick for a New Bot
 ================================

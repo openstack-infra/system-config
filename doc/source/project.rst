@@ -61,7 +61,7 @@ And if you have any questions, please ask.
 Bugs
 ====
 
-The infrastructure project maintains a bug list at:
+The infrastructure project maintains a bug list at::
 
   https://storyboard.openstack.org/#!/project_group/55
 

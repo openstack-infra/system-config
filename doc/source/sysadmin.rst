@@ -117,29 +117,29 @@ Adding a New Server
 
 To create a new server, do the following:
 
- * Add a file in :cgit_file:`modules/openstack_project/manifests/` that defines a
-   class which specifies the configuration of the server.
+* Add a file in :cgit_file:`modules/openstack_project/manifests/` that defines a
+  class which specifies the configuration of the server.
 
- * Add a node pattern entry in :cgit_file:`manifests/site.pp` for the server
-   that uses that class. Make sure it supports an ordinal naming pattern
-   (e.g., fooserver01.openstack.org not just fooserver.openstack.org, even
-   if you're replacing an existing server) and that another server with the
-   same does not already exist in the ansible inventory.
+* Add a node pattern entry in :cgit_file:`manifests/site.pp` for the server
+  that uses that class. Make sure it supports an ordinal naming pattern
+  (e.g., fooserver01.openstack.org not just fooserver.openstack.org, even
+  if you're replacing an existing server) and that another server with the
+  same does not already exist in the ansible inventory.
 
- * If your server needs private information such as passwords, use
-   hiera calls in the site manifest, and ask an infra-core team member
-   to manually add the private information to hiera.
+* If your server needs private information such as passwords, use
+  hiera calls in the site manifest, and ask an infra-core team member
+  to manually add the private information to hiera.
 
- * You should be able to install and configure most software only with
-   ansible or puppet.  Nonetheless, if you need SSH access to the host,
-   add your public key to :cgit_file:`playbooks/group_vars/all.yaml` and
-   include a stanza like this in your server class::
+* You should be able to install and configure most software only with
+  ansible or puppet.  Nonetheless, if you need SSH access to the host,
+  add your public key to :cgit_file:`playbooks/group_vars/all.yaml` and
+  include a stanza like this in your server class::
 
-     extra_users:
-       - your_user_name
+    extra_users:
+      - your_user_name
 
- * Add an RST file with documentation about the server in :cgit_file:`doc/source`
-   and add it to the index in that directory.
+* Add an RST file with documentation about the server in :cgit_file:`doc/source`
+  and add it to the index in that directory.
 
 SSH Access
 ==========
@@ -147,36 +147,36 @@ SSH Access
 For any of the systems managed by the OpenStack Infrastructure team, the
 following practices must be observed for SSH access:
 
- * SSH access is only permitted with SSH public/private key
-   authentication.
- * Users must use a strong passphrase to protect their private key.  A
-   passphrase of several words, at least one of which is not in a
-   dictionary is advised, or a random string of at least 16
-   characters.
- * To mitigate the inconvenience of using a long passphrase, users may
-   want to use an SSH agent so that the passphrase is only requested
-   once per desktop session.
- * Users private keys must never be stored anywhere except their own
-   workstation(s).  In particular, they must never be stored on any
-   remote server.
- * If users need to 'hop' from a server or bastion host to another
-   machine, they must not copy a private key to the intermediate
-   machine (see above).  Instead SSH agent forwarding may be used.
-   However due to the potential for a compromised intermediate machine
-   to ask the agent to sign requests without the users knowledge, in
-   this case only an SSH agent that interactively prompts the user
-   each time a signing request (ie, ssh-agent, but not gnome-keyring)
-   is received should be used, and the SSH keys should be added with
-   the confirmation constraint ('ssh-add -c').
- * The number of SSH keys that are configured to permit access to
-   OpenStack machines should be kept to a minimum.
- * OpenStack Infrastructure machines must use puppet to centrally manage and
-   configure user accounts, and the SSH authorized_keys files from the
-   openstack-infra/system-config repository.
- * SSH keys should be periodically rotated (at least once per year).
-   During rotation, a new key can be added to puppet for a time, and
-   then the old one removed.  Be sure to run puppet on the backup
-   servers to make sure they are updated.
+* SSH access is only permitted with SSH public/private key
+  authentication.
+* Users must use a strong passphrase to protect their private key.  A
+  passphrase of several words, at least one of which is not in a
+  dictionary is advised, or a random string of at least 16
+  characters.
+* To mitigate the inconvenience of using a long passphrase, users may
+  want to use an SSH agent so that the passphrase is only requested
+  once per desktop session.
+* Users private keys must never be stored anywhere except their own
+  workstation(s).  In particular, they must never be stored on any
+  remote server.
+* If users need to 'hop' from a server or bastion host to another
+  machine, they must not copy a private key to the intermediate
+  machine (see above).  Instead SSH agent forwarding may be used.
+  However due to the potential for a compromised intermediate machine
+  to ask the agent to sign requests without the users knowledge, in
+  this case only an SSH agent that interactively prompts the user
+  each time a signing request (ie, ssh-agent, but not gnome-keyring)
+  is received should be used, and the SSH keys should be added with
+  the confirmation constraint ('ssh-add -c').
+* The number of SSH keys that are configured to permit access to
+  OpenStack machines should be kept to a minimum.
+* OpenStack Infrastructure machines must use puppet to centrally manage and
+  configure user accounts, and the SSH authorized_keys files from the
+  openstack-infra/system-config repository.
+* SSH keys should be periodically rotated (at least once per year).
+  During rotation, a new key can be added to puppet for a time, and
+  then the old one removed.  Be sure to run puppet on the backup
+  servers to make sure they are updated.
 
 
 GitHub Access
@@ -204,8 +204,8 @@ Backups
 
 Off-site backups are made to two servers:
 
- * backup01.ord.rax.ci.openstack.org
- * TBD
+* backup01.ord.rax.ci.openstack.org
+* TBD
 
 Puppet is used to perform the initial configuration of those machines,
 but to protect them from unauthorized access in case access to the
