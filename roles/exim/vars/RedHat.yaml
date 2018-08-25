@@ -1,5 +1,5 @@
 package: exim
-service_name: exim
+exim_service_name: exim
 config_file: /etc/exim/exim.conf
 conf_dir: /etc/exim/
 sysdefault_file: /etc/sysconfig/exim
