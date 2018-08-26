@@ -43,8 +43,10 @@ clouds:
             - name: inap-17304-WAN1101
               routes_externally: True
   vexxhost:
-    region_name: ca-ymq-1
     profile: vexxhost
+    regions:
+      - ca-ymq-1
+      - sjc1
     api_timeout: 60
     auth_type: password
     auth:
