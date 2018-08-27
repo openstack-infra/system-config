@@ -30,8 +30,4 @@ class openstack_project::server (
     }
   }
 
-  class { 'openstack_project::automatic_upgrades':
-    origins => ["Puppetlabs:${lsbdistcodename}"],
-  }
-
 }
