@@ -16,9 +16,9 @@ Launching a node currently requires a different version of ansible
 than what is generally used on the puppetmaster.  Set up a
 virtualenv::
 
-  virtualenv -p python2 ~/launch-env/
+  python3 /usr/lib/python3/dist-packages/virtualenv.py --python=python3 ~/launch-env
   . ~/launch-env/bin/activate
-  pip install ansible==2.1.1.0 shade
+  pip install ansible shade
 
 To launch a node in the OpenStack CI account (production servers)::
 
