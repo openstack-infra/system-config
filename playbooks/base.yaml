@@ -18,3 +18,4 @@
   roles:
     - exim
     - iptables
+    - snmpd
