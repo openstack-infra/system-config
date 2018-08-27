@@ -3,6 +3,10 @@
     name: "sudo"
     state: present
 
+- name: Set desired groups
+  set_fact:
+    new_user_groups: "sudo{% if add_users_to_ansible_group %},ansible{% endif %}"
+
 # NOTE(mordred): We replace the main file rather than dropping a file in to
 # /etc/sudoers.d to deal with divergent base sudoers files from our distros.
 # We also want to change some default behavior (we want nopassword sudo, for
@@ -48,7 +52,7 @@
     uid: "{{ all_users[item].uid }}"
     group: "{{ item }}"
     comment: "{{ all_users[item].comment }}"
-    groups: sudo
+    groups: "{{ new_user_groups }}"
     shell: /bin/bash
   when:
     - item in all_users
