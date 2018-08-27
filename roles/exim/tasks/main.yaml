@@ -36,5 +36,5 @@
 
 - name: Enable exim
   service:
-    name: "{{ service_name }}"
+    name: "{{ exim_service_name }}"
     enabled: true
