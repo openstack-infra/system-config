@@ -16,21 +16,34 @@
     state: directory
     path: /etc/ansible/inventory_plugins
 
+# This group should apply to all the ansible runtime pieces so that
+# users can launch nodes without sudo.
+- name: Ensure an ansible group
+  group:
+    name: "ansible"
+    state: present
+
+- name: Flag that any created users should be in the ansible group
+  set_fact:
+    add_users_to_ansible_group: True
+
 - name: Ensure /var/cache/ansible
   file:
     state: directory
     path: /var/cache/ansible
     owner: root
-    group: root
+    group: ansible
     mode: 0770
+    recurse: yes
 
 - name: Ensure ansible log dir is writable
   file:
     path: /var/log/ansible
     state: directory
     owner: root
-    group: root
+    group: ansible
     mode: 0775
+    recurse: yes
 
 - name: Copy ansible.cfg in to place
   copy:
