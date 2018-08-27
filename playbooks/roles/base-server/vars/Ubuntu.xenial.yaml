@@ -1,0 +1,12 @@
+distro_packages:
+  - dnsutils
+  - emacs-nox
+  - iputils-ping
+  - vim-nox
+  # Install this to make transitioning ansible on python2 from
+  # trusty to xenial easier then we can switch all xenial nodes
+  # to python3
+  - python2.7
+sftp_path: /usr/lib/openssh/sftp-server
+ssh_service_name: ssh
+ntp_service_name: ntp
