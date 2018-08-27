@@ -1,3 +1,10 @@
+# TODO(clarkb) Find a way to make this a global default
+# currently restricted to mirror.yaml because we are trying to
+# boot a new mirror on xenial which doesn't have python2 by
+# default. Can't just set it to python3 globally without some
+# work due to Trusty and Centos not coming with ansible supported
+# python3 (>=3.5).
+ansible_python_interpreter: python3
 iptables_public_tcp_ports:
   - 80
   - 8080
