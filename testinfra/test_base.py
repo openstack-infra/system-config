@@ -91,3 +91,33 @@ def test_snmp(host):
 def test_timezone(host):
     tz = host.check_output('date +%Z')
     assert tz == "UTC"
+
+
+def test_unattended_upgrades(host):
+    if host.system_info.distribution in ['ubuntu', 'debian']:
+        package = host.package("unattended-upgrades")
+        assert package.is_installed
+
+        # This service under ubuntu trusty runs as a daily cron job,
+        # and as a systemd service in later releases.
+        if host.system_info.codename != 'trusty':
+            service = host.service("unattended-upgrades")
+            assert service.is_enabled
+            assert service.is_running
+
+            cfg_file = host.file("/etc/apt/apt.conf.d/20auto-upgrades")
+            assert cfg_file.exists
+            assert cfg_file.contains('APT::Periodic::Update-Package-Lists "1"')
+            assert cfg_file.contains('APT::Periodic::Unattended-Upgrade "1"')
+
+    else:
+        package = host.package("yum-cron")
+        assert package.is_installed
+
+        service = host.service("crond")
+        assert service.is_enabled
+        assert service.is_running
+
+        cfg_file = host.file("/etc/yum/yum-cron.conf")
+        assert cfg_file.exists
+        assert cfg_file.contains('apply_updates = yes')
