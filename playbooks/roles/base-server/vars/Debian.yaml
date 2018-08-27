@@ -5,3 +5,4 @@ distro_packages:
   - vim-nox
 sftp_path: /usr/lib/openssh/sftp-server
 ssh_service_name: ssh
+ntp_service_name: ntp
