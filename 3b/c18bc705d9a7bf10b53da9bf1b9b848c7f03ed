@@ -1,0 +1,11 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 27 Aug 2018 14:53:04 +0000
+Reviewed-on: https://review.openstack.org/596503
+Project: openstack-infra/system-config
+Branch: refs/heads/master
