@@ -36,6 +36,9 @@
           label: ubuntu-bionic
         - name: centos7
           label: centos-7
+    host-vars:
+      centos7:
+        ansible_python_interpreter: python2
     pre-run: playbooks/zuul/run-base-pre.yaml
     run: playbooks/zuul/run-base.yaml
     files:
