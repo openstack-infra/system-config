@@ -24,3 +24,8 @@ Configure users on a server.  Users are given sudo access
 
    Users who should be removed from all hosts
 
+.. zuul:rolevar:: add_users_to_ansible_group
+   :default: False
+
+   Intended to be set for the bridge host so that users can run
+   Ansible commands without a full ``sudo`` transition.

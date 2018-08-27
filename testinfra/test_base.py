@@ -21,3 +21,11 @@ def test_exim_is_installed(host):
 
     cmd = host.run("exim -bt root")
     assert cmd.rc == 0
+
+def test_ansible_group_on_bridge(host):
+    ansible_vars = host.ansible.get_variables()
+    if ansible_vars['inventory_hostname'] == 'bridge.openstack.org':
+        assert host.group("ansible").exists
+    else:
+        assert False
+
