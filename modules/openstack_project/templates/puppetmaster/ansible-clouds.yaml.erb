@@ -46,7 +46,9 @@ clouds:
       password: <%= @puppetmaster_clouds['openstackci_rax_password'] %>
       project_id: <%= @puppetmaster_clouds['openstackci_rax_project_id'] %>
   openstackci-vexxhost:
-    region_name: ca-ymq-1
+    regions:
+      - ca-ymq-1
+      - sjc1
     profile: vexxhost
     auth:
       username: '<%= @puppetmaster_clouds['openstackci_vexxhost_username'] %>'

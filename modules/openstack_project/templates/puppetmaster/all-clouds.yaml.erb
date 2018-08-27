@@ -70,7 +70,9 @@ clouds:
       password: <%= @puppetmaster_clouds['openstackjenkins_ovh_password'] %>
       project_name: <%= @puppetmaster_clouds['openstackjenkins_ovh_project_name'] %>
   openstackjenkins-vexxhost:
-    region_name: ca-ymq-1
+    regions:
+      - ca-ymq-1
+      - sjc1
     profile: vexxhost
     auth:
       username: '<%= @puppetmaster_clouds['openstackjenkins_vexxhost_username'] %>'
@@ -79,7 +81,9 @@ clouds:
       project_domain_name: default
       user_domain_name: default
   openstackci-vexxhost:
-    region_name: ca-ymq-1
+    regions:
+      - ca-ymq-1
+      - sjc1
     profile: vexxhost
     auth:
       username: '<%= @puppetmaster_clouds['openstackci_vexxhost_username'] %>'
