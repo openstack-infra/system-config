@@ -9,6 +9,7 @@
   roles:
     - base-server
     - timezone
+    - unbound
 
 - hosts: "puppet:!disabled"
   roles:

@@ -1,0 +1,18 @@
+# If set, the unbound daemon will be started and stopped by the init script.
+UNBOUND_ENABLE=true
+
+# Whether to automatically update the root trust anchor file.
+ROOT_TRUST_ANCHOR_UPDATE=true
+
+# File in which to store the root trust anchor.
+ROOT_TRUST_ANCHOR_FILE=/var/lib/unbound/root.key
+
+# If set, the unbound init script will provide unbound's listening
+# IP addresses as nameservers to resolvconf.
+RESOLVCONF=true
+
+# If set, resolvconf nameservers will be configured as forwarders
+# to be used by unbound.
+RESOLVCONF_FORWARDERS=false
+
+#DAEMON_OPTS="-c /etc/unbound/unbound.conf"

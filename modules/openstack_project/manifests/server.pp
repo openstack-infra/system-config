@@ -4,7 +4,6 @@
 class openstack_project::server (
   $pin_puppet                = '3.',
   $ca_server                 = undef,
-  $enable_unbound            = true,
   $afs                       = false,
   $afs_cache_size            = 500000,
   $pypi_index_url            = 'https://pypi.python.org/simple',
@@ -17,12 +16,6 @@ class openstack_project::server (
 
   ###########################################################
   # Process if ( $high_level_directive ) blocks
-
-  if ($enable_unbound) {
-    class { 'unbound':
-      install_resolv_conf => $install_resolv_conf
-    }
-  }
 
   if $afs {
     class { 'openafs::client':
