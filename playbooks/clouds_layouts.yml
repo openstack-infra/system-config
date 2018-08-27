@@ -183,6 +183,32 @@ clouds:
       - openstackci-keypairs
       - openstackci-security
 
+  # vexxhost
+  - name: openstackci-vexxhost-mtl1
+    oscc_cloud: openstackci-vexxhost
+    region_name: ca-ymq-1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackjenkins-vexxhost-mtl1
+    oscc_cloud: openstackjenkins-vexxhost
+    region_name: ca-ymq-1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackci-vexxhost-sjc1
+    oscc_cloud: openstackci-vexxhost
+    region_name: sjc1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+  - name: openstackjenkins-vexxhost-sjc1
+    oscc_cloud: openstackjenkins-vexxhost
+    region_name: sjc1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+
   # rackspace
   - name: openstackci-rax-dfw
     oscc_cloud: openstackci-rax
