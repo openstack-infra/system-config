@@ -3,6 +3,7 @@ distro_packages:
   - emacs-nox
   - iputils-ping
   - vim-nox
+  - unattended-upgrades
 sftp_path: /usr/lib/openssh/sftp-server
 ssh_service_name: ssh
 ntp_service_name: ntp
