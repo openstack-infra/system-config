@@ -34,11 +34,17 @@ cat > $ansible_root/ansible.cfg <<EOF
 local_tmp=$ansible_root/local_tmp
 remote_tmp=$ansible_root/remote_tmp
 EOF
+
+ANSIBLE_PYTHON=python3
+if grep -i '14.04.*trusty' /etc/os-release || grep -i 'centos.*7' /etc/os-release ; then
+    ANSIBLE_PYTHON=python
+fi
 cat > $ansible_root/hosts <<EOF
-localhost ansible_connection=local
+localhost ansible_connection=local ansible_python_interpreter=$ANSIBLE_PYTHON
 [puppet]
 localhost
 EOF
+
 echo "##" > $fileout
 cat $file > $fileout
 export ANSIBLE_CONFIG=$ansible_root/ansible.cfg
