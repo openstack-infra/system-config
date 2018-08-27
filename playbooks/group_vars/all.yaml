@@ -1,3 +1,7 @@
+# Default to python3 as more and more distros are dropping
+# python2 from the default installations.
+ansible_python_interpreter: python3
+
 distro_lookup_path:
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.{{ ansible_facts.architecture }}.yaml"
   - "{{ ansible_facts.distribution }}.{{ ansible_facts.lsb.codename }}.yaml"

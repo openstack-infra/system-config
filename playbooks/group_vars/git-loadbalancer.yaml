@@ -1,3 +1,4 @@
+ansible_python_interpreter: python2
 iptables_public_tcp_ports:
   - 80
   - 443
