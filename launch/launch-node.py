@@ -141,7 +141,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
     # Zero the ansible inventory cache so that next run finds the new server
     inventory_cache_dir = '/var/cache/ansible/inventory'
     for inventory_cache in os.listdir(inventory_cache_dir):
-        os.unlink(inventory_cache)
+        os.unlink(os.path.join(inventory_cache_dir, inventory_cache))
 
     with JobDir(keep) as jobdir:
         # Update the generated-groups file globally and incorporate it
