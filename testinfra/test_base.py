@@ -86,3 +86,8 @@ def test_snmp(host):
     service = host.service("snmpd")
     assert service.is_running
     assert service.is_enabled
+
+
+def test_timezone(host):
+    tz = host.check_output('date +%Z')
+    assert tz == "UTC"
