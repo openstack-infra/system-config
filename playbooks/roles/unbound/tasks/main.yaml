@@ -1,0 +1,34 @@
+- name: Include OS-specific tasks
+  include_tasks: "{{ item }}"
+  vars:
+    params:
+      files: "{{ distro_lookup_path }}"
+      skip: true
+  loop: "{{ query('first_found', params) }}"
+
+- name: Install unbound
+  package:
+    state: present
+    name: unbound
+
+- name: Write dhclient config file
+  copy:
+    src: dhclient.conf
+    dest: "{{ item }}"
+    mode: 0444
+  when: item is file
+  loop:
+    - /etc/dhcp/dhclient.conf
+    - /etc/dhcp/dhclient-eth0.conf
+
+- name: Write resolv.conf
+  copy:
+    src: resolv.conf
+    dest: /etc/resolv.conf
+    mode: 0444
+
+- name: Enable unbound
+  service:
+    name: unbound
+    enabled: true
+    state: started

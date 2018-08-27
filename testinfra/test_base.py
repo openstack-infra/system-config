@@ -91,3 +91,8 @@ def test_snmp(host):
 def test_timezone(host):
     tz = host.check_output('date +%Z')
     assert tz == "UTC"
+
+
+def test_unbound(host):
+    output = host.check_output('host git.openstack.org')
+    assert 'has address' in output
