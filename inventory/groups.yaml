@@ -44,7 +44,7 @@ groups:
   survey: inventory_hostname.startswith('survey')
   translate-dev: inventory_hostname is match('translate-dev\d+\.openstack\.org')
   translate: inventory_hostname is match('translate\d+\.openstack\.org')
-  webservers: inventory_hostname is match('(grafana\d*|health\d*|graphite\d*|groups\d*|groups-dev\d*|eavesdrop\d*|paste\d*|ethercalc\d+|etherpad\d*|etherpad-dev\d*|files\d*|refstack\d*|static\d*|status\d*|survey\d+|nodepool|nl\d+|nb\d+|zm\d+|ask|ask-staging|translate.*|codesearch\d*|cacti\d+|wiki.*|storyboard.*|openstackid-dev|planet)\.openstack\.org|openstackid.org')
+  webservers: inventory_hostname is match('(grafana\d*|health\d*|graphite\d*|groups\d*|groups-dev\d*|eavesdrop\d*|paste\d*|ethercalc\d+|etherpad\d*|etherpad-dev\d*|files\d*|refstack\d*|static\d*|status\d*|survey\d+|nodepool|nl\d+|nb\d+|zm\d+|ask|ask-staging|translate.*|codesearch\d*|cacti\d+|wiki.*|storyboard.*|openstackid-dev|planet\d*)\.openstack\.org|openstackid.org')
   wiki-dev: inventory_hostname is match('wiki-dev\d+\.openstack\.org')
   wiki: inventory_hostname is match('wiki\d+\.openstack\.org')
   zookeeper: inventory_hostname.startswith('zk')
