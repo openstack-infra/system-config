@@ -1,7 +1,7 @@
 iptables_public_tcp_ports:
   - 80
   - 3306
-iptables_rule_data:
+iptables_extra_allowed_hosts:
   - protocol: tcp
     port: '4730'
     hostname: logstash-worker01.openstack.org

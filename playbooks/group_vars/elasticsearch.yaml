@@ -1,4 +1,4 @@
-iptables_rule_data:
+iptables_extra_allowed_hosts:
   - protocol: tcp
     port: 9200:9400
     hostname: elasticsearch02.openstack.org
