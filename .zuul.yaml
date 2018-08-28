@@ -41,17 +41,32 @@
 - job:
     name: system-config-zuul-role-integration-centos-7
     parent: system-config-zuul-role-integration
-    nodeset: centos-7
+    nodeset:
+      nodes:
+        - name: base
+          label: centos-7
+        - name: puppet4
+          label: centos-7
 
 - job:
     name: system-config-zuul-role-integration-trusty
     parent: system-config-zuul-role-integration
-    nodeset: ubuntu-trusty
+    nodeset:
+      nodes:
+        - name: base
+          label: ubuntu-trusty
+        - name: puppet4
+          label: ubuntu-trusty
 
 - job:
     name: system-config-zuul-role-integration-xenial
     parent: system-config-zuul-role-integration
-    nodeset: ubuntu-xenial
+    nodeset:
+      nodes:
+        - name: base
+          label: ubuntu-xenial
+        - name: puppet4
+          label: ubuntu-xenial
 
 - job:
     name: system-config-zuul-role-integration-bionic
@@ -70,15 +85,15 @@
         - system-config-zuul-role-integration-centos-7
         - system-config-zuul-role-integration-trusty
         - system-config-zuul-role-integration-xenial
-        - system-config-zuul-role-integration-bionic
-        - system-config-zuul-role-integration-debian-stable
+#        - system-config-zuul-role-integration-bionic
+#        - system-config-zuul-role-integration-debian-stable
     gate:
       jobs:
         - system-config-zuul-role-integration-centos-7
         - system-config-zuul-role-integration-trusty
         - system-config-zuul-role-integration-xenial
-        - system-config-zuul-role-integration-bionic
-        - system-config-zuul-role-integration-debian-stable
+ #       - system-config-zuul-role-integration-bionic
+ #       - system-config-zuul-role-integration-debian-stable
 
 - job:
     name: system-config-run-base
@@ -110,17 +125,17 @@
 - project:
     templates:
       - system-config-zuul-role-integration
-    check:
-      jobs:
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-    gate:
-      jobs:
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
+#    check:
+#      jobs:
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - system-config-run-base
+#    gate:
+#      jobs:
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - system-config-run-base
