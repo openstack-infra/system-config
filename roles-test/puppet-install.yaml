@@ -1,0 +1,13 @@
+- name: Install puppet3
+  hosts: xenial-puppet3
+  roles:
+
+    - role: puppet-install
+      puppet_install_version: 3
+
+- name: Install puppet4
+  hosts: xenial-puppet4
+  roles:
+
+    - role: puppet-install
+      puppet_install_version: 4

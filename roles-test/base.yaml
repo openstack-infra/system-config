@@ -7,5 +7,9 @@
 # control-plane (see system-config-run-base)
 #
 
+# Puppet installation
+- import_playbook: puppet-install.yaml
+
 # Kerberos & afs roles
 - import_playbook: openafs-client.yaml
+
