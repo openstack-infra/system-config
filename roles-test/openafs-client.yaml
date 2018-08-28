@@ -1,5 +1,5 @@
 - name: Kerberos and OpenAFS client installation
-  hosts: all
+  hosts: base
   roles:
     - role: kerberos-client
       kerberos_realm: 'OPENSTACK.ORG'
