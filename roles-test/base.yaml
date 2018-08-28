@@ -9,3 +9,6 @@
 
 # Kerberos & afs roles
 - import_playbook: openafs-client.yaml
+
+# Puppet installation
+- import_playbook: puppet-install.yaml
