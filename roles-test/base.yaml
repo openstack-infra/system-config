@@ -1,0 +1,11 @@
+#
+# Test system-config roles/*
+#
+# This playbook should use and test roles defined in the system-config
+# top-level roles/* directory.  These roles should be generic enough
+# to run under Zuul (here) and also directly under Ansible for the
+# control-plane (see system-config-run-base)
+#
+
+# Kerberos & afs roles
+- import_playbook: openafs-client.yaml
