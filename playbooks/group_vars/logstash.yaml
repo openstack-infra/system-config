@@ -1,4 +1,4 @@
-iptables_public_tcp_ports:
+iptables_extra_public_tcp_ports:
   - 80
   - 3306
 iptables_extra_allowed_hosts:

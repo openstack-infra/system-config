@@ -17,6 +17,17 @@ iptables_base_allowed_hosts:
 iptables_extra_allowed_hosts: []
 iptables_allowed_hosts: "{{ iptables_base_allowed_hosts + iptables_extra_allowed_hosts }}"
 
+iptables_base_public_tcp_ports: []
+iptables_extra_public_tcp_ports: []
+# This is here only to allow the test framework to inject an iptables
+# rule to allow zuul console streaming.  Do not use it otherwise.
+iptables_test_public_tcp_ports: "{{ iptables_test_public_tcp_ports|default([]) }}"
+iptables_public_tcp_ports: "{{ iptables_test_public_tcp_ports + iptables_base_public_tcp_ports + iptables_extra_public_tcp_ports }}"
+
+iptables_base_public_udp_ports: []
+iptables_extra_public_udp_ports: []
+iptables_public_udp_ports: "{{ iptables_base_public_udp_ports + iptables_extra_public_udp_ports }}"
+
 # When adding new users, always pick a UID larger than the last UID, do not
 # fill in holes in the middle of the range.
 all_users:
