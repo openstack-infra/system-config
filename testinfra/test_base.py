@@ -96,3 +96,36 @@ def test_timezone(host):
 def test_unbound(host):
     output = host.check_output('host git.openstack.org')
     assert 'has address' in output
+
+
+def test_unattended_upgrades(host):
+    if host.system_info.distribution in ['ubuntu', 'debian']:
+        package = host.package("unattended-upgrades")
+        assert package.is_installed
+
+        package = host.package("mailutils")
+        assert package.is_installed
+
+        cfg_file = host.file("/etc/apt/apt.conf.d/10periodic")
+        assert cfg_file.exists
+        assert cfg_file.contains('^APT::Periodic::Enable "1"')
+        assert cfg_file.contains('^APT::Periodic::Update-Package-Lists "1"')
+        assert cfg_file.contains('^APT::Periodic::Download-Upgradeable-Packages "1"')
+        assert cfg_file.contains('^APT::Periodic::AutocleanInterval "5"')
+        assert cfg_file.contains('^APT::Periodic::Unattended-Upgrade "1"')
+        assert cfg_file.contains('^APT::Periodic::RandomSleep "1800"')
+
+        cfg_file = host.file("/etc/apt/apt.conf.d/50unattended-upgrades")
+        assert cfg_file.contains('^Unattended-Upgrade::Mail "root"')
+
+    else:
+        package = host.package("yum-cron")
+        assert package.is_installed
+
+        service = host.service("crond")
+        assert service.is_enabled
+        assert service.is_running
+
+        cfg_file = host.file("/etc/yum/yum-cron.conf")
+        assert cfg_file.exists
+        assert cfg_file.contains('apply_updates = yes')

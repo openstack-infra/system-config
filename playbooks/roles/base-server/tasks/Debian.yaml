@@ -18,3 +18,19 @@
     src: rsyslog.d_50-default.conf
     dest: /etc/rsyslog.d/50-default.conf
   notify: Restart rsyslog
+
+- name: Install apt-daily 10periodic file for unattended-upgrades
+  copy:
+     mode: 0444
+     src: 10periodic
+     dest: /etc/apt/apt.conf.d/10periodic
+     owner: root
+     group: root
+
+- name: Install 50unattended-upgrades file for unattended-upgrades
+  copy:
+     mode: 0444
+     src: 50unattended-upgrades
+     dest: /etc/apt/apt.conf.d/50unattended-upgrades
+     owner: root
+     group: root
