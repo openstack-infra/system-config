@@ -1,2 +1,4 @@
-iptables_public_ports:
+iptables_extra_public_tcp_ports:
+  - 53
+iptables_extra_public_udp_ports:
   - 53
