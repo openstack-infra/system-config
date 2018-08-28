@@ -1,0 +1,53 @@
+- fail:
+    msg: "Unsupported puppet version '{{ puppet_install_version }}' on this platform"
+  when: puppet_install_version not in [3,4]
+
+- name: Install puppet 3 packages
+  when: puppet_install_version == 3
+  become: true
+  block:
+    # Puppetlabs does not support Xenial for puppet 3, so we're using
+    # system packages
+    - name: Install puppet packages
+      package:
+        state: present
+        name: '{{ item }}'
+      loop:
+        - puppet
+        - ruby
+
+    # wipe out templatedir so we don't get warnings
+    - name: Remove templatedir
+      lineinfile:
+        path: /etc/puppet/puppet.conf
+        state: absent
+        regexp: 'templatedir'
+
+    # wipe out server, as we don't have one
+    - name: Remove server
+      lineinfile:
+        path: /etc/puppet/puppet.conf
+        state: absent
+        regexp: 'server'
+
+- name: Install puppet 4 packages
+  when: puppet_install_version == 4
+  become: true
+  block:
+    - name: Install puppetlabs repo
+      apt:
+        deb: https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
+
+    - name: Install puppet packages
+      apt:
+        name:
+          - puppet-agent
+          - ruby
+        update_cache: yes
+
+- name: Stop and disable puppet service
+  service:
+    name: puppet
+    state: stopped
+    enabled: no
+  become: yes
