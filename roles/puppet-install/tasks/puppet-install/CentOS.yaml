@@ -18,20 +18,6 @@
         state: present
         update_cache: yes
 
-    # wipe out templatedir so we don't get warnings
-    - name: Remove templatedir
-      lineinfile:
-        path: /etc/puppet/puppet.conf
-        state: absent
-        regexp: 'templatedir'
-
-    # wipe out server, as we don't have one
-    - name: Remove server
-      lineinfile:
-        path: /etc/puppet/puppet.conf
-        state: absent
-        regexp: 'server'
-
 - name: Install puppet 4 packages
   when: puppet_install_version == 4
   become: true
