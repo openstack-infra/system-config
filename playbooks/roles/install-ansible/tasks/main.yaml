@@ -6,6 +6,10 @@
   pip:
     name: openstacksdk
 
+- name: Install mitogen
+  pip:
+    name: mitogen
+
 - name: Ensure /etc/ansible and /etc/ansible/hosts
   file:
     state: directory
