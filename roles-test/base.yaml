@@ -6,6 +6,12 @@
 # to run under Zuul (here) and also directly under Ansible for the
 # control-plane (see system-config-run-base)
 #
+# Note playbooks should by default use the "base" node (i.e. hosts:
+# base); some roles (like puppet) may also use another node if they're
+# testing an alternative path.
+
+# Puppet installation
+- import_playbook: puppet-install.yaml
 
 # Kerberos & afs roles
 - import_playbook: openafs-client.yaml
