@@ -1,0 +1,10 @@
+- hosts: bridge.openstack.org
+  tasks:
+    - name: Collect testinfra logs
+      synchronize:
+        dest: "{{ zuul.executor.log_root }}"
+        mode: pull
+        src: "{{ item }}"
+        verify_host: true
+      loop:
+        - "{{ ansible_user_dir }}/{{ zuul.project.src_dir }}/junit.xml"
