@@ -37,6 +37,24 @@ def test_exim_is_installed(host):
     assert cmd.rc == 0
 
 
+def test_puppet(host):
+    # We only install puppet on trusty, xenial and centos 7
+    if (host.system_info.codename in ['trusty', 'xenial'] or
+            host.system_info.distribution in ['centos']):
+        # Package name differs depending on puppet release version
+        # just check one version of puppet is installed.
+        puppet = host.package("puppet")
+        puppet_agent = host.package("puppet-agent")
+        assert puppet.is_installed or puppet_agent.is_installed
+        service = host.service("puppet")
+        assert not service.is_running
+        assert not service.is_enabled
+    else:
+        puppet = host.package("puppet")
+        puppet_agent = host.package("puppet-agent")
+        assert not puppet.is_installed and not puppet_agent.is_installed
+
+
 def test_iptables(host):
     rules = host.iptables.rules()
     rules = [x.strip() for x in rules]
