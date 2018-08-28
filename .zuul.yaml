@@ -39,6 +39,16 @@
       - roles/.*
 
 - job:
+    name: system-config-zuul-role-integration-multinode
+    description: |
+      Test roles provided by system-config with Zuul
+    abstract: true
+    parent: base
+    run: roles-test/base.yaml
+    files:
+      - roles/.*
+
+- job:
     name: system-config-zuul-role-integration-centos-7
     parent: system-config-zuul-role-integration
     nodeset: centos-7
@@ -50,8 +60,21 @@
 
 - job:
     name: system-config-zuul-role-integration-xenial
-    parent: system-config-zuul-role-integration
-    nodeset: ubuntu-xenial
+    parent: system-config-zuul-role-integration-multinode
+    nodeset:
+      nodes:
+        - name: trusty-puppet3
+          label: ubuntu-trusty
+        - name: trusty-puppet4
+          label: ubuntu-trusty
+        - name: xenial-puppet3
+          label: ubuntu-xenial
+        - name: xenial-puppet4
+          label: ubuntu-xenial
+        - name: centos7-puppet3
+          label: centos-7
+        - name: centos7-puppet4
+          label: centos-7
 
 - job:
     name: system-config-zuul-role-integration-bionic
@@ -67,18 +90,18 @@
     name: system-config-zuul-role-integration
     check:
       jobs:
-        - system-config-zuul-role-integration-centos-7
-        - system-config-zuul-role-integration-trusty
+#        - system-config-zuul-role-integration-centos-7
+#        - system-config-zuul-role-integration-trusty
         - system-config-zuul-role-integration-xenial
-        - system-config-zuul-role-integration-bionic
-        - system-config-zuul-role-integration-debian-stable
+#        - system-config-zuul-role-integration-bionic
+#        - system-config-zuul-role-integration-debian-stable
     gate:
       jobs:
-        - system-config-zuul-role-integration-centos-7
-        - system-config-zuul-role-integration-trusty
+ #       - system-config-zuul-role-integration-centos-7
+ #       - system-config-zuul-role-integration-trusty
         - system-config-zuul-role-integration-xenial
-        - system-config-zuul-role-integration-bionic
-        - system-config-zuul-role-integration-debian-stable
+ #       - system-config-zuul-role-integration-bionic
+ #       - system-config-zuul-role-integration-debian-stable
 
 - job:
     name: system-config-run-base
@@ -110,17 +133,17 @@
 - project:
     templates:
       - system-config-zuul-role-integration
-    check:
-      jobs:
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-    gate:
-      jobs:
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
+#    check:
+#      jobs:
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - system-config-run-base
+#    gate:
+#      jobs:
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - system-config-run-base

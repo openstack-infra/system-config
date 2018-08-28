@@ -1,0 +1,13 @@
+- name: Install puppet3
+  hosts: '*puppet3'
+  roles:
+
+    - role: puppet-install
+      puppet_install_version: 3
+
+- name: Install puppet4
+  hosts: '*puppet4'
+  roles:
+
+    - role: puppet-install
+      puppet_install_version: 4
