@@ -35,6 +35,8 @@
     abstract: true
     parent: base
     run: roles-test/base.yaml
+    files:
+      - roles/.*
 
 - job:
     name: system-config-zuul-role-integration-centos-7
