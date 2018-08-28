@@ -1,0 +1,11 @@
+- name: Install puppet3
+  hosts: base
+  roles:
+    - role: puppet-install
+      puppet_install_version: 3
+
+- name: Install puppet4
+  hosts: puppet4
+  roles:
+    - role: puppet-install
+      puppet_install_version: 4
