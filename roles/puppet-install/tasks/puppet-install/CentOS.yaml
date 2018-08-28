@@ -1,0 +1,50 @@
+- fail:
+    msg: "Unsupported puppet version on this platform"
+  when: puppet_install_version != 3 or
+        puppet_install_version != 4
+
+- name: Install puppet 3 packages
+  when: puppet_install_version == 3
+  become: true
+  block:
+    - name: Install puppetlabs repo
+      yum:
+        name: https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+
+    - name: Install puppet packages
+      yum:
+        name:
+          - puppet
+          - ruby
+        state: present
+        update_cache: yes
+
+    # wipe out templatedir so we don't get warnings
+    - name: Remove templatedir
+      lineinfile:
+        path: /etc/puppet/puppet.conf
+        state: absent
+        regexp: 'templatedir'
+
+    # wipe out server, as we don't have one
+    - name: Remove server
+      lineinfile:
+        path: /etc/puppet/puppet.conf
+        state: absent
+        regexp: 'server'
+
+- name: Install puppet 4 packages
+  when: puppet_install_version == 4
+  become: true
+  block:
+    - name: Install puppetlabs repo
+      yum:
+        name: https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+
+    - name: Install puppet packages
+      yum:
+        name:
+          - puppet-agent
+          - ruby
+        state: present
+        update_cache: yes
