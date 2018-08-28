@@ -16,10 +16,9 @@
     - name: Install puppet packages
       package:
         state: present
-        name: '{{ item }}'
-      loop:
-        - puppet
-        - ruby
+        name:
+          - puppet
+          - ruby
     # wipe out templatedir so we don't get warnings
     - name: Remove templatedir
       lineinfile:
