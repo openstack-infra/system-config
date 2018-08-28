@@ -1,0 +1,11 @@
+- name: Register dhclient config file
+  stat:
+    path: "{{ item }}"
+  register: _dhclient
+
+- name: Write dhclient config file
+  when: _dhclient.stat.exists | bool
+  copy:
+    src: dhclient.conf
+    dest: "{{ item }}"
+    mode: 0444
