@@ -1,0 +1,19 @@
+- hosts: bridge.openstack.org
+  tasks:
+    - name: Register junit.xml
+      stat:
+        - path: "{{ zuul.projects.src_root }}/junit.xml"
+      register: _junit
+
+    - name: Post log processing
+      block:
+        - name: Collect testinfra logs
+          synchronize:
+            dest: "{{ zuul.executor.log_root }}"
+            mode: pull
+            src: "{{ item }}"
+            verify_host: true
+          with_items:
+            - "{{ zuul.projects.src_root }}/junit.xml"
+
+      when: _junit.stat.exists|bool
