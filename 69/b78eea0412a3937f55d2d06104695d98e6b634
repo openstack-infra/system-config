@@ -1,0 +1,11 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+1: Rafael Folco <rfolco@redhat.com>
+Code-Review+1: wes hayutin <weshayutin@gmail.com>
+Code-Review+1: Sorin Sbarnea <ssbarnea@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 28 Aug 2018 22:10:33 +0000
+Reviewed-on: https://review.openstack.org/596799
+Project: openstack-infra/system-config
+Branch: refs/heads/master
