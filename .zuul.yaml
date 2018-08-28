@@ -131,6 +131,13 @@
           label: ubuntu-bionic
         - name: centos7
           label: centos-7
+      groups:
+        - name: puppet
+          nodes:
+            - trusty
+            - xenial
+            - bionic
+            - centos7
     host-vars:
       trusty:
         ansible_python_interpreter: python2
