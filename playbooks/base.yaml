@@ -13,6 +13,7 @@
 
 - hosts: "puppet:!disabled"
   roles:
+    - install-puppet
     - disable-puppet-agent
 
 - hosts: "!ci-backup:!disabled"
