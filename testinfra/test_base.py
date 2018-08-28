@@ -96,3 +96,17 @@ def test_timezone(host):
 def test_unbound(host):
     output = host.check_output('host git.openstack.org')
     assert 'has address' in output
+
+
+def test_puppet(host):
+    # We only install puppet on trusty, xenial and centos 7
+    if (host.system_info.codename in ['trusty', 'xenial'] or
+            host.system_info.distribution in ['centos']):
+        # Package name differs depending on puppet release version
+        # just check one version of puppet is installed.
+        puppet = host.package("puppet")
+        puppet_agent = host.package("puppet-agent")
+        assert puppet.is_installaed or puppet_agent.is_installed
+        service = host.service("puppet")
+        assert not service.is_running
+        assert not service.is_enabled
