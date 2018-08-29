@@ -1,2 +1,2 @@
-iptables_public_tcp_ports:
+iptables_extra_public_tcp_ports:
   - 80

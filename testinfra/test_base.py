@@ -75,11 +75,10 @@ def test_iptables(host):
     reject = '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
     assert reject in rules
 
-    # Make sure that the zuul console stream rule has been removed
-    # from the test node
+    # Make sure that the zuul console stream rule is still present
     zuul = ('-A openstack-INPUT -p tcp -m state --state NEW'
             ' -m tcp --dport 19885 -j ACCEPT')
-    assert zuul not in rules
+    assert zuul in rules
 
     # Ensure all IPv4 addresses for cacti are allowed
     for ip in get_ips('cacti.openstack.org', socket.AF_INET):
