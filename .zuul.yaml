@@ -152,6 +152,23 @@
       - roles/.*
       - testinfra/.*
 
+- job:
+    name: system-config-run-eavesdrop
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: eavesdrop01.openstack.org
+          label: ubuntu-xenial
+    pre-run: playbooks/zuul/run-base-pre.yaml
+    run: playbooks/zuul/run-host.yaml
+    vars:
+      host: eavesdrop
+    files:
+      - .zuul.yaml
+      - playbooks/group_vars/eavesdrop.yaml
+      - testinfra/test_eavesdrop.py
+
 - project:
     templates:
       - system-config-zuul-role-integration
