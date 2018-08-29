@@ -12,17 +12,17 @@
         write_inventory_dest: /etc/ansible/hosts/inventory.yaml
         write_inventory_exclude_hostvars:
           - ansible_user
-    - name: Update ansible.cfg to use job inventory
-      ini_file:
-        path: /etc/ansible/ansible.cfg
-        section: defaults
-        option: inventory
-        value: /etc/ansible/hosts/inventory.yaml
     - name: Set up /opt/system-config repo
       git:
         repo: /home/zuul/src/git.openstack.org/openstack-infra/system-config
         dest: /opt/system-config
         force: yes
+    - name: Update ansible.cfg to use job inventory
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: defaults
+        option: inventory
+        value: /etc/ansible/hosts/inventory.yaml,/opt/system-config/inventory/groups.yaml
     - name: Make host_vars directory
       file:
         path: "/etc/ansible/hosts/host_vars"
@@ -49,4 +49,3 @@
         name: tox
       vars:
         tox_envlist: testinfra
-        tox_extra_args: testinfra/test_base.py
