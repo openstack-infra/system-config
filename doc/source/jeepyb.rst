@@ -22,7 +22,6 @@ At a Glance
 :Configuration:
   * :cgit_file:`modules/openstack_project/templates/review.projects.ini.erb`
   * :config:`gerrit/projects.yaml`
-  * :cgit_file:`modules/openstack_project/files/pypi-mirror.yaml`
 :Projects:
   * https://git.openstack.org/cgit/openstack-infra/jeepyb
 :Bugs:
