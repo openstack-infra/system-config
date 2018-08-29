@@ -14,6 +14,8 @@
 
 import socket
 
+testinfra_hosts = ['all']
+
 
 def get_ips(value, family=None):
     ret = set()
