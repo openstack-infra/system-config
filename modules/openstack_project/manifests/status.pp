@@ -244,27 +244,6 @@ class openstack_project::status (
   }
 
   ###########################################################
-  # Status - releasestatus (removed)
-
-  file { '/srv/static/release':
-    ensure => absent,
-    force  => yes,
-  }
-
-  file { '/var/lib/releasestatus':
-    ensure => absent,
-    force  => yes,
-  }
-
-  user { 'releasestatus':
-    ensure => absent,
-  }
-
-  group { 'releasestatus':
-    ensure => absent,
-  }
-
-  ###########################################################
   # Status - bugdaystats
 
   include bugdaystats
