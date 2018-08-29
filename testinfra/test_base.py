@@ -147,3 +147,19 @@ def test_unattended_upgrades(host):
         cfg_file = host.file("/etc/yum/yum-cron.conf")
         assert cfg_file.exists
         assert cfg_file.contains('apply_updates = yes')
+
+
+def test_logrotate(host):
+    '''Check for log rotation configuration files
+
+       The magic number here is [0:5] of the sha1 hash of the full
+       path to the rotated logfile; the role adds this for uniqueness.
+    '''
+    ansible_vars = host.ansible.get_variables()
+    if ansible_vars['inventory_hostname'] == 'bridge.openstack.org':
+        cfg_file = host.file("/etc/logrotate.d/ansible.log.37237.conf")
+        assert cfg_file.exists
+        assert cfg_file.contains('/var/log/ansible/ansible.log {')
+        cfg_file = host.file("/etc/logrotate.d/run_all_cron.log.1a953.conf")
+        assert cfg_file.contains('/var/log/ansible/run_all_cron.log {')
+        assert cfg_file.exists
