@@ -1,0 +1,23 @@
+- name: Install a logrotate config
+  hosts: base
+
+  tasks:
+    - name: Ensure logrotate package
+      package:
+        name: logrotate
+        ensure: present
+
+    - name: Install sample logrotate config
+      include_role:
+        - name: logrotate
+      vars:
+        logrotate_file_name: /var/log/sample.log
+
+    - name: Ensure logrotate config file created
+      stat:
+        path: /etc/logrotate.d/sample.log.dcc1a.conf
+      register: stat_result
+
+    - assert:
+        that:
+          - stat_result.stat.exists
