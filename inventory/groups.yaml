@@ -32,7 +32,7 @@ groups:
   ns: inventory_hostname.startswith('ns')
   paste: inventory_hostname.startswith('paste')
   pbx: inventory_hostname.startswith('pbx')
-  puppet: not inventory_hostname.startswith('bridge')
+  puppet: not (inventory_hostname.startswith('bridge') or inventory_hostname.startswith('bionic'))
   refstack: inventory_hostname.startswith('refstack')
   review-dev: inventory_hostname is match('review-dev\d+\.openstack\.org')
   review: inventory_hostname is match('review\d+\.openstack\.org')
