@@ -14,6 +14,11 @@
 
 import socket
 
+import iptables
+
+
+testinfra_hosts = ['all']
+
 
 def get_ips(value, family=None):
     ret = set()
@@ -56,7 +61,9 @@ def test_puppet(host):
 
 
 def test_iptables(host):
-    rules = host.iptables.rules()
+    ip = iptables.Iptables.get_module(host)
+    rules = ip.rules()
+
     rules = [x.strip() for x in rules]
 
     start = [
