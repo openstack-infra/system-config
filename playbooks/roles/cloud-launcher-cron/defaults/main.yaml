@@ -1,0 +1,6 @@
+cloud_launcher_cron_interval:
+  minute: '0'
+  hour: '*/1'
+  day: '*'
+  month: '*'
+  weekday: '*'
