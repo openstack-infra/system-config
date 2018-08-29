@@ -5,3 +5,4 @@
     - install-ansible
     - root-keys
     - ansible-cron
+    - cloud-launcher-cron
