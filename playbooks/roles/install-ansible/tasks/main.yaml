@@ -44,3 +44,10 @@
   copy:
     src: openstack.py
     dest: /etc/ansible/inventory_plugins/openstack.py
+
+
+- name: Setup log rotation
+  include_role:
+    name: logrotate
+  vars:
+    logrotate_file_name: /var/log/ansible/ansible.log
