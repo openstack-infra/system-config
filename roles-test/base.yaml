@@ -10,6 +10,9 @@
 # base); some roles (like puppet) may also use another node if they're
 # testing an alternative path.
 
+# Logrotate for a file
+- import_playbook: logrotate.yaml
+
 # Puppet installation
 - import_playbook: puppet-install.yaml
 
