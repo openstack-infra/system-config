@@ -43,3 +43,9 @@ def test_openstacksdk_config(host):
     assert f.user == 'root'
     assert f.group == 'root'
     assert f.mode == 0o640
+
+
+def test_cloud_launcher_cron(host):
+    with host.sudo():
+        crontab = host.check_output('crontab -l')
+        assert b'run_cloud_launcher.sh' in crontab
