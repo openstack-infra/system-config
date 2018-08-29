@@ -4,6 +4,7 @@ bastion_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYP
 base_packages:
   - at
   - git
+  - logrotate
   - lvm2
   - ntp
   - openssh-server
