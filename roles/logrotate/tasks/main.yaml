@@ -1,0 +1,12 @@
+- name: Set config file target if not set
+  set_fact:
+    logrotate_config_file_name: "{{ logrotate_file_name | basename }}.{{ (logrotate_file_name|basename|hash('sha1'))[0:5].conf"
+  when: not logrotate_config_file_name
+
+- name: 'Install {{ logrotate_file_name }} rotatation config file'
+  template:
+    src: logrotate.conf.j2
+    dest: '/etc/logrotate.d/{{ logrotate_config_file_name }}'
+    owner: root
+    group: root
+    mode: 0644
