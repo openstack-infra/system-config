@@ -169,7 +169,6 @@ node 'puppetmaster.openstack.org' {
     pin_puppet                => '3.6.',
   }
   class { 'openstack_project::puppetmaster':
-    puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
   }
 }
 
@@ -818,7 +817,6 @@ node /^nl\d+\.openstack\.org$/ {
   $packethost_username            = hiera('nodepool_packethost_username', 'username')
   $packethost_password            = hiera('nodepool_packethost_password')
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
-  $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server': }
 
@@ -827,7 +825,6 @@ node /^nl\d+\.openstack\.org$/ {
   class { '::openstackci::nodepool_launcher':
     nodepool_ssh_private_key => hiera('zuul_worker_ssh_private_key_contents'),
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
-    oscc_file_contents       => $clouds_yaml,
     statsd_host              => 'graphite.openstack.org',
     revision                 => 'master',
     python_version           => 3,
@@ -869,7 +866,6 @@ node /^nb\d+\.openstack\.org$/ {
   $packethost_username            = hiera('nodepool_packethost_username', 'username')
   $packethost_password            = hiera('nodepool_packethost_password')
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
-  $clouds_yaml                   = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server': }
 
@@ -880,7 +876,6 @@ node /^nb\d+\.openstack\.org$/ {
     vhost_name                    => $::fqdn,
     enable_build_log_via_http     => true,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    oscc_file_contents            => $clouds_yaml,
     statsd_host                   => 'graphite.openstack.org',
     upload_workers                => '16',
     revision                      => 'master',
