@@ -12,9 +12,9 @@ clouds:
       - IAD
     api_timeout: 60
     auth:
-      username: '<%= @rackspace_username %>'
-      password: '<%= @rackspace_password %>'
-      project_id: <%= @rackspace_project %>
+      username: '{{ rackspace_username }}'
+      password: '{{ rackspace_password }}'
+      project_id: '{{ rackspace_project }}'
     force_ipv4: true
   ovh:
     profile: ovh
@@ -26,16 +26,16 @@ clouds:
       - GRA1
     api_timeout: 60
     auth:
-      username: '<%= @ovh_username %>'
-      password: '<%= @ovh_password %>'
-      project_name: '<%= @ovh_project %>'
+      username: '{{ ovh_username }}'
+      password: '{{ ovh_password }}'
+      project_name: '{{ ovh_project }}'
   inap:
     profile: internap
     api_timeout: 60
     auth:
-      username: '<%= @internap_username %>'
-      password: '<%= @internap_password %>'
-      project_name: '<%= @internap_project %>'
+      username: '{{ internap_username }}'
+      password: '{{ internap_password }}'
+      project_name: '{{ internap_project }}'
     regions:
       - name: mtl01
         values:
@@ -50,9 +50,9 @@ clouds:
     api_timeout: 60
     auth_type: password
     auth:
-      username: '<%= @vexxhost_username %>'
-      password: '<%= @vexxhost_password %>'
-      project_name: '<%= @vexxhost_project %>'
+      username: '{{ vexxhost_username }}'
+      password: '{{ vexxhost_password }}'
+      project_name: '{{ vexxhost_project }}'
       project_domain_name: default
       user_domain_name: default
     image_format: 'raw'
@@ -65,8 +65,8 @@ clouds:
     profile: citycloud
     api_timeout: 60
     auth:
-      username: '<%= @citycloud_username %>'
-      password: '<%= @citycloud_password %>'
+      username: '{{ citycloud_username }}'
+      password: '{{ citycloud_password }}'
       project_id: bed89257500340af8d0fbe7141b1bfd6
       project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
       user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
@@ -76,9 +76,9 @@ clouds:
     identity_api_version: '3'
     auth:
       auth_url: https://cn1.linaro.cloud:35357
-      username: <%= @linaro_username %>
-      password: <%= @linaro_password %>
-      project_name: <%= @linaro_project %>
+      username: '{{ linaro_username }}'
+      password: '{{ linaro_password }}'
+      project_name: '{{ linaro_project }}'
       project_domain_name: default
       user_domain_name: default
   limestone:
@@ -92,9 +92,9 @@ clouds:
               nat_destination: true
     auth:
       auth_url: https://osa.continuous.pw:5000
-      username: <%= @limestone_username %>
-      password: <%= @limestone_password %>
-      project_name: <%= @limestone_project %>
+      username: '{{ limestone_username }}'
+      password: '{{ limestone_password }}'
+      project_name: '{{ limestone_project }}'
       user_domain_name: default
       project_domain_name: default
     api_timeout: 60
@@ -110,9 +110,9 @@ clouds:
               default_interface: True
     auth:
       auth_url: https://packet.platform9.net/keystone
-      username: <%= @packethost_username %>
-      password: <%= @packethost_password %>
-      project_name: <%= @packethost_project %>
+      username: '{{ packethost_username }}'
+      password: '{{ packethost_password }}'
+      project_name: '{{ packethost_project }}'
       user_domain_name: default
       project_domain_name: default
     identity_api_version: '3'
