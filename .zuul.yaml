@@ -118,7 +118,22 @@
         - system-config-zuul-role-integration-debian-stable
 
 - job:
+    name: system-config-run
+    description: |
+      Run the "base" playbook for system-config hosts.
+
+      This is a parent job designed to be inherited.
+    abstract: true
+    pre-run: playbooks/zuul/run-base-pre.yaml
+    run: playbooks/zuul/run-base.yaml
+    post-run: playbooks/zuul/run-base-post.yaml
+
+- job:
     name: system-config-run-base
+    parent: system-config-run
+    description: |
+      Run the "base" playbook on each of the node types
+      currently in use.
     nodeset:
       nodes:
         - name: bridge.openstack.org
@@ -136,9 +151,6 @@
         ansible_python_interpreter: python2
       centos7:
         ansible_python_interpreter: python2
-    pre-run: playbooks/zuul/run-base-pre.yaml
-    run: playbooks/zuul/run-base.yaml
-    post-run: playbooks/zuul/run-base-post.yaml
     files:
       - .zuul.yaml
       - playbooks/.*
@@ -147,14 +159,15 @@
 
 - job:
     name: system-config-run-eavesdrop
+    parent: system-config-run
+    description: |
+      Run the playbook for an eavesdrop server.
     nodeset:
       nodes:
         - name: bridge.openstack.org
           label: ubuntu-bionic
         - name: eavesdrop01.openstack.org
           label: ubuntu-xenial
-    pre-run: playbooks/zuul/run-base-pre.yaml
-    run: playbooks/zuul/run-base.yaml
     files:
       - .zuul.yaml
       - playbooks/group_vars/eavesdrop.yaml
