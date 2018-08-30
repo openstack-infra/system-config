@@ -1,8 +1,7 @@
 - name: Install base packages
   package:
     state: present
-    name: '{{ item }}'
-  loop: '{{ base_packages }}'
+    name: "{{ base_packages }}"
 
 - name: Include OS-specific variables
   include_vars: "{{ lookup('first_found', params) }}"
@@ -15,8 +14,7 @@
 - name: Install distro specific packages
   package:
     state: present
-    name: '{{ item }}'
-  loop: '{{ distro_packages }}'
+    name: "{{ distro_packages }}"
 
 - name: Increase syslog message size in order to capture python tracebacks
   copy:
