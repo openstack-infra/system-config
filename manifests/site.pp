@@ -169,7 +169,6 @@ node 'puppetmaster.openstack.org' {
     pin_puppet                => '3.6.',
   }
   class { 'openstack_project::puppetmaster':
-    puppetmaster_clouds                        => hiera('puppetmaster_clouds'),
   }
 }
 
@@ -818,6 +817,7 @@ node /^nl\d+\.openstack\.org$/ {
   $packethost_username            = hiera('nodepool_packethost_username', 'username')
   $packethost_password            = hiera('nodepool_packethost_password')
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
+  # TODO(clarkb) stop having puppet manage this file.
   $clouds_yaml                    = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server': }
@@ -869,6 +869,7 @@ node /^nb\d+\.openstack\.org$/ {
   $packethost_username            = hiera('nodepool_packethost_username', 'username')
   $packethost_password            = hiera('nodepool_packethost_password')
   $packethost_project             = hiera('nodepool_packethost_project', 'project')
+  # TODO(clarkb) stop having puppet manage this file.
   $clouds_yaml                   = template("openstack_project/nodepool/clouds.yaml.erb")
 
   class { 'openstack_project::server': }
