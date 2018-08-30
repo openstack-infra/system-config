@@ -12,3 +12,11 @@
         src: "{{ zuul.project.src_dir }}/junit.xml"
         verify_host: true
       when: _junit.stat.exists|bool
+
+    - name: Collect ansible configuration
+      synchronize:
+        dest: "{{ zuul.executor.log_root }}"
+        mode: pull
+        src: "/etc/ansible/"
+        verify_host: true
+      ignore_errors: true
