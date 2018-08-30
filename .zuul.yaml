@@ -173,6 +173,28 @@
       - playbooks/group_vars/eavesdrop.yaml
       - testinfra/test_eavesdrop.py
 
+- job:
+    name: system-config-run-nodepool
+    parent: system-config-run
+    description: |
+      Run the playbook for nodepool.
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: nl01.openstack.org
+          label: ubuntu-xenial
+        - name: nb01.openstack.org
+          label: ubuntu-xenial
+    files:
+      - .zuul.yaml
+      - playbooks/group_vars/nodepool.yaml
+      - playbooks/group_vars/nodepool-builder.yaml
+      - playbooks/group_vars/nodepool-launcher.yaml
+      - playbooks/roles/configure-openstacksdk/
+      - playbooks/templates/clouds/
+      - testinfra/test_nodepool.py
+
 - project:
     templates:
       - system-config-zuul-role-integration
@@ -184,6 +206,7 @@
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
         - system-config-run-eavesdrop
+        - system-config-run-nodepool
     gate:
       jobs:
         - puppet-beaker-rspec-infra-system-config
@@ -192,3 +215,4 @@
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
         - system-config-run-eavesdrop
+        - system-config-run-nodepool
