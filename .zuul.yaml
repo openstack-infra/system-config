@@ -146,6 +146,7 @@
         ansible_python_interpreter: python2
     pre-run: playbooks/zuul/run-base-pre.yaml
     run: playbooks/zuul/run-base.yaml
+    post-run: playbooks/zuul/run-base-post.yaml
     files:
       - .zuul.yaml
       - playbooks/.*
