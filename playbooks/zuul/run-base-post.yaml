@@ -19,4 +19,6 @@
         mode: pull
         src: "/etc/ansible"
         verify_host: true
+        rsync_opts:
+          - "--exclude=__pycache__"
       ignore_errors: true
