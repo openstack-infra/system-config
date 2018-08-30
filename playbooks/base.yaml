@@ -11,7 +11,19 @@
     - timezone
     - unbound
 
-- hosts: nodepool-launcher:nodepool-builder:bridge.openstack.org:!disabled
+- hosts: bridge.openstack.org:!disabled
+  tasks:
+    - include_role:
+        name: configure-openstacksdk
+      vars:
+        openstacksdk_config_file: '{{ openstacksdk_config_dir }}/all-clouds.yaml'
+        openstacksdk_config_template: clouds/bridge_all_clouds.yaml.j2
+    - include_role:
+        name: configure-openstacksdk
+      vars:
+        openstacksdk_config_template: clouds/bridge_clouds.yaml.j2
+
+- hosts: nodepool-launcher:nodepool-builder:!disabled
   strategy: free
   roles:
     - configure-openstacksdk

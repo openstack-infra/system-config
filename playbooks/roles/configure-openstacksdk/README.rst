@@ -10,5 +10,10 @@ Configure openstacksdk files needed by nodepool and ansible.
 .. zuul:rolevar:: openstacksdk_config_owner
    :default: root
 
-.. zuul:rolevar:: openstacksdf_config_group
+.. zuul:rolevar:: openstacksdk_config_group
    :default: root
+
+.. zuul:rolevar:: openstacksdk_config_file
+   :default: {{ openstacksdk_config_dir }}/clouds.yaml
+
+.. zuul:rolevar:: openstacksdk_config_template
