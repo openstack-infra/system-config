@@ -1,0 +1,119 @@
+cache:
+  expiration:
+    server: 5
+    port: 5
+    floating-ip: 5
+clouds:
+  rax:
+    profile: rackspace
+    regions:
+      - DFW
+      - ORD
+      - IAD
+    api_timeout: 60
+    auth:
+      username: '<%= @rackspace_username %>'
+      password: '<%= @rackspace_password %>'
+      project_id: <%= @rackspace_project %>
+    force_ipv4: true
+  ovh:
+    profile: ovh
+    # OVH has a weird new ipv6 setup that we can't handle properly
+    # for now ignore ipv6
+    force_ipv4: true
+    regions:
+      - BHS1
+      - GRA1
+    api_timeout: 60
+    auth:
+      username: '<%= @ovh_username %>'
+      password: '<%= @ovh_password %>'
+      project_name: '<%= @ovh_project %>'
+  inap:
+    profile: internap
+    api_timeout: 60
+    auth:
+      username: '<%= @internap_username %>'
+      password: '<%= @internap_password %>'
+      project_name: '<%= @internap_project %>'
+    regions:
+      - name: mtl01
+        values:
+          networks:
+            - name: inap-17304-WAN1101
+              routes_externally: True
+  vexxhost:
+    profile: vexxhost
+    regions:
+      - ca-ymq-1
+      - sjc1
+    api_timeout: 60
+    auth_type: password
+    auth:
+      username: '<%= @vexxhost_username %>'
+      password: '<%= @vexxhost_password %>'
+      project_name: '<%= @vexxhost_project %>'
+      project_domain_name: default
+      user_domain_name: default
+    image_format: 'raw'
+  citycloud:
+    regions:
+      - Lon1
+      - Kna1
+      - La1
+      - Sto2
+    profile: citycloud
+    api_timeout: 60
+    auth:
+      username: '<%= @citycloud_username %>'
+      password: '<%= @citycloud_password %>'
+      project_id: bed89257500340af8d0fbe7141b1bfd6
+      project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
+      user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
+  linaro:
+    regions:
+      - RegionOne
+    identity_api_version: '3'
+    auth:
+      auth_url: https://cn1.linaro.cloud:35357
+      username: <%= @linaro_username %>
+      password: <%= @linaro_password %>
+      project_name: <%= @linaro_project %>
+      project_domain_name: default
+      user_domain_name: default
+  limestone:
+    regions:
+      - name: RegionOne
+        values:
+          networks:
+            - name: "Gateway Network"
+              routes_externally: false
+              routes_ipv6_externally: true
+              nat_destination: true
+    auth:
+      auth_url: https://osa.continuous.pw:5000
+      username: <%= @limestone_username %>
+      password: <%= @limestone_password %>
+      project_name: <%= @limestone_project %>
+      user_domain_name: default
+      project_domain_name: default
+    api_timeout: 60
+    identity_api_version: 3
+    floating_ip_source: None
+    cacert: /home/nodepool/.config/openstack/limestone_cacert.pem
+  packethost:
+    regions:
+      - name: us-west-1
+        values:
+          networks:
+            - name: openstackzuul-net
+              default_interface: True
+    auth:
+      auth_url: https://packet.platform9.net/keystone
+      username: <%= @packethost_username %>
+      password: <%= @packethost_password %>
+      project_name: <%= @packethost_project %>
+      user_domain_name: default
+      project_domain_name: default
+    identity_api_version: '3'
+    image_format: 'raw'
