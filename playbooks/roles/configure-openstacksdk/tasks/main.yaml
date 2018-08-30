@@ -13,3 +13,11 @@
     mode: 0640
     owner: '{{ openstacksdk_config_owner }}'
     src: limestone_cacert.pem
+
+- name: Install the clouds config file
+  template:
+    src: '{{ openstacksdk_config_template }}'
+    dest: '{{ openstacksdk_config_file }}'
+    group: '{{ openstacksdk_config_group }}'
+    owner: '{{ openstacksdk_config_owner }}'
+    mode: 0640

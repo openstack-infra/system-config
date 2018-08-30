@@ -1,7 +1,6 @@
 # == Class: openstack_project::puppetmaster
 #
 class openstack_project::puppetmaster (
-  $puppetmaster_clouds,
   $root_rsa_key = 'xxx',
 ) {
   include logrotate
@@ -30,30 +29,6 @@ class openstack_project::puppetmaster (
     group  => 'admin',
     mode   => '0750',
   }
-
-  file { '/etc/openstack':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'admin',
-    mode   => '0750',
-  }
-
-  file { '/etc/openstack/clouds.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'admin',
-    mode    => '0660',
-    content => template('openstack_project/puppetmaster/ansible-clouds.yaml.erb'),
-  }
-
-  file { '/etc/openstack/all-clouds.yaml':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'admin',
-    mode    => '0660',
-    content => template('openstack_project/puppetmaster/all-clouds.yaml.erb'),
-  }
-
 
   # For signing key management
   package { 'gnupg':
