@@ -561,6 +561,14 @@ node /^files\d*\.openstack\.org$/ {
     require                       => Class['Openstack_project::Server'],
   }
 
+  openstack_project::website { 'docs.starlingx.io':
+    aliases          => [],
+    ssl_cert         => hiera('starlingx_io_ssl_cert'),
+    ssl_key          => hiera('starlingx_io_ssl_key'),
+    ssl_intermediate => hiera('starlingx_io_ssl_intermediate'),
+    require          => Class['openstack_project::files'],
+  }
+
   openstack_project::website { 'zuul-ci.org':
     aliases          => ['www.zuul-ci.org', 'zuulci.org', 'www.zuulci.org'],
     ssl_cert         => hiera('zuul-ci_org_ssl_cert'),
