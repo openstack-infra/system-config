@@ -45,7 +45,7 @@
     - name: Display group membership
       command: ansible localhost -m debug -a 'var=groups'
     - name: Run base.yaml
-      command: ansible-playbook /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
+      command: ansible-playbook -vvv /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
     - name: Run testinfra to validate configuration
       include_role:
         name: tox
