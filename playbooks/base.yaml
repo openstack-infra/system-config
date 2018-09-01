@@ -12,12 +12,14 @@
     - unbound
 
 - hosts: bridge.openstack.org:!disabled
-  roles:
-    - role: configure-openstacksdk
+  tasks:
+    - include_role:
+        name: configure-openstacksdk
       vars:
         openstacksdk_config_file: '{{ openstacksdk_config_dir }}/all-clouds.yaml'
         openstacksdk_config_template: clouds/bridge_all_clouds.yaml.j2
-    - role: configure-openstacksdk
+    - include_role:
+        name: configure-openstacksdk
       vars:
         openstacksdk_config_template: clouds/bridge_clouds.yaml.j2
 
