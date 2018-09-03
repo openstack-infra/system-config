@@ -8,7 +8,7 @@ groups:
   ask: inventory_hostname.startswith('ask')
   cacti: inventory_hostname is match('cacti\d+\.openstack\.org')
   ci-backup: inventory_hostname is match('backup\d+.*\ci\.openstack\.org')
-  disabled: inventory_hostname.startswith('backup') or inventory_hostname.startswith('wiki') or inventory_hostname.startswith('puppetmaster') or inventory_hostname in ['ask-staging01.openstack.org', 'mirror01.sto2.citycloud.openstack.org', 'mirror02.us-west-1.packethost.openstack.org', 'ask-staging.openstack.org', 'review.openstack.org']
+  disabled: inventory_hostname.startswith('backup') or inventory_hostname.startswith('wiki') or inventory_hostname.startswith('puppetmaster') or inventory_hostname in ['ask-staging01.openstack.org', 'mirror01.sto2.citycloud.openstack.org', 'ask-staging.openstack.org', 'review.openstack.org']
   eavesdrop: inventory_hostname.startswith('eavesdrop')
   elasticsearch: inventory_hostname is match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
