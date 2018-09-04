@@ -1,10 +1,9 @@
 - name: Remove packages that make no sense for servers
-  apt:
-    name: '{{ item }}'
+  package:
+    name:
+      - whoopsie
+      - popularity-contest
     state: absent
-  loop:
-    - whoopsie
-    - popularity-contest
 
 - name: Configure file limits
   copy:
