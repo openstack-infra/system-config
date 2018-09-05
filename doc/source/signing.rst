@@ -102,15 +102,12 @@ our management bastion host::
     #         0x94CBAFDD30345109561835AA0B7F8B60E3EDFAE3
     #     gpg --homedir signing.gnupg --verify \
     #         ~/signing.gnupg/sks-keyservers.netCA.pem{.asc,}
+    #
+    # You'll need to list them in the accompanying dirmngr.conf file.
 
     # Receive, send and search for keys in the SKS keyservers pool using
     # HKPS (OpenPGP HTTP Keyserver Protocol via TLS/SSL).
     keyserver hkps://hkps.pool.sks-keyservers.net
-
-    # Set the path to the public certificate for the
-    # sks-keyservers.net CA used to verify connections to servers in
-    # the pool above.
-    keyserver-options ca-cert-file=/root/signing.gnupg/sks-keyservers.netCA.pem
 
     # Ignore keyserver URLs specified in retrieved/refreshed keys
     # so they don't direct you to update from non-HKPS sources.
@@ -124,6 +121,14 @@ our management bastion host::
     # showing signatures.
     list-options show-uid-validity
     verify-options show-uid-validity
+
+And this is the content of the ``/root/signing.gnupg/dirmngr.conf`` file on
+our management bastion host::
+
+    # Set the path to the public certificate for the
+    # sks-keyservers.net CA used to verify connections to servers in
+    # the accompanying gpg.conf file.
+    hkp-cacert /root/signing.gnupg/sks-keyservers.netCA.pem
 
 
 Generation
@@ -145,7 +150,7 @@ the root user:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# umask 077
+    root@bridge:~# umask 077
 
 Now create a master key for the coming development cycle, taking
 mostly the GnuPG recommended default values. Set a validity period
@@ -156,8 +161,8 @@ earlier keys unless we know it to have been compromised):
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir signing.gnupg --gen-key
-    gpg (GnuPG) 1.4.16; Copyright (C) 2013 Free Software Foundation, Inc.
+    root@bridge:~# gpg --homedir signing.gnupg --full-generate-key
+    gpg (GnuPG) 2.2.4; Copyright (C) 2017 Free Software Foundation, Inc.
     This is free software: you are free to change and redistribute it.
     There is NO WARRANTY, to the extent permitted by law.
 
@@ -176,7 +181,7 @@ earlier keys unless we know it to have been compromised):
           <n>w = key expires in n weeks
           <n>m = key expires in n months
           <n>y = key expires in n years
-    Key is valid for? (0) 7m
+    Key is valid for? (0) 9m
     Key expires at Thu 02 Feb 2017 08:41:39 PM UTC
     Is this correct? (y/N) y
 
@@ -215,10 +220,10 @@ earlier keys unless we know it to have been compromised):
     gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
     gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
     gpg: next trustdb check due at 2017-02-02
-    pub   2048R/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
+    pub   rsa3072/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
           Key fingerprint = 7222 E5A0 5730 B767 0F93  035A 120D 3C23 C6D5 584D
     uid                 [ultimate] OpenStack Infra (Some Cycle) <infra-root@openstack.org>
-    sub   2048R/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
+    sub   rsa3072/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
 
 Create a revocation certificate for the master key, for use in the
 case extreme case that this master key itself becomes inaccessible,
@@ -230,9 +235,9 @@ cycle name:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir signing.gnupg --output \
+    root@bridge:~# gpg --homedir signing.gnupg --output \
     > signing.gnupg/some.revoke.asc --gen-revoke 0x120D3C23C6D5584D
-    sec  2048R/0x120D3C23C6D5584D 2016-07-07 OpenStack Infra (Some Cycle) <infra-root@openstack.org>
+    sec  rsa3072/0x120D3C23C6D5584D 2016-07-07 OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
     Create a revocation certificate for this key? (y/N) y
     Please select the reason for the revocation:
@@ -271,27 +276,19 @@ be valid only for as long as its associated master key is valid:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir signing.gnupg --edit-key 0x120D3C23C6D5584D
-    gpg (GnuPG) 1.4.16; Copyright (C) 2013 Free Software Foundation, Inc.
+    root@bridge:~# gpg --homedir signing.gnupg --edit-key 0x120D3C23C6D5584D
+    gpg (GnuPG) 2.2.4; Copyright (C) 2017 Free Software Foundation, Inc.
     This is free software: you are free to change and redistribute it.
     There is NO WARRANTY, to the extent permitted by law.
 
     Secret key is available.
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
                                    trust: ultimate      validity: ultimate
-    sub  2048R/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
+    sub  rsa3072/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
     [ultimate] (1). OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
     gpg> addkey
-    Key is protected.
-
-    You need a passphrase to unlock the secret key for
-    user: "OpenStack Infra (Some Cycle) <infra-root@openstack.org>"
-    2048-bit RSA key, ID 0x120D3C23C6D5584D, created 2016-07-07
-
-    Enter passphrase: ********************************
-
     Please select what kind of key you want:
        (3) DSA (sign only)
        (4) RSA (sign only)
@@ -311,6 +308,14 @@ be valid only for as long as its associated master key is valid:
     Key does not expire at all
     Is this correct? (y/N) y
     Really create? (y/N) y
+    Key is protected.
+
+    You need a passphrase to unlock the secret key for
+    user: "OpenStack Infra (Some Cycle) <infra-root@openstack.org>"
+    2048-bit RSA key, ID 0x120D3C23C6D5584D, created 2016-07-07
+
+    Enter passphrase: ********************************
+
     We need to generate a lot of random bytes. It is a good idea to perform
     some other action (type on the keyboard, move the mouse, utilize the
     disks) during the prime generation; this gives the random number
@@ -318,10 +323,10 @@ be valid only for as long as its associated master key is valid:
     +++++
     ........+++++
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
                                trust: ultimate      validity: ultimate
-    sub  2048R/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
-    sub  2048R/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage: S
+    sub  rsa3072/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
+    sub  rsa3072/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage: S
     [ultimate] (1). OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
     gpg> save
@@ -333,16 +338,16 @@ provides some added assurance of its validity:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir signing.gnupg --default-key 0x70CA2E45DF30B1B8 --sign-key 0x120D3C23C6D5584D
+    root@bridge:~# gpg --homedir signing.gnupg --default-key 0x70CA2E45DF30B1B8 --sign-key 0x120D3C23C6D5584D
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
                                    trust: ultimate      validity: ultimate
-    sub  2048R/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage:E
-    sub  2048R/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage:S
+    sub  rsa3072/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage:E
+    sub  rsa3072/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage:S
     [ultimate] (1). OpenStack Infra (Pike Cycle) <infra-root@openstack.org>
 
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage:SC
                                    trust: ultimate      validity: ultimate
      Primary key fingerprint: 120D 3C23 C6D5 584D 6FC2  4646 64DB B05A CC5E 7C28
 
@@ -366,7 +371,7 @@ separately:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir signing.gnupg --send-keys 0x120D3C23C6D5584D
+    root@bridge:~# gpg --homedir signing.gnupg --send-keys 0x120D3C23C6D5584D
     sending key 0x120D3C23C6D5584D to hkps server hkps.pool.sks-keyservers.net
 
 The rest of this process shouldn't happen until we're ready for the
@@ -381,12 +386,13 @@ GnuPG directory:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# umask 077
-    root@puppetmaster:~# mkdir temporary.gnupg
-    root@puppetmaster:~# gpg --homedir signing.gnupg --output \
-    > temporary.gnupg/secret-subkeys --export-secret-subkeys 0xC0224DB5F541FB68\!
-    root@puppetmaster:~# gpg --homedir temporary.gnupg --import \
-    > temporary.gnupg/secret-subkeys
+    root@bridge:~# umask 077
+    root@bridge:~# mkdir temporary.gnupg
+    root@bridge:~# gpg --homedir signing.gnupg \
+    > --output temporary.gnupg/secret-subkeys
+    > --export-secret-subkeys 0xC0224DB5F541FB68\!
+    root@bridge:~# gpg --homedir temporary.gnupg \
+    > --import temporary.gnupg/secret-subkeys
     gpg: keyring `temporary.gnupg/secring.gpg' created
     gpg: keyring `temporary.gnupg/pubring.gpg' created
     gpg: key C6D5584D: secret key imported
@@ -403,52 +409,64 @@ front of it instead of just ``sec``:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir temporary.gnupg --list-secret-keys
-    temporary.gnupg/secring.gpg
-    ---------------------------
-    sec#  2048R/C6D5584D 2016-07-07 [expires: 2017-02-02]
-    uid                  OpenStack Infra (Some Cycle) <infra-root@openstack.org>
-    ssb   2048R/F541FB68 2016-07-07
+    root@bridge:~# gpg --homedir temporary.gnupg --list-secret-keys
+
+    /root/temporary.gnupg/pubring.kbx
+    ---------------------------------
+    sec#  rsa3072 2016-07-07 [SC] [expires: 2017-02-02]
+          120D3C23C6D5584D
+    uid           [unknown] OpenStack Infra (Some Cycle) <infra-root@openstack.org>
+    ssb   rsa3072 2016-07-07 [S]
 
 So that our CI jobs will be able to make use of this subkey without
 interactively supplying a passphrase, the old passphrase (exported
 from the master key) must be reset to an empty string in the new
-temporary copy. This is again done using an interactive key editor
-session:
+temporary copy. Here we override the default pinentry mode to
+loopback as a workaround for other pinentry frontends refusing to
+accept an empty passphrase (unfortunately the prompting and feedback
+from the loopback pinentry leaves something to be desired). This is
+again done using an interactive key editor session:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir temporary.gnupg --edit-key 0xC0224DB5F541FB68
-    gpg (GnuPG) 1.4.16; Copyright (C) 2013 Free Software Foundation, Inc.
+    root@bridge:~# gpg --homedir temporary.gnupg --pinentry-mode loopback \
+    > --edit-key 0xC0224DB5F541FB68
+    gpg (GnuPG) 2.2.4; Copyright (C) 2017 Free Software Foundation, Inc.
     This is free software: you are free to change and redistribute it.
     There is NO WARRANTY, to the extent permitted by law.
 
-    Secret key is available.
+    Secret subkeys are available.
 
-    pub  2048R/C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
                      trust: unknown       validity: unknown
-    sub  2048R/F541FB68  created: 2016-07-07  expires: never       usage: S
+    sub  rsa3072/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage: S
     [ unknown] (1). OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
     gpg> passwd
-    Secret parts of primary key are not available.
-
-    You need a passphrase to unlock the secret key for
-    user: "OpenStack Infra (Some Cycle) <infra-root@openstack.org>"
-    2048-bit RSA key, ID F541FB68, created 2016-07-07
-
+    gpg: key 120D3C23C6D5584D/120D3C23C6D5584D: error changing passphrase: No secret key
     Enter passphrase: ********************************
-
-    Enter the new passphrase for this secret key.
-
     Enter passphrase:
-    Repeat passphrase:
-
-    You don't want a passphrase - this is probably a *bad* idea!
-
-    Do you really want to do this? (y/N) y
 
     gpg> save
+    Key not changed so no update needed.
+
+Test the subkey can be used without a passphrase::
+
+  root@bridge:~# echo foo | gpg --homedir temporary.gnupg --sign --armor
+  -----BEGIN PGP MESSAGE-----
+
+  owEB0QEu/pANAwAKARpUEUgFTp44AcsKYgBbid4PZm9vCokBswQAAQoAHRYhBB5+
+  uy3Npgy9sH8nfBpUEUgFTp44BQJbid4PAAoJEBpUEUgFTp4486YMAIQ8zfP5ZBTq
+  7+d6ZAO25HeYCXwqU7qqNRazrceyfBBcES6+TvOtbpNPxpCzAhT2RhkIJZMJaetF
+  /RObIXn5/nHdXRsEKgTIxoyPMfxo5M8zbLqnm7NEsFzUjK2lojBPxBQs/SxiD9Qy
+  5Hvv7sAtgNV11dzzoTtyIfOXU9dUjuEnfgboc7z410ctflgI8USRiaYaCJbdj1J/
+  iGlplq/jTNMnIB3N15M5M5U9GfFO05MVyoPz0qi3t9gWP8hkOnvOSakG25NVGB4l
+  zUbMR1oK8pmLJ33fcw/8/TejjeI2FVJh9jSVE8v4O77Iiir8XcIC+PwT2MK/HIda
+  SR43vh1iK66BbmlsONWxII74fIPEDHDeCqVnkzxdhleDf7DOd9HhYmI8WNOKtTIU
+  7hcy6cYqHBjEgVr5oViNiveiwGsKlOUhh8x1eYDIxEEoGQEHDJDKq9YOMMjRdsO8
+  fOw0TD/1r8Lmi8QLkCfGvFdrSY6EoCHqCMx3+JmGUD+iFGp2rCOucw==
+  =LxND
+  -----END PGP MESSAGE-----
 
 This leaves us with a temporary keyring containing only an unencrypted
 copy of the signing subkey. Export this keyring so that we can add it
@@ -456,40 +474,39 @@ as a secret to Zuul for use by release jobs.
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# gpg --homedir temporary.gnupg \
+    root@bridge:~# gpg --homedir temporary.gnupg \
     > --output temporary.gnupg/for-zuul --armor \
     > --export-secret-subkeys 0xC0224DB5F541FB68\!
-    root@puppetmaster:~# wget -O encrypt_secret.py \
-    > https://git.openstack.org/cgit/openstack-infra/zuul/plain/tools/encrypt_secret.py?\
-    > h=master
-    root@puppetmaster:~# python encrypt_secret.py --infile temporary.gnupg/for-zuul \
-    > --outfile temporary.gnupg/zuul.yaml https://zuul.openstack.org gerrit \
-    > openstack-infra/project-config
+    root@bridge:~# wget https://git.openstack.org/cgit/openstack-infra/zuul/plain/tools/encrypt_secret.py
+    root@bridge:~# python3 encrypt_secret.py --tenant openstack \
+    > --infile temporary.gnupg/for-zuul --outfile temporary.gnupg/zuul.yaml \
+    > https://zuul.openstack.org openstack-infra/project-config
     writing RSA key
     Public key length: 4096 bits (512 bytes)
     Max plaintext length per chunk: 470 bytes
-    Input plaintext length: 3024 bytes
-    Number of chunks: 7
+    Input plaintext length: 4818 bytes
+    Number of chunks: 11
 
 Copy ``temporary.gnupg/zuul.yaml`` to your workstation and make a
-commit to ``project-config/zuul.d/secrets.yaml`` to update the
-``gpg_key`` secret with its contents.  Be user to replace ``<name>``
-and ``<fieldname>`` as appropriate.
+commit to ``zuul.d/secrets.yaml`` file in the
+``openstack/project-config`` repo to update the ``gpg_key`` secret
+with its contents.  Be sure to replace ``<name>`` and
+``<fieldname>`` as appropriate.
 
 Safely clean up, doing your best to securely remove the temporary
 copy of the unencrypted signing subkey and any associated files:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# shred temporary.gnupg/*
-    root@puppetmaster:~# rm -rf temporary.gnupg
+    root@bridge:~# find temporary.gnupg/ -type f -exec shred {} \;
+    root@bridge:~# rm -rf temporary.gnupg encrypt_secret.py
 
 To document this transition, export a minimal text version of the
 public master key:
 
 .. code-block:: shell-session
 
-    root@puppetmaster:~# ( gpg --fingerprint \
+    root@bridge:~# ( gpg --fingerprint \
     > 0x120d3c23c6d5584d6fc2464664dbb05acc5e7c28
     > gpg --armor --export-options export-clean,export-minimal \
     > --export 0x120d3c23c6d5584d6fc2464664dbb05acc5e7c28 ) > \
@@ -523,13 +540,13 @@ fingerprint of the key as it exists on disk:
 
 .. code-block:: shell-session
 
-    me@puppetmaster:~$ sudo gpg --homedir /root/signing.gnupg --fingerprint \
+    me@bridge:~$ sudo gpg --homedir /root/signing.gnupg --fingerprint \
     > --list-keys "OpenStack Infra (Some Cycle)"
-    pub   2048R/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
+    pub   rsa3072/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
           Key fingerprint = 120D 3C23 C6D5 584D 6FC2  4646 64DB B05A CC5E 7C28
     uid                 [ultimate] OpenStack Infra (Some Cycle) <infra-root@openstack.org>
-    sub   2048R/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
-    sub   2048R/0xC0224DB5F541FB68 2016-07-07
+    sub   rsa3072/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
+    sub   rsa3072/0xC0224DB5F541FB68 2016-07-07
 
 Now on your own system where your OpenPGP key resides, retrieve the
 key, compare the fingerprint from above, and if they match, sign it
@@ -547,21 +564,21 @@ and push the signature back to the keyserver network:
     gpg: Total number processed: 1
     gpg:               imported: 1  (RSA: 1)
     me@home:~$ gpg2 --fingerprint 0x120D3C23C6D5584D
-    pub   2048R/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
+    pub   rsa3072/0x120D3C23C6D5584D 2016-07-07 [expires: 2017-02-02]
           Key fingerprint = 120D 3C23 C6D5 584D 6FC2  4646 64DB B05A CC5E 7C28
     uid                 [  full  ] OpenStack Infra (Some Cycle) <infra-root@openstack.org>
-    sub   2048R/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
-    sub   2048R/0xC0224DB5F541FB68 2016-07-07
+    sub   rsa3072/0x1F215B56867C5D9A 2016-07-07 [expires: 2017-02-02]
+    sub   rsa3072/0xC0224DB5F541FB68 2016-07-07
     me@home:~$ gpg2 --sign-key 0x120D3C23C6D5584D
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
                                    trust: unknown       validity: full
-    sub  2048R/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
-    sub  2048R/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage: S
+    sub  rsa3072/0x1F215B56867C5D9A  created: 2016-07-07  expires: 2017-02-02  usage: E
+    sub  rsa3072/0xC0224DB5F541FB68  created: 2016-07-07  expires: never       usage: S
     [  full  ] (1). OpenStack Infra (Some Cycle) <infra-root@openstack.org>
 
 
-    pub  2048R/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
+    pub  rsa3072/0x120D3C23C6D5584D  created: 2016-07-07  expires: 2017-02-02  usage: SC
                                    trust: unknown       validity: full
      Primary key fingerprint: 120D 3C23 C6D5 584D 6FC2  4646 64DB B05A CC5E 7C28
 
