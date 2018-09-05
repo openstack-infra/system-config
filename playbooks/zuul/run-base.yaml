@@ -42,6 +42,8 @@
         dest: "/etc/ansible/hosts/{{ item }}"
       loop:
         - group_vars/all.yaml
+        - group_vars/nodepool.yaml
+        - host_vars/bridge.openstack.org.yaml
     - name: Display group membership
       command: ansible localhost -m debug -a 'var=groups'
     - name: Run base.yaml

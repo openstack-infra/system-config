@@ -21,9 +21,9 @@ import sys
 import tempfile
 
 FILES_TO_CHECK = (
-    'modules/openstack_project/templates/nodepool/clouds.yaml.erb',
-    'modules/openstack_project/templates/puppetmaster/all-clouds.yaml.erb',
-    'modules/openstack_project/templates/puppetmaster/ansible-clouds.yaml.erb'
+    'playbooks/templates/clouds/nodepool_clouds.yaml.j2',
+    'playbooks/templates/clouds/bridge_all_clouds.yaml.j2',
+    'playbooks/templates/clouds/bridge_clouds.yaml.j2',
 )
 
 
@@ -39,7 +39,7 @@ def check_files():
                                      os.path.basename(file)), 'w')
             in_file = open(file, 'r')
             for line in in_file:
-                line = re.sub(r'<%.*%>', 'loremipsum', line)
+                line = re.sub(r'{{.*}}', 'loremipsum', line)
                 temp.write(line)
             temp.close()
 
