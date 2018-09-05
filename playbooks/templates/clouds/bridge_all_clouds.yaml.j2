@@ -1,3 +1,30 @@
+#
+# Bridge all clouds
+#
+# This file is deployed to /etc/openstack/all-clouds.yaml on the
+# bastion host and contains information for all cloud environments
+# provided to OpenStack Infra.
+#
+# Providers have two projects:
+#
+# * openstack[zuul|jenkins]-provider
+#    provides capacity for test nodes (jenkins being a legacy name
+#    from pre-zuulv3 era)
+# * openstackci-provider
+#    provides capacity for control-plane.  Ranges from a single mirror
+#    host to all our other services.
+#
+# This is used as required for global operations on all clouds.  The
+# most important one being the "cloud-launcher" process which
+# canonicalises all providers with correct keypairs and other
+# configuration details.
+#
+# To manually operate on projects only in this file, you can redirect
+# openstacksdk with
+#
+#  $ OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml openstack ...
+#
+
 clouds:
   openstackci-inap:
     profile: internap
@@ -193,7 +220,6 @@ clouds:
       project_name: '{{ clouds.openstackci_packethost_project_name }}'
       user_domain_name: default
       project_domain_name: default
-
   openstackzuul-packethost:
     regions:
       - name: us-west-1

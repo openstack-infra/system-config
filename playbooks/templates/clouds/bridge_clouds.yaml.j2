@@ -1,3 +1,18 @@
+#
+# Bridge clouds
+#
+# This file is deployed to /etc/openstack/clouds.yaml on the bastion
+# host and is thus the default configuration file for openstacksdk
+# operations.
+#
+# It is a strict subset of all-clouds.yaml but contains only the CI
+# (control-plane) projects for each provider.  This is useful because
+# the test-node tenants have hundreds of ephemeral nodes, whose
+# cache-evading behaviour would make enumerating their projects
+# unnecessarily slow when building an inventory for our default
+# control-plane cron runs (run_all.sh).
+#
+
 ansible:
   fail_on_errors: False
   expand_hostvars: False
