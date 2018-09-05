@@ -21,7 +21,7 @@ set -e
 
 SYSTEM_CONFIG=/opt/system-config
 ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
-ANSIBLE_FORKS=50
+export ANSIBLE_FORKS=50
 
 echo "--- begin run @ $(date -Is) ---"
 
