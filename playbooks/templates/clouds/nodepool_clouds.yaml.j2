@@ -1,3 +1,16 @@
+#
+# Nodepool openstacksdk configuration
+#
+# This file is deployed to nodepool launcher and builder hosts as
+#
+#   ~nodepool/.config/openstack/config/clouds.yaml
+#
+# and is used there to authenticate nodepool operations to clouds.
+# This file only contains projects we are launching test nodes in, and
+# the naming should correspond that used in nodepool configuration
+# files.
+#
+
 cache:
   expiration:
     server: 5
