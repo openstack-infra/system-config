@@ -1,4 +1,4 @@
-- hosts: "afs*:!disabled"
+- hosts: "afs:afsdb:!disabled"
   strategy: free
   roles:
     - puppet
