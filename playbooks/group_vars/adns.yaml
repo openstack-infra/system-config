@@ -1,0 +1,7 @@
+iptables_extra_allowed_hosts:
+  - protocol: tcp
+    port: 53
+    hostname: ns1.openstack.org
+  - protocol: tcp
+    port: 53
+    hostname: ns2.openstack.org
