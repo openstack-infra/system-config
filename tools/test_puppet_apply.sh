@@ -33,6 +33,7 @@ cat > $ansible_root/ansible.cfg <<EOF
 [defaults]
 local_tmp=$ansible_root/local_tmp
 remote_tmp=$ansible_root/remote_tmp
+log_path=$fileout
 EOF
 cat > $ansible_root/hosts <<EOF
 localhost ansible_connection=local
