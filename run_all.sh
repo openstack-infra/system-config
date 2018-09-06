@@ -21,7 +21,6 @@ set -e
 
 SYSTEM_CONFIG=/opt/system-config
 ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
-export ANSIBLE_FORKS=50
 
 echo "--- begin run @ $(date -Is) ---"
 
@@ -40,18 +39,18 @@ timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/update-system-config.ya
 timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/bridge.yaml
 
 # Run the base playbook everywhere
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/base.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/base.yaml
 
 # Update the puppet version
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
 
 # Run the git/gerrit/zuul sequence, since it's important that they all work together
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 # Run everything else. We do not care if the other things worked
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+timeout -k 2m 120m ansible-playbook -f 20 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
 
 echo "--- end run @ $(date -Is) ---"
 echo
