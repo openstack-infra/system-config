@@ -26,6 +26,7 @@
 - hosts: nodepool-launcher:nodepool-builder:!disabled
   strategy: free
   roles:
+    - minimal-nodepool
     - configure-openstacksdk
 
 - hosts: "puppet:!disabled"
