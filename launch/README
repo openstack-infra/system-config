@@ -1,28 +1,10 @@
 Create Server
 =============
 
-Note that these instructions assume you're working from this
-directory on an updated local clone of the repository on the
-puppetmaster, and that your account is a member of the admin
-and puppet groups for access to their respective keys::
-
-  sudo adduser $(whoami) admin
-  sudo adduser $(whoami) puppet
-
-(Remember to log out and back into your shell if you add yourself
-to a group.)
-
-Launching a node currently requires a different version of ansible
-than what is generally used on the puppetmaster.  Set up a
-virtualenv::
-
-  python3 /usr/lib/python3/dist-packages/virtualenv.py --python=python3 ~/launch-env
-  . ~/launch-env/bin/activate
-  pip install ansible shade
+The commands in this section should be run as root.
 
 To launch a node in the OpenStack CI account (production servers)::
 
-  . ~/launch-env/bin/activate
   export OS_CLOUD=openstackci-rax
   export OS_REGION_NAME=DFW
   export FLAVOR="8 GB Performance"
@@ -31,27 +13,12 @@ To launch a node in the OpenStack CI account (production servers)::
   ./launch-node.py $FQDN --flavor "$FLAVOR" \
     --cloud=$OS_CLOUD --region=$OS_REGION_NAME
 
-To launch a node in the OpenStack Jenkins account (slave nodes)::
-
-  . ~/launch-env/bin/activate
-  export OS_CLOUD=openstackjenkins-rax
-  export OS_REGION_NAME=DFW
-  export FQDN=slavename01.slave.openstack.org
-  openstack image list
-  export IMAGE='Ubuntu 18.04 LTS (Bionic Beaver) (PVHVM)'
-  openstack flavor list
-  export FLAVOR="8 GB Performance"
-  ./launch-node.py $FQDN --image "$IMAGE" --flavor "$FLAVOR" \
-     --cloud=$OS_CLOUD --region=$OS_REGION_NAME
-
 Manually add the hostname to DNS (the launch script does not do so
-automatically). Note that this example assumes you've already
-exported a relevant FQDN and sourced the appropriate API credentials
-above.
+automatically, but it prints the commands to run).
 
 In order for Ansible to be able to send out the Puppet updates,
 you also need the puppetmaster to accept the root SSH key for the
-new server. So as root on the puppetmaster:
+new server. So as root on bridge.openstack.org:
 
   ssh root@$FQDN
 

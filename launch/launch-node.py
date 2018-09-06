@@ -32,7 +32,6 @@ import dns
 import utils
 
 import openstack
-import os_client_config
 import paramiko
 
 SCRIPT_DIR = os.path.dirname(sys.argv[0])
