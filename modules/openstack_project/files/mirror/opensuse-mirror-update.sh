@@ -88,11 +88,12 @@ fi
 date --iso-8601=ns
 echo "Running rsync distribution $REPO ..."
 $K5START rsync -rlptDvz \
+    --timeout=600 \
     --delete --stats \
     --delete-excluded \
     --exclude="i586" \
     rsync://rsync.opensuse.org/buildservice-repos-main/openSUSE:/Factory:/Update/standard/ \
-    $BASE/$REPO
+    $BASE/$REPO || :
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
