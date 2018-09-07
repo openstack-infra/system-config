@@ -377,7 +377,13 @@ clouds:
     region_name: us-west-1
     profiles:
       - openstackci-keypairs
-      - openstackci-security
+      # Disabled because this account is an admin account and sees
+      # the default security group for every project in the cloud.
+      # Results in:
+      #   FAILED! => {"changed": false, "msg": "Multiple matches found for default"}
+      # Reenable if os_security_group grows a project filter or some other
+      # method of deduplication.
+      #- openstackci-security
   - name: openstackzuul-packethost
     oscc_cloud: openstackzuul-packethost
     region_name: us-west-1
