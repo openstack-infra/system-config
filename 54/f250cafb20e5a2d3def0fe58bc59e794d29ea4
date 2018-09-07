@@ -1,0 +1,9 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 07 Sep 2018 15:42:36 +0000
+Reviewed-on: https://review.openstack.org/600575
+Project: openstack-infra/system-config
+Branch: refs/heads/master
