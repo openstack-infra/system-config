@@ -1,5 +1,6 @@
 - hosts: "!disabled"
   name: "Base: set up users and base package repositories on all hosts"
+  strategy: free
   roles:
     - users
     - base-repos
@@ -8,6 +9,7 @@
 # fires before we run base-server
 - hosts: "!disabled"
   name: "Base: set up common environment on all hosts"
+  strategy: free
   roles:
     - base-server
     - timezone
@@ -15,6 +17,7 @@
 
 - hosts: bridge.openstack.org:!disabled
   name: "Base: configure OpenStackSDK on bridge"
+  strategy: free
   tasks:
     - include_role:
         name: configure-openstacksdk
@@ -35,12 +38,14 @@
 
 - hosts: "puppet:!disabled"
   name: "Base: install and configure puppet on puppet hosts"
+  strategy: free
   roles:
     - puppet-install
     - disable-puppet-agent
 
 - hosts: "!ci-backup:!disabled"
   name: "Base: set up common environment on all hosts (except backup)"
+  strategy: free
   roles:
     - exim
     - iptables
