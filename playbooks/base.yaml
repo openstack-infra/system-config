@@ -1,4 +1,5 @@
 - hosts: "!disabled"
+  name: "Base: set up users and base package repositories on all hosts"
   roles:
     - users
     - base-repos
@@ -6,12 +7,14 @@
 # Run base-server seperately so that the update apt cache handler in base-repos
 # fires before we run base-server
 - hosts: "!disabled"
+  name: "Base: set up common environment on all hosts"
   roles:
     - base-server
     - timezone
     - unbound
 
 - hosts: bridge.openstack.org:!disabled
+  name: "Base: configure OpenStackSDK on bridge"
   tasks:
     - include_role:
         name: configure-openstacksdk
@@ -24,17 +27,20 @@
         openstacksdk_config_template: clouds/bridge_clouds.yaml.j2
 
 - hosts: nodepool-launcher:nodepool-builder:!disabled
+  name: "Base: configure OpenStackSDK on nodepool"
   strategy: free
   roles:
     - minimal-nodepool
     - configure-openstacksdk
 
 - hosts: "puppet:!disabled"
+  name: "Base: install and configure puppet on puppet hosts"
   roles:
     - puppet-install
     - disable-puppet-agent
 
 - hosts: "!ci-backup:!disabled"
+  name: "Base: set up common environment on all hosts (except backup)"
   roles:
     - exim
     - iptables

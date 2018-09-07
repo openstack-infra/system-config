@@ -1,6 +1,6 @@
----
 - hosts: localhost
+  name: "Cloud-launcher: Run cloud launcher"
   connection: local
   gather_facts: false
   roles:
-    - { role: cloud-launcher }
+    - cloud-launcher

@@ -1,4 +1,5 @@
 - hosts: bridge.openstack.org
+  name: "Bridge: configure the bastion host"
   become: true
   roles:
     - pip3

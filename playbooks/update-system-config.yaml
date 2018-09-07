@@ -1,9 +1,8 @@
----
 - hosts: "localhost:!disabled"
+  name: "System-config: Update the system-config repo on bridge"
   connection: local
   gather_facts: false
   tasks:
-
     - name: Make sure system-config repo is up to date
       git:
         repo: https://git.openstack.org/openstack-infra/system-config

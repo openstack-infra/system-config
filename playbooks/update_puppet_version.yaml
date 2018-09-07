@@ -1,4 +1,5 @@
 - hosts: 'puppet4'
+  name: "Puppet-version: install puppet-4 on puppet-4 hosts"
   gather_facts: false
   tasks:
   - git:
