@@ -195,6 +195,24 @@
       - playbooks/templates/clouds/
       - testinfra/test_nodepool.py
 
+- job:
+    name: system-config-run-mirror
+    parent: system-config-run
+    description: |
+      Run the playbook for mirrors
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: mirror01.openstack.org
+          label: ubuntu-xenial
+    files:
+      - .zuul.yaml
+      - playbooks/group_vars/mirror.yaml
+      - roles/kerberos-client
+      - roles/openafs-client
+      - testinfra/test_mirror.py
+
 - project:
     templates:
       - system-config-zuul-role-integration
