@@ -13,7 +13,7 @@
   cron:
     name: run_all.sh
     state: present
-    job: 'flock -n /var/run/ansible/run_all.lock bash /opt/system-config/run_all.sh >> /var/log/ansible/run_all_cron.log 2>&1'
+    job: 'flock -n /var/run/ansible/run_all.lock bash /opt/system-config/run_all.sh -c >> /var/log/ansible/run_all_cron.log 2>&1'
     minute: "{{ update_cron_interval.minute }}"
     hour: "{{ update_cron_interval.hour }}"
     day: "{{ update_cron_interval.day }}"
