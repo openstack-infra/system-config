@@ -1,0 +1,63 @@
+- name: Install Apache packages
+  package:
+    name:
+      - apache2
+      - apache2-utils
+    state: present
+
+- name: Ensure Apache2 proxy
+  apache2_module:
+    name: proxy
+    state: present
+
+- name: Ensure Apache2 proxy_http
+  apache2_module:
+    name: proxy_http
+    state: present
+
+- name: Ensure Apache2 rewrite
+  apache2_module:
+    name: rewrite
+    state: present
+
+- name: Ensure Apache2 cache
+  apache2_module:
+    name: cache
+    state: present
+
+- name: Ensure Apache2 substitute
+  apache2_module:
+    name: substitute
+    state: present
+
+- name: Ensure webroot
+  file:
+    path: /var/www/mirror
+    owner: root
+    group: root
+    state: directory
+
+- name: Ensure proxy cache
+  file:
+    path: /var/cache/apache2/proxy
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+# TODO: setup server alias correctly
+- name: Install apache vhost configuration
+  template:
+    src: mirror.vhost.j2
+    dest: /etc/apache2/sites-available/mirror.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Enable apache vhost configuration
+  file:
+    src: /etc/apache2/sites-available/mirror.conf
+    dest: /etc/apache2/sites-enabled/mirror.conf
+    state: link
+  notify: Restart apache
+
