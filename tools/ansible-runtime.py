@@ -32,7 +32,7 @@ with open('/var/log/ansible/run_all_cron.log') as f:
         if "--- end run @" in line:
             end = datetime.strptime(line[14:-5], '%Y-%m-%dT%H:%M:%S+00:00')
             if not begin:
-                print("end @ %s had no beginning?", end)
+                print("end @ %s had no beginning?" % end)
                 continue
             runtime = end - begin
             # NOTE(ianw): try to get what would have been the HEAD at
