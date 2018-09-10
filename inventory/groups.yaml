@@ -15,7 +15,23 @@ groups:
   etherpad: inventory_hostname.startswith('etherpad')
   files: inventory_hostname.startswith('files')
   firehose: inventory_hostname.startswith('firehose')
-  futureparser: inventory_hostname is match('(review\d*|review-dev\d*|groups\d*|groups-dev\d*|grafana\d*|health\d*|graphite\d*|paste\d*|planet\d*|ethercalc\d*|etherpad\d*|etherpad-dev\d*|logstash-worker\d+|firehose\d+|ask-staging\d*|codesearch\d*)\.openstack\.org')
+  futureparser: >
+    inventory_hostname is match('review\d*\.openstack\.org') or
+    inventory_hostname is match('review-dev\d*\.openstack\.org') or
+    inventory_hostname is match('groups\d*\.openstack\.org') or
+    inventory_hostname is match('groups-dev\d*\.openstack\.org') or
+    inventory_hostname is match('grafana\d*\.openstack\.org') or
+    inventory_hostname is match('health\d*\.openstack\.org') or
+    inventory_hostname is match('graphite\d*\.openstack\.org') or
+    inventory_hostname is match('paste\d*\.openstack\.org') or
+    inventory_hostname is match('planet\d*\.openstack\.org') or
+    inventory_hostname is match('ethercalc\d*\.openstack\.org') or
+    inventory_hostname is match('etherpad\d*\.openstack\.org') or
+    inventory_hostname is match('etherpad-dev\d*\.openstack\.org') or
+    inventory_hostname is match('logstash-worker\d+\.openstack\.org') or
+    inventory_hostname is match('firehose\d+\.openstack\.org') or
+    inventory_hostname is match('ask-staging\d*\.openstack\.org') or
+    inventory_hostname is match('codesearch\d*)\.openstack\.org')
   gerrit: inventory_hostname is match('review.*\.openstack\.org')
   git-loadbalancer: inventory_hostname is match('git(-fe\d+)?\.openstack\.org')
   git-server: inventory_hostname is match('git\d+\.openstack\.org')
