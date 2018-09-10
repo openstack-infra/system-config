@@ -22,6 +22,7 @@ groups:
     inventory_hostname is match('groups-dev\d*\.openstack\.org') or
     inventory_hostname is match('grafana\d*\.openstack\.org') or
     inventory_hostname is match('health\d*\.openstack\.org') or
+    inventory_hostname is match('cacti\d*\.openstack\.org') or
     inventory_hostname is match('graphite\d*\.openstack\.org') or
     inventory_hostname is match('paste\d*\.openstack\.org') or
     inventory_hostname is match('planet\d*\.openstack\.org') or
