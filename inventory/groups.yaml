@@ -30,6 +30,7 @@ groups:
     inventory_hostname is match('etherpad-dev\d*\.openstack\.org') or
     inventory_hostname is match('logstash-worker\d+\.openstack\.org') or
     inventory_hostname is match('firehose\d+\.openstack\.org') or
+    inventory_hostname is match('storyboard\d*\.openstack\.org') or
     inventory_hostname is match('storyboard-dev\d*\.openstack\.org') or
     inventory_hostname is match('ask-staging\d*\.openstack\.org') or
     inventory_hostname is match('codesearch\d*)\.openstack\.org')
