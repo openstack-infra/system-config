@@ -107,6 +107,21 @@ authentication token for use with AFS with::
   kinit
   aklog
 
+If not running on Debian or Ubuntu you can install openafs client
+packages as well as Kerberos5 packages on your distro of choice.
+
+Then to kinit, use your fully qualified user id::
+
+  kinit user@OPENSTACK.ORG
+
+Or for admin access::
+
+  kinit user/admin@OPENSTACK.ORG
+
+Then aklog, specifying the openstack.org cell::
+
+  aklog -cell openstack.org
+
 Administration
 --------------
 
