@@ -360,6 +360,28 @@ clouds:
     profiles:
       - openstackci-keypairs
       - openstackci-security
+  - name: openstackci-linaro-london
+    oscc_cloud: openstackci-linaro-london
+    region_name: London
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+    images:
+      - name: ubuntu-xenial
+        download_image_url: https://cloud-images.ubuntu.com/releases/16.04/release/ubuntu-16.04-server-cloudimg-arm64-uefi1.img
+        download_image_dest: /tmp/ubuntu-xenial-aarch64-uefi.img
+        filename: /tmp/ubuntu-xenial-aarch64-uefi.img
+        properties:
+          hw_firmware_type: uefi
+          os_command_line: console=ttyAMA0
+          hw_disk_bus: scsi
+          hw_scsi_model: virtio-scsi
+  - name: openstackzuul-linaro-london
+    oscc_cloud: openstackzuul-linaro-london
+    region_name: London
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
   - name: openstackci-limestone
     oscc_cloud: openstackci-limestone
     region_name: RegionOne

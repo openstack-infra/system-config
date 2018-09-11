@@ -164,6 +164,26 @@ clouds:
       project_name: '{{ clouds.openstackzuul_linaro_project_name }}'
       project_domain_name: default
       user_domain_name: default
+  openstackci-linaro-london:
+    regions:
+      - London
+    auth:
+      auth_url: https://uk.linaro.cloud:5000
+      username: '{{ clouds.openstackci_linaro_london_username }}'
+      password: '{{ clouds.openstackci_linaro_london_password }}'
+      project_id: '{{ clouds.openstackci_linaro_london_project_id }}'
+      project_domain_name: default
+      user_domain_name: default
+  openstackzuul-linaro-london:
+    regions:
+      - London
+    auth:
+      auth_url: https://uk.linaro.cloud:5000
+      username: '{{ clouds.openstackzuul_linaro_london_username }}'
+      password: '{{ clouds.openstackzuul_linaro_london_password }}'
+      project_id: '{{ clouds.openstackzuul_linaro_london_project_id }}'
+      project_domain_name: default
+      user_domain_name: default
   openstackci-limestone:
     regions:
       - name: RegionOne

@@ -94,6 +94,17 @@ clouds:
       project_name: '{{ nodepool_linaro_project }}'
       project_domain_name: default
       user_domain_name: default
+  linaro-london:
+    regions:
+      - London
+    identity_api_version: '3'
+    auth:
+      auth_url: https://uk.linaro.cloud:5000
+      username: '{{ nodepool_linaro_london_username }}'
+      password: '{{ nodepool_linaro_london_password }}'
+      project_id: '{{ nodepool_linaro_london_project }}'
+      project_domain_name: default
+      user_domain_name: default
   limestone:
     regions:
       - name: RegionOne
