@@ -33,6 +33,7 @@ groups:
     inventory_hostname is match('firehose\d+\.openstack\.org') or
     inventory_hostname is match('storyboard\d*\.openstack\.org') or
     inventory_hostname is match('storyboard-dev\d*\.openstack\.org') or
+    inventory_hostname is match('pbx\.openstack\.org') or
     inventory_hostname is match('ask-staging\d*\.openstack\.org') or
     inventory_hostname is match('translate\d+\.openstack\.org') or
     inventory_hostname is match('translate-dev\d*\.openstack\.org') or
