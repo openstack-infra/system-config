@@ -4,8 +4,10 @@ class openstack_project::kata_lists(
   $listpassword = ''
 ) {
 
+  $listdomain = 'lists.katacontainers.io'
+
   class { 'mailman':
-    vhost_name => 'lists.katacontainers.io'
+    vhost_name => $listdomain,
   }
 
   Maillist {
