@@ -195,6 +195,20 @@
       - playbooks/templates/clouds/
       - testinfra/test_nodepool.py
 
+- job:
+    name: system-config-run-production-playbook
+    description: |
+      Run specified playbook against productions hosts.
+
+      This is a parent job designed to be inherited to enabled
+      CD deployment of our infrastructure. Set playbook_name to
+      specify the playbook relative to
+      bridge.openstack.org:/opt/system-config/playbooks
+    abstract: true
+    run: playbooks/zuul/run-production-playbook.yaml
+    vars:
+      ansible_threads: 5
+
 - project:
     templates:
       - system-config-zuul-role-integration
