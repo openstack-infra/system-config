@@ -1,0 +1,7 @@
+- hosts: 'zuul01.openstack.org'
+  any_errors_fatal: true
+  tasks:
+    - name: Reconfigure the zuul scheduler
+      command: /usr/local/bin/zuul-scheduler full-reconfigure
+      become: true
+      become_user: root
