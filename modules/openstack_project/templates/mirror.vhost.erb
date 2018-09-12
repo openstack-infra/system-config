@@ -270,6 +270,11 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPass "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/alpine/" "http://dl-cdn.alpinelinux.org/alpine/"
 
+    # LXC (copr)
+    CacheEnable disk "/lxc2"
+    ProxyPass "/lxc2/" "https://copr-be.cloud.fedoraproject.org/results/thm/lxc2.0/" ttl=120 keepalive=On retry=0
+    ProxyPassReverse "/lxc2/" "https://copr-be.cloud.fedoraproject.org/results/thm/lxc2.0/"
+
 </VirtualHost>
 
 <VirtualHost <%= @vhost_name %>:8081>
