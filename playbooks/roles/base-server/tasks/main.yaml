@@ -33,7 +33,7 @@
   authorized_key:
     state: present
     user: root
-    exclusive: yes
+    exclusive: "{{ bastion_key_exclusive }}"
     key: "{{ bastion_public_key }}"
     key_options: |
       from="{{ bastion_ipv4 }},{{ bastion_ipv6 }},localhost"
