@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 12 Sep 2018 20:00:08 +0000
+Reviewed-on: https://review.openstack.org/602101
+Project: openstack-infra/system-config
+Branch: refs/heads/master
