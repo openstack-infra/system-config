@@ -1,0 +1,11 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 12 Sep 2018 17:36:53 +0000
+Reviewed-on: https://review.openstack.org/602081
+Project: openstack-infra/system-config
+Branch: refs/heads/master
