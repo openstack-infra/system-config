@@ -94,14 +94,15 @@ def stream_syslog(ssh_client):
 
 
 def bootstrap_server(server, key, name, volume_device, keep,
-                     mount_path, fs_label, environment):
+                     mount_path, fs_label, environment, timeout):
 
     ip = server.public_v4
     ssh_kwargs = dict(pkey=key)
 
     print("--- Running initial configuration on host %s ---" % ip)
     for username in ['root', 'ubuntu', 'centos', 'admin']:
-        ssh_client = utils.ssh_connect(ip, username, ssh_kwargs, timeout=600)
+        ssh_client = utils.ssh_connect(ip, username, ssh_kwargs,
+                                       timeout=timeout)
         if ssh_client:
             break
 
@@ -117,7 +118,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
         ssh_client.ssh("sudo chmod 644 ~root/.ssh/authorized_keys")
         ssh_client.ssh("sudo chown root.root ~root/.ssh/authorized_keys")
 
-    ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=600)
+    ssh_client = utils.ssh_connect(ip, 'root', ssh_kwargs, timeout=timeout)
 
     # Something up with RAX images that they have the ipv6 interface in
     # /etc/network/interfaces but eth0 hasn't noticed yet; reload it
@@ -200,7 +201,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
 def build_server(cloud, name, image, flavor,
                  volume, keep, network, boot_from_volume, config_drive,
                  mount_path, fs_label, availability_zone, environment,
-                 volume_size):
+                 volume_size, timeout):
     key = None
     server = None
 
@@ -209,7 +210,8 @@ def build_server(cloud, name, image, flavor,
                          boot_from_volume=boot_from_volume,
                          volume_size=volume_size,
                          network=network,
-                         config_drive=config_drive)
+                         config_drive=config_drive,
+                         timeout=timeout)
 
     if availability_zone:
         create_kwargs['availability_zone'] = availability_zone
@@ -244,7 +246,7 @@ def build_server(cloud, name, image, flavor,
         else:
             volume_device = None
         bootstrap_server(server, key, name, volume_device, keep,
-                         mount_path, fs_label, environment)
+                         mount_path, fs_label, environment, timeout)
         print('UUID=%s\nIPV4=%s\nIPV6=%s\n' % (
             server.id, server.public_v4, server.public_v6))
     except Exception:
@@ -319,6 +321,9 @@ def main():
                         help="Boot with config_drive attached.",
                         action='store_true',
                         default=False)
+    parser.add_argument("--timeout", dest="timeout",
+                        help="Increase timeouts (default 600s)",
+                        type=int, default=600)
     parser.add_argument("--az", dest="availability_zone", default=None,
                         help="AZ to boot in.")
     options = parser.parse_args()
@@ -354,7 +359,8 @@ def main():
                           options.config_drive,
                           options.mount_path, options.fs_label,
                           options.availability_zone,
-                          options.environment, options.volume_size)
+                          options.environment, options.volume_size,
+                          options.timeout)
     dns.print_dns(cloud, server)
 
 if __name__ == '__main__':
