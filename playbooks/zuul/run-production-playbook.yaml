@@ -1,0 +1,12 @@
+- hosts: localhost
+  tasks:
+    - name: Add bridge.o.o to inventory
+      add_host:
+        name: bridge.openstack.org
+        ansible_user: root
+
+- hosts: bridge.openstack.org
+  tasks:
+    - name: Run specified playbook on bridge.o.o
+      command: ansible-playbook -f {{ ansible_forks }} /opt/system-config/playbooks/{{ playbook_name }}
+
