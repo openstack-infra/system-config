@@ -42,9 +42,13 @@
 # for now this is a fixed copy.
 - name: Copy fixed openstack inventory in place
   copy:
-    src: openstack.py
+    src: inventory_plugins/openstack.py
     dest: /etc/ansible/inventory_plugins/openstack.py
 
+- name: Copy yamlgroup inventory in place
+  copy:
+    src: inventory_plugins/yamlgroup.py
+    dest: /etc/ansible/inventory_plugins/yamlgroup.py
 
 - name: Setup log rotation
   include_role:
