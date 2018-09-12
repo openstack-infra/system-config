@@ -196,7 +196,7 @@
       - testinfra/test_nodepool.py
 
 - job:
-    name: system-config-run-production-playbook
+    name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
 
@@ -208,6 +208,17 @@
     run: playbooks/zuul/run-production-playbook.yaml
     vars:
       ansible_forks: 5
+
+- job:
+    name: infra-prod-zuul_reconfigure
+    parent: infra-prod-playbook
+    description: |
+      Perform a full Zuul reconfiguration.
+
+      This reloads the tenant config file and clears all configuration
+      caches.
+    vars:
+      playbook_name: zuul_reconfigure.yaml
 
 - project:
     templates:
