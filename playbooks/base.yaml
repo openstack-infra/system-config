@@ -13,6 +13,13 @@
     - timezone
     - unbound
 
+- hosts: "!ci-backup:!disabled"
+  name: "Base: set up common environment on all hosts (except backup)"
+  roles:
+    - exim
+    - iptables
+    - snmpd
+
 - hosts: bridge.openstack.org:!disabled
   name: "Base: configure OpenStackSDK on bridge"
   tasks:
@@ -38,10 +45,3 @@
   roles:
     - puppet-install
     - disable-puppet-agent
-
-- hosts: "!ci-backup:!disabled"
-  name: "Base: set up common environment on all hosts (except backup)"
-  roles:
-    - exim
-    - iptables
-    - snmpd
