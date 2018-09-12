@@ -1,4 +1,4 @@
-- hosts: 'zuul01.openstack.org'
+- hosts: 'zuul-scheduler:!disabled'
   any_errors_fatal: true
   tasks:
     - name: Reconfigure the zuul scheduler

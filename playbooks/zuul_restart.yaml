@@ -1,6 +1,6 @@
 # Run this with "-f 20"
 
-- hosts: 'zuul01.openstack.org'
+- hosts: 'zuul-scheduler:!disabled'
   any_errors_fatal: true
   tasks:
     - name: Stop Zuul Scheduler
@@ -37,7 +37,7 @@
         state: absent
         timeout: 11400
 
-- hosts: 'zm*.openstack.org'
+- hosts: 'zuul-merger:!disabled'
   tasks:
     - name: Stop Zuul Mergers
       service:
@@ -46,7 +46,7 @@
       become: true
       become_user: root
 
-- hosts: 'ze*.openstack.org'
+- hosts: 'zuul-executor:!disabled'
   tasks:
     - name: Stop Zuul Executors
       service:
@@ -55,7 +55,7 @@
       become: true
       become_user: root
 
-- hosts: 'zuul01.openstack.org'
+- hosts: 'zuul-scheduler:!disabled'
   tasks:
     - name: Start Zuul Scheduler
       service:
@@ -76,7 +76,7 @@
       become: true
       become_user: root
 
-- hosts: 'zm*.openstack.org'
+- hosts: 'zuul-merger:!disabled'
   tasks:
     - name: Wait for (3h10m) to stop Zuul Mergers
       wait_for:
@@ -90,7 +90,7 @@
       become: true
       become_user: root
 
-- hosts: 'ze*.openstack.org'
+- hosts: 'zuul-executor:!disabled'
   tasks:
     - name: Wait for (3h10m) to stop Zuul Executors
       wait_for:

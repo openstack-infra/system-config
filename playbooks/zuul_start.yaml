@@ -1,6 +1,6 @@
 # Run this with "-f 20"
 
-- hosts: 'zuul01.openstack.org'
+- hosts: 'zuul-scheduler:!disabled'
   tasks:
     - name: Start Zuul Scheduler
       service:
@@ -21,7 +21,7 @@
       become: true
       become_user: root
 
-- hosts: 'zm*.openstack.org'
+- hosts: 'zuul-merger:!disabled'
   tasks:
     - name: Start Zuul Mergers
       service:
@@ -30,7 +30,7 @@
       become: true
       become_user: root
 
-- hosts: 'ze*.openstack.org'
+- hosts: 'zuul-executor:!disabled'
   tasks:
     - name: Start Zuul Executors
       service:

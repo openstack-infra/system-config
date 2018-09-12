@@ -1,6 +1,6 @@
 # Run this with "-f 20"
 
-- hosts: 'zuul01.openstack.org'
+- hosts: 'zuul-scheduler:!disabled'
   any_errors_fatal: true
   tasks:
     - name: Stop Zuul Scheduler
@@ -37,7 +37,7 @@
         state: absent
         timeout: 11400
 
-- hosts: 'zm*.openstack.org'
+- hosts: 'zuul-merger:!disabled'
   tasks:
     - name: Stop Zuul Merger
       service:
@@ -51,7 +51,7 @@
         state: absent
         timeout: 11400
 
-- hosts: 'ze*.openstack.org'
+- hosts: 'zuul-executor:!disabled'
   tasks:
     - name: Stop Zuul Executor
       service:
