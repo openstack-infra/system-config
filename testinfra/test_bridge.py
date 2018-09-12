@@ -49,3 +49,12 @@ def test_cloud_launcher_cron(host):
     with host.sudo():
         crontab = host.check_output('crontab -l')
         assert 'run_cloud_launcher.sh' in crontab
+
+
+def test_authorized_keys(host):
+    authorized_keys = host.file('/root/.ssh/authorized_keys')
+    assert authorized_keys.exists
+
+    content = authorized_keys.content.decode('utf8')
+    lines = content.split('\n')
+    assert len(lines) >= 3
