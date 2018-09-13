@@ -18,7 +18,7 @@ MIRROR_VOLUME=$1
 BASE="/afs/.openstack.org/mirror/opensuse"
 MIRROR="rsync://mirror.us.leaseweb.net/opensuse"
 OBS_MIRROR="rsync://ftp.gwdg.de/pub/opensuse/repositories/"
-OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Queens' 'Cloud:/OpenStack:/Master')
+OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Queens' 'Cloud:/OpenStack:/Rocky' 'Cloud:/OpenStack:/Master')
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
 # NOTE(hwoarang): 15.0 is newer than 42.3
