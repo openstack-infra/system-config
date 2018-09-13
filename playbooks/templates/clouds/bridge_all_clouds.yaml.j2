@@ -255,3 +255,27 @@ clouds:
       user_domain_name: default
       project_domain_name: default
     identity_api_version: '3'
+  openstackci-arm64ci:
+    regions:
+      - nrt1
+    auth:
+      auth_url: https://arm64ci.cloud:5000
+      username: '{{ clouds.openstackci_arm64ci_username }}'
+      password: '{{ clouds.openstackci_arm64ci_password }}'
+      project_name: '{{ clouds.openstackci_arm64ci_project_name }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+      interface: public
+    identity_api_version: '3'
+  openstackzuul-arm64ci:
+    regions:
+      - nrt1
+    auth:
+      auth_url: https://arm64ci.cloud:5000
+      username: '{{ clouds.openstackzuul_arm64ci_username }}'
+      password: '{{ clouds.openstackzuul_arm64ci_password }}'
+      project_name: '{{ clouds.openstackzuul_arm64ci_project_name }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+      interface: public
+    identity_api_version: '3'
