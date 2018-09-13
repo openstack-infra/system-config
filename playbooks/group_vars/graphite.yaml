@@ -1,4 +1,7 @@
 iptables_extra_allowed_hosts:
+  - hostname: bridge.openstack.org
+    port: 8125
+    protocol: udp
   - hostname: git.openstack.org
     port: 8125
     protocol: udp
