@@ -83,12 +83,17 @@ def test_iptables(host):
             ' -m tcp --dport 19885 -j ACCEPT')
     assert zuul in rules
 
-    # Ensure all IPv4 addresses for cacti are allowed
+    # Ensure all IPv4+6 addresses for cacti are allowed
     for ip in get_ips('cacti.openstack.org', socket.AF_INET):
         snmp = ('-A openstack-INPUT -s %s/32 -p udp -m udp'
                 ' --dport 161 -j ACCEPT' % ip)
         assert snmp in rules
 
+    ip6rules = host.check_output('ip6tables -S')
+    for ip in get_ips('cacti.openstack.org', socket.AF_INET6):
+        snmp = ('-A openstack-INPUT -m udp -p udp -s %s'
+                ' --dport 161 -j ACCEPT' % ip)
+        assert snmp in ip6rules
 
 def test_ntp(host):
     package = host.package("ntp")
