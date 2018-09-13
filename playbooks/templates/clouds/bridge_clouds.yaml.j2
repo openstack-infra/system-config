@@ -140,3 +140,13 @@ clouds:
       user_domain_name: default
       project_domain_name: default
     identity_api_version: '3'
+  openstackci-arm64ci-ewr1:
+    regions:
+      - ewr1
+    auth:
+      auth_url: http://ewr1.os-ci-arm.codethink.co.uk:5000
+      username: '{{ clouds.openstackci_arm64ci_ewr1_username }}'
+      password: '{{ clouds.openstackci_arm64ci_ewr1_password }}'
+      project_name: '{{ clouds.openstackci_arm64ci_ewr1_project_name }}'
+      project_domain_name: default
+      user_domain_name: default
