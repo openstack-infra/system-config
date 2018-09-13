@@ -13,29 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import socket
+import subprocess
 
 
 class FilterModule(object):
 
     def dns(self, value, family):
         ret = set()
+        if family == '4':
+            match = 'has address'
+        elif family == '6':
+            match = 'has IPv6 address'
         try:
-            addr_info = socket.getaddrinfo(value, None, family)
-        except socket.gaierror:
+            # Note we use 'host' rather than something like
+            # getaddrinfo so we actually query DNS and don't get any
+            # local-only results from /etc/hosts
+            output = subprocess.check_output(
+                ['/usr/bin/host', value], universal_newlines=True)
+            for line in output.split('\n'):
+                if match in line:
+                    address = line.split()[-1]
+                    ret.add(address)
+        except Exception as e:
             return ret
-        for addr in addr_info:
-            ret.add(addr[4][0])
         return sorted(ret)
 
     def dns_a(self, value):
-        return self.dns(value, socket.AF_INET)
+        return self.dns(value, '4')
 
     def dns_aaaa(self, value):
-        return self.dns(value, socket.AF_INET6)
+        return self.dns(value, '6')
 
-    def filters(self):
-        return {
-            'dns_a': self.dns_a,
-            'dns_aaaa': self.dns_aaaa,
-        }
