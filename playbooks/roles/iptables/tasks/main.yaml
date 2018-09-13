@@ -16,6 +16,14 @@
     state: directory
     path: '{{ rules_dir }}'
 
+- name: Dump 4 rules
+  debug:
+    msg: '{{ ipv4_rules }}'
+
+- name: Dump 6 rules
+  debug:
+    msg: '{{ ipv6_rules }}'
+
 - name: Install IPv4 rules files
   template:
     src: rules.v4.j2
