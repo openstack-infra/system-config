@@ -23,7 +23,7 @@
 {% endfor -%}
 {% for host in iptables_allowed_hosts -%}
 {% for addr in host.hostname | dns_aaaa -%}
--A openstack-INPUT {% if host.protocol == 'tcp' %}-m state --state NEW {% endif %} -m {{ host.protocol }} -p {{ host.protocol }} -s {{ addr }} --dport {{ host.port }} -j ACCEPT
+-A openstack-INPUT {% if host.protocol == 'tcp' %}-m state --state NEW {% endif %}-m {{ host.protocol }} -p {{ host.protocol }} -s {{ addr }} --dport {{ host.port }} -j ACCEPT
 {% endfor -%}
 {% endfor -%}
 -A openstack-INPUT -j REJECT --reject-with icmp6-adm-prohibited
