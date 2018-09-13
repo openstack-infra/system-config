@@ -1,515 +1,462 @@
-# NOTE: Adding a non-existent host to a group will result in creating that
-# host in the ansible inventory. So care should be taken that listing a host
-# in a group lists an actual host.
-adns:
-  hosts:
-    adns1.openstack.org:
-afs:
-  hosts:
-    afs01.dfw.openstack.org:
-    afs01.ord.openstack.org:
-    afs02.dfw.openstack.org:
-afs-client:
-  hosts:
-    afs01.dfw.openstack.org:
-    afs01.ord.openstack.org:
-    afs02.dfw.openstack.org:
-    afsdb01.openstack.org:
-    afsdb02.openstack.org:
-    files02.openstack.org:
-    mirror01.bhs1.ovh.openstack.org:
-    mirror01.ca-ymq-1.vexxhost.openstack.org:
-    mirror01.cn1.linaro.openstack.org:
-    mirror01.gra1.ovh.openstack.org:
-    mirror01.iad.rax.openstack.org:
-    mirror01.kna1.citycloud.openstack.org:
-    mirror01.la1.citycloud.openstack.org:
-    mirror01.lon1.citycloud.openstack.org:
-    mirror01.mtl01.inap.openstack.org:
-    mirror01.ord.rax.openstack.org:
-    mirror01.sjc1.vexxhost.openstack.org:
-    mirror01.sto2.citycloud.openstack.org:
-    mirror02.ca-ymq-1.vexxhost.openstack.org:
-    mirror02.dfw.rax.openstack.org:
-    mirror02.regionone.limestone.openstack.org:
-    mirror02.us-west-1.packethost.openstack.org:
-    review-dev01.openstack.org:
-    ze01.openstack.org:
-    ze02.openstack.org:
-    ze03.openstack.org:
-    ze04.openstack.org:
-    ze05.openstack.org:
-    ze06.openstack.org:
-    ze07.openstack.org:
-    ze08.openstack.org:
-    ze09.openstack.org:
-    ze10.openstack.org:
-    ze11.openstack.org:
-afsadmin:
-  hosts:
-    mirror-update01.openstack.org:
-afsdb:
-  hosts:
-    afsdb01.openstack.org:
-    afsdb02.openstack.org:
-ask:
-  hosts:
-    ask-staging.openstack.org:
-    ask-staging01.openstack.org:
-    ask.openstack.org:
-cacti:
-  hosts:
-    cacti02.openstack.org:
+plugin: yamlgroup
 disabled:
-  hosts:
-    ask-staging.openstack.org:
-    ask-staging01.openstack.org:
-    backup01.ord.rax.ci.openstack.org:
-    corvustest:
-    ethercalc01.openstack.org:
-    idp.openstackid.org:
-    lists-dev01.openstack.org:
-    mirror01.sto2.citycloud.openstack.org:
-    puppetmaster.openstack.org:
-    review.openstack.org:
-    wiki-dev01.openstack.org:
-    wiki-upgrade-test.openstack.org:
-    wiki.openstack.org:
-eavesdrop:
-  hosts:
-    eavesdrop01.openstack.org:
-elasticsearch:
-  hosts:
-    elasticsearch02.openstack.org:
-    elasticsearch03.openstack.org:
-    elasticsearch04.openstack.org:
-    elasticsearch05.openstack.org:
-    elasticsearch06.openstack.org:
-    elasticsearch07.openstack.org:
-ethercalc:
-  hosts:
-    ethercalc02.openstack.org:
-etherpad:
-  hosts:
-    etherpad.openstack.org:
-    etherpad-dev.openstack.org:
-files:
-  hosts:
-    files02.openstack.org:
-firehose:
-  hosts:
-    firehose01.openstack.org:
-futureparser:
-  hosts:
-    ask-staging.openstack.org:
-    ask-staging01.openstack.org:
-    codesearch01.openstack.org:
-    ethercalc02.openstack.org:
-    etherpad-dev.openstack.org:
-    etherpad.openstack.org:
-    firehose01.openstack.org:
-    grafana01.openstack.org:
-    grafana02.openstack.org:
-    graphite.openstack.org:
-    groups-dev.openstack.org:
-    groups.openstack.org:
-    health.openstack.org:
-    logstash-worker01.openstack.org:
-    logstash-worker02.openstack.org:
-    logstash-worker03.openstack.org:
-    logstash-worker04.openstack.org:
-    logstash-worker05.openstack.org:
-    logstash-worker06.openstack.org:
-    logstash-worker07.openstack.org:
-    logstash-worker08.openstack.org:
-    logstash-worker09.openstack.org:
-    logstash-worker10.openstack.org:
-    logstash-worker11.openstack.org:
-    logstash-worker12.openstack.org:
-    logstash-worker13.openstack.org:
-    logstash-worker14.openstack.org:
-    logstash-worker15.openstack.org:
-    logstash-worker16.openstack.org:
-    logstash-worker17.openstack.org:
-    logstash-worker18.openstack.org:
-    logstash-worker19.openstack.org:
-    logstash-worker20.openstack.org:
-    paste01.openstack.org:
-    planet01.openstack.org:
-    review-dev01.openstack.org:
-    review.openstack.org:
-    review01.openstack.org:
-    storyboard-dev.openstack.org:
-gerrit:
-  hosts:
-    review-dev01.openstack.org:
-    review.openstack.org:
-    review01.openstack.org:
-git-loadbalancer:
-  hosts:
-    git.openstack.org:
-git-server:
-  hosts:
-    git01.openstack.org:
-    git02.openstack.org:
-    git03.openstack.org:
-    git04.openstack.org:
-    git05.openstack.org:
-    git06.openstack.org:
-    git07.openstack.org:
-    git08.openstack.org:
-grafana:
-  hosts:
-    grafana01.openstack.org:
-    grafana02.openstack.org:
-graphite:
-  hosts:
-    graphite.openstack.org:
+  - ask-staging.openstack.org
+  - ask-staging01.openstack.org
+  - backup01.ord.rax.ci.openstack.org
+  - corvustest
+  - ethercalc01.openstack.org
+  - idp.openstackid.org
+  - lists-dev01.openstack.org
+  - mirror01.sto2.citycloud.openstack.org
+  - puppetmaster.openstack.org
+  - review.openstack.org
+  - wiki-dev01.openstack.org
+  - wiki-upgrade-test.openstack.org
+  - wiki.openstack.org
 groups:
-  hosts:
-    groups.openstack.org:
-    groups-dev.openstack.org:
-health:
-  hosts:
-    health.openstack.org:
-kdc:
-  hosts:
-    kdc01.openstack.org:
-    kdc04.openstack.org:
-logstash:
-  hosts:
-    logstash.openstack.org:
-logstash-worker:
-  hosts:
-    logstash-worker01.openstack.org:
-    logstash-worker02.openstack.org:
-    logstash-worker03.openstack.org:
-    logstash-worker04.openstack.org:
-    logstash-worker05.openstack.org:
-    logstash-worker06.openstack.org:
-    logstash-worker07.openstack.org:
-    logstash-worker08.openstack.org:
-    logstash-worker09.openstack.org:
-    logstash-worker10.openstack.org:
-    logstash-worker11.openstack.org:
-    logstash-worker12.openstack.org:
-    logstash-worker13.openstack.org:
-    logstash-worker14.openstack.org:
-    logstash-worker15.openstack.org:
-    logstash-worker16.openstack.org:
-    logstash-worker17.openstack.org:
-    logstash-worker18.openstack.org:
-    logstash-worker19.openstack.org:
-    logstash-worker20.openstack.org:
-mailman:
-  hosts:
-    lists-dev01.openstack.org:
-    lists.katacontainers.io:
-    lists.openstack.org:
-mirror:
-  hosts:
-    mirror01.bhs1.ovh.openstack.org:
-    mirror01.ca-ymq-1.vexxhost.openstack.org:
-    mirror01.cn1.linaro.openstack.org:
-    mirror01.gra1.ovh.openstack.org:
-    mirror01.iad.rax.openstack.org:
-    mirror01.kna1.citycloud.openstack.org:
-    mirror01.la1.citycloud.openstack.org:
-    mirror01.lon1.citycloud.openstack.org:
-    mirror01.mtl01.inap.openstack.org:
-    mirror01.ord.rax.openstack.org:
-    mirror01.sjc1.vexxhost.openstack.org:
-    mirror01.sto2.citycloud.openstack.org:
-    mirror02.ca-ymq-1.vexxhost.openstack.org:
-    mirror02.dfw.rax.openstack.org:
-    mirror02.regionone.limestone.openstack.org:
-    mirror02.us-west-1.packethost.openstack.org:
-nodepool:
-  hosts:
-    nb01.openstack.org:
-    nb02.openstack.org:
-    nb03.openstack.org:
-    nl01.openstack.org:
-    nl02.openstack.org:
-    nl03.openstack.org:
-    nl04.openstack.org:
-    nodepool.openstack.org:
-nodepool-builder:
-  hosts:
-    nb01.openstack.org:
-    nb02.openstack.org:
-    nb03.openstack.org:
-nodepool-launcher:
-  hosts:
-    nl01.openstack.org:
-    nl02.openstack.org:
-    nl03.openstack.org:
-    nl04.openstack.org:
-ns:
-  hosts:
-    ns1.openstack.org:
-    ns2.openstack.org:
-paste:
-  hosts:
-    paste01.openstack.org:
-pbx:
-  hosts:
-    pbx.openstack.org:
-puppet:
-  hosts:
-    adns1.openstack.org:
-    afs01.dfw.openstack.org:
-    afs01.ord.openstack.org:
-    afs02.dfw.openstack.org:
-    afsdb01.openstack.org:
-    afsdb02.openstack.org:
-    ask-staging.openstack.org:
-    ask-staging01.openstack.org:
-    ask.openstack.org:
-    backup01.ord.rax.ci.openstack.org:
-    cacti02.openstack.org:
-    codesearch01.openstack.org:
-    corvustest:
-    eavesdrop01.openstack.org:
-    elasticsearch02.openstack.org:
-    elasticsearch03.openstack.org:
-    elasticsearch04.openstack.org:
-    elasticsearch05.openstack.org:
-    elasticsearch06.openstack.org:
-    elasticsearch07.openstack.org:
-    ethercalc02.openstack.org:
-    etherpad-dev.openstack.org:
-    etherpad.openstack.org:
-    files02.openstack.org:
-    firehose01.openstack.org:
-    git.openstack.org:
-    git01.openstack.org:
-    git02.openstack.org:
-    git03.openstack.org:
-    git04.openstack.org:
-    git05.openstack.org:
-    git06.openstack.org:
-    git07.openstack.org:
-    git08.openstack.org:
-    grafana01.openstack.org:
-    grafana02.openstack.org:
-    graphite.openstack.org:
-    groups-dev.openstack.org:
-    groups.openstack.org:
-    health.openstack.org:
-    kdc01.openstack.org:
-    kdc04.openstack.org:
-    lists-dev01.openstack.org:
-    lists.katacontainers.io:
-    lists.openstack.org:
-    logstash-worker01.openstack.org:
-    logstash-worker02.openstack.org:
-    logstash-worker03.openstack.org:
-    logstash-worker04.openstack.org:
-    logstash-worker05.openstack.org:
-    logstash-worker06.openstack.org:
-    logstash-worker07.openstack.org:
-    logstash-worker08.openstack.org:
-    logstash-worker09.openstack.org:
-    logstash-worker10.openstack.org:
-    logstash-worker11.openstack.org:
-    logstash-worker12.openstack.org:
-    logstash-worker13.openstack.org:
-    logstash-worker14.openstack.org:
-    logstash-worker15.openstack.org:
-    logstash-worker16.openstack.org:
-    logstash-worker17.openstack.org:
-    logstash-worker18.openstack.org:
-    logstash-worker19.openstack.org:
-    logstash-worker20.openstack.org:
-    logstash.openstack.org:
-    mirror-update01.openstack.org:
-    mirror01.bhs1.ovh.openstack.org:
-    mirror01.ca-ymq-1.vexxhost.openstack.org:
-    mirror01.cn1.linaro.openstack.org:
-    mirror01.gra1.ovh.openstack.org:
-    mirror01.iad.rax.openstack.org:
-    mirror01.kna1.citycloud.openstack.org:
-    mirror01.la1.citycloud.openstack.org:
-    mirror01.lon1.citycloud.openstack.org:
-    mirror01.mtl01.inap.openstack.org:
-    mirror01.ord.rax.openstack.org:
-    mirror01.sjc1.vexxhost.openstack.org:
-    mirror01.sto2.citycloud.openstack.org:
-    mirror02.ca-ymq-1.vexxhost.openstack.org:
-    mirror02.dfw.rax.openstack.org:
-    mirror02.regionone.limestone.openstack.org:
-    mirror02.us-west-1.packethost.openstack.org:
-    nb01.openstack.org:
-    nb02.openstack.org:
-    nb03.openstack.org:
-    nl01.openstack.org:
-    nl02.openstack.org:
-    nl03.openstack.org:
-    nl04.openstack.org:
-    nodepool.openstack.org:
-    ns1.openstack.org:
-    ns2.openstack.org:
-    openstackid-dev.openstack.org:
-    openstackid.org:
-    paste01.openstack.org:
-    pbx.openstack.org:
-    planet01.openstack.org:
-    puppetmaster.openstack.org:
-    refstack.openstack.org:
-    review-dev01.openstack.org:
-    review.openstack.org:
-    review01.openstack.org:
-    static.openstack.org:
-    status.openstack.org:
-    storyboard-dev.openstack.org:
-    storyboard.openstack.org:
-    subunit-worker01.openstack.org:
-    subunit-worker02.openstack.org:
-    survey01.openstack.org:
-    translate-dev01.openstack.org:
-    translate01.openstack.org:
-    wiki-dev01.openstack.org:
-    wiki-upgrade-test.openstack.org:
-    ze01.openstack.org:
-    ze02.openstack.org:
-    ze03.openstack.org:
-    ze04.openstack.org:
-    ze05.openstack.org:
-    ze06.openstack.org:
-    ze07.openstack.org:
-    ze08.openstack.org:
-    ze09.openstack.org:
-    ze10.openstack.org:
-    ze11.openstack.org:
-    zk01.openstack.org:
-    zk02.openstack.org:
-    zk03.openstack.org:
-    zm01.openstack.org:
-    zm02.openstack.org:
-    zm03.openstack.org:
-    zm04.openstack.org:
-    zm05.openstack.org:
-    zm06.openstack.org:
-    zm07.openstack.org:
-    zm08.openstack.org:
-    zuul01.openstack.org:
-refstack:
-  hosts:
-    refstack.openstack.org:
-review-dev:
-  hosts:
-    review-dev01.openstack.org:
-review:
-  hosts:
-    review01.openstack.org:
-static:
-  hosts:
-    static.openstack.org:
-status:
-  hosts:
-    status.openstack.org:
-storyboard:
-  hosts:
-    storyboard.openstack.org:
-    storyboard-dev.openstack.org:
-storyboard-dev:
-  hosts:
-    storyboard-dev.openstack.org:
-subunit-worker:
-  hosts:
-    subunit-worker02.openstack.org:
-    subunit-worker01.openstack.org:
-survey:
-  hosts:
-    survey01.openstack.org:
-translate-dev:
-  hosts:
-    translate-dev01.openstack.org:
-translate:
-  hosts:
-    translate01.openstack.org:
-webservers:
-  hosts:
-    ask-staging.openstack.org:
-    ask.openstack.org:
-    cacti02.openstack.org:
-    codesearch01.openstack.org:
-    eavesdrop01.openstack.org:
-    ethercalc02.openstack.org:
-    etherpad-dev.openstack.org:
-    etherpad.openstack.org:
-    files02.openstack.org:
-    grafana01.openstack.org:
-    grafana02.openstack.org:
-    graphite.openstack.org:
-    groups-dev.openstack.org:
-    groups.openstack.org:
-    health.openstack.org:
-    nb01.openstack.org:
-    nb02.openstack.org:
-    nb03.openstack.org:
-    nl01.openstack.org:
-    nl02.openstack.org:
-    nl03.openstack.org:
-    nl04.openstack.org:
-    nodepool.openstack.org:
-    openstackid-dev.openstack.org:
-    openstackid.org:
-    paste01.openstack.org:
-    planet01.openstack.org:
-    refstack.openstack.org:
-    static.openstack.org:
-    status.openstack.org:
-    storyboard-dev.openstack.org:
-    storyboard.openstack.org:
-    survey01.openstack.org:
-    translate-dev01.openstack.org:
-    translate01.openstack.org:
-    wiki-dev01.openstack.org:
-    wiki-upgrade-test.openstack.org:
-    zm01.openstack.org:
-    zm02.openstack.org:
-    zm03.openstack.org:
-    zm04.openstack.org:
-    zm05.openstack.org:
-    zm06.openstack.org:
-    zm07.openstack.org:
-    zm08.openstack.org:
-wiki:
-  hosts:
-    wiki.openstack.org:
-wiki-dev:
-  hosts:
-    wiki-dev01.openstack.org:
-zookeeper:
-  hosts:
-    zk01.openstack.org:
-    zk02.openstack.org:
-    zk03.openstack.org:
-zuul-executor:
-  hosts:
-    ze01.openstack.org:
-    ze02.openstack.org:
-    ze03.openstack.org:
-    ze04.openstack.org:
-    ze05.openstack.org:
-    ze06.openstack.org:
-    ze07.openstack.org:
-    ze08.openstack.org:
-    ze09.openstack.org:
-    ze10.openstack.org:
-    ze11.openstack.org:
-zuul-merger:
-  hosts:
-    zm01.openstack.org:
-    zm02.openstack.org:
-    zm03.openstack.org:
-    zm04.openstack.org:
-    zm05.openstack.org:
-    zm06.openstack.org:
-    zm07.openstack.org:
-    zm08.openstack.org:
-zuul-scheduler:
-  hosts:
-    zuul01.openstack.org:
+  adns:
+    - adns1.openstack.org
+  afs:
+    - afs01.dfw.openstack.org
+    - afs01.ord.openstack.org
+    - afs02.dfw.openstack.org
+  afs-client:
+    - afs01.dfw.openstack.org
+    - afs01.ord.openstack.org
+    - afs02.dfw.openstack.org
+    - afsdb01.openstack.org
+    - afsdb02.openstack.org
+    - files02.openstack.org
+    - mirror01.bhs1.ovh.openstack.org
+    - mirror01.ca-ymq-1.vexxhost.openstack.org
+    - mirror01.cn1.linaro.openstack.org
+    - mirror01.gra1.ovh.openstack.org
+    - mirror01.iad.rax.openstack.org
+    - mirror01.kna1.citycloud.openstack.org
+    - mirror01.la1.citycloud.openstack.org
+    - mirror01.lon1.citycloud.openstack.org
+    - mirror01.mtl01.inap.openstack.org
+    - mirror01.ord.rax.openstack.org
+    - mirror01.sjc1.vexxhost.openstack.org
+    - mirror01.sto2.citycloud.openstack.org
+    - mirror02.ca-ymq-1.vexxhost.openstack.org
+    - mirror02.dfw.rax.openstack.org
+    - mirror02.regionone.limestone.openstack.org
+    - mirror02.us-west-1.packethost.openstack.org
+    - review-dev01.openstack.org
+    - ze01.openstack.org
+    - ze02.openstack.org
+    - ze03.openstack.org
+    - ze04.openstack.org
+    - ze05.openstack.org
+    - ze06.openstack.org
+    - ze07.openstack.org
+    - ze08.openstack.org
+    - ze09.openstack.org
+    - ze10.openstack.org
+    - ze11.openstack.org
+  afsadmin:
+    - mirror-update01.openstack.org
+  afsdb:
+    - afsdb01.openstack.org
+    - afsdb02.openstack.org
+  ask:
+    - ask-staging.openstack.org
+    - ask-staging01.openstack.org
+    - ask.openstack.org
+  cacti:
+    - cacti02.openstack.org
+  eavesdrop:
+    - eavesdrop01.openstack.org
+  elasticsearch:
+    - elasticsearch02.openstack.org
+    - elasticsearch03.openstack.org
+    - elasticsearch04.openstack.org
+    - elasticsearch05.openstack.org
+    - elasticsearch06.openstack.org
+    - elasticsearch07.openstack.org
+  ethercalc:
+    - ethercalc02.openstack.org
+  etherpad:
+    - etherpad.openstack.org
+    - etherpad-dev.openstack.org
+  files:
+    - files02.openstack.org
+  firehose:
+    - firehose01.openstack.org
+  futureparser:
+    - ask-staging.openstack.org
+    - ask-staging01.openstack.org
+    - codesearch01.openstack.org
+    - ethercalc02.openstack.org
+    - etherpad-dev.openstack.org
+    - etherpad.openstack.org
+    - firehose01.openstack.org
+    - grafana01.openstack.org
+    - grafana02.openstack.org
+    - graphite.openstack.org
+    - groups-dev.openstack.org
+    - groups.openstack.org
+    - health.openstack.org
+    - logstash-worker01.openstack.org
+    - logstash-worker02.openstack.org
+    - logstash-worker03.openstack.org
+    - logstash-worker04.openstack.org
+    - logstash-worker05.openstack.org
+    - logstash-worker06.openstack.org
+    - logstash-worker07.openstack.org
+    - logstash-worker08.openstack.org
+    - logstash-worker09.openstack.org
+    - logstash-worker10.openstack.org
+    - logstash-worker11.openstack.org
+    - logstash-worker12.openstack.org
+    - logstash-worker13.openstack.org
+    - logstash-worker14.openstack.org
+    - logstash-worker15.openstack.org
+    - logstash-worker16.openstack.org
+    - logstash-worker17.openstack.org
+    - logstash-worker18.openstack.org
+    - logstash-worker19.openstack.org
+    - logstash-worker20.openstack.org
+    - paste01.openstack.org
+    - planet01.openstack.org
+    - review-dev01.openstack.org
+    - review.openstack.org
+    - review01.openstack.org
+    - storyboard-dev.openstack.org
+  gerrit:
+    - review-dev01.openstack.org
+    - review.openstack.org
+    - review01.openstack.org
+  git-loadbalancer:
+    - git.openstack.org
+  git-server:
+    - git01.openstack.org
+    - git02.openstack.org
+    - git03.openstack.org
+    - git04.openstack.org
+    - git05.openstack.org
+    - git06.openstack.org
+    - git07.openstack.org
+    - git08.openstack.org
+  grafana:
+    - grafana01.openstack.org
+    - grafana02.openstack.org
+  graphite:
+    - graphite.openstack.org
+  groups:
+    - groups.openstack.org
+    - groups-dev.openstack.org
+  health:
+    - health.openstack.org
+  kdc:
+    - kdc01.openstack.org
+    - kdc04.openstack.org
+  logstash:
+    - logstash.openstack.org
+  logstash-worker:
+    - logstash-worker01.openstack.org
+    - logstash-worker02.openstack.org
+    - logstash-worker03.openstack.org
+    - logstash-worker04.openstack.org
+    - logstash-worker05.openstack.org
+    - logstash-worker06.openstack.org
+    - logstash-worker07.openstack.org
+    - logstash-worker08.openstack.org
+    - logstash-worker09.openstack.org
+    - logstash-worker10.openstack.org
+    - logstash-worker11.openstack.org
+    - logstash-worker12.openstack.org
+    - logstash-worker13.openstack.org
+    - logstash-worker14.openstack.org
+    - logstash-worker15.openstack.org
+    - logstash-worker16.openstack.org
+    - logstash-worker17.openstack.org
+    - logstash-worker18.openstack.org
+    - logstash-worker19.openstack.org
+    - logstash-worker20.openstack.org
+  mailman:
+    - lists-dev01.openstack.org
+    - lists.katacontainers.io:
+    - lists.openstack.org
+  mirror:
+    - mirror01.bhs1.ovh.openstack.org
+    - mirror01.ca-ymq-1.vexxhost.openstack.org
+    - mirror01.cn1.linaro.openstack.org
+    - mirror01.gra1.ovh.openstack.org
+    - mirror01.iad.rax.openstack.org
+    - mirror01.kna1.citycloud.openstack.org
+    - mirror01.la1.citycloud.openstack.org
+    - mirror01.lon1.citycloud.openstack.org
+    - mirror01.mtl01.inap.openstack.org
+    - mirror01.ord.rax.openstack.org
+    - mirror01.sjc1.vexxhost.openstack.org
+    - mirror01.sto2.citycloud.openstack.org
+    - mirror02.ca-ymq-1.vexxhost.openstack.org
+    - mirror02.dfw.rax.openstack.org
+    - mirror02.regionone.limestone.openstack.org
+    - mirror02.us-west-1.packethost.openstack.org
+  nodepool:
+    - nb01.openstack.org
+    - nb02.openstack.org
+    - nb03.openstack.org
+    - nl01.openstack.org
+    - nl02.openstack.org
+    - nl03.openstack.org
+    - nl04.openstack.org
+    - nodepool.openstack.org
+  nodepool-builder:
+    - nb01.openstack.org
+    - nb02.openstack.org
+    - nb03.openstack.org
+  nodepool-launcher:
+    - nl01.openstack.org
+    - nl02.openstack.org
+    - nl03.openstack.org
+    - nl04.openstack.org
+  ns:
+    - ns1.openstack.org
+    - ns2.openstack.org
+  paste:
+    - paste01.openstack.org
+  pbx:
+    - pbx.openstack.org
+  puppet:
+    - adns1.openstack.org
+    - afs01.dfw.openstack.org
+    - afs01.ord.openstack.org
+    - afs02.dfw.openstack.org
+    - afsdb01.openstack.org
+    - afsdb02.openstack.org
+    - ask-staging.openstack.org
+    - ask-staging01.openstack.org
+    - ask.openstack.org
+    - backup01.ord.rax.ci.openstack.org
+    - cacti02.openstack.org
+    - codesearch01.openstack.org
+    - corvustest:
+    - eavesdrop01.openstack.org
+    - elasticsearch02.openstack.org
+    - elasticsearch03.openstack.org
+    - elasticsearch04.openstack.org
+    - elasticsearch05.openstack.org
+    - elasticsearch06.openstack.org
+    - elasticsearch07.openstack.org
+    - ethercalc02.openstack.org
+    - etherpad-dev.openstack.org
+    - etherpad.openstack.org
+    - files02.openstack.org
+    - firehose01.openstack.org
+    - git.openstack.org
+    - git01.openstack.org
+    - git02.openstack.org
+    - git03.openstack.org
+    - git04.openstack.org
+    - git05.openstack.org
+    - git06.openstack.org
+    - git07.openstack.org
+    - git08.openstack.org
+    - grafana01.openstack.org
+    - grafana02.openstack.org
+    - graphite.openstack.org
+    - groups-dev.openstack.org
+    - groups.openstack.org
+    - health.openstack.org
+    - kdc01.openstack.org
+    - kdc04.openstack.org
+    - lists-dev01.openstack.org
+    - lists.katacontainers.io:
+    - lists.openstack.org
+    - logstash-worker01.openstack.org
+    - logstash-worker02.openstack.org
+    - logstash-worker03.openstack.org
+    - logstash-worker04.openstack.org
+    - logstash-worker05.openstack.org
+    - logstash-worker06.openstack.org
+    - logstash-worker07.openstack.org
+    - logstash-worker08.openstack.org
+    - logstash-worker09.openstack.org
+    - logstash-worker10.openstack.org
+    - logstash-worker11.openstack.org
+    - logstash-worker12.openstack.org
+    - logstash-worker13.openstack.org
+    - logstash-worker14.openstack.org
+    - logstash-worker15.openstack.org
+    - logstash-worker16.openstack.org
+    - logstash-worker17.openstack.org
+    - logstash-worker18.openstack.org
+    - logstash-worker19.openstack.org
+    - logstash-worker20.openstack.org
+    - logstash.openstack.org
+    - mirror-update01.openstack.org
+    - mirror01.bhs1.ovh.openstack.org
+    - mirror01.ca-ymq-1.vexxhost.openstack.org
+    - mirror01.cn1.linaro.openstack.org
+    - mirror01.gra1.ovh.openstack.org
+    - mirror01.iad.rax.openstack.org
+    - mirror01.kna1.citycloud.openstack.org
+    - mirror01.la1.citycloud.openstack.org
+    - mirror01.lon1.citycloud.openstack.org
+    - mirror01.mtl01.inap.openstack.org
+    - mirror01.ord.rax.openstack.org
+    - mirror01.sjc1.vexxhost.openstack.org
+    - mirror01.sto2.citycloud.openstack.org
+    - mirror02.ca-ymq-1.vexxhost.openstack.org
+    - mirror02.dfw.rax.openstack.org
+    - mirror02.regionone.limestone.openstack.org
+    - mirror02.us-west-1.packethost.openstack.org
+    - nb01.openstack.org
+    - nb02.openstack.org
+    - nb03.openstack.org
+    - nl01.openstack.org
+    - nl02.openstack.org
+    - nl03.openstack.org
+    - nl04.openstack.org
+    - nodepool.openstack.org
+    - ns1.openstack.org
+    - ns2.openstack.org
+    - openstackid-dev.openstack.org
+    - openstackid.org:
+    - paste01.openstack.org
+    - pbx.openstack.org
+    - planet01.openstack.org
+    - puppetmaster.openstack.org
+    - refstack.openstack.org
+    - review-dev01.openstack.org
+    - review.openstack.org
+    - review01.openstack.org
+    - static.openstack.org
+    - status.openstack.org
+    - storyboard-dev.openstack.org
+    - storyboard.openstack.org
+    - subunit-worker01.openstack.org
+    - subunit-worker02.openstack.org
+    - survey01.openstack.org
+    - translate-dev01.openstack.org
+    - translate01.openstack.org
+    - wiki-dev01.openstack.org
+    - wiki-upgrade-test.openstack.org
+    - ze01.openstack.org
+    - ze02.openstack.org
+    - ze03.openstack.org
+    - ze04.openstack.org
+    - ze05.openstack.org
+    - ze06.openstack.org
+    - ze07.openstack.org
+    - ze08.openstack.org
+    - ze09.openstack.org
+    - ze10.openstack.org
+    - ze11.openstack.org
+    - zk01.openstack.org
+    - zk02.openstack.org
+    - zk03.openstack.org
+    - zm01.openstack.org
+    - zm02.openstack.org
+    - zm03.openstack.org
+    - zm04.openstack.org
+    - zm05.openstack.org
+    - zm06.openstack.org
+    - zm07.openstack.org
+    - zm08.openstack.org
+    - zuul01.openstack.org
+  refstack:
+    - refstack.openstack.org
+  review-dev:
+    - review-dev01.openstack.org
+  review:
+    - review01.openstack.org
+  static:
+    - static.openstack.org
+  status:
+    - status.openstack.org
+  storyboard:
+    - storyboard.openstack.org
+    - storyboard-dev.openstack.org
+  storyboard-dev:
+    - storyboard-dev.openstack.org
+  subunit-worker:
+    - subunit-worker02.openstack.org
+    - subunit-worker01.openstack.org
+  survey:
+    - survey01.openstack.org
+  translate-dev:
+    - translate-dev01.openstack.org
+  translate:
+    - translate01.openstack.org
+  webservers:
+    - ask-staging.openstack.org
+    - ask.openstack.org
+    - cacti02.openstack.org
+    - codesearch01.openstack.org
+    - eavesdrop01.openstack.org
+    - ethercalc02.openstack.org
+    - etherpad-dev.openstack.org
+    - etherpad.openstack.org
+    - files02.openstack.org
+    - grafana01.openstack.org
+    - grafana02.openstack.org
+    - graphite.openstack.org
+    - groups-dev.openstack.org
+    - groups.openstack.org
+    - health.openstack.org
+    - nb01.openstack.org
+    - nb02.openstack.org
+    - nb03.openstack.org
+    - nl01.openstack.org
+    - nl02.openstack.org
+    - nl03.openstack.org
+    - nl04.openstack.org
+    - nodepool.openstack.org
+    - openstackid-dev.openstack.org
+    - openstackid.org:
+    - paste01.openstack.org
+    - planet01.openstack.org
+    - refstack.openstack.org
+    - static.openstack.org
+    - status.openstack.org
+    - storyboard-dev.openstack.org
+    - storyboard.openstack.org
+    - survey01.openstack.org
+    - translate-dev01.openstack.org
+    - translate01.openstack.org
+    - wiki-dev01.openstack.org
+    - wiki-upgrade-test.openstack.org
+    - zm01.openstack.org
+    - zm02.openstack.org
+    - zm03.openstack.org
+    - zm04.openstack.org
+    - zm05.openstack.org
+    - zm06.openstack.org
+    - zm07.openstack.org
+    - zm08.openstack.org
+  wiki:
+    - wiki.openstack.org
+  wiki-dev:
+    - wiki-dev01.openstack.org
+  zookeeper:
+    - zk01.openstack.org
+    - zk02.openstack.org
+    - zk03.openstack.org
+  zuul-executor:
+    - ze01.openstack.org
+    - ze02.openstack.org
+    - ze03.openstack.org
+    - ze04.openstack.org
+    - ze05.openstack.org
+    - ze06.openstack.org
+    - ze07.openstack.org
+    - ze08.openstack.org
+    - ze09.openstack.org
+    - ze10.openstack.org
+    - ze11.openstack.org
+  zuul-merger:
+    - zm01.openstack.org
+    - zm02.openstack.org
+    - zm03.openstack.org
+    - zm04.openstack.org
+    - zm05.openstack.org
+    - zm06.openstack.org
+    - zm07.openstack.org
+    - zm08.openstack.org
+  zuul-scheduler:
+    - zuul01.openstack.org
