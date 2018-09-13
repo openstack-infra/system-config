@@ -37,6 +37,10 @@
         bastion_ipv6: "{{ nodepool['public_ipv6'] }}"
         bastion_public_key: "{{ lookup('file', zuul.executor.work_root + '/' + zuul.build + '_id_rsa.pub') }}"
         iptables_test_public_tcp_ports: [19885]
+        iptables_extra_allowed_hosts:
+          - hostname: git.openstack.org
+            port: 9876
+            protocol: udp
       template:
         src: "templates/{{ item }}.j2"
         dest: "/etc/ansible/hosts/{{ item }}"
