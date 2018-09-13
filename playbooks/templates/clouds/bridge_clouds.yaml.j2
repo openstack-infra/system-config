@@ -140,3 +140,13 @@ clouds:
       user_domain_name: default
       project_domain_name: default
     identity_api_version: '3'
+  openstackci-arm64ci:
+    regions:
+      - ewr1
+    auth:
+      auth_url: http://arm64ci.cloud:5000
+      username: '{{ clouds.openstackci_arm64ci_username }}'
+      password: '{{ clouds.openstackci_arm64ci_password }}'
+      project_name: '{{ clouds.openstackci_arm64ci_project_name }}'
+      project_domain_name: default
+      user_domain_name: default
