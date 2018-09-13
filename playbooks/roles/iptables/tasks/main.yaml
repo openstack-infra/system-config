@@ -16,6 +16,22 @@
     state: directory
     path: '{{ rules_dir }}'
 
+- name: Dump host rules
+  debug:
+    msg: '{{ iptables_allowed_hosts }}'
+
+- name: Dump pypi
+  debug:
+    msg: '{{ pypi.org | dns_a }}'
+
+- name: Dump bridge
+  debug:
+    msg: '{{ bridge.openstack.org | dns_a }}'
+
+- name: Dump bridge v6
+  debug:
+    msg: '{{ bridge.openstack.org | dns_aaaa }}'
+
 - name: Install IPv4 rules files
   template:
     src: rules.v4.j2
