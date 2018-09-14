@@ -1,7 +1,10 @@
 - hosts: 'zuul-scheduler:!disabled'
   any_errors_fatal: true
   tasks:
-    - name: Reconfigure the zuul scheduler
-      command: /usr/local/bin/zuul-scheduler full-reconfigure
-      become: true
-      become_user: root
+    - name: Say hello
+      debug:
+        msg: Hello world!
+    # - name: Reconfigure the zuul scheduler
+    #   command: /usr/local/bin/zuul-scheduler full-reconfigure
+    #   become: true
+    #   become_user: root
