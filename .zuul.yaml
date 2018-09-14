@@ -208,6 +208,8 @@
     run: playbooks/zuul/run-production-playbook.yaml
     vars:
       ansible_forks: 5
+    nodeset:
+      nodes: []
 
 - job:
     name: infra-prod-zuul_reconfigure
