@@ -1,6 +1,7 @@
 distro_packages:
   - dnsutils
   - emacs23-nox
+  - yaml-mode
   - iputils-ping
   - vim-nox
   - unattended-upgrades
