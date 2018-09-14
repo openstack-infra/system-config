@@ -478,4 +478,12 @@ class openstack_project::lists(
     password    => $listpassword,
     description => 'Discussion of StarlingX usage and development.',
   }
+
+  mailman_list { 'openstack-discuss@openstack':
+    require     => Mailman::Site['openstack'],
+    ensure      => present,
+    admin       => 'fungi@yuggoth.org',
+    password    => $listpassword,
+    description => 'Discussion of OpenStack usage and development.',
+  }
 }
