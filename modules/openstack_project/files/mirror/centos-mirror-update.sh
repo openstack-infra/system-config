@@ -16,7 +16,7 @@
 MIRROR_VOLUME=$1
 
 BASE="/afs/.openstack.org/mirror/centos"
-MIRROR="rsync://mirror.lstn.net"
+MIRROR="rsync://repos.dfw.quadranet.com"
 K5START="k5start -t -f /etc/centos.keytab service/centos-mirror -- timeout -k 2m 30m"
 
 REPO=7
