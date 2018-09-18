@@ -167,15 +167,6 @@ The ``close-pull-requests`` Jeepyb command is installed as a cron job
 and periodically closes all pull requests for projects so configured
 in projects.yaml.
 
-
-Expiring Old Reviews
---------------------
-
-The ``expire-old-reviews`` Jeepyb command is installed as a cron job
-that periodically marks reviews that have seen little activity as
-`Abandoned`.  Their owners may use the Gerrit interface to restore
-them when they are ready for further review.
-
 Manage Projects
 ---------------
 
