@@ -1,5 +1,5 @@
 - name: Install puppet packages
-  include: "{{ lookup('first_found', params) }}"
+  include_tasks: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
