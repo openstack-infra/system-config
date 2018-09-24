@@ -51,10 +51,22 @@ def test_cloud_launcher_cron(host):
         assert 'run_cloud_launcher.sh' in crontab
 
 
-def test_authorized_keys(host):
+def test_root_authorized_keys(host):
     authorized_keys = host.file('/root/.ssh/authorized_keys')
     assert authorized_keys.exists
 
     content = authorized_keys.content.decode('utf8')
     lines = content.split('\n')
-    assert len(lines) >= 3
+    assert len(lines) >= 2
+
+def test_zuulcd_authorized_keys(host):
+    authorized_keys = host.file('/home/zuulcd/.ssh/authorized_keys')
+    assert authorized_keys.exists
+
+    content = authorized_keys.content.decode('utf8')
+    lines = content.split('\n')
+    # Remove empty lines
+    keys = list(filter(None, lines))
+    assert len(keys) >= 2
+    for key in keys:
+        assert 'ssh-rsa' in key
