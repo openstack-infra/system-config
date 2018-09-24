@@ -54,13 +54,16 @@
     - item in all_users
     - "'uid' in all_users[item]"
 
+- name: Process ssh keys
+  construct_user_list:
+    valid_users: "{{ base_users + extra_users }}"
+    all_users: "{{ all_users }}"
+  register: processed_keys
+
 - name: Add ssh keys to users
-  loop: "{{ base_users + extra_users }}"
+  loop: "{{ processed_keys.users }}"
   authorized_key:
-    user: "{{ item }}"
+    user: "{{ item.username }}"
     state: present
-    key: "{{ all_users[item].key }}"
+    key: "{{ item.key }}"
     exclusive: yes
-  when:
-    - item in all_users
-    - "'key' in all_users[item]"
