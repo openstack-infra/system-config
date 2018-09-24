@@ -158,9 +158,9 @@ all_users:
 
   zuulcd:
     comment: Zuul CICD
-    key: |
-      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcXd/QJDEprSLh6N6bULnhchf9M+uzYBEJ2b51Au67FON+5M6VEj5Ut+DlkEPhabOP+tSv9Cn1HpmpBjdEOXdmBj6JS7G/gBb4w28oZDyNjrPT2ebpRw/XnVEkGfikR2J+j3o7CV+ybhLDalXm2TUDReVXnONUq3YzZbjRzoYs0xxrxyss47vZP0xFpsAt9jCMAJW2k6H589VUY38k9LFyhZUZ72FB6eJ68B9GN0TimBYm2DqvupBGQrRhkP8OZ0WoBV8PulKXaHVFdmfBNHB7E7FLlZKuiM6nkV4bOWMGOB/TF++wXBK86t9po3pWCM7+kr72xGRTE+6LuZ2z1K+h zuul-system-config-20180924
-      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQbidZ1wW8moNtPGBhZ3oDm1kcDtiAemI51euL6KZslwpG8CKMT0KBSYw1vpCYc5dYCerq63dQtg2Bm1rhc2gC/U2bbMlvnNPwlkS7eykVfrPDfJHVbff+qHv7l1e1ZoCVAEvVxXG/FgFUiqIKwEhMqG/Etegw07H7vERNETGE5RyRA8cMnK9Cj4oL0OUpZAv7o1a+A+gXRv1EMdWL7g9M6OImikO48w+ZSLOA8uD+0MmN23nh335k2VG609u+ZxTkZAB4GtW0HSCTFu5MCmJFaY1+5cCNedsC9O4ekaXNQxYelFxasN5Qe7miRWcR+Ax8g3HjHpG3Hc1LSc/6XVcj zuul-project-config-20180924
+    key_urls:
+      - https://zuul.opendev.org/api/tenant/openstack/project-ssh-key/openstack-infra/system-config.pub
+      - https://zuul.opendev.org/api/tenant/openstack/project-ssh-key/openstack-infra/project-config.pub
     uid: 2031
     gid: 2031
 
