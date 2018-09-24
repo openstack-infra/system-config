@@ -1,3 +1,5 @@
 ansible_python_interpreter: python3
 bastion_key_exclusive: false
 kube_config_template: clouds/bridge_kube_config.yaml.j2
+extra_users:
+  - zuulcd
