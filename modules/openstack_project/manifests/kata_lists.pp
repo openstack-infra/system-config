@@ -29,4 +29,13 @@ class openstack_project::kata_lists(
     webserver   => $listdomain,
     mailserver  => $listdomain,
   }
+
+  maillist { 'embargo-notice':
+    ensure      => present,
+    admin       => 'jonathan@openstack.org',
+    password    => $listpassword,
+    description => 'Announcements of embargoed notices for the Kata Containers project',
+    webserver   => $listdomain,
+    mailserver  => $listdomain,
+  }
 }
