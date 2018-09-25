@@ -14,6 +14,8 @@ At a Glance
 :Hosts:
   * ns1.openstack.org
   * ns2.openstack.org
+  * ns1.opendev.org
+  * ns2.opendev.org
 :Puppet:
   * :cgit_file:`manifests/site.pp`
 :Projects:
