@@ -238,6 +238,11 @@ class openstack_project::review (
           replicationDelay     => '1',
           replicatePermissions => false,
           mirror               => true,
+          projects             => [
+            'openstack/*',
+            'openstack-dev/*',
+            'openstack-infra/*',
+          ]
         },
         {
           name                 => 'local',
