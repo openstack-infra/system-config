@@ -1,0 +1,13 @@
+[Unit]
+Description=Statsd
+
+[Service]
+WorkingDirectory=/opt/statsd
+ExecStart=/usr/bin/node /opt/statsd/stats.js /etc/statsd/config.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=statsd
+
+[Install]
+WatnedBy=multi-user.target

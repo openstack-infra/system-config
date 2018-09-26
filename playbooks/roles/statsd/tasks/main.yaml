@@ -1,0 +1,46 @@
+- name: Ensure statsd group
+  group:
+    name: statsd
+
+- name: Ensure statsd user
+  user:
+    name: statsd
+    groups:
+      - statsd
+
+- name: Ensure nodejs
+  package:
+    state: present
+    name:
+      - nodejs
+
+- name: Ensure config directory
+  file:
+    path: /etc/statsd
+    state: directory
+
+- name: Clone upstream statsd
+  git:
+    repo: https://github.com/etsy/statsd.git
+    dest: /opt/statsd
+
+- name: Install config file
+  template:
+    src: statsd.js.j2
+    dest: /etc/statsd/statsd.js
+    owner: statsd
+    group: statsd
+    mode: 0644
+    # notify service on change?
+
+- name: Install statsd service file
+  copy:
+    src: statsd.service
+    dest: /etc/systemd/system/statsd.service
+  register: installed_stastd_service
+
+- name: Enable statsd service
+  systemd:
+    name: statsd
+    enabled: yes
+    daemon_reload: yes
