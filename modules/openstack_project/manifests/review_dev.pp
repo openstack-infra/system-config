@@ -178,6 +178,10 @@ class openstack_project::review_dev (
           replicationDelay     => '1',
           replicatePermissions => false,
           mirror               => true,
+          projects             => [
+            'gtest-org/*',
+            'kdc*',
+          ]
         },
         {
           name                 => 'local',
