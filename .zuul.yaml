@@ -216,6 +216,22 @@
       - testinfra/test_nodepool.py
 
 - job:
+    name: system-config-run-docker
+    parent: system-config-run
+    description: |
+      Test docker installation and setup
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: bionic-docker
+          label: ubuntu-bionic
+    files:
+      - .zuul.yaml
+      - playbooks/roles/install-docker
+      - testinfra/test_docker.py
+
+- job:
     name: system-config-run-dns
     parent: system-config-run
     description: |
@@ -287,6 +303,7 @@
         - system-config-run-dns
         - system-config-run-eavesdrop
         - system-config-run-nodepool
+        - system-config-run-docker
     gate:
       jobs:
         - tox-linters
@@ -299,3 +316,4 @@
         - system-config-run-dns
         - system-config-run-eavesdrop
         - system-config-run-nodepool
+        - system-config-run-docker
