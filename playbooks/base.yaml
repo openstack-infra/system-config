@@ -51,3 +51,8 @@
   name: "Base: configure authoritative nameservers"
   roles:
     - nameserver
+
+- hosts: "docker:!disabled"
+  name: "Base: install and configure docker on docker hosts"
+  roles:
+    - install-docker

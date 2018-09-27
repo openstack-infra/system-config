@@ -62,7 +62,7 @@ def test_iptables(host):
     rules = host.iptables.rules()
     rules = [x.strip() for x in rules]
 
-    start = [
+    needed_rules = [
         '-P INPUT ACCEPT',
         '-P FORWARD ACCEPT',
         '-P OUTPUT ACCEPT',
@@ -72,11 +72,11 @@ def test_iptables(host):
         '-A openstack-INPUT -p icmp -m icmp --icmp-type any -j ACCEPT',
         '-A openstack-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
         '-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT',
+        '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
     ]
+    for rule in needed_rules:
+        assert rule in rules
     assert rules[:len(start)] == start
-
-    reject = '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
-    assert reject in rules
 
     # Make sure that the zuul console stream rule is still present
     zuul = ('-A openstack-INPUT -p tcp -m state --state NEW'
