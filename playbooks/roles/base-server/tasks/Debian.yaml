@@ -3,6 +3,7 @@
     name:
       - whoopsie
       - popularity-contest
+      - snapd
     state: absent
 
 - name: Configure file limits
