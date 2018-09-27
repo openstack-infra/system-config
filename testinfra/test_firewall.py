@@ -14,8 +14,9 @@
 
 import socket
 
-
-testinfra_hosts = ['all']
+# TODO(ianw): docker fiddles the firewall rules; update these to
+# handle docker too.
+testinfra_hosts = ['all:!bionic-docker']
 
 
 def get_ips(value, family=None):
@@ -56,6 +57,45 @@ def test_puppet(host):
         puppet = host.package("puppet")
         puppet_agent = host.package("puppet-agent")
         assert not puppet.is_installed and not puppet_agent.is_installed
+
+
+def test_iptables(host):
+    rules = host.iptables.rules()
+    rules = [x.strip() for x in rules]
+
+    start = [
+        '-P INPUT ACCEPT',
+        '-P FORWARD ACCEPT',
+        '-P OUTPUT ACCEPT',
+        '-N openstack-INPUT',
+        '-A INPUT -j openstack-INPUT',
+        '-A openstack-INPUT -i lo -j ACCEPT',
+        '-A openstack-INPUT -p icmp -m icmp --icmp-type any -j ACCEPT',
+        '-A openstack-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
+        '-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT',
+    ]
+    assert rules[:len(start)] == start
+
+    reject = '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
+    assert reject in rules
+
+    # Make sure that the zuul console stream rule is still present
+    zuul = ('-A openstack-INPUT -p tcp -m state --state NEW'
+            ' -m tcp --dport 19885 -j ACCEPT')
+    assert zuul in rules
+
+    # Ensure all IPv4+6 addresses for cacti are allowed
+    for ip in get_ips('cacti.openstack.org', socket.AF_INET):
+        snmp = ('-A openstack-INPUT -s %s/32 -p udp -m udp'
+                ' --dport 161 -j ACCEPT' % ip)
+        assert snmp in rules
+
+    # TODO(ianw) add ip6tables support to testinfra iptables module
+    ip6rules = host.check_output('ip6tables -S')
+    for ip in get_ips('cacti.openstack.org', socket.AF_INET6):
+        snmp = ('-A openstack-INPUT -s %s/128 -p udp -m udp'
+                ' --dport 161 -j ACCEPT' % ip)
+        assert snmp in ip6rules
 
 
 def test_ntp(host):
