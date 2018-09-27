@@ -196,6 +196,22 @@
       - testinfra/test_nodepool.py
 
 - job:
+    name: system-config-run-docker
+    parent: system-config-run
+    description: |
+      Test docker installation and setup
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: docker.quay.openstack.org
+          label: ubuntu-bionic
+    files:
+      - .zuul.yaml
+      - playbooks/roles/install-docker
+      - testinfra/test_docker.py
+
+- job:
     name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
@@ -223,22 +239,9 @@
       playbook_name: zuul_reconfigure.yaml
 
 - project:
-    templates:
-      - system-config-zuul-role-integration
-      - infra-puppet-apply-jobs
-      - infra-logstash-filter-jobs
-      - publish-tox-docs-infra
     check:
       jobs:
-        - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
+        - system-config-run-docker
     gate:
       jobs:
         - tox-linters
