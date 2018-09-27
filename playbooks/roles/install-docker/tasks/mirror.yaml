@@ -1,0 +1,32 @@
+- name: Create docker directory
+  become: yes
+  file:
+    state: directory
+    path: /etc/docker
+
+- name: Set docker_mirror fact for upstream docker
+  when:
+    - docker_mirror is not defined
+    - mirror_fqdn is defined
+    - use_upstream_docker
+  set_fact:
+    docker_mirror: "http://{{ mirror_fqdn }}:8082"
+
+- name: Set docker_mirror fact for distro docker
+  when:
+    - docker_mirror is not defined
+    - mirror_fqdn is defined
+    - not use_upstream_docker
+  set_fact:
+    docker_mirror: "http://{{ mirror_fqdn }}:8081/registry-1.docker/"
+
+- name: Install dockerhub proxy configuration
+  become: yes
+  when:
+    - docker_mirror is defined
+  template:
+    dest: /etc/docker/daemon.json
+    group: root
+    mode: 0644
+    owner: root
+    src: daemon.json.j2

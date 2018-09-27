@@ -41,3 +41,8 @@
   roles:
     - puppet-install
     - disable-puppet-agent
+
+- hosts: "docker:!disabled"
+  name: "Base: install and configure docker on docker hosts"
+  roles:
+    - docker-install
