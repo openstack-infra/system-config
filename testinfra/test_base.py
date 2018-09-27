@@ -73,7 +73,37 @@ def test_iptables(host):
         '-A openstack-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
         '-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT',
     ]
-    assert rules[:len(start)] == start
+    start_docker = [
+        '-P INPUT ACCEPT',
+        '-P FORWARD DROP',
+        '-P OUTPUT ACCEPT',
+        '-N DOCKER',
+        '-N DOCKER-ISOLATION-STAGE-1',
+        '-N DOCKER-ISOLATION-STAGE-2',
+        '-N DOCKER-USER',
+        '-N openstack-INPUT',
+        '-A INPUT -j openstack-INPUT',
+        '-A FORWARD -j DOCKER-USER',
+        '-A FORWARD -j DOCKER-ISOLATION-STAGE-1',
+        '-A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT',
+        '-A FORWARD -o docker0 -j DOCKER',
+        '-A FORWARD -i docker0 ! -o docker0 -j ACCEPT',
+        '-A FORWARD -i docker0 -o docker0 -j ACCEPT',
+        '-A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2',
+        '-A DOCKER-ISOLATION-STAGE-1 -j RETURN',
+        '-A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP',
+        '-A DOCKER-ISOLATION-STAGE-2 -j RETURN',
+        '-A DOCKER-USER -j RETURN',
+        '-A openstack-INPUT -i lo -j ACCEPT',
+        '-A openstack-INPUT -p icmp -m icmp --icmp-type any -j ACCEPT',
+        '-A openstack-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT',
+        '-A openstack-INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT',
+    ]
+
+    # If host is configured to run docker there are extra docker iptables
+    # rules. Not all hosts run docker to accept either.
+    assert rules[:len(start)] == start or \
+        rules[:len(start_docker)] == start_docker
 
     reject = '-A openstack-INPUT -j REJECT --reject-with icmp-host-prohibited'
     assert reject in rules
