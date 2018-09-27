@@ -89,27 +89,27 @@ class openstack_project::review_dev (
       commentlinks                        => [
         {
           name  => 'bugheader',
-          match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\s*#?(\\d+)',
+          match => '([Cc]loses|[Pp]artial|[Rr]elated)-[Bb]ug:\\\\s*#?(\\\\d+)',
           link  => 'https://launchpad.net/bugs/$2',
         },
         {
           name  => 'bug',
-          match => '\\b[Bb]ug:? #?(\\d+)',
+          match => '\\\\b[Bb]ug:? #?(\\\\d+)',
           link  => 'https://launchpad.net/bugs/$1',
         },
         {
           name  => 'story',
-          match => '\\b[Ss]tory:? #?(\\d+)',
+          match => '\\\\b[Ss]tory:? #?(\\\\d+)',
           link  => 'https://storyboard-dev.openstack.org/#!/story/$1',
         },
         {
           name  => 'its-storyboard',
-          match => '\\b[Tt]ask:? #?(\\d+)',
+          match => '\\\\b[Tt]ask:? #?(\\\\d+)',
           link  => 'task: $1',
         },
         {
           name  => 'blueprint',
-          match => '(\\b[Bb]lue[Pp]rint\\b|\\b[Bb][Pp]\\b)[ \\t#:]*([A-Za-z0-9\\-]+)',
+          match => '(\\\\b[Bb]lue[Pp]rint\\\\b|\\\\b[Bb][Pp]\\\\b)[ \\\\t#:]*([A-Za-z0-9\\\\-]+)',
           link  => 'https://blueprints.launchpad.net/openstack/?searchtext=$2',
         },
         {
@@ -119,7 +119,7 @@ class openstack_project::review_dev (
         },
         {
           name  => 'launchpadbug',
-          match => '<a href=\"(https://bugs\\.launchpad\\.net/[a-zA-Z0-9\\-]+/\\+bug/(\\d+))[^\"]*\">[^<]+</a>',
+          match => '<a href=\"(https://bugs\\\\.launchpad\\\\.net/[a-zA-Z0-9\\\\.]+/\\\\+bug/(\\\\d+))[^\"]*\">[^<]+</a>',
           html  => '<a href=\"$1\">$1</a>'
         },
         {
@@ -129,7 +129,7 @@ class openstack_project::review_dev (
         },
         {
           name  => 'gitsha',
-          match => '(<p>|[\\s(])([0-9a-f]{40})(</p>|[\\s.,;:)])',
+          match => '(<p>|[\\\\s(])([0-9a-f]{40})(</p>|[\\\\s.,;:)])',
           html  => '$1<a href=\"/#/q/$2\">$2</a>$3',
         },
       ],

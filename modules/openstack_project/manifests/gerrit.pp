@@ -158,13 +158,13 @@ class openstack_project::gerrit (
       {
         name   => 'storyboard-story',
         footer => 'story:',
-        match  => '\\#?(\\d+)',
+        match  => '\\\\#?(\\\\d+)',
         system => 'Storyboard',
       },
       {
         name   => 'storyboard-task',
         footer => 'task:',
-        match  => '\\#?(\\d+)',
+        match  => '\\\\#?(\\\\d+)',
         system => 'Storyboard',
       },
     ],
