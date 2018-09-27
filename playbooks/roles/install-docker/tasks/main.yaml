@@ -1,0 +1,25 @@
+- name: Create docker directory
+  become: yes
+  file:
+    state: directory
+    path: /etc/docker
+
+- name: Install docker configuration
+  become: yes
+  template:
+    dest: /etc/docker/daemon.json
+    group: root
+    mode: 0644
+    owner: root
+    src: daemon.json.j2
+
+- name: Install docker-ce from upstream
+  include: upstream.yaml
+  when: use_upstream_docker
+
+- name: Install docker-engine from distro
+  include: distro.yaml
+  when: not use_upstream_docker
+
+- name: reset ssh connection to pick up docker group
+  meta: reset_connection
