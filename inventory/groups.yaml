@@ -29,6 +29,7 @@ groups:
     - wiki.openstack.org
   docker:
     - docker-test.openstack.org
+    - graphite01.openstack.org
   eavesdrop: eavesdrop[0-9]*.openstack.org
   elasticsearch: elasticsearch[0-9]*.openstack.org
   ethercalc: ethercalc*
@@ -77,7 +78,7 @@ groups:
     - grafana01.openstack.org
     - grafana02.openstack.org
   graphite:
-    - graphite.openstack.org
+    - graphite[0-9]*.openstack.org
   groups:
     - groups.openstack.org
     - groups-dev.openstack.org
@@ -193,6 +194,7 @@ groups:
     - grafana01.openstack.org
     - grafana02.openstack.org
     - graphite.openstack.org
+    - graphite01.openstack.org
     - groups-dev.openstack.org
     - groups.openstack.org
     - health.openstack.org
@@ -329,7 +331,7 @@ groups:
     - files02.openstack.org
     - grafana01.openstack.org
     - grafana02.openstack.org
-    - graphite.openstack.org
+    - graphite*[0.openstack.org
     - groups-dev.openstack.org
     - groups.openstack.org
     - health.openstack.org

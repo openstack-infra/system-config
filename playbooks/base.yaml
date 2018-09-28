@@ -46,3 +46,8 @@
   name: "Base: install and configure docker on docker hosts"
   roles:
     - install-docker
+
+- hosts: graphite01.openstack.org
+  name: Setup graphite01.openstack.org
+  roles:
+    - docker-graphite

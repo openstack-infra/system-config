@@ -1,0 +1,10 @@
+- name: Install base graphite docker image
+  docker_container:
+    name: graphite
+    image: graphiteapp/graphite-statsd
+    state: started
+    restart: yes
+    ports:
+      - "80:80"
+      - "8125:8125/udp"
+      - "8126:8126"
