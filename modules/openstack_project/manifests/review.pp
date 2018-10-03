@@ -156,6 +156,11 @@ class openstack_project::review (
           link  => 'https://storyboard.openstack.org/#!/story/$1',
         },
         {
+          name  => 'task',
+          match => '\\\\b[Tt]ask:? #?(\\\\d+)',
+          link  => 'https://storyboard.openstack.org/#!/task/$1',
+        },
+        {
           name  => 'its-storyboard',
           match => '\\\\b[Tt]ask:? #?(\\\\d+)',
           link  => 'task: $1',
