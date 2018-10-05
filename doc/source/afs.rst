@@ -220,6 +220,10 @@ Be sure to mount the read-write volume in AFS with::
 You may want to create read-only sites for the volume with ``vos
 addsite`` and then ``vos release``.
 
+If the volume's mountpoint lies within another volume, you may also
+need to ``vos release`` that parent volume before it will show up in
+the read-only path.
+
 You should set the volume quota with ``fs setquota``.
 
 Adding a Fileserver
