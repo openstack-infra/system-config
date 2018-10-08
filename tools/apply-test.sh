@@ -69,8 +69,16 @@ sudo mkdir -p /var/run/puppet
 echo "Running apply test primer to avoid setup races when run in parallel."
 ./tools/test_puppet_apply.sh applytest/primer.pp
 
+THREADS=$(nproc)
+if grep -qi centos /etc/os-release ; then
+    # Single thread on centos to workaround a race with rsync on centos
+    # when copying puppet modules for multiple puppet applies at the same
+    # time.
+    THREADS=1
+fi
+
 echo "Running apply test on these hosts:"
 find applytest -name 'puppetapplytest*.final' -print0
 find applytest -name 'puppetapplytest*.final' -print0 | \
-    xargs -0 -P $(nproc) -n 1 -I filearg \
+    xargs -0 -P $THREADS -n 1 -I filearg \
         ./tools/test_puppet_apply.sh filearg
