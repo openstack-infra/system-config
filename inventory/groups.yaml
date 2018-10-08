@@ -12,7 +12,8 @@ groups:
   eavesdrop: inventory_hostname.startswith('eavesdrop')
   elasticsearch: inventory_hostname is match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
-  etherpad: inventory_hostname.startswith('etherpad')
+  etherpad: inventory_hostname is match('etherpad\d*\.openstack\.org')
+  etherpad-dev: inventory_hostname is match('etherpad-dev\d*\.openstack\.org')
   files: inventory_hostname.startswith('files')
   firehose: inventory_hostname.startswith('firehose')
   futureparser: >

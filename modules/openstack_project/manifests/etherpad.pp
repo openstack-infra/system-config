@@ -8,7 +8,8 @@ class openstack_project::etherpad (
   $ssl_chain_file_contents = '',
   $mysql_host = 'localhost',
   $mysql_user = 'eplite',
-  $mysql_db_name = 'etherpad-lite'
+  $mysql_db_name = 'etherpad-lite',
+  $vhost_name = $::fqdn,
 ) {
   class { 'etherpad_lite':
     ep_ensure      => 'latest',
@@ -17,6 +18,7 @@ class openstack_project::etherpad (
   }
 
   class { 'etherpad_lite::apache':
+    vhost_name              => $vhost_name,
     ssl_cert_file           => $ssl_cert_file,
     ssl_key_file            => $ssl_key_file,
     ssl_chain_file          => $ssl_chain_file,

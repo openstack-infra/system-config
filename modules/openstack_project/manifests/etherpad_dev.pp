@@ -2,7 +2,8 @@ class openstack_project::etherpad_dev (
   $mysql_password,
   $mysql_host = 'localhost',
   $mysql_user = 'eplite',
-  $mysql_db_name = 'etherpad-lite'
+  $mysql_db_name = 'etherpad-lite',
+  $vhost_name = $::fqdn,
 ) {
   class { 'etherpad_lite':
     ep_ensure      => 'latest',
@@ -10,6 +11,7 @@ class openstack_project::etherpad_dev (
   }
 
   class { 'etherpad_lite::apache':
+    vhost_name     => $vhost_name,
     ssl_cert_file  => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file   => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file => '',
