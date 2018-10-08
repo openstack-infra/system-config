@@ -21,7 +21,16 @@ OBS_MIRROR="rsync://provo-mirror.opensuse.org/opensuse/repositories"
 OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Queens' 'Cloud:/OpenStack:/Rocky' 'Cloud:/OpenStack:/Master')
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
-# NOTE(hwoarang): 15.0 is newer than 42.3
+# NOTE(hwoarang): Ensure old distros are not mirrored aymore
+for DISTVER in 42.2; do
+    for REPO in distribution/leap/$DISTVER update/leap/$DISTVER; do
+        if [ -d $BASE/$REPO ]; then
+            $K5START rm -rf $BASE/$REPO
+        fi
+    done
+done
+
+# NOTE(hwoarang): 15.0 is newer than 42.3.
 for DISTVER in 42.3 15.0; do
     REPO=distribution/leap/$DISTVER
     if ! [ -f $BASE/$REPO ]; then
