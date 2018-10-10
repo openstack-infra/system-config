@@ -555,7 +555,7 @@ class openstack_project::mirror_update (
   cron { 'opensuse mirror':
     user        => $user,
     minute      => fqdn_rand(45, 'opensuse-mirror'),
-    hour        => '*/6',
+    hour        => '*/2',
     command     => 'flock -n /var/run/opensuse-mirror.lock opensuse-mirror-update mirror.opensuse >>/var/log/opensuse-mirror.log 2>&1',
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
     require     => [
