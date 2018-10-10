@@ -1,10 +1,6 @@
 - name: Install ansible
   pip:
     name: ansible
-    # NOTE(corvus): Installing pre-release for
-    # https://github.com/ansible/ansible/commit/5f953d1129925579b7bf6ea2cce1ccf583199801
-    # remove version parameter after 2.7.0 release
-    version: 2.7.0rc1
 
 - name: Install openstacksdk
   pip:
