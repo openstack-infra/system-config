@@ -766,7 +766,7 @@ node /^adns\d+\.opendev\.org$/ {
   class { 'openstack_project::master_nameserver':
     tsig_key => hiera('tsig_key', {}),
     dnssec_keys => hiera_hash('dnssec_keys', {}),
-    notifies => [],
+    notifies => ['104.239.140.165', '162.253.55.16'],
   }
 }
 
@@ -822,12 +822,12 @@ node /^ns\d+\.opendev\.org$/ {
   class { '::nsd':
     ip_addresses => [ $::ipaddress, $::ipaddress6 ],
     zones => {
-#      'adns1_zones' => {
-#        allow_notify => dns_a('adns1.opendev.org'),
-#        masters => dns_a('adns1.opendev.org'),
-#        zones => ['opendev.org'],
-#        tsig_name => $tsig_name,
-#      }
+      'adns1_zones' => {
+        allow_notify => '104.239.146.24',
+        masters => '104.239.146.24',
+        zones => ['opendev.org'],
+        tsig_name => $tsig_name,
+      }
     }
   }
 }
