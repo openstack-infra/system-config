@@ -242,30 +242,6 @@ clouds:
       - openstackci-keypairs
 
   # Citycloud
-  - name: openstackci-citycloud-Lon1
-    oscc_cloud: openstackci-citycloud
-    region_name: Lon1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-      - openstackci-networking
-    routers:
-      - name: openstackci-router1
-        network: ext-net
-        interfaces:
-          - openstackci-subnet1
-  - name: openstackzuul-citycloud-Lon1
-    oscc_cloud: openstackzuul-citycloud
-    region_name: Lon1
-    profiles:
-      - openstackci-keypairs
-      - openstackci-security
-      - openstackzuul-networking
-    routers:
-      - name: openstackzuul-router1
-        network: ext-net
-        interfaces:
-          - openstackzuul-subnet1
   - name: openstackci-citycloud-La1
     oscc_cloud: openstackci-citycloud
     region_name: La1
