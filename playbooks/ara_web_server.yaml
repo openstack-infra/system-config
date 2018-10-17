@@ -1,0 +1,6 @@
+# Documentation https://git.openstack.org/cgit/openstack/ansible-role-ara/tree/README.rst
+# Configuration: http://git.openstack.org/cgit/openstack/ansible-role-ara/tree/defaults/main.yml
+- name: Deploy ARA web server
+  hosts: ara.openstack.org
+  roles:
+    - ara
