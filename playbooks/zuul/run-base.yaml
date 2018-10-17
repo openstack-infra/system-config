@@ -4,6 +4,8 @@
 
 - hosts: bridge.openstack.org
   become: true
+  vars:
+    ara_install: true
   tasks:
     - name: Write inventory on bridge
       include_role:

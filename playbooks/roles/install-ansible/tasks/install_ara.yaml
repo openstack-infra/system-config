@@ -1,0 +1,34 @@
+- name: Install required dependencies
+  become: true
+  package:
+    name:
+      - gcc
+      - libffi-dev
+      - libssl-dev
+      - libxml2-dev
+      - libxslt-dev
+      - python-dev
+      - python-setuptools
+      - python-virtualenv
+      - debianutils
+    state: present
+
+- name: Install ARA
+  become: true
+  pip:
+    name: ara
+    state: present
+    version: "{{ ara_version }}"
+
+- name: Install PyMySQL
+  become: true
+  pip:
+    name: pymysql
+    state: present
+  when: ara_install_pymysql
+
+# For configuring the callback plugins location in ansible.cfg
+- name: Get ARA's location for callback plugins
+  command: python -m ara.setup.callback_plugins
+  register: ara_callback_plugins
+  changed_when: false
