@@ -36,9 +36,13 @@
     group: root
     mode: 0775
 
+- name: Set up the ARA callback
+  include_tasks: install_ara.yaml
+  when: ara_install
+
 - name: Copy ansible.cfg in to place
-  copy:
-    src: ansible.cfg
+  template:
+    src: ansible.cfg.j2
     dest: /etc/ansible/ansible.cfg
 
 # NOTE(mordred) The copy of the openstack inventory plugin from 2.6 is busted.
