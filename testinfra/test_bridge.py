@@ -58,3 +58,10 @@ def test_authorized_keys(host):
     content = authorized_keys.content.decode('utf8')
     lines = content.split('\n')
     assert len(lines) >= 3
+
+
+def test_ara(host):
+    ara = host.run("ara playbook list")
+    assert ara.rc == 0
+    database = host.file('/var/cache/ansible/ara.sqlite')
+    assert database.exists
