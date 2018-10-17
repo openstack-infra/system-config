@@ -112,6 +112,9 @@ bridge, you can access any of the clouds with::
   export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
   openstack --os-cloud <cloud name> --os-cloud-region <region name>
 
+
+.. _adding_new_server:
+
 Adding a New Server
 ===================
 
