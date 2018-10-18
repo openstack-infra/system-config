@@ -28,8 +28,7 @@ class openstack_project::logstash (
 
   class { 'log_processor': }
 
-  class { 'log_processor::client':
-    config_file => 'puppet:///modules/openstack_project/logstash/jenkins-log-client.yaml',
+  class { 'log_processor::geard':
     statsd_host => $statsd_host,
   }
 
