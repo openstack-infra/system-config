@@ -382,7 +382,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/apt-puppetlabs',
     distributions => 'openstack_project/reprepro/distributions.apt-puppetlabs.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/puppetlabs-debs',
-    releases      => { 'xenial' => 'PC1 puppet5', 'stretch' => 'PC1 puppet5', 'bionic' => 'puppet5' },
+    releases      => { 'xenial' => 'PC1 puppet5', 'stretch' => 'PC1 puppet5 puppet6', 'bionic' => 'puppet5 puppet6' },
   }
 
   cron { 'reprepro ubuntu puppetlabs':
