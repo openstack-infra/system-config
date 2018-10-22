@@ -75,13 +75,18 @@ clouds:
     regions:
       - Kna1
       - La1
+      - Lon1
+      - Sto2
     profile: citycloud
     auth:
+      # TODO(mordred) This auth_url entry is only needed until openstacksdk
+      # 0.18.2 or 0.19.0 is released.
+      auth_url: "https://{region_name}.citycloud.com:5000/v3/"
       username: '{{ clouds.openstackci_citycloud_username }}'
       password: '{{ clouds.openstackci_citycloud_password }}'
-      project_id: 656841f5d46e4b0889129d1fc20bd0b8
-      project_domain_id: a5e7d1a8f25b42b081cf89d1130638da
-      user_domain_id: a5e7d1a8f25b42b081cf89d1130638da
+      project_name: 'Default Project 27611'
+      project_domain_name: CCP_Domain_27611
+      user_domain_name: CCP_Domain_27611
   openstackci-linaro:
     regions:
       - RegionOne
