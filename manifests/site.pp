@@ -677,11 +677,15 @@ node /^static\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^zk\d+\.openstack\.org$/ {
-  $zk_cluster_members = {
-    1 => 'zk01.openstack.org',
-    2 => 'zk02.openstack.org',
-    3 => 'zk03.openstack.org',
-  }
+  # We use IP addresses here so that zk listens on the public facing addresses
+  # allowing cluster members to talk to each other. Without this they listen
+  # on 127.0.1.1 because that is what we have in /etc/hosts for
+  # zk0X.openstack.org.
+  $zk_cluster_members = [
+    '23.253.236.126', # zk01
+    '172.99.117.32',  # zk02
+    '23.253.90.246',  # zk03
+  ]
   class { 'openstack_project::server': }
 
   class { '::zookeeper':
