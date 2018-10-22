@@ -677,6 +677,11 @@ node /^static\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 node /^zk\d+\.openstack\.org$/ {
+  $zk_cluster_members = {
+    1 => 'zk01.openstack.org',
+    2 => 'zk02.openstack.org',
+    3 => 'zk03.openstack.org',
+  }
   class { 'openstack_project::server': }
 
   class { '::zookeeper':
