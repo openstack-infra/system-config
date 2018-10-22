@@ -1018,7 +1018,7 @@ node /^zuul\d+\.openstack\.org$/ {
     git_name                      => $git_name,
     revision                      => $revision,
     python_version                => 3,
-    zookeeper_hosts               => 'nodepool.openstack.org:2181',
+    zookeeper_hosts               => 'zk01.openstack.org:2181,zk02.openstack.org:2181,zk03.openstack.org:2181',
     zookeeper_session_timeout     => 40,
     zuulv3                        => true,
     connections                   => hiera('zuul_connections', []),
