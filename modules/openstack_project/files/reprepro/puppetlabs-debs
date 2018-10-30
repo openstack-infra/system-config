@@ -1,6 +1,6 @@
 Name: puppetlabs-debs
 Method: https://apt.puppetlabs.com/
-Components: PC1 puppet5
+Components: PC1 puppet5 puppet6
 UDebComponents:
 Architectures: amd64
 GetInRelease: no
