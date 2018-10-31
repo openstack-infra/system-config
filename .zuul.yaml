@@ -196,6 +196,29 @@
       - testinfra/test_nodepool.py
 
 - job:
+    name: system-config-run-dns
+    parent: system-config-run
+    description: |
+      Run the playbook for dns.
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: adns1.opendev.org
+          label: ubuntu-bionic
+    host-vars:
+      adns1.opendev.org:
+         start_services: true
+    files:
+      - .zuul.yaml
+      - playbooks/group_vars/adns.yaml
+      - playbooks/group_vars/dns.yaml
+      - playbooks/host_vars/adns1.opendev.org.yaml
+      - playbooks/zuul/templates/group_vars/adns.yaml.j2
+      - playbooks/roles/master-nameserver/
+      - testinfra/test_adns.py
+
+- job:
     name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
@@ -237,6 +260,7 @@
         - puppet-beaker-rspec-puppet-4-infra-system-config
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
+        - system-config-run-dns
         - system-config-run-eavesdrop
         - system-config-run-nodepool
     gate:
@@ -248,5 +272,6 @@
         - puppet-beaker-rspec-puppet-4-infra-system-config
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
+        - system-config-run-dns
         - system-config-run-eavesdrop
         - system-config-run-nodepool
