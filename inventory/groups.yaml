@@ -27,6 +27,9 @@ groups:
     - wiki-dev01.openstack.org
     - wiki-upgrade-test.openstack.org
     - wiki.openstack.org
+  dns:
+    - adns*.opendev.org
+    - ns*.opendev.org
   eavesdrop: eavesdrop[0-9]*.openstack.org
   elasticsearch: elasticsearch[0-9]*.openstack.org
   ethercalc: ethercalc*
