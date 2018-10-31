@@ -1,0 +1,72 @@
+- name: install packages
+  package:
+    name:
+      - bind9
+      - git
+      - rsync
+    state: present
+- name: ensure zone dir
+  file:
+    path: /var/lib/bind/zones
+    state: directory
+- name: clone zone repos
+  git:
+    repo: "{{ item.url }}"
+    dest: "/opt/source/{{ item.name }}"
+  loop: "{{ bind_repos }}"
+- name: synchronize zones
+  delegate_to: "{{ inventory_hostname }}"
+  synchronize:
+    src: "/opt/source/{{ item.source }}"
+    dest: "/var/lib/bind/zones/{{ item.name }}"
+  loop: "{{ bind_zones }}"
+  notify: Reload named
+- name: install tsig key
+  no_log: true
+  template:
+    src: templates/bind.key.j2
+    dest: "/etc/bind/tsig.key"
+    owner: root
+    group: bind
+    mode: 0440
+  vars:
+    key: "{{ tsig_key }}"
+    name: tsig
+- name: ensure dnssec key dir
+  file:
+    path: /etc/bind/keys
+    state: directory
+# The key directories must exist for every zone, regardless of whether
+# there are any keys in them.
+- name: ensure dnssec key dirs
+  loop: "{{ bind_zones }}"
+  file:
+    path: "/etc/bind/keys/{{ item.name }}"
+    state: directory
+- name: install dnssec public keys
+  loop: "{{ dnssec_keys | dict2items }}"
+  copy:
+    dest: "/etc/bind/keys/{{ item.value.zone }}/{{ item.value.zone }}.+008+{{ item.key }}.key"
+    content: "{{ item.value.public }}"
+- name: install dnssec private keys
+  no_log: true
+  loop: "{{ dnssec_keys | dict2items }}"
+  copy:
+    dest: "/etc/bind/keys/{{ item.value.zone }}/{{ item.value.zone }}.+008+{{ item.key }}.private"
+    content: "{{ item.value.private }}"
+- name: install bind config
+  template:
+    src: templates/named.conf.j2
+    dest: /etc/bind/named.conf
+    owner: root
+    group: bind
+    mode: 0444
+- name: enable named
+  service:
+    name: bind9
+    enabled: true
+- name: start named
+  service:
+    name: bind9
+    state: started
+  when: start_services | default(False)

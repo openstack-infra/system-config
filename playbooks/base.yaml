@@ -41,3 +41,7 @@
   roles:
     - puppet-install
     - disable-puppet-agent
+
+- hosts: "adns1.opendev.org:!disabled"
+  roles:
+    - master-nameserver
