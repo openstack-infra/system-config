@@ -8,5 +8,4 @@
 - hosts: bridge.openstack.org
   tasks:
     - name: Run specified playbook on bridge.o.o
-      command: ansible-playbook -f {{ ansible_forks }} /opt/system-config/playbooks/{{ playbook_name }}
-
+      command: ansible-playbook -f {{ ansible_forks }} /opt/system-config/playbooks/{{ playbook_name }} -e "start_services=true"
