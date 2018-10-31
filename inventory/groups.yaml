@@ -9,6 +9,7 @@ groups:
   cacti: inventory_hostname is match('cacti\d+\.openstack\.org')
   ci-backup: inventory_hostname is match('backup\d+.*\ci\.openstack\.org')
   disabled: inventory_hostname.startswith('backup') or inventory_hostname.startswith('wiki') or inventory_hostname.startswith('puppetmaster') or inventory_hostname in ['ask-staging01.openstack.org', 'mirror01.sto2.citycloud.openstack.org', 'ask-staging.openstack.org', 'review.openstack.org']
+  dns: inventory_hostname is match('(ad)?ns\d*\.opendev\.org')
   eavesdrop: inventory_hostname.startswith('eavesdrop')
   elasticsearch: inventory_hostname is match('elasticsearch0[1-7]\.openstack\.org')
   ethercalc: inventory_hostname.startswith('ethercalc')
@@ -60,7 +61,7 @@ groups:
   ns: inventory_hostname.startswith('ns')
   paste: inventory_hostname.startswith('paste')
   pbx: inventory_hostname.startswith('pbx')
-  puppet: not (inventory_hostname.startswith('bridge') or inventory_hostname.startswith('bionic'))
+  puppet: not (inventory_hostname.startswith('bridge') or inventory_hostname.startswith('bionic') or inventory_hostname is match('adns\d*\.opendev\.org'))
   refstack: inventory_hostname.startswith('refstack')
   review-dev: inventory_hostname is match('review-dev\d+\.openstack\.org')
   review: inventory_hostname is match('review\d+\.openstack\.org')
