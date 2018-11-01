@@ -206,14 +206,19 @@
           label: ubuntu-bionic
         - name: adns1.opendev.org
           label: ubuntu-bionic
+        - name: ns1.opendev.org
+          label: ubuntu-bionic
     files:
       - .zuul.yaml
       - playbooks/group_vars/adns.yaml
       - playbooks/group_vars/dns.yaml
-      - playbooks/host_vars/adns1.opendev.org.yaml
+      - ^playbooks/host_vars/(ad)?ns\d+.opendev.org.yaml
       - playbooks/zuul/templates/group_vars/adns.yaml.j2
+      - playbooks/zuul/templates/group_vars/ns.yaml.j2
       - playbooks/roles/master-nameserver/
+      - playbooks/roles/nameserver/
       - testinfra/test_adns.py
+      - testinfra/test_ns.py
 
 - job:
     name: infra-prod-playbook

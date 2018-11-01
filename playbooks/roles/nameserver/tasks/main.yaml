@@ -1,0 +1,23 @@
+# Install the NSD config before installing the package because the
+# default packaged config listens on all addresses therefore will
+# not start.
+- name: Ensure NSD config directory exists
+  file:
+    path: /etc/nsd
+    state: directory
+- name: Install NSD config
+  template:
+    src: templates/nsd.conf.j2
+    dest: /etc/nsd/nsd.conf
+    owner: root
+    group: root
+    mode: 0444
+  notify: Reconfigure NSD
+- name: Install packages
+  package:
+    name:
+      - nsd
+- name: Enable NSD
+  service:
+    name: nsd
+    enabled: true
