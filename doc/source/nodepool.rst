@@ -12,9 +12,19 @@ At a Glance
 ===========
 
 :Hosts:
-  * nodepool.openstack.org
+  * nl01.openstack.org
+  * nl02.openstack.org
+  * nl03.openstack.org
+  * nl04.openstack.org
+  * nb01.openstack.org
+  * nb02.openstack.org
+  * nb03.openstack.org
+  * zk01.openstack.org
+  * zk02.openstack.org
+  * zk03.openstack.org
 :Puppet:
-  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/nodepool.pp
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/nodepool_launcher.pp
+  * https://git.openstack.org/cgit/openstack-infra/puppet-openstackci/tree/manifests/nodepool_builder.pp
 :Configuration:
   * :config:`nodepool/nodepool.yaml`
   * :config:`nodepool/scripts/`
@@ -41,8 +51,8 @@ instances for tests up to the set limits of the CI infrastructure.
 Zookeeper
 =========
 
-Nodepool stores image metadata in ZooKeeper.  We have a one-node
-ZooKeeper "cluster" running on nodepool.openstack.org.
+Nodepool stores image metadata in ZooKeeper.  We have a three-node
+ZooKeeper cluster running on zk01.openstack.org - zk03.openstack.org.
 
 The Nodepool CLI should be sufficient to examine and alter any of the
 information stored in ZooKeeper.  However, in case advanced debugging

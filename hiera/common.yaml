@@ -444,7 +444,6 @@ cacti_hosts:
 - nl02.openstack.org
 - nl03.openstack.org
 - nl04.openstack.org
-- nodepool.openstack.org
 - ns1.openstack.org
 - ns2.openstack.org
 - openstackid.org

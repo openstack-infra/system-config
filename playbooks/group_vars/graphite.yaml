@@ -14,9 +14,6 @@ iptables_extra_allowed_hosts:
   - hostname: logstash.openstack.org
     port: 8125
     protocol: udp
-  - hostname: nodepool.openstack.org
-    port: 8125
-    protocol: udp
   - hostname: nl01.openstack.org
     port: 8125
     protocol: udp
