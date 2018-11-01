@@ -1,0 +1,52 @@
+# This is a dictionary of hosts, with a list of what
+# groups they should be in
+
+results:
+
+  adns1.openstack.org:
+    - adns
+    - puppet
+
+  afs01.dfw.openstack.org:
+    - afs
+    - afs-client
+    - puppet
+
+  graphite.openstack.org:
+    - graphite
+    - puppet
+    - webservers
+
+  lists.katacontainers.io:
+    - mailman
+    - puppet
+
+  mirror02.dfw.rax.openstack.org:
+    - afs-client
+    - mirror
+    - puppet
+    - webservers
+
+  mirror-update01.openstack.org:
+    - afsadmin
+    - puppet
+
+  review.openstack.org:
+    - disabled
+    - gerrit
+    - puppet
+
+  nb01.openstack.org:
+    - nodepool
+    - nodepool-builder
+    - puppet
+    - webservers
+
+  ze01.openstack.org:
+    - afs-client
+    - puppet
+    - zuul-executor
+
+  zk01.openstack.org:
+    - puppet
+    - zookeeper
