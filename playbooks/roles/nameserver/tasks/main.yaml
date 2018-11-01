@@ -1,0 +1,25 @@
+- name: Install packages
+  package:
+    name:
+      - nsd
+    state: present
+- name: Ensure base dnssec key directory exists
+  file:
+    path: /etc/bind/keys
+    state: directory
+- name: Install NSD config
+  template:
+    src: templates/nsd.conf.j2
+    dest: /etc/nsd/nsd.conf
+    owner: root
+    group: root
+    mode: 0444
+- name: Enable NSD
+  service:
+    name: nsd
+    enabled: true
+- name: Start NSD (if requested)
+  service:
+    name: nsd
+    state: started
+  when: start_services | default(False)
