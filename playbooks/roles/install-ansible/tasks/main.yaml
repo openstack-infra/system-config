@@ -1,6 +1,7 @@
 - name: Install ansible
   pip:
     name: ansible
+    state: latest
 
 - name: Install openstacksdk
   pip:
