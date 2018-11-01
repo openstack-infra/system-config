@@ -7,5 +7,7 @@ PyYAML>=3.10.0 # MIT
 ansible-lint
 openstacksdk
 zuul-sphinx>=0.2.3
+testtools
+mock
 # testinfra 1.17.0 has a broken wheel that won't install under python3
 testinfra!=1.17.0
