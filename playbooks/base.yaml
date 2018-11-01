@@ -46,3 +46,8 @@
   name: "Base: configure adns1.opendev.org"
   roles:
     - master-nameserver
+
+- hosts: "ns1.opendev.org:ns2.opendev.org:!disabled"
+  name: "Base: configure adns1.opendev.org"
+  roles:
+    - master-nameserver
