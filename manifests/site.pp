@@ -832,25 +832,6 @@ node /^ns\d+\.opendev\.org$/ {
   }
 }
 
-# Node-OS: trusty
-node 'nodepool.openstack.org' {
-  $group = 'nodepool'
-
-  class { 'openstack_project::server': }
-
-  class { '::zookeeper':
-    # The frequency in hours to look for and purge old snapshots,
-    # defaults to 0 (disabled). The number of retained snapshots can
-    # be separately controlled through snap_retain_count and
-    # defaults to the minimum value of 3. This will quickly fill the
-    # disk in production if not enabled. Works on ZK >=3.4.
-    purge_interval => 6,
-  }
-
-  include openstack_project
-
-}
-
 # Node-OS: xenial
 node /^nl\d+\.openstack\.org$/ {
   $group = 'nodepool'
