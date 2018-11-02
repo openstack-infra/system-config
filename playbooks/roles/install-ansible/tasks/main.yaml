@@ -1,6 +1,15 @@
+# If ansible_install_version is not defined it should be "latest"; but
+# if it explicitly None we want to make sure to omit the version
+# argument to pip
+- name: Set ansible version
+  set_fact:
+    _install_ansible_version: '{{ install_ansible_version | default(latest) }}'
+  when: install_ansible_version is not defined or install_ansible_version != None
+
 - name: Install ansible
   pip:
-    name: ansible
+    name: '{{ install_ansible_name | default(ansible) }}'
+    version: '{{ _install_ansible_version | default(omit) }}'
 
 - name: Install openstacksdk
   pip:
