@@ -14,6 +14,7 @@
     owner: root
     group: root
     mode: 0444
+  notify: Reconfigure NSD
 - name: Enable NSD
   service:
     name: nsd
