@@ -97,22 +97,7 @@ groups:
     - lists.katacontainers.io
     - lists.openstack.org
   mirror:
-    - mirror01.bhs1.ovh.openstack.org
-    - mirror01.ca-ymq-1.vexxhost.openstack.org
-    - mirror01.cn1.linaro.openstack.org
-    - mirror01.gra1.ovh.openstack.org
-    - mirror01.iad.rax.openstack.org
-    - mirror01.kna1.citycloud.openstack.org
-    - mirror01.la1.citycloud.openstack.org
-    - mirror01.lon1.citycloud.openstack.org
-    - mirror01.mtl01.inap.openstack.org
-    - mirror01.ord.rax.openstack.org
-    - mirror01.sjc1.vexxhost.openstack.org
-    - mirror01.sto2.citycloud.openstack.org
-    - mirror02.ca-ymq-1.vexxhost.openstack.org
-    - mirror02.dfw.rax.openstack.org
-    - mirror02.regionone.limestone.openstack.org
-    - mirror02.us-west-1.packethost.openstack.org
+    - mirror[0-9]*.*.*.openstack.org
   nodepool:
     - nb01.openstack.org
     - nb02.openstack.org
@@ -186,22 +171,7 @@ groups:
     - logstash-worker[0-9]*.openstack.org
     - logstash[0-9]*.openstack.org
     - mirror-update01.openstack.org
-    - mirror01.bhs1.ovh.openstack.org
-    - mirror01.ca-ymq-1.vexxhost.openstack.org
-    - mirror01.cn1.linaro.openstack.org
-    - mirror01.gra1.ovh.openstack.org
-    - mirror01.iad.rax.openstack.org
-    - mirror01.kna1.citycloud.openstack.org
-    - mirror01.la1.citycloud.openstack.org
-    - mirror01.lon1.citycloud.openstack.org
-    - mirror01.mtl01.inap.openstack.org
-    - mirror01.ord.rax.openstack.org
-    - mirror01.sjc1.vexxhost.openstack.org
-    - mirror01.sto2.citycloud.openstack.org
-    - mirror02.ca-ymq-1.vexxhost.openstack.org
-    - mirror02.dfw.rax.openstack.org
-    - mirror02.regionone.limestone.openstack.org
-    - mirror02.us-west-1.packethost.openstack.org
+    - mirror[0-9]*.*.*.openstack.org
     - nb01.openstack.org
     - nb02.openstack.org
     - nb03.openstack.org
