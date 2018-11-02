@@ -2,4 +2,17 @@ Install and configure Ansible on a host via pip
 
 **Role Variables**
 
-* None
+.. zuul:rolevar:: install_ansible_name
+   :default: ansible
+
+   The name of the ansible package to install.  To install from
+   alternative sources, this can be a URL for a remote package;
+   e.g. to install from upstream devel branch
+   ``git+https://github.com/ansible/ansible.git@devel``
+
+.. zuul:rolevar:: install_ansible_version
+   :default: latest
+
+   The version of the library from
+   :zuul:rolevar:`install_ansible_name`.  Set this to ``None`` if
+   specifying versions via :zuul:rolevar:`install_ansible_name`
