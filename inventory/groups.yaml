@@ -89,28 +89,9 @@ groups:
     - kdc01.openstack.org
     - kdc04.openstack.org
   logstash:
-    - logstash.openstack.org
+    - logstash[0-9]*.openstack.org
   logstash-worker:
-    - logstash-worker01.openstack.org
-    - logstash-worker02.openstack.org
-    - logstash-worker03.openstack.org
-    - logstash-worker04.openstack.org
-    - logstash-worker05.openstack.org
-    - logstash-worker06.openstack.org
-    - logstash-worker07.openstack.org
-    - logstash-worker08.openstack.org
-    - logstash-worker09.openstack.org
-    - logstash-worker10.openstack.org
-    - logstash-worker11.openstack.org
-    - logstash-worker12.openstack.org
-    - logstash-worker13.openstack.org
-    - logstash-worker14.openstack.org
-    - logstash-worker15.openstack.org
-    - logstash-worker16.openstack.org
-    - logstash-worker17.openstack.org
-    - logstash-worker18.openstack.org
-    - logstash-worker19.openstack.org
-    - logstash-worker20.openstack.org
+    - logstash-worker[0-9]*.openstack.org
   mailman:
     - lists-dev01.openstack.org
     - lists.katacontainers.io
@@ -202,27 +183,8 @@ groups:
     - lists-dev01.openstack.org
     - lists.katacontainers.io
     - lists.openstack.org
-    - logstash-worker01.openstack.org
-    - logstash-worker02.openstack.org
-    - logstash-worker03.openstack.org
-    - logstash-worker04.openstack.org
-    - logstash-worker05.openstack.org
-    - logstash-worker06.openstack.org
-    - logstash-worker07.openstack.org
-    - logstash-worker08.openstack.org
-    - logstash-worker09.openstack.org
-    - logstash-worker10.openstack.org
-    - logstash-worker11.openstack.org
-    - logstash-worker12.openstack.org
-    - logstash-worker13.openstack.org
-    - logstash-worker14.openstack.org
-    - logstash-worker15.openstack.org
-    - logstash-worker16.openstack.org
-    - logstash-worker17.openstack.org
-    - logstash-worker18.openstack.org
-    - logstash-worker19.openstack.org
-    - logstash-worker20.openstack.org
-    - logstash.openstack.org
+    - logstash-worker[0-9]*.openstack.org
+    - logstash[0-9]*.openstack.org
     - mirror-update01.openstack.org
     - mirror01.bhs1.ovh.openstack.org
     - mirror01.ca-ymq-1.vexxhost.openstack.org
