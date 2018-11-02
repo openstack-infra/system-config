@@ -30,7 +30,8 @@ groups:
   eavesdrop: eavesdrop[0-9]*.openstack.org
   elasticsearch: elasticsearch[0-9]*.openstack.org
   ethercalc: ethercalc*
-  etherpad: etherpad*
+  etherpad: etherpad[0-9]*.openstack.org
+  etherpad-dev: etherpad-dev[0-9]*.openstack.org
   files: files*
   firehose: firehose*
   futureparser:
@@ -177,8 +178,8 @@ groups:
     - elasticsearch06.openstack.org
     - elasticsearch07.openstack.org
     - ethercalc02.openstack.org
-    - etherpad-dev.openstack.org
-    - etherpad.openstack.org
+    - etherpad-dev[0-9]*.openstack.org
+    - etherpad[0-9]*.openstack.org
     - files02.openstack.org
     - firehose01.openstack.org
     - git.openstack.org
@@ -323,8 +324,8 @@ groups:
     - codesearch01.openstack.org
     - eavesdrop01.openstack.org
     - ethercalc02.openstack.org
-    - etherpad-dev.openstack.org
-    - etherpad.openstack.org
+    - etherpad-dev[0-9]*.openstack.org
+    - etherpad[0-9]*.openstack.org
     - files02.openstack.org
     - grafana01.openstack.org
     - grafana02.openstack.org
