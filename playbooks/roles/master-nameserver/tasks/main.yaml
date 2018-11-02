@@ -65,8 +65,3 @@
   service:
     name: bind9
     enabled: true
-- name: Start named (if requested)
-  service:
-    name: bind9
-    state: started
-  when: start_services | default(False)

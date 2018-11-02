@@ -18,8 +18,3 @@
   service:
     name: nsd
     enabled: true
-- name: Start NSD (if requested)
-  service:
-    name: nsd
-    state: started
-  when: start_services | default(False)
