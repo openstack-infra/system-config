@@ -284,14 +284,7 @@ groups:
     - zk01.openstack.org
     - zk02.openstack.org
     - zk03.openstack.org
-    - zm01.openstack.org
-    - zm02.openstack.org
-    - zm03.openstack.org
-    - zm04.openstack.org
-    - zm05.openstack.org
-    - zm06.openstack.org
-    - zm07.openstack.org
-    - zm08.openstack.org
+    - zm[0-9]*.openstack.org
     - zuul01.openstack.org
   refstack:
     - refstack.openstack.org
@@ -354,14 +347,6 @@ groups:
     - translate01.openstack.org
     - wiki-dev01.openstack.org
     - wiki-upgrade-test.openstack.org
-    - zm01.openstack.org
-    - zm02.openstack.org
-    - zm03.openstack.org
-    - zm04.openstack.org
-    - zm05.openstack.org
-    - zm06.openstack.org
-    - zm07.openstack.org
-    - zm08.openstack.org
   wiki:
     - wiki.openstack.org
   wiki-dev:
@@ -383,13 +368,6 @@ groups:
     - ze10.openstack.org
     - ze11.openstack.org
   zuul-merger:
-    - zm01.openstack.org
-    - zm02.openstack.org
-    - zm03.openstack.org
-    - zm04.openstack.org
-    - zm05.openstack.org
-    - zm06.openstack.org
-    - zm07.openstack.org
-    - zm08.openstack.org
+    - zm[0-9]*.openstack.org
   zuul-scheduler:
     - zuul01.openstack.org
