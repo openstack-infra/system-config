@@ -99,22 +99,12 @@ groups:
   mirror:
     - mirror[0-9]*.*.*.openstack.org
   nodepool:
-    - nb01.openstack.org
-    - nb02.openstack.org
-    - nb03.openstack.org
-    - nl01.openstack.org
-    - nl02.openstack.org
-    - nl03.openstack.org
-    - nl04.openstack.org
+    - nb[0-9]*.openstack.org
+    - nl[0-9]*.openstack.org
   nodepool-builder:
-    - nb01.openstack.org
-    - nb02.openstack.org
-    - nb03.openstack.org
+    - nb[0-9]*.openstack.org
   nodepool-launcher:
-    - nl01.openstack.org
-    - nl02.openstack.org
-    - nl03.openstack.org
-    - nl04.openstack.org
+    - nl[0-9]*.openstack.org
   ns:
     - ns1.openstack.org
     - ns2.openstack.org
@@ -172,13 +162,8 @@ groups:
     - logstash[0-9]*.openstack.org
     - mirror-update01.openstack.org
     - mirror[0-9]*.*.*.openstack.org
-    - nb01.openstack.org
-    - nb02.openstack.org
-    - nb03.openstack.org
-    - nl01.openstack.org
-    - nl02.openstack.org
-    - nl03.openstack.org
-    - nl04.openstack.org
+    - nb[0-9]*.openstack.org
+    - nl[0-9]*.openstack.org
     - ns1.openstack.org
     - ns2.openstack.org
     - openstackid-dev.openstack.org
@@ -248,13 +233,8 @@ groups:
     - groups-dev.openstack.org
     - groups.openstack.org
     - health.openstack.org
-    - nb01.openstack.org
-    - nb02.openstack.org
-    - nb03.openstack.org
-    - nl01.openstack.org
-    - nl02.openstack.org
-    - nl03.openstack.org
-    - nl04.openstack.org
+    - nb[0-9]*.openstack.org
+    - nl[0-9]*.openstack.org
     - openstackid-dev.openstack.org
     - openstackid.org
     - paste01.openstack.org
