@@ -208,11 +208,6 @@
           label: ubuntu-bionic
         - name: ns1.opendev.org
           label: ubuntu-bionic
-    host-vars:
-      adns1.opendev.org:
-         start_services: true
-      ns1.opendev.org:
-         start_services: true
     files:
       - .zuul.yaml
       - playbooks/group_vars/adns.yaml
