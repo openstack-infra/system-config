@@ -9,3 +9,8 @@ bastion_ipv6: {{ bastion_ipv6 }}
 {% endif %}
 bastion_public_key: {{ bastion_public_key }}
 iptables_test_public_tcp_ports: {{ iptables_test_public_tcp_ports }}
+# We normally don't ensure that services are running in our playbooks,
+# but we do want them running in tests.  Some of our playbooks check
+# for this variable to decide whether to start services, so set it to
+# true in tests.
+start_services: true
