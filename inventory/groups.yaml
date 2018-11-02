@@ -67,14 +67,7 @@ groups:
   git-loadbalancer:
     - git.openstack.org
   git-server:
-    - git01.openstack.org
-    - git02.openstack.org
-    - git03.openstack.org
-    - git04.openstack.org
-    - git05.openstack.org
-    - git06.openstack.org
-    - git07.openstack.org
-    - git08.openstack.org
+    - git[0-9]*.openstack.org
   grafana:
     - grafana01.openstack.org
     - grafana02.openstack.org
@@ -139,14 +132,7 @@ groups:
     - files02.openstack.org
     - firehose01.openstack.org
     - git.openstack.org
-    - git01.openstack.org
-    - git02.openstack.org
-    - git03.openstack.org
-    - git04.openstack.org
-    - git05.openstack.org
-    - git06.openstack.org
-    - git07.openstack.org
-    - git08.openstack.org
+    - git[0-9]*.openstack.org
     - grafana01.openstack.org
     - grafana02.openstack.org
     - graphite.openstack.org
