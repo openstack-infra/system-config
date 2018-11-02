@@ -61,6 +61,7 @@
     owner: root
     group: bind
     mode: 0444
+  notify: Reload named
 - name: Enable named
   service:
     name: bind9
