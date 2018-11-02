@@ -106,7 +106,7 @@ for more information.
 Accessing Clouds
 ================
 
-As an unprivileged user who is a member of the `admin` group on
+As an unprivileged user who is a member of the `sudo` group on
 bridge, you can access any of the clouds with::
 
   export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml

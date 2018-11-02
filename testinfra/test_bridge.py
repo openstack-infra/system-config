@@ -19,11 +19,19 @@ testinfra_hosts = ['bridge.openstack.org']
 def test_clouds_yaml(host):
     clouds_yaml = host.file('/etc/openstack/clouds.yaml')
     assert clouds_yaml.exists
+    assert clouds_yaml.is_file
+    assert clouds_yaml.user == 'root'
+    assert clouds_yaml.group == 'sudo'
+    assert clouds_yaml.mode == 0o640
 
     assert b'password' in clouds_yaml.content
 
     all_clouds_yaml = host.file('/etc/openstack/all-clouds.yaml')
     assert all_clouds_yaml.exists
+    assert all_clouds_yaml.is_file
+    assert all_clouds_yaml.user == 'root'
+    assert all_clouds_yaml.group == 'sudo'
+    assert all_clouds_yaml.mode == 0o640
 
     assert b'password' in all_clouds_yaml.content
 
@@ -33,7 +41,7 @@ def test_openstacksdk_config(host):
     assert f.exists
     assert f.is_directory
     assert f.user == 'root'
-    assert f.group == 'root'
+    assert f.group == 'sudo'
     assert f.mode == 0o750
     del f
 
@@ -41,7 +49,7 @@ def test_openstacksdk_config(host):
     assert f.exists
     assert f.is_file
     assert f.user == 'root'
-    assert f.group == 'root'
+    assert f.group == 'sudo'
     assert f.mode == 0o640
 
 
