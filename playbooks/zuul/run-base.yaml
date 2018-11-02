@@ -17,12 +17,28 @@
         repo: /home/zuul/src/git.openstack.org/openstack-infra/system-config
         dest: /opt/system-config
         force: yes
+    - name: Add groups config for test nodes
+      template:
+        src: "templates/gate-groups.yaml.j2"
+        dest: "/etc/ansible/hosts/gate-groups.yaml"
     - name: Update ansible.cfg to use job inventory
       ini_file:
         path: /etc/ansible/ansible.cfg
         section: defaults
         option: inventory
-        value: /etc/ansible/hosts/inventory.yaml,/opt/system-config/inventory/groups.yaml
+        value: /etc/ansible/hosts/inventory.yaml,/opt/system-config/inventory/groups.yaml,/etc/ansible/hosts/gate-groups.yaml
+    - name: Update ansible.cfg to use yamlgroup plugin
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: defaults
+        option: inventory_plugins
+        value: /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/roles/install-ansible/files/inventory_plugins
+    - name: Update ansible.cfg to configure inventory plugins
+      ini_file:
+        path: /etc/ansible/ansible.cfg
+        section: inventory
+        option: enable_plugins
+        value: yamlgroup,yaml,advanced_host_list,ini
     - name: Make host_vars directory
       file:
         path: "/etc/ansible/hosts/host_vars"
