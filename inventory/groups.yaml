@@ -332,7 +332,6 @@ groups:
     - groups-dev.openstack.org
     - groups.openstack.org
     - health.openstack.org
-    - mirror[0-9]*.*.*.openstack.org
     - nb01.openstack.org
     - nb02.openstack.org
     - nb03.openstack.org
