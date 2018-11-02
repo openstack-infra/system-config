@@ -35,7 +35,6 @@ results:
     - afs-client
     - mirror
     - puppet
-    - webservers
 
   mirror-update01.openstack.org:
     - afsadmin
