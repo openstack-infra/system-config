@@ -120,12 +120,7 @@ groups:
     - codesearch01.openstack.org
     - corvustest
     - eavesdrop01.openstack.org
-    - elasticsearch02.openstack.org
-    - elasticsearch03.openstack.org
-    - elasticsearch04.openstack.org
-    - elasticsearch05.openstack.org
-    - elasticsearch06.openstack.org
-    - elasticsearch07.openstack.org
+    - elasticsearch[0-9]*.openstack.org
     - ethercalc02.openstack.org
     - etherpad-dev[0-9]*.openstack.org
     - etherpad[0-9]*.openstack.org
