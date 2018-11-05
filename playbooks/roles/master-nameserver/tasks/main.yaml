@@ -19,6 +19,9 @@
   synchronize:
     src: "/opt/source/{{ item.source }}"
     dest: "/var/lib/bind/zones/{{ item.name }}"
+    rsync_opts:
+      - "--chmod=u+rwX,g+rX,o+rX"
+      - "--chown=bind:bind"
   loop: "{{ dns_zones }}"
   notify: Reload named
 - name: Install tsig key
