@@ -54,6 +54,7 @@ groups:
     - lists[0-9]*.katacontainers.io
     - lists[0-9]*.openstack.org
     - logstash-worker[0-9]*.openstack.org
+    - logstash[0-9].openstack.org
     - paste[0-9]*.openstack.org
     - pbx.openstack.org
     - planet[0-9]*.openstack.org
