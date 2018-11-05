@@ -67,6 +67,7 @@ groups:
     - translate[0-9]*.openstack.org
     - translate-dev[0-9]*.openstack.org
     - wiki-dev[0-9]*.openstack.org
+    - wiki[0-0]*.openstack.org
   gerrit:
     - review-dev01.openstack.org
     - review.openstack.org
