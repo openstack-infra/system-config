@@ -35,6 +35,7 @@ results:
     - afs-client
     - mirror
     - puppet
+    - futureparser
 
   mirror-update01.openstack.org:
     - afsadmin
