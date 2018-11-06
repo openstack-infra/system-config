@@ -38,6 +38,7 @@ groups:
   files: files*
   firehose: firehose*
   futureparser:
+    - adns[0-9]*.openstack.org
     - ask-staging[0-9]*.openstack.org
     - cacti[0-9]*.openstack.org
     - codesearch[0-9]*.openstack.org
