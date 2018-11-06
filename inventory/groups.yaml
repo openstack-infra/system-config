@@ -64,6 +64,7 @@ groups:
     - mirror[0-9]*.*.*.openstack.org
     - ns[0-9]*.openstack.org
     - openstackid-dev.openstack.org
+    - openstackid.openstack.org
     - paste[0-9]*.openstack.org
     - pbx.openstack.org
     - planet[0-9]*.openstack.org
