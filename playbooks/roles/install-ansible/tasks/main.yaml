@@ -1,6 +1,29 @@
+# If ansible_install_version is not defined it should be "latest"
+- name: Set ansible default version to latest
+  set_fact:
+    install_ansible_version: latest
+  when: install_ansible_version is not defined
+
+# If a version is not explicitly set we want to make sure to
+# completely omit the version argument to pip, as it will be coming
+# from the long-form install_ansible_name variable.  Additionally, if
+# the version is the special value "latest", then we also want to omit
+# any version number, but also set the package state to "latest".
+- name: Set ansible version for installation
+  set_fact:
+    _install_ansible_version: '{{ install_ansible_version }}'
+  when: install_ansible_version not in ('', 'latest')
+
+- name: Set ansible package state for installation
+  set_fact:
+    _install_ansible_state: latest
+  when: install_ansible_version == 'latest'
+
 - name: Install ansible
   pip:
-    name: ansible
+    name: '{{ install_ansible_name | default("ansible") }}'
+    version: '{{ _install_ansible_version | default(omit) }}'
+    state: '{{ _install_ansible_state | default(omit) }}'
 
 - name: Install openstacksdk
   pip:
@@ -55,3 +78,6 @@
     name: logrotate
   vars:
     logrotate_file_name: /var/log/ansible/ansible.log
+
+- name: Verify ansible install
+  command: ansible --version
