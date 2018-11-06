@@ -39,6 +39,7 @@ results:
   mirror-update01.openstack.org:
     - afsadmin
     - puppet
+    - futureparser
 
   review01.openstack.org:
     - futureparser

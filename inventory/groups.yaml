@@ -56,6 +56,7 @@ groups:
     - lists[0-9]*.open*.org
     - logstash-worker[0-9]*.open*.org
     - logstash[0-9]*.open*.org
+    - mirror-update[0-9]*.open*.org
     - paste[0-9]*.open*.org
     - pbx*.open*.org
     - planet[0-9]*.open*.org
