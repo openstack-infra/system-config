@@ -165,6 +165,9 @@
     vars:
       bridge_ansible_name: 'git+https://github.com/ansible/ansible.git@devel'
       bridge_ansible_version: null
+      bridge_openstacksdk_name: 'git+https://git.openstack.org/openstack/openstacksdk'
+      bridge_openstacksdk_version: null
+
 - job:
     name: system-config-run-eavesdrop
     parent: system-config-run

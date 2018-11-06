@@ -8,6 +8,8 @@
     - role: install-ansible
       install_ansible_name: '{{ bridge_ansible_name | default("ansible") }}'
       install_ansible_version: '{{ bridge_ansible_version | default("2.7.0") }}'
+      install_openstacksdk_name: '{{ bridge_openstacksdk_name | default("openstacksdk") }}'
+      install_openstacksdk_version: '{{ bridge_openstacksdk_verison | default("latest") }}'
     - root-keys
     - ansible-cron
     - cloud-launcher-cron
