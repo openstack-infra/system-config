@@ -165,9 +165,12 @@
     required-projects:
       - name: github.com/ansible/ansible
         override-checkout: devel
+      - name: openstack/openstacksdk
     vars:
       bridge_ansible_name: '{{ ansible_user_dir}}/src/github.com/ansible'
       bridge_ansible_version: null
+      bridge_openstacksdk_name: '{{ ansible_user_dir }}/src/git.openstack.org/openstack/openstacksdk'
+      bridge_openstacksdk_version: null
 
 - job:
     name: system-config-run-eavesdrop
