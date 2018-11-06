@@ -66,3 +66,4 @@ results:
   zk01.openstack.org:
     - puppet
     - zookeeper
+    - futureparser
