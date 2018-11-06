@@ -44,6 +44,7 @@ groups:
     - etherpad-dev[0-9]*.open*.org
     - etherpad[0-9]*.open*.org
     - firehose[0-9]*.open*.org
+    - git.open*.org
     - git[0-9]*.open*.org
     - grafana[0-9]*.open*.org
     - graphite[0-9]*.open*.org
