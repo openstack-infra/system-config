@@ -59,6 +59,7 @@ groups:
     - logstash-worker[0-9]*.openstack.org
     - logstash[0-9].openstack.org
     - mirror-update[0-9]*.openstack.org
+    - mirror01.iad.rax.openstack.org
     - paste[0-9]*.openstack.org
     - pbx.openstack.org
     - planet[0-9]*.openstack.org
