@@ -59,7 +59,7 @@ groups:
     - logstash[0-9]*.open*.org
     - mirror-update[0-9]*.open*.org
     - mirror[0-9]*.*.*.open*.org
-    - ns1.openstack.org
+    - ns[0-9]*.openstack.org
     - paste[0-9]*.open*.org
     - pbx*.open*.org
     - planet[0-9]*.open*.org
