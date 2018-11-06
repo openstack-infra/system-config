@@ -126,9 +126,6 @@ clouds:
       - Sto2
     profile: citycloud
     auth:
-      # TODO(mordred) This auth_url entry is only needed until openstacksdk
-      # 0.18.2 or 0.19.0 is released.
-      auth_url: "https://{region_name}.citycloud.com:5000/v3/"
       username: '{{ clouds.openstackci_citycloud_username }}'
       password: '{{ clouds.openstackci_citycloud_password }}'
       project_name: 'Default Project 27611'
