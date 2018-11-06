@@ -25,10 +25,28 @@
     version: '{{ _install_ansible_version | default(omit) }}'
     state: '{{ _install_ansible_state | default(omit) }}'
 
+# Same version/state default swizzling as described above for
+# openstacksdk
+- name: Set openstacksdk default version to latest
+  set_fact:
+    install_openstacksdk_version: latest
+  when: install_openstacksdk_version is not defined
+
+- name: Set openstacksdk version for installation
+  set_fact:
+    _install_openstacksdk_version: '{{ install_openstacksdk_version }}'
+  when: install_openstacksdk_version not in ('', 'latest')
+
+- name: Set openstacksdk package state for installation
+  set_fact:
+    _install_openstacksdk_state: latest
+  when: install_openstacksdk_version == 'latest'
+
 - name: Install openstacksdk
   pip:
-    state: latest
-    name: openstacksdk
+    name: '{{ install_openstacksdk_name | default("openstacksdk") }}'
+    version: '{{ _install_openstacksdk_version | default(omit) }}'
+    state: '{{ _install_openstacksdk_state | default(omit) }}'
 
 - name: Ensure /etc/ansible and /etc/ansible/hosts
   file:
