@@ -46,6 +46,7 @@ groups:
     - ethercalc[0-9]*.openstack.org
     - etherpad-dev[0-9]*.openstack.org
     - etherpad[0-9]*.openstack.org
+    - files[0-9]*.openstack.org
     - firehose[0-9]*.openstack.org
     - git.openstack.org
     - git[0-9]+.openstack.org
