@@ -47,7 +47,7 @@ groups:
     - etherpad-dev[0-9]*.openstack.org
     - etherpad[0-9]*.openstack.org
     - firehose[0-9]*.openstack.org
-    - git01.openstack.org
+    - git[0-9]*.openstack.org
     - grafana[0-9]*.openstack.org
     - graphite[0-9]*.openstack.org
     - groups-dev[0-9]*.openstack.org
