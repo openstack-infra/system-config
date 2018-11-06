@@ -158,6 +158,18 @@
       - testinfra/.*
 
 - job:
+    name: system-config-run-base-ansible-devel
+    parent: system-config-run-base
+    description: |
+      Run the base playbook with the latest ansible
+    required-projects:
+      - name: github.com/ansible/ansible
+        override-checkout: devel
+    vars:
+      bridge_ansible_name: '{{ ansible_user_dir}}/src/github.com/ansible'
+      bridge_ansible_version: null
+
+- job:
     name: system-config-run-eavesdrop
     parent: system-config-run
     description: |
@@ -262,6 +274,7 @@
         - puppet-beaker-rspec-puppet-4-infra-system-config
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
+        - system-config-run-base-ansible-devel
         - system-config-run-dns
         - system-config-run-eavesdrop
         - system-config-run-nodepool
