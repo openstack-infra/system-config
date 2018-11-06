@@ -78,9 +78,6 @@ clouds:
     profile: citycloud
     api_timeout: 60
     auth:
-      # TODO(mordred) This auth_url entry is only needed until openstacksdk
-      # 0.18.2 or 0.19.0 is released.
-      auth_url: "https://{region_name}.citycloud.com:5000/v3/"
       username: '{{ nodepool_citycloud_username }}'
       password: '{{ nodepool_citycloud_password }}'
       project_name: 'OpenStack CI Project'
