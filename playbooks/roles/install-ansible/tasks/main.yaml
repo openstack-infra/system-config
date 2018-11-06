@@ -1,7 +1,7 @@
-# If ansible_install_version is not defined it should be "latest"; but
-# if it is explicitly empty we want to make sure to completely omit
-# the version argument to pip, as it will be coming from the long-form
-# install_ansbile_name variable.
+# If [ansible|openstacksdk]_install_version is not defined it should
+# be "latest"; but if it is explicitly empty we want to make sure to
+# completely omit the version argument to pip, as it will be coming
+# from the long-form install_ansbile_name variable.
 - name: Set ansible version
   set_fact:
     _install_ansible_version: '{{ install_ansible_version | default("latest") }}'
@@ -12,9 +12,15 @@
     name: '{{ install_ansible_name | default("ansible") }}'
     version: '{{ _install_ansible_version | default(omit) }}'
 
+- name: Set openstacksdk version
+  set_fact:
+    _install_openstacksdk_version: '{{ install_openstacksdk_version | default("latest") }}'
+  when: install_openstacksdk_version is not defined or install_openstacksdk_version != ""
+
 - name: Install openstacksdk
   pip:
-    name: openstacksdk
+    name: '{{ install_openstacksdk_name | default("openstacksdk") }}'
+    version: '{{ _install_openstacksdk_version | default(omit) }}'
 
 - name: Ensure /etc/ansible and /etc/ansible/hosts
   file:

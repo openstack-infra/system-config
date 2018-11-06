@@ -161,10 +161,12 @@
     name: system-config-run-base-ansible-devel
     parent: system-config-run-base
     description: |
-      Run the base playbook with the latest ansible
+      Run the base playbook with the latest ansible and openstacksdk
     vars:
       bridge_ansible_name: 'git+https://github.com/ansible/ansible.git@devel'
       bridge_ansible_version: null
+      bridge_openstacksdk_name: 'git+https://git.openstack.org/openstack/openstacksdk'
+      bridge_openstacksdk_version: null
 
 - job:
     name: system-config-run-eavesdrop
