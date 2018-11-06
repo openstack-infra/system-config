@@ -4,6 +4,7 @@
 
 - name: Install openstacksdk
   pip:
+    state: latest
     name: openstacksdk
 
 - name: Ensure /etc/ansible and /etc/ansible/hosts
