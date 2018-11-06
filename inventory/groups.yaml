@@ -63,6 +63,7 @@ groups:
     - mirror[0-9]*.*.*.open*.org
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
+    - openstackid-dev.open*.org
     - paste[0-9]*.open*.org
     - pbx[0-9]*.opendev.org
     - planet[0-9]*.open*.org
