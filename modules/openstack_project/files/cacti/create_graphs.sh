@@ -12,13 +12,7 @@ php -q add_device.php --description="$HOST_NAME" --ip="$HOST_NAME" \
 
 HOST_ID=`php -q add_graphs.php --list-hosts |grep -P "\t$HOST_NAME"|cut -f 1`
 
-if [[ $HOST_NAME =~ vanilla\.ic\.openstack\.org ]]; then
-    TREE_NAME='Infra Cloud Vanilla'
-elif [[ $HOST_NAME =~ chocolate\.ic\.openstack\.org ]]; then
-    TREE_NAME='Infra Cloud Chocolate'
-else
-    TREE_NAME='All Hosts'
-fi
+TREE_NAME='All Hosts'
 
 TREE_ID=`php -q add_tree.php --list-trees |grep "$TREE_NAME"|cut -f 1`
 php -q add_tree.php --type=node --node-type=host --tree-id=$TREE_ID \
