@@ -1,0 +1,9 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Joshua Hesketh <josh@nitrotech.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 07 Nov 2018 04:08:53 +0000
+Reviewed-on: https://review.openstack.org/616039
+Project: openstack-infra/system-config
+Branch: refs/heads/master
