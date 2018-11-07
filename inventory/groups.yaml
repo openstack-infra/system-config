@@ -83,8 +83,8 @@ groups:
     - wiki-dev[0-9]*.openstack.org
     - wiki[0-9]*.openstack.org
     - ze[0-9]*.openstack.org
-    - zm01.openstack.org
     - zk[0-9]*.openstack.org
+    - zm[0-9]*.openstack.org
   gerrit:
     - review-dev01.openstack.org
     - review.openstack.org
