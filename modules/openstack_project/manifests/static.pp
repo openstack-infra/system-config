@@ -201,6 +201,7 @@ class openstack_project::static (
     jenkins_ssh_key         => $openstack_project::jenkins_ssh_key,
     domain                  => 'openstack.org',
     ara_middleware          => true,
+    wsgi_processes          => 16,
     swift_authurl           => $swift_authurl,
     swift_user              => $swift_user,
     swift_key               => $swift_key,
