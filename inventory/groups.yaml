@@ -62,6 +62,7 @@ groups:
     - logstash[0-9].openstack.org
     - mirror-update[0-9]*.openstack.org
     - mirror[0-9]*.*.*.openstack.org
+    - nl01.openstack.org
     - ns[0-9]*.openstack.org
     - openstackid-dev.openstack.org
     - openstackid.openstack.org
