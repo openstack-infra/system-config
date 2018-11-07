@@ -27,6 +27,21 @@ ANSIBLE_PLAYBOOKS=$SYSTEM_CONFIG/playbooks
 # errexit
 set +e
 
+# We only send stats if running under cron
+UNDER_CRON=0
+
+while getopts ":c" arg; do
+    case $arg in
+        c)
+            UNDER_CRON=1
+            ;;
+    esac
+done
+
+_START_TIME=$(date '+%s')
+
+echo "--- begin run @ $(date -Is) ---"
+
 # We need access to all-clouds
 export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
 
@@ -35,3 +50,15 @@ export OS_CLIENT_CONFIG_FILE=/etc/openstack/all-clouds.yaml
 /usr/bin/timeout -k 2m 120m /usr/local/bin/ansible-playbook -i /dev/null -f 1 \
     ${ANSIBLE_PLAYBOOKS}/run_cloud_launcher.yaml \
     -e@${ANSIBLE_PLAYBOOKS}/clouds_layouts.yml
+
+echo "--- end run @ $(date -Is) ---"
+
+# Only send stats under cron conditions
+if [[ ${UNDER_CRON} != 1 ]]; then
+    return
+fi
+
+_CURRENT_TIME=$(date '+%s')
+_ELAPSED_MS=$(( (_CURRENT_TIME - _START_TIME) * 1000 ))
+echo "bridge.ansible.run_cloud_launcher:${_ELAPSED_MS}|ms" | \
+    nc -w 1 -u graphite.openstack.org 8125
