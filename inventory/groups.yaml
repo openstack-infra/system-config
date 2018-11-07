@@ -82,7 +82,7 @@ groups:
     - wiki[0-9]*.open*.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
-    - zm01.open*.org
+    - zm[0-9]*.open*.org
   gerrit:
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
