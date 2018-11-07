@@ -78,6 +78,7 @@ groups:
     - translate-dev[0-9]*.open*.org
     - wiki-dev[0-9]*.open*.org
     - wiki[0-9]*.open*.org
+    - ze01.open*.org
     - zk[0-9]*.open*.org
   gerrit:
     - review-dev[0-9]*.open*.org
