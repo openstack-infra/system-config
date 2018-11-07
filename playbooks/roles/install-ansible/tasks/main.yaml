@@ -100,3 +100,6 @@
 
 - name: Verify ansible install
   command: ansible --version
+
+- name: Verify openstacksdk install
+  command: python3 -m openstack version
