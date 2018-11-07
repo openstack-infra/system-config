@@ -59,6 +59,7 @@ results:
     - afs-client
     - puppet
     - zuul-executor
+    - futureparser
 
   zk01.openstack.org:
     - puppet
