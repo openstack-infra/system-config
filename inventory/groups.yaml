@@ -85,6 +85,7 @@ groups:
     - ze[0-9]*.openstack.org
     - zk[0-9]+.openstack.org
     - zm[0-9]*.openstack.org
+    - zuul01.openstack.org
   gerrit:
     - review-dev01.openstack.org
     - review.openstack.org
