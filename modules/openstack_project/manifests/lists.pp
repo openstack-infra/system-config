@@ -326,14 +326,6 @@ class openstack_project::lists(
     description => 'Women of OpenStack discussion list.',
   }
 
-  mailman_list { 'openstack-internships@openstack':
-    require     => Mailman::Site['openstack'],
-    ensure      => present,
-    admin       => 'stefano@openstack.org',
-    password    => $listpassword,
-    description => 'List to coordinate mentors and interns of OpenStack programs.',
-  }
-
   mailman_list { 'foundation-testing-standards@openstack':
     require     => Mailman::Site['openstack'],
     ensure      => present,
