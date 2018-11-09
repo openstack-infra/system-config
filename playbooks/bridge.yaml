@@ -3,7 +3,11 @@
   become: true
   roles:
     - pip3
-    - install-ansible
+    # Note for production use we expect to take the defaults; unit
+    # test jobs override this to test with latest upstream ansible.
+    - role: install-ansible
+      install_ansible_name: '{{ bridge_ansible_name | default("ansible") }}'
+      install_ansible_version: '{{ bridge_ansible_version | default("2.7.0") }}'
     - root-keys
     - ansible-cron
     - cloud-launcher-cron
