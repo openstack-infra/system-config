@@ -1,5 +1,9 @@
 - hosts: bridge.openstack.org
   tasks:
+    - name: Set log directory
+      set_fact:
+        log_dir: "{{ zuul.executor.log_root}}/bridge.o.o"
+
     - name: Register junit.xml file
       stat:
         path: "{{ zuul.project.src_dir }}/junit.xml"
@@ -13,9 +17,17 @@
         verify_host: true
       when: _junit.stat.exists|bool
 
+    - name: Collect testing ARA results
+      synchronize:
+        dest: "{{ log_dir }}/ara-report"
+        mode: pull
+        src: "/var/cache/ansible/ara.sqlite"
+        verify_host: true
+      ignore_errors: true
+
     - name: Collect ansible configuration
       synchronize:
-        dest: "{{ zuul.executor.log_root }}"
+        dest: "{{ log_dir }}"
         mode: pull
         src: "/etc/ansible"
         verify_host: true
