@@ -1,5 +1,19 @@
+- hosts: localhost
+  tasks:
+    - name: Ensure log directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - "{{ zuul.executor.log_root }}/bridge.o.o"
+        - "{{ zuul.executor.log_root }}/bridge.o.o/ara-report"
+
 - hosts: bridge.openstack.org
   tasks:
+    - name: Set log directory
+      set_fact:
+        log_dir: "{{ zuul.executor.log_root }}/bridge.o.o"
+
     - name: Register junit.xml file
       stat:
         path: "{{ zuul.project.src_dir }}/junit.xml"
@@ -13,9 +27,26 @@
         verify_host: true
       when: _junit.stat.exists|bool
 
+      # Because during the test we run ansible as root, we need
+      # to allow ourselves permissions to copy the results
+    - name: Open ARA results permissions
+      file:
+        dest: /var/cache/ansible
+        mode: u=rwX,g=rX,o=rX
+        recurse: yes
+      become: yes
+
+    - name: Collect testing ARA results
+      synchronize:
+        dest: "{{ log_dir }}/ara-report/"
+        mode: pull
+        src: "/var/cache/ansible/ara.sqlite"
+        verify_host: true
+      ignore_errors: true
+
     - name: Collect ansible configuration
       synchronize:
-        dest: "{{ zuul.executor.log_root }}"
+        dest: "{{ log_dir }}/etc"
         mode: pull
         src: "/etc/ansible"
         verify_host: true
