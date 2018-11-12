@@ -4,6 +4,7 @@ exim_aliases:
   root: "{{ ','.join(listadmins|default([])) }}"
   ambassadors-owner: spam
   community-owner: spam
+  edge-computing-owner: spam
   foundation-board-confidential-owner: spam
   foundation-board-owner: spam
   foundation-owner: spam
