@@ -15,6 +15,11 @@
       install_ansible_version: '{{ bridge_ansible_version | default("2.7.3") }}'
       install_ansible_openstacksdk_name: '{{ bridge_openstacksdk_name | default("openstacksdk") }}'
       install_ansible_openstacksdk_version: '{{ bridge_openstacksdk_verison | default("latest") }}'
+      # NOTE(ianw): At 2018-12, ARA is only enabled during gate
+      # testing jobs as we decide if or how to store data on
+      # production bridge.o.o
+      install_ansible_ara_name: '{{ bridge_ara_name | default("ara") }}'
+      install_ansible_ara_version: '{{ bridge_ara_version | default("0.16.1") }}'
     - root-keys
     - ansible-cron
     - cloud-launcher-cron
