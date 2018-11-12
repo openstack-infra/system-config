@@ -268,7 +268,7 @@
       playbook_name: zuul_reconfigure.yaml
 
 - project:
-    templates:
+#    templates:
 #      - system-config-zuul-role-integration
 #      - infra-puppet-apply-jobs
 #      - infra-logstash-filter-jobs
