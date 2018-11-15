@@ -508,7 +508,6 @@ node /^mirror-update\d*\.openstack\.org$/ {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
-    bandersnatch_keytab   => hiera('bandersnatch_keytab'),
     admin_keytab          => hiera('afsadmin_keytab'),
     fedora_keytab         => hiera('fedora_keytab'),
     opensuse_keytab       => hiera('opensuse_keytab'),
