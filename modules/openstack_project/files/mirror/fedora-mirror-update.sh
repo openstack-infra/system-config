@@ -19,6 +19,10 @@ BASE="/afs/.openstack.org/mirror/fedora"
 # NOTE(pabelanger): #fedora-admin:
 # tibbs | I run pubmirror[12].math.uh.edu.
 # tibbs | It polls the masters every ten minutes.
+# NOTE(ianw): 2018-11 we dropped "-p" from the rsync commands
+#  because upstream starting putting setgid bits on directories,
+#  which you have to have admin permissions in AFS to set.
+#   https://pagure.io/releng/issue/7921
 MIRROR="rsync://pubmirror1.math.uh.edu/fedora-buffet/fedora/linux"
 K5START="k5start -t -f /etc/fedora.keytab service/fedora-mirror -- timeout -k 2m 30m"
 
@@ -29,7 +33,7 @@ for REPO in releases/27 releases/28 releases/29; do
 
     date --iso-8601=ns
     echo "Running rsync releases..."
-    $K5START rsync -rlptDvz \
+    $K5START rsync -rltDvz \
         --delete \
         --delete-excluded \
         --exclude="Cloud/x86_64/images/*.box" \
@@ -54,7 +58,7 @@ for REPO in updates/27 updates/28 updates/29 ; do
 
     date --iso-8601=ns
     echo "Running rsync updates..."
-    $K5START rsync -rlptDvz \
+    $K5START rsync -rltDvz \
         --delete \
         --delete-excluded \
         --exclude="aarch64/" \
