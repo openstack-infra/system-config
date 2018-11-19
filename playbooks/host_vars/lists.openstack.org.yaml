@@ -21,6 +21,7 @@ exim_aliases:
   openstack-owner: spam
   openstack-qa-owner: spam
   openstack-security-owner: spam
+  openstack-sigs-owner: spam
   openstack-tc-owner: spam
   openstack-vi-owner: spam
   product-wg-owner: spam
