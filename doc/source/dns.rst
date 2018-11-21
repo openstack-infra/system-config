@@ -37,4 +37,10 @@ Run::
 And add the resulting files to the `dnssec_keys` key in the
 `group/adns.yaml` private hiera file on puppetmaster.
 
+If you need to generate DS records for the registrar, identify which
+of the just-created key files is the key-signing key (examine the
+contents of the files and read the comments therein).  Then run::
+
+  dnssec-dsfromkey -2 $KEYFILE
+
 .. note:: This section will be expanded.
