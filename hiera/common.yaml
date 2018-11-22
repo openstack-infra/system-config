@@ -114,6 +114,7 @@ statusbot_channels:
 meetbot_channels:
 - '#airshipit'
 - '#ara'
+- '#askopenlab'
 - '#cloudkitty'
 - '#congress'
 - '#dox'
