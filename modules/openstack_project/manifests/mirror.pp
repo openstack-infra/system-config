@@ -15,7 +15,6 @@ class openstack_project::mirror (
   }
 
   $mirror_root = '/afs/openstack.org/mirror'
-  $pypi_root = "${mirror_root}/pypi"
   $wheel_root = "${mirror_root}/wheel"
   $ceph_deb_hammer_root = "${mirror_root}/ceph-deb-hammer"
   $ceph_deb_jewel_root = "${mirror_root}/ceph-deb-jewel"
@@ -44,14 +43,10 @@ class openstack_project::mirror (
   }
 
   # Create the symlink to pypi.
+  # NOTE(ianw) : retired 2018-11-22; see
+  # https://review.openstack.org/#/c/618326/
   file { "${www_root}/pypi":
-    ensure  => link,
-    target  => "${pypi_root}/web",
-    owner   => root,
-    group   => root,
-    require => [
-      File["${www_root}"],
-    ]
+    ensure  => absent,
   }
 
   # Create the symlink to wheel.
