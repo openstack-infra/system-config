@@ -41,6 +41,7 @@ groups:
     - ask-staging[0-9]*.openstack.org
     - cacti[0-9]*.openstack.org
     - codesearch[0-9]*.openstack.org
+    - eavesdrop[0-9]*.openstack.org
     - ethercalc[0-9]*.openstack.org
     - etherpad-dev[0-9]*.openstack.org
     - etherpad[0-9]*.openstack.org
