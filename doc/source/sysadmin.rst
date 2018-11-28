@@ -190,12 +190,8 @@ Git repositories, only Gerrit will be permitted to commit code to
 OpenStack repositories.  Because GitHub always allows project
 administrators to commit code, accounts that have access to manage the
 GitHub projects necessarily will have commit access to the
-repositories.  Therefore, to avoid inadvertent commits to the public
-repositories, unique administrative-only accounts must be used to
-manage the OpenStack GitHub organization and projects.  These accounts
-will not be used to check out or commit code for any project.
-These accounts are required to have two factor authentication with Github
-enabled.
+repositories.  Therefore theese accounts are required to have two factor
+authentication with Github enabled.
 
 Root only information
 #####################
