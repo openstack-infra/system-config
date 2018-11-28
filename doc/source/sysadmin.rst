@@ -194,6 +194,8 @@ repositories.  Therefore, to avoid inadvertent commits to the public
 repositories, unique administrative-only accounts must be used to
 manage the OpenStack GitHub organization and projects.  These accounts
 will not be used to check out or commit code for any project.
+These accounts are required to have two factor authentication with Github
+enabled.
 
 Root only information
 #####################
