@@ -1,7 +1,6 @@
 # == Class: openstack_project::mirror_update
 #
 class openstack_project::mirror_update (
-  $bandersnatch_keytab = '',
   $reprepro_keytab = '',
   $admin_keytab = '',
   $gem_keytab = '',
@@ -20,45 +19,6 @@ class openstack_project::mirror_update (
 
   class { 'openstack_project::gem_mirror': }
 
-  class { 'bandersnatch':
-    bandersnatch_source => 'pip3',
-  }
-
-  class { 'bandersnatch::mirror':
-    mirror_root       => '/afs/.openstack.org/mirror/pypi',
-    static_root       => '/afs/.openstack.org/mirror',
-    hash_index        => true,
-    package_blacklist => [
-      # These packages are quite large and release often. Ignore them.
-      tensorflow,
-      tf-nightly,
-      tf-nightly-gpu,
-      tfp-nightly,
-      tfp-nightly-gpu,
-      tensorboard,
-      tb-nightly,
-      mxnet,
-      mxnet-mkl,
-      mxnet-cu75,
-      mxnet-cu75mkl,
-      mxnet-cu80,
-      mxnet-cu80mkl,
-      mxnet-cu80-win,
-      mxnet-cu90,
-      mxnet-cu90mkl,
-      mxnet-cu91,
-      mxnet-cu91mkl,
-    ],
-    require           => Class['bandersnatch'],
-  }
-
-  file { '/etc/bandersnatch.keytab':
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0400',
-    content => $bandersnatch_keytab,
-  }
-
   file { '/etc/gem.keytab':
     owner   => 'rubygems',
     group   => 'root',
@@ -74,36 +34,12 @@ class openstack_project::mirror_update (
     content => $admin_keytab,
   }
 
-  file { '/usr/local/bin/bandersnatch-mirror-update':
-    ensure  => present,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    source  => 'puppet:///modules/openstack_project/bandersnatch-mirror-update.sh',
-  }
-
   file { '/usr/local/bin/gem-mirror-update':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
     source  => 'puppet:///modules/openstack_project/gem-mirror-update.sh',
-  }
-
-  cron { 'bandersnatch':
-    # Disabled until we sort out how to mirror without unbound growth.
-    # We may just switch to caching proxy long term.
-    ensure      => absent,
-    user        => $user,
-    minute      => '*/5',
-    command     => 'flock -n /var/run/bandersnatch/mirror.lock bandersnatch-mirror-update /var/log/bandersnatch/mirror.log',
-    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => [
-       File['/usr/local/bin/bandersnatch-mirror-update'],
-       File['/etc/afsadmin.keytab'],
-       File['/etc/bandersnatch.keytab'],
-       Class['bandersnatch::mirror']
-    ]
   }
 
   file { '/etc/reprepro.keytab':

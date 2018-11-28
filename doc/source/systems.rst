@@ -26,7 +26,6 @@ Major Systems
    planet
    puppet
    static
-   bandersnatch
    reprepro
    lists
    wiki
