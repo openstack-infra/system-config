@@ -1,0 +1,13 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Sorin Sbarnea <ssbarnea@redhat.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 28 Nov 2018 07:22:27 +0000
+Reviewed-on: https://review.openstack.org/618326
+Project: openstack-infra/system-config
+Branch: refs/heads/master
