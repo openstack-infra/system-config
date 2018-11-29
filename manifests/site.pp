@@ -564,6 +564,14 @@ node /^files\d*\.openstack\.org$/ {
     require          => Class['openstack_project::files'],
   }
 
+  openstack_project::website { 'opendev.org':
+    aliases          => ['www.opendev.org'],
+    ssl_cert         => hiera('opendev_ssl_cert'),
+    ssl_key          => hiera('opendev_ssl_key'),
+    ssl_intermediate => hiera('opendev_ssl_intermediate'),
+    require          => Class['openstack_project::files'],
+  }
+
   openstack_project::website { 'zuul-ci.org':
     aliases          => ['www.zuul-ci.org', 'zuulci.org', 'www.zuulci.org'],
     ssl_cert         => hiera('zuul-ci_org_ssl_cert'),
