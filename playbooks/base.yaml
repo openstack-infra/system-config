@@ -35,6 +35,7 @@
   roles:
     - minimal-nodepool
     - configure-openstacksdk
+    - configure-kubectl
 
 - hosts: "puppet:!disabled"
   name: "Base: install and configure puppet on puppet hosts"

@@ -21,3 +21,10 @@ def test_clouds_yaml(host):
     assert clouds_yaml.exists
 
     assert b'password' in clouds_yaml.content
+
+
+def test_kube_config(host):
+    kubeconfig = host.file('/home/nodepool/.kube/config')
+    assert kubeconfig.exists
+
+    assert b'k8s_key' in kubeconfig.content
