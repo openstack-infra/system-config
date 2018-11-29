@@ -17,6 +17,7 @@ exim_aliases:
   openstack-fr-owner: spam
   openstack-i18n-owner: spam
   openstack-infra-owner: spam
+  openstack-ko-owner: spam
   openstack-operators-owner: spam
   openstack-owner: spam
   openstack-qa-owner: spam
