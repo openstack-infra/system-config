@@ -980,6 +980,7 @@ node /^zuul\d+\.openstack\.org$/ {
     proxy_ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
     statsd_host                   => 'graphite.openstack.org',
     status_url                    => 'https://zuul.openstack.org',
+    relative_priority             => true,
   }
 
   file { "/etc/zuul/github.key":
