@@ -2,6 +2,11 @@ mm_domains: 'lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.sta
 exim_local_domains: "@:{{ mm_domains }}"
 exim_aliases:
   root: "{{ ','.join(listadmins|default([])) }}"
+  openstack: openstack-discuss
+  openstack-dev: openstack-discuss
+  openstack-operators: openstack-discuss
+  openstack-sigs: openstack-discuss
+  openstack-tc: openstack-discuss
   ambassadors-owner: spam
   community-owner: spam
   edge-computing-owner: spam
@@ -12,18 +17,13 @@ exim_aliases:
   mailman-owner: spam
   marketing-owner: spam
   openstack-announce-owner: spam
-  openstack-dev-owner: spam
   openstack-docs-owner: spam
   openstack-fr-owner: spam
   openstack-i18n-owner: spam
   openstack-infra-owner: spam
   openstack-ko-owner: spam
-  openstack-operators-owner: spam
-  openstack-owner: spam
   openstack-qa-owner: spam
   openstack-security-owner: spam
-  openstack-sigs-owner: spam
-  openstack-tc-owner: spam
   openstack-vi-owner: spam
   product-wg-owner: spam
   superuser-owner: spam
