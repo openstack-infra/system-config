@@ -1,5 +1,0 @@
-- name: Reload iptables (Red Hat)
-  command: 'systemctl reload iptables'
-
-- name: Reload ip6tables (Red Hat)
-  command: 'systemctl reload ip6tables'
