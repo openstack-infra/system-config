@@ -1,2 +1,0 @@
-- name: Reload iptables (Debian)
-  command: '{{ reload_command }}'

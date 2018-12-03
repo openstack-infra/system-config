@@ -25,8 +25,7 @@
     mode: 0640
     setype: '{{ setype | default(omit) }}'
   notify:
-    - Reload iptables Debian
-    - Reload iptables RedHat
+    - Reload iptables
 
 - name: Install IPv6 rules files
   template:
@@ -37,8 +36,7 @@
     mode: 0640
     setype: '{{ setype | default(omit) }}'
   notify:
-    - Reload iptables Debian
-    - Reload iptables RedHat
+    - Reload iptables
 
 - name: Include OS specific tasks
   include_tasks: "{{ item }}"
