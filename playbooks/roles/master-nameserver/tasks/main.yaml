@@ -46,17 +46,26 @@
   file:
     path: "/etc/bind/keys/{{ item.name }}"
     state: directory
+    owner: root
+    group: bind
+    mode: 0750
 - name: Install dnssec public keys
   loop: "{{ dnssec_keys | dict2items }}"
   copy:
     dest: "/etc/bind/keys/{{ item.value.zone }}/K{{ item.value.zone }}.+008+{{ item.key }}.key"
     content: "{{ item.value.public }}"
+    owner: root
+    group: bind
+    mode: 0440
 - name: Install dnssec private keys
   no_log: true
   loop: "{{ dnssec_keys | dict2items }}"
   copy:
     dest: "/etc/bind/keys/{{ item.value.zone }}/K{{ item.value.zone }}.+008+{{ item.key }}.private"
     content: "{{ item.value.private }}"
+    owner: root
+    group: bind
+    mode: 0440
 - name: Install bind config
   template:
     src: templates/named.conf.j2
