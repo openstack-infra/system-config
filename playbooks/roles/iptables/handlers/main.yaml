@@ -1,11 +1,11 @@
 - name: Reload iptables Debian
-  import_tasks: tasks/reload-debian.yaml
+  include_tasks: tasks/reload-debian.yaml
   when:
     - not ansible_facts.is_chroot
     - ansible_facts.os_family == 'Debian'
 
 - name: Reload iptables RedHat
-  import_tasks: tasks/reload-redhat.yaml
+  include_tasks: tasks/reload-redhat.yaml
   when:
     - not ansible_facts.is_chroot
     - ansible_facts.os_family == 'RedHat'
