@@ -1,7 +1,2 @@
 ansible_python_interpreter: python3
 bastion_key_exclusive: false
-ara_install: true
-# MySQL implementation
-# ara_install_pymysql: true
-# ara_config:
-#   database: "mysql+pymysql://bridge:password@localhost/ara"
