@@ -1,3 +1,6 @@
+# If to install ansible as editable.
+install_ansible_editable: false
+
 # Whether or not to install ARA
 install_ansible_ara_enable: false
 

@@ -24,6 +24,7 @@
     name: '{{ install_ansible_name | default("ansible") }}'
     version: '{{ _install_ansible_version | default(omit) }}'
     state: '{{ _install_ansible_state | default(omit) }}'
+    editable: '{{ install_ansible_editable }}'
 
 # Same version/state default swizzling as described above for
 # openstacksdk

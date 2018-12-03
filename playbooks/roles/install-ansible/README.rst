@@ -20,6 +20,14 @@ Install and configure Ansible on a host via pip
    value "latest" will ensure ``state: latest`` is set for the
    package and thus the latest version is always installed.
 
+.. zuul:rolevar:: install_ansible_editable
+   :default: false
+
+   Set this to true to use a pip "editable" install for Ansible.  For
+   master-branch CI jobs this is useful because you will get git info
+   in version stamps.  Only valid when the
+   :zuul:rolevar:`install_ansible_name` variable is for a VCS URL.
+
 .. zuul:rolevar:: install_ansible_openstacksdk_name
    :default: openstacksdk
 
@@ -37,6 +45,7 @@ Install and configure Ansible on a host via pip
    :zuul:rolevar:`install-ansible.install_ansible_openstacksdk_name`.  The
    special value "latest" will ensure ``state: latest`` is set for the
    package and thus the latest version is always installed.
+
 
 .. zuul:rolevar:: install_ansible_ara_enable
    :default: false

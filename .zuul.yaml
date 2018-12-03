@@ -173,6 +173,7 @@
     vars:
       bridge_ansible_name: '{{ ansible_user_dir}}/src/github.com/ansible/ansible'
       bridge_ansible_version: null
+      install_ansible_editable: true
       bridge_openstacksdk_name: '{{ ansible_user_dir }}/src/git.openstack.org/openstack/openstacksdk'
       bridge_openstacksdk_version: null
       bridge_ara_name: '{{ ansible_user_dir}}/src/git.openstack.org/openstack/ara'
