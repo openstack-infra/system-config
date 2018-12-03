@@ -38,23 +38,31 @@ Install and configure Ansible on a host via pip
    special value "latest" will ensure ``state: latest`` is set for the
    package and thus the latest version is always installed.
 
-.. zuul:rolevar:: ara_install
+.. zuul:rolevar:: install_ansible_ara_enable
    :default: false
 
    Whether or not to install the ARA Records Ansible callback plugin
 
-.. zuul:rolevar:: ara_install_pymysql
-   :default: false
+.. zuul:rolevar:: install_ansible_ara_name
+   :default: ara
 
-   Whether or not to install pymysql (required when using the mysql backend)
+   The name of the ARA package to install.  To install from
+   alternative sources, this can be a URL for a remote package.
 
-.. zuul:rolevar:: ara_version
-   :default: "0.16.1"
+.. zuul:rolevar:: install_ansible_ara_version
+   :default: latest
 
-   Version of ARA to install
+   Version of ARA to install.  Set this to empty (YAML ``null``) if
+   specifying versions via URL in
+   :zuul:rolevar:`install-ansible.install_ansible_ara_name`.  The
+   special value "latest" will ensure ``state: latest`` is set for the
+   package and hence the latest version is always installed.
 
-.. zuul:rolevar:: ara_config
+.. zuul:rolevar:: install_ansible_ara_config
    :default: {"database": "sqlite:////var/cache/ansible/ara.sqlite"}
+
+   A dictionary of key-value pairs to be added to the ARA
+   configuration file
 
    *database*: Connection string for the database (ex: mysql+pymysql://ara:password@localhost/ara)
 
