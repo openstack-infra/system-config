@@ -146,6 +146,8 @@
           label: ubuntu-bionic
         - name: centos7
           label: centos-7
+    vars:
+      install_ansible_ara_enable: true
     host-vars:
       trusty:
         ansible_python_interpreter: python2
@@ -166,11 +168,14 @@
       - name: github.com/ansible/ansible
         override-checkout: devel
       - name: openstack/openstacksdk
+      - name: openstack/ara
     vars:
       bridge_ansible_name: '{{ ansible_user_dir}}/src/github.com/ansible/ansible'
       bridge_ansible_version: null
       bridge_openstacksdk_name: '{{ ansible_user_dir }}/src/git.openstack.org/openstack/openstacksdk'
       bridge_openstacksdk_version: null
+      bridge_ara_name: '{{ ansible_user_dir}}/src/git.openstack.org/openstack/ara'
+      bridge_ara_version: null
 
 - job:
     name: system-config-run-eavesdrop
@@ -264,18 +269,18 @@
 
 - project:
     templates:
-      - system-config-zuul-role-integration
-      - infra-puppet-apply-jobs
-      - infra-logstash-filter-jobs
-      - publish-tox-docs-infra
+#      - system-config-zuul-role-integration
+#      - infra-puppet-apply-jobs
+#      - infra-logstash-filter-jobs
+#      - publish-tox-docs-infra
     check:
       jobs:
         - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - legacy-system-config-puppet-syntax-3
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
         - system-config-run-base
         - system-config-run-base-ansible-devel
         - system-config-run-dns
