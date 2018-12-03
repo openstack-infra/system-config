@@ -1,5 +1,5 @@
 - name: Reload iptables Debian
-  import_tasks: tasks/reload-debian.yaml
+  command: '{{ reload_command }}'
   when:
     - not ansible_facts.is_chroot
     - ansible_facts.os_family == 'Debian'
