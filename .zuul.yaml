@@ -127,6 +127,9 @@
     pre-run: playbooks/zuul/run-base-pre.yaml
     run: playbooks/zuul/run-base.yaml
     post-run: playbooks/zuul/run-base-post.yaml
+    vars:
+      install_ansible_ara_enable: true
+
 
 - job:
     name: system-config-run-base
@@ -166,11 +169,14 @@
       - name: github.com/ansible/ansible
         override-checkout: devel
       - name: openstack/openstacksdk
+      - name: openstack/ara
     vars:
       bridge_ansible_name: '{{ ansible_user_dir}}/src/github.com/ansible/ansible'
       bridge_ansible_version: null
       bridge_openstacksdk_name: '{{ ansible_user_dir }}/src/git.openstack.org/openstack/openstacksdk'
       bridge_openstacksdk_version: null
+      bridge_ara_name: '{{ ansible_user_dir}}/src/git.openstack.org/openstack/ara'
+      bridge_ara_version: null
 
 - job:
     name: system-config-run-eavesdrop

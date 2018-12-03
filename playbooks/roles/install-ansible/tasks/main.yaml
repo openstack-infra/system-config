@@ -76,7 +76,7 @@
 
 - name: Set up the ARA callback
   include_tasks: install_ara.yaml
-  when: ara_install
+  when: install_ansible_ara_enable
 
 - name: Copy ansible.cfg in to place
   template:
