@@ -1,0 +1,8 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 03 Dec 2018 23:38:07 +0000
+Reviewed-on: https://review.openstack.org/617939
+Project: openstack-infra/system-config
+Branch: refs/heads/master
