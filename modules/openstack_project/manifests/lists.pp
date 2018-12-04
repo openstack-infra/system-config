@@ -278,14 +278,6 @@ class openstack_project::lists(
     description => 'Discussions around consuming the OpenStack REST APIs and development of API-consuming SDKs and frameworks',
   }
 
-  mailman_list { 'openstack-sigs@openstack':
-    require     => Mailman::Site['openstack'],
-    ensure      => present,
-    admin       => 'thierry@openstack.org',
-    password    => $listpassword,
-    description => 'OpenStack SIGs discussions, gathering users, operators and developers of OpenStack into common groups.',
-  }
-
   mailman_list { 'enterprise-wg@openstack':
     require     => Mailman::Site['openstack'],
     ensure      => present,
