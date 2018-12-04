@@ -20,7 +20,7 @@ Install and configure Ansible on a host via pip
    value "latest" will ensure ``state: latest`` is set for the
    package and thus the latest version is always installed.
 
-.. zuul:rolevar:: install_openstacksdk_name
+.. zuul:rolevar:: install_ansible_openstacksdk_name
    :default: openstacksdk
 
    The name of the openstacksdk package to install.  To install from
@@ -28,12 +28,12 @@ Install and configure Ansible on a host via pip
    e.g. to install from a gerrit change
    ``git+https://git.openstack.org/openstack/openstacksdk@refs/changes/12/3456/1#egg=openstacksdk``
 
-.. zuul:rolevar:: install_openstacksdk_version
+.. zuul:rolevar:: install_ansible_openstacksdk_version
    :default: latest
 
    The version of the library from
-   :zuul:rolevar:`install-ansible.install_openstacksdk_name`.  Set
+   :zuul:rolevar:`install-ansible.install_ansible_openstacksdk_name`.  Set
    this to empty (YAML ``null``) if specifying versions via
-   :zuul:rolevar:`install-ansible.install_openstacksdk_name`.  The
+   :zuul:rolevar:`install-ansible.install_ansible_openstacksdk_name`.  The
    special value "latest" will ensure ``state: latest`` is set for the
    package and thus the latest version is always installed.
