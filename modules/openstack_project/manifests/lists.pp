@@ -230,14 +230,6 @@ class openstack_project::lists(
     description => 'Discussions of the OpenStack Foundation Core Definition Committee',
   }
 
-  mailman_list { 'interop-wg@openstack':
-    require     => Mailman::Site['openstack'],
-    ensure      => present,
-    admin       => 'chris@openstack.org',
-    password    => $listpassword,
-    description => 'Discussions of the OpenStack Foundation Board Interoperability Working Group',
-  }
-
   mailman_list { 'ambassadors@openstack':
     require     => Mailman::Site['openstack'],
     ensure      => present,

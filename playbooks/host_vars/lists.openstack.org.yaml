@@ -2,6 +2,7 @@ mm_domains: 'lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.sta
 exim_local_domains: "@:{{ mm_domains }}"
 exim_aliases:
   root: "{{ ','.join(listadmins|default([])) }}"
+  interop-wg: openstack-discuss
   openstack: openstack-discuss
   openstack-dev: openstack-discuss
   openstack-operators: openstack-discuss
