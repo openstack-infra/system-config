@@ -1,9 +1,11 @@
-- name: Remove packages that make no sense for servers
+- name: Remove packages that make no sense for our servers
   package:
     name:
       - whoopsie
       - popularity-contest
       - snapd
+      - lxd
+      - lxd-client
     state: absent
 
 - name: Configure file limits
