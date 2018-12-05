@@ -1048,6 +1048,14 @@ all:
       private_v4: 10.209.160.69
       public_v4: 104.239.149.58
       public_v6: 2001:4800:7819:105:be76:4eff:fe04:4f0d
+    ze12.openstack.org:
+      ansible_host: 2001:4800:7818:104:be76:4eff:fe03:b582
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      private_v4: 10.209.32.181
+      public_v4: 104.130.124.187
+      public_v6: 2001:4800:7818:104:be76:4eff:fe03:b582
     zk01.openstack.org:
       ansible_host: 2001:4800:7817:103:be76:4eff:fe04:e359
       location:
