@@ -101,3 +101,6 @@ iptables_extra_allowed_hosts:
   - protocol: tcp
     port: '4730'
     hostname: ze11.openstack.org
+  - protocol: tcp
+    port: '4730'
+    hostname: ze12.openstack.org

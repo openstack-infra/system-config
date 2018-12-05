@@ -86,3 +86,6 @@ iptables_extra_allowed_hosts:
   - hostname: ze11.openstack.org
     port: 8125
     protocol: udp
+  - hostname: ze12.openstack.org
+    port: 8125
+    protocol: udp
