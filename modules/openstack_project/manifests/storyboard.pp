@@ -29,11 +29,17 @@ class openstack_project::storyboard(
   class { 'openstack_project::server': }
 
 
+  class { '::storyboard::mysql':
+    mysql_database         => 'storyboard',
+    mysql_user             => $mysql_user,
+    mysql_user_password    => $mysql_password,
+  }
+
   mysql_backup::backup_remote { 'storyboard':
     database_host     => $mysql_host,
     database_user     => $mysql_user,
     database_password => $mysql_password,
-    require           => Class['::storyboard::application'],
+    require           => Class['::storyboard::mysql'],
   }
 
   class { '::storyboard::cert':
