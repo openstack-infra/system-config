@@ -63,6 +63,12 @@ class openstack_project::storyboard(
     default_url            => $default_url,
   }
 
+  class { '::storyboard::mysql':
+    mysql_database         => 'storyboard',
+    mysql_user             => $mysql_user,
+    mysql_user_password    => $mysql_password,
+  }
+
   class { '::storyboard::rabbit':
     rabbitmq_user          => $rabbitmq_user,
     rabbitmq_user_password => $rabbitmq_password,
