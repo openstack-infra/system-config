@@ -39,7 +39,7 @@ We are most active on IRC, so please join the **#openstack-infra**
 channel on Freenode.
 
 Feel free to attend our `weekly IRC meeting
-<https://wiki.openstack.org/wiki/Meetings/InfraTeamMeeting>`_.
+<https://wiki.openstack.org/wiki/Meetings/InfraTeamMeeting>`_
 on Tuesdays at 19:00 UTC in #openstack-meeting.
 
 Check out our open bugs on `StoryBoard
@@ -144,7 +144,7 @@ Infrastructure Core Team
 Infrastructure Council
   The infrastructure council is the technical design body for the
   infrastructure project.  While individuals and groups are empowered
-  to execute the designs from the concil, major technical designs are
+  to execute the designs from the council, major technical designs are
   agreed upon as a group to ensure that our large set of projects are
   all working together to the same end.  The council need not delve
   too deeply into technical detail -- just enough so that development

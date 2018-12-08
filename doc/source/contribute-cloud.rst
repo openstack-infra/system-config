@@ -56,7 +56,7 @@ Each test instance requires:
 In a setting where our instances will be segregated, our usage
 patterns will cause us to be our own noisy neighbors at the worst
 times, so it would be best to plan for little or no overcommitment.
-In an unsegregrated public cloud setting, the distribution of our jobs
+In an unsegregated public cloud setting, the distribution of our jobs
 over a larger number of hypervisors will allow for more
 overcommitment.
 

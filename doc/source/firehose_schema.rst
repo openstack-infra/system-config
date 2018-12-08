@@ -34,17 +34,17 @@ The ``git namespace`` and ``repo name`` are pretty self explanatory and are just
 from the git repository the change in gerrit is for. The event is defined in the gerrit event stream. You can see the full reference for topics in the Gerrit
 docs for `Gerrit events`_. However, for simplicity the possible values are:
 
- * change-abandoned
- * change-merged
- * change-restored
- * comment-added
- * draft-published
- * hashtags-changed
- * merge-failed
- * patchset-created
- * ref-updated
- * reviewer-added
- * topic-changed
+* change-abandoned
+* change-merged
+* change-restored
+* comment-added
+* draft-published
+* hashtags-changed
+* merge-failed
+* patchset-created
+* ref-updated
+* reviewer-added
+* topic-changed
 
 Payload
 -------

@@ -218,7 +218,7 @@ arguments to and instantiates the job templates as real jobs. For example:
 Each project using templated jobs should have its own ``- project:`` section.
 Under this sections there should be a ``jobs:`` section with a list of job
 templates or job groups to be used by this project. Other values under the
-``- project:`` section define the arguments to the templates lised under
+``- project:`` section define the arguments to the templates listed under
 ``jobs:``. In this case we are giving the docs template ``name`` and ``node``
 values.
 

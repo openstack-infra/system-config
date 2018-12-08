@@ -110,7 +110,7 @@ vhd-util
 ========
 
 Creating images for Rackspace requires a patched version of vhd-util to convert
-the images into the appropriate VHD format. A package is manaually managed
+the images into the appropriate VHD format. A package is manually managed
 at `ppa:openstack-ci-core/vhd-util` and is based on a git repo at
 https://github.com/emonty/vhd-util
 

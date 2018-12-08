@@ -51,7 +51,7 @@ Elevate your account to Superadmin via mysqlclient:
 value is in the users table for your OpenID-autocreated account)
 
 Refresh your browser. When logged in via the web-ui you should now have
-superadmin priviledges allowing you to set the following values:
+superadmin privileges allowing you to set the following values:
 
 Configuration > Global Settings > Email Settings
 

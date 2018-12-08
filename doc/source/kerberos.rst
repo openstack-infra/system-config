@@ -42,7 +42,7 @@ Realm Creation
 On the first KDC host, the admin needs to run `krb5_newrealm` by hand. Then
 admin principals and host principles need to be set up.
 
-Set up host principals for slave propogation::
+Set up host principals for slave propagation::
 
    # execute kadmin.local then run these commands
    addprinc -randkey host/kdc01.openstack.org

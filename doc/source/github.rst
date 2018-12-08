@@ -57,7 +57,7 @@ OpenStack Zuul App
 
 Zuul v3 is integrated with GitHub by way of a `GitHub App`_. This is done to
 enable OpenStack to test integration with external projects that use GitHub
-for development. Information on onfiguring projects to use the OpenStack Zuul
+for development. Information on configuring projects to use the OpenStack Zuul
 App can be found in the :ref:`zuul` page at :ref:`zuul_github_projects`.
 
 The OpenStack Zuul App is managed `OpenStack Zuul Settings Page`_ which is

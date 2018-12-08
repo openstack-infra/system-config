@@ -5,7 +5,7 @@
 Unofficial Project Hosting
 ##########################
 
-Unoffocial project hosting is the way that OpenStack related projects can
+Unofficial project hosting is the way that OpenStack related projects can
 consume and make use of the OpenStack project infrastructure. This
 includes Gerrit code review, Zuul continuous integration, GitHub
 repository mirroring, and various small things like IRC bots, pypi uploads,

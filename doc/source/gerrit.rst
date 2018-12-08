@@ -160,9 +160,9 @@ Auto Review Expiry
 Puppet automatically installs a daily cron job called ``expire-old-reviews``
 onto the Gerrit servers.  This script follows two rules:
 
- #. If the review hasn't been touched in 2 weeks, mark as abandoned.
- #. If there is a negative review and it hasn't been touched in 1 week, mark as
-    abandoned.
+#. If the review hasn't been touched in 2 weeks, mark as abandoned.
+#. If there is a negative review and it hasn't been touched in 1 week, mark as
+   abandoned.
 
 If your review gets touched by either of these rules, it is possible to
 unabandon a review on the Gerrit web interface.
@@ -669,30 +669,36 @@ must follow that steps:
    members can be found on: https://review.openstack.org/#/admin/groups/270,members
 
    That will give you the name and email of all members. Then you can get the matching
-   numerical account ID with the help of REST API:
-   curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X GET https://review.openstack.org/a/accounts/{email}
+   numerical account ID with the help of REST API::
+
+     curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X GET https://review.openstack.org/a/accounts/{email}
 
    This will return a JSON dictionary, that will contain _account_id field.
 
-2. Mark the account as inactive using gerrit ssh api, with:
-   ssh -p 29418 review.openstack.org gerrit set-account --inactive {account-id}
+2. Mark the account as inactive using gerrit ssh api, with::
 
-   Alternatively you can use REST API, sending a DELETE for:
-   curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X DELETE https://review.openstack.org/a/accounts/{account-id}/active
+     ssh -p 29418 review.openstack.org gerrit set-account --inactive {account-id}
 
-3. Check if there are active gerrit ssh connections:
-   ssh -p 29418 review.openstack.org gerrit show-connections -n | grep {account-id}
+   Alternatively you can use REST API, sending a DELETE for::
 
-   And kill all of them with subsequent:
-   ssh -p 29418 review.openstack.org gerrit close-connection {connection-id}
+     curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X DELETE https://review.openstack.org/a/accounts/{account-id}/active
+
+3. Check if there are active gerrit ssh connections::
+
+     ssh -p 29418 review.openstack.org gerrit show-connections -n | grep {account-id}
+
+   And kill all of them with subsequent::
+
+     ssh -p 29418 review.openstack.org gerrit close-connection {connection-id}
 
 4. You can check if the account is properly marked as inactive using REST API,
-   sending a GET for:
+   sending a GET for::
 
-   curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X GET https://review.openstack.org/a/accounts/{account-id}/active
+     curl -i -H "Accept: application/json" --digest --user <<gerrit_user>>:<<http_pass>> -X GET https://review.openstack.org/a/accounts/{account-id}/active
 
    A 200 return code means the account is active, and 204 means account inactive.
 
 4. In the case of a failing Third Party CI, if the account caused a loop of comments in
-   a change, you can delete them with following query:
-   delete from change_messages where author_id={account-id} and change_id={change-id};
+   a change, you can delete them with following query::
+
+     delete from change_messages where author_id={account-id} and change_id={change-id};

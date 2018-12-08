@@ -72,7 +72,7 @@ Adding an Admin to StoryBoard
 -----------------------------
 
 StoryBoard administrators are handled from a single configuration file, and
-are identified by OpenID. To add a new administator, simply add their
+are identified by OpenID. To add a new administrator, simply add their
 Launchpad OpenID string and email as follows:
 
 ``:config:`gerrit/projects.yaml```::

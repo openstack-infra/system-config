@@ -32,7 +32,7 @@ directories on bridge.openstack.org, having multiple CA services.
 Generating a CA certificate
 ---------------------------
 
-Below are the steps for create a new certificicate authority. Today we do this
+Below are the steps for create a new certificate authority. Today we do this
 on bridge.openstack.org.  Some important things to note, our pass phrase
 for our cakey.pem file is stored in our GPG password.txt file. Additionally, by
 default our cacert.pem file will only be valid for 3 years.
@@ -83,7 +83,7 @@ bridge.openstack.org.
     Write out database with 1 new entries
     Data Base Updated
 
-Generate a Cerfificate Request
+Generate a Certificate Request
 ------------------------------
 
 Each service that requires a SSL certificate will need to first request a
@@ -237,7 +237,7 @@ Installing the Certificates
 ---------------------------
 
 2 files will have been created, newcert.pem (public key) and newreq.pem (private
-key). Be sure to use caution while transporting these files, specifcially
+key). Be sure to use caution while transporting these files, specifically
 newreq.pem should be added into private hieradata for the specific server and
 then deleted from disk.
 

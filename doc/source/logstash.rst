@@ -206,7 +206,7 @@ loves it when you give it more memory. Currently we run a multi-node
 cluster on large VMs to give ElasticSearch both memory and disk space.
 Per index (Logstash creates one index per day) we have N+1 replica
 redundancy to distribute disk utilization and provide high availability.
-Each replica is broken into multiple shards providing inceased indexing
+Each replica is broken into multiple shards providing increased indexing
 and search throughput as each shard is essentially a valid mini index.
 
 To check on the cluster health, run this command on any es.* node::
@@ -279,7 +279,7 @@ can jumpstart the refining process with a simple query.
 This will show you all logs available from the patchset and build pair
 that failed. Chances are that this is still a significant number of
 logs and you will want to do more filtering. You can add more filters
-to the queriy using ``AND`` and ``OR`` and parentheses can be used to
+to the query using ``AND`` and ``OR`` and parentheses can be used to
 group sections of the query. Potential additions to the above query
 might be
 

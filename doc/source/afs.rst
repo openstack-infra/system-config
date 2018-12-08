@@ -43,7 +43,7 @@ OpenStack Cell
 
 AFS may be one of the most thoroughly documented systems in the world.
 There is plenty of very good information about how AFS works and the
-commands to use it.  This document will only cover the mininmum needed
+commands to use it.  This document will only cover the minimum needed
 to understand our deployment of it.
 
 OpenStack runs an AFS cell called ``openstack.org``.  There are three
@@ -283,7 +283,7 @@ Updating Settings
 
 If you wish to update the settings for an existing server, you can
 stop and remove the existing ``bnode`` (the collection of processes
-the overseeer is monitoring, created via ``bos create`` above) and
+the overseer is monitoring, created via ``bos create`` above) and
 recreate it.
 
 For example ::
@@ -360,7 +360,7 @@ point is composed of read-only volumes::
 In order to mount the ``mirror.foo`` volume under ``mirror`` we need
 to modify the read-write version of the ``mirror`` volume.  To make
 this easy, the read-write version of the cell root is mounted at
-``/afs/.openstack.org``.  Folllowing the same logic from earlier,
+``/afs/.openstack.org``.  Following the same logic from earlier,
 traversing to paths below that mount point will generally prefer
 read-write volumes.
 
@@ -465,7 +465,7 @@ our mirror update cron jobs, manually perform the first mirror update:
   a bug where it will not use renewed tokens and so token expiration
   during a vos release may cause a similar problem.
 
-* Once the initial sync and and ``vos release`` are complete, release
+* Once the initial sync and ``vos release`` are complete, release
   the lock file on mirror-update.
 
 Removing a mirror

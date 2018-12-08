@@ -57,7 +57,7 @@ gathered from the upstream mirror.  Since the upstream mirror remains
 consistent, ``reprepro`` will always download a consistent set of
 files.  Then thanks to the release of the AFS mirror volume being
 atomic, we do not have any period where the repository package index
-doens't match the set of packages in the filesystem.
+doesn't match the set of packages in the filesystem.
 
 Since this does not require coordination with upstream, the same
 pattern is suitable across Ubuntu, Debian and other various apt

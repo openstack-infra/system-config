@@ -177,7 +177,7 @@ Executors
 
 The Zuul Executors are a horizontally scalable set of servers named
 ze*.openstack.org. They perform git merging operations for the scheduler
-and execute Ansible playboks to actually run jobs.
+and execute Ansible playbooks to actually run jobs.
 
 Our jobs are configured to upload as much information as possible along with
 their logs, but if there is an error which can not be diagnosed in that
@@ -213,7 +213,7 @@ between OpenStack projects and those ecosystem projects, we can add the
 OpenStack Zuul GitHub app to those projects, then configure them in Zuul.
 
 In order to add the GitHub app to a project, an admin on that project should
-nagivate to the `OpenStack Zuul`_ app in the GitHub UI. From there they can
+navigate to the `OpenStack Zuul`_ app in the GitHub UI. From there they can
 click "Install", then choose the project or organization they want to install
 the App on.
 

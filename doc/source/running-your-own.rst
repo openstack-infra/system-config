@@ -95,7 +95,7 @@ modules/openstack_project
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This tree defines the shape of servers (some of which are unique, some of which
-are scaled horizonally, thus the separation). To run your own infrastructure we
+are scaled horizontally, thus the separation). To run your own infrastructure we
 recommend you copy the entire tree, delete (or simply ignore) any servers you won't
 run, and replace hostnames and class names with yours throughout. Some templates can
 be used as-is by leaving their references to point within the openstack_project tree.

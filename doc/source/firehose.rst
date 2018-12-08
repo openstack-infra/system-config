@@ -39,10 +39,10 @@ Connection Info
 
 firehose.openstack.org has 2 open ports for MQTT traffic:
 
- * **1883** - The default MQTT port
- * **80** - Uses websockets for the MQTT communication
- * **8883** - The default SSL/TLS MQTT port
- * **443** - The SSL/TLS websockets port
+* **1883** - The default MQTT port
+* **80** - Uses websockets for the MQTT communication
+* **8883** - The default SSL/TLS MQTT port
+* **443** - The SSL/TLS websockets port
 
 
 Topics
@@ -120,7 +120,7 @@ to more specific.
 
 MQTT Protocol Example
 ---------------------
-Interacting with firehose on the unecrpyted MQTT port is normally pretty easy in
+Interacting with firehose on the unencrypted MQTT port is normally pretty easy in
 most language bindings. Here are some examples that will have the same behavior
 as the CLI example above and will subscribe to all topics on the firehose and
 print it to STDOUT.
@@ -275,7 +275,7 @@ Using SSL/TLS
 -------------
 If you would like to connect to the firehose using ssl to encrypt the events you
 recieve from MQTT you just need to connect with ssl enabled via either of the
-encypted ports. If you'd like to verify the server ssl certificate when
+encrypted ports. If you'd like to verify the server ssl certificate when
 connecting you'll need to provide a CA bundle to use as most MQTT clients do
 not know how to use the system trusted CA bundle like most http clients.
 

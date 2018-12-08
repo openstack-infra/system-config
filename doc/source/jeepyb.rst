@@ -76,7 +76,7 @@ option should have a value that is a path to the ``project.config``
 for that project.
 
 That is the high level view of how we can configure projects using the
-pupppet repository. To create an actual change that does all of this for
+puppet repository. To create an actual change that does all of this for
 a single project you will want to do the following:
 
 #. Add a ``gerrit/acls/organization/project-name.config`` file to the
@@ -103,7 +103,7 @@ a single project you will want to do the following:
 #. If there is an existing repo that is being replaced by this new
    project you can set the upstream value for the project. When an
    upstream is set, that upstream will be cloned and pushed into Gerrit
-   instead of an empty repository. eg::
+   instead of an empty repository. e.g.::
 
      - project: organization/project-name
        acl-config: /home/gerrit2/acls/organization/project-name.config
@@ -189,7 +189,7 @@ set of projects by reading a requirements.txt file, installing all
 listed dependencies into a virtualenv, inspecting the resulting
 installed package set, and then downloading all of the second-level
 (and further) dependencies.  Essentially, the mirror is built by
-introspection and contains the full set of depedencies needed whether
+introspection and contains the full set of dependencies needed whether
 they are explicitly listed or not.
 
 Admin tasks
