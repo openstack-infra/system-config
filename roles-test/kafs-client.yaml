@@ -1,0 +1,17 @@
+- name: kafs client installation
+  hosts: base
+  become: true
+  roles:
+    - role: kafs-client
+
+  tasks:
+    - name: Check for directory in /kafs
+      stat:
+        path: "/kafs/openstack.org/mirror"
+      register: kafs_mirror
+
+    - name: Ensure that kAFS is mounted
+      assert:
+        that:
+          - kafs_mirror.stat.exists
+
