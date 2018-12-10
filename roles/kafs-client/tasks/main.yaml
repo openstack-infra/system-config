@@ -1,0 +1,21 @@
+- name: Install upstream kafs copr repos
+  command: dnf copr enable -y jsbillings/kafs
+  become: true
+
+- name: Load kafs module
+  command: modprobe kafs
+  become: true
+
+- name: Install kafs packages
+  package:
+    name:
+      - kafs-client
+      - kafs-utils
+    state: present
+  become: true
+
+- name: Enable automount
+  systemd:
+    name: afs.mount
+    enabled: yes
+    state: started
