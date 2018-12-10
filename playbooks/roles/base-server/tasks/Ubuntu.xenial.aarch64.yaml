@@ -2,3 +2,6 @@
   apt:
     name: linux-generic-hwe-16.04
     state: present
+
+- name: Include generic Debian tasks
+  include_tasks: Debian.yaml
