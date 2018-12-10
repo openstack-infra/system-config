@@ -1,0 +1,29 @@
+- name: Install upstream kafs copr repos
+  command: dnf copr enable -y jsbillings/kafs
+  become: true
+
+- name: Load kafs module
+  command: modprobe kafs
+
+- name: Install kafs packages
+  yum:
+    name:
+      - kafs-client
+      - kafs-utils
+      - kafs-aklog
+
+- name: Configure root cell
+  sysctl:
+    name: fs.afs.root_cell
+    value: '{{ kafs_client_cell }}'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Mount AFS
+  mount:
+    path: /afs
+    source: none
+    fstype: afs
+    opts: dyn
+    state: present

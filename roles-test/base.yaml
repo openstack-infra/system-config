@@ -14,4 +14,7 @@
 - import_playbook: puppet-install.yaml
 
 # Kerberos & afs roles
-- import_playbook: openafs-client.yaml
+# TODO: use this on all !fedora platforms
+#- import_playbook: openafs-client.yaml
+
+- import_playbook: kafs-client.yaml
