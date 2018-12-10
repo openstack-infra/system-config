@@ -274,7 +274,7 @@ on the firehose and print it to STDOUT
 Using SSL/TLS
 -------------
 If you would like to connect to the firehose using ssl to encrypt the events you
-recieve from MQTT you just need to connect with ssl enabled via either of the
+receive from MQTT you just need to connect with ssl enabled via either of the
 encrypted ports. If you'd like to verify the server ssl certificate when
 connecting you'll need to provide a CA bundle to use as most MQTT clients do
 not know how to use the system trusted CA bundle like most http clients.
