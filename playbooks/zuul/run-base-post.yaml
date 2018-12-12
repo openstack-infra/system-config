@@ -7,6 +7,36 @@
       with_items:
         - "{{ zuul.executor.log_root }}/bridge.o.o"
         - "{{ zuul.executor.log_root }}/bridge.o.o/ara-report"
+        - "{{ zuul.executor.log_root }}/bridge.o.o/logs"
+        # NOTE(ianw): is there some way to iterate the host list and
+        # make nicely formatted log directories for each host we ran
+        # against?
+        - "{{ zuul.executor.log_root }}/nodes/logs"
+
+- hosts: *:!bridge.openstack.org
+  tasks:
+    - name: Set log directory
+      set_fact:
+        log_dir: "{{ zuul.executor.log_root }}/nodes"
+
+    - name: Check for /var/log/syslog (debuntu)
+      stat:
+        path: '/var/log/syslog'
+      register: _syslogs
+      become: yes
+
+    - name: Check for /var/log/messages (rpmish)
+      stat:
+        path: '/var/log/messages'
+      register: _syslogs
+      become: yes
+
+    - name: 'Collect syslogs for {{ inventory_hostname }}'
+      synchronize:
+        dest: "{{ log_dir }}/{{ inventory_hostname }}.syslog"
+        mode: pull
+        src: "{{ _syslogs.path }}"
+      become: yes
 
 - hosts: bridge.openstack.org
   tasks:
@@ -54,4 +84,12 @@
         verify_host: true
         rsync_opts:
           - "--exclude=__pycache__"
+      ignore_errors: true
+
+    - name: Collect syslogs
+      synchronize:
+        dest: "{{ log_dir }}/logs"
+        mode: pull
+        src: "/var/log/syslog"
+        verify_host: true
       ignore_errors: true
