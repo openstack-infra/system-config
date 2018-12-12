@@ -33,8 +33,10 @@ instance of Zanata running on the `Wildfly JBoss Application Server
 before being applied in production.
 
 Translators work through the Zanata web UI or with the zanata-cli tool to do
-their translations. A series of Jenkins jobs handle translations proposals
-on the proposal slave.
+their translations. Zuul proposes updates to translations with the
+``upstream-translation-update`` and ``propose-translation-update`` jobs
+defined in `project-config zuul jobs`_.
+
 
 Projects are added for translations by
 modifying :config:`gerrit/projects.yaml` and adding the following to
@@ -49,3 +51,5 @@ changes.
 
 Finally, the translations jobs must be added to the project in
 :config:`jenkins/jobs/projects.yaml` and :config:`zuul/layout.yaml`.
+
+.. _project-config zuul jobs: http://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/jobs.yaml
