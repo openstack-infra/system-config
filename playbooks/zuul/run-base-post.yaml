@@ -1,18 +1,64 @@
 - hosts: localhost
   tasks:
-    - name: Ensure log directories exist
+    - name: Make log directories for testing hosts
+      file:
+        path: "{{ zuul.executor.log_root }}/{{ item }}/logs"
+        state: directory
+        recurse: true
+      loop: "{{ query('inventory_hostnames', 'all') }}"
+
+    - name: Ensure bridge ARA log directories exist
       file:
         path: "{{ item }}"
         state: directory
       with_items:
-        - "{{ zuul.executor.log_root }}/bridge.o.o"
-        - "{{ zuul.executor.log_root }}/bridge.o.o/ara-report"
+        - "{{ zuul.executor.log_root }}/bridge.openstack.org/ara-report"
+
+- hosts: all
+  tasks:
+    - name: Set log directory
+      set_fact:
+        log_dir: "{{ zuul.executor.log_root }}/{{ inventory_hostname }}/logs"
+
+    - name: Create list of files to collect
+      set_fact:
+        _to_collect: []
+
+    - name: Check for /var/log/syslog (debuntu)
+      stat:
+        path: '/var/log/syslog'
+      register: _syslog
+      become: yes
+
+    - name: Collect syslog
+      set_fact:
+        _to_collect: '{{ _to_collect + [_syslog.stat.path] }}'
+      when: _syslog.stat.exists
+
+    - name: Check for /var/log/messages (rpmish)
+      stat:
+        path: '/var/log/messages'
+      register: _messages
+      become: yes
+
+    - name: Collect messages
+      set_fact:
+        _to_collect: '{{ _to_collect + [_messages.stat.path] }}'
+      when: _messages.stat.exists
+
+    - name: 'Collect logs for {{ inventory_hostname }}'
+      synchronize:
+        dest: "{{ log_dir }}/{{ inventory_hostname }}.{{ item | basename }}"
+        mode: pull
+        src: "{{ item }}"
+      become: yes
+      loop: "{{ _to_collect }}"
 
 - hosts: bridge.openstack.org
   tasks:
     - name: Set log directory
       set_fact:
-        log_dir: "{{ zuul.executor.log_root }}/bridge.o.o"
+        log_dir: "{{ zuul.executor.log_root }}/{{ inventory_hostname }}"
 
     - name: Register junit.xml file
       stat:
