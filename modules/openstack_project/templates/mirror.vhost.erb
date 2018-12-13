@@ -53,6 +53,12 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     # 5GiB
     CacheMaxFileSize 5368709120
     CacheStoreExpired On
+    # Pip sets Cache-Control: max-age=0 on requests for pypi index pages.
+    # This means we don't use the cache for those requests. This setting
+    # should force the proxy to ignore cache-control on the request side
+    # but we should still cache things based on the cache-control responses
+    # from the backed servers.
+    CacheIgnoreCacheControl On
 
     # Added Aug 2017 in an attempt to avoid occasional 502 errors (around
     # 0.05% of requests) of the type:
