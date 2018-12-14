@@ -475,4 +475,12 @@ class openstack_project::lists(
     password    => $listpassword,
     description => 'The mailman site list',
   }
+
+  mailman_list { 'rust-vmm@opendev':
+    require     => Mailman::Site['opendev'],
+    ensure      => present,
+    admin       => 'claire@openstack.org',
+    password    => $listpassword,
+    description => 'Collaborating on Rust-based virtual machine monitors.',
+  }
 }
