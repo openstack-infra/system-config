@@ -52,6 +52,11 @@ class openstack_project::lists(
     default_url_host   => 'lists.starlingx.io',
   }
 
+  mailman::site { 'opendev':
+    default_email_host => 'lists.opendev.org',
+    default_url_host   => 'lists.opendev.org',
+  }
+
   # Add new mailing lists below this line
 
   mailman_list { 'mailman@openstack':
@@ -461,5 +466,13 @@ class openstack_project::lists(
     admin       => 'fungi@yuggoth.org',
     password    => $listpassword,
     description => 'Discussion of OpenStack usage and development.',
+  }
+
+  mailman_list { 'mailman@opendev':
+    require     => Mailman::Site['opendev'],
+    ensure      => present,
+    admin       => 'nobody@openstack.org',
+    password    => $listpassword,
+    description => 'The mailman site list',
   }
 }

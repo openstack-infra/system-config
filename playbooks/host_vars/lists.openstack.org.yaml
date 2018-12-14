@@ -1,4 +1,4 @@
-mm_domains: 'lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.starlingx.io'
+mm_domains: 'lists.openstack.org:lists.zuul-ci.org:lists.airshipit.org:lists.starlingx.io:lists.opendev.org'
 exim_local_domains: "@:{{ mm_domains }}"
 exim_aliases:
   root: "{{ ','.join(listadmins|default([])) }}"
