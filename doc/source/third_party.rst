@@ -441,7 +441,7 @@ chance of success if you follow these steps:
   * send an email to the openstack-dev mailing list nominating your
     system for voting permissions
 
-    * openstack-dev@lists.openstack.org
+    * openstack-discuss@lists.openstack.org
     * use tags [Infra][Nova] for the Nova program, please replace
       [Nova] with [Program], where [Program] is the name of the
       program your CI account will test
