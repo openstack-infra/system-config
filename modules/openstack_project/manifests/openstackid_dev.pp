@@ -59,6 +59,7 @@ class openstack_project::openstackid_dev (
   $cache_driver = 'redis',
   $session_driver = 'redis',
   $session_cookie_secure = false,
+  $php_version = 7,
 ) {
 
   class { 'openstack_project::server': }
@@ -109,6 +110,7 @@ class openstack_project::openstackid_dev (
     cache_driver               => $cache_driver,
     session_driver             => $session_driver,
     session_cookie_secure      => $session_cookie_secure,
+    php_version                => $php_version,
   }
 
   # redis (custom module written by tipit)
