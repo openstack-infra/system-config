@@ -288,7 +288,6 @@ node /^eavesdrop\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^ethercalc\d+\.openstack\.org$/ {
   $group = "ethercalc"
@@ -302,7 +301,6 @@ node /^ethercalc\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad\d*\.openstack\.org$/ {
   $group = "etherpad"
@@ -319,7 +317,6 @@ node /^etherpad\d*\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^etherpad-dev\d*\.openstack\.org$/ {
   $group = "etherpad-dev"
@@ -373,7 +370,6 @@ node /^wiki-dev\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^logstash\d*\.openstack\.org$/ {
   class { 'openstack_project::server': }
@@ -1235,7 +1231,6 @@ node 'ask-staging.openstack.org' {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^translate\d+\.openstack\.org$/ {
   $group = "translate"
@@ -1262,7 +1257,6 @@ node /^translate\d+\.openstack\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^translate-dev\d*\.openstack\.org$/ {
   $group = "translate-dev"
