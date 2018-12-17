@@ -1122,7 +1122,7 @@ node 'openstackid.org' {
   }
 }
 
-# Node-OS: trusty
+# Node-OS: xenial
 node 'openstackid-dev.openstack.org' {
   class { 'openstack_project::openstackid_dev':
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
@@ -1147,6 +1147,7 @@ node 'openstackid-dev.openstack.org' {
     email_smtp_server           => 'smtp.sendgrid.net',
     email_smtp_server_user      => hiera('openstackid_dev_smtp_user'),
     email_smtp_server_password  => hiera('openstackid_dev_smtp_password'),
+    php_version                 => 7
   }
 }
 
