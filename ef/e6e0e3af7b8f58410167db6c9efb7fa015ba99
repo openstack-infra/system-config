@@ -1,0 +1,10 @@
+Code-Review+1: François Magimel <francois.magimel@alumni.enseeiht.fr>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Workflow+1: Joshua Hesketh <josh@nitrotech.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 17 Dec 2018 16:36:32 +0000
+Reviewed-on: https://review.openstack.org/439083
+Project: openstack-infra/system-config
+Branch: refs/heads/master
