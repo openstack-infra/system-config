@@ -1,0 +1,23 @@
+---
+# Source: percona-xtradb-cluster/templates/service-repl.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: "gitea-pxc-repl"
+  labels:
+    app: gitea-pxc
+    chart: "percona-xtradb-cluster-0.6.1"
+    release: "gitea"
+    heritage: "Tiller"
+spec:
+  clusterIP: None
+  ports:
+  - name: galera
+    port: 4567
+  - name: state-xfer
+    port: 4568
+  - name: state-snap
+    port: 4444
+  selector:
+    app: gitea-pxc
+    release: "gitea"

@@ -1,0 +1,165 @@
+- name: Create master security group
+  tags: bootstrap
+  os_security_group:
+    name: "sg-{{ name }}-master"
+    state: present
+  when: state == "present"
+
+- name: Create nodes security group
+  tags: bootstrap
+  os_security_group:
+    name: "sg-{{ name }}-nodes"
+    state: present
+  when: state == "present"
+
+- name: Allow SSH to master from anywhere IPv4
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
+  when: state == "present"
+
+- name: Allow SSH to master from anywhere IPv6
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    ethertype: IPv6
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: ::/0
+  when: state == "present"
+
+- name: Allow K8S API to master from anywhere IPv4
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    protocol: tcp
+    port_range_min: 6443
+    port_range_max: 6443
+    remote_ip_prefix: 0.0.0.0/0
+  when: state == "present"
+
+- name: Allow K8S API to master from anywhere IPv6
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    ethertype: IPv6
+    protocol: tcp
+    port_range_min: 6443
+    port_range_max: 6443
+    remote_ip_prefix: ::/0
+  when: state == "present"
+
+- name: Allow HTTP to master from anywhere IPv4
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: 0.0.0.0/0
+  when: state == "present"
+
+- name: Allow HTTP to master from anywhere IPv6
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    ethertype: IPv6
+    protocol: tcp
+    port_range_min: 80
+    port_range_max: 80
+    remote_ip_prefix: ::/0
+  when: state == "present"
+
+- name: Allow HTTPS to master from anywhere IPv4
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    protocol: tcp
+    port_range_min: 443
+    port_range_max: 443
+    remote_ip_prefix: 0.0.0.0/0
+  when: state == "present"
+
+- name: Allow HTTPS to master from anywhere IPv6
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    ethertype: IPv6
+    protocol: tcp
+    port_range_min: 443
+    port_range_max: 443
+    remote_ip_prefix: ::/0
+  when: state == "present"
+
+- name: Allow traffic to master from nodes
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-master"
+    remote_group: "sg-{{ name }}-nodes"
+  when: state == "present"
+
+- name: Allow SSH to nodes from anywhere IPv4
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-nodes"
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: 0.0.0.0/0
+  when: state == "present"
+
+- name: Allow SSH to nodes from anywhere IPv6
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-nodes"
+    ethertype: IPv6
+    protocol: tcp
+    port_range_min: 22
+    port_range_max: 22
+    remote_ip_prefix: ::/0
+  when: state == "present"
+
+- name: Allow traffic to nodes from nodes
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-nodes"
+    remote_group: "sg-{{ name }}-nodes"
+  when: state == "present"
+
+- name: Allow traffic to nodes from master
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-nodes"
+    remote_group: "sg-{{ name }}-master"
+  when: state == "present"
+
+- name: Allow load balancer traffic to nodes
+  tags: bootstrap
+  os_security_group_rule:
+    security_group: "sg-{{ name }}-nodes"
+    remote_ip_prefix: 10.8.10.0/24
+    protocol: tcp
+    port_range_min: 30000
+    port_range_max: 32767
+  when:
+  - state == "present"
+  - use_octavia
+
+- name: Delete master security group
+  tags: bootstrap
+  os_security_group:
+    name: "sg-{{ name }}-master"
+    state: absent
+  when: state == "absent"
+
+- name: Delete nodes security group
+  tags: bootstrap
+  os_security_group:
+    name: "sg-{{ name }}-nodes"
+    state: absent
+  when: state == "absent"

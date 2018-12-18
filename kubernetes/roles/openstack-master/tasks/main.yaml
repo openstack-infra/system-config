@@ -1,0 +1,56 @@
+- name: Get cloud configuration
+  tags: bootstrap
+  os_client_config:
+
+- name: Create OpenStack instance
+  os_server:
+    security_groups: "sg-{{ name }}-master"
+    name: "{{ master_name }}"
+    image: "{{ master_image }}"
+    boot_from_volume: "{{ master_boot_from_volume }}"
+    terminate_volume: "{{ master_terminate_volume }}"
+    volume_size: "{{ master_volume_size }}"
+    key_name: "{{ key_name }}"
+    flavor_ram: "{{ master_flavor_ram if not master_flavor_name else omit }}"
+    flavor: "{{ master_flavor_name if master_flavor_name else omit }}"
+    nics:
+      - net-name: "{{ network_name }}"
+    floating_ip_pools: "{{ floating_ip_pools }}"
+    userdata: |
+      #cloud-config
+      package_upgrade: true
+      hostname: "{{ master_name }}"
+      manage_etc_hosts: false
+      packages:
+        - python
+        - python-simplejson
+  when: state == "present"
+  register: "instance"
+
+- name: Delete OpenStack instances
+  os_server:
+    name: "{{ master_name }}"
+    state: absent
+  when: state == "absent"
+
+- name: Update inventory
+  add_host:
+    name: "{{ instance.server.name }}"
+    ansible_ssh_host: "{{ instance.openstack.accessIPv4 }}"
+    ansible_ssh_user: ubuntu
+    groupname: master
+    routeruuid: "{{ routeruuid | default('None',true) }}"
+    subnetuuid: "{{ subnetuuid | default('None',true) }}"
+  when: state == "present"
+
+- name: Wait during instances boot
+  tags: bootstrap
+  wait_for:
+    host: "{{ instance.openstack.accessIPv4 }}"
+    port: 22
+    search_regex: OpenSSH
+  when: state == "present"
+
+- name: Allow SSH keys on first connection
+  shell: "ssh-keyscan {{ instance.openstack.accessIPv4 }} >> ~/.ssh/known_hosts"
+  when: state == "present"

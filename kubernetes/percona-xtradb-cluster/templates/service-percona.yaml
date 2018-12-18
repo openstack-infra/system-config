@@ -1,0 +1,19 @@
+---
+# Source: percona-xtradb-cluster/templates/service-percona.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea-pxc
+  labels:
+    app: gitea-pxc
+    chart: "percona-xtradb-cluster-0.6.1"
+    release: "gitea"
+    heritage: "Tiller"
+spec:
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: mysql
+  selector:
+    app: gitea-pxc
+    release: "gitea"

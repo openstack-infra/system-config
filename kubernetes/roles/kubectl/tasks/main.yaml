@@ -1,0 +1,8 @@
+- name: Retrieve kubectl configuration
+  become: yes
+  fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: admin.conf
+    flat: yes
+    fail_on_missing: yes
+  when: state == 'present'
