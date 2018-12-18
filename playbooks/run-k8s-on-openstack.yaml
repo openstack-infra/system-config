@@ -15,3 +15,8 @@
       command: ./run_k8s_ansible.sh
       args:
         chdir: /opt/system-config
+
+    - name: Install cinder storage class
+      k8s:
+        state: present
+        definition: "{{ lookup('file', 'k8s/storage-class.yaml') | from_yaml }}"
