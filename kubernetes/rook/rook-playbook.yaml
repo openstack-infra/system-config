@@ -1,0 +1,14 @@
+- hosts: localhost
+  tasks:
+
+    # Using kubectl rather than k8s module because the
+    # k8s module only allows single document files and
+    # the majority of these files are pretty straight
+    # copies from upstream rook, so reorganizing them
+    # into single document files is lame.
+    - name: Set up cinder storage class
+      command: |
+        kubectl apply -f rook-operator.yaml
+        kubectl apply -f rook-cluster.yaml
+        kubectl apply -f rook-toolbox.yaml
+        kubectl apply -f rook-filesystem.yaml
