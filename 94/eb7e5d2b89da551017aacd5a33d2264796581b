@@ -1,0 +1,11 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 18 Dec 2018 17:08:11 +0000
+Reviewed-on: https://review.openstack.org/624501
+Project: openstack-infra/system-config
+Branch: refs/heads/master
