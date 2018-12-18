@@ -1,0 +1,38 @@
+- name: Wait for nodes registration
+  shell: "/usr/bin/test $(kubectl get nodes | grep -ow Ready | wc -l) == {{ groups['nodes'] | length + groups['master'] | length }}"
+  register: nodes_status
+  retries: 30
+  delay: 10
+  until: nodes_status | success
+  tags:
+    - skip_ansible_lint
+
+- name: Get event log
+  command: kubectl get events --all-namespaces
+  register: events
+  tags:
+    - skip_ansible_lint
+
+- name: Display events
+  debug:
+    var: events.stdout_lines
+
+- name: Get nodes
+  command: kubectl get nodes
+  register: nodes
+  tags:
+    - skip_ansible_lint
+
+- name: Display nodes
+  debug:
+    var: nodes.stdout_lines
+
+- name: Get cluster info
+  command: kubectl cluster-info
+  register: clusterinfo
+  tags:
+    - skip_ansible_lint
+
+- name: Display cluster info
+  debug:
+    var: clusterinfo.stdout_lines

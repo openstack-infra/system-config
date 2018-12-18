@@ -1,0 +1,31 @@
+---
+- name: Destroy k8s cluster
+  hosts: localhost
+  pre_tasks:
+    - name: Set variables
+      set_fact:
+        state: absent
+
+  roles:
+    - openstack-master
+    - openstack-nodes
+    - openstack-security-groups
+
+  tasks:
+    - name: clear static routes
+      shell: openstack router set --no-route "{{ router_name }}"
+
+    - name: delete router
+      os_router:
+        state: absent
+        name: "{{ router_name }}"
+
+    - name: delete network
+      os_network:
+        state: absent
+        name: "{{ network_name }}"
+
+    - name: delete subnet
+      os_subnet:
+        state: absent
+        name: "{{ network_name }}"

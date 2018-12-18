@@ -1,0 +1,45 @@
+key_name: "{{ lookup('env','KEY') }}"
+
+name: "{{ lookup('env','NAME') | default('k8s', true) }}"
+
+network_name: "{{ lookup('env','NETWORK') | default(name, true) }}"
+subnet_name: "{{ lookup('env','NETWORK') | default(name, true) }}"
+router_name: "{{ lookup('env','NAME') | default(name, true) }}"
+floating_ip_pools: "{{ lookup('env', 'FLOATING_IP_POOL') | default(omit, true) }}"
+external_network_name: "{{ lookup('env', 'EXTERNAL_NETWORK') | default('public', true) }}"
+use_octavia: "{{ lookup('env', 'USE_OCTAVIA') | default('False', true) | bool }}"
+block_storage_version: "{{ lookup('env', 'BLOCK_STORAGE_VERSION') | default('v2', true) }}"
+ignore_volume_az: "{{ lookup('env', 'IGNORE_VOLUME_AZ') | default('false', true) | bool }}"
+
+master_name: "{{ name }}-master"
+master_image: "{{ lookup('env','IMAGE') | default('xenial-server-cloudimg-amd64', true) }}"
+master_flavor_ram: "{{ lookup('env','MASTER_MEMORY') | default('4096', true) }}"
+master_flavor_name: "{{ lookup('env','MASTER_FLAVOR') | default(false) }}"
+master_boot_from_volume: "{{ lookup('env', 'MASTER_BOOT_FROM_VOLUME') | default('True', true) }}"
+master_terminate_volume: "{{ lookup('env', 'MASTER_TERMINATE_VOLUME') | default('True', true) }}"
+master_volume_size: "{{ lookup('env', 'MASTER_VOLUME_SIZE') | default('64', true) }}"
+
+nodes_count: "{{ lookup('env', 'NODE_COUNT') | default(3, true) }}"
+nodes_name: "{{ name }}-" # node id will automatically be appended
+nodes_image: "{{ lookup('env','IMAGE') | default('xenial-server-cloudimg-amd64', true) }}"
+nodes_flavor_ram: "{{ lookup('env','NODE_MEMORY') | default('4096', true) }}"
+nodes_flavor_name: "{{ lookup('env','NODE_FLAVOR') | default(false) }}"
+nodes_auto_ip: "{{ lookup('env', 'NODE_AUTO_IP') | default ('False', true) }}"
+nodes_delete_fip: "{{ lookup('env', 'NODE_DELETE_FIP') | default ('True', true) }}"
+# Some clouds only support boot from volume - use it even for ephemeral nodes
+nodes_boot_from_volume: "{{ lookup('env', 'NODE_BOOT_FROM_VOLUME') | default('False', true) }}"
+nodes_terminate_volume: "{{ lookup('env', 'NODE_TERMINATE_VOLUME') | default('True', true) }}"
+nodes_volume_size: "{{ lookup('env', 'NODE_VOLUME_SIZE') | default('64', true) }}"
+# Whether to attach a data volume to each node. Useful when running Ceph via rook
+nodes_extra_volume: "{{ lookup('env', 'NODE_EXTRA_VOLUME') | default('True', true) }}"
+nodes_extra_volume_name: "{{ name }}-data-" # node id will automatically be appended
+nodes_extra_volume_size: "{{ lookup('env', 'NODE_EXTRA_VOLUME_SIZE') | default('80', true) }}"
+nodes_delete_extra_volume: "{{ lookup('env', 'NODE_DELETE_EXTRA_VOLUME') | default('True', true) }}"
+
+helm_include: "{{ lookup('env', 'INCLUDE_HELM') | default(false) }}"
+helm_repos: "{{ lookup('env', 'HELM_REPOS').split(';') | default([], true) }}"
+helm_install: "{{ lookup('env', 'HELM_INSTALL').split(';') | default([], true) }}"
+
+#Change at your own risk
+kubernetes_version: v1.11.5
+kubernetes_ubuntu_version: 1.11.5-00
