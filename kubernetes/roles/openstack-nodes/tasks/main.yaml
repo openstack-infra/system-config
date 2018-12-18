@@ -1,0 +1,106 @@
+- name: Get cloud configuration
+  tags: bootstrap
+  os_client_config:
+
+- name: Create OpenStack instance
+  os_server:
+    security_groups: "sg-{{ name }}-nodes"
+    name: "{{ nodes_name }}{{ item }}"
+    image: "{{ nodes_image }}"
+    key_name: "{{ key_name }}"
+    flavor_ram: "{{ nodes_flavor_ram if not nodes_flavor_name else omit }}"
+    flavor: "{{ nodes_flavor_name if nodes_flavor_name else omit }}"
+    boot_from_volume: "{{ nodes_boot_from_volume }}"
+    terminate_volume: "{{ nodes_terminate_volume }}"
+    volume_size: "{{ nodes_volume_size }}"
+    nics:
+      - net-name: "{{ network_name }}"
+    auto_ip: "{{ nodes_auto_ip }}"
+    delete_fip: "{{ nodes_delete_fip }}"
+    userdata: |
+      #cloud-config
+      package_upgrade: true
+      hostname: "{{ nodes_name }}{{ item }}"
+      manage_etc_hosts: false
+      packages:
+        - python
+        - python-simplejson
+  when: state == "present"
+  register: "instances"
+  with_sequence: count={{ nodes_count }}
+
+- name: Create data volumes for minions
+  os_volume:
+    name: "{{ nodes_extra_volume_name }}{{ item }}"
+    size: "{{ nodes_extra_volume_size }}"
+    state: present
+  when:
+  - state == "present"
+  - nodes_extra_volume
+  with_sequence: count={{ nodes_count }}
+
+- name: Attach data volumes to minions
+  os_server_volume:
+    state: present
+    server: "{{ nodes_name }}{{ item }}"
+    volume: "{{ nodes_extra_volume_name }}{{ item }}"
+  when:
+  - state == "present"
+  - nodes_extra_volume
+  with_sequence: count={{ nodes_count }}
+
+- name: Delete OpenStack instances
+  os_server:
+    name: "{{ nodes_name }}{{ item }}"
+    state: absent
+  when: state == "absent"
+  with_sequence: count={{ nodes_count }}
+
+- name: Delete data volumes
+  os_volume:
+    name: "{{ nodes_extra_volume_name }}{{ item }}"
+    state: absent
+  when:
+  - state == "absent"
+  - nodes_extra_volume
+  with_sequence: count={{ nodes_count }}
+
+- name: Delete security group
+  tags: bootstrap
+  os_security_group:
+    name: "sg-{{ name }}"
+    state: absent
+  when: state == "absent"
+
+- name: Update inventory
+  add_host:
+    name: "{{ item.server.name }}"
+    ansible_ssh_host: "{{ item.server.private_v4 }}"
+    ansible_ssh_user: ubuntu
+    ansible_ssh_common_args: "-o ProxyCommand=\"ssh -W %h:%p -q ubuntu@{{ hostvars[groups.master[0]]['ansible_ssh_host'] }}\""
+    groupname: nodes
+  with_items: "{{ instances.results }}"
+  when: state == "present"
+
+- name: Wait during nodes boot
+  wait_for:
+    host: "{{ hostvars[item]['ansible_ssh_host'] }}"
+    port: 22
+    search_regex: OpenSSH
+  with_items: "{{ groups.nodes }}"
+  delegate_to: "{{ groups.master[0] }}"
+  when: state == "present"
+
+- name: Scan SSH host keys
+  command: "ssh-keyscan {{ hostvars[item]['ansible_ssh_host'] }}"
+  with_items: "{{ groups.nodes }}"
+  register: ssh_host_keys
+  delegate_to: "{{ groups.master[0] }}"
+  when: state == "present"
+
+- name: Update SSH known_hosts
+  lineinfile:
+    name: ~/.ssh/known_hosts
+    line: "{{ item.stdout }}"
+  with_items: "{{ ssh_host_keys.results }}"
+  when: state == "present"
