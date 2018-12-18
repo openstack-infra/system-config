@@ -1,0 +1,107 @@
+---
+- name: Launch k8s master
+  hosts: localhost
+  pre_tasks:
+    - name: create network
+      os_network:
+        name: "{{ name }}"
+
+    - name: create subnet
+      os_subnet:
+        network_name: "{{ network_name }}"
+        name: "{{ subnet_name }}"
+        cidr: 10.8.10.0/24
+        dns_nameservers:
+          - 8.8.8.8
+          - 8.8.4.4
+      register: subnet
+
+    - name: create router
+      os_router:
+        name: "{{ router_name }}"
+        network: "{{ external_network_name }}"
+        interfaces:
+          - "{{ network_name }}"
+      register: router
+
+    - name: Set variables
+      set_fact:
+        state: present
+        routeruuid: "{{ router.id }}"
+        subnetuuid: "{{ subnet.id }}"
+  roles:
+    - openstack-security-groups
+    - openstack-master
+
+- name: Master preparation
+  hosts: master
+  pre_tasks:
+    - name: Set variables
+      set_fact:
+        state: present
+  tags:
+    - bootstrap
+  gather_facts: false
+  roles:
+    - common
+
+- name: Launch k8s nodes
+  hosts: localhost
+  roles:
+    - openstack-nodes
+
+- name: Nodes preparation
+  hosts: nodes
+  tags:
+    - bootstrap
+  gather_facts: false
+  roles:
+    - common
+
+- name: Install repo and packages
+  hosts: all
+  tags:
+    - bootstrap
+  become: true
+  roles:
+    - kubeadm
+
+- name: k8s master setup
+  hosts: master
+  tags:
+    - bootstrap
+  become: true
+  roles:
+    - kubeadm-master
+
+- name: k8s nodes setup
+  hosts: nodes
+  become: true
+  tags:
+    - bootstrap
+  roles:
+    - kubeadm-nodes
+
+- name: k8s rbac
+  hosts: master
+  tags:
+    - bootstrap
+  roles:
+    - k8s-rbac
+
+- name: k8s addons
+  hosts: master
+  tags:
+    - bootstrap
+  roles:
+    - k8s-addons
+
+- name: Health check
+  hosts: master
+  roles:
+    - healthcheck
+
+- name: Local kubectl configuration
+  hosts: master
+  roles:
+    - kubectl

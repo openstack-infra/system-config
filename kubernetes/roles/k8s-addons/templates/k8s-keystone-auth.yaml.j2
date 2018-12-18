@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: k8s-keystone-auth
+  name: k8s-keystone-auth
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-keystone-auth
+  template:
+    metadata:
+      labels:
+        app: k8s-keystone-auth
+    spec:
+      hostNetwork: True
+      serviceAccount: admin-user
+      serviceAccountName: admin-user
+      containers:
+        - image: k8scloudprovider/k8s-keystone-auth:v0.2.0
+          imagePullPolicy: Always
+          name: k8s-keystone-auth
+          args:
+            - ./bin/k8s-keystone-auth
+            - --tls-cert-file
+            - /etc/kubernetes/pki/apiserver.crt
+            - --tls-private-key-file
+            - /etc/kubernetes/pki/apiserver.key
+            - --keystone-url
+            - {{ lookup('env','OS_AUTH_URL') | replace("v2.0","v3") }}
+            - --policy-configmap-name
+            - k8s-auth-policy
+            - --sync-config-file
+            - /etc/kubernetes/syncconfig.yaml
+          volumeMounts:
+          - mountPath: /etc/kubernetes
+            name: k8s-certs
+            readOnly: true
+          - mountPath: /etc/ssl/certs
+            name: ca-certs
+            readOnly: true
+      volumes:
+      - hostPath:
+          path: /etc/kubernetes
+          type: DirectoryOrCreate
+        name: k8s-certs
+      - hostPath:
+          path: /etc/ssl/certs
+          type: DirectoryOrCreate
+        name: ca-certs
+      nodeSelector:
+        node-role.kubernetes.io/master: ""
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule

@@ -1,0 +1,49 @@
+- name: copy install script for helm 
+  copy: 
+    src: files/get_helm.sh
+    dest: /home/ubuntu/get_helm.sh
+    mode: '700'
+    owner: ubuntu
+  
+- name: install helm
+  command: /home/ubuntu/get_helm.sh
+
+- name: init helm
+  command: helm init
+
+- name: create Service-Account for helm
+  ignore_errors: yes
+  command: kubectl create serviceaccount --namespace kube-system tiller
+
+- name: create Clusterrolebinding for helm
+  ignore_errors: yes
+  command: kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+
+- name: patch the tiller deployment
+  ignore_errors: yes
+  command: kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+- name: add repos to helm
+  ignore_errors: yes
+  command: helm repo add {{ item }}
+  when: item|length > 0
+
+- name: update the helm repos
+  command: helm repo update
+
+- name: wait for tiller pod
+  ignore_errors: yes
+  shell: "kubectl get pod -n kube-system | grep tiller-deploy | grep Running"
+  register: tillerdeployment
+  until: tillerdeployment.rc == 0
+  retries: 30
+  delay: 2
+
+- name: install helm charts
+  ignore_errors: yes
+  command: helm install {{ item }}
+  register: result
+  retries: 30
+  delay: 2
+  until: result.rc == 0
+  when: item|length > 0
