@@ -119,6 +119,7 @@
 
 - job:
     name: system-config-run
+    parent: base-test
     description: |
       Run the "base" playbook for system-config hosts.
 
