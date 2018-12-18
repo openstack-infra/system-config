@@ -1,0 +1,39 @@
+---
+- name: Create inventory dinamically
+  hosts: localhost
+  pre_tasks:
+    - name: Set variables
+      set_fact:
+        state: present
+
+  roles:
+    - openstack-master
+
+- name: Upgrade K8S
+  hosts: master
+  become: true
+  tasks:
+    - name: upgrade kubeadm binary manually
+      get_url:
+        url: https://dl.k8s.io/release/{{ kubernetes_version }}/bin/linux/amd64/kubeadm
+        dest:  /usr/bin/kubeadm
+        mode: 755
+        force: yes
+
+# TODO: implement a check that we really upgraded kubeadm
+#    - name: Check kubeadm version
+#      shell: kubeadm version
+#      register: kubeadminversion
+#
+#    - name: Fail
+#      fail:
+#        msg: wrong version
+#      when: kubeadminversion.stdout | search( "{{ kubernetes_version }}" )
+
+# TODO: is running this command really needed or is just informative ?
+#    - name:
+#      shell: kubeadm upgrade plan
+
+    - name: Run kubeadm upgrade
+      shell: sudo kubeadm upgrade apply {{ kubernetes_version }} -y
+

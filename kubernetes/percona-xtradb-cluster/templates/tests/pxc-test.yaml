@@ -1,0 +1,28 @@
+---
+# Source: percona-xtradb-cluster/templates/tests/pxc-test.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "gitea-test"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+  - name: pxc-test
+    image: "percona/percona-xtradb-cluster:5.7.19"
+    imagePullPolicy: "IfNotPresent"
+    command: ["bash", "/tests/run.sh"]
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: gitea-pxc
+          key: mysql-root-password
+    volumeMounts:
+    - mountPath: /tests
+      name: tests
+  volumes:
+  - name: tests
+    configMap:
+      name: gitea-pxc-tests
+  restartPolicy: Never

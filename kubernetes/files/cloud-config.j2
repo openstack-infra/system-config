@@ -1,0 +1,43 @@
+[Global]
+auth-url = {{ lookup('env', 'OS_AUTH_URL') }}
+username = {{ lookup('env', 'OS_USERNAME') }}
+password = "{{ lookup('env', 'OS_PASSWORD') }}"
+tenant-name = {{ lookup('env', 'OS_PROJECT_NAME') }}
+{% if lookup('env', 'OS_PROJECT_ID') != '' %}
+tenant-id = {{ lookup('env', 'OS_PROJECT_ID') }}
+{% endif %}
+{% if lookup('env', 'OS_REGION_NAME') != '' %}
+region = {{ lookup('env', 'OS_REGION_NAME') }}
+{% endif %}
+{% if lookup('env', 'OS_DOMAIN_NAME') != '' %}
+domain-name = {{ lookup('env', 'OS_DOMAIN_NAME') }}
+{% elif lookup('env', 'OS_USER_DOMAIN_NAME') != '' %}
+domain-name = {{ lookup('env', 'OS_USER_DOMAIN_NAME') }}
+{% endif %}
+{% if lookup('env', 'OS_USER_DOMAIN_ID') != '' %}
+domain-name = {{ lookup('env', 'OS_USER_DOMAIN_ID') }}
+{% endif %}
+
+[BlockStorage]
+trust-device-path = false
+bs-version = {{ hostvars[groups.master[0]]['block_storage_version'] }}
+{% if hostvars[groups.master[0]]['ignore_volume_az'] %}
+ignore-volume-az = true
+{% endif %}
+
+{% if lookup('env', 'FLOATING_IP_NETWORK_UUID') != '' %}
+[LoadBalancer]
+lb-version = v2
+floating-network-id = {{ lookup('env', 'FLOATING_IP_NETWORK_UUID') }}
+subnet-id = {{ hostvars[groups.master[0]]['subnetuuid'] }}
+create-monitor = yes
+{% if hostvars[groups.master[0]]['use_octavia'] %}
+use-octavia = yes
+{% endif %}
+monitor-delay = 1m
+monitor-timeout = 30s
+monitor-max-retries = 3
+{% endif %}
+
+[Route]
+router-id = {{ hostvars[groups.master[0]]['routeruuid'] }}

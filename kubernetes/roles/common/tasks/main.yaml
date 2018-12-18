@@ -1,0 +1,9 @@
+- name: Wait for cloud-init to finish
+  raw: while ! test -f /var/lib/cloud/instance/boot-finished; do sleep 1; done
+  retries: 5
+  delay: 1
+  tags:
+    - skip_ansible_lint
+
+- name: Setup
+  action: setup

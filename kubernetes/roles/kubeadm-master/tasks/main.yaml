@@ -1,0 +1,149 @@
+- name: Check for existing kubelet configuration
+  stat:
+    path: /etc/kubernetes/kubelet.conf
+  register: kubelet_conf
+
+- name: kubeadm init
+  command: "kubeadm init --kubernetes-version {{ kubernetes_version }} --apiserver-advertise-address {{ hostvars[groups.master[0]].ansible_ssh_host }}"
+  args:
+    creates: /etc/kubernetes/kubelet.conf
+  when: kubelet_conf.stat.exists == False
+
+- name: generate a join token
+  command: kubeadm token create --print-join-command
+  register: joincommand
+
+- name: set fact joincommand
+  set_fact:
+    joincommand: "{{ joincommand.stdout }}"
+
+- name: Upload the openstack-cloud-controller-manager pod descriptor
+  copy:
+    dest: /etc/kubernetes/manifests/openstack-cloud-controller-manager-pod.yaml
+    src: files/openstack-cloud-controller-manager-pod.yaml
+
+- name: Configure kube-controller-manager cloud provider integration Step1
+  blockinfile:
+    insertbefore: 'image: '
+    block: "    - --cloud-provider=external\n    - --cluster-cidr=10.96.0.0/16\n    - --allocate-node-cidrs=true\n    - --external-cloud-volume-plugin=openstack\n    - --cloud-config=/etc/kubernetes/cloud-config"
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK CLOUDPROVIDER"
+
+- name: Configure kube-controller-manager cloud provider integration Step2
+  blockinfile:
+    insertafter: 'volumeMounts:'
+    block: "    - mountPath: /etc/kubernetes/cloud-config\n      name: cloud-config\n      readOnly: true"
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK CLOUDCONFIG"
+
+- name: Configure kube-controller-manager cloud provider integration Step3
+  blockinfile:
+    insertbefore: 'status: '
+    block: "  - hostPath:\n      path: /etc/kubernetes/cloud-config\n      type: FileOrCreate\n    name: cloud-config"
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK HOSTPATH"
+
+- name: Upload webook kubeconfig file
+  copy:
+    dest: /etc/kubernetes/pki/webhook.kubeconfig.yaml
+    src: files/webhook.kubeconfig.yaml
+
+- name: Ensure --authorization-mode has Webhook mode
+  lineinfile:
+    state: present
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    regexp: '.*--authorization-mode=.*'
+    line: "    - --authorization-mode=Node,Webhook,RBAC"
+
+- name: Configure apiserver cloud provider integration
+  blockinfile:
+    insertbefore: 'image: '
+    block: "    - --authentication-token-webhook-config-file=/etc/kubernetes/pki/webhook.kubeconfig.yaml\n    - --authorization-webhook-config-file=/etc/kubernetes/pki/webhook.kubeconfig.yaml\n    - --cloud-provider=external"
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+
+- name: Configure apiserver cloud provider integration Step2
+  blockinfile:
+    insertafter: 'volumeMounts:'
+    block: "    - mountPath: /etc/kubernetes/cloud-config\n      name: cloud-config\n      readOnly: true"
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK CLOUDCONFIG"
+
+- name: Configure apiserver cloud provider integration Step3
+  blockinfile:
+    insertbefore: 'status: '
+    block: "  - hostPath:\n      path: /etc/kubernetes/cloud-config\n      type: FileOrCreate\n    name: cloud-config"
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK HOSTPATH"
+
+- name: In case of upgrade make sure container versions are right for kube-apiserver
+  replace:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    regexp: v1.[0-9]{1,2}.[0-9]{1,2}
+    replace: "{{ kubernetes_version }}"
+
+- name: In case of upgrade make sure container versions are right for kube-controller-manager
+  replace:
+    path: /etc/kubernetes/manifests/kube-controller-manager.yaml
+    regexp: v1.[0-9]{1,2}.[0-9]{1,2}
+    replace: "{{ kubernetes_version }}"
+
+- name: In case of upgrade make sure container versions are right for kube-scheduler
+  replace:
+    path: /etc/kubernetes/manifests/kube-scheduler.yaml
+    regexp: v1.[0-9]{1,2}.[0-9]{1,2}
+    replace: "{{ kubernetes_version }}"
+
+- name: Ensure kubectl configuration directory is present
+  become: True
+  file:
+    path: /home/ubuntu/.kube
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0700
+
+- name: Copy kubectl configuration for the default user
+  become: True
+  copy:
+    remote_src: True
+    src: /etc/kubernetes/admin.conf
+    dest: /home/ubuntu/.kube/config
+    owner: ubuntu
+    group: ubuntu
+    mode: 0600
+
+- name: Check for existing kubectl bash completion
+  stat:
+    path: /etc/bash_completion.d/kubectl
+  register: kubectl_bash_completion
+
+- name: Ensure kubectl bash_completion is present
+  become: True
+  shell: kubectl completion bash > /etc/bash_completion.d/kubectl
+  when: kubectl_bash_completion.stat.exists == False
+
+- name: Check for existing kubectx
+  stat:
+    path: /opt/kubectx/kubectx
+  register: kubectx
+
+- name: Clone kubectx repo
+  git:
+    repo: https://github.com/ahmetb/kubectx
+    dest: /opt/kubectx
+  when: kubectx.stat.exists == False
+
+- name: Link kubectx
+  file:
+    state: link
+    src: /opt/kubectx/kubectx
+    dest: /usr/local/bin/kubectx
+  when: kubectx.stat.exists == False
+
+- name: Link kubens
+  file:
+    state: link
+    src: /opt/kubectx/kubens
+    dest: /usr/local/bin/kubens
+  when: kubectx.stat.exists == False
+
