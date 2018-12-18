@@ -26,6 +26,8 @@ any_unparsed_is_failed=True
 [ssh_connection]
 retries=3
 pipelining = True
+{# https://docs.ansible.com/ansible/latest/reference_appendices/config.html?highlight=ssh_args#ansible-ssh-args #}
+ssh_args = -o ControlMaster=auto -o ControlPersist=270s -o ServerAliveInterval=30 -o GSSAPIAuthentication=no
 
 [callback_profile_tasks]
 task_output_limit = 50
