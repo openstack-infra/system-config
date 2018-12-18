@@ -64,7 +64,7 @@ def test_iptables(host):
 
     start = [
         '-P INPUT ACCEPT',
-        '-P FORWARD ACCEPT',
+        '-P FORWARD DROP',
         '-P OUTPUT ACCEPT',
         '-N openstack-INPUT',
         '-A INPUT -j openstack-INPUT',
