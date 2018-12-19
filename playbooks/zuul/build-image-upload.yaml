@@ -1,0 +1,11 @@
+- hosts: all
+  tasks:
+    - name: Upload image to dockerhub
+      when: credentials is defined
+      block:
+        - name: Log in to dockerhub
+          command: "docker login -u {{ credentials.username }} -p {{ credentials.password }}"
+          no_log: true
+        - name: Upload to dockerhub
+          command: "docker push {{ item.repository }}"
+          loop: "{{ images }}"
