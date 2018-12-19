@@ -22,6 +22,29 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+# Image building jobs
+- job:
+    name: system-config-build-image
+    description: |
+      Build a docker image
+
+      .. zuul:jobvar:: image_name
+
+         The name of the image to build; should be a directory in this
+         repo under ``docker/``.
+    abstract: true
+    pre-run: playbooks/zuul/build-image-pre.yaml
+    run: playbooks/zuul/build-image.yaml
+
+- job:
+    name: system-config-build-image-gitea
+    description: Build a gitea image
+    parent: system-config-build-image
+    vars:
+      image_name: gitea
+    files:
+      - docker/gitea/.*
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -304,6 +327,7 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-build-image-gitea
     gate:
       jobs:
         - tox-linters
@@ -317,3 +341,4 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-build-image-gitea

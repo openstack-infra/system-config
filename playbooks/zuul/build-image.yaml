@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - name: Build a docker image
+      command: docker build .
+      chdir: "{{ zuul.project.src_dir }}/docker/{{ image_name }}"
