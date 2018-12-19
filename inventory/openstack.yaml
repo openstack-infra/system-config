@@ -832,14 +832,6 @@ all:
       private_v4: ''
       public_v4: 199.204.45.22
       public_v6: 2604:e100:1:0:f816:3eff:fe05:7ce0
-    puppetmaster.openstack.org:
-      ansible_host: 2001:4800:7818:101:3c21:a454:23ed:4072
-      location:
-        cloud: openstackci-rax
-        region_name: DFW
-      private_v4: 10.208.226.85
-      public_v4: 23.253.245.198
-      public_v6: 2001:4800:7818:101:3c21:a454:23ed:4072
     refstack.openstack.org:
       ansible_host: 2001:4800:7817:103:be76:4eff:fe05:5870
       location:
@@ -856,14 +848,6 @@ all:
       private_v4: 10.209.129.244
       public_v4: 23.253.109.117
       public_v6: 2001:4800:7819:104:be76:4eff:fe04:4153
-    review.openstack.org:
-      ansible_host: 2001:4800:7819:103:be76:4eff:fe05:8525
-      location:
-        cloud: openstackci-rax
-        region_name: DFW
-      private_v4: 10.223.160.141
-      public_v4: 104.130.246.91
-      public_v6: 2001:4800:7819:103:be76:4eff:fe05:8525
     review01.openstack.org:
       ansible_host: 2001:4800:7819:103:be76:4eff:fe04:9229
       location:
