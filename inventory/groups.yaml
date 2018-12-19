@@ -1,18 +1,18 @@
 plugin: yamlgroup
 groups:
-  adns: adns*
-  afs: afs[0-9]*.openstack.org
+  adns: adns*.open*.org
+  afs: afs[0-9]*.open*.org
   afs-client:
-    - review-dev[0-9]*
-    - mirror[0-9]*.*.*.openstack.org
-    - files[0-9]*
-    - ze[0-9]*.openstack.org
-    - afsdb*
-    - afs[0-9]*.*.openstack.org
-  afsadmin: mirror-update[0-9]*.openstack.org
-  afsdb: afsdb[0-9]*.openstack.org
-  ask: ask*
-  cacti: cacti[0-9]*.openstack.org
+    - review-dev[0-9]*.open*.org
+    - mirror[0-9]*.open*.org
+    - files[0-9]*.open*.org
+    - ze[0-9]*.open*.org
+    - afsdb*.open*.org
+    - afs[0-9]*.open*.org
+  afsadmin: mirror-update[0-9]*.open*.org
+  afsdb: afsdb[0-9]*.open*.org
+  ask: ask*.open*.org
+  cacti: cacti[0-9]*.open*.org
   disabled:
     - ask-staging.openstack.org
     - ask-staging01.openstack.org
@@ -22,231 +22,205 @@ groups:
     - idp.openstackid.org
     - lists-dev01.openstack.org
     - mirror01.sto2.citycloud.openstack.org
-    - puppetmaster.openstack.org
-    - review.openstack.org
     - wiki-dev01.openstack.org
     - wiki-upgrade-test.openstack.org
-    - wiki.openstack.org
   dns:
     - adns*.opendev.org
     - ns*.opendev.org
-  eavesdrop: eavesdrop[0-9]*.openstack.org
-  elasticsearch: elasticsearch[0-9]*.openstack.org
-  ethercalc: ethercalc*
-  etherpad: etherpad[0-9]*.openstack.org
-  etherpad-dev: etherpad-dev[0-9]*.openstack.org
-  files: files*
-  firehose: firehose*
+  eavesdrop: eavesdrop[0-9]*.open*.org
+  elasticsearch: elasticsearch[0-9]*.open*.org
+  ethercalc: ethercalc*.open*.org
+  etherpad: etherpad[0-9]*.open*.org
+  etherpad-dev: etherpad-dev[0-9]*.open*.org
+  files: files[0-9]*.open*.org
+  firehose: firehose[0-9]*.open*.org
   futureparser:
-    - ask-staging[0-9]*.openstack.org
-    - cacti[0-9]*.openstack.org
-    - codesearch[0-9]*.openstack.org
-    - eavesdrop[0-9]*.openstack.org
-    - elasticsearch0[1-7].openstack.org
-    - ethercalc[0-9]*.openstack.org
-    - etherpad-dev[0-9]*.openstack.org
-    - etherpad[0-9]*.openstack.org
-    - firehose[0-9]*.openstack.org
-    - grafana[0-9]*.openstack.org
-    - graphite[0-9]*.openstack.org
-    - groups-dev[0-9]*.openstack.org
-    - groups[0-9]*.openstack.org
-    - health[0-9]*.openstack.org
+    - ask-staging[0-9]*.open*.org
+    - cacti[0-9]*.open*.org
+    - codesearch[0-9]*.open*.org
+    - eavesdrop[0-9]*.open*.org
+    - elasticsearch[0-9]*.open*.org
+    - ethercalc[0-9]*.open*.org
+    - etherpad-dev[0-9]*.open*.org
+    - etherpad[0-9]*.open*.org
+    - firehose[0-9]*.open*.org
+    - grafana[0-9]*.open*.org
+    - graphite[0-9]*.open*.org
+    - groups-dev[0-9]*.open*.org
+    - groups[0-9]*.open*.org
+    - health[0-9]*.open*.org
+    - lists-dev[0-9]*.open*.org
     - lists[0-9]*.katacontainers.io
-    - lists[0-9]*.openstack.org
-    - logstash-worker[0-9]*.openstack.org
-    - logstash[0-9]*.openstack.org
-    - paste[0-9]*.openstack.org
-    - pbx.openstack.org
-    - planet[0-9]*.openstack.org
-    - review-dev[0-9]*.openstack.org
-    - review[0-9]*.openstack.org
-    - storyboard-dev[0-9]*.openstack.org
-    - storyboard[0-9]*.openstack.org
-    - static[0-9]*.openstack.org
-    - status[0-9]*.openstack.org
-    - subunit-worker[0-9]*.openstack.org
-    - survey[0-9]*.openstack.org
-    - translate[0-9]*.openstack.org
-    - translate-dev[0-9]*.openstack.org
-    - wiki-dev[0-9]*.openstack.org
-    - wiki[0-9]*.openstack.org
+    - lists[0-9]*.open*.org
+    - logstash-worker[0-9]*.open*.org
+    - logstash[0-9]*.open*.org
+    - paste[0-9]*.open*.org
+    - pbx*.open*.org
+    - planet[0-9]*.open*.org
+    - review-dev[0-9]*.open*.org
+    - review[0-9]*.open*.org
+    - storyboard-dev[0-9]*.open*.org
+    - storyboard[0-9]*.open*.org
+    - static[0-9]*.open*.org
+    - status[0-9]*.open*.org
+    - subunit-worker[0-9]*.open*.org
+    - survey[0-9]*.open*.org
+    - translate[0-9]*.open*.org
+    - translate-dev[0-9]*.open*.org
+    - wiki-dev[0-9]*.open*.org
+    - wiki[0-9]*.open*.org
   gerrit:
-    - review-dev01.openstack.org
-    - review.openstack.org
-    - review01.openstack.org
+    - review-dev[0-9]*.open*.org
+    - review[0-9]*.open*.org
   git-loadbalancer:
-    - git.openstack.org
+    - git.*.open*.org
   git-server:
-    - git[0-9]*.openstack.org
+    - git[0-9]*.open*.org
   grafana:
-    - grafana01.openstack.org
-    - grafana02.openstack.org
+    - grafana[0-9]*.open*.org
   graphite:
-    - graphite.openstack.org
+    - graphite*.open*.org
   groups:
-    - groups.openstack.org
-    - groups-dev.openstack.org
+    - groups*.open*.org
   health:
-    - health.openstack.org
+    - health*.open*.org
   kdc:
-    - kdc01.openstack.org
-    - kdc04.openstack.org
+    - kdc[0-9]*.open*.org
   logstash:
-    - logstash[0-9]*.openstack.org
+    - logstash[0-9]*.open*.org
   logstash-worker:
-    - logstash-worker[0-9]*.openstack.org
+    - logstash-worker[0-9]*.open*.org
   mailman:
-    - lists-dev01.openstack.org
-    - lists.katacontainers.io
-    - lists.openstack.org
+    - lists*.katacontainers.io
+    - lists*.open*.org
   mirror:
-    - mirror[0-9]*.*.*.openstack.org
+    - mirror[0-9]*.open*.org
   nodepool:
-    - nb[0-9]*.openstack.org
-    - nl[0-9]*.openstack.org
+    - nb[0-9]*.open*.org
+    - nl[0-9]*.open*.org
   nodepool-builder:
-    - nb[0-9]*.openstack.org
+    - nb[0-9]*.open*.org
   nodepool-launcher:
-    - nl[0-9]*.openstack.org
+    - nl[0-9]*.open*.org
   ns:
-    - ns[0-9]*.*
+    - ns[0-9]*.open*.org
   paste:
-    - paste01.openstack.org
+    - paste[0-9]*.open*.org
   pbx:
-    - pbx.openstack.org
+    - pbx*.open*.org
   puppet:
     - adns1.openstack.org
-    - afs01.dfw.openstack.org
-    - afs01.ord.openstack.org
-    - afs02.dfw.openstack.org
-    - afsdb01.openstack.org
-    - afsdb02.openstack.org
-    - ask-staging.openstack.org
-    - ask-staging01.openstack.org
-    - ask.openstack.org
-    - backup01.ord.rax.ci.openstack.org
-    - cacti02.openstack.org
-    - codesearch01.openstack.org
+    - afs[0-9]*.open*.org
+    - afsdb[0-9]*.open*.org
+    - ask*.open*.org
+    - backup[0-9]*.open*.org
+    - cacti[0-9]*.open*.org
+    - codesearch[0-9]*.open*.org
     - corvustest
-    - eavesdrop01.openstack.org
-    - elasticsearch[0-9]*.openstack.org
-    - ethercalc02.openstack.org
-    - etherpad-dev[0-9]*.openstack.org
-    - etherpad[0-9]*.openstack.org
-    - files02.openstack.org
-    - firehose01.openstack.org
-    - git.openstack.org
-    - git[0-9]*.openstack.org
-    - grafana01.openstack.org
-    - grafana02.openstack.org
-    - graphite.openstack.org
-    - groups-dev.openstack.org
-    - groups.openstack.org
-    - health.openstack.org
-    - kdc01.openstack.org
-    - kdc04.openstack.org
-    - lists-dev01.openstack.org
-    - lists.katacontainers.io
-    - lists.openstack.org
-    - logstash-worker[0-9]*.openstack.org
-    - logstash[0-9]*.openstack.org
-    - mirror-update01.openstack.org
-    - mirror[0-9]*.*.*.openstack.org
-    - nb[0-9]*.openstack.org
-    - nl[0-9]*.openstack.org
+    - eavesdrop[0-9]*.open*.org
+    - elasticsearch[0-9]*.open*.org
+    - ethercalc[0-9]*.open*.org
+    - etherpad-dev[0-9]*.open*.org
+    - etherpad[0-9]*.open*.org
+    - files[0-9]*.open*.org
+    - firehose[0-9]*.open*.org
+    - git*.open*.org
+    - grafana[0-9]*.open*.org
+    - graphite*.open*.org
+    - groups-dev*.open*.org
+    - groups*.open*.org
+    - health*.open*.org
+    - kdc[0-9]*.open*.org
+    - lists*.katacontainers.io
+    - lists*.open*.org
+    - logstash-worker[0-9]*.open*.org
+    - logstash[0-9]*.open*.org
+    - mirror-update[0-9]*.open*.org
+    - mirror[0-9]*.open*.org
+    - nb[0-9]*.open*.org
+    - nl[0-9]*.open*.org
     - ns1.openstack.org
     - ns2.openstack.org
-    - openstackid-dev.openstack.org
+    - openstackid-dev*.open*.org
     - openstackid.org
-    - paste01.openstack.org
-    - pbx.openstack.org
-    - planet01.openstack.org
-    - puppetmaster.openstack.org
-    - refstack.openstack.org
-    - review-dev01.openstack.org
-    - review.openstack.org
-    - review01.openstack.org
-    - static.openstack.org
-    - status.openstack.org
-    - storyboard-dev.openstack.org
-    - storyboard.openstack.org
-    - subunit-worker01.openstack.org
-    - subunit-worker02.openstack.org
-    - survey01.openstack.org
-    - translate-dev01.openstack.org
-    - translate01.openstack.org
-    - wiki-dev01.openstack.org
-    - wiki-upgrade-test.openstack.org
-    - ze[0-9]*.openstack.org
-    - zm[0-9]*.openstack.org
-    - zuul01.openstack.org
-    - zk[0-9]*.openstack.org
+    - paste[0-9]*.open*.org
+    - pbx*.open*.org
+    - planet[0-9]*.open*.org
+    - refstack*.open*.org
+    - review-dev[0-9]*.open*.org
+    - review[0-9]*.open*.org
+    - static*.open*.org
+    - status*.open*.org
+    - storyboard*.open*.org
+    - subunit-worker[0-9]*.open*.org
+    - survey[0-9]*.open*.org
+    - translate-dev[0-9]*.open*.org
+    - translate[0-9]*.open*.org
+    - wiki-dev[0-9]*.open*.org
+    - wiki[0-9]*.open*.org
+    - ze[0-9]*.open*.org
+    - zm[0-9]*.open*.org
+    - zuul[0-9]*.open*.org
+    - zk[0-9]*.open*.org
   refstack:
-    - refstack.openstack.org
+    - refstack*.open*.org
   review-dev:
-    - review-dev01.openstack.org
+    - review-dev[0-9]*.open*.org
   review:
-    - review01.openstack.org
+    - review[0-9]*.open*.org
   static:
-    - static.openstack.org
+    - static*.open*.org
   status:
-    - status.openstack.org
+    - status*.open*.org
   storyboard:
-    - storyboard.openstack.org
-    - storyboard-dev.openstack.org
+    - storyboard*.open*.org
   storyboard-dev:
-    - storyboard-dev.openstack.org
+    - storyboard-dev*.open*.org
   subunit-worker:
-    - subunit-worker02.openstack.org
-    - subunit-worker01.openstack.org
+    - subunit-worker[0-9]*.open*.org
   survey:
-    - survey01.openstack.org
+    - survey[0-9]*.open*.org
   translate-dev:
-    - translate-dev01.openstack.org
+    - translate-dev[0-9]*.open*.org
   translate:
-    - translate01.openstack.org
+    - translate[0-9]*.open*.org
   webservers:
-    - ask-staging.openstack.org
-    - ask.openstack.org
-    - cacti02.openstack.org
-    - codesearch01.openstack.org
-    - eavesdrop01.openstack.org
-    - ethercalc02.openstack.org
-    - etherpad-dev[0-9]*.openstack.org
-    - etherpad[0-9]*.openstack.org
-    - files02.openstack.org
-    - grafana01.openstack.org
-    - grafana02.openstack.org
-    - graphite.openstack.org
-    - groups-dev.openstack.org
-    - groups.openstack.org
-    - health.openstack.org
-    - nb[0-9]*.openstack.org
-    - nl[0-9]*.openstack.org
-    - openstackid-dev.openstack.org
+    - ask*.open*.org
+    - cacti[0-9]*.open*.org
+    - codesearch[0-9]*.open*.org
+    - eavesdrop[0-9]*.open*.org
+    - ethercalc[0-9]*.open*.org
+    - etherpad-dev[0-9]*.open*.org
+    - etherpad[0-9]*.open*.org
+    - files[0-9]*.open*.org
+    - grafana[0-9]*.open*.org
+    - graphite*.open*.org
+    - groups*.open*.org
+    - health*.open*.org
+    - nb[0-9]*.open*.org
+    - nl[0-9]*.open*.org
+    - openstackid-dev*.open*.org
     - openstackid.org
-    - paste01.openstack.org
-    - planet01.openstack.org
-    - refstack.openstack.org
-    - static.openstack.org
-    - status.openstack.org
-    - storyboard-dev.openstack.org
-    - storyboard.openstack.org
-    - survey01.openstack.org
-    - translate-dev01.openstack.org
-    - translate01.openstack.org
-    - wiki-dev01.openstack.org
-    - wiki-upgrade-test.openstack.org
+    - paste[0-9]*.open*.org
+    - planet[0-9]*.open*.org
+    - refstack*.open*.org
+    - static*.open*.org
+    - status*.open*.org
+    - storyboard*.open*.org
+    - survey[0-9]*.open*.org
+    - translate-dev[0-9]*.open*.org
+    - translate[0-9]*.open*.org
+    - wiki-dev[0-9]*.open*.org
+    - wiki[0-9]*.open*.org
   wiki:
-    - wiki.openstack.org
+    - wiki[0-9]*.open*.org
   wiki-dev:
-    - wiki-dev01.openstack.org
+    - wiki-dev[0-9]*.open*.org
   zookeeper:
-    - zk[0-9]*.openstack.org
+    - zk[0-9]*.open*.org
   zuul-executor:
-    - ze[0-9]*.openstack.org
+    - ze[0-9]*.open*.org
   zuul-merger:
-    - zm[0-9]*.openstack.org
+    - zm[0-9]*.open*.org
   zuul-scheduler:
-    - zuul01.openstack.org
+    - zuul[0-9]*.open*.org
