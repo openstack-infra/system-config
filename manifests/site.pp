@@ -19,7 +19,7 @@ node default {
 # Long lived servers:
 #
 # Node-OS: xenial
-node /^review\d*\.openstack\.org$/ {
+node /^review\d*\.open.*\.org$/ {
   $group = "review"
 
   class { 'openstack_project::server': }
@@ -59,7 +59,7 @@ node /^review\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^review-dev\d*\.openstack\.org$/ {
+node /^review-dev\d*\.open.*\.org$/ {
   $group = "review-dev"
 
   class { 'openstack_project::server':
@@ -91,7 +91,7 @@ node /^review-dev\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^grafana\d*\.openstack\.org$/ {
+node /^grafana\d*\.open.*\.org$/ {
   $group = "grafana"
   class { 'openstack_project::server': }
   class { 'openstack_project::grafana':
@@ -108,7 +108,7 @@ node /^grafana\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^health\d*\.openstack\.org$/ {
+node /^health\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::openstack_health_api':
     subunit2sql_db_host => hiera('subunit2sql_db_host', 'localhost'),
@@ -116,7 +116,7 @@ node /^health\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^cacti\d+\.openstack\.org$/ {
+node /^cacti\d+\.open.*\.org$/ {
   $group = "cacti"
   include openstack_project::ssl_cert_check
   class { 'openstack_project::cacti':
@@ -127,7 +127,7 @@ node /^cacti\d+\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^graphite\d*\.openstack\.org$/ {
+node /^graphite\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { '::graphite':
@@ -139,7 +139,7 @@ node /^graphite\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^groups\d*\.openstack\.org$/ {
+node /^groups\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::groups':
     site_admin_password          => hiera('groups_site_admin_password'),
@@ -154,7 +154,7 @@ node /^groups\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^groups-dev\d*\.openstack\.org$/ {
+node /^groups-dev\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::groups_dev':
     site_admin_password          => hiera('groups_dev_site_admin_password'),
@@ -170,7 +170,7 @@ node /^groups-dev\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^lists\d*\.openstack\.org$/ {
+node /^lists\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::lists':
@@ -188,7 +188,7 @@ node /^lists\d*\.katacontainers\.io$/ {
 }
 
 # Node-OS: xenial
-node /^paste\d*\.openstack\.org$/ {
+node /^paste\d*\.open.*\.org$/ {
   $group = "paste"
 
   class { 'openstack_project::server': }
@@ -200,13 +200,13 @@ node /^paste\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /planet\d*\.openstack\.org$/ {
+node /planet\d*\.open.*\.org$/ {
   class { 'openstack_project::planet':
   }
 }
 
 # Node-OS: xenial
-node /^eavesdrop\d*\.openstack\.org$/ {
+node /^eavesdrop\d*\.open.*\.org$/ {
   $group = "eavesdrop"
   class { 'openstack_project::server': }
 
@@ -242,7 +242,7 @@ node /^eavesdrop\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^ethercalc\d+\.openstack\.org$/ {
+node /^ethercalc\d+\.open.*\.org$/ {
   $group = "ethercalc"
   class { 'openstack_project::server': }
 
@@ -255,7 +255,7 @@ node /^ethercalc\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^etherpad\d*\.openstack\.org$/ {
+node /^etherpad\d*\.open.*\.org$/ {
   $group = "etherpad"
   class { 'openstack_project::server': }
 
@@ -271,7 +271,7 @@ node /^etherpad\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^etherpad-dev\d*\.openstack\.org$/ {
+node /^etherpad-dev\d*\.open.*\.org$/ {
   $group = "etherpad-dev"
   class { 'openstack_project::server': }
 
@@ -284,7 +284,7 @@ node /^etherpad-dev\d*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^wiki\d+\.openstack\.org$/ {
+node /^wiki\d+\.open.*\.org$/ {
   $group = "wiki"
   class { 'openstack_project::wiki':
     bup_user                  => 'bup-wiki',
@@ -306,7 +306,7 @@ node /^wiki\d+\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^wiki-dev\d+\.openstack\.org$/ {
+node /^wiki-dev\d+\.open.*\.org$/ {
   $group = "wiki-dev"
   class { 'openstack_project::wiki':
     serveradmin           => hiera('infra_apache_serveradmin'),
@@ -324,7 +324,7 @@ node /^wiki-dev\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^logstash\d*\.openstack\.org$/ {
+node /^logstash\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::logstash':
@@ -342,7 +342,7 @@ node /^logstash\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^logstash-worker\d+\.openstack\.org$/ {
+node /^logstash-worker\d+\.open.*\.org$/ {
   $group = 'logstash-worker'
 
   class { 'openstack_project::server': }
@@ -356,7 +356,7 @@ node /^logstash-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^subunit-worker\d+\.openstack\.org$/ {
+node /^subunit-worker\d+\.open.*\.org$/ {
   $group = "subunit-worker"
   class { 'openstack_project::server': }
   class { 'openstack_project::subunit_worker':
@@ -368,7 +368,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^elasticsearch\d+\.openstack\.org$/ {
+node /^elasticsearch\d+\.open.*\.org$/ {
   $group = "elasticsearch"
   class { 'openstack_project::server': }
   class { 'openstack_project::elasticsearch_node':
@@ -377,7 +377,7 @@ node /^elasticsearch\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^firehose\d+\.openstack\.org$/ {
+node /^firehose\d+\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::firehose':
     gerrit_ssh_host_key => hiera('gerrit_ssh_rsa_pubkey_contents'),
@@ -396,7 +396,7 @@ node /^firehose\d+\.openstack\.org$/ {
 
 # CentOS machines to load balance git access.
 # Node-OS: centos7
-node /^git(-fe\d+)?\.openstack\.org$/ {
+node /^git(-fe\d+)?\.open.*\.org$/ {
   $group = "git-loadbalancer"
   class { 'openstack_project::git':
     balancer_member_names   => [
@@ -425,7 +425,7 @@ node /^git(-fe\d+)?\.openstack\.org$/ {
 # CentOS machines to run cgit and git daemon. Will be
 # load balanced by git.openstack.org.
 # Node-OS: centos7
-node /^git\d+\.openstack\.org$/ {
+node /^git\d+\.open.*\.org$/ {
   $group = "git-server"
   include openstack_project
   class { 'openstack_project::server': }
@@ -453,7 +453,7 @@ node /^git\d+\.openstack\.org$/ {
 
 # A machine to drive AFS mirror updates.
 # Node-OS: xenial
-node /^mirror-update\d*\.openstack\.org$/ {
+node /^mirror-update\d*\.open.*\.org$/ {
   $group = "afsadmin"
 
   class { 'openstack_project::mirror_update':
@@ -470,7 +470,7 @@ node /^mirror-update\d*\.openstack\.org$/ {
 
 # Machines in each region to serve AFS mirrors.
 # Node-OS: xenial
-node /^mirror\d*\..*\.openstack\.org$/ {
+node /^mirror\d*\..*\.open.*\.org$/ {
   $group = "mirror"
 
   class { 'openstack_project::server':
@@ -486,7 +486,7 @@ node /^mirror\d*\..*\.openstack\.org$/ {
 
 # Serve static AFS content for docs and other sites.
 # Node-OS: xenial
-node /^files\d*\.openstack\.org$/ {
+node /^files\d*\.open.*\.org$/ {
   $group = "files"
   class { 'openstack_project::server':
     afs                       => true,
@@ -533,7 +533,7 @@ node /^files\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^refstack\d*\.openstack\.org$/ {
+node /^refstack\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'refstack':
     mysql_host          => hiera('refstack_mysql_host', 'localhost'),
@@ -559,7 +559,7 @@ node /^refstack\d*\.openstack\.org$/ {
 # A machine to run Storyboard
 # Node-OS: trusty
 # Node-OS: xenial
-node /^storyboard\d*\.openstack\.org$/ {
+node /^storyboard\d*\.open.*\.org$/ {
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
@@ -589,7 +589,7 @@ node /^storyboard\d*\.openstack\.org$/ {
 # A machine to run Storyboard devel
 # Node-OS: trusty
 # Node-OS: xenial
-node /^storyboard-dev\d*\.openstack\.org$/ {
+node /^storyboard-dev\d*\.open.*\.org$/ {
   class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
@@ -615,7 +615,7 @@ node /^storyboard-dev\d*\.openstack\.org$/ {
 # A machine to serve static content.
 # Node-OS: trusty
 # Node-OS: xenial
-node /^static\d*\.openstack\.org$/ {
+node /^static\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::static':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -632,7 +632,7 @@ node /^static\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^zk\d+\.openstack\.org$/ {
+node /^zk\d+\.open.*\.org$/ {
   # We use IP addresses here so that zk listens on the public facing addresses
   # allowing cluster members to talk to each other. Without this they listen
   # on 127.0.1.1 because that is what we have in /etc/hosts for
@@ -646,7 +646,7 @@ node /^zk\d+\.openstack\.org$/ {
 
   class { '::zookeeper':
     # ID needs to be numeric, so we use regex to extra numbers from fqdn.
-    id             => regsubst($::fqdn, '^zk(\d+)\.openstack\.org$', '\1'),
+    id             => regsubst($::fqdn, '^zk(\d+)\.open.*\.org$', '\1'),
     # The frequency in hours to look for and purge old snapshots,
     # defaults to 0 (disabled). The number of retained snapshots can
     # be separately controlled through snap_retain_count and
@@ -660,7 +660,7 @@ node /^zk\d+\.openstack\.org$/ {
 # A machine to serve various project status updates.
 # Node-OS: trusty
 # Node-OS: xenial
-node /^status\d*\.openstack\.org$/ {
+node /^status\d*\.open.*\.org$/ {
   $group = 'status'
 
   class { 'openstack_project::server': }
@@ -678,7 +678,7 @@ node /^status\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^survey\d+\.openstack\.org$/ {
+node /^survey\d+\.open.*\.org$/ {
   $group = "survey"
   class { 'openstack_project::server': }
 
@@ -699,7 +699,7 @@ node /^survey\d+\.openstack\.org$/ {
 # This is a hidden authoritative master nameserver, not publicly
 # accessible.
 # Node-OS: xenial
-node /^adns\d+\.openstack\.org$/ {
+node /^adns\d+\.open.*\.org$/ {
   $group = 'adns'
 
   class { 'openstack_project::server': }
@@ -713,7 +713,7 @@ node /^adns\d+\.openstack\.org$/ {
 
 # These are publicly accessible authoritative slave nameservers.
 # Node-OS: xenial
-node /^ns\d+\.openstack\.org$/ {
+node /^ns\d+\.open.*\.org$/ {
   $group = 'ns'
 
   class { 'openstack_project::server': }
@@ -743,7 +743,7 @@ node /^ns\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^nl\d+\.openstack\.org$/ {
+node /^nl\d+\.open.*\.org$/ {
   $group = 'nodepool'
 
   # NOTE(ianw) From 09-2018 (https://review.openstack.org/#/c/598329/)
@@ -765,7 +765,7 @@ node /^nl\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^nb\d+\.openstack\.org$/ {
+node /^nb\d+\.open.*\.org$/ {
   $group = 'nodepool'
 
   class { 'openstack_project::server': }
@@ -797,7 +797,7 @@ node /^nb\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^ze\d+\.openstack\.org$/ {
+node /^ze\d+\.open.*\.org$/ {
   $group = "zuul-executor"
 
   $gerrit_server           = 'review.openstack.org'
@@ -891,7 +891,7 @@ node /^ze\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^zuul\d+\.openstack\.org$/ {
+node /^zuul\d+\.open.*\.org$/ {
   $group = "zuul-scheduler"
   $gerrit_server        = 'review.openstack.org'
   $gerrit_user          = 'zuul'
@@ -979,7 +979,7 @@ node /^zuul\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^zm\d+.openstack\.org$/ {
+node /^zm\d+.open.*\.org$/ {
   $group = "zuul-merger"
 
   $gerrit_server        = 'review.openstack.org'
@@ -1023,7 +1023,7 @@ node /^zm\d+.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^pbx\d*\.openstack\.org$/ {
+node /^pbx\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::pbx':
     sip_providers => [
@@ -1040,7 +1040,7 @@ node /^pbx\d*\.openstack\.org$/ {
 
 # Node-OS: xenial
 # A backup machine.  Don't run cron or puppet agent on it.
-node /^backup\d+\..*\.ci\.openstack\.org$/ {
+node /^backup\d+\..*\.ci\.open.*\.org$/ {
   $group = "ci-backup"
   class { 'openstack_project::server': }
   include openstack_project::backup_server
@@ -1076,7 +1076,7 @@ node 'openstackid.org' {
 }
 
 # Node-OS: trusty
-node /^openstackid-dev\d*\.openstack\.org$/ {
+node /^openstackid-dev\d*\.open.*\.org$/ {
   class { 'openstack_project::openstackid_dev':
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
     id_mysql_host               => hiera('openstackid_dev_id_mysql_host', 'localhost'),
@@ -1110,14 +1110,14 @@ node 'single-node-ci.test.only' {
 }
 
 # Node-OS: trusty
-node /^kdc01\.openstack\.org$/ {
+node /^kdc01\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc': }
 }
 
 # Node-OS: xenial
-node /^kdc04\.openstack\.org$/ {
+node /^kdc04\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc':
@@ -1126,7 +1126,7 @@ node /^kdc04\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^afsdb01\.openstack\.org$/ {
+node /^afsdb01\.open.*\.org$/ {
   $group = "afsdb"
 
   class { 'openstack_project::server':
@@ -1138,7 +1138,7 @@ node /^afsdb01\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^afsdb.*\.openstack\.org$/ {
+node /^afsdb.*\.open.*\.org$/ {
   $group = "afsdb"
 
   class { 'openstack_project::server':
@@ -1149,7 +1149,7 @@ node /^afsdb.*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^afs.*\..*\.openstack\.org$/ {
+node /^afs.*\..*\.open.*\.org$/ {
   $group = "afs"
 
   class { 'openstack_project::server':
@@ -1160,7 +1160,7 @@ node /^afs.*\..*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^ask\d*\.openstack\.org$/ {
+node /^ask\d*\.open.*\.org$/ {
 
   class { 'openstack_project::server': }
 
@@ -1175,7 +1175,7 @@ node /^ask\d*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node /^ask-staging\d*\.openstack\.org$/ {
+node /^ask-staging\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::ask_staging':
@@ -1185,7 +1185,7 @@ node /^ask-staging\d*\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^translate\d+\.openstack\.org$/ {
+node /^translate\d+\.open.*\.org$/ {
   $group = "translate"
   class { 'openstack_project::server': }
   class { 'openstack_project::translate':
@@ -1211,7 +1211,7 @@ node /^translate\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^translate-dev\d*\.openstack\.org$/ {
+node /^translate-dev\d*\.open.*\.org$/ {
   $group = "translate-dev"
   class { 'openstack_project::translate_dev':
     admin_users           => 'aeng,cboylan,eumel,eumel8,ianw,ianychoi,infra,jaegerandi,mordred,stevenk',
@@ -1230,7 +1230,7 @@ node /^translate-dev\d*\.openstack\.org$/ {
 
 # Node-OS: trusty
 # Node-OS: xenial
-node /^codesearch\d*\.openstack\.org$/ {
+node /^codesearch\d*\.open.*\.org$/ {
   $group = "codesearch"
   class { 'openstack_project::server': }
   class { 'openstack_project::codesearch':
