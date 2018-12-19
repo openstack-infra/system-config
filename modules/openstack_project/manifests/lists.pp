@@ -57,6 +57,11 @@ class openstack_project::lists(
     default_url_host   => 'lists.opendev.org',
   }
 
+  mailman::site { 'openci':
+    default_email_host => 'lists.openci.io',
+    default_url_host   => 'lists.openci.io',
+  }
+
   # Add new mailing lists below this line
 
   mailman_list { 'mailman@openstack':
@@ -482,5 +487,13 @@ class openstack_project::lists(
     admin       => 'claire@openstack.org',
     password    => $listpassword,
     description => 'Collaborating on Rust-based virtual machine monitors.',
+  }
+
+  mailman_list { 'discuss@openci':
+    require     => Mailman::Site['openci'],
+    ensure      => present,
+    admin       => 'info@openci.io',
+    password    => $listpassword,
+    description => 'Community of CI/CD practitioners.',
   }
 }
