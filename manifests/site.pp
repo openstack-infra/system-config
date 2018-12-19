@@ -19,7 +19,7 @@ node default {
 # Long lived servers:
 #
 # Node-OS: xenial
-node 'review01.openstack.org' {
+node /^review\d*\.openstack\.org$/ {
   $group = "review"
 
   class { 'openstack_project::server': }
@@ -368,7 +368,7 @@ node /^subunit-worker\d+\.openstack\.org$/ {
 }
 
 # Node-OS: xenial
-node /^elasticsearch0[1-7]\.openstack\.org$/ {
+node /^elasticsearch\d+\.openstack\.org$/ {
   $group = "elasticsearch"
   class { 'openstack_project::server': }
   class { 'openstack_project::elasticsearch_node':
@@ -1023,7 +1023,7 @@ node /^zm\d+.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'pbx.openstack.org' {
+node /^pbx\d*\.openstack\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::pbx':
     sip_providers => [
@@ -1076,7 +1076,7 @@ node 'openstackid.org' {
 }
 
 # Node-OS: trusty
-node 'openstackid-dev.openstack.org' {
+node /^openstackid-dev\d*\.openstack\.org$/ {
   class { 'openstack_project::openstackid_dev':
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
     id_mysql_host               => hiera('openstackid_dev_id_mysql_host', 'localhost'),
@@ -1110,14 +1110,14 @@ node 'single-node-ci.test.only' {
 }
 
 # Node-OS: trusty
-node 'kdc01.openstack.org' {
+node /^kdc01\.openstack\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc': }
 }
 
 # Node-OS: xenial
-node 'kdc04.openstack.org' {
+node /^kdc04\.openstack\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::kdc':
@@ -1126,7 +1126,7 @@ node 'kdc04.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'afsdb01.openstack.org' {
+node /^afsdb01\.openstack\.org$/ {
   $group = "afsdb"
 
   class { 'openstack_project::server':
@@ -1160,7 +1160,7 @@ node /^afs.*\..*\.openstack\.org$/ {
 }
 
 # Node-OS: trusty
-node 'ask.openstack.org' {
+node /^ask\d*\.openstack\.org$/ {
 
   class { 'openstack_project::server': }
 
@@ -1175,7 +1175,7 @@ node 'ask.openstack.org' {
 }
 
 # Node-OS: trusty
-node 'ask-staging.openstack.org' {
+node /^ask-staging\d*\.openstack\.org$/ {
   class { 'openstack_project::server': }
 
   class { 'openstack_project::ask_staging':
