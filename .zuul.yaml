@@ -22,6 +22,68 @@
     vars:
       project_src_dir: "{{ zuul.project.src_dir }}/modules/openstack_project"
 
+# Image building jobs
+- secret:
+    name: system-config-dockerhub
+    data:
+      username: openstackzuul
+      password: !encrypted/pkcs1-oaep
+        - iz3aVtc1eXwM/d02gaA8qyvryJtrOOTmPZhfWiRw3VaVpuU/lrpSD/qRKPwBEbhFCpzCh
+          B3eelTaJMKaMsVFU/cD+EOB6MBpCtHreKug3+B1g1Ag9TQaLGfa2d7swPRrhFEENpQBzm
+          D9OqBYVCWTyGo/Y1nkC/zb+e1H2IdI1axNJrVaKR6FYN8vhpPsflvyW2PCNsdT2YlKCMz
+          G0wFMJv6zMH6Jw1c0ruHm5pa9O4EWLwhmdxHMeTRAT4JVJdLehVGQLBXvXxZzMOXB2Jrj
+          KHIMFFhzlc1bZXcFKAMakvfP0ARLmPySEnIcVHjHXvsXmGLuVB0lSXUtUB1QW8qJcso1m
+          C0ky4VAFHoNB/EV5VGu7btkZDtJKzsQcPXnaT1LcX1xS+QC0bC4SYR25WN9RK7z1sXvMn
+          dxMIwJIvXOb+aE5mdl63G8OBTxznPAGioCZNjqoMPQJ7VzITSYnPiW5CyZDUinTSDDver
+          zHBG/Svpwiu7Lm2vOgExHYdCDeo0a5lacxjcwW2FfP7fal3ZLoTeSTGXvIaffS552mZ9L
+          I0cLfq/ikkbaC4a+bqFnVdDm9wNAyBtOkq5wn3TqOFMrFaBlkI5/34i2fLauZOoka6bcN
+          zJnvDrjRemvgmWP1q4uI8cPzJK3zjN9/GYrs1MQxHCsNn33sWpc1oHRO+TL/8g=
+
+- job:
+    name: system-config-build-image
+    description: |
+      Build a docker image.
+
+      .. zuul:jobvar:: image_name
+
+         The name of the image to build; should be a directory in this
+         repo under ``docker/``.
+
+      .. zuul:jobvar:: image_repository
+
+         The name of the target repository in dockerhub for the image.
+         Supply this even if they image is not going to be uploaded
+         (it will be tagged with this in the local registry).
+
+      .. zuul:jobvar:: credentials
+
+         If this is provided, the resulting image will be uploaded.
+         This should be a secret with two keys: ``username`` and
+         ``password``.
+
+    abstract: true
+    pre-run: playbooks/zuul/build-image-pre.yaml
+    run: playbooks/zuul/build-image.yaml
+    post-run: playbooks/zuul/build-image-upload.yaml
+
+- job:
+    name: system-config-build-image-gitea
+    description: Build a gitea image
+    parent: system-config-build-image
+    vars:
+      image_name: gitea
+      image_repository: opendevorg/gitea
+    files:
+      - docker/gitea/.*
+
+- job:
+    name: system-config-upload-image-gitea
+    description: Build and upload a gitea image
+    parent: system-config-build-image-gitea
+    secrets:
+      name: credentials
+      secret: system-config-dockerhub
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -304,6 +366,7 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-build-image-gitea
     gate:
       jobs:
         - tox-linters
@@ -317,3 +380,4 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-build-image-gitea
