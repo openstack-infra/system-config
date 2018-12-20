@@ -1,0 +1,31 @@
+- hosts: localhost
+  tasks:
+    - name: Set up gitea namespace
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/namespace.yaml') | from_yaml }}"
+    - name: Set up gitea secrets
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/secret.yaml') | from_yaml }}"
+    - name: Set up gitea configmap
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: gitea-conf
+            namespace: gitea
+          data:
+            # Note: we are not asking ansible to template this, it
+            # will be run by jinja-init
+            app.ini.j2: "{{ lookup('file', 'app.ini.j2') }}"
+    - name: Set up gitea deployment
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/deployment.yaml') | from_yaml }}"
+    - name: Set up gitea service
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/service.yaml') | from_yaml }}"
