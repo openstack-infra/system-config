@@ -97,6 +97,26 @@
       name: credentials
       secret: system-config-dockerhub
 
+- job:
+    name: system-config-build-image-jinja-init
+    description: Build a jinja-init image
+    parent: system-config-build-image
+    vars:
+      images:
+        - context: docker/jinja-init
+          target: jinja-init
+          repository: opendevorg/jinja-init
+    files:
+      - docker/jinja-init/.*
+
+- job:
+    name: system-config-upload-image-jinja-init
+    description: Build and upload a jinja-init image
+    parent: system-config-build-image-jinja-init
+    secrets:
+      name: credentials
+      secret: system-config-dockerhub
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -394,6 +414,8 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-build-image-gitea
+        - system-config-build-image-jinja-init
     post:
       jobs:
         - system-config-upload-image-gitea
+        - system-config-upload-image-jinja-init
