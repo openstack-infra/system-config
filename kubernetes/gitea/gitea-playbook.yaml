@@ -1,0 +1,62 @@
+- hosts: localhost
+  tasks:
+    # Deploy the service
+    - name: Set up gitea namespace
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/namespace.yaml') | from_yaml }}"
+    - name: Set up gitea secrets
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/secret.yaml') | from_yaml }}"
+    - name: Set up gitea configmap
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: gitea-conf
+            namespace: gitea
+          data:
+            # Note: we are not asking ansible to template this, it
+            # will be run by jinja-init
+            app.ini.j2: "{{ lookup('file', 'app.ini.j2') }}"
+    - name: Set up gitea deployment
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/deployment.yaml') | from_yaml }}"
+    - name: Set up gitea service
+      k8s:
+        state: present
+        definition: "{{ lookup('template', 'k8s/service.yaml') | from_yaml }}"
+
+    # Bootstrap
+    # TODO: wait until service is up
+    - name: Get service IP
+      k8s:
+        namespace: gitea
+        kind: Service
+        name: gitea-service
+      register: gitea_service
+    - name: Set service url fact
+      set_fact:
+        gitea_url: "http://{{ gitea_service.result.status.loadBalancer.ingress[0].ip }}"
+    - name: Check if root user exists
+      uri:
+        url: "{{ gitea_url }}/api/v1/users/root"
+        status_code: 200, 404
+      register: root_user_check
+    - name: Create root user
+      when: root_user_check.status==404
+      block:
+        - name: Find gitea pods
+          k8s_facts:
+            namespace: gitea
+            kind: Pod
+            label_selectors:
+              - "app = gitea"
+          register: gitea_pods
+        - name: Create root user
+          command: "/home/corvus/opendev/kubectl exec {{ gitea_pods.resources[0].metadata.name }} -n gitea -c gitea -- gitea admin create-user --name root --password {{ gitea_root_password }} --email {{ gitea_root_email }} --admin"
+          no_log: true
