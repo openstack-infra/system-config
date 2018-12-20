@@ -40,9 +40,14 @@ results:
     - afsadmin
     - puppet
 
-  review.openstack.org:
-    - disabled
+  review01.openstack.org:
+    - futureparser
     - gerrit
+    - puppet
+    - review
+
+  backup01.ord.rax.ci.openstack.org:
+    - disabled
     - puppet
 
   nb01.openstack.org:
