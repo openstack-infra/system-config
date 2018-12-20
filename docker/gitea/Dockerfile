@@ -57,17 +57,16 @@ RUN apt-get update && apt-get -y install \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN addgroup \
-    --system --gid 1000 \
-    git && \
-  adduser \
+RUN addgroup --system --gid 1000 git \
+  && adduser \
     --system --no-create-home --disabled-login \
     --home /data/git \
     --shell /bin/bash \
     --uid 1000 \
     --gid 1000 \
-    git && \
-  echo "git:$(dd if=/dev/urandom bs=24 count=1 status=none | base64)" | chpasswd
+    git \
+  && echo "git:$(dd if=/dev/urandom bs=24 count=1 status=none | base64)" | chpasswd \
+  && mkdir /custom
 
 # Copy the /etc config files and entrypoint script
 COPY --from=build-env /go/src/code.gitea.io/gitea/docker /
@@ -75,6 +74,11 @@ COPY --from=build-env /go/src/code.gitea.io/gitea/docker /
 # Copy the app
 COPY --from=build-env /go/src/code.gitea.io/gitea/gitea /app/gitea/gitea
 RUN ln -s /app/gitea/gitea /usr/local/bin/gitea
+
+# Copy our custom templates
+COPY custom/ /custom/
+
+ENV GITEA_CUSTOM /custom
 
 ###################################
 # The gitea image
@@ -86,10 +90,9 @@ RUN apt-get update && apt-get -y install pandoc \
 
 EXPOSE 3000
 ENV USER git
-ENV GITEA_CUSTOM /data/gitea
 VOLUME ["/data"]
 ENTRYPOINT ["/usr/bin/entrypoint"]
-CMD ["/app/gitea/gitea"]
+CMD ["/app/gitea/gitea", "web"]
 USER 1000:1000
 
 ###################################
