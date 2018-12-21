@@ -250,6 +250,14 @@ class openstack_project::review (
           ]
         },
         {
+          name                 => 'gitea',
+          url                  => 'git@http://38.108.68.66:',
+          authGroup            => 'Anonymous Users',
+          replicationDelay     => '1',
+          replicatePermissions => false,
+          mirror               => true,
+        },
+        {
           name                 => 'local',
           url                  => 'file:///opt/lib/git/',
           replicationDelay     => '1',
