@@ -158,7 +158,7 @@ class openstack_project::gerrit (
       {
         name    => 'launchpad-bug',
         footers => ['closes-bug:', 'partial-bug:', 'related-bug:'],
-        match   => '\\#?(\\d+)',
+        match   => '\\\\#?(\\\\d+)',
         system  => 'Launchpad',
       },
       {
