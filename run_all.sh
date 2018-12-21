@@ -82,6 +82,11 @@ start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/base.yaml
 send_timer base
 
+# Run k8s-on-openstack
+start_timer
+timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/run-k8s-on-openstack.yaml
+send_timer base
+
 # Update the puppet version
 start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml

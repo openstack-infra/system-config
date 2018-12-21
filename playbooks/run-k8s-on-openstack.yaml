@@ -1,0 +1,15 @@
+- hosts: "localhost:!disabled"
+  name: "System-config: Update the system-config repo on bridge"
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Make sure k8s-on-openstack repo is up to date
+      git:
+        repo: https://github.com/infraly/k8s-on-openstack
+        dest: /opt/k8s-on-openstack
+        force: yes
+
+    - name: Run kubernetes deploy playbook
+      command: ./run-k8s-ansible.sh
+      args:
+        chdir: /opt/system-config
