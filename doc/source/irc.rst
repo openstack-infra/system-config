@@ -262,11 +262,13 @@ event. Usage instructions are provided in its `README.rst file
 <https://git.openstack.org/cgit/openstack/ptgbot/tree/README.rst>`_.
 It writes some static content into ``/var/lib/ptgbot/www`` on the
 eavesdrop.openstack.org server and then serves that from a
-http://ptg.openstack.org/ Apache vhost. It also updates a
-spreadsheet on https://ethercalc.openstack.org/ but the name of the
-sheet varies from one PTG to the next (naming format is
-``$CYCLE-PTG-Discussion-Rooms`` with ``$CYCLE`` being something like
-``Pike`` or ``Queens``).
+http://ptg.openstack.org/ Apache vhost.
+
+Code for the PTG bot lives in the openstack-infra/ptgbot respository
+(https://git.openstack.org/cgit/openstack-infra/ptgbot), while the
+puppet module used to deploy it (including the template used for its
+configuration) lives in the openstack-infra/puppet-ptgbot repository
+(https://git.openstack.org/cgit/openstack-infra/puppet-ptgbot).
 
 Basic Channel Operator Commands
 ===============================
