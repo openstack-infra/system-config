@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: David Moreau Simard <dmsimard@redhat.com>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 21 Dec 2018 15:20:00 +0000
+Reviewed-on: https://review.openstack.org/626392
+Project: openstack-infra/system-config
+Branch: refs/heads/master
