@@ -92,6 +92,10 @@ profiles:
 
             ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmc5fbzMptjAb5D86zSH13ZYCbf3QuV1jk9hL0r1qHw frickler@os-infra-2017
 
+      - name: bridge-root-2014-09-15
+        public_key: |
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp puppet-remote-2014-09-15
+
   - name: openstackci-flavors
     flavors:
       - name: nodepool
