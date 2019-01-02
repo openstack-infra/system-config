@@ -27,6 +27,7 @@ exim_aliases:
   openstack-security-owner: spam
   openstack-vi-owner: spam
   product-wg-owner: spam
+  starlingx-discuss-owner: spam
   superuser-owner: spam
   user-committee-owner: spam
   women-of-openstack-owner: spam
