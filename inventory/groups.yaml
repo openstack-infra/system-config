@@ -68,6 +68,7 @@ groups:
     - paste[0-9]*.open*.org
     - pbx[0-9]*.opendev.org
     - planet[0-9]*.open*.org
+    - refstack*.open*.org
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
     - storyboard-dev[0-9]*.opendev.org
