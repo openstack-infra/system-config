@@ -55,7 +55,7 @@ groups:
     - health[0-9]*.open*.org
     - lists-dev[0-9]*.open*.org
     - lists*.katacontainers.io
-    - lists[0-9]*.open*.org
+    - lists*.open*.org
     - logstash-worker[0-9]*.open*.org
     - logstash[0-9]*.open*.org
     - mirror-update[0-9]*.open*.org
