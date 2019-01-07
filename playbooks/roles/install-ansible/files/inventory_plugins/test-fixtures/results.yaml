@@ -24,6 +24,7 @@ results:
     - webservers
 
   lists.katacontainers.io:
+    - futureparser
     - mailman
     - puppet
 
