@@ -3,10 +3,8 @@
 
 results:
 
-  adns1.openstack.org:
+  adns1.opendev.org:
     - adns
-    - puppet
-    - futureparser
 
   afs01.dfw.openstack.org:
     - afs
