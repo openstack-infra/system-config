@@ -8,14 +8,6 @@ all:
       private_v4: 10.209.134.4
       public_v4: 104.239.146.24
       public_v6: 2001:4800:7819:104:be76:4eff:fe04:43d0
-    adns1.openstack.org:
-      ansible_host: 2001:4801:7824:101:be76:4eff:fe10:c98e
-      location:
-        cloud: openstackci-rax
-        region_name: ORD
-      private_v4: 10.209.103.102
-      public_v4: 23.253.63.149
-      public_v6: 2001:4801:7824:101:be76:4eff:fe10:c98e
     afs01.dfw.openstack.org:
       ansible_host: 2001:4800:7818:103:be76:4eff:fe04:a376
       location:
@@ -768,14 +760,6 @@ all:
       private_v4: 10.209.133.154
       public_v4: 104.239.140.165
       public_v6: 2001:4800:7819:104:be76:4eff:fe04:38f0
-    ns1.openstack.org:
-      ansible_host: 2001:4800:7817:103:be76:4eff:fe04:3fc7
-      location:
-        cloud: openstackci-rax
-        region_name: DFW
-      private_v4: 10.208.160.121
-      public_v4: 23.253.236.219
-      public_v6: 2001:4800:7817:103:be76:4eff:fe04:3fc7
     ns2.opendev.org:
       ansible_host: 2604:e100:1:0:f816:3eff:fe2c:7447
       location:
@@ -784,14 +768,6 @@ all:
       private_v4: ''
       public_v4: 162.253.55.16
       public_v6: 2604:e100:1:0:f816:3eff:fe2c:7447
-    ns2.openstack.org:
-      ansible_host: 2604:e100:1:0:f816:3eff:fe53:ee69
-      location:
-        cloud: openstackci-vexxhost
-        region_name: ca-ymq-1
-      private_v4: ''
-      public_v4: 162.253.55.139
-      public_v6: 2604:e100:1:0:f816:3eff:fe53:ee69
     openstackid-dev.openstack.org:
       ansible_host: 2001:4800:7819:103:be76:4eff:fe05:3d
       location:

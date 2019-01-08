@@ -696,52 +696,6 @@ node /^survey\d+\.open.*\.org$/ {
   }
 }
 
-# This is a hidden authoritative master nameserver, not publicly
-# accessible.
-# Node-OS: xenial
-node /^adns\d+\.open.*\.org$/ {
-  $group = 'adns'
-
-  class { 'openstack_project::server': }
-
-  class { 'openstack_project::master_nameserver':
-    tsig_key => hiera('tsig_key', {}),
-    dnssec_keys => hiera_hash('dnssec_keys', {}),
-    notifies => concat(dns_a('ns1.openstack.org'), dns_a('ns2.openstack.org')),
-  }
-}
-
-# These are publicly accessible authoritative slave nameservers.
-# Node-OS: xenial
-node /^ns\d+\.open.*\.org$/ {
-  $group = 'ns'
-
-  class { 'openstack_project::server': }
-
-  $tsig_key = hiera('tsig_key', {})
-  if $tsig_key != {} {
-    $tsig_name = 'tsig'
-    nsd::tsig { 'tsig':
-      algo => $tsig_key[algorithm],
-      data => $tsig_key[secret],
-    }
-  } else {
-    $tsig_name = undef
-  }
-
-  class { '::nsd':
-    ip_addresses => [ $::ipaddress, $::ipaddress6 ],
-    zones => {
-      'adns1_zones' => {
-        allow_notify => dns_a('adns1.openstack.org'),
-        masters => dns_a('adns1.openstack.org'),
-        zones => ['zuul-ci.org', 'zuulci.org'],
-        tsig_name => $tsig_name,
-      }
-    }
-  }
-}
-
 # Node-OS: xenial
 node /^nl\d+\.open.*\.org$/ {
   $group = 'nodepool'
