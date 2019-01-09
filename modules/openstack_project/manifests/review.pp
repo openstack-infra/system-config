@@ -256,6 +256,11 @@ class openstack_project::review (
           replicationDelay     => '1',
           replicatePermissions => false,
           mirror               => true,
+          push                 => [
+            '+refs/heads/*:refs/heads/*',
+            '+refs/tags/*:refs/tags/*',
+          ],
+          threads              => '8',
         },
         {
           name                 => 'local',
