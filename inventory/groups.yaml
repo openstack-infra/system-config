@@ -158,7 +158,6 @@ groups:
     - pbx*.open*.org
     - planet[0-9]*.open*.org
     - refstack*.open*.org
-    - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
     - static*.open*.org
     - status*.open*.org
@@ -173,6 +172,8 @@ groups:
     - zm[0-9]*.open*.org
     - zuul[0-9]*.open*.org
     - zk[0-9]*.open*.org
+  puppet4:
+    - review-dev[0-9]*.open*.org
   refstack:
     - refstack*.open*.org
   review-dev:
