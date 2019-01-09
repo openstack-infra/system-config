@@ -597,13 +597,13 @@ node /^storyboard-dev\d*\.open.*\.org$/ {
     mysql_password          => hiera('storyboard_db_password'),
     rabbitmq_user           => hiera('storyboard_rabbit_user', 'username'),
     rabbitmq_password       => hiera('storyboard_rabbit_password'),
-    hostname                => $::fqdn,
+    hostname                => 'storyboard-dev.openstack.org',
     valid_oauth_clients     => [
-      $::fqdn,
+      'storyboard-dev.openstack.org',
       'logs.openstack.org',
     ],
     cors_allowed_origins     => [
-      "https://${::fqdn}",
+      'https://storyboard-dev.openstack.org',
       'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard-dev@storyboard-dev.openstack.org',

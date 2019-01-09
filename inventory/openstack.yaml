@@ -848,6 +848,14 @@ all:
       private_v4: 10.209.4.179
       public_v4: 162.209.77.161
       public_v6: 2001:4800:7818:103:be76:4eff:fe06:905
+    storyboard-dev01.opendev.org:
+      ansible_host: 2001:4800:7817:103:be76:4eff:fe04:93f6
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      private_v4: 10.208.163.115
+      public_v4: 23.253.234.105
+      public_v6: 2001:4800:7817:103:be76:4eff:fe04:93f6
     storyboard-dev.openstack.org:
       ansible_host: 2001:4800:7815:102:be76:4eff:fe05:3f4c
       location:
