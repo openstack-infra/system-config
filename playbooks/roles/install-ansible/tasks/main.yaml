@@ -25,6 +25,11 @@
     version: '{{ _install_ansible_version | default(omit) }}'
     state: '{{ _install_ansible_state | default(omit) }}'
 
+# For use by k8s_raw ansible module
+- name: Install openshift client
+  pip:
+    name: 'openshift'
+
 # Same version/state default swizzling as described above for
 # openstacksdk
 - name: Set openstacksdk default version to latest
