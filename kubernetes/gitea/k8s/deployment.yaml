@@ -67,3 +67,13 @@ spec:
         - name: secrets
           secret:
             secretName: gitea-app
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - gitea
+              topologyKey: "kubernetes.io/hostname"
