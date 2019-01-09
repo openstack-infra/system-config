@@ -590,6 +590,7 @@ node /^storyboard\d*\.open.*\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^storyboard-dev\d*\.open.*\.org$/ {
+  $group = "storyboard-dev"
   class { 'openstack_project::storyboard::dev':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
