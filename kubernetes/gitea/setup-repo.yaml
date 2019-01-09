@@ -1,6 +1,10 @@
 - name: debug
   debug:
-    msg: "{{ gerrit_projects[org+'/'+repo] }}"
+    msg: "{{ project }}"
+- name: Parse project name
+  set_fact:
+    org: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\1') }}"
+    repo: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\2') }}"
 - name: Create repo
   when: repo not in gitea_org_repos
   uri:
@@ -13,7 +17,7 @@
     body_format: json
     body:
       auto_init: false
-      description: "{{ gerrit_projects[org+'/'+repo]['description'] | default('') }}"
+      description: "{{ project.description | default('') }}"
       name: "{{ repo }}"
       private: false
   register: create_repo_result
@@ -32,4 +36,4 @@
 - name: Adjust repo settings
   when: "sql_statement is defined"
   command: |
-    /home/corvus/opendev/kubectl exec gitea-pxc-0 -c database -n gitea-db -- mysql gitea -e '{{ sql_statement }}'
+    kubectl exec gitea-pxc-0 -c database -n gitea-db -- mysql gitea -e '{{ sql_statement }}'

@@ -1,19 +1,20 @@
 - hosts: localhost
   vars:
-    gitea_url: http://38.108.68.66
+    gitea_url: http://38.108.68.64
+    project_config_ref: master
+    project_config_dest: /tmp/project_config
   tasks:
+    - name: Clone project-config
+      git:
+        repo: https://git.openstack.org/openstack-infra/project-config
+        dest: "{{ project_config_dest }}"
+        version: "{{ project_config_ref }}"
     - name: Get Gerrit project list
-      uri:
-        url: "https://review.openstack.org/projects/"
-        status_code: 200
-        return_content: true
-      register: gerrit_project_list
-    - name: Parse Gerrit project list
       set_fact:
-        gerrit_projects: "{{ gerrit_project_list.content[4:] | from_json }}"
+        gerrit_projects: "{{ lookup('file', project_config_dest + '/gerrit/projects.yaml') | from_yaml }}"
     - name: Parse Gerrit org list
       set_fact:
-        gerrit_orgs: "{{ gerrit_projects.keys() | map('regex_search', '^(.*?)/') | list | unique | select | map('regex_replace', '/', '') | list }}"
+        gerrit_orgs: "{{ gerrit_projects | map(attribute='project') | map('regex_search', '^(.*?)/') | list | unique | select | map('regex_replace', '/', '') | list }}"
     - name: debug
       debug:
         msg: "{{ gerrit_orgs }}"
@@ -34,3 +35,8 @@
       loop_control:
         loop_var: org
       include_tasks: 'setup-org.yaml'
+    - name: Create repos
+      loop: "{{ gerrit_projects }}"
+      loop_control:
+        loop_var: project
+      include_tasks: 'setup-repo.yaml'

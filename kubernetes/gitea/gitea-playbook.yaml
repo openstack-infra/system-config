@@ -1,6 +1,5 @@
 - hosts: localhost
   tasks:
-    # Deploy the service
     - name: Set up gitea namespace
       k8s:
         state: present
@@ -30,15 +29,15 @@
       k8s:
         state: present
         definition: "{{ lookup('template', 'k8s/service.yaml') | from_yaml }}"
-
-    # Bootstrap
-    # TODO: wait until service is up
     - name: Get service IP
       k8s:
         namespace: gitea
         kind: Service
         name: gitea-service
       register: gitea_service
+      until: gitea_service.result.status.loadBalancer and gitea_service.result.status.loadBalancer.ingress and gitea_service.result.status.loadBalancer.ingress | length > 0 and gitea_service.result.status.loadBalancer.ingress[0].ip
+      delay: 1
+      retries: 300
     - name: Set service url fact
       set_fact:
         gitea_url: "http://{{ gitea_service.result.status.loadBalancer.ingress[0].ip }}"
