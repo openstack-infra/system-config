@@ -67,7 +67,6 @@ groups:
     - paste[0-9]*.open*.org
     - pbx*.open*.org
     - planet[0-9]*.open*.org
-    - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
     - storyboard-dev[0-9]*.open*.org
     - storyboard[0-9]*.open*.org
@@ -173,6 +172,8 @@ groups:
     - zm[0-9]*.open*.org
     - zuul[0-9]*.open*.org
     - zk[0-9]*.open*.org
+  puppet4:
+    - review-dev[0-9]*.open*.org
   refstack:
     - refstack*.open*.org
   review-dev:
