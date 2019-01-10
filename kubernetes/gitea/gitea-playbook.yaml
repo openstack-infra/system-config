@@ -32,6 +32,17 @@
             namespace: gitea
           data:
             home.tmpl: "{{ lookup('file', 'templates/home.tmpl') }}"
+    - name: Set up gitea css configmap
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: gitea-css
+            namespace: gitea
+          data:
+	    opendev.css: "{{ lookup('file', 'public/css/opendev.css') }}"
     - name: Set up gitea deployment
       k8s:
         state: present
