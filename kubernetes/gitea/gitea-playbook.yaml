@@ -21,6 +21,17 @@
             # Note: we are not asking ansible to template this, it
             # will be run by jinja-init
             app.ini.j2: "{{ lookup('file', 'app.ini.j2') }}"
+    - name: Set up gitea templates configmap
+      k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: gitea-templates
+            namespace: gitea
+          data:
+            home.tmpl: "{{ lookup('file', 'templates/home.tmpl') }}"
     - name: Set up gitea deployment
       k8s:
         state: present
