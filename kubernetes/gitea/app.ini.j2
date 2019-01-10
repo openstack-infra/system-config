@@ -1,3 +1,7 @@
+APP_NAME = OpenDev: Free Software Needs Free Tools
+RUN_MODE = prod
+RUN_USER = git
+
 [server]
 APP_DATA_PATH    = /data/gitea
 SSH_DOMAIN       = localhost
@@ -69,6 +73,6 @@ ENABLED = true
 ; List of file extensions that should be rendered by an external command
 FILE_EXTENSIONS = .rst
 ; External command to render all matching extensions
-RENDER_COMMAND = "/usr/bin/pandoc"
+RENDER_COMMAND = "/usr/bin/pandoc -f rst"
 ; Input is not a standard input but a file
 IS_INPUT_FILE = false
