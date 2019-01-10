@@ -35,6 +35,8 @@ spec:
               mountPath: /data
             - name: gitea-conf
               mountPath: /custom/conf
+            - name: gitea-templates
+              mountPAth: /custom/templates
             - name: logs
               mountPath: /logs
         - name: openssh
