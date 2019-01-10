@@ -6,6 +6,7 @@ metadata:
   labels:
     app: gitea
 spec:
+  revisionHistoryLimit: 1
   replicas: 1
   selector:
     matchLabels:
@@ -28,6 +29,9 @@ spec:
       containers:
         - name: gitea
           image: jeblair/gitea #gitea/gitea:1.6.0
+          env:
+            - name: deployment_id
+              value: 1  # Increment to trigger a deployment.
           ports:
             - containerPort: 3000
           volumeMounts:
