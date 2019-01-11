@@ -32,3 +32,4 @@ RUN pip install jinja2
 COPY --from=build /src/jinja-init/run.py /
 
 ENTRYPOINT ["python", "/run.py"]
+# this comment is here to perform a test run of the job.
