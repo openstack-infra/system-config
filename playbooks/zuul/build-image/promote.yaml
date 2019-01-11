@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: localhost
   tasks:
     - name: Promote dockerhub image
       when: credentials is defined
