@@ -1,0 +1,9 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 11 Jan 2019 19:06:20 +0000
+Reviewed-on: https://review.openstack.org/630323
+Project: openstack-infra/system-config
+Branch: refs/heads/master
