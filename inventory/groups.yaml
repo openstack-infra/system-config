@@ -50,11 +50,9 @@ groups:
     - git[0-9]*.openstack.org
     - grafana[0-9]*.open*.org
     - graphite[0-9]*.open*.org
-    - groups-dev[0-9]*.open*.org
     - groups[0-9]*.open*.org
     - health[0-9]*.open*.org
     - kdc[0-9]*.open*.org
-    - lists-dev[0-9]*.open*.org
     - lists*.katacontainers.io
     - lists*.open*.org
     - logstash-worker[0-9]*.open*.org
@@ -68,15 +66,12 @@ groups:
     - planet[0-9]*.open*.org
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
-    - storyboard-dev[0-9]*.opendev.org
     - storyboard[0-9]*.opendev.org
     - static[0-9]*.open*.org
     - status[0-9]*.open*.org
     - subunit-worker[0-9]*.open*.org
     - survey[0-9]*.open*.org
     - translate[0-9]*.open*.org
-    - translate-dev[0-9]*.open*.org
-    - wiki-dev[0-9]*.open*.org
     - wiki[0-9]*.open*.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
@@ -186,6 +181,12 @@ groups:
     - zk[0-9]*.open*.org
   puppet4:
     - etherpad-dev[0-9]*.open*.org
+    - groups-dev[0-9]*.open*.org
+    - lists-dev[0-9]*.open*.org
+    - review-dev[0-9]*.open*.org
+    - storyboard-dev[0-9]*.opendev.org
+    - translate-dev[0-9]*.open*.org
+    - wiki-dev[0-9]*.open*.org
   refstack:
     - refstack*.open*.org
   registry:
