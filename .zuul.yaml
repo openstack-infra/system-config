@@ -448,6 +448,7 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-build-image-gitea
+        - system-config-build-image-jinja-init
     gate:
       jobs:
         - tox-linters
