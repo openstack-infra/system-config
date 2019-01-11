@@ -1,0 +1,15 @@
+# Version 2 is the latest that is supported by docker-compose in
+# Ubuntu Xenial.
+version: '2'
+
+services:
+  gerrit:
+    image: gerritcodereview/gerrit
+    network_mode: host
+    command: |
+      /bin/sh -c '\
+        git config -f /var/gerrit/etc/gerrit.config gerrit.canonicalWebUrl http://gerrit:8080/ && \
+        git config -f /var/gerrit/etc/gerrit.config gerrit.ui POLYGERRIT && \
+        git config -f /var/gerrit/etc/gerrit.config sendemail.enable false && \
+        git config -f /var/gerrit/etc/gerrit.config noteDb.changes.autoMigrate true && \
+        /var/gerrit/bin/gerrit.sh run'
