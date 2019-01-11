@@ -1,0 +1,8 @@
+- name: Synchronize docker-compose directory
+  synchronize:
+    src: gerrit-docker/
+    dest: /etc/gerrit-docker/
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/gerrit-docker/
