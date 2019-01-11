@@ -70,16 +70,42 @@
          ``password``.
 
     abstract: true
-    pre-run: playbooks/zuul/build-image-pre.yaml
-    run: playbooks/zuul/build-image.yaml
-    post-run: playbooks/zuul/build-image-upload.yaml
+    pre-run: playbooks/zuul/build-image/pre.yaml
+    run: playbooks/zuul/build-image/run.yaml
+    post-run: playbooks/zuul/build-image/upload.yaml
+
+- job:
+    name: system-config-promote-image
+    description: |
+      Retag a previously-uploaded docker image.
+
+      .. zuul:jobvar:: images
+
+         .. zuul:jobvar:: repository
+
+            The name of the target repository in dockerhub for the
+            image.
+
+         .. zuul:jobvar:: tags
+
+            A list of tags to be added to the image.  Default: ['latest'].
+
+      .. zuul:jobvar:: credentials
+
+         This should be a secret with two keys: ``username`` and
+         ``password``.
+
+    abstract: true
+    run: playbooks/zuul/build-image/promote.yaml
+    nodeset:
+      nodes: []
 
 - job:
     name: system-config-build-image-gitea
     description: Build a gitea image
     parent: system-config-build-image
     vars:
-      images:
+      images: &gitea_images
         - context: docker/gitea
           target: gitea
           repository: opendevorg/gitea
@@ -96,6 +122,16 @@
     secrets:
       name: credentials
       secret: system-config-dockerhub
+
+- job:
+    name: system-config-promote-image-gitea
+    description: Promote a previously published gitea image to latest
+    parent: system-config-promote-image
+    secrets:
+      name: credentials
+      secret: system-config-dockerhub
+    vars:
+      images: *gitea_images
 
 - job:
     name: system-config-build-image-jinja-init
@@ -413,9 +449,9 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
-        - system-config-build-image-gitea
-        - system-config-build-image-jinja-init
-    post:
-      jobs:
         - system-config-upload-image-gitea
         - system-config-upload-image-jinja-init
+    promote:
+      jobs:
+        - system-config-promote-image-gitea
+        - system-config-promote-image-jinja-init
