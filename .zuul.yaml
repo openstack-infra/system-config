@@ -101,19 +101,28 @@
       nodes: []
 
 - job:
-    name: system-config-build-image-gitea
-    description: Build a gitea image
-    parent: system-config-build-image
+    name: system-config-image-gitea-info
+    abstract: true
+    description: Mix-in job with info for building a gitea image
     vars:
-      images: &gitea_images
+      images:
         - context: docker/gitea
           target: gitea
           repository: opendevorg/gitea
         - context: docker/gitea
           target: gitea-openssh
           repository: opendevorg/gitea-openssh
-    files: &gitea_files
+    files:
       - docker/gitea/.*
+
+- job:
+    name: system-config-build-image-gitea
+    description: Build a gitea image
+    parent: system-config-build-image
+
+- job:
+    name: system-config-build-image-gitea
+    parent: system-config-image-gitea-info
 
 - job:
     name: system-config-upload-image-gitea
@@ -130,21 +139,31 @@
     secrets:
       name: credentials
       secret: system-config-dockerhub
+
+- job:
+    name: system-config-promote-image-gitea
+    parent: system-config-image-gitea-info
+
+- job:
+    name: system-config-image-jinja-init-info
+    abstract: true
+    description: Mix-in job with info for building a jinja-init image
     vars:
-      images: *gitea_images
-    files: *gitea_files
+      images:
+        - context: docker/jinja-init
+          target: jinja-init
+          repository: opendevorg/jinja-init
+    files:
+      - docker/jinja-init/.*
 
 - job:
     name: system-config-build-image-jinja-init
     description: Build a jinja-init image
     parent: system-config-build-image
-    vars:
-      images: &jinja-init_images
-        - context: docker/jinja-init
-          target: jinja-init
-          repository: opendevorg/jinja-init
-    files: &jinja-init_files
-      - docker/jinja-init/.*
+
+- job:
+    name: system-config-build-image-jinja-init
+    parent: system-config-image-jinja-init-info
 
 - job:
     name: system-config-upload-image-jinja-init
@@ -161,9 +180,10 @@
     secrets:
       name: credentials
       secret: system-config-dockerhub
-    vars:
-      images: *jinja-init_images
-    files: *jinja-init_files
+
+- job:
+    name: system-config-promote-image-jinja-init
+    parent: system-config-image-jinja-init-info
 
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
