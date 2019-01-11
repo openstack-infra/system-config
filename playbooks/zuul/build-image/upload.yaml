@@ -7,5 +7,5 @@
           command: "docker login -u {{ credentials.username }} -p {{ credentials.password }}"
           no_log: true
         - name: Upload to dockerhub
-          command: "docker push {{ item.repository }}"
+          command: "docker push {{ item.repository }}:change_{{ zuul.change }}"
           loop: "{{ images }}"

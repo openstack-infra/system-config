@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+    - name: Promote dockerhub image
+      when: credentials is defined
+      block:
+        - name: Promote image
+          loop: "{{ images }}"
+          loop_control:
+            loop_var: image
+          include_tasks: build-image-promote-retag.yaml
