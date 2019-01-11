@@ -118,11 +118,9 @@
 - job:
     name: system-config-build-image-gitea
     description: Build a gitea image
-    parent: system-config-build-image
-
-- job:
-    name: system-config-build-image-gitea
-    parent: system-config-image-gitea-info
+    parent:
+      - system-config-build-image
+      - system-config-image-gitea-info
 
 - job:
     name: system-config-upload-image-gitea
@@ -135,14 +133,12 @@
 - job:
     name: system-config-promote-image-gitea
     description: Promote a previously published gitea image to latest
-    parent: system-config-promote-image
+    parent:
+      - system-config-promote-image
+      - system-config-image-gitea-info
     secrets:
       name: credentials
       secret: system-config-dockerhub
-
-- job:
-    name: system-config-promote-image-gitea
-    parent: system-config-image-gitea-info
 
 - job:
     name: system-config-image-jinja-init-info
@@ -159,11 +155,9 @@
 - job:
     name: system-config-build-image-jinja-init
     description: Build a jinja-init image
-    parent: system-config-build-image
-
-- job:
-    name: system-config-build-image-jinja-init
-    parent: system-config-image-jinja-init-info
+    parent:
+      - system-config-build-image
+      - system-config-image-jinja-init-info
 
 - job:
     name: system-config-upload-image-jinja-init
@@ -176,14 +170,12 @@
 - job:
     name: system-config-promote-image-jinja-init
     description: Promote a previously published jinja-init image to latest
-    parent: system-config-promote-image
+    parent:
+      - system-config-promote-image
+      - system-config-image-jinja-init-info
     secrets:
       name: credentials
       secret: system-config-dockerhub
-
-- job:
-    name: system-config-promote-image-jinja-init
-    parent: system-config-image-jinja-init-info
 
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
