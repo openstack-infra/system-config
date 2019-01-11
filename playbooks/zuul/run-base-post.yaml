@@ -54,6 +54,30 @@
       become: yes
       loop: "{{ _to_collect }}"
 
+    - name: List containers
+      command: "docker ps -a --format '{{ '{{ .Names }}' }}'"
+      register: docker_containers
+      ignore_errors: true
+      become: true
+
+    - name: Create container log dir
+      file:
+        path: "/var/log/docker"
+        state: directory
+      become: true
+
+    - name: Save container logs
+      loop: "{{ docker_containers.stdout_lines | default([]) }}"
+      shell: "docker logs {{ item }} > /var/log/docker/{{item}}"
+      become: true
+
+    - name: 'Collect container logs for {{ inventory_hostname }}'
+      synchronize:
+        dest: "{{ log_dir }}/"
+        mode: pull
+        src: "/var/log/docker"
+      become: yes
+
 - hosts: bridge.openstack.org
   tasks:
     - name: Set log directory

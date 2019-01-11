@@ -27,6 +27,8 @@ groups:
   dns:
     - adns*.opendev.org
     - ns*.opendev.org
+  docker:
+    - review.opendev.org
   eavesdrop: eavesdrop[0-9]*.open*.org
   elasticsearch: elasticsearch[0-9]*.open*.org
   ethercalc: ethercalc*.open*.org
@@ -65,7 +67,7 @@ groups:
     - pbx*.open*.org
     - planet[0-9]*.open*.org
     - review-dev[0-9]*.open*.org
-    - review[0-9]*.open*.org
+    - review[0-9]*.openstack.org
     - storyboard-dev[0-9]*.open*.org
     - storyboard[0-9]*.open*.org
     - static[0-9]*.open*.org
@@ -156,7 +158,7 @@ groups:
     - planet[0-9]*.open*.org
     - refstack*.open*.org
     - review-dev[0-9]*.open*.org
-    - review[0-9]*.open*.org
+    - review[0-9]*.openstack.org
     - static*.open*.org
     - status*.open*.org
     - storyboard*.open*.org
