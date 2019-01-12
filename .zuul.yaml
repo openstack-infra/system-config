@@ -223,6 +223,49 @@
     vars: *gitea-init_vars
     files: *gitea-init_files
 
+- job:
+    name: system-config-build-image-gerrit
+    description: Build a gerrit image
+    parent: system-config-build-image
+    pre-run: playbooks/zuul/gerrit/repos.yaml
+    required-projects:
+      - name: gerrit.googlesource.com/gerrit
+        override-checkout: stable-2.15
+      - name: gerrit.googlesource.com/plugins/its-base
+        override-checkout: stable-2.15
+      - name: gerrit.googlesource.com/plugins/its-storyboard
+        override-checkout: stable-2.15
+      - name: gerrit.googlesource.com/plugins/javamelody
+        override-checkout: stable-2.15
+    vars: &gerrit_vars
+      images:
+        - context: docker/gerrit
+          target: gerrit
+          repository: opendevorg/gerrit
+          path: /home/zuul/src/gerrit.googlesource.com/gerrit
+          tags:
+            - 2.15
+          build_args:
+            - BAZEL_OPTS="--local_resources=4096,2.0,1.0"
+    files: &gerrit_files
+      - docker/gerrit/.*
+      - playbooks/zuul/gerrit/.*
+
+- job:
+    name: system-config-upload-image-gerrit
+    description: Build and upload a gerrit image
+    parent: system-config-upload-image
+    pre-run: playbooks/zuul/gerrit/repos.yaml
+    vars: *gerrit_vars
+    files: *gerrit_files
+
+- job:
+    name: system-config-promote-image-gerrit
+    description: Promote a previously published gerrit image to latest
+    parent: system-config-promote-image
+    vars: *gerrit_vars
+    files: *gerrit_files
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -508,6 +551,7 @@
         - system-config-build-image-gitea
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
+        - system-config-build-image-gerrit
     gate:
       jobs:
         - tox-linters
@@ -524,8 +568,10 @@
         - system-config-upload-image-gitea
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
+        - system-config-upload-image-gerrit
     promote:
       jobs:
         - system-config-promote-image-gitea
         - system-config-promote-image-jinja-init
         - system-config-promote-image-gitea-init
+        - system-config-promote-image-gerrit
