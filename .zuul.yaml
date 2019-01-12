@@ -214,32 +214,6 @@
     files: *gitea-init_files
 
 - job:
-    name: system-config-build-image-bazel
-    description: Build a bazel image
-    parent: system-config-build-image
-    vars: &bazel_vars
-      images:
-        - context: docker/bazel
-          target: bazel
-          repository: opendevorg/bazel
-    files: &bazel_files
-      - docker/bazel/.*
-
-- job:
-    name: system-config-upload-image-bazel
-    description: Build and upload a bazel image
-    parent: system-config-upload-image
-    vars: *bazel_vars
-    files: *bazel_files
-
-- job:
-    name: system-config-promote-image-bazel
-    description: Promote a previously published bazel image to latest
-    parent: system-config-promote-image
-    vars: *bazel_vars
-    files: *bazel_files
-
-- job:
     name: system-config-build-image-gerrit
     description: Build a gerrit image
     parent: system-config-build-image
@@ -556,7 +530,6 @@
         - system-config-build-image-gitea
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
-        - system-config-build-image-bazel
 	- system-config-build-image-gerrit
     gate:
       jobs:
@@ -574,12 +547,10 @@
         - system-config-upload-image-gitea
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
-        - system-config-upload-image-bazel
 	- system-config-upload-image-gerrit
     promote:
       jobs:
         - system-config-promote-image-gitea
         - system-config-promote-image-jinja-init
         - system-config-promote-image-gitea-init
-        - system-config-promote-image-bazel
 	- system-config-promote-image-gerrit

@@ -13,7 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM opendevorg/bazel as builder
+FROM openjdk:8 as builder
+
+RUN groupadd builder && \
+  useradd builder --home-dir /usr/src --create-home -g builder
+RUN \
+  echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+  && curl -sL https://bazel.build/bazel-release.pub.gpg | apt-key add - \
+  && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+  && apt-get update \
+  && apt-get install -y bazel nodejs build-essential zip unzip python maven \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 COPY . /usr/src
 RUN chown -R builder /usr/src
