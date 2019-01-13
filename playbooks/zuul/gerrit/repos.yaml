@@ -13,6 +13,7 @@
         - its-storyboard
         - its-base
         - javamelody
+        - verify-status
 
     - name: Configure plugin bazel file
       lineinfile:
