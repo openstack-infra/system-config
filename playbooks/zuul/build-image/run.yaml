@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - name: Build a docker image
-      command: "docker build {{ item.path | default('.') }} -f Dockerfile {{ target | default(false) | ternary('--target ', '') }}{{ target | default('') }} --tag {{ item.repository }}:change_{{ zuul.change }}"
+      command: "docker build {{ item.path | default('.') }} -f Dockerfile {{ target | default(false) | ternary('--target ', '') }}{{ target | default('') }} {{ item.build_arg | default(false) | ternary('--build-arg ', '' }}{{ item.build_arg | default('') }} -tag {{ item.repository }}:change_{{ zuul.change }}"
       args:
         chdir: "{{ zuul.project.src_dir }}/{{ item.context }}"
       loop: "{{ images }}"
