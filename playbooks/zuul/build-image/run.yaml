@@ -1,7 +1,12 @@
 - hosts: all
   tasks:
     - name: Build a docker image
-      command: "docker build {{ item.path | default('.') }} -f Dockerfile {{ target | default(false) | ternary('--target ', '') }}{{ target | default('') }} --tag {{ item.repository }}:change_{{ zuul.change }}"
+      command: >-
+        docker build {{ item.path | default('.') }} -f Dockerfile
+        {% if target | default(false) -%}
+          --target {{ target }}
+        {% endif -%}
+        --tag {{ item.repository }}:change_{{ zuul.change }}
       args:
         chdir: "{{ zuul.project.src_dir }}/{{ item.context }}"
       loop: "{{ images }}"

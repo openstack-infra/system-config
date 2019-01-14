@@ -69,6 +69,10 @@
             docker build. Useful for building images with a Dockerfile
             in the context directory but a source repository elsewhere.
 
+         .. zuul:jobvar:: build_args
+
+            Optional; if supplied, a list of values to pass to the docker
+            ``--build-arg`` parameter.
     abstract: true
     pre-run: playbooks/zuul/build-image/pre.yaml
     run: playbooks/zuul/build-image/run.yaml
