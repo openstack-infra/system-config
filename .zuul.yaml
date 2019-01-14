@@ -63,6 +63,12 @@
             uploaded (it will be tagged with this in the local
             registry).
 
+         .. zuul:jobvar:: path
+
+            Optional; if supplied, the directory that should be passed to
+            docker build. Useful for building images with a Dockerfile
+            in the context directory but a source repository elsewhere.
+
     abstract: true
     pre-run: playbooks/zuul/build-image/pre.yaml
     run: playbooks/zuul/build-image/run.yaml
