@@ -1,7 +1,7 @@
 - name: Get dockerhub token
   no_log: true
   uri:
-    url: "https://auth.docker.io/token?service=registry.docker.io&scope=repository:{{image.repository}}:pull,push"
+    url: "https://auth.docker.io/token?service=registry.docker.io&scope=repository:{{ image.repository }}:pull,push"
     user: "{{ credentials.username }}"
     password: "{{ credentials.password }}"
     force_basic_auth: true
@@ -9,7 +9,7 @@
 - name: Get manifest
   no_log: true
   uri:
-    url: "https://registry.hub.docker.com/v2/{{image.repository}}/manifests/change_{{zuul.change}}"
+    url: "https://registry.hub.docker.com/v2/{{ image.repository }}/manifests/change_{{ zuul.change }}"
     status_code: 200
     headers:
       Accept: "application/vnd.docker.distribution.manifestv2+json"
@@ -22,10 +22,18 @@
   loop_control:
     loop_var: new_tag
   uri:
-    url: "https://registry.hub.docker.com/v2/{{image.repository}}/manifests/{{ new_tag }}"
+    url: "https://registry.hub.docker.com/v2/{{ image.repository }}/manifests/{{ new_tag }}"
     method: PUT
     status_code: 201
     body: "{{ manifest.content | string }}"
     headers:
       Content-Type: "application/vnd.docker.distribution.manifestv2+json"
       Authorization: "Bearer {{ token.json.token }}"
+- name: Delete the current change tag
+  no_log: true
+  uri:
+    url: "https://hub.docker.com/v2/repositories/{{ image.repository }}/tags/change_{{ zuul.change }}/"
+    method: DELETE
+    status_code: 204
+    headers:
+      Authorization: "JWT {{ jwt_token.json.token }}"
