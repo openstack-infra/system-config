@@ -29,6 +29,10 @@ zuul_connections:
     driver: 'github'
     app_key: '/etc/zuul/github.key'
 
+  - name: 'googlesource'
+    driver: 'git'
+    baseurl: https://gerrit.googlesource.com/
+
 gearman_server_ssl_cert: |
   -----BEGIN CERTIFICATE-----
   MIIEYTCCA0mgAwIBAgIJAKkAn3gh0LBPMA0GCSqGSIb3DQEBCwUAMIG5MQswCQYD
