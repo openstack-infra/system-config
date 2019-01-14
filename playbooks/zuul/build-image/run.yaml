@@ -5,3 +5,4 @@
       args:
         chdir: "{{ zuul.project.src_dir }}/{{ item.context }}"
       loop: "{{ images }}"
+      environment: "{{ item.environment | default({}) }}"

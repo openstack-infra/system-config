@@ -69,6 +69,10 @@
             docker build. Useful for building images with a Dockerfile
             in the context directory but a source repository elsewhere.
 
+         .. zuul:jobvar:: environment
+
+            Optional; if supplied, a dictionary of environment variables
+            to set.
     abstract: true
     pre-run: playbooks/zuul/build-image/pre.yaml
     run: playbooks/zuul/build-image/run.yaml
