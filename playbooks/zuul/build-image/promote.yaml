@@ -1,10 +1,22 @@
 - hosts: localhost
   tasks:
-    - name: Promote dockerhub image
-      when: credentials is defined
-      block:
-        - name: Promote image
-          loop: "{{ images }}"
-          loop_control:
-            loop_var: image
-          include_tasks: promote-retag.yaml
+    # This is used by the delete tasks
+    - name: Get dockerhub JWT token
+      no_log: true
+      uri:
+        url: "https://hub.docker.com/v2/users/login/"
+        body_format: json
+        body:
+          username: "{{ credentials.username }}"
+          password: "{{ credentials.password }}"
+      register: jwt_token
+    - name: Promote image
+      loop: "{{ images }}"
+      loop_control:
+        loop_var: image
+      include_tasks: promote-retag.yaml
+    - name: Delete obsolete tags
+      loop: "{{ images }}"
+      loop_control:
+        loop_var: image
+      include_tasks: promote-delete-tag.yaml
