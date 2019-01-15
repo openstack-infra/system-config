@@ -42,4 +42,4 @@ zuul_connections:
 
   - name: 'googlesource'
     driver: 'git'
-    baseurl: https://gerrit.googlesource.com/
+    baseurl: https://gerrit.googlesource.com
