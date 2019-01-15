@@ -66,7 +66,7 @@ class openstack_project::review_dev (
       ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
       email                               => 'review-dev@openstack.org',
       war                                 =>
-        'http://logs.openstack.org/90/630390/1/check/gerrit-buck/159a508/gerrit/gerrit/buck-out/gen/gerrit-v2.13.12.8.6c12de7.war',
+        'https://tarballs.openstack.org/gerrit/gerrit-v2.13.12.11.1707fec.war',
       acls_dir                            => $::project_config::gerrit_acls_dir,
       notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
       projects_file                       => $::project_config::jeepyb_project_file,
