@@ -136,6 +136,36 @@
     vars: *gitea-init_vars
     files: *gitea-init_files
 
+# Gitea jobs
+- job:
+    name: system-config-build-image-gitea
+    description: Build a gitea image.
+    parent: system-config-build-image
+    vars: &gitea_vars
+      images:
+        - context: docker/gitea
+          target: gitea
+          repository: opendevorg/gitea
+        - context: docker/gitea
+          target: gitea-openssh
+          repository: opendevorg/gitea-openssh
+    files: &gitea_files
+      - docker/gitea/.*
+
+- job:
+    name: system-config-upload-image-gitea
+    description: Build and upload a gitea image.
+    parent: system-config-upload-image
+    vars: *gitea_vars
+    files: *gitea_files
+
+- job:
+    name: system-config-promote-image-gitea
+    description: Promote a previously published gitea image to latest.
+    parent: system-config-promote-image
+    vars: *gitea_vars
+    files: *gitea_files
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -420,6 +450,7 @@
         - system-config-run-docker
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
+        - system-config-build-image-gitea
     gate:
       jobs:
         - tox-linters
@@ -435,7 +466,9 @@
         - system-config-run-docker
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
+        - system-config-upload-image-gitea
     promote:
       jobs:
         - system-config-promote-image-jinja-init
         - system-config-promote-image-gitea-init
+        - system-config-promote-image-gitea
