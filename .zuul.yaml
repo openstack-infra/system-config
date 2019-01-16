@@ -82,6 +82,33 @@
     nodeset:
       nodes: []
 
+# Jinja-init jobs
+- job:
+    name: system-config-build-image-jinja-init
+    description: Build a jinja-init image.
+    parent: system-config-build-image
+    vars: &jinja-init_vars
+      images:
+        - context: docker/jinja-init
+          target: jinja-init
+          repository: opendevorg/jinja-init
+    files: &jinja-init_files
+      - docker/jinja-init/.*
+
+- job:
+    name: system-config-upload-image-jinja-init
+    description: Build and upload a jinja-init image.
+    parent: system-config-upload-image
+    vars: *jinja-init_vars
+    files: *jinja-init_files
+
+- job:
+    name: system-config-promote-image-jinja-init
+    description: Promote a previously published jinja-init image to latest.
+    parent: system-config-promote-image
+    vars: *jinja-init_vars
+    files: *jinja-init_files
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -364,6 +391,7 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-build-image-jinja-init
     gate:
       jobs:
         - tox-linters
@@ -377,3 +405,7 @@
         - system-config-run-eavesdrop
         - system-config-run-nodepool
         - system-config-run-docker
+        - system-config-upload-image-jinja-init
+    promote:
+      jobs:
+        - system-config-promote-image-jinja-init
