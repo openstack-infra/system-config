@@ -24,7 +24,7 @@
     Require all granted
   </Directory>
 
-  <% if @auth_openid != nil %>
+  <% if scope.lookupvar("openstack_project::survey::auth_openid") != nil %>
     <Location /index.php/admin/>
       AuthType OpenID
       AuthName "Welcome"
