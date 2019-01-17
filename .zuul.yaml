@@ -48,6 +48,7 @@
       <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-build-docker-image>`_
       for details.
     abstract: true
+    allowed-projects: openstack-infra/system-config
     pre-run: playbooks/zuul/build-image/pre.yaml
     run: playbooks/zuul/build-image/run.yaml
 
@@ -61,6 +62,7 @@
       <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-upload-docker-image>`_
       for details.
     abstract: true
+    allowed-projects: openstack-infra/system-config
     post-run: playbooks/zuul/build-image/upload.yaml
     secrets:
       name: credentials
@@ -75,6 +77,7 @@
       <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-promote-docker-image>`_
       for details.
     abstract: true
+    allowed-projects: openstack-infra/system-config
     run: playbooks/zuul/build-image/promote.yaml
     secrets:
       name: credentials
