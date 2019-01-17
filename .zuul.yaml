@@ -65,7 +65,7 @@
     allowed-projects: openstack-infra/system-config
     post-run: playbooks/zuul/build-image/upload.yaml
     secrets:
-      name: credentials
+      name: docker_credentials
       secret: system-config-dockerhub
 
 - job:
@@ -80,7 +80,7 @@
     allowed-projects: openstack-infra/system-config
     run: playbooks/zuul/build-image/promote.yaml
     secrets:
-      name: credentials
+      name: docker_credentials
       secret: system-config-dockerhub
     nodeset:
       nodes: []
@@ -91,7 +91,7 @@
     description: Build a jinja-init image.
     parent: system-config-build-image
     vars: &jinja-init_vars
-      images:
+      docker_images:
         - context: docker/jinja-init
           target: jinja-init
           repository: opendevorg/jinja-init
@@ -118,7 +118,7 @@
     description: Build a gitea-init image.
     parent: system-config-build-image
     vars: &gitea-init_vars
-      images:
+      docker_images:
         - context: docker/gitea-init
           target: gitea-init
           repository: opendevorg/gitea-init
@@ -145,7 +145,7 @@
     description: Build a gitea image.
     parent: system-config-build-image
     vars: &gitea_vars
-      images:
+      docker_images:
         - context: docker/gitea
           target: gitea
           repository: opendevorg/gitea
@@ -197,7 +197,7 @@
       - name: gerrit.googlesource.com/plugins/singleusergroup
         override-checkout: stable-2.15
     vars: &gerrit_vars
-      images:
+      docker_images:
         - context: docker/gerrit
           target: gerrit
           repository: opendevorg/gerrit
