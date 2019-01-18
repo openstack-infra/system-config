@@ -226,6 +226,35 @@
     vars: *gerrit_vars
     files: *gerrit_files
 
+# python-builder jobs
+- job:
+    name: system-config-build-image-python-builder
+    description: Build a python-builder image.
+    parent: system-config-build-image
+    vars: &python-builder_vars
+      docker_images:
+        - context: docker/python-builder
+          target: python-builder
+          repository: opendevorg/python-builder
+        - context: docker/python-builder
+          target: python-base
+          repository: opendevorg/python-base
+    files: &python-builder_files
+      - docker/python-builder/.*
+
+- job:
+    name: system-config-upload-image-python-builder
+    description: Build and upload a python-builder image.
+    parent: system-config-upload-image
+    vars: *python-builder_vars
+    files: *python-builder_files
+
+- job:
+    name: system-config-promote-image-python-builder
+    description: Promote a previously published python-builder image to latest.
+    parent: system-config-promote-image
+    vars: *python-builder_vars
+    files: *python-builder_files
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -512,6 +541,7 @@
         - system-config-build-image-gitea-init
         - system-config-build-image-gitea
         - system-config-build-image-gerrit
+        - system-config-build-image-python-builder
     gate:
       jobs:
         - tox-linters
@@ -529,9 +559,11 @@
         - system-config-upload-image-gitea-init
         - system-config-upload-image-gitea
         - system-config-upload-image-gerrit
+        - system-config-upload-image-python-builder
     promote:
       jobs:
         - system-config-promote-image-jinja-init
         - system-config-promote-image-gitea-init
         - system-config-promote-image-gitea
         - system-config-promote-image-gerrit
+        - system-config-promote-image-python-builder
