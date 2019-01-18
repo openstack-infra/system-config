@@ -36,16 +36,14 @@ if [ -f bindep.txt -o -f other-requirements.txt ] ; then
   fi
 fi
 
-# Now that we have the list of bindep requirements, install the things
-# needed to build wheels. This includes javascript tools, as there
-# are pbr/bindep projects that require javascript to be present to
-# build their tools.
-apt-get install -y apt-transport-https curl gnupg2 git
-curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://deb.nodesource.com/node_8.x xenial main\ndeb https://dl.yarnpkg.com/debian/ stable main" >> /etc/apt/sources.list
-apt-get update
-apt-get install -y nodejs yarn
+apt-get install -y git
+
+# Now that we have the list of bindep requirements, install extra
+# things, if any, that are needed to build wheels.
+if [ -f "$ASSEMBLE_HOOK" ] ; then
+  $ASSEMBLE_HOOK
+fi
+
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
