@@ -123,7 +123,7 @@ class openstack_project::review (
       httpd_maxthreads                    => '100',
       httpd_maxqueued                     => '200',
       war                                 =>
-        'http://tarballs.openstack.org/ci/gerrit/gerrit-v2.13.9.4.2a605d5.war',
+        'https://tarballs.openstack.org/gerrit/gerrit-v2.13.12.11.1707fec.war',
       acls_dir                            => $::project_config::gerrit_acls_dir,
       notify_impact_file                  => $::project_config::gerrit_notify_impact_file,
       projects_file                       => $::project_config::jeepyb_project_file,
