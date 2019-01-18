@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import configparser
+import os
+import sys
+
+
+def get_extras_packages(path):
+    config = configparser.ConfigParser()
+    config.read('setup.cfg')
+    config = dict(dict(config.items()).get('extras', {}).items())
+
+    extras = set()
+    for name, packages in config.items():
+        for package in packages.split('\n'):
+            package = package.strip()
+            if not package:
+                continue
+            extras.add(package)
+        outpath = os.path.join(path, name, 'requirements.txt')
+        os.mkdir(os.path.dirname(outpath))
+        with open(outpath, 'w') as outfile:
+            outfile.write(packages)
+
+    return " ".join(["'{v}'".format(v=v) for v in extras])
+
+
+if __name__ == '__main__':
+    path = '/output'
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+    print(get_extras_packages(path))
