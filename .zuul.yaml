@@ -236,6 +236,9 @@
         - context: docker/python-builder
           target: python-builder
           repository: opendevorg/python-builder
+        - context: docker/python-builder
+          target: python-base
+          repository: opendevorg/python-base
     files: &python-builder_files
       - docker/python-builder/.*
 
