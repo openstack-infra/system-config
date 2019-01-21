@@ -18,6 +18,13 @@ set -e
 
 apt-get update
 apt-get -y install $(cat /output/bindep/run.txt)
+# If a requirements.txt file exists,
+# install it directly so that people can use git url syntax
+# to do things like pick up patched but unreleased versions
+# of dependencies.
+if [ -f /output/requirements.txt ] ; then
+    pip install --cache-dir=/output/wheels -r /output/requirements.txt
+fi
 pip install --cache-dir=/output/wheels /output/wheels/*.whl
 
 # clean up after ourselves

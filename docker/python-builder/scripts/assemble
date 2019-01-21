@@ -59,7 +59,14 @@ python -m venv /tmp/venv
 /tmp/venv/bin/pip install -U pip wheel
 
 # Install everything so that the wheel cache is populated
-# with transitive depends.
+# with transitive depends. If a requirements.txt file exists,
+# install it directly so that people can use git url syntax
+# to do things like pick up patched but unreleased versions
+# of dependencies.
+if [ -f /tmp/src/requirements.txt ] ; then
+    /tmp/venv/bin/pip install --cache-dir=/output/wheels -r /tmp/src/requirements.txt
+    cp /tmp/src/requirements.txt /output/requirements.txt
+fi
 /tmp/venv/bin/pip install --cache-dir=/output/wheels /output/wheels/*whl
 
 # Install each of the extras so that we collect all possibly
