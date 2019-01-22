@@ -149,7 +149,7 @@ groups:
     - mirror[0-9]*.open*.org
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
-    - openstackid-dev*.open*.org
+    - openstackid-dev*.openstack.org
     - openstackid.org
     - paste[0-9]*.open*.org
     - pbx*.open*.org
@@ -207,7 +207,7 @@ groups:
     - health*.open*.org
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
-    - openstackid-dev*.open*.org
+    - openstackid-dev*.openstack.org
     - openstackid.org
     - paste[0-9]*.open*.org
     - planet[0-9]*.open*.org
