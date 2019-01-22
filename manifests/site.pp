@@ -1031,7 +1031,8 @@ node 'openstackid.org' {
 }
 
 # Node-OS: xenial
-node 'openstackid-dev.openstack.org' {
+node /^openstackid-dev\d*.open.*\.org$/ {
+  $group = "openstackid-dev"
   class { 'openstack_project::openstackid_dev':
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
     id_mysql_host               => hiera('openstackid_dev_id_mysql_host', 'localhost'),
