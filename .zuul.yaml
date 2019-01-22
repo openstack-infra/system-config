@@ -234,11 +234,7 @@
     vars: &python-builder_vars
       docker_images:
         - context: docker/python-builder
-          target: python-builder
           repository: opendevorg/python-builder
-        - context: docker/python-builder
-          target: python-base
-          repository: opendevorg/python-base
     files: &python-builder_files
       - docker/python-builder/.*
 
@@ -255,6 +251,33 @@
     parent: system-config-promote-image
     vars: *python-builder_vars
     files: *python-builder_files
+
+# python-base jobs
+- job:
+    name: system-config-build-image-python-base
+    description: Build a python-base image.
+    parent: system-config-build-image
+    vars: &python-base_vars
+      docker_images:
+        - context: docker/python-base
+          repository: opendevorg/python-base
+    files: &python-base_files
+      - docker/python-base/.*
+
+- job:
+    name: system-config-upload-image-python-base
+    description: Build and upload a python-base image.
+    parent: system-config-upload-image
+    vars: *python-base_vars
+    files: *python-base_files
+
+- job:
+    name: system-config-promote-image-python-base
+    description: Promote a previously published python-base image to latest.
+    parent: system-config-promote-image
+    vars: *python-base_vars
+    files: *python-base_files
+
 # Role integration jobs.  These test the top-level generic roles/*
 # under Zuul.  The range of platforms should be the same as those for
 # openstack-zuul-jobs.
@@ -541,6 +564,7 @@
         - system-config-build-image-gitea-init
         - system-config-build-image-gitea
         - system-config-build-image-gerrit
+        - system-config-build-image-python-base
         - system-config-build-image-python-builder
     gate:
       jobs:
@@ -559,6 +583,7 @@
         - system-config-upload-image-gitea-init
         - system-config-upload-image-gitea
         - system-config-upload-image-gerrit
+        - system-config-upload-image-python-base
         - system-config-upload-image-python-builder
     promote:
       jobs:
@@ -566,4 +591,5 @@
         - system-config-promote-image-gitea-init
         - system-config-promote-image-gitea
         - system-config-promote-image-gerrit
+        - system-config-promote-image-python-base
         - system-config-promote-image-python-builder
