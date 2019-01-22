@@ -15,9 +15,9 @@
 
 FROM python:slim as fake-python
 
-COPY python3-dev.control /tmp/python3-dev.control
 WORKDIR /tmp
 RUN apt-get update && apt-get install -y equivs
+COPY python3-dev.control /tmp/python3-dev.control
 RUN equivs-build /tmp/python3-dev.control
 
 FROM python:slim as python-builder
