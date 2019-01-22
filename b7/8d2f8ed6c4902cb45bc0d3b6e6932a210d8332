@@ -1,0 +1,9 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 22 Jan 2019 20:19:31 +0000
+Reviewed-on: https://review.openstack.org/632529
+Project: openstack-infra/system-config
+Branch: refs/heads/master
