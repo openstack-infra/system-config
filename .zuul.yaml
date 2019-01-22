@@ -234,12 +234,11 @@
     vars: &python-builder_vars
       docker_images:
         - context: docker/python-builder
-          target: python-builder
           repository: opendevorg/python-builder
-        - context: docker/python-builder
-          target: python-base
+        - context: docker/python-base
           repository: opendevorg/python-base
     files: &python-builder_files
+      - docker/python-base/.*
       - docker/python-builder/.*
 
 - job:
