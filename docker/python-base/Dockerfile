@@ -13,19 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:slim as fake-python
-
-WORKDIR /tmp
-RUN apt-get update && apt-get install -y equivs
-COPY python3-dev.control /tmp/python3-dev.control
-RUN equivs-build /tmp/python3-dev.control
-
 FROM python:slim
 
-COPY --from=fake-python /tmp/python3-dev_4.0.0_all.deb /tmp/python3-dev_4.0.0_all.deb
-COPY scripts/assemble /usr/local/bin/assemble
-COPY scripts/get-extras-packages /usr/local/bin/get-extras-packages
-COPY scripts/install-from-bindep /output/install-from-bindep
-RUN dpkg -i /tmp/python3-dev_4.0.0_all.deb \
-  && rm /tmp/python3-dev_4.0.0_all.deb \
-  && pip install bindep
+RUN apt-get update \
+  && apt-get install -y dumb-init \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
