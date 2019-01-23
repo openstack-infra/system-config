@@ -50,6 +50,12 @@ exim_routers:
   - dnslookup: '{{ exim_dnslookup_router }}'
   - system_aliases: '{{ exim_system_aliases_router }}'
   - localuser: '{{ exim_localuser_router }}'
+  - mailman_copy: |
+      driver = accept
+      domains = lists.openstack.org
+      local_parts = openstack-discuss
+      transport = local_copy
+      unseen
   - mailman_router: |
       driver = accept
       domains = {{ mm_domains }}
@@ -63,6 +69,11 @@ exim_routers:
       require_files = ${lookup{${lc::$domain}}lsearch{/etc/mailman/sites}}/lists/${lc::$local_part}/config.pck
       transport = mailman_transport
 exim_transports:
+  - local_copy: |
+      driver = appendfile
+      file = /var/mail/$local_part
+      group = mail
+      mode = 0660
   - mailman_transport: |
       driver = pipe
       command = /var/lib/mailman/mail/mailman \
