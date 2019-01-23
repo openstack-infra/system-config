@@ -560,6 +560,7 @@ node /^refstack\d*\.open.*\.org$/ {
 # Node-OS: trusty
 # Node-OS: xenial
 node /^storyboard\d*\.open.*\.org$/ {
+  $group = "storyboard"
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
@@ -572,13 +573,13 @@ node /^storyboard\d*\.open.*\.org$/ {
     ssl_key                 => '/etc/ssl/private/storyboard.openstack.org.key',
     ssl_key_file_contents   => hiera('storyboard_ssl_key_file_contents'),
     ssl_chain_file_contents => hiera('storyboard_ssl_chain_file_contents'),
-    hostname                => $::fqdn,
+    hostname                => 'storyboard.openstack.org',
     valid_oauth_clients     => [
-      $::fqdn,
+      'storyboard.openstack.org',
       'logs.openstack.org',
     ],
     cors_allowed_origins     => [
-      "https://${::fqdn}",
+      'https://storyboard.openstack.org',
       'http://logs.openstack.org',
     ],
     sender_email_address => 'storyboard@storyboard.openstack.org',
