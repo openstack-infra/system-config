@@ -41,49 +41,26 @@
 
 - job:
     name: system-config-build-image
-    description: |
-      Build a docker image.
-
-      See the `role documentation
-      <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-build-docker-image>`_
-      for details.
+    parent: build-docker-image
     abstract: true
-    allowed-projects: openstack-infra/system-config
-    pre-run: playbooks/zuul/build-image/pre.yaml
-    run: playbooks/zuul/build-image/run.yaml
 
 - job:
     name: system-config-upload-image
-    parent: system-config-build-image
-    description: |
-      Build and upload a docker image.
-
-      See the `role documentation
-      <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-upload-docker-image>`_
-      for details.
+    parent: upload-docker-image
     abstract: true
-    allowed-projects: openstack-infra/system-config
-    post-run: playbooks/zuul/build-image/upload.yaml
     secrets:
       name: docker_credentials
       secret: system-config-dockerhub
+      pass-to-parent: true
 
 - job:
     name: system-config-promote-image
-    description: |
-      Retag a previously-uploaded docker image.
-
-      See the `role documentation
-      <https://zuul-ci.org/docs/zuul-jobs/roles.html#role-promote-docker-image>`_
-      for details.
+    parent: promote-docker-image
     abstract: true
-    allowed-projects: openstack-infra/system-config
-    run: playbooks/zuul/build-image/promote.yaml
     secrets:
       name: docker_credentials
       secret: system-config-dockerhub
-    nodeset:
-      nodes: []
+      pass-to-parent: true
 
 # Jinja-init jobs
 - job:
