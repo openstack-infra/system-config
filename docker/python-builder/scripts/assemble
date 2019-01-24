@@ -40,6 +40,12 @@ fi
 # pbr needs git installed, else nothing will work
 apt-get install -y git
 
+# If a pip.conf file is in the source directory, use it for
+# the wheel building.
+if [ -f .python-builder-pip.conf ] ; then
+  cp .python-builder-pip.conf /etc/pip.conf
+fi
+
 # Build a wheel so that we have an install target.
 # pip install . in the container context with the mounted
 # source dir gets ... exciting.
