@@ -6,28 +6,27 @@ DNS
 ###
 
 The project runs authoritative DNS servers for any constituent
-projects that wish to use them.  The servers run NSD.
+projects that wish to use them.  The servers run Bind on a hidden
+master which handles automatic DNSSEC zone signing while the public
+authoritative servers run NSD.
 
 At a Glance
 ===========
 
 :Hosts:
-  * ns1.openstack.org
-  * ns2.openstack.org
   * ns1.opendev.org
   * ns2.opendev.org
-:Puppet:
-  * :cgit_file:`manifests/site.pp`
+:Ansible:
+  * :cgit_file:`playbooks/group_vars/dns.yaml`
 :Projects:
-  * https://github.com/icann-dns/puppet-nsd
   * https://www.nlnetlabs.nl/projects/nsd/
 
 Adding a Zone
 =============
 
-To add a new zone, add an entry to :cgit_file:`manifests/site.pp`,
-:cgit_file:`modules/openstack_project/manifests/master_nameserver.pp` and
-create a new git repository to hold the contents of the zone.
+To add a new zone, identify an existing git repository or create a new
+one to hold the contents of the zone, then update
+:cgit_file:`playbooks/group_vars/dns.yaml`.
 
 Run::
 
@@ -35,12 +34,10 @@ Run::
   dnssec-keygen -a RSASHA256 -b 2048 -3 -fk example.net
 
 And add the resulting files to the `dnssec_keys` key in the
-`group/adns.yaml` private hiera file on puppetmaster.
+`group/adns.yaml` private hostvars file on puppetmaster.
 
 If you need to generate DS records for the registrar, identify which
-of the just-created key files is the key-signing key (examine the
-contents of the files and read the comments therein).  Then run::
+of the just-created key files is the key-signing key by examining the
+contents of the files and reading the comments therein, then run::
 
   dnssec-dsfromkey -2 $KEYFILE
-
-.. note:: This section will be expanded.
