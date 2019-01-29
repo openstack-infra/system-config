@@ -930,6 +930,22 @@ node /^zuul\d+\.open.*\.org$/ {
         template   => 'zuul/zuulv3.vhost.erb',
         vhost_name => 'zuul.opendev.org',
       },
+      'zuul.openstack.org-http' => {
+        port       => 80,
+        docroot    => '/opt/zuul-web/content',
+        priority   => '50',
+        ssl        => false,
+        template   => 'zuul/zuulv3.vhost.erb',
+        vhost_name => 'zuul.openstack.org',
+      },
+      'zuul.opendev.org-http' => {
+        port       => 80,
+        docroot    => '/opt/zuul-web/content',
+        priority   => '40',
+        ssl        => false,
+        template   => 'zuul/zuulv3.vhost.erb',
+        vhost_name => 'zuul.opendev.org',
+      },
     },
     vhosts_flags => {
       'zuul.openstack.org' => {
@@ -939,6 +955,14 @@ node /^zuul\d+\.open.*\.org$/ {
       'zuul.opendev.org' => {
         tenant_name => '',
         ssl         => true,
+      },
+      'zuul.openstack.org-http' => {
+        tenant_name => 'openstack',
+        ssl         => false,
+      },
+      'zuul.opendev.org-http' => {
+        tenant_name => '',
+        ssl         => false,
       },
     },
     vhosts_ssl => {
