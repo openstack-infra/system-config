@@ -913,11 +913,46 @@ node /^zuul\d+\.open.*\.org$/ {
   }
 
   class { '::zuul::web':
-    tenant_name             => 'openstack',
-    vhost_name              => 'zuul.openstack.org',
-    ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
-    ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
-    ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
+    vhosts = {
+      'zuul.openstack.org' => {
+        port       => 443,
+        docroot    => '/opt/zuul-web/content',
+        priority   => '50',
+        ssl        => true,
+        template   => 'zuul/zuulv3.vhost.erb',
+        vhost_name => 'zuul.openstack.org',
+      },
+      'zuul.opendev.org' => {
+        port       => 443,
+        docroot    => '/opt/zuul-web/content',
+        priority   => '40',
+        ssl        => true,
+        template   => 'zuul/zuulv3.vhost.erb',
+        vhost_name => 'zuul.opendev.org',
+      },
+    },
+    vhosts_flags = {
+      'zuul.openstack.org' => {
+        tenant_name => 'openstack',
+        ssl         => true,
+      },
+      'zuul.opendev.org' => {
+        tenant_name => '',
+        ssl         => true,
+      },
+    },
+    vhosts_ssl = {
+      'zuul.openstack.org' => {
+        ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
+        ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
+        ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
+      },
+      'zuul.opendev.org' => {
+        ssl_cert_file_contents  => hiera('opendev_zuul_ssl_cert_file_contents'),
+        ssl_chain_file_contents => hiera('opendev_zuul_ssl_chain_file_contents'),
+        ssl_key_file_contents   => hiera('opendev_zuul_ssl_key_file_contents'),
+      },
+    },
   }
 
   class { '::zuul::fingergw': }
