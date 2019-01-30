@@ -15,63 +15,14 @@
         - "{{ zuul.executor.log_root }}/hosts/bridge.openstack.org/ara-report"
 
 - hosts: all
-  tasks:
-    - name: Set log directory
-      set_fact:
-        log_dir: "{{ zuul.executor.log_root }}/hosts/{{ inventory_hostname }}/logs"
-
-    - name: Create list of files to collect
-      set_fact:
-        _to_collect: []
-
-    - name: Check for /var/log/syslog (debuntu)
-      stat:
-        path: '/var/log/syslog'
-      register: _syslog
-      become: yes
-
-    - name: Collect syslog
-      set_fact:
-        _to_collect: '{{ _to_collect + [_syslog.stat.path] }}'
-      when: _syslog.stat.exists
-
-    - name: Check for /var/log/messages (rpmish)
-      stat:
-        path: '/var/log/messages'
-      register: _messages
-      become: yes
-
-    - name: Collect messages
-      set_fact:
-        _to_collect: '{{ _to_collect + [_messages.stat.path] }}'
-      when: _messages.stat.exists
-
-    - name: 'Collect logs for {{ inventory_hostname }}'
-      synchronize:
-        dest: "{{ log_dir }}/{{ item | basename }}"
-        mode: pull
-        src: "{{ item }}"
-      become: yes
-      loop: "{{ _to_collect }}"
+  roles:
+    - stage-output
 
 - hosts: bridge.openstack.org
   tasks:
     - name: Set log directory
       set_fact:
         log_dir: "{{ zuul.executor.log_root }}/hosts/{{ inventory_hostname }}"
-
-    - name: Register junit.xml file
-      stat:
-        path: "{{ zuul.project.src_dir }}/junit.xml"
-      register: _junit
-
-    - name: Collect testinfra logs
-      synchronize:
-        dest: "{{ zuul.executor.log_root }}"
-        mode: pull
-        src: "{{ zuul.project.src_dir }}/junit.xml"
-        verify_host: true
-      when: _junit.stat.exists|bool
 
       # Because during the test we run ansible as root, we need
       # to allow ourselves permissions to copy the results
