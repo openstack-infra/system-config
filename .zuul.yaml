@@ -339,6 +339,14 @@
     post-run: playbooks/zuul/run-base-post.yaml
     vars:
       install_ansible_ara_enable: true
+      zuul_copy_output: "{{ copy_output | combine(host_copy_output | default({})) }}"
+      copy_output:
+        '/var/log/syslog': logs
+        '/var/log/messages': logs
+    host-vars:
+      bridge.openstack.org:
+        host_copy_output:
+          '{{ zuul.project.src_dir }}/junit.xml': logs
 
 - job:
     name: system-config-run-base
