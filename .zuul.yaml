@@ -344,6 +344,7 @@
       copy_output:
         '/var/log/syslog': logs
         '/var/log/messages': logs
+        '/var/log/docker': logs
     host-vars:
       bridge.openstack.org:
         host_copy_output:
