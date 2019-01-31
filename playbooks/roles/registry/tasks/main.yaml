@@ -1,0 +1,35 @@
+- name: Synchronize docker-compose directory
+  synchronize:
+    src: registry-docker/
+    dest: /etc/registry-docker/
+- name: Ensure registry volume directories exists
+  file:
+    state: directory
+    path: "/var/registry/{{ item }}"
+  loop:
+    - data
+    - certs
+    - auth
+- name: Write htpassword file
+  htpasswd:
+    create: true
+    path: /var/registry/auth/htpassword
+    name: "{{ registry_user }}"
+    password: "{{ registry_password }}"
+- name: Write TLS private key
+  copy:
+    content: "{{ registry_tls_key }}"
+    dest: /var/registry/certs/domain.key
+- name: Write TLS certificate
+  copy:
+    content: "{{ registry_tls_cert }}{{ registry_tls_chain | default('') }}"
+    dest: /var/registry/certs/domain.crt
+- name: Install docker-compose
+  package:
+    name:
+      - docker-compose
+    state: present
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/registry-docker/
