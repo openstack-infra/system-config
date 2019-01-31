@@ -57,3 +57,8 @@
   name: "Base: install and configure docker on docker hosts"
   roles:
     - install-docker
+
+- hosts: "review.opendev.org:!disabled"
+  name: "Base: configure review.opendev.org"
+  roles:
+    - gerrit

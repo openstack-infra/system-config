@@ -1,0 +1,32 @@
+- name: Synchronize docker-compose directory
+  synchronize:
+    src: gerrit-docker/
+    dest: /etc/gerrit-docker/
+- name: Ensure Gerrit volume directories exists
+  file:
+    state: directory
+    path: "/var/gerrit/{{ item }}"
+    owner: 1000
+    group: 1000
+    mode: 0755
+  loop:
+    - etc
+    - git
+    - index
+    - cache
+- name: Write Gerrit config file
+  template:
+    src: gerrit.config
+    dest: /var/gerrit/etc/gerrit.config
+    owner: 1000
+    group: 1000
+    mode: 0644
+- name: Install docker-compose
+  package:
+    name:
+      - docker-compose
+    state: present
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/gerrit-docker/
