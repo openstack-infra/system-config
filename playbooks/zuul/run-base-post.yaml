@@ -16,6 +16,31 @@
 
 - hosts: all
   tasks:
+    - name: List containers
+      command: "docker ps -a --format '{{ '{{ .Names }}' }}'"
+      register: docker_containers
+      ignore_errors: true
+      become: true
+
+    - name: Create container log dir
+      file:
+        path: "/var/log/docker"
+        state: directory
+      become: true
+
+    - name: Save container logs
+      loop: "{{ docker_containers.stdout_lines | default([]) }}"
+      shell: "docker logs {{ item }} &> /var/log/docker/{{item}}.txt"
+      executable: /bin/bash
+      become: true
+
+    - name: Open container logs permissions
+      file:
+        dest: /var/log/docker
+        mode: u=rwX,g=rX,o=rX
+        recurse: yes
+      become: yes
+
     - include_role:
         name: stage-output
 
