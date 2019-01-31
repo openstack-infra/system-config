@@ -1,0 +1,16 @@
+# Version 2 is the latest that is supported by docker-compose in
+# Ubuntu Xenial.
+version: '2'
+
+services:
+  gerrit:
+    image: gerritcodereview/gerrit
+    network_mode: host
+    command: "/var/gerrit/bin/gerrit.sh run"
+    volumes:
+      - /var/gerrit/etc:/var/gerrit/etc
+      # Enabling other volumes will require further init steps, since
+      # these may already have data in them from the upstream image.
+      # - /var/gerrit/git:/var/gerrit/git
+      # - /var/gerrit/index:/var/gerrit/index
+      # - /var/gerrit/cache:/var/gerrit/cache
