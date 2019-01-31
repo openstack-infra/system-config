@@ -57,3 +57,9 @@
   name: "Base: install and configure docker on docker hosts"
   roles:
     - install-docker
+
+- hosts: "registry:!disabled"
+  name: "Base: configure registry"
+  roles:
+    - install-docker
+    - registry
