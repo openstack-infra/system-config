@@ -1062,7 +1062,8 @@ node /^backup\d+\..*\.ci\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
-node 'openstackid.org' {
+node /^openstackid\d*(\.openstack)?\.org$/' {
+  $group = "openstackid"
   class { 'openstack_project::openstackid_prod':
     site_admin_password         => hiera('openstackid_site_admin_password'),
     id_mysql_host               => hiera('openstackid_id_mysql_host', 'localhost'),
@@ -1091,7 +1092,7 @@ node 'openstackid.org' {
 }
 
 # Node-OS: xenial
-node /^openstackid-dev\d*.openstack\.org$/ {
+node /^openstackid-dev\d*\.openstack\.org$/ {
   $group = "openstackid-dev"
   class { 'openstack_project::openstackid_dev':
     site_admin_password         => hiera('openstackid_dev_site_admin_password'),
