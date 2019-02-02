@@ -26,7 +26,7 @@ FROM golang:1.11-stretch AS build-env
 
 LABEL maintainer="infra-root@openstack.org"
 
-ARG GITEA_VERSION=v1.6.3
+ARG GITEA_VERSION=v1.7.1
 ENV TAGS "bindata $TAGS"
 
 #Build deps
