@@ -2,12 +2,11 @@
   name: "Puppet-version: install puppet-4 on puppet-4 hosts"
   gather_facts: false
   tasks:
-  - git:
-      repo: https://git.openstack.org/openstack-infra/system-config
-      dest: /opt/system-config
-      force: yes
-  - shell: ./install_puppet.sh
-    args:
-      chdir: /opt/system-config
+  - get_url:
+      url: http://git.openstack.org/cgit/openstack-infra/system-config/plain/install_puppet.sh
+      dest: /tmp/install_puppet.sh
+      mode: 0755
+      checksum: sha256:741b8cfdc039e817bd598511dd7203da16701f213775e639994e8bb278a68239
+  - shell: /tmp/install_puppet.sh
     environment:
       PUPPET_VERSION: 4
