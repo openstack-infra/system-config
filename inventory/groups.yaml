@@ -179,6 +179,8 @@ groups:
     - etherpad-dev[0-9]*.open*.org
   refstack:
     - refstack*.open*.org
+  registry:
+    - insecure-ci-registry[0-9]*.opendev.org
   review-dev:
     - review-dev[0-9]*.open*.org
   review:
