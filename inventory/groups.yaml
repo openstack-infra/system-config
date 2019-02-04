@@ -38,14 +38,6 @@ groups:
     - afs[0-9]*.open*.org
     - afsdb[0-9]*.open*.org
     - ask-staging[0-9]*.open*.org
-    - cacti[0-9]*.open*.org
-    - codesearch[0-9]*.open*.org
-    - eavesdrop[0-9]*.open*.org
-    - elasticsearch[0-9]*.open*.org
-    - ethercalc[0-9]*.open*.org
-    - etherpad[0-9]*.open*.org
-    - files[0-9]*.open*.org
-    - firehose[0-9]*.open*.org
     - git.openstack.org
     - git[0-9]*.openstack.org
     - grafana[0-9]*.open*.org
@@ -180,7 +172,15 @@ groups:
     - zuul[0-9]*.open*.org
     - zk[0-9]*.open*.org
   puppet4:
+    - cacti[0-9]*.open*.org
+    - codesearch[0-9]*.open*.org
+    - eavesdrop[0-9]*.open*.org
+    - elasticsearch[0-9]*.open*.org
+    - ethercalc[0-9]*.open*.org
+    - etherpad[0-9]*.open*.org
     - etherpad-dev[0-9]*.open*.org
+    - files[0-9]*.open*.org
+    - firehose[0-9]*.open*.org
     - groups-dev[0-9]*.open*.org
     - lists-dev[0-9]*.open*.org
     - review-dev[0-9]*.open*.org
