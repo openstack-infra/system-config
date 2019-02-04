@@ -15,8 +15,8 @@ results:
 
   firehose01.openstack.org:
     - firehose
-    - futureparser
     - puppet
+    - puppet4
 
   graphite.openstack.org:
     - graphite
