@@ -186,6 +186,7 @@ groups:
     - etherpad-dev[0-9]*.open*.org
     - files[0-9]*.open*.org
     - firehose[0-9]*.open*.org
+    - git01.openstack.org
     - groups-dev[0-9]*.open*.org
     - lists-dev[0-9]*.open*.org
     - review-dev[0-9]*.open*.org
