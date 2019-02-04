@@ -7,6 +7,8 @@
       git:
         repo: https://github.com/infraly/k8s-on-openstack
         dest: /opt/k8s-on-openstack
+        # HEAD as of 2018-12-20
+        version: 6d94a51f5fcd6679dc88244257f79346fb4bfd4a
         force: yes
 
     - name: Run kubernetes deploy playbook
