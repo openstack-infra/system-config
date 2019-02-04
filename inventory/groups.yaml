@@ -114,6 +114,11 @@ groups:
     - nl[0-9]*.open*.org
   ns:
     - ns[0-9]*.open*.org
+  openstackid-dev:
+    - openstackid-dev*.openstack.org
+  openstackid:
+    - openstackid.org
+    - openstackid[0-9]*.openstack.org
   paste:
     - paste[0-9]*.open*.org
   pbx:
@@ -150,6 +155,7 @@ groups:
     - nl[0-9]*.open*.org
     - openstackid-dev*.openstack.org
     - openstackid.org
+    - openstackid[0-9]*.openstack.org
     - paste[0-9]*.open*.org
     - pbx*.open*.org
     - planet[0-9]*.open*.org
@@ -210,6 +216,7 @@ groups:
     - nl[0-9]*.open*.org
     - openstackid-dev*.openstack.org
     - openstackid.org
+    - openstackid[0-9]*.openstack.org
     - paste[0-9]*.open*.org
     - planet[0-9]*.open*.org
     - refstack*.open*.org
