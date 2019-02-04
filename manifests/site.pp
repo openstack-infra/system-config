@@ -504,6 +504,14 @@ node /^files\d*\.open.*\.org$/ {
     require                       => Class['Openstack_project::Server'],
   }
 
+  # Temporary for evaluating htaccess rules
+  ::httpd::vhost { "git-test.openstack.org":
+    port          => 80, # Is required despite not being used.
+    docroot       => "/afs/openstack.org/project/git-test/www",
+    priority      => '50',
+    template      => 'openstack_project/git-test.vhost.erb',
+  }
+
   openstack_project::website { 'docs.starlingx.io':
     volume_name      => 'starlingx.io',
     aliases          => [],
@@ -518,6 +526,14 @@ node /^files\d*\.open.*\.org$/ {
     ssl_cert         => hiera('opendev_ssl_cert'),
     ssl_key          => hiera('opendev_ssl_key'),
     ssl_intermediate => hiera('opendev_ssl_intermediate'),
+    require          => Class['openstack_project::files'],
+  }
+
+  openstack_project::website { 'zuul-ci.org':
+    aliases          => ['www.zuul-ci.org', 'zuulci.org', 'www.zuulci.org'],
+    ssl_cert         => hiera('zuul-ci_org_ssl_cert'),
+    ssl_key          => hiera('zuul-ci_org_ssl_key'),
+    ssl_intermediate => hiera('zuul-ci_org_ssl_intermediate'),
     require          => Class['openstack_project::files'],
   }
 
