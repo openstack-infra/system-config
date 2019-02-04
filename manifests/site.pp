@@ -504,6 +504,14 @@ node /^files\d*\.open.*\.org$/ {
     require                       => Class['Openstack_project::Server'],
   }
 
+  # Temporary for evaluating htaccess rules
+  ::httpd::vhost { "git-test.openstack.org":
+    port          => 80, # Is required despite not being used.
+    docroot       => "/afs/openstack.org/project/git-test/www",
+    priority      => '50',
+    template      => 'openstack_project/git-test.vhost.erb',
+  }
+
   openstack_project::website { 'docs.starlingx.io':
     volume_name      => 'starlingx.io',
     aliases          => [],
