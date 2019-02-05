@@ -328,6 +328,14 @@ all:
       private_v4: 10.208.5.122
       public_v4: 162.242.156.70
       public_v6: 2001:4800:7815:102:be76:4eff:fe05:b6f
+    insecure-ci-registry01.opendev.org:
+      ansible_host: 2001:4800:7818:101:be76:4eff:fe04:67f5
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      private_v4: 10.208.225.128
+      public_v4: 104.130.132.79
+      public_v6: 2001:4800:7818:101:be76:4eff:fe04:67f5
     kdc01.openstack.org:
       ansible_host: 2001:4800:7818:103:fc6b:fcd5:e132:b4f5
       location:
