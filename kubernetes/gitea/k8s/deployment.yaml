@@ -31,7 +31,7 @@ spec:
           image: opendevorg/gitea
           env:
             - name: deployment_id
-              value: '1'  # Increment to trigger a deployment.
+              value: '2'  # Increment to trigger a deployment.
           ports:
             - containerPort: 3000
           volumeMounts:
