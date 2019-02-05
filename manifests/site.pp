@@ -794,6 +794,18 @@ node /^ze\d+\.open.*\.org$/ {
     ],
   }
 
+  # Skopeo is required for pushing/pulling from the intermediate
+  # registry, and is available in the projectatomic ppa.
+
+  apt::ppa { 'ppa:projectatomic/ppa': }
+  package { 'skopeo':
+    ensure  => present,
+    require => [
+      Apt::Ppa['ppa:projectatomic/ppa'],
+      Class['apt::update'],
+    ],
+  }
+
   # NOTE(pabelanger): We call ::zuul directly, so we can override all in one
   # settings.
   class { '::zuul':
