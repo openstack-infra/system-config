@@ -483,4 +483,12 @@ class openstack_project::lists(
     password    => $listpassword,
     description => 'Collaborating on Rust-based virtual machine monitors.',
   }
+
+  mailman_list { 'rustyk8s@opendev':
+    require     => Mailman::Site['opendev'],
+    ensure      => present,
+    admin       => 'allison@lohutok.net',
+    password    => $listpassword,
+    description => 'Collaborating on Rust-based Kubernetes API.',
+  }
 }
