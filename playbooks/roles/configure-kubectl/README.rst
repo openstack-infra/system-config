@@ -1,6 +1,6 @@
 Configure kube config files
 
-Configure kubernetes files needed by nodepool.
+Configure kubernetes files needed by kubectl.
 
 **Role Variables**
 

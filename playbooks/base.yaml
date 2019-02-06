@@ -17,7 +17,9 @@
     - snmpd
 
 - hosts: bridge.openstack.org:!disabled
-  name: "Base: configure OpenStackSDK on bridge"
+  name: "Base: configure cloud credentials on bridge"
+  roles:
+    - configure-kubectl
   tasks:
     - include_role:
         name: configure-openstacksdk

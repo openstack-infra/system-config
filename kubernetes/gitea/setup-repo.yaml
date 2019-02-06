@@ -36,4 +36,4 @@
 - name: Adjust repo settings
   when: "sql_statement is defined"
   command: |
-    kubectl exec gitea-pxc-0 -c database -n gitea-db -- mysql gitea -e '{{ sql_statement }}'
+    kubectl --context gitea exec gitea-pxc-0 -c database -n gitea-db -- mysql gitea -e '{{ sql_statement }}'

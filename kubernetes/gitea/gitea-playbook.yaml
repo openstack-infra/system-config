@@ -2,14 +2,17 @@
   tasks:
     - name: Set up gitea namespace
       k8s:
+        context: gitea
         state: present
         definition: "{{ lookup('template', 'k8s/namespace.yaml') | from_yaml }}"
     - name: Set up gitea secrets
       k8s:
+        context: gitea
         state: present
         definition: "{{ lookup('template', 'k8s/secret.yaml') | from_yaml }}"
     - name: Set up gitea configmap
       k8s:
+        context: gitea
         state: present
         definition:
           apiVersion: v1
@@ -23,14 +26,17 @@
             app.ini.j2: "{{ lookup('file', 'app.ini.j2') }}"
     - name: Set up gitea deployment
       k8s:
+        context: gitea
         state: present
         definition: "{{ lookup('template', 'k8s/deployment.yaml') | from_yaml }}"
     - name: Set up gitea service
       k8s:
+        context: gitea
         state: present
         definition: "{{ lookup('template', 'k8s/service.yaml') | from_yaml }}"
     - name: Get service IP
       k8s:
+        context: gitea
         namespace: gitea
         kind: Service
         name: gitea-service
@@ -57,7 +63,7 @@
               - "app = gitea"
           register: gitea_pods
         - name: Create root user
-          command: "kubectl exec {{ gitea_pods.resources[0].metadata.name }} -n gitea -c gitea -- gitea admin create-user --name root --password {{ gitea_root_password }} --email {{ gitea_root_email }} --admin"
+          command: "kubectl --context gitea exec {{ gitea_pods.resources[0].metadata.name }} -n gitea -c gitea -- gitea admin create-user --name root --password {{ gitea_root_password }} --email {{ gitea_root_email }} --admin"
           no_log: true
     - name: Check if gerrit user exists
       uri:

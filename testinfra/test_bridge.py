@@ -65,3 +65,10 @@ def test_ara(host):
     assert ara.rc == 0
     database = host.file('/var/cache/ansible/ara.sqlite')
     assert database.exists
+
+
+def test_kube_config(host):
+    kubeconfig = host.file('/root/.kube/config')
+    assert kubeconfig.exists
+
+    assert b'gitea_k8s_key' in kubeconfig.content

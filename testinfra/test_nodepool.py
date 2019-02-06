@@ -27,4 +27,4 @@ def test_kube_config(host):
     kubeconfig = host.file('/home/nodepool/.kube/config')
     assert kubeconfig.exists
 
-    assert b'k8s_key' in kubeconfig.content
+    assert b'nodepool_k8s_key' in kubeconfig.content

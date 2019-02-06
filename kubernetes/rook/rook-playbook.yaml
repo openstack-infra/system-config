@@ -8,7 +8,7 @@
     # into single document files is lame.
     - name: Set up cinder storage class
       command: |
-        kubectl apply -f rook-operator.yaml
-        kubectl apply -f rook-cluster.yaml
-        kubectl apply -f rook-toolbox.yaml
-        kubectl apply -f rook-filesystem.yaml
+        kubectl --context gitea apply -f rook-operator.yaml
+        kubectl --context gitea apply -f rook-cluster.yaml
+        kubectl --context gitea apply -f rook-toolbox.yaml
+        kubectl --context gitea apply -f rook-filesystem.yaml
