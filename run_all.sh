@@ -87,6 +87,19 @@ start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/run-k8s-on-openstack.yaml
 send_timer k8s
 
+# These playbooks run on the gitea k8s cluster
+start_timer
+timeout -k 2m 120m ansible-playbook -f 50 ${SYSTEM_CONFIG}/kubernetes/rook/rook-playbook.yaml
+send_timer gitea_rook
+
+start_timer
+timeout -k 2m 120m ansible-playbook -f 50 ${SYSTEM_CONFIG}/kubernetes/percona-xtradb-cluster/pxc-playbook.yaml
+send_timer gitea_pxc
+
+start_timer
+timeout -k 2m 120m ansible-playbook -f 50 ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
+send_timer gitea_gitea
+
 # Update the puppet version
 start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
