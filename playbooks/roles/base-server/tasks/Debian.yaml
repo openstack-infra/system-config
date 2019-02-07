@@ -3,7 +3,6 @@
     name:
       - whoopsie
       - popularity-contest
-      - snapd
       - lxd
       - lxd-client
     state: absent

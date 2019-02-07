@@ -72,3 +72,8 @@ def test_kube_config(host):
     assert kubeconfig.exists
 
     assert b'gitea_k8s_key' in kubeconfig.content
+
+
+def test_kubectl(host):
+    kube = host.run('kubectl version')
+    assert kube.rc == 0

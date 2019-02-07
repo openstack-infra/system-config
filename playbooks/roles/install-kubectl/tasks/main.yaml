@@ -1,0 +1,7 @@
+- name: Install snapd
+  package:
+    name: snapd
+    state: present
+
+- name: Install kubectl
+  command: snap install kubectl --classic
