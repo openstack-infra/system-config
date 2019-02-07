@@ -679,6 +679,36 @@ all:
         region_name: ca-ymq-1
       public_v4: 162.253.55.16
       public_v6: 2604:e100:1:0:f816:3eff:fe2c:7447
+    opendev-k8s-master.opendev.org:
+      ansible_host: 38.108.68.20
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.20
+    opendev-k8s-1.opendev.org:
+      ansible_host: 38.108.68.70
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.70
+    opendev-k8s-2.opendev.org:
+      ansible_host: 38.108.68.91
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.91
+    opendev-k8s-3.opendev.org:
+      ansible_host: 38.108.68.72
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.72
+    opendev-k8s-4.opendev.org:
+      ansible_host: 38.108.68.125
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.125
     openstackid-dev.openstack.org:
       ansible_host: 2001:4800:7819:103:be76:4eff:fe05:3d
       location:
