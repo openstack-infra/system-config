@@ -1,0 +1,19 @@
+- name: Get list of installed packages
+  package_facts:
+
+- name: Determine whether snapd is installed
+  set_fact:
+    reconnect: true
+  when: not (ansible_facts.packages.snapd | default(false))
+
+- name: Install snapd
+  package:
+    name: snapd
+    state: present
+
+- name: Reset SSH connection to pick up path changes
+  meta: reset_connection
+  when: reconnect | default(false)
+
+- name: Install kubectl
+  command: snap install kubectl --classic
