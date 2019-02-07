@@ -13,8 +13,14 @@
     - timezone
     - unbound
     - exim
-    - iptables
+
+# Don't run firewall rules on kubernetes hosts, they are managed by k8s-on-openstack.
+# TODO(mordred) snmpd should be able to be re-added to kubernetes hosts but we'll need
+# to add cacti to sg-opendev-nodes and sg-opendev-master security groups first.
+- hosts: "!disabled:!kubernetes"
+  name: "Base: set up firewall rules"
     - snmpd
+    - iptables
 
 - hosts: bridge.openstack.org:!disabled
   name: "Base: configure cloud credentials on bridge"
