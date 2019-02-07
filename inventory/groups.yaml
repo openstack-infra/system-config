@@ -96,6 +96,8 @@ groups:
     - health*.open*.org
   kdc:
     - kdc[0-9]*.open*.org
+  kubernetes:
+    - opendev-k8s*.opendev.org
   logstash:
     - logstash[0-9]*.open*.org
   logstash-worker:
