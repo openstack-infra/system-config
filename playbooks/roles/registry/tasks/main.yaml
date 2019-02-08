@@ -10,11 +10,18 @@
     - data
     - certs
     - auth
-- name: Install passlib
+- name: Install passlib (python2)
   package:
     name:
       - python-passlib
     state: present
+  when: "'python3' not in ansible_python_interpreter"
+- name: Install passlib (python3)
+  package:
+    name:
+      - python3-passlib
+    state: present
+  when: "'python3' in ansible_python_interpreter"
 - name: Write htpassword file
   htpasswd:
     create: true
