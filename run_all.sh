@@ -77,15 +77,20 @@ start_timer
 timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/bridge.yaml
 send_timer bridge
 
+# Run k8s-on-openstack
+start_timer
+timeout -k 2m 120m ${SYSTEM_CONFIG}/run_k8s_ansible.sh
+send_timer k8s
+
+# Run the k8s nodes bootstrap playbook
+start_timer
+timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/bootstrap-k8s-nodes.yaml
+send_timer base
+
 # Run the base playbook everywhere
 start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/base.yaml
 send_timer base
-
-# Run k8s-on-openstack
-start_timer
-timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/run-k8s-on-openstack.yaml
-send_timer k8s
 
 # These playbooks run on the gitea k8s cluster
 start_timer
