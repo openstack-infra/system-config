@@ -18,3 +18,11 @@
       command: ansible-galaxy install --roles-path /etc/ansible/roles --force -r roles.yaml
       args:
         chdir: /opt/system-config
+
+    - name: Make sure k8s-on-openstack repo is up to date
+      git:
+        repo: https://github.com/infraly/k8s-on-openstack
+        dest: /opt/k8s-on-openstack
+        # HEAD as of 2019-02-08
+        version: 9c922b2bb3312896e619a60b44d3a7ec06ab0426
+        force: yes
