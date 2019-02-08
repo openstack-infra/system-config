@@ -13,7 +13,7 @@
 - name: Install passlib
   package:
     name:
-      - python-passlib
+      - python3-passlib
     state: present
 - name: Write htpassword file
   htpasswd:
