@@ -21,3 +21,15 @@
         context: gitea
         state: present
         definition: "{{ lookup('file', 'k8s/storage-class.yaml') | from_yaml }}"
+
+# k8s-on-openstack uses the baked in ubuntu user and ssh keypairs
+# to interact with the host. Our other roles assume that we'll be
+# logging in directly as root. Run base-repos logging in as ubuntu
+# with become: true set so that we can overwrite the root ssh key
+# with the one allowing direct login from bridge.
+- hosts: "kubernetes:!disabled"
+  name: "Base: set up users and base package repositories on all hosts"
+  remote_user: ubuntu
+  become: true
+  roles:
+    - base-repos
