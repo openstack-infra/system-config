@@ -39,5 +39,4 @@ export NODE_EXTRA_VOLUME_SIZE="80"
 export USE_OCTAVIA="True"
 export BLOCK_STORAGE_VERSION='v3'
 
-cd /opt/k8s-on-openstack
-ansible-playbook -v site.yaml
+ansible-playbook -v /opt/k8s-on-openstack/site.yaml
