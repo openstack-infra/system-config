@@ -16,7 +16,8 @@
 FROM python:slim
 
 RUN apt-get update \
-  && apt-get install -y dumb-init \
+  && apt-get install -y dumb-init libjemalloc1 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+ENV LD_PRELOAD /usr/lib/x86_64-linux-gnu/libjemalloc.so.1
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
