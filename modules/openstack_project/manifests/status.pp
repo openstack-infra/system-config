@@ -165,68 +165,6 @@ class openstack_project::status (
   include elastic_recheck::cron
 
   ###########################################################
-  # Status - zuul
-
-  file { '/srv/static/status/zuul':
-    ensure => directory,
-  }
-
-  file { '/srv/static/status/zuul/index.html':
-    ensure  => present,
-    content => template('openstack_project/zuul/status.html.erb'),
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/status.js':
-    ensure  => present,
-    content => template('openstack_project/zuul/status.js.erb'),
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/green.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/green.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/red.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/red.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/black.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/black.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/grey.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/grey.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/line-angle.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line-angle.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/line-t.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line-t.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-  file { '/srv/static/status/zuul/line.png':
-    ensure  => present,
-    source  => 'puppet:///modules/openstack_project/zuul/line.png',
-    require => File['/srv/static/status/zuul'],
-  }
-
-
-  ###########################################################
   # Status - reviewday
 
   include reviewday
