@@ -123,7 +123,7 @@ results. */
 .result_SUCCESS {
     color: #007f00;
 }
-.result_FAILURE, .result_POST_FAILURE, .result_TIMED_OUT, .result_RETRY_LIMIT {
+.result_FAILURE, .result_POST_FAILURE, .result_TIMED_OUT, .result_RETRY_LIMIT, .result_DISK_FULL {
     color: #cf2f19;
 }
 .result_UNSTABLE, .result_WARNING {
