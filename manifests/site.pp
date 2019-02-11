@@ -5,7 +5,17 @@
 # in between any two variables in order for them to be correctly parsed and
 # passed around in test.sh
 #
-$elasticsearch_nodes = hiera_array('elasticsearch_nodes')
+# Note we do not do a hiera lookup here as we set $group on a per node basis
+# and that must be set before we can do hiera lookups. Doing a hiera lookup
+# here would fail to find any group specific info.
+$elasticsearch_nodes = [
+  "elasticsearch02.openstack.org",
+  "elasticsearch03.openstack.org",
+  "elasticsearch04.openstack.org",
+  "elasticsearch05.openstack.org",
+  "elasticsearch06.openstack.org",
+  "elasticsearch07.openstack.org",
+]
 
 #
 # Default: should at least behave like an openstack server
