@@ -26,6 +26,7 @@
 - hosts: bridge.openstack.org:!disabled
   name: "Base: configure cloud credentials on bridge"
   roles:
+    - install-kubectl
     - configure-kubectl
   tasks:
     - include_role:

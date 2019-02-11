@@ -71,4 +71,9 @@ def test_kube_config(host):
     kubeconfig = host.file('/root/.kube/config')
     assert kubeconfig.exists
 
-    assert b'gitea_k8s_key' in kubeconfig.content
+    assert b'Z2l0ZWFfazhzX2tleQ==' in kubeconfig.content
+
+
+def test_kubectl(host):
+    kube = host.run('kubectl help')
+    assert kube.rc == 0
