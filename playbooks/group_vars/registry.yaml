@@ -1,1 +1,3 @@
 registry_user: zuul
+iptables_extra_public_tcp_ports:
+  - 5000
