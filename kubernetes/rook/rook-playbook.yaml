@@ -1,14 +1,15 @@
 - hosts: localhost
   tasks:
-
     # Using kubectl rather than k8s module because the
     # k8s module only allows single document files and
     # the majority of these files are pretty straight
     # copies from upstream rook, so reorganizing them
     # into single document files is lame.
-    - name: Set up cinder storage class
-      command: |
-        kubectl --context gitea apply -f rook-operator.yaml
-        kubectl --context gitea apply -f rook-cluster.yaml
-        kubectl --context gitea apply -f rook-toolbox.yaml
-        kubectl --context gitea apply -f rook-filesystem.yaml
+    - name: Set up Rook operator
+      command: kubectl --context gitea apply -f rook-operator.yaml
+    - name: Set up Rook cluster
+      command: kubectl --context gitea apply -f rook-cluster.yaml
+    - name: Set up Rook toolbox
+      command: kubectl --context gitea apply -f rook-toolbox.yaml
+    - name: Set up Rook filesystem
+      command: kubectl --context gitea apply -f rook-filesystem.yaml

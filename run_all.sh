@@ -94,15 +94,15 @@ send_timer base
 
 # These playbooks run on the gitea k8s cluster
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e /etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/rook/rook-playbook.yaml
+timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/rook/rook-playbook.yaml
 send_timer gitea_rook
 
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e /etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/percona-xtradb-cluster/pxc-playbook.yaml
+timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/percona-xtradb-cluster/pxc-playbook.yaml
 send_timer gitea_pxc
 
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e /etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
+timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
 send_timer gitea_gitea
 
 # Update the puppet version
