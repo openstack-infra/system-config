@@ -45,8 +45,8 @@ class openstack_project::survey (
   $auth_openid = undef,
   $docroot = '/var/www',
   $runtime_dir_mode = '0755',
-  $download_url = 'https://github.com/LimeSurvey/LimeSurvey/archive/',
-  $version = '3.7.0+180418',
+  $download_url = 'https://download.limesurvey.org/latest-stable-release/',
+  $version = '3.15.6+190108',
   $www_group = 'www-data',
   $www_user = 'www-data',
   # These are required for bootstrapping, so do not have defaults.
@@ -76,7 +76,7 @@ class openstack_project::survey (
   exec { 'limesurvey-download':
     path    => '/bin:/usr/bin',
     creates => "${docroot}/tmp/runtime",
-    command => "bash -c 'cd /tmp; wget ${download_url}${version}.tar.gz'",
+    command => "bash -c 'cd /tmp; wget ${download_url}limesurvey${version}.tar.gz'",
     require => File[$docroot],
     user    => $www_user,
   }
@@ -85,7 +85,7 @@ class openstack_project::survey (
     path    => '/bin:/usr/bin',
     cwd     => '/tmp',
     creates => "${docroot}/tmp/runtime",
-    command => "bash -c 'cd /tmp; tar zxf /tmp/${version}.tar.gz -C ${docroot} --strip-components=1'",
+    command => "bash -c 'cd /tmp; tar zxf /tmp/limesurvey${version}.tar.gz -C ${docroot} --strip-components=1'",
     notify  => Exec['limesurvey-install'],
     require => Exec['limesurvey-download'],
     user    => $www_user,
@@ -102,7 +102,7 @@ class openstack_project::survey (
     user        => $www_user,
   }
 
-  file { "/tmp/${version}.tar.gz":
+  file { "/tmp/limesurvey${version}.tar.gz":
     ensure  => absent,
     require => Exec['limesurvey-unzip'],
   }
