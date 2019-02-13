@@ -1,0 +1,24 @@
+- name: Show what certs would be created
+  debug:
+    var: letsencrypt_certs
+
+- name: Generate fake self-signed certs
+  shell:
+    # - any need to make this a SAN for other domains?
+    # - fullchain ok as is, or need to fake intermediate?
+    # - we *could* actually have a "well-known" fake infra intermediate?
+    cmd: |
+      set -o xtrace
+      domain={{ item.value[0] }}
+      mkdir -p /etc/letsencrypt-certs/${domain}
+      cd /etc/letsencrypt-certs/${domain}
+
+      openssl genrsa -out ${domain}.key 2048
+      openssl rsa -in ${domain}.key -out ${domain}.key
+      openssl req -sha256 -new -key ${domain}.key -out ${domain}.csr -subj '/CN=localhost'
+      openssl x509 -req -sha256 -days 365 -in ${domain}.csr -signkey ${domain}.key -out ${domain}.cer
+      cp ${domain}.cer fullchain.cer
+
+      find /etc/letsencrypt-certs
+  loop: "{{ letsencrypt_certs | dict2items }}"
+
