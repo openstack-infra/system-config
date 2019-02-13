@@ -91,3 +91,20 @@
   roles:
     - install-docker
     - zuul-preview
+
+# This next section needs to happen in order.  letsencrypt hosts
+# export their TXT authentication records which is installed onto
+# adns1, and then the hosts verify to issue/renew keys
+- hosts: "letsencrypt:!disabled"
+  name: "Base: deploy and renew certificates"
+  roles:
+    - letsencrypt-acme-sh-install
+    - letsencrypt-request-certs
+- hosts: "adns1.opendev.org"
+  name: "Install txt records"
+  roles:
+    - letsencrypt-install-txt-record
+- hosts: "letsencrypt:!disabled"
+  name: "Create certs"
+  roles:
+    - letsencrypt-create-certs
