@@ -1,0 +1,7 @@
+- name: Include ACME renewal
+  include: acme.yaml
+  when: not letsencrypt_test_only
+
+- name: Include self-signed generation
+  include: selfsigned.yaml
+  when: letsencrypt_test_only
