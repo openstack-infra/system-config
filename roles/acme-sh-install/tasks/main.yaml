@@ -1,0 +1,5 @@
+- name: Install acme.sh client
+  git:
+    repo: https://github.com/Neilpang/acme.sh
+    dest: /opt/acme.sh
+    version: dev

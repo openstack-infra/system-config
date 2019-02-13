@@ -1,0 +1,3 @@
+- name: Remove txt records
+  debug:
+    msg: remove txt records

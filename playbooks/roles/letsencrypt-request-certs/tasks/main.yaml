@@ -1,0 +1,3 @@
+- name: I will run acme.sh with domains and produce txt record outputs
+  debug:
+    msg: acme.sh run
