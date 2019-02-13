@@ -1068,7 +1068,9 @@ node /^zm\d+.open.*\.org$/ {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^pbx\d*\.open.*\.org$/ {
+  $group = "pbx"
   class { 'openstack_project::server': }
   class { 'openstack_project::pbx':
     sip_providers => [
