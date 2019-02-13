@@ -1,0 +1,27 @@
+- name: Make key list
+  set_fact:
+    acme_txt_keys: []
+
+- name: Build key list
+  set_fact:
+    acme_txt_keys: '{{ acme_txt_keys }} + {{ hostvars[item]["acme_txt_required"] }}'
+  with_inventory_hostnames: letsencrypt
+
+- name: Final list
+  debug:
+    var: acme_txt_keys
+
+- name: Deploy new zone.db
+  template:
+    src: zone.db.j2
+    dest: /var/lib/bind/zones/acme.opendev.org/zone.db
+
+- name: debug new file
+  slurp:
+    src: '/var/lib/bind/zones/acme.opendev.org'
+  register: bind_zone_result
+- debug:
+    msg: "{{ bind_zone_result['content'] | b64decode }}"
+
+- name: Reload domain
+  shell: rndc reload acme.opendev.org
