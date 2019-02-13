@@ -1,0 +1,34 @@
+- name: Show cert list
+  debug:
+    var: letsencrypt_certs
+
+- name: Build arguments for letsencrypt acme.sh driver
+  set_fact:
+    acme_args: >-
+      {% for cert in letsencrypt_certs[inventory_hostname] %}
+      "{% for domain in letsencrypt_certs[inventory_hostname][cert] %}
+      -d {{ domain }}
+      {% endfor %}"
+      {% endfor %}
+
+- name: Run acme.sh driver for certificate issue
+  shell:
+    cmd: |
+      /opt/acme.sh/driver.sh issue {{ acme_args }}
+  args:
+    chdir: /opt/acme.sh/
+  register: acme_output
+
+- debug:
+    var: acme_output.stdout_lines
+
+- set_fact:
+    acme_txt_required: []
+
+- set_fact:
+    acme_txt_required: '{{ acme_txt_required + [(item.split(":")[0], item.split(":")[1])] }}'
+  loop: '{{ acme_output.stdout_lines }}'
+
+- debug:
+    var: acme_txt_required
+

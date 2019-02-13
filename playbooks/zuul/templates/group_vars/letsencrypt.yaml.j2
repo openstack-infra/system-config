@@ -1,0 +1,18 @@
+# We don't want CI tests trying to really authenticate against
+# letsencrypt; apart from just being unfriendly it might cause quota
+# issues.
+letsencyrpt_test_only: True
+
+letsencrypt_certs:
+  test01.opendev.org:
+    cert1:
+      - test01.opendev.org
+      - test.opendev.org
+      - alias.opendev.org
+    cert2:
+      - someotherthing.opendev.org
+
+  test02.opendev.org:
+    cert3:
+      - test02.opendev.org
+      - service.opendev.org
