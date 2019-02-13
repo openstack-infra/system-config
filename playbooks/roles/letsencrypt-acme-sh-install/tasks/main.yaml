@@ -1,0 +1,17 @@
+- name: Install acme.sh client
+  git:
+    repo: https://github.com/Neilpang/acme.sh
+    dest: /opt/acme.sh
+    version: dev
+
+- name: Install driver script
+  copy:
+    src: driver.sh
+    dest: /opt/acme.sh/driver.sh
+    mode: 0755
+
+- name: Setup log directory
+  file:
+    path: /var/log/acme.sh
+    state: directory
+    mode: 0755
