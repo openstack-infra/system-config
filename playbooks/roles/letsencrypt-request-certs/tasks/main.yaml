@@ -1,0 +1,22 @@
+- set_fact:
+    acme_txt_required: []
+
+- name: Show cert list
+  debug:
+    var: letsencrypt_certs
+
+#
+# Handle multiple certs for a single host; like
+#
+# letsencrypt_certs:
+#    main:
+#      hostname.opendev.org
+#    secondary:
+#      foo.opendev.org
+#      baz.opendev.org
+#
+# All required TXT keys are put into acme_txt_required
+
+- include_tasks: acme.yaml
+  loop: "{{ lookup('dict', letsencrypt_certs) }}"
+
