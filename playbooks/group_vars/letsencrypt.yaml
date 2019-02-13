@@ -1,0 +1,36 @@
+letsencrypt_cert_dir: '/etc/letsencrypt-certs'
+#letsencrypt_certs:
+
+  # The way this works is as follows:
+  #
+  #  - Each key below is for the hostname where the key will be
+  #    generated
+  #  - each nested dict within the host is an arbitrary descriptive
+  #    name for a separate key ...
+  #  - the certificate will be named for the *first* entry in the list
+  #    of the dictionary
+  #  - the others values are aliases in the certificate
+  #  - there must be a CNAME record existing from
+  #      _acme-challenge.hostname.opendev.org ->
+  #                   _acme-challenge.acme-opendev.org
+  #    for each entry.
+  #
+  # e.g.
+  #
+  # test01.opendev.org:
+  #  main:
+  #   - test01.opendev.org
+  #   - test.opendev.org
+  #   - alias.opendev.org
+  #  somethingelse:
+  #   - foo.opendev.org
+  #
+  # Results in two certificates being provisioned like:
+  #  /etc/letsencrypt-certs/test01.opendev.org/test01.opendev.org.key
+  #  /etc/letsencrypt-certs/foo.opendev.org/foo.opendev.org.key
+  # on the test01.opendev.org server
+
+#  graphite01.opendev.org:
+#    main:
+#      - graphite01.opendev.org
+#      - graphite.opendev.org
