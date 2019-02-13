@@ -6,10 +6,10 @@
     # copies from upstream rook, so reorganizing them
     # into single document files is lame.
     - name: Set up Rook operator
-      command: kubectl --context gitea apply -f rook-operator.yaml
+      command: kubectl --context gitea apply -f operator.yaml
     - name: Set up Rook cluster
-      command: kubectl --context gitea apply -f rook-cluster.yaml
+      command: kubectl --context gitea apply -f cluster.yaml
     - name: Set up Rook toolbox
-      command: kubectl --context gitea apply -f rook-toolbox.yaml
+      command: kubectl --context gitea apply -f toolbox.yaml
     - name: Set up Rook filesystem
-      command: kubectl --context gitea apply -f rook-filesystem.yaml
+      command: kubectl --context gitea apply -f filesystem.yaml
