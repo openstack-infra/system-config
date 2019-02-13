@@ -73,3 +73,22 @@
   roles:
     - install-docker
     - registry
+
+
+- hosts: "letsencrypt:!disabled"
+  name: "Base: deploy and renew certificates"
+  roles:
+    - acme-sh-install
+    - letsencrypt-request-certs
+- hosts: "adns1.openstack.org"
+  name: "Install txt records"
+  roles:
+    - letsencrypt-install-txt-record
+- hosts: "letsencrypt:!disabled"
+  name: "Create certs"
+  roles:
+    - letsencrypt-create-certs
+- hosts: "adns1.openstack.org"
+  name: "Remove txt records"
+  roles:
+    - letsencrypt-remove-txt-record

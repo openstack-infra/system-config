@@ -1,0 +1,3 @@
+- name: Install txt records in bind db for auth domain
+  debug:
+    msg: install txt records
