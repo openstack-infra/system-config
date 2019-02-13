@@ -103,6 +103,8 @@ groups:
     - kdc[0-9]*.open*.org
   kubernetes:
     - opendev-k8s*.opendev.org
+  letsencrypt:
+    - test[0-9]*.opendev.org
   logstash:
     - logstash[0-9]*.open*.org
   logstash-worker:
