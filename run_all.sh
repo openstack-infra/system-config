@@ -51,6 +51,7 @@ function send_timer {
     local elapsed_ms=$(( (current - start) * 1000 ))
 
     echo "bridge.ansible.run_all.${name}:${elapsed_ms}|ms" | nc -w 1 -u graphite.openstack.org 8125
+    echo "End $name"
 }
 # See send_timer
 function start_timer {
@@ -69,12 +70,12 @@ set +e
 
 # Clone system-config and install modules and roles
 start_timer
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
+timeout -k 2m 10m ansible-playbook ${ANSIBLE_PLAYBOOKS}/update-system-config.yaml
 send_timer update_system_config
 
 # Update the code on bridge
 start_timer
-timeout -k 2m 120m ansible-playbook ${ANSIBLE_PLAYBOOKS}/bridge.yaml
+timeout -k 2m 10m ansible-playbook ${ANSIBLE_PLAYBOOKS}/bridge.yaml
 send_timer bridge
 
 # Run k8s-on-openstack
@@ -85,7 +86,7 @@ send_timer k8s
 # Run the k8s nodes bootstrap playbook
 start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/bootstrap-k8s-nodes.yaml
-send_timer base
+send_timer k8s_bootstrap
 
 # Run the base playbook everywhere
 start_timer
@@ -94,36 +95,36 @@ send_timer base
 
 # These playbooks run on the gitea k8s cluster
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/rook/rook-playbook.yaml
+timeout -k 2m 10m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/rook/rook-playbook.yaml
 send_timer gitea_rook
 
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/percona-xtradb-cluster/pxc-playbook.yaml
+timeout -k 2m 10m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/percona-xtradb-cluster/pxc-playbook.yaml
 send_timer gitea_pxc
 
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
+timeout -k 2m 10m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
 send_timer gitea_gitea
 
 # Update the puppet version
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
+timeout -k 2m 10m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
 send_timer update_puppet_version
 
 # Run the git/gerrit/zuul sequence, since it's important that they all work together
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
+timeout -k 2m 30m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/remote_puppet_git.yaml
 send_timer git
 
 # Run AFS changes separately so we can make sure to only do one at a time
 # (turns out quorum is nice to have)
 start_timer
-timeout -k 2m 120m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
+timeout -k 2m 30m ansible-playbook -f 1 ${ANSIBLE_PLAYBOOKS}/remote_puppet_afs.yaml
 send_timer afs
 
 # Run everything else. We do not care if the other things worked
 start_timer
-timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
+timeout -k 2m 30m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/remote_puppet_else.yaml
 send_timer else
 
 # Send the combined time for everything
