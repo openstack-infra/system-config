@@ -1,0 +1,18 @@
+- name: 'Build arguments for letsencrypt acme.sh driver for: {{ item.key }}'
+  set_fact:
+    acme_args: '"{{ {% for domain in item.value %}-d {{ domain }}{% endfor %} }}"'
+
+- name: Run acme.sh driver for certificate issue
+  shell:
+    cmd: |
+      /opt/acme.sh/driver.sh issue {{ acme_args }}
+  args:
+    chdir: /opt/acme.sh/
+  register: acme_output
+
+- debug:
+    var: acme_output.stdout_lines
+
+- set_fact:
+    acme_txt_required: '{{ acme_txt_required + [(item.split(":")[0], item.split(":")[1])] }}'
+  loop: '{{ acme_output.stdout_lines }}'
