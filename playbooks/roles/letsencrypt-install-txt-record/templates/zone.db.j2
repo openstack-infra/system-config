@@ -1,0 +1,15 @@
+; -*- mode: zone -*-
+$ORIGIN acme-opendev.org.
+$TTL 5m
+@               IN      SOA     adns1.opendev.org. hostmaster.opendev.org. (
+                        {{ ansible_date_time.epoch }}  ; serial number unixtime
+                        1h          ; refresh (secondary checks for updates)
+                        10m         ; retry   (secondary retries failed axfr)
+                        10d         ; expire  (secondary ends serving old data)
+                        5m  )       ; min ttl (cache time for failed lookups)
+@               IN      NS      ns1.opendev.org.
+@               IN      NS      ns2.opendev.org.
+
+{% for key in acme_txt_keys %}
+{{key[0]}}.        IN      TXT     "{{key[1]}}"
+{% endfor %}

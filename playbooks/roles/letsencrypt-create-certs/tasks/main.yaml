@@ -1,0 +1,3 @@
+- name: run acme.sh to create certs now TXT records are created
+  debug:
+    msg: run acme.sh to make/renew certs
