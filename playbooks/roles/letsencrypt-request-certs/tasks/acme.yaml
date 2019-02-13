@@ -1,0 +1,29 @@
+- name: 'Build arguments for letsencrypt acme.sh driver for: {{ cert.key }}'
+  set_fact:
+    # NOTE(ianw): note the domains are passed in one string (between
+    # ") as it makes argument parsing a little easier in the driver.sh
+    acme_args: '"{% for domain in cert.value %}-d {{ domain }} {% endfor %}"'
+
+- name: Run acme.sh driver for certificate issue
+  shell:
+    cmd: |
+      /opt/acme.sh/driver.sh issue {{ acme_args }}
+  args:
+    chdir: /opt/acme.sh/
+  environment:
+    LETSENCRYPT_STAGING: '{{ "1" if letsencrypt_test_only else "0" }}'
+  register: acme_output
+
+- debug:
+    var: acme_output.stdout_lines
+
+# NOTE(ianw): The output is domain:key which we split into a tuple
+# here.  We don't make use of the domain part ATM; our default CNAME
+# setup points "_acme-challenge.host.acme.opendev.org" to just
+# "acme.opendev.org" so we put all the keys into "top-level" TXT
+# records directly at acme.opendev.org.  letsencyrpt doesn't care; it
+# just follows the CNAME and enumerates all the TXT records in
+# acme.opendev.org looking for one that matches.
+- set_fact:
+    acme_txt_required: '{{ acme_txt_required + [(item.split(":")[0], item.split(":")[1])] }}'
+  loop: '{{ acme_output.stdout_lines }}'
