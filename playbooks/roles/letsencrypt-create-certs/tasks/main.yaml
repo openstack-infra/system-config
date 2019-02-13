@@ -1,0 +1,8 @@
+- name: Include ACME renewal
+  include: acme.yaml
+  loop: " {{ lookup('dict', 'letsencrypt_certs') }} "
+#  when: not letsencrypt_test_only
+
+#- name: Include self-signed generation
+#  include: selfsigned.yaml
+#  when: letsencrypt_test_only
