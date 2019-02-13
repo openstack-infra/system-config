@@ -13,6 +13,7 @@
         write_inventory_dest: /etc/ansible/hosts/inventory.yaml
         write_inventory_exclude_hostvars:
           - ansible_user
+        write_inventory_global_vars: '{{ test_inventory_vars | default(omit) }}'
     - name: Set up /opt/system-config repo
       git:
         repo: /home/zuul/src/git.openstack.org/openstack-infra/system-config
