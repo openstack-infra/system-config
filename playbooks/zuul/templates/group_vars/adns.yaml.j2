@@ -2,15 +2,55 @@ tsig_key:
   algorithm: hmac-md5
   secret: 9zO/4WnUinnLHISPgDI5Aw==
 dnssec_keys:
-  54873:
+  '54873':
     zone: zuul-ci.org
     public: public_key
     private: private_key
-  04765:
+  '04765':
     zone: zuul-ci.org
     public: public_key
     private: private_key
-  39885:
+  '39885':
     zone: acme.opendev.org
-    public: public_key
-    private: private_key
+    private: |
+      Private-key-format: v1.3
+      Algorithm: 8 (RSASHA256)
+      Modulus: vPINrZAKY0HPiGLqn6k1jHT5eM2vELmjlS/vb5CGGCpiJF5SQLzd33PktpLqmzu/homx3L1lw+fGT6TGN17RDWl5TxvCKeIS8IFIYfJM+Y38I1hmsy0IdJgBMbhcEn2z7rwZ5qzMe+Pt+3GyM9qLN/JzU43pXoGDMYgfk/qO4LGkQV4f8oh1DWwo9fPhK2HFsUZEr5S22+0YaAs8VaPlGr5cZExhTXg59WXK4N4jc5gUdiFDmG8D5kqRLpRt1VJC3CljyrXRXE83yU7tBnlBX9XfeLGlCDixFlPCK64F/ZyJbF+/4g03eGVoBfFvFRMVCIrgW774ktUxYTSpajvR9w==
+      PublicExponent: AQAB
+      PrivateExponent: ln9Sp8GIlKDx1he7/GqCDZuKrk9etzq2cnlZBQsf1BXGUGOUrp4BOCAOt+Hz3qvLlTUOJ93wNgfiLMP5YlcyurUdfAaHNGcvYMQJTIL8DvaqM9kRDHy9NGly4hCPvebEME9BbjyLL89QWqyoHadgprKGa7IohS8xuX1Mccjsj0lwdd7eLss7d4beFlDp5jqEI53oMlZ0uE4QNdsOib9pGG0JJtziCfYHEQmrpAdIjAyPx0LJuuwfb2aFg/QVhbwon2vmdtthY/rmIb6UReycnobdsWGjoUQ9BOwMNhylePmtlJDLzf+vItahx/929FynC1l+AZueGOiKmsXhvf/hoQ==
+      Prime1: 64SFD9ziqTr26KDcl7V7Re7uDeJIY4EoiTsXM/qJWfpfvqVqc9ReViO3pQGXY0eggRwF3vsoLsr3Q8ciTSNousbM0Ws047qn3AkWvMs0+WIY9tdNaDU3pSIB/obwmnjLo79bgU4lL8f6NjkJxTQl1nG/Q0EmuUsFvNOBnmuH7uc=
+      Prime2: zWCrHuqRXAOlCzmKI/F984Kt10c9pbSqkyDzmWGpJrIdUKN+KyIhkdOl6l33AwIk64Ehl4VDDfUoJsMe2TficsHqWbeJyy7i1wXH7FYeCobyq+gJ51THDxjdVHdgpBb2hNP83yoIqA+l6JVtpjiTOjRqg+fxIEJl4vzknb3T8nE=
+      Exponent1: IZjc9n9XIjcUI+lWrpmoBTjpYremBfPV2YXBcJvL3jcWU3b7cZyY/IbJ2tMYSoRcRC7AM6f2en5fuZ59qS1k8kgLzdASUm49JelyAeqnGvBAiW37T+NPldH9INcVGaQjwK86mX6RVXicnAGVADnJMAc39psjsAkgv2gYtIW4dX8=
+      Exponent2: aiGZbHmVMnKjuIA8lcR27P7L7SLghaAuQafWmp2wNtH2ejRyv8F8jYpNBCcYvdI+2AC8Jjv0YeMdo6JTb7cEa38wJrrFF12cVbekD8qU7aW9A/7+FzBlSbT0s3CZXVKMhCm0VHK5VHf5qY6Gwk4cLwjlPlL+9Ue6tSkwzx9IxtE=
+      Coefficient: ma0dbbfwpHfBPI+vWOglHyVr9hj61/eQAjMyaxHU19kEBtEXO1lkp1lB5Kj+jtZ+E6HIfk+y1LfWsIinsvyZ7nBJpSEBgIf/s/WwNJCeKsnHbSbG+rfvW7DT/PWWQjBNnKIJr6nVGPJvEcfX3Yk8bgx6HRRcm7cSw+zqPgE4FSI=
+      Created: 20190326005043
+      Publish: 20190326005043
+      Activate: 20190326005043
+    public: |
+      ; This is a zone-signing key, keyid 39885, for acme.opendev.org.
+      ; Created: 20190326005043 (Tue Mar 26 00:50:43 2019)
+      ; Publish: 20190326005043 (Tue Mar 26 00:50:43 2019)
+      ; Activate: 20190326005043 (Tue Mar 26 00:50:43 2019)
+      acme.opendev.org. IN DNSKEY 256 3 8 AwEAAbzyDa2QCmNBz4hi6p+pNYx0+XjNrxC5o5Uv72+QhhgqYiReUkC8 3d9z5LaS6ps7v4aJsdy9ZcPnxk+kxjde0Q1peU8bwiniEvCBSGHyTPmN /CNYZrMtCHSYATG4XBJ9s+68GeaszHvj7ftxsjPaizfyc1ON6V6BgzGI H5P6juCxpEFeH/KIdQ1sKPXz4SthxbFGRK+UttvtGGgLPFWj5Rq+XGRM YU14OfVlyuDeI3OYFHYhQ5hvA+ZKkS6UbdVSQtwpY8q10VxPN8lO7QZ5 QV/V33ixpQg4sRZTwiuuBf2ciWxfv+INN3hlaAXxbxUTFQiK4Fu++JLV MWE0qWo70fc=
+  '32827':
+    zone: acme.opendev.org
+    private: |
+      Private-key-format: v1.3
+      Algorithm: 8 (RSASHA256)
+      Modulus: rnohNqrzRE5tGo5RidDKr2gGMTdQCCIn85kqleDUC+vb9nAvPa5sy49Kr9AjOLTFakkk8MGEmTGk0v7psKLxvr9Nb/sDCNU90toaVsGUzxWYrTIlu3aQNqW9k9KSyj+FW7lZE+2rQTjOev7FwTm4bQ4KudUSW/8/QnJHS+CcTf37W6KPo/3sm6BV3DQ6BM58QPHX8EFTzOUIYQz4OTA389YwOmEzUUJBExVgEXOI3p2vROZ+Cq8GxB43H9FLm+Ojffgw5reSJzfMD2jQOJs1q1GvF85EZ5rVF5t83E9uscdKrArRAwNIVPtCdbmE8dLvZg+91LRgt+2v0CFCwzVTew==
+      PublicExponent: AQAB
+      PrivateExponent: VsxFF6glyzZkypBAehoXqvlKE1PcCZ/MVkA9UkB93MxiKhAXQE00rHPFiP83dm9fwodOzELJT1jGEX1lDk2Ri/4pbOrn0I4c6nc8ISq+d+LbiFXpNYA/MCB11kMsaVb+ZeooKWTUDGdRORjjkkO/vuj8ZwRb1M5/TvQBCftcZuN/sjLkFBBfxOTyjmiTX92Dah9xAKQITpQIg4BbYWNSZniVRrHNwpYsAu+/JF0EZigcqL6OHDhU2s9zHv/OYi8/qP14xL8HVF5o82nSK5TvTH9CjgUUHcBDsadQ7XDXOxP/9mDuYoCBjWSWgzWxo0KIPu+1Zw8DFsn+VvdHOEP0CQ==
+      Prime1: 2nd5YtHj7/yRAXXY6ht2sncuCo11+jD5miopO1/zCGit8qXxGvSkiDtJ+cwcjzuhoqLubptOCkHBZLZXVZVOAxYohMnGFIovF9x1sQ9w/2OrS4Y80h67q/RNNQ0cFuMfhRMCQfKhkonxsvsLpzm9EaHqTZTbgvQlhJcPbCwALo8=
+      Prime2: zHPrUIY3QrDY0z0l7YekEY8CWcOWDQH0R2/VZpqTAJcLmSnwpyvtF/YxEStrPj0RptkMoj8T1umdT64OgsABYZ5lxhX87jVhnCpSdOLdYXp4yK1X+/CosAdaOgvyHGA073xFslj/iSGq87ZKS6vp1f8xpU61MXwZme/ePbULQlU=
+      Exponent1: t2zShQ73Ezr6wMAihMTUTxlTldaZ9JuEJlU50zlHQ4soaW+8VMaNEji9brdaT0Rg/L1R9Zn91wzIhHe4Mgouutay5HLJFdvDmIQoaKYvWK5lVv75N+5H4iM3Y9CDAhBmGYQRRC+kSvX48i5n5VrMDO7mW4cdGwFEMuPmNgtnh68=
+      Exponent2: n7+HQtDMBtD1agAiTXkpagrKtGaNLLa1Lsgj/tqSN+jNSCyr+4Ln60wSxK6fSe8fhrWbGH6eutKoduSyM9lgeuzv6pmtmladYQ70hJ3qikrOa0Z+M72zoG7uQeKplyBY3DLGpnbBm11yHKD3Zi76M5oFKXvZOcQUoOH6TU7TcE0=
+      Coefficient: H4JFM9m+9Wx/+dSEA4zKj6TmVLvbEWQobWeQKGdUqkyLL76xv67H8o1hLMg0j/k/MmgBR3sjaKd7L3XkPtLzrUgqzmbhCvEkjQQxdi3SnXNei/hD9SKbkE/c89/e8epu4e9aDSiXXpPLnXeBvmAFfDoT0WKYjVyTGaPCeQAKyQs=
+      Created: 20190326005103
+      Publish: 20190326005103
+      Activate: 20190326005103
+    public: |
+      ; This is a key-signing key, keyid 32827, for amce.opendev.org.
+      ; Created: 20190326005103 (Tue Mar 26 00:51:03 2019)
+      ; Publish: 20190326005103 (Tue Mar 26 00:51:03 2019)
+      ; Activate: 20190326005103 (Tue Mar 26 00:51:03 2019)
+      amce.opendev.org. IN DNSKEY 257 3 8 AwEAAa56ITaq80RObRqOUYnQyq9oBjE3UAgiJ/OZKpXg1Avr2/ZwLz2u bMuPSq/QIzi0xWpJJPDBhJkxpNL+6bCi8b6/TW/7AwjVPdLaGlbBlM8V mK0yJbt2kDalvZPSkso/hVu5WRPtq0E4znr+xcE5uG0OCrnVElv/P0Jy R0vgnE39+1uij6P97JugVdw0OgTOfEDx1/BBU8zlCGEM+DkwN/PWMDph M1FCQRMVYBFziN6dr0TmfgqvBsQeNx/RS5vjo334MOa3kic3zA9o0Dib NatRrxfORGea1RebfNxPbrHHSqwK0QMDSFT7QnW5hPHS72YPvdS0YLft r9AhQsM1U3s=
