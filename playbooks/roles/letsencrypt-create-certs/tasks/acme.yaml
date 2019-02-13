@@ -1,0 +1,17 @@
+- name: Build arguments for letsencrypt acme.sh driver
+  set_fact:
+    acme_args: >-
+      {% for cert in letsencrypt_certs %}
+      "{% for domain in letsencrypt_certs[cert] %}
+      -d {{ domain }}
+      {% endfor %}"
+      {% endfor %}
+
+- name: Run acme.sh driver for certificate generation/renewal
+  register: acme_output
+  shell:
+    cmd: |
+      /opt/acme.sh/driver.sh renew {{ acme_args }}
+  args:
+    chdir: /opt/acme.sh/
+
