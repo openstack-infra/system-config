@@ -1,0 +1,13 @@
+# NOTE(ianw): this var set for the host by the
+# letsencrypt-request-certs role; running this when empty would be a
+# no-op but we might as well skip it if we know this host hasn't
+# requested anything to actually create/renew.
+- name: Check for prerun state
+  fail:
+    msg: "acme_txt_required is not defined; was letsencrypt-request-certs run?"
+  when: acme_txt_required is not defined
+
+- name: Include ACME renewal
+  include_tasks: acme.yaml
+  loop: "{{ query('dict', letsencrypt_certs) }}"
+  when: acme_txt_required | length > 0
