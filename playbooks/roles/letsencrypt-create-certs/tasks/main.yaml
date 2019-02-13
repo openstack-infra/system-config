@@ -1,0 +1,3 @@
+- name: Include ACME renewal
+  include_tasks: acme.yaml
+  loop: "{{ query('dict', letsencrypt_certs) }}"
