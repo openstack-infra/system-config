@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-FROM opendevorg/jinja-init
+FROM opendevorg/jinja-init as gitea-init
 
 COPY entrypoint.sh /
 

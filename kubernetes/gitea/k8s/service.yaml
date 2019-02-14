@@ -9,6 +9,10 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      targetPort: 3080
+      name: http
+    - protocol: TCP
+      port: 443
       targetPort: 3000
       name: http
     - protocol: TCP
