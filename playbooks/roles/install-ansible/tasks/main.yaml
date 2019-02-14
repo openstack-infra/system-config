@@ -26,9 +26,10 @@
     state: '{{ _install_ansible_state | default(omit) }}'
 
 # For use by k8s_raw ansible module
-- name: Install openshift client
-  pip:
-    name: 'openshift'
+# - name: Install openshift client
+#   pip:
+#     name: 'openshift'
+# TODO(corvus): re-add this once kubernetes 9.0.0 is released
 
 # Same version/state default swizzling as described above for
 # openstacksdk
