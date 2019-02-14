@@ -29,6 +29,9 @@ PASSWD   = {{ db_password }}
 SSL_MODE = disable
 LOG_SQL  = false
 
+[repository]
+ROOT = /data/git/repositories
+
 [indexer]
 ISSUE_INDEXER_PATH = /data/gitea/indexers/issues.bleve
 REPO_INDEXER_ENABLED = true
@@ -55,7 +58,7 @@ SECRET_KEY     = {{ secret_key }}
 INTERNAL_TOKEN = {{ internal_token }}
 
 [service]
-DISABLE_REGISTRATION              = false
+DISABLE_REGISTRATION              = true
 REQUIRE_SIGNIN_VIEW               = false
 REGISTER_EMAIL_CONFIRM            = false
 ENABLE_NOTIFY_MAIL                = false
