@@ -34,6 +34,7 @@ spec:
               value: '2'  # Increment to trigger a deployment.
           ports:
             - containerPort: 3000
+            - containerPort: 3080
           volumeMounts:
             - name: gitea-data
               mountPath: /data

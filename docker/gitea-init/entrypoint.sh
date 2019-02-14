@@ -21,6 +21,12 @@ chown 1000:1000 /data/git
 mkdir -p /data/gitea
 chown 1000:1000 /data/gitea
 
+mkdir -p /data/gitea/ssl
+chown 1000:1000 /data/gitea/ssl
+chmod 0500 /data/gitea/ssl
+cp /secrets/gitea_tls_cert /data/gitea/ssl/cert.pem
+cp /secrets/gitea_tls_key /data/gitea/ssl/key.pem
+
 # This one is used by openssh and can remain root-owned
 mkdir -p /data/ssh
 
