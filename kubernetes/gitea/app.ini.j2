@@ -5,8 +5,9 @@ RUN_USER = git
 [server]
 APP_DATA_PATH    = /data/gitea
 SSH_DOMAIN       = localhost
+PROTOCOL         = https
 HTTP_PORT        = 3000
-ROOT_URL         = http://38.108.68.64/
+ROOT_URL         = https://38.108.68.64/
 DISABLE_SSH      = false
 SSH_PORT         = 22
 LFS_CONTENT_PATH = /data/git/lfs
@@ -14,6 +15,10 @@ DOMAIN           = localhost
 LFS_START_SERVER = true
 LFS_JWT_SECRET   = {{ lfs_jwt_secret }}
 OFFLINE_MODE     = false
+CERT_FILE        = /data/gitea/ssl/cert.pem
+KEY_FILE         = /data/gitea/ssl/key.pem
+REDIRECT_OTHER_PORT = true
+PORT_TO_REDIRECT = 3080
 
 [database]
 DB_TYPE  = mysql
