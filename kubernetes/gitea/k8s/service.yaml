@@ -14,7 +14,7 @@ spec:
     - protocol: TCP
       port: 443
       targetPort: 3000
-      name: http
+      name: https
     - protocol: TCP
       port: 22
       targetPort: 22

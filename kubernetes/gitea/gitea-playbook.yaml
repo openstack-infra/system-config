@@ -5,11 +5,27 @@
         context: gitea
         state: present
         definition: "{{ lookup('template', 'k8s/namespace.yaml') | from_yaml }}"
+    # This is not in a file because that doesn't seem to handle multiline
+    # strings well.
     - name: Set up gitea secrets
       k8s:
         context: gitea
         state: present
-        definition: "{{ lookup('template', 'k8s/secret.yaml') | from_yaml }}"
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: gitea-app
+            namespace: gitea
+          type: Opaque
+          stringData:
+            secret_key: "{{ gitea_secret_key }}"
+            internal_token: "{{ gitea_internal_token }}"
+            lfs_jwt_secret: "{{ gitea_lfs_jwt_secret }}"
+            db_username: "{{ gitea_db_username }}"
+            db_password: "{{ gitea_db_password }}"
+            gitea_tls_cert: "{{ gitea_tls_cert }}"
+            gitea_tls_key: "{{ gitea_tls_key }}"
     - name: Set up gitea configmap
       k8s:
         context: gitea
