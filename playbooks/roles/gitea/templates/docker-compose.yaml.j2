@@ -5,6 +5,7 @@ version: '2'
 services:
   mariadb:
     image: mariadb
+    network_mode: host
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "{{ gitea_root_db_password }}"
@@ -17,6 +18,7 @@ services:
     depends_on:
       - mariadb
     image: opendevorg/gitea:latest
+    network_mode: host
     restart: always
     environment:
       - USER_UID=1000
@@ -26,16 +28,12 @@ services:
       - /var/gitea/conf:/custom/conf
       - /var/gitea/logs:/logs
       - /var/gitea/certs:/certs
-    ports:
-      - "443:3000"
-      - "80:3080"
   gitea-ssh:
     depends_on:
       - mariadb
     image: opendevorg/gitea-openssh
+    network_mode: host
     restart: always
-    ports:
-      - "222:22"
     volumes:
       - /var/gitea/data:/data
       - /var/gitea/conf:/custom/conf
