@@ -70,6 +70,8 @@ RUN addgroup --system --gid 1000 git \
 
 # Copy the /etc config files and entrypoint script
 COPY --from=build-env /go/src/code.gitea.io/gitea/docker /
+# Copy our custom sshd_config
+COPY sshd_config /etc/ssh/sshd_config
 
 # Copy the app
 COPY --from=build-env /go/src/code.gitea.io/gitea/gitea /app/gitea/gitea
