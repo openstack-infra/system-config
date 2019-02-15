@@ -1,0 +1,42 @@
+# Version 2 is the latest that is supported by docker-compose in
+# Ubuntu Xenial.
+version: '2'
+
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "{{ gitea_root_db_password }}"
+      MYSQL_DATABASE: gitea
+      MYSQL_USER: "{{ gitea_db_username }}"
+      MYSQL_PASSWORD: "{{ gitea_db_password }}"
+    volumes:
+      - /var/gitea/db:/var/lib/mysql
+  gitea-web:
+    depends_on:
+      - mariadb
+    image: opendevorg/gitea:latest
+    restart: always
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    volumes:
+      - /var/gitea/data:/data
+      - /var/gitea/conf:/custom/conf
+      - /var/gitea/logs:/logs
+      - /var/gitea/certs:/certs
+    ports:
+      - "443:3000"
+      - "80:3080"
+  gitea-ssh:
+    depends_on:
+      - mariadb
+    image: opendevorg/gitea-openssh
+    restart: always
+    ports:
+      - "222:22"
+    volumes:
+      - /var/gitea/data:/data
+      - /var/gitea/conf:/custom/conf
+      - /var/gitea/logs:/logs
