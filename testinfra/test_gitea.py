@@ -17,9 +17,9 @@ testinfra_hosts = ['gitea01.opendev.org']
 
 
 def test_gitea_listening(host):
-    gitea_https = host.socket("tcp://0.0.0.0:443")
+    gitea_https = host.socket("tcp://0.0.0.0:3000")
     assert gitea_https.is_listening
-    gitea_http = host.socket("tcp://0.0.0.0:80")
+    gitea_http = host.socket("tcp://0.0.0.0:3080")
     assert gitea_http.is_listening
     gitea_ssh = host.socket("tcp://0.0.0.0:222")
     assert gitea_ssh.is_listening
