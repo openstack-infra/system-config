@@ -744,6 +744,13 @@ all:
         region_name: DFW
       public_v4: 23.253.226.32
       public_v6: 2001:4800:7817:103:be76:4eff:fe04:67a8
+    pbx01.opendev.org:
+      ansible_host: 2001:4800:7819:104:be76:4eff:fe04:b06f
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 104.239.146.91
+      public_v6: 2001:4800:7819:104:be76:4eff:fe04:b06f
     planet01.openstack.org:
       ansible_host: 2604:e100:1:0:f816:3eff:fe05:7ce0
       location:
