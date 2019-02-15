@@ -43,7 +43,7 @@
     chdir: /etc/gitea-docker/
 - name: Check if root user exists
   uri:
-    url: "https://localhost/api/v1/users/root"
+    url: "https://localhost:3000/api/v1/users/root"
     validate_certs: false
     status_code: 200, 404
   register: root_user_check
@@ -58,7 +58,7 @@
       no_log: true
 - name: Check if gerrit user exists
   uri:
-    url: "https://localhost/api/v1/users/gerrit"
+    url: "https://localhost:3000/api/v1/users/gerrit"
     validate_certs: false
     status_code: 200, 404
   register: gerrit_user_check
@@ -66,7 +66,7 @@
   when: gerrit_user_check.status==404
   no_log: true
   uri:
-    url: "https://localhost/api/v1/admin/users"
+    url: "https://localhost:3000/api/v1/admin/users"
     validate_certs: false
     method: POST
     user: root
@@ -87,7 +87,7 @@
     user: root
     password: "{{ gitea_root_password }}"
     force_basic_auth: true
-    url: "https://localhost/api/v1/users/gerrit/keys"
+    url: "https://localhost:3000/api/v1/users/gerrit/keys"
     validate_certs: false
     status_code: 200
   register: gerrit_key_check
@@ -99,7 +99,7 @@
     user: root
     password: "{{ gitea_root_password }}"
     force_basic_auth: true
-    url: "https://localhost/api/v1/user/keys/{{ gerrit_key_check.json[0].id }}"
+    url: "https://localhost:3000/api/v1/user/keys/{{ gerrit_key_check.json[0].id }}"
     validate_certs: false
     method: DELETE
     status_code: 204
@@ -110,7 +110,7 @@
     user: root
     password: "{{ gitea_root_password }}"
     force_basic_auth: true
-    url: "https://localhost/api/v1/admin/users/gerrit/keys"
+    url: "https://localhost:3000/api/v1/admin/users/gerrit/keys"
     validate_certs: false
     method: POST
     status_code: 201
