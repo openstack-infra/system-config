@@ -19,11 +19,10 @@ CERT_FILE        = /certs/cert.pem
 KEY_FILE         = /certs/key.pem
 REDIRECT_OTHER_PORT = true
 PORT_TO_REDIRECT = 3080
-LOCAL_ROOT_URL   = https://gitea-web:3000/
 
 [database]
 DB_TYPE  = mysql
-HOST     = mariadb:3306
+HOST     = localhost:3306
 NAME     = gitea
 USER     = {{ gitea_db_username }}
 PASSWD   = {{ gitea_db_password }}
