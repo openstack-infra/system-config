@@ -86,6 +86,8 @@ groups:
     - git.open*.org
   git-server:
     - git[0-9]*.open*.org
+  gitea:
+    - gitea[0-9]*.opendev.org
   grafana:
     - grafana[0-9]*.open*.org
   graphite:
