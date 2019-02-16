@@ -18,7 +18,8 @@
 - name: Write htpassword file
   htpasswd:
     create: true
-    path: /var/registry/auth/htpassword
+    crypt_scheme: bcrypt
+    path: /var/registry/auth/htpasswd
     name: "{{ registry_user }}"
     password: "{{ registry_password }}"
 - name: Write TLS private key
