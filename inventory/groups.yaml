@@ -66,7 +66,7 @@ groups:
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
     - storyboard-dev[0-9]*.opendev.org
-    - storyboard[0-9]*.open*.org
+    - storyboard[0-9]*.opendev.org
     - static[0-9]*.open*.org
     - status[0-9]*.open*.org
     - subunit-worker[0-9]*.open*.org
@@ -166,7 +166,8 @@ groups:
     - review[0-9]*.open*.org
     - static*.open*.org
     - status*.open*.org
-    - storyboard*.open*.org
+    - storyboard-dev[0-9]*.opendev.org
+    - storyboard[0-9]*.opendev.org
     - subunit-worker[0-9]*.open*.org
     - survey[0-9]*.open*.org
     - translate-dev[0-9]*.open*.org
@@ -192,7 +193,7 @@ groups:
   status:
     - status*.open*.org
   storyboard:
-    - storyboard*.open*.org
+    - storyboard[0-9]*.opendev.org
   storyboard-dev:
     - storyboard-dev[0-9]*.opendev.org
   subunit-worker:
@@ -226,7 +227,8 @@ groups:
     - refstack*.open*.org
     - static*.open*.org
     - status*.open*.org
-    - storyboard*.open*.org
+    - storyboard-dev[0-9]*.opendev.org
+    - storyboard[0-9]*.opendev.org
     - survey[0-9]*.open*.org
     - translate-dev[0-9]*.open*.org
     - translate[0-9]*.open*.org
