@@ -42,7 +42,7 @@ class openstack_project::openstackid_prod (
   $serveradmin = '',
   $canonicalweburl = '',
   $session_cookie_domain = '',
-  $release = '1.0.25',
+  $release = '2.0.0',
   $app_url = '',
   $app_key = '',
   $email_driver = 'mail',
