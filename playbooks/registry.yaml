@@ -1,0 +1,17 @@
+- hosts: "registry:!disabled"
+  name: "prepare registry"
+  roles:
+    - install-docker
+    - letsencrypt-acme-sh-install
+    - letsencrypt-request-certs
+
+- hosts: "adns1.opendev.org"
+  name: "Install txt records"
+  roles:
+    - letsencrypt-install-txt-record
+
+- hosts: "regstry:!disabled"
+  name: "configure registry"
+  roles:
+    - letsencrypt-create-certs
+    - registry

@@ -68,12 +68,6 @@
   roles:
     - install-docker
 
-- hosts: "registry:!disabled"
-  name: "Base: configure registry"
-  roles:
-    - install-docker
-    - registry
-
 # This next section needs to happen in order.  letsencrypt hosts
 # export their TXT authentication records which is installed onto
 # adns1, and then the hosts verify to issue/renew keys
