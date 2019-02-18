@@ -294,6 +294,7 @@ cacti_hosts:
 - nl04.openstack.org
 - ns1.opendev.org
 - ns2.opendev.org
+- openstackid01.openstack.org
 - openstackid.org
 - paste.openstack.org
 - pbx01.opendev.org
