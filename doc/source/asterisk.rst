@@ -11,7 +11,7 @@ At a Glance
 ===========
 
 :Hosts:
-  * http://pbx.openstack.org
+  * sip://pbx.opendev.org
 :Puppet:
   * https://git.openstack.org/cgit/openstack-infra/puppet-asterisk/tree/
   * :cgit_file:`modules/openstack_project/manifests/pbx.pp`
@@ -27,5 +27,5 @@ At a Glance
 Overview
 ========
 
-This is a CentOS 6 system that runs Asterisk, a telephony server.  It is used
-as a conferencing server for the OpenStack project.
+This is a Ubuntu Xenial system that runs Asterisk, a telephony server.
+It is used as a conferencing server for the OpenStack project.
