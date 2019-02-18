@@ -73,3 +73,9 @@
   roles:
     - install-docker
     - registry
+
+- hosts: "letsencrypt-rax-dns:!disabled"
+  name: "Base: copy openstack.org host legacy hiera keys"
+  roles:
+    - letsencrypt-rax-hiera
+
