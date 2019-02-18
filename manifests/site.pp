@@ -1067,7 +1067,6 @@ node /^zm\d+.open.*\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^pbx\d*\.open.*\.org$/ {
   $group = "pbx"

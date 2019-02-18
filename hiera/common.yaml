@@ -296,7 +296,7 @@ cacti_hosts:
 - ns2.opendev.org
 - openstackid.org
 - paste.openstack.org
-- pbx.openstack.org
+- pbx01.opendev.org
 - planet01.openstack.org
 - puppetmaster.openstack.org
 - mirror02.dfw.rax.openstack.org
