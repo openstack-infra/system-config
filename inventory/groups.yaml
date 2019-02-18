@@ -98,6 +98,9 @@ groups:
     - kdc[0-9]*.open*.org
   kubernetes:
     - opendev-k8s*.opendev.org
+  letsencrypt-rax-dns:
+    - test01.openstack.org
+    - test02.openstack.org
   logstash:
     - logstash[0-9]*.open*.org
   logstash-worker:

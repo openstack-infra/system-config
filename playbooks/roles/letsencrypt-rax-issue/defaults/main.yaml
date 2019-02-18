@@ -1,0 +1,8 @@
+letsencrypt_rax_certs: {}
+letsencrypt_rax_certhome: /etc/letsencrypt-rax/
+letsencrypt_rax_logfile: /var/log/letsencrypt-rax/letsencrypt-rax.log
+letsencrypt_rax_acme_path: /opt/acme.sh/acme.sh
+
+# Fill from secrets
+rackspace_dns_username:
+rackspace_dns_api_key:

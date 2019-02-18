@@ -1,0 +1,9 @@
+cert_{{ hostname }}:
+  key_contents: |
+    {{ cert_details['priv_key'] | indent }}
+  full_chain_contents: |
+    {{ cert_details['full_chain'] | indent }}
+  chain_contents: |
+    {{ cert_details['chain'] | indent }}
+  cert_contents: |
+    {{ cert_details['cert'] | indent }}

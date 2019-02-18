@@ -1,0 +1,54 @@
+- name: 'Build acme.sh arguments for {{ hostname }}'
+  set_fact:
+    args: >-
+      --issue
+      --staging
+      --dns dns_rackspace
+      --debug 2
+      --certhome {{ letsencrypt_rax_certhome }}
+      {% for domain in letsencrypt_rax_certs[hostname] %}
+      -d {{ domain }}
+      {% endfor %}
+
+- debug:
+    var: args
+
+# If there's no update required when running --issue this will just
+# exit saying the domain doesn't require any updating.
+- name: 'Run acme.sh for {{ hostname }}'
+  shell:
+    cmd: '{{ acme_path }} {{ args }} 2>&1 | tee -a {{ letsencrypt_rax_logfile }}'
+  register: output
+  environment:
+    CERT_HOME: '{{ letsencrypt_rax_certhome }}'
+    RACKSPACE_Username: '{{ rackspace_dns_username }}'
+    RACKSPACE_Apikey: '{{ rackspace_dns_api_key }}'
+  ignore_errors: yes
+
+- name: Check if certs changed
+  set_fact:
+    domains_changed: true
+  when: "'Domains not changed' not in output.stdout"
+
+- name: Create certifcate combined YAML
+  when: domains_changed | default(false)
+  block:
+    - set_fact:
+        cert_paths:
+          priv_key: '{{ letsencrypt_rax_certhome }}/{{ hostname }}/{{ hostname }}.key'
+          full_chain: '{{ letsencrypt_rax_certhome }}/{{ hostname }}/fullchain.cer'
+          chain: '{{ letsencrypt_rax_certhome }}/{{ hostname }}/ca.cer'
+          cert: '{{ letsencrypt_rax_certhome }}/{{ hostname }}/{{ hostname }}.cer'
+          output_yaml: '{{ letsencrypt_rax_certhome }}/{{ hostname }}.yaml'
+
+    - set_fact:
+        cert_details:
+          priv_key: "{{ lookup('file', cert_paths['priv_key']) }}"
+          full_chain: "{{ lookup('file', cert_paths['full_chain']) }}"
+          chain: "{{ lookup('file', cert_paths['chain']) }}"
+          cert: "{{ lookup('file', cert_paths['cert']) }}"
+
+    - template:
+        src: 'template.j2'
+        dest: "{{ cert_paths['output_yaml'] }}"
+

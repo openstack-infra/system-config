@@ -73,3 +73,14 @@
   roles:
     - install-docker
     - registry
+
+- hosts: "letsencrypt-rax-dns:!disabled"
+  name: "Base: copy openstack.org host legacy hiera keys"
+  copy:
+    src: '/etc/letsencrypt-rax/{{ inventory_hostname }}.yaml'
+    # NOTE: ansible-puppet will require a small update to the hiera config file to
+    # also source this file, as it overwrites the hiera configuration as
+    # part of the puppet run
+    # https://git.openstack.org/cgit/openstack-infra/ansible-role-puppet/tree/templates/hiera.yaml.j2
+    dest: '/etc/puppet/hieradata/production/host_vars/{{ inventory_hostname }}.certs.yaml'
+

@@ -1,0 +1,23 @@
+- name: Set PATH for cron
+  cron:
+    name: PATH
+    env: yes
+    value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+- name: Set up cron job for running run_all.sh
+  cron:
+    name: letsencrypt-rax-dns
+    state: present
+    job: ansible-playbook /opt/system-config/playbooks/letsencrypt-rax-dns.yaml
+    minute: "{{ update_cron_interval.minute }}"
+    hour: "{{ update_cron_interval.hour }}"
+    day: "{{ update_cron_interval.day }}"
+    month: "{{ update_cron_interval.month }}"
+    weekday: "{{ update_cron_interval.weekday }}"
+
+# TODO
+#- name: Setup log rotation
+#  include_role:
+#    name: logrotate
+#  vars:
+#    logrotate_file_name: /var/log/ansible/run_all_cron.log

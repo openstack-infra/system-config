@@ -1,0 +1,61 @@
+# This playbook is run from cron periodically, and creates the
+# certificate files and Ansible variable inclusion files for
+# openstack.org hosts which are hosted on RAX DNS.
+- hosts: localhost
+  connection: local
+  vars:
+
+    # This drives the certificates that are created and renewed.  For
+    # each entry, the certificate material will be populated into
+    # /etc/letsencrypt-rax-certs.  The layout will be like this:
+    #
+    #  /etc/letsencrypt-rax-certs/hostname.yaml
+    #  /etc/letsencrypt-rax-certs/hostname/hostname.key
+    #  /etc/letsencrypt-rax-certs/hostname/hostname.cer
+    #  /etc/letsencrypt-rax-certs/hostname/ca.cer
+    #  /etc/letsencrypt-rax-certs/hostname/fullchain.cer
+    #
+    # The YAML file has one dict variable:
+    #
+    #  cert_hostname:
+    #    key_contents: ...
+    #    full_chain_contents: ...
+    #    chain_contents: ...
+    #    cert_contents: ...
+    #
+    # Hosts in the "letsencrypt-rax-puppet" group will have this
+    # available via hiera
+    letsencrypt_rax_certs:
+      test01.openstack.org:
+        - test01.openstack.org
+        - test.openstack.org
+      test02.acme-opendev.org:
+        - test02.acme-opendev.org
+
+  tasks:
+    - name: Install acme.sh client
+      git:
+        repo: https://github.com/Neilpang/acme.sh
+        dest: /opt/acme.sh
+        version: dev
+
+    - name: Setup log directory
+      file:
+        path: /var/log/letsencrypt-rax
+        state: directory
+        mode: 0755
+
+    # Note this file is manually created and has the API key for the
+    # openstack DNS user
+    - include_vars:
+        file: "/etc/letsencrypt-rax/auth.yaml"
+
+    - name: 'Issue certs for {{ item }}'
+      include_role:
+        name: letsencrypt-rax-issue
+      vars:
+        hostname: '{{ item }}'
+      loop: '{{ letsencrypt_rax_certs.keys() | list }}'
+
+
+
