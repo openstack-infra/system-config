@@ -1,2 +1,6 @@
 gitea_root_email: infra-root@openstack.org
 gitea_gerrit_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVuhTMAz1H2Jr9AC3py9A0vlNna6Sdt4yrvZOayxukPqQ7GPZd+Mo7MVyypxLD479N2mA09JAdsbq1eTiPP8ksEkB+dNxZzw8mY1653R/IXSW6J9xPcoDa88HF2s/xHN24IWzgiDjNNe79AQ+sKleByEQZ++xXny3MRpy258hKUvAtjjOLOnM1PBs8JNOzBL+UPgWRgSX6GG0qywJZqjD1Qx5kvH9RTRLi+tcMhEi4laN7BYvn4csY0sYzTzPG4ZTu3ootIJoRlQGtQ0LmoFO1vSwyEJUags6/ZZGjgy3jl3kwcU/b8ZnFlF4MDw1OB1QqMb4r6bMHbXNIupp4zJbz gerrit-replication-2014-04-25
+iptables_extra_public_tcp_ports:
+  - 222
+  - 3000
+  - 3080

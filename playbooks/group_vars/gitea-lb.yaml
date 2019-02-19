@@ -1,0 +1,14 @@
+haproxy_listeners:
+  - name: balance_git_http
+    bind: '*:80'
+    servers:
+      - name: 'gitea01.opendev.org'
+        address: '127.0.0.1:80'  # placeholder
+  - name: balance_git_https
+    bind: '*:443'
+    servers:
+      - name: 'gitea01.opendev.org'
+        address: '127.0.0.1:443'  # placeholder
+iptables_extra_public_tcp_ports:
+  - 443
+  - 80
