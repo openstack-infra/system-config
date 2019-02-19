@@ -79,3 +79,9 @@
   roles:
     - install-docker
     - gitea
+
+- hosts: "gitea-lb:!disabled"
+  name: "Base: configure gitea load balancer"
+  roles:
+    - install-docker
+    - haproxy
