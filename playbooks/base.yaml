@@ -73,3 +73,9 @@
   roles:
     - install-docker
     - registry
+
+- hosts: "gitea:!disabled"
+  name: "Base: configure gitea"
+  roles:
+    - install-docker
+    - gitea

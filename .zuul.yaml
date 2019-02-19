@@ -501,6 +501,30 @@
       - testinfra/test_registry.py
 
 - job:
+    name: system-config-run-gitea
+    parent: system-config-run
+    description: |
+      Run the playbook for the gitea servers.
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: gitea01.opendev.org
+          label: ubuntu-bionic
+    host-vars:
+      gitea01.opendev.org:
+        host_copy_output:
+          '/var/gitea/conf': logs
+          '/var/gitea/certs': logs
+          '/var/gitea/logs': logs
+    files:
+      - .zuul.yaml
+      - playbooks/group_vars/gitea.yaml
+      - playbooks/zuul/templates/group_vars/gitea.yaml.j2
+      - playbooks/roles/gitea/
+      - testinfra/test_gitea.py
+
+- job:
     name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
@@ -549,6 +573,7 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
+        - system-config-run-gitea
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
         - system-config-build-image-gitea
@@ -568,6 +593,7 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
+        - system-config-run-gitea
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
         - system-config-upload-image-gitea

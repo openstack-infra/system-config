@@ -1,0 +1,121 @@
+- name: Ensure docker-compose directory exists
+  file:
+    state: directory
+    path: /etc/gitea-docker
+    mode: 0700
+- name: Write docker-compose file
+  template:
+    src: docker-compose.yaml.j2
+    dest: /etc/gitea-docker/docker-compose.yaml
+    mode: 0600
+- name: Ensure gitea volume directories exists
+  file:
+    state: directory
+    path: "/var/gitea/{{ item }}"
+    owner: 1000
+    group: 1000
+  loop:
+    - conf
+    - data
+    - logs
+    - certs
+    - db
+- name: Write TLS private key
+  copy:
+    content: "{{ gitea_tls_key }}"
+    dest: /var/gitea/certs/key.pem
+- name: Write TLS certificate
+  copy:
+    content: "{{ gitea_tls_cert }}"
+    dest: /var/gitea/certs/cert.pem
+- name: Write app.ini
+  template:
+    src: app.ini.j2
+    dest: /var/gitea/conf/app.ini
+- name: Install docker-compose
+  package:
+    name:
+      - docker-compose
+    state: present
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/gitea-docker/
+- name: Check if root user exists
+  uri:
+    url: "https://localhost/api/v1/users/root"
+    validate_certs: false
+    status_code: 200, 404
+  register: root_user_check
+  delay: 1
+  retries: 300
+  until: root_user_check and root_user_check.status in (200, 404)
+- name: Create root user
+  when: root_user_check.status==404
+  block:
+    - name: Create root user
+      command: "docker exec -t giteadocker_gitea-web_1 gitea admin create-user --name root --password {{ gitea_root_password }} --email {{ gitea_root_email }} --admin"
+      no_log: true
+- name: Check if gerrit user exists
+  uri:
+    url: "https://localhost/api/v1/users/gerrit"
+    validate_certs: false
+    status_code: 200, 404
+  register: gerrit_user_check
+- name: Create gerrit user
+  when: gerrit_user_check.status==404
+  no_log: true
+  uri:
+    url: "https://localhost/api/v1/admin/users"
+    validate_certs: false
+    method: POST
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    status_code: 201
+    body_format: json
+    body:
+      email: "gerrit@review.opendev.org"
+      full_name: Gerrit
+      login_name: gerrit
+      password: "{{ gitea_gerrit_password }}"
+      send_notify: false
+      source_id: 0
+      username: gerrit
+- name: Check if gerrit ssh key exists
+  uri:
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    url: "https://localhost/api/v1/users/gerrit/keys"
+    validate_certs: false
+    status_code: 200
+  register: gerrit_key_check
+  no_log: true
+- name: Delete old gerrit ssh key
+  when: gerrit_key_check.json | length > 0 and gerrit_key_check.json[0].key != gitea_gerrit_public_key
+  no_log: true
+  uri:
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    url: "https://localhost/api/v1/user/keys/{{ gerrit_key_check.json[0].id }}"
+    validate_certs: false
+    method: DELETE
+    status_code: 204
+- name: Add gerrit ssh key
+  when: gerrit_key_check.json | length == 0
+  no_log: true
+  uri:
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    url: "https://localhost/api/v1/admin/users/gerrit/keys"
+    validate_certs: false
+    method: POST
+    status_code: 201
+    body_format: json
+    body:
+      key: "{{ gitea_gerrit_public_key }}"
+      read_only: false
+      title: "Gerrit replication key"

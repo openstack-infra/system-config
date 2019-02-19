@@ -62,6 +62,7 @@
         - group_vars/nodepool.yaml
         - group_vars/ns.yaml
         - group_vars/registry.yaml
+        - group_vars/gitea.yaml
         - host_vars/bridge.openstack.org.yaml
     - name: Display group membership
       command: ansible localhost -m debug -a 'var=groups'
