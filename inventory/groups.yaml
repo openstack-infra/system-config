@@ -245,5 +245,7 @@ groups:
     - ze[0-9]*.open*.org
   zuul-merger:
     - zm[0-9]*.open*.org
+  zuul-previev:
+    - zp[0-9]*.open*.org
   zuul-scheduler:
     - zuul[0-9]*.open*.org
