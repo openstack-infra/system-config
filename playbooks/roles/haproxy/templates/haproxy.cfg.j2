@@ -1,0 +1,35 @@
+global
+  uid  1000
+  gid  1000
+  log  127.0.0.1 local0
+  maxconn  4000
+  pidfile  /var/haproxy/run/haproxy.pid
+  stats  socket /var/haproxy/run/stats uid 1000 guid 1000 mode 0600 level admin
+  user  haproxy
+
+defaults
+  log  global
+  maxconn  8000
+  option  redispatch
+  retries  3
+  stats  enable
+  timeout  http-request 10s
+  timeout  queue 1m
+  timeout  connect 10s
+  timeout  client 2m
+  timeout  server 2m
+  timeout  check 10s
+
+{% for listener in haproxy_listeners %}
+listen {{ listener.name }}
+  {% for bind in listener.bind %}
+  bind {{ bind }}
+  {% endfor %}
+  mode tcp
+  balance leastconn
+  option tcplog
+
+  {% for server in listener.servers %}
+  server {{ server.name }} {{ server.address }}
+  {% endfor %}
+{% endfor %}
