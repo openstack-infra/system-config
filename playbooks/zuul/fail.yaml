@@ -1,0 +1,4 @@
+- hosts: localhost
+  tasks:
+    - fail:
+        msg: Fail!  For testing!
