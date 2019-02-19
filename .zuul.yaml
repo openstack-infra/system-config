@@ -534,6 +534,24 @@
       - testinfra/test_gitea_lb.py
 
 - job:
+    name: system-config-run-zuul-preview
+    parent: system-config-run
+    description: |
+      Run the playbook for the docker registry.
+    dependencies:
+      - opendev-buildset-registry
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: zp01.opendev.org
+          label: ubuntu-bionic
+    files:
+      - .zuul.yaml
+      - playbooks/roles/zuul-preview/
+      - testinfra/test_zuul_preview.py
+
+- job:
     name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
@@ -574,6 +592,8 @@
         - puppet-beaker-rspec-infra-centos-7-system-config
         - puppet-beaker-rspec-puppet-4-infra-system-config
         - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+        - opendev-buildset-registry:
+            post-run: playbooks/zuul/fail.yaml
         - system-config-run-base
         - system-config-run-base-ansible-devel:
             voting: false
@@ -583,6 +603,7 @@
         - system-config-run-docker
         - system-config-run-docker-registry
         - system-config-run-gitea
+        - system-config-run-zuul-preview
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
         - system-config-build-image-gitea
@@ -603,6 +624,7 @@
         - system-config-run-docker
         - system-config-run-docker-registry
         - system-config-run-gitea
+        - system-config-run-zuul-preview
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
         - system-config-upload-image-gitea

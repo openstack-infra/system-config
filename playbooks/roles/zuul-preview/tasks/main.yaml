@@ -1,0 +1,13 @@
+- name: Synchronize docker-compose directory
+  synchronize:
+    src: zuul-preview-docker/
+    dest: /etc/zuul-preview-docker/
+- name: Install docker-compose
+  package:
+    name:
+      - docker-compose
+    state: present
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/zuul-preview-docker/
