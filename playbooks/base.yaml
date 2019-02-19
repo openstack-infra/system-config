@@ -79,3 +79,9 @@
   roles:
     - install-docker
     - gitea
+
+- hosts: "zuul-preview:!disabled"
+  name: "Base: configure zuul-preview"
+  roles:
+    - install-docker
+    - zuul-preview
