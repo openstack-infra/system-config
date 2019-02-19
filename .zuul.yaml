@@ -327,6 +327,13 @@
         - system-config-zuul-role-integration-bionic
         - system-config-zuul-role-integration-debian-stable
 
+# Consider putting this in the parent job as the default playbook
+- job:
+    name: system-config-buildset-registry
+    parent: openstack-buildset-registry
+    run: playbooks/zuul/buildset-registry.yaml
+    requires: docker-image
+
 - job:
     name: system-config-run
     description: |
@@ -525,6 +532,22 @@
       - testinfra/test_gitea.py
 
 - job:
+    name: system-config-run-zuul-preview
+    parent: system-config-run
+    description: |
+      Run the playbook for the docker registry.
+    nodeset:
+      nodes:
+        - name: bridge.openstack.org
+          label: ubuntu-bionic
+        - name: zp01.opendev.org
+          label: ubuntu-bionic
+    files:
+      - .zuul.yaml
+      - playbooks/roles/zuul-preview/
+      - testinfra/test_zuul_preview.py
+
+- job:
     name: infra-prod-playbook
     description: |
       Run specified playbook against productions hosts.
@@ -552,57 +575,9 @@
       playbook_name: zuul_reconfigure.yaml
 
 - project:
-    templates:
-      - system-config-zuul-role-integration
-      - infra-puppet-apply-jobs
-      - infra-logstash-filter-jobs
-      - publish-tox-docs-infra
     check:
       jobs:
-        - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-base-ansible-devel:
-            voting: false
-        - system-config-run-dns
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
-        - system-config-run-docker
-        - system-config-run-docker-registry
-        - system-config-run-gitea
-        - system-config-build-image-jinja-init
-        - system-config-build-image-gitea-init
-        - system-config-build-image-gitea
-        - system-config-build-image-gerrit
-        - system-config-build-image-python-builder
-    gate:
-      jobs:
-        - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-dns
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
-        - system-config-run-docker
-        - system-config-run-docker-registry
-        - system-config-run-gitea
-        - system-config-upload-image-jinja-init
-        - system-config-upload-image-gitea-init
-        - system-config-upload-image-gitea
-        - system-config-upload-image-gerrit
-        - system-config-upload-image-python-builder
-    promote:
-      jobs:
-        - system-config-promote-image-jinja-init
-        - system-config-promote-image-gitea-init
-        - system-config-promote-image-gitea
-        - system-config-promote-image-gerrit
-        - system-config-promote-image-python-builder
+        - system-config-buildset-registry
+        - system-config-run-zuul-preview:
+            dependencies:
+              - system-config-buildset-registry
