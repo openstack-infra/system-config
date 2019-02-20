@@ -16,11 +16,6 @@
 testinfra_hosts = ['bionic-docker']
 
 
-def test_docker_config(host):
-    daemon_json = host.file('/etc/docker/daemon.json')
-    assert daemon_json.exists
-
-
 def test_docker_service(host):
     docker = host.service('docker')
     assert docker.is_running
