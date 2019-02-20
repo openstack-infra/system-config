@@ -3,3 +3,5 @@
     - ensure-tox
     - multi-node-known-hosts
     - copy-build-sshkey
+    - use-docker-mirror
+    - use-buildset-registry
