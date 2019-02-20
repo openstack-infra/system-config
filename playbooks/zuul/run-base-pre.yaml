@@ -3,3 +3,10 @@
     - ensure-tox
     - multi-node-known-hosts
     - copy-build-sshkey
+    - use-docker-mirror
+  tasks:
+    - include_role:
+        name: use-buildset-registry
+      vars:
+        buildset_registry_docker_user: root
+      when: buildset_registry is defined
