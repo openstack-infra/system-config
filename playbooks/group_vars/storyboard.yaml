@@ -1,3 +1,4 @@
+exim_local_domains: "@:storyboard.openstack.org"
 exim_routers:
   - dnslookup: '{{ exim_dnslookup_router }}'
   - system_aliases: '{{ exim_system_aliases_router }}'
