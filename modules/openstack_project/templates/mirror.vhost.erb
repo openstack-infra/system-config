@@ -283,6 +283,7 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
 
 </VirtualHost>
 
+# Docker registry v1 proxy.
 <VirtualHost <%= @vhost_name %>:8081>
     ServerName <%= @srvname %>:8081
     <% if @serveraliases.is_a? Array -%>
@@ -345,6 +346,7 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
 
 </VirtualHost>
 
+# Docker registry v2 proxy.
 <VirtualHost <%= @vhost_name %>:8082>
     ServerName <%= @srvname %>:8082
     <% if @serveraliases.is_a? Array -%>
@@ -400,9 +402,6 @@ LogFormat "%h %l %u %t \"%r\" %>s %b %{cache-status}e \"%{Referer}i\" \"%{User-a
     ProxyPass "/cloudflare/" "https://production.cloudflare.docker.com/" ttl=120 keepalive=On retry=0
     ProxyPassReverse "/cloudflare/" "https://production.cloudflare.docker.com/"
 
-    # NOTE(SamYaple): Docker has historically not allowed to have anything in
-    # the URI, but it wasn't enforced until they started validating the config
-    # in docker-ce 17.10. Prior to that, it was working fine.
     # NOTE(corvus): Ensure this stanza is last since it's the most
     # greedy match.
     CacheEnable disk  "/"
