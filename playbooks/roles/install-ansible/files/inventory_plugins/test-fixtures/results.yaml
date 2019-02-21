@@ -10,6 +10,7 @@ results:
   afs01.dfw.openstack.org:
     - afs
     - afs-client
+    - futureparser
     - puppet
 
   firehose01.openstack.org:
