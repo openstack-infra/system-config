@@ -53,6 +53,7 @@ groups:
     - groups-dev[0-9]*.open*.org
     - groups[0-9]*.open*.org
     - health[0-9]*.open*.org
+    - kdc[0-9]*.open*.org
     - lists-dev[0-9]*.open*.org
     - lists*.katacontainers.io
     - lists*.open*.org
