@@ -575,9 +575,8 @@ node /^refstack\d*\.open.*\.org$/ {
 }
 
 # A machine to run Storyboard
-# Node-OS: trusty
 # Node-OS: xenial
-node /^storyboard\d*\.open.*\.org$/ {
+node /^storyboard\d+\.opendev\.org$/ {
   $group = "storyboard"
   class { 'openstack_project::storyboard':
     project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
@@ -606,7 +605,6 @@ node /^storyboard\d*\.open.*\.org$/ {
 }
 
 # A machine to run Storyboard devel
-# Node-OS: trusty
 # Node-OS: xenial
 node /^storyboard-dev\d+\.opendev\.org$/ {
   $group = "storyboard-dev"

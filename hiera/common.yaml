@@ -319,7 +319,8 @@ cacti_hosts:
 - review.openstack.org
 - static.openstack.org
 - status01.openstack.org
-- storyboard.openstack.org
+- storyboard01.opendev.org
+- storyboard-dev01.opendev.org
 - subunit-worker01.openstack.org
 - subunit-worker02.openstack.org
 - translate.openstack.org

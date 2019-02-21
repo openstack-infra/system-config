@@ -807,13 +807,6 @@ all:
         region_name: DFW
       public_v4: 162.209.77.101
       public_v6: 2001:4800:7818:103:be76:4eff:fe04:976a
-    storyboard.openstack.org:
-      ansible_host: 2001:4800:7815:103:be76:4eff:fe06:b5c
-      location:
-        cloud: openstackci-rax
-        region_name: DFW
-      public_v4: 23.253.85.155
-      public_v6: 2001:4800:7815:103:be76:4eff:fe06:b5c
     subunit-worker01.openstack.org:
       ansible_host: 2001:4800:7822:102:be76:4eff:fe05:1751
       location:
