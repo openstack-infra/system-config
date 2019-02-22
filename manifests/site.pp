@@ -1177,6 +1177,16 @@ node /^kdc01\.open.*\.org$/ {
 }
 
 # Node-OS: xenial
+# This node will become the new master when we retire kdc01
+node /^kdc03\.open.*\.org$/ {
+  class { 'openstack_project::server': }
+
+  class { 'openstack_project::kdc':
+    slave => true,
+  }
+}
+
+# Node-OS: xenial
 node /^kdc04\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
