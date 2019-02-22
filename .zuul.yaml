@@ -509,6 +509,8 @@
       nodes:
         - name: bridge.openstack.org
           label: ubuntu-bionic
+        - name: gitea-lb01.opendev.org
+          label: ubuntu-bionic
         - name: gitea01.opendev.org
           label: ubuntu-bionic
     host-vars:
@@ -517,12 +519,19 @@
           '/var/gitea/conf': logs
           '/var/gitea/certs': logs
           '/var/gitea/logs': logs
+      gitea-lb01.opendev.org:
+        host_copy_output:
+          '/var/haproxy/etc': logs
     files:
       - .zuul.yaml
       - playbooks/group_vars/gitea.yaml
+      - playbooks/group_vars/gitea-lb.yaml
       - playbooks/zuul/templates/group_vars/gitea.yaml.j2
+      - playbooks/zuul/templates/group_vars/gitea-lb.yaml.j2
       - playbooks/roles/gitea/
+      - playbooks/roles/haproxy/
       - testinfra/test_gitea.py
+      - testinfra/test_gitea_lb.py
 
 - job:
     name: infra-prod-playbook

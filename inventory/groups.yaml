@@ -92,6 +92,8 @@ groups:
     - git[0-9]*.openstack.org
   gitea:
     - gitea[0-9]*.opendev.org
+  gitea-lb:
+    - gitea-lb[0-9]*.opendev.org
   grafana:
     - grafana[0-9]*.open*.org
   graphite:

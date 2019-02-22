@@ -1,0 +1,26 @@
+- name: Synchronize docker-compose directory
+  synchronize:
+    src: docker/
+    dest: /etc/haproxy-docker/
+- name: Ensure registry volume directories exists
+  file:
+    state: directory
+    path: "/var/haproxy/{{ item }}"
+    owner: 1000
+    group: 1000
+  loop:
+    - etc
+    - run
+- name: Write haproxy config file
+  template:
+    src: haproxy.cfg.j2
+    dest: /var/haproxy/etc/haproxy.cfg
+- name: Install docker-compose
+  package:
+    name:
+      - docker-compose
+    state: present
+- name: Run docker-compose up
+  shell:
+    cmd: docker-compose up -d
+    chdir: /etc/haproxy-docker/
