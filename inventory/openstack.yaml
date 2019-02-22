@@ -301,6 +301,13 @@ all:
         region_name: DFW
       public_v4: 104.130.154.186
       public_v6: 2001:4800:7818:103:fc6b:fcd5:e132:b4f5
+    kdc03.openstack.org:
+      ansible_host: 2001:4800:7817:104:be76:4eff:fe01:491e
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 23.253.107.82
+      public_v6: 2001:4800:7817:104:be76:4eff:fe01:491e
     kdc04.openstack.org:
       ansible_host: 2001:4801:7827:101:be76:4eff:fe10:8bc5
       location:
