@@ -1169,21 +1169,11 @@ node 'single-node-ci.test.only' {
   include ::openstackci::single_node_ci
 }
 
-# Node-OS: trusty
-node /^kdc01\.open.*\.org$/ {
-  class { 'openstack_project::server': }
-
-  class { 'openstack_project::kdc': }
-}
-
 # Node-OS: xenial
-# This node will become the new master when we retire kdc01
 node /^kdc03\.open.*\.org$/ {
   class { 'openstack_project::server': }
 
-  class { 'openstack_project::kdc':
-    slave => true,
-  }
+  class { 'openstack_project::kdc': }
 }
 
 # Node-OS: xenial

@@ -5,8 +5,8 @@
       kerberos_realm: 'OPENSTACK.ORG'
       kerberos_admin_server: 'kdc.openstack.org'
       kerberos_kdcs:
-        - kdc01.openstack.org
-        - kdc02.openstack.org
+        - kdc03.openstack.org
+        - kdc04.openstack.org
 
     - role: openafs-client
 
