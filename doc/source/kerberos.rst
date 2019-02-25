@@ -45,10 +45,8 @@ admin principals and host principles need to be set up.
 Set up host principals for slave propagation::
 
    # execute kadmin.local then run these commands
-   addprinc -randkey host/kdc01.openstack.org
    addprinc -randkey host/kdc03.openstack.org
    addprinc -randkey host/kdc04.openstack.org
-   ktadd host/kdc01.openstack.org
    ktadd host/kdc03.openstack.org
    ktadd host/kdc04.openstack.org
 
@@ -116,20 +114,19 @@ Should you need perform maintenance on the kerberos server that requires
 taking kerberos processes offline you can do this by performing your
 updates on a single server at a time.
 
-`kdc01.openstack.org` is our primary server and `kdc0[34].openstack.org`
-is the hot standby. Perform your maintenance on `kdc0[34].openstack.org`
+`kdc03.openstack.org` is our primary server and `kdc04.openstack.org`
+is the hot standby. Perform your maintenance on `kdc04.openstack.org`
 first. Then once that is done we can prepare for taking down the
-primary. On `kdc01.openstack.org` run::
+primary. On `kdc03.openstack.org` run::
 
-  root@kdc01:~# /usr/local/bin/run-kprop.sh
+  root@kdc03:~# /usr/local/bin/run-kprop.sh
 
 You should see::
 
-  Database propagation to kdc03.openstack.org: SUCCEEDED
   Database propagation to kdc04.openstack.org: SUCCEEDED
 
-Once this is done the standby server is ready and we can take kdc01
-offline. When kdc01 is back online rerun `run-kprop.sh` to ensure
+Once this is done the standby server is ready and we can take kdc03
+offline. When kdc03 is back online rerun `run-kprop.sh` to ensure
 everything is working again.
 
 DNS Entries
@@ -137,15 +134,14 @@ DNS Entries
 
 Kerberos uses the following DNS entries::
 
-  _kpasswd._udp.openstack.org.         300 IN SRV 0 0 464 kdc01.openstack.org.
-  _kerberos-adm._tcp.openstack.org.    300 IN SRV 0 0 749 kdc01.openstack.org.
-  _kerberos-master._udp.openstack.org. 300 IN SRV 0 0 88 kdc01.openstack.org.
-  _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc04.openstack.org.
+  _kpasswd._udp.openstack.org.         300 IN SRV 0 0 464 kdc03.openstack.org.
+  _kerberos-adm._tcp.openstack.org.    300 IN SRV 0 0 749 kdc03.openstack.org.
+  _kerberos-master._udp.openstack.org. 300 IN SRV 0 0 88 kdc03.openstack.org.
   _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc03.openstack.org.
-  _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc01.openstack.org.
+  _kerberos._udp.openstack.org.        300 IN SRV 0 0 88 kdc04.openstack.org.
   _kerberos.openstack.org.             300 IN TXT "OPENSTACK.ORG"
 
 Be sure to update them if kdc servers change.  We also maintain a
 CNAME for convenience which points to the master kdc::
 
-  kdc.openstack.org. 300 IN CNAME kdc01.openstack.org.
+  kdc.openstack.org. 300 IN CNAME kdc03.openstack.org.

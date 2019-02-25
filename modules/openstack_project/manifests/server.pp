@@ -24,7 +24,6 @@ class openstack_project::server (
       admin_server => 'kdc.openstack.org',
       cache_size   => $afs_cache_size,
       kdcs         => [
-        'kdc01.openstack.org',
         'kdc03.openstack.org',
         'kdc04.openstack.org',
       ],
