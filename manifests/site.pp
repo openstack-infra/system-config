@@ -122,6 +122,7 @@ node /^health\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
   class { 'openstack_project::openstack_health_api':
     subunit2sql_db_host => hiera('subunit2sql_db_host', 'localhost'),
+    hostname            => 'health.openstack.org',
   }
 }
 
