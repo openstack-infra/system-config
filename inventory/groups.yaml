@@ -64,6 +64,7 @@ groups:
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
     - openstackid-dev[0-9]*.openstack.org
+    - openstackid[0-9]*.openstack.org
     - paste[0-9]*.open*.org
     - pbx[0-9]*.opendev.org
     - planet[0-9]*.open*.org
