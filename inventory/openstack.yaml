@@ -266,6 +266,13 @@ all:
         region_name: DFW
       public_v4: 104.130.142.190
       public_v6: 2001:4800:7818:101:be76:4eff:fe06:d38
+    graphite01.opendev.org:
+      ansible_host: 2001:4800:7818:103:be76:4eff:fe00:beac
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 104.130.138.88
+      public_v6: 2001:4800:7818:103:be76:4eff:fe00:beac
     groups-dev.openstack.org:
       ansible_host: 2001:4800:780e:510:be76:4eff:fe06:8b84
       location:
