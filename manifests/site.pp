@@ -1123,6 +1123,10 @@ node /^openstackid\d*(\.openstack)?\.org$/ {
     email_smtp_server_user              => hiera('openstackid_smtp_user'),
     email_smtp_server_password          => hiera('openstackid_smtp_password'),
     php_version                         => 7,
+    mysql_ssl_enabled                   => true,
+    mysql_ssl_ca_file_contents          => hiera('openstackid_mysql_ssl_ca_file_contents'),
+    mysql_ssl_client_key_file_contents  => hiera('openstackid_mysql_ssl_client_key_file_contents'),
+    mysql_ssl_client_cert_file_contents => hiera('openstackid_mysql_ssl_client_cert_file_contents'),
   }
 }
 
