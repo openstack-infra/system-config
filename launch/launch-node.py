@@ -172,6 +172,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
 
         ansible_cmd = [
             'ansible-playbook',
+            '--flush-cache',
             '-i', jobdir.inventory_root, '-l', name,
             '--private-key={key}'.format(key=jobdir.key),
             "--ssh-common-args='-o StrictHostKeyChecking=no'",
