@@ -261,6 +261,7 @@ cacti_hosts:
 - groups-dev.openstack.org
 - groups.openstack.org
 - health.openstack.org
+- health01.opendev.org
 - kdc03.openstack.org
 - kdc04.openstack.org
 - lists.openstack.org

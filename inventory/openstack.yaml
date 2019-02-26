@@ -287,6 +287,13 @@ all:
         region_name: DFW
       public_v4: 162.242.156.70
       public_v6: 2001:4800:7815:102:be76:4eff:fe05:b6f
+    health01.opendev.org:
+      ansible_host: 2001:4800:7817:103:be76:4eff:fe04:3959
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 23.253.236.45
+      public_v6: 2001:4800:7817:103:be76:4eff:fe04:3959
     insecure-ci-registry01.opendev.org:
       ansible_host: 2001:4800:7818:101:be76:4eff:fe04:67f5
       location:
