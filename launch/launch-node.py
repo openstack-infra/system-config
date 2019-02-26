@@ -182,6 +182,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
         for playbook in [
                 'set-hostnames.yaml',
                 'base.yaml',
+                'apply-package-updates.yaml',
         ]:
             run(ansible_cmd + [
                 os.path.join(SCRIPT_DIR, '..', 'playbooks', playbook)],

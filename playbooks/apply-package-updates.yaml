@@ -1,0 +1,8 @@
+- hosts: "{{ target }}"
+  user: root
+  tasks:
+    - name: Run unattended-upgrade on debuntu
+      shell: |
+        unattended-upgrade -d
+      when: ansible_facts['os_family'] == "Debian"
+  # TODO add equivalent for other platforms
