@@ -1,6 +1,15 @@
 - hosts: "{{ target }}"
   user: root
   tasks:
+    # netplan.io can get stuck on bionic - just use dist-upgrade
+    # to do an initial upgrade, then run unattended-upgrade to make
+    # sure it all worked right.
+    - name: Run apt-get dist-upgrade on debuntu
+      when: ansible_facts['os_family'] == "Debian"
+      apt:
+        state: dist
+        update_cache: yes
+
     - name: Run unattended-upgrade on debuntu
       shell: |
         unattended-upgrade -d
