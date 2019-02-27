@@ -116,9 +116,8 @@ node /^grafana\d*\.open.*\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
-node /^health\d*\.open.*\.org$/ {
+node /^health\d*\.openstack\.org$/ {
   $group = "health"
   class { 'openstack_project::server': }
   class { 'openstack_project::openstack_health_api':

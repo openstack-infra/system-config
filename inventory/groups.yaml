@@ -53,7 +53,7 @@ groups:
     - graphite[0-9]*.open*.org
     - groups-dev[0-9]*.open*.org
     - groups[0-9]*.open*.org
-    - health[0-9]*.open*.org
+    - health[0-9]*.openstack.org
     - kdc[0-9]*.open*.org
     - lists-dev[0-9]*.open*.org
     - lists*.katacontainers.io
@@ -104,7 +104,7 @@ groups:
   groups:
     - groups*.open*.org
   health:
-    - health*.open*.org
+    - health[0-9]*.openstack.org
   kdc:
     - kdc[0-9]*.open*.org
   kubernetes:
@@ -157,7 +157,7 @@ groups:
     - graphite*.open*.org
     - groups-dev*.open*.org
     - groups*.open*.org
-    - health*.open*.org
+    - health[0-9]*.openstack.org
     - kdc[0-9]*.open*.org
     - lists*.katacontainers.io
     - lists*.open*.org
@@ -228,7 +228,7 @@ groups:
     - grafana[0-9]*.open*.org
     - graphite*.open*.org
     - groups*.open*.org
-    - health*.open*.org
+    - health[0-9]*.openstack.org
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
     - openstackid-dev*.openstack.org
