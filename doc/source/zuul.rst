@@ -137,3 +137,19 @@ Mergers.  These are horizontally scalable components of Zuul which
 perform git operations for the benefit of jobs. They can be started
 and stopped at will, and new ones added as necessary to accommodate
 load.
+
+Secrets
+-------
+
+In some cases it may be warranted to compare the decrypted plaintext of
+a secret from job configuration against a reference value while
+troubleshooting, since random padding means encrypting the same
+plaintext a second time will result in wholly different ciphertext. In
+order to avoid unintentional disclosure this should only be done when
+absolutely necessary, but it's possible to decrypt a secret locally on
+the scheduler server with a command like the following (just extract the
+secret ciphertext from the job configuration first to remove surrounding
+YAML, there is no need to dedent nor recombine split lines)::
+
+  cat ciphertext.txt | base64 -d | sudo openssl rsautl -decrypt -oaep -inkey \
+  /var/lib/zuul/keys/secrets/project/gerrit/openstack-infra/project-config/0.pem
