@@ -254,6 +254,9 @@ def build_server(cloud, name, image, flavor,
         print("****")
         print("Server %s failed to build!" % (server.id))
         try:
+            volumes = []
+            if boot_from_volume:
+                volumes = cloud.get_volumes(server)
             if keep:
                 print("Keeping as requested")
                 # Write out the private SSH key we generated, as we
@@ -262,11 +265,14 @@ def build_server(cloud, name, image, flavor,
                     key.write_private_key(key_file)
                     os.chmod(key_file.name, 0o600)
                     print("Private key saved in %s" % key_file.name)
-                print(
-                    "Run to delete -> openstack server delete %s" % \
-                    (server.id))
+                print("Run to delete:")
+                print("  openstack server delete %s" % (server.id))
+                for attachment in volumes:
+                    print("  openstack volume delete %s" % (attachment.id))
             else:
                 cloud.delete_server(server.id, delete_ips=True)
+                for attachment in volumes:
+                    cloud.delete_volume(attachment.id)
         except Exception:
             print("Exception encountered deleting server:")
             traceback.print_exc()
