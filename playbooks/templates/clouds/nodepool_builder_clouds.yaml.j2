@@ -1,0 +1,179 @@
+#
+# Nodepool openstacksdk configuration
+#
+# This file is deployed to nodepool launcher and builder hosts as
+#
+#   ~nodepool/.config/openstack/config/clouds.yaml
+#
+# and is used there to authenticate nodepool operations to clouds.
+# This file only contains projects we are launching test nodes in, and
+# the naming should correspond that used in nodepool configuration
+# files.
+#
+
+cache:
+  expiration:
+    server: 5
+    port: 5
+    floating-ip: 5
+clouds:
+  rax:
+    profile: rackspace
+    regions:
+      - DFW
+      - ORD
+      - IAD
+    api_timeout: 60
+    auth:
+      username: '{{ nodepool_rackspace_username }}'
+      password: '{{ nodepool_rackspace_password }}'
+      project_id: '{{ nodepool_rackspace_project }}'
+    force_ipv4: true
+  openstackci-rax:
+    regions:
+      - DFW
+      - ORD
+      - IAD
+    profile: rackspace
+    auth:
+      username: '{{ clouds.openstackci_rax_username }}'
+      password: '{{ clouds.openstackci_rax_password }}'
+      project_id: '{{ clouds.openstackci_rax_project_id }}'
+  ovh:
+    profile: ovh
+    # OVH has a weird new ipv6 setup that we can't handle properly
+    # for now ignore ipv6
+    force_ipv4: true
+    regions:
+      - BHS1
+      - GRA1
+    api_timeout: 60
+    auth:
+      username: '{{ nodepool_ovh_username }}'
+      password: '{{ nodepool_ovh_password }}'
+      project_name: '{{ nodepool_ovh_project }}'
+  inap:
+    profile: internap
+    api_timeout: 60
+    auth:
+      username: '{{ nodepool_internap_username }}'
+      password: '{{ nodepool_internap_password }}'
+      project_name: '{{ nodepool_internap_project }}'
+    regions:
+      - name: mtl01
+        values:
+          networks:
+            - name: inap-17304-WAN1101
+              routes_externally: True
+  vexxhost:
+    profile: vexxhost
+    regions:
+      - ca-ymq-1
+      - sjc1
+    api_timeout: 60
+    auth_type: password
+    auth:
+      username: '{{ nodepool_vexxhost_username }}'
+      password: '{{ nodepool_vexxhost_password }}'
+      project_name: '{{ nodepool_vexxhost_project }}'
+      project_domain_name: default
+      user_domain_name: default
+    image_format: 'raw'
+  openstackci-vexxhost:
+    regions:
+      - ca-ymq-1
+      - sjc1
+    profile: vexxhost
+    auth:
+      username: '{{ clouds.openstackci_vexxhost_username }}'
+      password: '{{ clouds.openstackci_vexxhost_password }}'
+      project_name: '{{ clouds.openstackci_vexxhost_project_name }}'
+      project_domain_name: default
+      user_domain_name: default
+  citycloud:
+    regions:
+      - Lon1
+      - Kna1
+      - La1
+      - Sto2
+    profile: citycloud
+    api_timeout: 60
+    auth:
+      # TODO(mordred) This auth_url entry is only needed until openstacksdk
+      # 0.18.2 or 0.19.0 is released.
+      auth_url: "https://{region_name}.citycloud.com:5000/v3/"
+      username: '{{ nodepool_citycloud_username }}'
+      password: '{{ nodepool_citycloud_password }}'
+      project_name: 'OpenStack CI Project'
+      project_domain_name: CCP_Domain_27611
+      user_domain_name: CCP_Domain_27611
+  linaro:
+    regions:
+      - RegionOne
+    identity_api_version: '3'
+    auth:
+      auth_url: https://cn1.linaro.cloud:35357
+      username: '{{ nodepool_linaro_username }}'
+      password: '{{ nodepool_linaro_password }}'
+      project_name: '{{ nodepool_linaro_project }}'
+      project_domain_name: default
+      user_domain_name: default
+  linaro-london:
+    regions:
+      - London
+    identity_api_version: '3'
+    auth:
+      auth_url: https://uk.linaro.cloud:5000
+      username: '{{ nodepool_linaro_london_username }}'
+      password: '{{ nodepool_linaro_london_password }}'
+      project_name: '{{ nodepool_linaro_london_project }}'
+      project_domain_name: default
+      user_domain_name: default
+  limestone:
+    regions:
+      - name: RegionOne
+        values:
+          networks:
+            - name: "Gateway Network"
+              routes_externally: false
+              routes_ipv6_externally: true
+              nat_destination: true
+    auth:
+      auth_url: https://osa.continuous.pw:5000
+      username: '{{ nodepool_limestone_username }}'
+      password: '{{ nodepool_limestone_password }}'
+      project_name: '{{ nodepool_limestone_project }}'
+      user_domain_name: default
+      project_domain_name: default
+    api_timeout: 60
+    identity_api_version: 3
+    floating_ip_source: None
+    cacert: /home/nodepool/.config/openstack/limestone_cacert.pem
+  packethost:
+    regions:
+      - name: us-west-1
+        values:
+          networks:
+            - name: openstackzuul-net
+              default_interface: True
+    auth:
+      auth_url: https://packet.platform9.net/keystone
+      username: '{{ nodepool_packethost_username }}'
+      password: '{{ nodepool_packethost_password }}'
+      project_name: '{{ nodepool_packethost_project }}'
+      user_domain_name: default
+      project_domain_name: default
+    identity_api_version: '3'
+    image_format: 'raw'
+  arm64ci:
+    regions:
+      - nrt1
+    identity_api_version: '3'
+    auth:
+      auth_url: https://arm64ci.cloud:5000
+      username: '{{ nodepool_arm64ci_username }}'
+      password: '{{ nodepool_arm64ci_password }}'
+      project_name: '{{ nodepool_arm64ci_project }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+    interface: public
