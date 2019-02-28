@@ -1085,3 +1085,10 @@ all:
         region_name: DFW
       public_v4: 104.130.246.196
       public_v6: 2001:4800:7819:103:be76:4eff:fe04:5870
+    zp01.opendev.org:
+      ansible_host: 2001:4800:7819:104:be76:4eff:fe04:815a
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 174.143.130.226
+      public_v6: 2001:4800:7819:104:be76:4eff:fe04:815a
