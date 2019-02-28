@@ -29,6 +29,16 @@ clouds:
       password: '{{ nodepool_rackspace_password }}'
       project_id: '{{ nodepool_rackspace_project }}'
     force_ipv4: true
+  openstackci-rax:
+    regions:
+      - DFW
+      - ORD
+      - IAD
+    profile: rackspace
+    auth:
+      username: '{{ clouds.openstackci_rax_username }}'
+      password: '{{ clouds.openstackci_rax_password }}'
+      project_id: '{{ clouds.openstackci_rax_project_id }}'
   ovh:
     profile: ovh
     # OVH has a weird new ipv6 setup that we can't handle properly
@@ -69,6 +79,17 @@ clouds:
       project_domain_name: default
       user_domain_name: default
     image_format: 'raw'
+  openstackci-vexxhost:
+    regions:
+      - ca-ymq-1
+      - sjc1
+    profile: vexxhost
+    auth:
+      username: '{{ clouds.openstackci_vexxhost_username }}'
+      password: '{{ clouds.openstackci_vexxhost_password }}'
+      project_name: '{{ clouds.openstackci_vexxhost_project_name }}'
+      project_domain_name: default
+      user_domain_name: default
   citycloud:
     regions:
       - Lon1

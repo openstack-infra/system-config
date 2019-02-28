@@ -13,6 +13,9 @@ groups:
   afsdb: afsdb[0-9]*.open*.org
   ask: ask*.open*.org
   cacti: cacti[0-9]*.open*.org
+  control-plane-clouds:
+    - bridge.openstack.org
+    - nb[0-9]*.open*.org
   disabled:
     - ask-staging.openstack.org
     - ask-staging01.openstack.org
