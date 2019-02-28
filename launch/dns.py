@@ -33,6 +33,25 @@ def print_dns(cloud, server):
     ip4 = server.public_v4
     ip6 = server.public_v6
 
+    if 'rax' in cloud.config.name:
+        print_reverse_dns(cloud, server, ip4, ip6)
+
+    if server.name.endswith('opendev.org'):
+        print_dns_opendev(server.name.rsplit('.', 2)[0], ip4, ip6)
+    else:
+        print_dns_legacy(server, ip4, ip6)
+
+
+def print_dns_opendev(name, ip4, ip6):
+
+    print("\n")
+    print("Put the following into zone-opendev.org:zones/opendev.org/zone.db")
+    print("{name}			IN	A	{ip4}".format(name=name, ip4=ip4))
+    if ip6:
+        print("{name}			IN	AAAA	{ip6}".format(name=name, ip6=ip6))
+
+
+def print_reverse_dns(cloud, server, ip4, ip6):
     # Get the server object from the sdk layer so that we can pull the
     # href data out of the links dict.
     try:
@@ -63,6 +82,9 @@ def print_dns(cloud, server):
         "    --ttl 3600" % (
             server.name, ip4, href))
     print("\n")
+
+
+def print_legacy_dns(server, ip4, ip6):
     print(". ~root/ci-launch/openstack-rs-nova.sh")
     print("\n")
     print(
