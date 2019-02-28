@@ -1,4 +1,4 @@
 openstacksdk_config_dir: /home/nodepool/.config/openstack
 openstacksdk_config_owner: nodepool
 openstacksdk_config_group: nodepool
-openstacksdk_config_template: clouds/nodepool_clouds.yaml.j2
+openstacksdk_config_template: clouds/nodepool_builder_clouds.yaml.j2
