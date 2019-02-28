@@ -4,13 +4,41 @@ haproxy_listeners:
       - '*:80'
     servers:
       - name: 'gitea01.opendev.org'
-        address: '127.0.0.1:80'  # placeholder
+        address: '38.108.68.93:80'
+      - name: 'gitea02.opendev.org'
+        address: '38.108.68.122:80'
+      - name: 'gitea03.opendev.org'
+        address: '38.108.68.133:80'
+      - name: 'gitea04.opendev.org'
+        address: '38.108.68.115:80'
+      - name: 'gitea05.opendev.org'
+        address: '38.108.68.55:80'
+      - name: 'gitea06.opendev.org'
+        address: '38.108.68.130:80'
+      - name: 'gitea07.opendev.org'
+        address: '38.108.68.86:80'
+      - name: 'gitea08.opendev.org'
+        address: '38.108.68.22:80'
   - name: balance_git_https
     bind:
       - '*:443'
     servers:
       - name: 'gitea01.opendev.org'
-        address: '127.0.0.1:443'  # placeholder
+        address: '38.108.68.93:443'
+      - name: 'gitea02.opendev.org'
+        address: '38.108.68.122:443'
+      - name: 'gitea03.opendev.org'
+        address: '38.108.68.133:443'
+      - name: 'gitea04.opendev.org'
+        address: '38.108.68.115:443'
+      - name: 'gitea05.opendev.org'
+        address: '38.108.68.55:443'
+      - name: 'gitea06.opendev.org'
+        address: '38.108.68.130:443'
+      - name: 'gitea07.opendev.org'
+        address: '38.108.68.86:443'
+      - name: 'gitea08.opendev.org'
+        address: '38.108.68.22:443'
 iptables_extra_public_tcp_ports:
   - 443
   - 80
