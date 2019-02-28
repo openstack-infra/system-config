@@ -327,7 +327,7 @@ def main():
     parser.add_argument("--config-drive", dest="config_drive",
                         help="Boot with config_drive attached.",
                         action='store_true',
-                        default=False)
+                        default=True)
     parser.add_argument("--timeout", dest="timeout",
                         help="Increase timeouts (default 600s)",
                         type=int, default=600)
