@@ -21,7 +21,8 @@ import sys
 import tempfile
 
 FILES_TO_CHECK = (
-    'playbooks/templates/clouds/nodepool_clouds.yaml.j2',
+    'playbooks/templates/clouds/nodepool_builder_clouds.yaml.j2',
+    'playbooks/templates/clouds/nodepool_launcher_clouds.yaml.j2',
     'playbooks/templates/clouds/bridge_all_clouds.yaml.j2',
     'playbooks/templates/clouds/bridge_clouds.yaml.j2',
 )
