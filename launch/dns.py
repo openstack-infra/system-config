@@ -40,6 +40,7 @@ def print_dns(cloud, server):
         print_dns_opendev(server.name.rsplit('.', 2)[0], ip4, ip6)
     else:
         print_dns_legacy(server, ip4, ip6)
+    print_inventory_yaml(server, ip4, ip6)
 
 
 def print_dns_opendev(name, ip4, ip6):
@@ -98,6 +99,20 @@ def print_legacy_dns(server, ip4, ip6):
         "    --type A --data %s \\\n"
         "    --ttl 3600 openstack.org" % (
             server.name, ip4))
+
+def print_inventory_yaml(server, ip4, ip6):
+    print("\n")
+    print("Put the following into inventory/openstack.yaml")
+    print("\n")
+    print("    {name}:".format(name=server.name))
+    print("      ansible_host: {ip}".format(ip=ip6 or ip4))
+    print("      location:")
+    print("        cloud: {cloud}".format(cloud=server.location['cloud']))
+    print("        region_name: {region_name}".format(
+        region_name=server.location['region_name']))
+    print("      public_v4: {ip4}".format(ip4=ip4))
+    if ip6:
+        print("      public_v6: {ip6}".format(ip6=ip6))
 
 
 def main():
