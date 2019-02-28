@@ -182,6 +182,60 @@ all:
         region_name: DFW
       public_v4: 104.130.155.115
       public_v6: 2001:4800:7818:103:be76:4eff:fe04:40aa
+    gitea-lb01.opendev.org:
+      ansible_host: 38.108.68.124
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.124
+    gitea01.opendev.org:
+      ansible_host: 38.108.68.93
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.93
+    gitea02.opendev.org:
+      ansible_host: 38.108.68.122
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.122
+    gitea03.opendev.org:
+      ansible_host: 38.108.68.133
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.133
+    gitea04.opendev.org:
+      ansible_host: 38.108.68.115
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.115
+    gitea05.opendev.org:
+      ansible_host: 38.108.68.55
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.55
+    gitea06.opendev.org:
+      ansible_host: 38.108.68.130
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.130
+    gitea07.opendev.org:
+      ansible_host: 38.108.68.86
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.86
+    gitea08.opendev.org:
+      ansible_host: 38.108.68.22
+      location:
+        cloud: openstackci-vexxhost
+        region_name: sjc1
+      public_v4: 38.108.68.22
     git.openstack.org:
       ansible_host: 2001:4800:7819:103:be76:4eff:fe04:77e6
       location:
