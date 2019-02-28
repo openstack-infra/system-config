@@ -60,6 +60,7 @@ results:
     - puppet
     - webservers
     - futureparser
+    - control-plane-clouds
 
   ze01.openstack.org:
     - afs-client

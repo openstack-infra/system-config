@@ -64,6 +64,7 @@
         - group_vars/registry.yaml
         - group_vars/gitea.yaml
         - group_vars/gitea-lb.yaml
+        - group_vars/control-plane-clouds.yaml
         - host_vars/bridge.openstack.org.yaml
     - name: Display group membership
       command: ansible localhost -m debug -a 'var=groups'
