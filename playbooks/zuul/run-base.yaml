@@ -59,6 +59,7 @@
       loop:
         - group_vars/all.yaml
         - group_vars/adns.yaml
+        - group_vars/control-plane-clouds.yaml
         - group_vars/nodepool.yaml
         - group_vars/ns.yaml
         - group_vars/registry.yaml
