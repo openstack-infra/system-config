@@ -20,6 +20,14 @@
       facts:
         project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
 
+- hosts: "gitea:!disabled"
+  name: "Create repos on gitea servers"
+  strategy: free
+  max_fail_percentage: 1
+  roles:
+    - role: gitea-git-repos
+      project_config_ref: "{{ hostvars.localhost.gitinfo.after }}"
+
 - hosts: "review:!disabled"
   name: "Puppet-git: Run puppet on the Gerrit server"
   strategy: free
