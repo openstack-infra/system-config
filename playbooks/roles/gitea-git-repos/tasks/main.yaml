@@ -1,11 +1,6 @@
-- name: Clone project-config
-  git:
-    repo: https://git.openstack.org/openstack-infra/project-config
-    dest: "{{ project_config_dest }}"
-    version: "{{ project_config_ref }}"
 - name: Get Gerrit project list
   set_fact:
-    gerrit_projects: "{{ lookup('file', project_config_dest + '/gerrit/projects.yaml') | from_yaml }}"
+    gerrit_projects: "{{ lookup('file', '/opt/project-config/gerrit/projects.yaml') | from_yaml }}"
 - name: Parse Gerrit org list
   set_fact:
     gerrit_orgs: "{{ gerrit_projects | map(attribute='project') | map('regex_search', '^(.*?)/') | list | unique | select | map('regex_replace', '/', '') | list }}"

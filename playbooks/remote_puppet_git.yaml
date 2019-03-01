@@ -8,7 +8,7 @@
     - name: Grab project-config repo info
       git:
         repo: https://git.openstack.org/openstack-infra/project-config
-        clone: no
+        dest: /opt/project-config
       register: gitinfo
 
 - hosts: "git-server:!disabled"
