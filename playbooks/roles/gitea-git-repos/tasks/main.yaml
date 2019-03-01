@@ -1,0 +1,37 @@
+- name: Clone project-config
+  git:
+    repo: https://git.openstack.org/openstack-infra/project-config
+    dest: "{{ project_config_dest }}"
+    version: "{{ project_config_ref }}"
+- name: Get Gerrit project list
+  set_fact:
+    gerrit_projects: "{{ lookup('file', project_config_dest + '/gerrit/projects.yaml') | from_yaml }}"
+- name: Parse Gerrit org list
+  set_fact:
+    gerrit_orgs: "{{ gerrit_projects | map(attribute='project') | map('regex_search', '^(.*?)/') | list | unique | select | map('regex_replace', '/', '') | list }}"
+- name: debug
+  debug:
+    msg: "{{ gerrit_orgs }}"
+- name: Get Gitea org list
+  # We assume that all the orgs we are interested in are owned by root
+  uri:
+    url: "{{ gitea_url }}/api/v1/user/orgs"
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    validate_certs: false
+    status_code: 200
+  register: gitea_org_list
+- name: Parse Gitea org list
+  set_fact:
+    gitea_orgs: "{{ gitea_org_list.json | map(attribute='username') | list }}"
+- name: Create orgs
+  loop: "{{ gerrit_orgs }}"
+  loop_control:
+    loop_var: org
+  include_tasks: 'setup-org.yaml'
+- name: Create repos
+  loop: "{{ gerrit_projects }}"
+  loop_control:
+    loop_var: project
+  include_tasks: 'setup-repo.yaml'

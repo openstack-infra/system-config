@@ -1,0 +1,3 @@
+gitea_url: https://localhost:3000
+project_config_ref: master
+project_config_dest: /tmp/project_config
