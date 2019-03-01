@@ -3,7 +3,7 @@
   strategy: free
   connection: local
   tasks:
-    - name: Grab project-config repo info
+    - name: Clone project-config repo
       git:
         repo: https://git.openstack.org/openstack-infra/project-config
         dest: /opt/project-config
