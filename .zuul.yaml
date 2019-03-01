@@ -387,6 +387,7 @@
     required-projects:
       - name: github.com/ansible/ansible
         override-checkout: devel
+      - name: github.com/philpep/testinfra
       - name: openstack/openstacksdk
       - name: openstack/ara
     vars:
