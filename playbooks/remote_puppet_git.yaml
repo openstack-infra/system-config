@@ -3,12 +3,11 @@
   strategy: free
   connection: local
   tasks:
-    # Note that git module does ls-remote if clone is set to no and places
-    # the remote_head value in returndict.after
     - name: Grab project-config repo info
       git:
         repo: https://git.openstack.org/openstack-infra/project-config
-        clone: no
+        dest: /opt/project-config
+        force: yes
       register: gitinfo
 
 - hosts: "git-server:!disabled"
