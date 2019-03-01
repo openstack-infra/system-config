@@ -54,6 +54,10 @@ Copy the file `/etc/krb5.keytab` to the second kdc host.
 
 The puppet config sets up slave propagation scripts and cron jobs to run them.
 
+You will also need to create a stash file after creating a new realm. Run
+`krb5_util stash` on the first kdc host. Copy the file `/etc/krb5kdc/stash`
+to all other KDC servers for the krb5-kdc daemons to run.
+
 .. _addprinc:
 
 Adding A User Principal
