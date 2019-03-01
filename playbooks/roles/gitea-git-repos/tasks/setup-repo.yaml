@@ -1,0 +1,40 @@
+- name: debug
+  debug:
+    msg: "{{ project }}"
+- name: Parse project name
+  set_fact:
+    org: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\1') }}"
+    repo: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\2') }}"
+- name: Create repo
+  when: repo not in gitea_org_repos
+  uri:
+    url: "{{ gitea_url }}/api/v1/org/{{ org }}/repos"
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    status_code: 201
+    method: POST
+    body_format: json
+    body:
+      auto_init: false
+      description: "{{ project.description | default('') }}"
+      name: "{{ repo }}"
+      private: false
+  register: create_repo_result
+- name: Get created repo id
+  when: "create_repo_result.json is defined"
+  set_fact:
+    repo_id: "{{ create_repo_result.json['id'] }}"
+- name: Prepare sql query
+  when: "repo_id is defined"
+  set_fact:
+    sql_statement: |
+      start transaction;
+      delete from repo_unit where repo_id = {{ repo_id }} and `type` in (2, 3, 5, 7);
+      insert into repo_unit (repo_id, `type`, config, created_unix) values ({{ repo_id }}, 7, "{""ExternalTrackerURL"":""https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"",""ExternalTrackerFormat"":""https://storyboard.openstack.org/#!/story/{index}"",""ExternalTrackerStyle"":""""}", unix_timestamp());
+      commit;
+- name: Adjust repo settings
+  when: "sql_statement is defined"
+  become: true
+  command: |
+    docker exec giteadocker_mariadb_1 bash -c 'mysql --password="$MYSQL_ROOT_PASSWORD" -e "{{ sql_statement }}"'
