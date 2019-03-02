@@ -23,6 +23,7 @@
     - root-keys
     - ansible-cron
     - cloud-launcher-cron
+    - edit-secrets-script
   tasks:
     - name: Allow Zuul to trigger Ansible
       authorized_key:
