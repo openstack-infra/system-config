@@ -30,12 +30,14 @@
   when: "repo_id is defined"
   set_fact:
     sql_statement: |
+      EOF
       start transaction;
       delete from repo_unit where repo_id = {{ repo_id }} and `type` in (2, 3, 5, 7);
       insert into repo_unit (repo_id, `type`, config, created_unix) values ({{ repo_id }}, 7, "{""ExternalTrackerURL"":""https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"",""ExternalTrackerFormat"":""https://storyboard.openstack.org/#!/story/{index}"",""ExternalTrackerStyle"":""""}", unix_timestamp());
       commit;
+      EOF
 - name: Adjust repo settings
   when: "sql_statement is defined"
   become: true
   command: |
-    docker exec giteadocker_mariadb_1 bash -c 'mysql --password="$MYSQL_ROOT_PASSWORD" -e "{{ sql_statement }}" gitea'
+    docker exec giteadocker_mariadb_1 bash -c 'mysql --password="$MYSQL_ROOT_PASSWORD" gitea <<{{ sql_statement }}'
