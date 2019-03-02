@@ -6,7 +6,7 @@
     org: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\1') }}"
     repo: "{{ project.project | regex_replace('^(.*)/(.*)$', '\\2') }}"
 - name: Create repo
-  when: repo not in gitea_org_repos
+  when: project.project not in gitea_repos
   uri:
     url: "{{ gitea_url }}/api/v1/org/{{ org }}/repos"
     user: root

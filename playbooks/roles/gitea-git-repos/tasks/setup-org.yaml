@@ -53,4 +53,4 @@
   register: gitea_org_repo_list
 - name: Parse org repo list
   set_fact:
-    gitea_org_repos: "{{ gitea_org_repo_list.json | map(attribute='name') | list }}"
+    gitea_repos: "{{ gitea_org_repo_list.json | map(attribute='full_name') | list + gitea_repos | default([]) }}"
