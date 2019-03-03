@@ -45,3 +45,17 @@
       external_tracker_url: "https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"
       tracker_url_format: https://storyboard.openstack.org/#!/story/{index}
       tracker_issue_style: numeric
+- name: Set default branch
+  uri:
+    url: "{{ gitea_url }}/{{ org }}/{{ repo }}/settings/branches"
+    validate_certs: false
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    status_code: 302
+    method: POST
+    body_format: form-urlencoded
+    body:
+      _csrf: "{{ gitea_token }}"
+      action: default_branch
+      branch: master
