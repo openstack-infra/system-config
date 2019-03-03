@@ -33,6 +33,9 @@
     password: "{{ gitea_root_password }}"
     force_basic_auth: true
   register: gitea_token
+- name: Parse CSRF taken
+  set_fact:
+    gitea_token: "{{ gitea_token.cookies._csrf|regex_replace('%3D','=') }}"
 - name: Create repos
   loop: "{{ gerrit_projects }}"
   loop_control:
