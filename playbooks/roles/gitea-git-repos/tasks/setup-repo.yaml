@@ -22,22 +22,26 @@
       name: "{{ repo }}"
       private: false
   register: create_repo_result
-- name: Get created repo id
-  when: "create_repo_result.json is defined"
-  set_fact:
-    repo_id: "{{ create_repo_result.json['id'] }}"
-- name: Prepare sql query
-  when: "repo_id is defined"
-  set_fact:
-    sql_statement: |
-      EOF
-      start transaction;
-      delete from repo_unit where repo_id = {{ repo_id }} and `type` in (2, 3, 5, 7);
-      insert into repo_unit (repo_id, `type`, config, created_unix) values ({{ repo_id }}, 7, "{""ExternalTrackerURL"":""https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"",""ExternalTrackerFormat"":""https://storyboard.openstack.org/#!/story/{index}"",""ExternalTrackerStyle"":""""}", unix_timestamp());
-      commit;
-      EOF
 - name: Adjust repo settings
-  when: "sql_statement is defined"
-  become: true
-  command: |
-    docker exec giteadocker_mariadb_1 bash -c 'mysql --password="$MYSQL_ROOT_PASSWORD" gitea <<{{ sql_statement }}'
+  uri:
+    url: "{{ gitea_url }}/{{ org }}/{{ repo }}/settings"
+    validate_certs: false
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+    status_code: 302
+    method: POST
+    body_format: form-urlencoded
+    body:
+      _csrf: "{{ gitea_token }}"
+      action: advanced
+      # enable_pulls is not provided, which disables it
+      # enable_wiki is not provided, which disables it
+      enable_external_wiki: false
+      external_wiki_url:
+      # enable_issues is on so that issue links work
+      enable_issues: on
+      enable_external_tracker: true
+      external_tracker_url: "https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"
+      tracker_url_format: https://storyboard.openstack.org/#!/story/{index}
+      tracker_issue_style: numeric

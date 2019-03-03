@@ -25,6 +25,14 @@
   loop_control:
     loop_var: org
   include_tasks: 'setup-org.yaml'
+- name: Get a CSRF token
+  uri:
+    url: "{{ gitea_url }}/"
+    validate_certs: false
+    user: root
+    password: "{{ gitea_root_password }}"
+    force_basic_auth: true
+  register: gitea_token
 - name: Create repos
   loop: "{{ gerrit_projects }}"
   loop_control:
