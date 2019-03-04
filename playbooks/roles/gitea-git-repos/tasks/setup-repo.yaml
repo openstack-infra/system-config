@@ -23,6 +23,7 @@
       private: false
   register: create_repo_result
 - name: Adjust repo settings
+  when: project.project not in gitea_repos
   uri:
     url: "{{ gitea_url }}/{{ org }}/{{ repo }}/settings"
     validate_certs: false
