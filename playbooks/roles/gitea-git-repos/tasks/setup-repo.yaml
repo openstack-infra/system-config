@@ -18,7 +18,7 @@
     body_format: json
     body:
       auto_init: false
-      description: "{{ project.description | default('') }}"
+      description: "{{ (project.description | default(''))[:255] }}"
       name: "{{ repo }}"
       private: false
   register: create_repo_result
