@@ -41,3 +41,4 @@
   loop_control:
     loop_var: project
   include_tasks: 'setup-repo.yaml'
+  when: gitea_always_update or project.project not in gitea_repos
