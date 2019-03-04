@@ -178,7 +178,7 @@ class openstack_project::review_dev (
       replication                         => [
         {
           name                 => 'github',
-          url                  => 'git@github.com:',
+          url                  => 'ssh://git@github.com:22/',
           authGroup            => 'Anonymous Users',
           replicationDelay     => '1',
           replicatePermissions => false,
