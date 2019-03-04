@@ -1,0 +1,49 @@
+# Run this with "-f 20"
+
+- hosts: 'nodepool-builder:!disabled'
+  any_errors_fatal: true
+  tasks:
+    - name: Stop Nodepool Builder
+      service:
+        name: nodepool-builder
+        state: stopped
+      become: true
+      become_user: root
+    - name: Wait for (3h10m) to stop Nodepool Builder
+      wait_for:
+        path: /var/run/nodepool/nodepool-builder.pid
+        state: absent
+        timeout: 11400
+
+- hosts: 'nodepool-launcher:!disabled'
+  any_errors_fatal: true
+  tasks:
+    - name: Stop Nodepool Launcher
+      service:
+        name: nodepool-launcher
+        state: stopped
+      become: true
+      become_user: root
+    - name: Wait for (3h10m) to stop Nodepool Launcher
+      wait_for:
+        path: /var/run/nodepool-launcher/nodepool-launcher.pid
+        state: absent
+        timeout: 11400
+
+- hosts: 'nodepool-launcher:!disabled'
+  tasks:
+    - name: Start Nodepool Launcher
+      service:
+        name: nodepool-launcher
+        state: started
+      become: true
+      become_user: root
+
+- hosts: 'nodepool-builder:!disabled'
+  tasks:
+    - name: Start Nodepool Builder
+      service:
+        name: nodepool-builder
+        state: started
+      become: true
+      become_user: root
