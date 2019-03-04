@@ -34,6 +34,28 @@
         - [ '/var/lib/git/' ]
         - "{{ repos }}"
 
+- hosts: gitea
+  gather_facts: False
+  vars:
+    gitea_url: http://localhost:3000
+  tasks:
+    - name: Get a CSRF token
+      uri:
+        url: "{{ gitea_url }}/"
+        validate_certs: false
+        user: root
+        password: "{{ gitea_root_password }}"
+        force_basic_auth: true
+      register: gitea_token
+    - name: Parse CSRF taken
+      set_fact:
+        gitea_token: "{{ gitea_token.cookies._csrf|regex_replace('%3D','=') }}"
+    - name: Move gitea repo
+      include_tasks: gitea-rename-tasks.yaml
+      loop: "{{ repos }}"
+      loop_control:
+        loop_var: repo
+
 - hosts: storyboard.openstack.org
   gather_facts: False
   remote_user: root
