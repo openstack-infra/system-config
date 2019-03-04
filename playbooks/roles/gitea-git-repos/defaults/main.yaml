@@ -1,1 +1,2 @@
 gitea_url: https://localhost:3000
+gitea_always_update: false
