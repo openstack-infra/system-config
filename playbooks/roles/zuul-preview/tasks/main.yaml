@@ -7,6 +7,10 @@
     name:
       - docker-compose
     state: present
+- name: Run docker-compose pull
+  shell:
+    cmd: docker-compose pull
+    chdir: /etc/zuul-preview-docker/
 - name: Run docker-compose up
   shell:
     cmd: docker-compose up -d
