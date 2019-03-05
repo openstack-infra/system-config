@@ -12,6 +12,10 @@ services:
       MYSQL_DATABASE: gitea
       MYSQL_USER: "{{ gitea_db_username }}"
       MYSQL_PASSWORD: "{{ gitea_db_password }}"
+    entrypoint:
+      - /bin/bash
+      - "-c"
+    command: "rm -f /var/lib/mysql/tc.log && docker-entrypoint.sh mysqld"
     volumes:
       - /var/gitea/db:/var/lib/mysql
   gitea-web:
