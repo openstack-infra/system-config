@@ -513,6 +513,11 @@
           label: ubuntu-bionic
         - name: gitea01.opendev.org
           label: ubuntu-bionic
+    run:
+      - playbooks/zuul/run-base.yaml
+      - playbooks/zuul/test-gitea.yaml
+    vars:
+      run_base_test_playbook: playbooks/zuul/test/gitea.yaml
     host-vars:
       gitea01.opendev.org:
         host_copy_output:
