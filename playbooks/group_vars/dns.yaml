@@ -1,11 +1,16 @@
 dns_repos:
   - name: zone-opendev.org
     url: https://git.openstack.org/openstack-infra/zone-opendev.org
+    refspec: refs/changes/54/641154/1
+    version: FETCH_HEAD
   - name: zone-zuul-ci.org
     url: https://git.openstack.org/openstack-infra/zone-zuul-ci.org
 dns_zones:
   - name: opendev.org
     source: zone-opendev.org/zones/opendev.org/
+  - name: acme.opendev.org
+    source: zone-opendev.org/zones/acme.opendev.org/
+    unmanaged: True
   - name: zuul-ci.org
     source: zone-zuul-ci.org/zones/zuul-ci.org/
   - name: zuulci.org
