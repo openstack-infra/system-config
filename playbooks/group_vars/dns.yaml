@@ -6,6 +6,9 @@ dns_repos:
 dns_zones:
   - name: opendev.org
     source: zone-opendev.org/zones/opendev.org/
+  - name: acme.opendev.org
+    source: zone-opendev.org/zones/acme.opendev.org/
+    unmanaged: True
   - name: zuul-ci.org
     source: zone-zuul-ci.org/zones/zuul-ci.org/
   - name: zuulci.org
