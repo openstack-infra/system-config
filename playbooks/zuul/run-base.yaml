@@ -54,6 +54,7 @@
         bastion_ipv6: "{{ nodepool['public_ipv6'] }}"
         bastion_public_key: "{{ lookup('file', zuul.executor.work_root + '/' + zuul.build + '_id_rsa.pub') }}"
         iptables_test_public_tcp_ports: [19885]
+        zuul: "{{ zuul }}"
       template:
         src: "templates/{{ item }}.j2"
         dest: "/etc/ansible/hosts/{{ item }}"
