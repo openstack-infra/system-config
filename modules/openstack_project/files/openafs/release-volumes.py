@@ -20,6 +20,8 @@ import logging
 
 VOLUMES = ['docs',
            'docs.dev',
+           'project.starlingx',
+           'project.zuul',
            ]
 
 log = logging.getLogger("release")
