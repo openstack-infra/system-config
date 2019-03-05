@@ -456,6 +456,9 @@
     parent: system-config-run
     description: |
       Run the playbook for dns.
+    required-projects:
+      - openstack-infra/zone-opendev.org
+      - openstack-infra/zone-zuul-ci.org
     nodeset:
       nodes:
         - name: bridge.openstack.org
@@ -464,6 +467,11 @@
           label: ubuntu-bionic
         - name: ns1.opendev.org
           label: ubuntu-bionic
+    host-vars:
+      adns1.opendev.org:
+        host_copy_output:
+          '/etc/bind/named.conf': logs
+          '/var/lib/bind/zones': logs
     files:
       - .zuul.yaml
       - playbooks/group_vars/adns.yaml
@@ -577,34 +585,34 @@
       playbook_name: zuul_reconfigure.yaml
 
 - project:
-    templates:
-      - system-config-zuul-role-integration
-      - infra-puppet-apply-jobs
-      - infra-logstash-filter-jobs
-      - publish-tox-docs-infra
+#    templates:
+#      - system-config-zuul-role-integration
+#      - infra-puppet-apply-jobs
+#      - infra-logstash-filter-jobs
+#      - publish-tox-docs-infra
     check:
       jobs:
         - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-base-ansible-devel:
-            voting: false
+#        - legacy-system-config-puppet-syntax-3
+#        - puppet-beaker-rspec-infra-system-config
+#        - puppet-beaker-rspec-infra-centos-7-system-config
+#        - puppet-beaker-rspec-puppet-4-infra-system-config
+#        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
+#        - system-config-run-base
+#        - system-config-run-base-ansible-devel:
+#            voting: false
         - system-config-run-dns
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
-        - system-config-run-docker
-        - system-config-run-docker-registry
-        - system-config-run-gitea
-        - system-config-run-zuul-preview
-        - system-config-build-image-jinja-init
-        - system-config-build-image-gitea-init
-        - system-config-build-image-gitea
-        - system-config-build-image-gerrit
-        - system-config-build-image-python-builder
+#        - system-config-run-eavesdrop
+#        - system-config-run-nodepool
+#        - system-config-run-docker
+#        - system-config-run-docker-registry
+#        - system-config-run-gitea
+#        - system-config-run-zuul-preview
+#        - system-config-build-image-jinja-init
+#        - system-config-build-image-gitea-init
+#        - system-config-build-image-gitea
+#        - system-config-build-image-gerrit
+#        - system-config-build-image-python-builder
     gate:
       jobs:
         - tox-linters
