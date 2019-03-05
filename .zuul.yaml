@@ -41,12 +41,12 @@
 
 - job:
     name: system-config-build-image
-    parent: build-docker-image
+    parent: opendev-build-docker-image
     abstract: true
 
 - job:
     name: system-config-upload-image
-    parent: upload-docker-image
+    parent: opendev-upload-docker-image
     abstract: true
     secrets:
       name: docker_credentials
@@ -55,7 +55,7 @@
 
 - job:
     name: system-config-promote-image
-    parent: promote-docker-image
+    parent: opendev-promote-docker-image
     abstract: true
     secrets:
       name: docker_credentials
@@ -481,6 +481,8 @@
     parent: system-config-run
     description: |
       Run the playbook for the docker registry.
+    dependencies: opendev-buildset-registry
+    requires: docker-image
     nodeset:
       nodes:
         - name: bridge.openstack.org
@@ -505,6 +507,8 @@
     parent: system-config-run
     description: |
       Run the playbook for the gitea servers.
+    dependencies: opendev-buildset-registry
+    requires: docker-image
     nodeset:
       nodes:
         - name: bridge.openstack.org
@@ -538,6 +542,8 @@
     parent: system-config-run
     description: |
       Run the playbook for the docker registry.
+    dependencies: opendev-buildset-registry
+    requires: docker-image
     nodeset:
       nodes:
         - name: bridge.openstack.org
@@ -584,6 +590,7 @@
       - publish-tox-docs-infra
     check:
       jobs:
+        - opendev-buildset-registry
         - tox-linters
         - legacy-system-config-puppet-syntax-3
         - puppet-beaker-rspec-infra-system-config
@@ -607,6 +614,7 @@
         - system-config-build-image-python-builder
     gate:
       jobs:
+        - opendev-buildset-registry
         - tox-linters
         - legacy-system-config-puppet-syntax-3
         - puppet-beaker-rspec-infra-system-config
