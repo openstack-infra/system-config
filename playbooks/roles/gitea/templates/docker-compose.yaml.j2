@@ -3,6 +3,13 @@
 version: '2'
 
 services:
+  mariadbremediation:
+    image: mariadb:10.4
+    restart: always
+    network_mode: host
+    volumes:
+      - /var/gitea/db:/var/lib/mysql
+    command: "rm -f /var/lib/mysql/tc.log"
   mariadb:
     image: mariadb:10.4
     network_mode: host
@@ -14,6 +21,8 @@ services:
       MYSQL_PASSWORD: "{{ gitea_db_password }}"
     volumes:
       - /var/gitea/db:/var/lib/mysql
+    depends_on:
+      - mariadbremediation
   gitea-web:
     depends_on:
       - mariadb
