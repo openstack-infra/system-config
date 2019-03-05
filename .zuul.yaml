@@ -456,6 +456,9 @@
     parent: system-config-run
     description: |
       Run the playbook for dns.
+    required-projects:
+      - openstack-infra/zone-opendev.org
+      - openstack-infra/zone-zuul-ci.org
     nodeset:
       nodes:
         - name: bridge.openstack.org
