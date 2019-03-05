@@ -12,6 +12,7 @@
 - name: Clone zone repos
   git:
     repo: "{{ item.url }}"
+    refspec: "{{ item.refspec | default(omit) }}"
     dest: "/opt/source/{{ item.name }}"
   loop: "{{ dns_repos }}"
 - name: Synchronize zone repos to zone directories
@@ -22,6 +23,7 @@
     rsync_opts:
       - "--chmod=u+rwX,g+rX,o+rX"
       - "--chown=bind:bind"
+      - '{{ item.unmanaged | default(False) | ternary("--ignore-existing", "") }}'
   loop: "{{ dns_zones }}"
   notify: Reload named
 - name: Install tsig key

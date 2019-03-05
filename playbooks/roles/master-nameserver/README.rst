@@ -51,6 +51,10 @@ nameserver.
 
       The URL of the git repository.
 
+   .. zuul:rolevar:: refspec
+
+      Add an additonial refspec to be fetched
+
 .. zuul:rolevar:: dns_zones
    :type: list
 
@@ -69,6 +73,14 @@ nameserver.
       ``example.com``, and within that repo, the ``zone.db`` file was
       located at ``zones/example_com/zone.db``, then the value here
       should be ``example.com/zones/example_com``.
+
+   .. zuul:rolevar:: unmanaged
+      :type: bool
+      :default: False
+
+      If ``True`` the zone is considered unmanaged.  The ``source``
+      file will be put in place if it does not exist, but will
+      otherwise be left alone.
 
 .. zuul:rolevar:: dns_notify
    :type: list
