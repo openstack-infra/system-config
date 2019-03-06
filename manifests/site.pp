@@ -1191,6 +1191,7 @@ node /^kdc04\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^afsdb01\.open.*\.org$/ {
   $group = "afsdb"
 
@@ -1203,6 +1204,7 @@ node /^afsdb01\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^afsdb.*\.open.*\.org$/ {
   $group = "afsdb"
 
@@ -1214,6 +1216,7 @@ node /^afsdb.*\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
+# Node-OS: xenial
 node /^afs.*\..*\.open.*\.org$/ {
   $group = "afs"
 
