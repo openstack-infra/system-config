@@ -539,6 +539,7 @@
       - playbooks/zuul/templates/group_vars/gitea.yaml.j2
       - playbooks/zuul/templates/group_vars/gitea-lb.yaml.j2
       - playbooks/roles/gitea/
+      - playbooks/roles/gitea-git-repos/
       - playbooks/roles/haproxy/
       - testinfra/test_gitea.py
       - testinfra/test_gitea_lb.py
