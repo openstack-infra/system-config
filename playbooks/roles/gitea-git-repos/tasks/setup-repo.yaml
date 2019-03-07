@@ -21,6 +21,7 @@
       description: "{{ (project.description | default(''))[:255] }}"
       name: "{{ repo }}"
       private: false
+      readme: Default
   register: create_repo_result
 - name: Adjust repo settings
   when: gitea_always_update or project.project not in gitea_repos
