@@ -135,6 +135,7 @@
         - context: docker/gitea
           target: gitea-openssh
           repository: opendevorg/gitea-openssh
+    # Duplicate in the run-gitea job
     files: &gitea_files
       - docker/gitea/.*
 
@@ -543,6 +544,9 @@
       - playbooks/roles/haproxy/
       - testinfra/test_gitea.py
       - testinfra/test_gitea_lb.py
+      # From gitea_files -- If we rebuild the image, we want to run
+      # this job as well.
+      - docker/gitea/.*
 
 - job:
     name: system-config-run-zuul-preview
@@ -612,7 +616,10 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
-        - system-config-run-gitea
+        - system-config-run-gitea:
+            dependencies:
+              - name: system-config-build-image-gitea
+                soft: true
         - system-config-run-zuul-preview
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
@@ -634,7 +641,10 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
-        - system-config-run-gitea
+        - system-config-run-gitea:
+            dependencies:
+              - name: system-config-upload-image-gitea
+                soft: true
         - system-config-run-zuul-preview
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
