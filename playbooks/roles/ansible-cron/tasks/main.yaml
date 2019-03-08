@@ -19,6 +19,7 @@
     day: "{{ update_cron_interval.day }}"
     month: "{{ update_cron_interval.month }}"
     weekday: "{{ update_cron_interval.weekday }}"
+  when: ansible_cron_install_cron
 
 - name: Setup log rotation
   include_role:

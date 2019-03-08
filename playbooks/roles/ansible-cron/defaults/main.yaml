@@ -4,3 +4,5 @@ update_cron_interval:
   day: '*'
   month: '*'
   weekday: '*'
+# Flag that can be set in tests to ensure cron is not run
+ansible_cron_install_cron: true
