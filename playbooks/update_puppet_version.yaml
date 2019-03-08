@@ -2,11 +2,19 @@
   name: "Puppet-version: install puppet-4 on puppet-4 hosts"
   gather_facts: false
   tasks:
-  - get_url:
+  - name: "Check if puppet 4 is already installed"
+    stat:
+      path: /opt/puppetlabs/puppet/bin/puppet
+    register: puppet4_bin_path
+  - name: "Get puppet installation script"
+    get_url:
       url: http://git.openstack.org/cgit/openstack-infra/system-config/plain/install_puppet.sh
       dest: /tmp/install_puppet.sh
       mode: 0755
       checksum: sha256:741b8cfdc039e817bd598511dd7203da16701f213775e639994e8bb278a68239
-  - shell: /tmp/install_puppet.sh
+    when: not puppet4_bin_path.stat.exists
+  - name: "Install puppet 4 if not already installed"
+    shell: /tmp/install_puppet.sh
     environment:
       PUPPET_VERSION: 4
+    when: not puppet4_bin_path.stat.exists
