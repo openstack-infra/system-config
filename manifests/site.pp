@@ -505,14 +505,26 @@ node /^files\d*\.open.*\.org$/ {
   }
 
   class { 'openstack_project::files':
-    vhost_name                    => 'files.openstack.org',
-    developer_cert_file_contents  => hiera('developer_cert_file_contents'),
-    developer_key_file_contents   => hiera('developer_key_file_contents'),
-    developer_chain_file_contents => hiera('developer_chain_file_contents'),
-    docs_cert_file_contents       => hiera('docs_cert_file_contents'),
-    docs_key_file_contents        => hiera('docs_key_file_contents'),
-    docs_chain_file_contents      => hiera('docs_chain_file_contents'),
-    require                       => Class['Openstack_project::Server'],
+    vhost_name                        => 'files.openstack.org',
+    developer_cert_file_contents      => hiera('developer_cert_file_contents'),
+    developer_key_file_contents       => hiera('developer_key_file_contents'),
+    developer_chain_file_contents     => hiera('developer_chain_file_contents'),
+    docs_cert_file_contents           => hiera('docs_cert_file_contents'),
+    docs_key_file_contents            => hiera('docs_key_file_contents'),
+    docs_chain_file_contents          => hiera('docs_chain_file_contents'),
+    git_airship_cert_file_contents    => hiera('git_airship_cert_file_contents'),
+    git_airship_key_file_contents     => hiera('git_airship_key_file_contents'),
+    git_airship_chain_file_contents   => hiera('git_airship_chain_file_contents'),
+    git_openstack_cert_file_contents  => hiera('git_openstack_cert_file_contents'),
+    git_openstack_key_file_contents   => hiera('git_openstack_key_file_contents'),
+    git_openstack_chain_file_contents => hiera('git_openstack_chain_file_contents'),
+    git_starlingx_cert_file_contents  => hiera('git_starlingx_cert_file_contents'),
+    git_starlingx_key_file_contents   => hiera('git_starlingx_key_file_contents'),
+    git_starlingx_chain_file_contents => hiera('git_starlingx_chain_file_contents'),
+    git_zuul_cert_file_contents       => hiera('git_zuul_cert_file_contents'),
+    git_zuul_key_file_contents        => hiera('git_zuul_key_file_contents'),
+    git_zuul_chain_file_contents      => hiera('git_zuul_chain_file_contents'),
+    require                           => Class['Openstack_project::Server'],
   }
 
   # Temporary for evaluating htaccess rules
