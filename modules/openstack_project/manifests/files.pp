@@ -8,6 +8,18 @@ class openstack_project::files (
   $docs_cert_file_contents,
   $docs_key_file_contents,
   $docs_chain_file_contents,
+  $git_airship_cert_file_contents,
+  $git_airship_key_file_contents,
+  $git_airship_chain_file_contents,
+  $git_openstack_cert_file_contents,
+  $git_openstack_key_file_contents,
+  $git_openstack_chain_file_contents,
+  $git_starlingx_cert_file_contents,
+  $git_starlingx_key_file_contents,
+  $git_starlingx_chain_file_contents,
+  $git_zuul_cert_file_contents,
+  $git_zuul_key_file_contents,
+  $git_zuul_chain_file_contents,
 ) {
 
   $afs_root = '/afs/openstack.org/'
@@ -28,6 +40,24 @@ class openstack_project::files (
     mode     => '0444',
     source   => 'puppet:///modules/openstack_project/disallow_robots.txt',
     require  => File["${www_base}"],
+  }
+
+  #####################################################
+  # Git Redirects Webroot
+  file { "${www_base}/git-redirect":
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    require => File["${www_base}"],
+  }
+
+  file { "${www_base}/git-redirect/.htaccess":
+    ensure   => present,
+    owner    => 'root',
+    group    => 'root',
+    mode     => '0444',
+    source   => 'puppet:///modules/openstack_project/git-redirect.htaccess',
+    require  => File["${www_base}/git-redirect"],
   }
 
   #####################################################
@@ -188,5 +218,157 @@ class openstack_project::files (
     content => $developer_chain_file_contents,
     require => File['/etc/ssl/certs'],
     before  => File['/etc/ssl/certs/developer.openstack.org.pem'],
+  }
+}
+
+
+  ###########################################################
+  # git.airshipit.org
+
+  ::httpd::vhost { 'git.airshipit.org':
+    port     => 443, # Is required despite not being used.
+    docroot  => "${www_base}/git-redirect",
+    priority => '50',
+    template => 'openstack_project/git-redirect.vhost.erb',
+    require  => File["${www_base}/git-redirect"],
+  }
+  file { '/etc/ssl/certs/git.airshipit.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_airship_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/git.airshipit.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $git_airship_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/git.airshipit.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_airship_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.airshipit.org.pem'],
+  }
+}
+
+
+  ###########################################################
+  # git.openstack.org
+
+  ::httpd::vhost { 'git.openstack.org':
+    port     => 443, # Is required despite not being used.
+    docroot  => "${www_base}/git-redirect",
+    priority => '50',
+    template => 'openstack_project/git-redirect.vhost.erb',
+    require  => File["${www_base}/git-redirect"],
+  }
+  file { '/etc/ssl/certs/git.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_openstack_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/git.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $git_openstack_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/git.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_openstack_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.openstack.org.pem'],
+  }
+}
+
+
+  ###########################################################
+  # git.starlingx.io
+
+  ::httpd::vhost { 'git.starlingx.io':
+    port     => 443, # Is required despite not being used.
+    docroot  => "${www_base}/git-redirect",
+    priority => '50',
+    template => 'openstack_project/git-redirect.vhost.erb',
+    require  => File["${www_base}/git-redirect"],
+  }
+  file { '/etc/ssl/certs/git.starlingx.io.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_starlingx_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/git.starlingx.io.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $git_starlingx_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/git.starlingx.io_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_starlingx_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.starlingx.io.pem'],
+  }
+}
+
+
+  ###########################################################
+  # git.zuul-ci.org
+
+  ::httpd::vhost { 'git.zuul-ci.org':
+    port     => 443, # Is required despite not being used.
+    docroot  => "${www_base}/git-redirect",
+    priority => '50',
+    template => 'openstack_project/git-redirect.vhost.erb',
+    require  => File["${www_base}/git-redirect"],
+  }
+  file { '/etc/ssl/certs/git.zuul-ci.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_zuul_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/git.zuul-ci.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $git_zuul_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/git.zuul-ci.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $git_zuul_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.zuul-ci.org.pem'],
   }
 }
