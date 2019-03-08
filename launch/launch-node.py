@@ -183,6 +183,7 @@ def bootstrap_server(server, key, name, volume_device, keep,
                 'set-hostnames.yaml',
                 'base.yaml',
                 'apply-package-updates.yaml',
+                'cleanup-exim-paniclog.yaml',
         ]:
             run(ansible_cmd + [
                 os.path.join(SCRIPT_DIR, '..', 'playbooks', playbook)],

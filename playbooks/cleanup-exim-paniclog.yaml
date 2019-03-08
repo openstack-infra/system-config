@@ -1,0 +1,7 @@
+- hosts: "{{ target }}"
+  user: root
+  tasks:
+    - name: Delete exim paniclog
+      file:
+        path: /var/log/exim4/paniclog
+        state: absent
