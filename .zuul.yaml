@@ -612,7 +612,10 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
-        - system-config-run-gitea
+        - system-config-run-gitea:
+            dependencies:
+              - name: system-config-build-image-gitea
+                soft: true
         - system-config-run-zuul-preview
         - system-config-build-image-jinja-init
         - system-config-build-image-gitea-init
@@ -634,7 +637,10 @@
         - system-config-run-nodepool
         - system-config-run-docker
         - system-config-run-docker-registry
-        - system-config-run-gitea
+        - system-config-run-gitea:
+            dependencies:
+              - name: system-config-upload-image-gitea
+                soft: true
         - system-config-run-zuul-preview
         - system-config-upload-image-jinja-init
         - system-config-upload-image-gitea-init
