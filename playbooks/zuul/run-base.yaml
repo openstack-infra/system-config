@@ -1,6 +1,7 @@
 - import_playbook: ../bridge.yaml
   vars:
     root_rsa_key: "{{ lookup('file', zuul.executor.work_root + '/' + zuul.build + '_id_rsa') }}"
+    ansible_cron_install_cron: false
 
 - hosts: bridge.openstack.org
   become: true
