@@ -170,9 +170,15 @@ def bootstrap_server(server, key, name, volume_device, keep,
         t.daemon = True
         t.start()
 
+        inventory_list = ','.join([
+            jobdir.inventory_root,
+            '/opt/system-config/inventory/openstack.yaml',
+            '/opt/system-config/inventory/groups.yaml',
+            '/opt/system-config/inventory/emergency.yaml',
+        ])
         ansible_cmd = [
             'ansible-playbook',
-            '-i', jobdir.inventory_root, '-l', name,
+            '-i', inventory_list, '-l', name,
             '--private-key={key}'.format(key=jobdir.key),
             "--ssh-common-args='-o StrictHostKeyChecking=no'",
             '-e', 'target={name}'.format(name=name),
