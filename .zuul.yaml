@@ -41,18 +41,14 @@
 
 - job:
     name: system-config-build-image
-    parent: build-docker-image
+    parent: opendev-build-docker-image
     dependencies: opendev-buildset-registry
-    requires: docker-image
-    provides: docker-image
     abstract: true
 
 - job:
     name: system-config-upload-image
-    parent: upload-docker-image
+    parent: opendev-upload-docker-image
     dependencies: opendev-buildset-registry
-    requires: docker-image
-    provides: docker-image
     abstract: true
     secrets:
       name: docker_credentials
@@ -61,7 +57,7 @@
 
 - job:
     name: system-config-promote-image
-    parent: promote-docker-image
+    parent: opendev-promote-docker-image
     abstract: true
     secrets:
       name: docker_credentials
@@ -550,7 +546,6 @@
     description: |
       Run the playbook for the docker registry.
     dependencies: opendev-buildset-registry
-    requires: docker-image
     nodeset:
       nodes:
         - name: bridge.openstack.org
