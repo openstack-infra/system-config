@@ -88,6 +88,15 @@ start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/bootstrap-k8s-nodes.yaml
 send_timer k8s_bootstrap
 
+# Update the puppet version
+# We run this before base because base enforces the specified puppet version
+# but does not transition from an older version to a newer version.
+# This playbook will do the transition if necessary then base will enforce
+# it going forward.
+start_timer
+timeout -k 2m 10m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
+send_timer update_puppet_version
+
 # Run the base playbook everywhere
 start_timer
 timeout -k 2m 120m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/base.yaml
@@ -105,11 +114,6 @@ send_timer gitea_pxc
 start_timer
 timeout -k 2m 10m ansible-playbook -f 50 -e @/etc/ansible/hosts/gitea-cluster.yaml ${SYSTEM_CONFIG}/kubernetes/gitea/gitea-playbook.yaml
 send_timer gitea_gitea
-
-# Update the puppet version
-start_timer
-timeout -k 2m 10m ansible-playbook -f 50 ${ANSIBLE_PLAYBOOKS}/update_puppet_version.yaml
-send_timer update_puppet_version
 
 # Run the git/gerrit/zuul sequence, since it's important that they all work together
 start_timer
