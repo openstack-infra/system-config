@@ -295,7 +295,7 @@ node /^etherpad-dev\d*\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
-node /^wiki\d+\.open.*\.org$/ {
+node /^wiki\d+\.openstack\.org$/ {
   $group = "wiki"
   class { 'openstack_project::wiki':
     bup_user                  => 'bup-wiki',
@@ -317,7 +317,7 @@ node /^wiki\d+\.open.*\.org$/ {
 }
 
 # Node-OS: trusty
-node /^wiki-dev\d+\.open.*\.org$/ {
+node /^wiki-dev\d+\.openstack\.org$/ {
   $group = "wiki-dev"
   class { 'openstack_project::wiki':
     serveradmin           => hiera('infra_apache_serveradmin'),
