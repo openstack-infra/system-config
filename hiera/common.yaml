@@ -33,6 +33,7 @@ statusbot_channels:
 - openstack-doc
 - openstack-dragonflow
 - openstack-entropy
+- openstack-fenix
 - openstack-foundation
 - openstack-fwaas
 - openstack-gate
@@ -135,6 +136,7 @@ meetbot_channels:
 - '#openstack-doc'
 - '#openstack-dragonflow'
 - '#openstack-ec2api'
+- '#openstack-fenix'
 - '#openstack-forum'
 - '#openstack-fr'
 - '#openstack-freezer'
