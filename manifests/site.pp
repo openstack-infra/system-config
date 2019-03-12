@@ -942,6 +942,8 @@ node /^zuul\d+\.open.*\.org$/ {
   }
 
   class { '::zuul::web':
+    # We manage backups below
+    enable_status_backups => false,
     vhosts => {
       'zuul.openstack.org' => {
         port       => 443,
@@ -1006,6 +1008,11 @@ node /^zuul\d+\.open.*\.org$/ {
         ssl_key_file_contents   => hiera('opendev_zuul_ssl_key_file_contents'),
       },
     },
+  }
+
+  zuul::status_backups { 'zuul.openstack.org':
+    tenant_name => 'openstack',
+    ssl         => true,
   }
 
   class { '::zuul::fingergw': }
