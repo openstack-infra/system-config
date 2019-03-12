@@ -75,7 +75,7 @@ groups:
     - subunit-worker[0-9]*.open*.org
     - survey[0-9]*.open*.org
     - translate[0-9]*.open*.org
-    - wiki[0-9]*.open*.org
+    - wiki[0-9]*.openstack.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
     - zm[0-9]*.open*.org
@@ -178,8 +178,8 @@ groups:
     - survey[0-9]*.open*.org
     - translate-dev[0-9]*.open*.org
     - translate[0-9]*.open*.org
-    - wiki-dev[0-9]*.open*.org
-    - wiki[0-9]*.open*.org
+    - wiki-dev[0-9]*.openstack.org
+    - wiki[0-9]*.openstack.org
     - ze[0-9]*.open*.org
     - zm[0-9]*.open*.org
     - zuul[0-9]*.open*.org
@@ -191,7 +191,7 @@ groups:
     - review-dev[0-9]*.open*.org
     - storyboard-dev[0-9]*.opendev.org
     - translate-dev[0-9]*.open*.org
-    - wiki-dev[0-9]*.open*.org
+    - wiki-dev[0-9]*.openstack.org
   refstack:
     - refstack*.open*.org
   registry:
@@ -244,12 +244,12 @@ groups:
     - survey[0-9]*.open*.org
     - translate-dev[0-9]*.open*.org
     - translate[0-9]*.open*.org
-    - wiki-dev[0-9]*.open*.org
-    - wiki[0-9]*.open*.org
+    - wiki-dev[0-9]*.openstack.org
+    - wiki[0-9]*.openstack.org
   wiki:
-    - wiki[0-9]*.open*.org
+    - wiki[0-9]*.openstack.org
   wiki-dev:
-    - wiki-dev[0-9]*.open*.org
+    - wiki-dev[0-9]*.openstack.org
   zookeeper:
     - zk[0-9]*.open*.org
   zuul-executor:
