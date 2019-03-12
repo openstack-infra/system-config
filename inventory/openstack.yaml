@@ -910,6 +910,13 @@ all:
         region_name: DFW
       public_v4: 162.209.77.78
       public_v6: 2001:4800:7818:103:be76:4eff:fe04:9552
+    wiki-dev02.openstack.org:
+      ansible_host: 2001:4800:7817:104:be76:4eff:fe04:82e7
+      location:
+        cloud: openstackci-rax
+        region_name: DFW
+      public_v4: 23.253.253.208
+      public_v6: 2001:4800:7817:104:be76:4eff:fe04:82e7
     wiki-upgrade-test.openstack.org:
       ansible_host: 2001:4800:7813:516:be76:4eff:fe06:36e7
       location:
