@@ -23,6 +23,32 @@
       private: false
       readme: Default
   register: create_repo_result
+
+- name: Set storyboard tracker url
+  when: "'use-storyboard' in project and project['use-storyboard']"
+  set_fact:
+    external_tracker_url: "https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"
+- name: Set storyboard tracker url format
+  when: "'use-storyboard' in project and project['use-storyboard']"
+  set_fact:
+    tracker_url_format: "https://storyboard.openstack.org/#!/story/{index}"
+- name: Set launchpad tracker url
+  when: "('use-storyboard' not in project or not project['use-storyboard']) and ('groups' not in project or not project['groups'])"
+  set_fact:
+    external_tracker_url: "https://bugs.launchpad.net/{{ repo }}"
+- name: Set launchpad tracker url format
+  when: "('use-storyboard' not in project or not project['use-storyboard']) and ('groups' not in project or not project['groups'])"
+  set_fact:
+    tracker_url_format: "https://bugs.launchpad.net/{{ repo }}/+bug/{index}"
+- name: Set launchpad tracker url if group set
+  when: "('use-storyboard' not in project or not project['use-storyboard']) and ('groups' in project and project['groups'])"
+  set_fact:
+    external_tracker_url: "https://bugs.launchpad.net/{{ project.groups[0] }}"
+- name: Set launchpad tracker url format if group set
+  when: "('use-storyboard' not in project or not project['use-storyboard']) and ('groups' in project and project['groups'])"
+  set_fact:
+    tracker_url_format: "https://bugs.launchpad.net/{{ project.groups[0] }}/+bug/{index}"
+
 - name: Adjust repo settings
   when: gitea_always_update or project.project not in gitea_repos
   uri:
@@ -44,8 +70,8 @@
       # enable_issues is on so that issue links work
       enable_issues: on
       enable_external_tracker: true
-      external_tracker_url: "https://storyboard.openstack.org/#!/project/{{ org }}/{{ repo }}"
-      tracker_url_format: https://storyboard.openstack.org/#!/story/{index}
+      external_tracker_url: "{{ external_tracker_url }}"
+      tracker_url_format: "{{ tracker_url_format }}"
       tracker_issue_style: numeric
 - name: Set default branch
   when: gitea_always_update or project.project not in gitea_repos
