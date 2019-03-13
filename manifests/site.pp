@@ -136,7 +136,6 @@ node /^cacti\d+\.open.*\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^graphite\d*\.open.*\.org$/ {
   class { 'openstack_project::server': }
@@ -1204,7 +1203,6 @@ node /^kdc04\.open.*\.org$/ {
   }
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^afsdb01\.open.*\.org$/ {
   $group = "afsdb"
@@ -1217,7 +1215,6 @@ node /^afsdb01\.open.*\.org$/ {
   include openstack_project::afsrelease
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^afsdb.*\.open.*\.org$/ {
   $group = "afsdb"
@@ -1229,7 +1226,6 @@ node /^afsdb.*\.open.*\.org$/ {
   include openstack_project::afsdb
 }
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^afs.*\..*\.open.*\.org$/ {
   $group = "afs"
@@ -1310,7 +1306,6 @@ node /^translate-dev\d*\.open.*\.org$/ {
 }
 
 
-# Node-OS: trusty
 # Node-OS: xenial
 node /^codesearch\d*\.open.*\.org$/ {
   $group = "codesearch"
