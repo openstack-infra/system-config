@@ -51,6 +51,10 @@
 
 - name: Adjust repo settings
   when: gitea_always_update or project.project not in gitea_repos
+  register: result
+  retries: 3
+  until: result is succeeded
+  delay: 5
   uri:
     url: "{{ gitea_url }}/{{ org }}/{{ repo }}/settings"
     validate_certs: false
@@ -75,6 +79,10 @@
       tracker_issue_style: numeric
 - name: Set default branch
   when: gitea_always_update or project.project not in gitea_repos
+  register: result
+  retries: 3
+  until: result is succeeded
+  delay: 5
   uri:
     url: "{{ gitea_url }}/{{ org }}/{{ repo }}/settings/branches"
     validate_certs: false
