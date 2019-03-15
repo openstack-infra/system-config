@@ -1,0 +1,10 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+1: Andriy Shevchenko <huang.zhiping@99cloud.net>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 15 Mar 2019 03:39:43 +0000
+Reviewed-on: https://review.openstack.org/643168
+Project: openstack-infra/system-config
+Branch: refs/heads/master
