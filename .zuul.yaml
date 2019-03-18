@@ -42,7 +42,6 @@
 - job:
     name: system-config-build-image
     parent: opendev-build-docker-image
-    dependencies: opendev-buildset-registry
     abstract: true
 
 - job:
@@ -131,23 +130,18 @@
         - context: docker/gitea
           target: gitea-openssh
           repository: opendevorg/gitea-openssh
-    # Duplicate in the run-gitea job
-    files: &gitea_files
-      - docker/gitea/.*
 
 - job:
     name: system-config-upload-image-gitea
     description: Build and upload a gitea image.
     parent: system-config-upload-image
     vars: *gitea_vars
-    files: *gitea_files
 
 - job:
     name: system-config-promote-image-gitea
     description: Promote a previously published gitea image to latest.
     parent: system-config-promote-image
     vars: *gitea_vars
-    files: *gitea_files
 
 # Gerrit jobs
 - job:
@@ -612,70 +606,6 @@
       playbook_name: zuul_reconfigure.yaml
 
 - project:
-    templates:
-      - system-config-zuul-role-integration
-      - infra-puppet-apply-jobs
-      - infra-logstash-filter-jobs
-      - publish-tox-docs-infra
     check:
       jobs:
-        - opendev-buildset-registry
-        - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-base-ansible-devel:
-            voting: false
-        - system-config-run-dns
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
-        - system-config-run-docker
-        - system-config-run-docker-registry
-        - system-config-run-gitea:
-            dependencies:
-              - name: system-config-build-image-gitea
-                soft: true
-        - system-config-run-zuul-preview
-        - system-config-build-image-jinja-init
-        - system-config-build-image-gitea-init
         - system-config-build-image-gitea
-        - system-config-build-image-gerrit
-        - system-config-build-image-python-base
-        - system-config-build-image-python-builder
-    gate:
-      jobs:
-        - opendev-buildset-registry
-        - tox-linters
-        - legacy-system-config-puppet-syntax-3
-        - puppet-beaker-rspec-infra-system-config
-        - puppet-beaker-rspec-infra-centos-7-system-config
-        - puppet-beaker-rspec-puppet-4-infra-system-config
-        - puppet-beaker-rspec-puppet-4-centos-7-infra-system-config
-        - system-config-run-base
-        - system-config-run-dns
-        - system-config-run-eavesdrop
-        - system-config-run-nodepool
-        - system-config-run-docker
-        - system-config-run-docker-registry
-        - system-config-run-gitea:
-            dependencies:
-              - name: system-config-upload-image-gitea
-                soft: true
-        - system-config-run-zuul-preview
-        - system-config-upload-image-jinja-init
-        - system-config-upload-image-gitea-init
-        - system-config-upload-image-gitea
-        - system-config-upload-image-gerrit
-        - system-config-upload-image-python-base
-        - system-config-upload-image-python-builder
-    promote:
-      jobs:
-        - system-config-promote-image-jinja-init
-        - system-config-promote-image-gitea-init
-        - system-config-promote-image-gitea
-        - system-config-promote-image-gerrit
-        - system-config-promote-image-python-base
-        - system-config-promote-image-python-builder
