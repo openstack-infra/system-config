@@ -86,6 +86,7 @@ statusbot_channels:
 - openstack-tricircle
 - openstack-trove
 - openstack-uc
+- openstack-uk
 - openstack-valence
 - openstack-valet
 - openstack-vitrage
