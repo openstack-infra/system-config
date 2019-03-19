@@ -20,6 +20,7 @@
 # of this that could be cleaned up upstream, but doing so makes the actual
 # os_ module invocations really chatty.
 
+cd "$(dirname "$0")"
 eval $(python3 tools/cloud-to-env.py --cloud=openstackci-vexxhost --region=sjc1)
 
 export KEY="bridge-root-2014-09-15"
