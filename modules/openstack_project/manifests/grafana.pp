@@ -53,7 +53,7 @@ class openstack_project::grafana (
 
   $grafana_cfg_merged = merge($grafana_cfg_defaults, $grafana_cfg)
 
-  $version = '5.1.3'
+  $version = 'latest'
 
   class { '::grafana':
     cfg            => $grafana_cfg_merged,
