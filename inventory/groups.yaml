@@ -169,7 +169,7 @@ groups:
     - etherpad-dev[0-9]*.open*.org
     - files[0-9]*.open*.org
     - firehose[0-9]*.open*.org
-    - groups-dev[0-9]*.open*.org
+    - groups-dev*.open*.org
     - grafana[0-9]*.open*.org
     - graphite[0-9]*.open*.org
     - groups[0-9]*.open*.org
