@@ -50,6 +50,8 @@ groups:
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
     - review[0-9]*.open*.org
+    - static*.open*.org
+    - status*.open*.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
     - zm[0-9]*.open*.org
@@ -184,8 +186,6 @@ groups:
     - review-dev[0-9]*.open*.org
     - storyboard[0-9]*.opendev.org
     - storyboard-dev[0-9]*.opendev.org
-    - static[0-9]*.open*.org
-    - status[0-9]*.open*.org
     - subunit-worker[0-9]*.open*.org
     - survey[0-9]*.open*.org
     - translate[0-9]*.open*.org
