@@ -172,7 +172,7 @@ groups:
     - groups-dev*.open*.org
     - grafana[0-9]*.open*.org
     - graphite[0-9]*.open*.org
-    - groups[0-9]*.open*.org
+    - groups*.open*.org
     - health[0-9]*.openstack.org
     - lists-dev[0-9]*.open*.org
     - openstackid[0-9]*.openstack.org
