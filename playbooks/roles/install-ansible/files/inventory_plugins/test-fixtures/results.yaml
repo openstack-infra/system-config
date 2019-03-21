@@ -29,20 +29,17 @@ results:
     - puppet
 
   logstash-worker02.openstack.org:
-    - futureparser
     - logstash-worker
-    - puppet
+    - puppet4
 
   mirror02.dfw.rax.openstack.org:
     - afs-client
     - mirror
-    - puppet
-    - futureparser
+    - puppet4
 
   mirror-update01.openstack.org:
     - afsadmin
-    - puppet
-    - futureparser
+    - puppet4
 
   review01.openstack.org:
     - futureparser
