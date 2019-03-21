@@ -22,6 +22,7 @@ VOLUMES = ['docs',
            'docs.dev',
            'project.starlingx',
            'project.zuul',
+           'project.opendev',
            ]
 
 log = logging.getLogger("release")
