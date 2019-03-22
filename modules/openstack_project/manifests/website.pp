@@ -19,6 +19,7 @@ define openstack_project::website (
   $ssl_key = undef,
   $ssl_intermediate = undef,
   $template = 'openstack_project/website.vhost.erb',
+  $docroot = undef,
 ) {
 
   $afs_root = '/afs/openstack.org/'
@@ -29,10 +30,16 @@ define openstack_project::website (
     $volume_name_ = $volume_name
   }
 
+  if $docroot == undef {
+     $docroot_ = "${afs_root}/project/${volume_name_}/www"
+  } else {
+     $docroot_ = $docroot
+  }
+
   ::httpd::vhost { $name:
     serveraliases => $aliases,
     port          => 443, # Is required despite not being used.
-    docroot       => "${afs_root}/project/${volume_name_}/www",
+    docroot       => $docroot_,
     priority      => '50',
     template      => $template,
     require       => [File["/etc/ssl/certs/${name}.pem"],
