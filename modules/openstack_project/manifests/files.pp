@@ -367,4 +367,5 @@ class openstack_project::files (
     require => File['/etc/ssl/certs'],
     before  => File['/etc/ssl/certs/git.zuul-ci.org.pem'],
   }
+
 }
