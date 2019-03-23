@@ -63,7 +63,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/debian',
     distributions => 'openstack_project/reprepro/distributions.debian.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
-    releases      => ['stretch'],
+    releases      => ['stretch', 'buster'],
   }
 
   cron { 'reprepro debian':
@@ -96,7 +96,7 @@ class openstack_project::mirror_update (
     basedir       => '/afs/.openstack.org/mirror/debian-security',
     distributions => 'openstack_project/reprepro/distributions.debian-security.erb',
     updates_file  => 'puppet:///modules/openstack_project/reprepro/debian-security-updates',
-    releases      => ['stretch'],
+    releases      => ['stretch', 'buster'],
   }
 
   cron { 'reprepro debian security':
