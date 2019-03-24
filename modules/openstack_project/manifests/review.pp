@@ -93,7 +93,7 @@ class openstack_project::review (
       vhost_name                          => 'review.openstack.org',
       canonicalweburl                     => 'https://review.openstack.org/',
       git_http_url                        => 'https://git.openstack.org/',
-      canonical_git_url                   => 'git://git.openstack.org/',
+      canonical_git_url                   => 'https://git.openstack.org/',
       ssl_cert_file                       => $ssl_cert_file,
       ssl_key_file                        => $ssl_key_file,
       ssl_chain_file                      => $ssl_chain_file,

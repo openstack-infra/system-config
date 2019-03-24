@@ -170,7 +170,7 @@ class openstack_project::status (
   include reviewday
 
   reviewday::site { 'reviewday':
-    git_url                       => 'git://git.openstack.org/openstack-infra/reviewday',
+    git_url                       => 'https://git.openstack.org/openstack-infra/reviewday',
     serveradmin                   => 'webmaster@openstack.org',
     httproot                      => '/srv/static/reviewday',
     gerrit_url                    => 'review.openstack.org',
@@ -187,7 +187,7 @@ class openstack_project::status (
   include bugdaystats
 
   bugdaystats::site { 'bugdaystats':
-    git_url     => 'git://git.openstack.org/openstack-infra/bugdaystats',
+    git_url     => 'https://git.openstack.org/openstack-infra/bugdaystats',
     serveradmin => 'webmaster@openstack.org',
     httproot    => '/srv/static/bugdaystats',
     configfile  => '/var/lib/bugdaystats/config.js',
