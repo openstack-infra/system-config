@@ -18,7 +18,7 @@ Documentation
 ==============
 
 The documentation presented at http://docs.openstack.org/infra/system-config comes from
-git://git.openstack.org/openstack-infra/system-config repo's docs/source.  To
+https://git.openstack.org/openstack-infra/system-config repo's docs/source.  To
 build the documentation use
 
  $ tox -evenv python setup.py build_sphinx

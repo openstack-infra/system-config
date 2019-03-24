@@ -17,7 +17,7 @@
 . ./tools/prep-apply.sh
 
 /usr/zuul-env/bin/zuul-cloner --workspace /tmp --cache-dir /opt/git \
-    git://git.openstack.org \
+    https://git.openstack.org \
     openstack-infra/logstash-filters
 sha=$(git --git-dir=/tmp/openstack-infra/logstash-filters/.git rev-parse HEAD)
 
