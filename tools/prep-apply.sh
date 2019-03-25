@@ -73,7 +73,7 @@ for MOD in ${!INTEGRATION_MODULES[*]}; do
 done
 
 sudo -E /usr/zuul-env/bin/zuul-cloner -m clonemap.yaml --cache-dir /opt/git \
-    git://git.openstack.org \
+    https://git.openstack.org \
     $project_names
 
 # Fix hostname lookups
