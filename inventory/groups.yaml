@@ -44,7 +44,6 @@ groups:
     - lists*.open*.org
     - nb[0-9]*.open*.org
     - nl[0-9]*.open*.org
-    - review[0-9]*.open*.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
     - zm[0-9]*.open*.org
@@ -181,6 +180,7 @@ groups:
     - pbx[0-9]*.opendev.org
     - planet[0-9]*.open*.org
     - refstack*.open*.org
+    - review[0-9]*.open*.org
     - review-dev[0-9]*.open*.org
     - static*.open*.org
     - status*.open*.org
