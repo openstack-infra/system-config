@@ -9,7 +9,7 @@
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
-    AllowOverrideList Redirect RedirectMatch
+    AllowOverrideList Redirect RedirectMatch RewriteEngine RewriteBase RewriteCond RewriteMap RewriteOptions RewriteRule
     Satisfy Any
     Require all granted
   </Directory>
@@ -37,7 +37,7 @@
   <Directory <%= @docroot %>>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride None
-    AllowOverrideList Redirect RedirectMatch
+    AllowOverrideList Redirect RedirectMatch RewriteEngine RewriteBase RewriteCond RewriteMap RewriteOptions RewriteRule
     Satisfy Any
     Require all granted
   </Directory>
