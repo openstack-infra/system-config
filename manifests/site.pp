@@ -546,9 +546,9 @@ node /^files\d*\.open.*\.org$/ {
   openstack_project::website { 'docs.opendev.org':
     aliases          => [],
     docroot	     => "/afs/openstack.org/project/opendev.org/docs",
-    ssl_cert         => hiera('opendev_ssl_cert'),
-    ssl_key          => hiera('opendev_ssl_key'),
-    ssl_intermediate => hiera('opendev_ssl_intermediate'),
+    ssl_cert         => hiera('docs_opendev_ssl_cert'),
+    ssl_key          => hiera('docs_opendev_ssl_key'),
+    ssl_intermediate => hiera('docs_opendev_ssl_intermediate'),
     require          => Class['openstack_project::files'],
   }
 
