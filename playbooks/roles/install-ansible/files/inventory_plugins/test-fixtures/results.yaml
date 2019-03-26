@@ -45,9 +45,9 @@ results:
     - puppet4
 
   review01.openstack.org:
-    - futureparser
     - gerrit
     - puppet
+    - puppet4
     - review
 
   backup01.ord.rax.ci.openstack.org:
