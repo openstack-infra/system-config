@@ -18,16 +18,20 @@ MIRROR_VOLUME=$1
 BASE="/afs/.openstack.org/mirror/opensuse"
 MIRROR="rsync://mirror.us.leaseweb.net/opensuse"
 OBS_MIRROR="rsync://provo-mirror.opensuse.org/opensuse/repositories"
-OBS_REPOS=('Virtualization:/containers' 'Cloud:/OpenStack:/Queens' 'Cloud:/OpenStack:/Rocky' 'Cloud:/OpenStack:/Master')
+OBS_REPOS=('Virtualization:/containers')
+CLOUD_OBS_REPOS=('Cloud:/OpenStack:/Queens/openSUSE_Leap_42.3'
+                'Cloud:/OpenStack:/Queens/openSUSE_Leap_15.0'
+                'Cloud:/OpenStack:/Rocky/openSUSE_Leap_42.3'
+                'Cloud:/OpenStack:/Rocky/openSUSE_Leap_15.0'
+                'Cloud:/OpenStack:/Master/openSUSE_Leap_15.0')
 K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -k 2m 30m"
 
 # NOTE(hwoarang): Ensure old distros are not mirrored aymore
-for DISTVER in 42.2; do
-    for REPO in distribution/leap/$DISTVER update/leap/$DISTVER; do
-        if [ -d $BASE/$REPO ]; then
-            $K5START rm -rf $BASE/$REPO
-        fi
-    done
+for REPO in distribution/leap/42.2 update/leap/42.2 \
+        repositories/Cloud:/OpenStack:/Master/openSUSE_Leap_42.3 ; do
+    if [ -d $BASE/$REPO ]; then
+        $K5START rm -rf $BASE/$REPO
+    fi
 done
 
 # NOTE(hwoarang): 15.0 is newer than 42.3.
@@ -74,6 +78,21 @@ for DISTVER in 42.3 15.0; do
             $OBS_MIRROR/$obs_repo/openSUSE_Leap_${DISTVER}/ $BASE/$REPO/
     done
 
+done
+
+date --iso-8601=ns
+for obs_repo in ${CLOUD_OBS_REPOS[@]}; do
+    REPO=repositories/${obs_repo}/
+    if ! [ -f $BASE/$REPO ]; then
+        $K5START mkdir -p $BASE/$REPO
+    fi
+    echo "Running rsync ${obs_repo} ..."
+    $K5START rsync -rlptDvz \
+        --delete --stats \
+        --delete-excluded \
+        --exclude="src/" \
+        --exclude="nosrc/" \
+        $OBS_MIRROR/$obs_repo/ $BASE/$REPO
 done
 
 REPO=tumbleweed
