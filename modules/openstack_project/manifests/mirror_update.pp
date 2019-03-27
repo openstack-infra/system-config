@@ -59,11 +59,12 @@ class openstack_project::mirror_update (
 
   ### Debian mirror ###
   ::openstack_project::reprepro { 'debian-reprepro-mirror':
-    confdir       => '/etc/reprepro/debian',
-    basedir       => '/afs/.openstack.org/mirror/debian',
-    distributions => 'openstack_project/reprepro/distributions.debian.erb',
-    updates_file  => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
-    releases      => ['stretch', 'buster'],
+    confdir            => '/etc/reprepro/debian',
+    basedir            => '/afs/.openstack.org/mirror/debian',
+    distributions      => 'openstack_project/reprepro/distributions.debian.erb',
+    updates_file       => 'puppet:///modules/openstack_project/reprepro/debuntu-updates',
+    releases           => ['stretch', 'buster'],
+    skip_backports_for => ['buster'],
   }
 
   cron { 'reprepro debian':

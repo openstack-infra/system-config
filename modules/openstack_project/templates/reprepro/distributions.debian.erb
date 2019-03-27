@@ -23,6 +23,7 @@ Contents: .gz
 Update: debian
 Log: <%= @logdir %>/debian-<%= release %>-updates.log
 
+<% if not @skip_backports_for.include?(release) %>
 Origin: Debian Backports
 Label: Debian Backports
 Suite: <%= release %>-backports
@@ -36,5 +37,6 @@ UDebComponents: main
 Contents: .gz
 Update: debian
 Log: <%= @logdir %>/debian-<%= release %>-backports.log
+<% end -%>
 
 <% end -%>

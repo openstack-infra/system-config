@@ -8,6 +8,7 @@ define openstack_project::reprepro (
   $updates_file = undef,
   $options_template = 'openstack_project/reprepro/options.erb',
   $releases = [],
+  $skip_backports_for = [],
 ) {
   file { "$confdir":
     ensure => directory,
