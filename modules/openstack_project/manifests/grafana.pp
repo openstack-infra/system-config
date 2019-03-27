@@ -53,11 +53,7 @@ class openstack_project::grafana (
 
   $grafana_cfg_merged = merge($grafana_cfg_defaults, $grafana_cfg)
 
-  if ( $::hostname == "grafana02" ) {
-    $version = '5.1.3'
-  } else {
-    $version = '2.6.0'
-  }
+  $version = '5.1.3'
 
   class { '::grafana':
     cfg            => $grafana_cfg_merged,
