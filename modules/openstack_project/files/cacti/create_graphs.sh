@@ -54,8 +54,11 @@ function add_ds_graph {
 SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
     grep "SNMP - Get Mounted Partitions"|cut -f 1`
 
+for mountpoint in $(php -q /usr/share/cacti/cli/add_graphs.php --host-id=$HOST_ID --snmp-field=hrStorageDescr --list-snmp-values | \
+    grep /|grep -v -e dev -e dib_tmp -e run -e sys) ; do
 add_ds_graph "Host MIB - Available Disk Space" "Available Disk Space" \
-    "hrStorageDescr" "/"
+    "hrStorageDescr" "$mountpoint"
+done
 
 SNMP_QUERY_ID=`php -q add_graphs.php --host-id=$HOST_ID --list-snmp-queries | \
     grep "SNMP - Interface Statistics"|cut -f 1`
