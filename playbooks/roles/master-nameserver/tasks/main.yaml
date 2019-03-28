@@ -12,16 +12,21 @@
 - name: Clone zone repos
   git:
     repo: "{{ item.url }}"
+    refspec: "{{ item.refspec | default(omit) }}"
+    version: "{{ item.version | default(omit) }}"
     dest: "/opt/source/{{ item.name }}"
   loop: "{{ dns_repos }}"
+- name: Set base rsync options
+  set_fact:
+    _rsync_options:
+      - "--chmod=u+rwX,g+rX,o+rX"
+      - "--chown=bind:bind"
 - name: Synchronize zone repos to zone directories
   delegate_to: "{{ inventory_hostname }}"
   synchronize:
     src: "/opt/source/{{ item.source }}"
     dest: "/var/lib/bind/zones/{{ item.name }}"
-    rsync_opts:
-      - "--chmod=u+rwX,g+rX,o+rX"
-      - "--chown=bind:bind"
+    rsync_opts: '{{ _rsync_options + ["--ignore-existing"] if item.unmanaged|default(False) else _rsync_options }}'
   loop: "{{ dns_zones }}"
   notify: Reload named
 - name: Install tsig key
