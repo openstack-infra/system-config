@@ -53,8 +53,8 @@
     - puppet-install
     - disable-puppet-agent
 
-- hosts: "adns1.opendev.org:!disabled"
-  name: "Base: configure adns1.opendev.org"
+- hosts: adns:!disabled
+  name: "Base: configure adns server"
   roles:
     - master-nameserver
 
