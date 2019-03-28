@@ -102,11 +102,13 @@ fi
 
 date --iso-8601=ns
 echo "Running rsync distribution $REPO ..."
+# TW is large and can have failures, be more resilient
 $K5START rsync -rlptDvz \
     --delete --stats \
     --delete-excluded \
     --exclude="i586" \
-    $MIRROR/$REPO/repo/oss/ $BASE/$REPO/repo/oss/
+    --ignore-errors \
+    $MIRROR/$REPO/repo/oss/ $BASE/$REPO/repo/oss/ || :
 
 REPO=update/tumbleweed
 if ! [ -f $BASE/$REPO ]; then
@@ -120,6 +122,7 @@ $K5START rsync -rlptDvz \
     --delete --stats \
     --delete-excluded \
     --exclude="i586" \
+    --ignore-errors \
     rsync://rsync.opensuse.org/buildservice-repos-main/openSUSE:/Factory:/Update/standard/ \
     $BASE/$REPO || :
 
