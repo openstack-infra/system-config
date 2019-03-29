@@ -28,6 +28,7 @@ K5START="k5start -t -f /etc/opensuse.keytab service/opensuse-mirror -- timeout -
 
 # NOTE(hwoarang): Ensure old distros are not mirrored aymore
 for REPO in distribution/leap/42.2 update/leap/42.2 \
+        distribution/leap/15.0/jeos distribution/leap/15.0/live \
         repositories/Cloud:/OpenStack:/Master/openSUSE_Leap_42.3 ; do
     if [ -d $BASE/$REPO ]; then
         $K5START rm -rf $BASE/$REPO
@@ -36,7 +37,7 @@ done
 
 # NOTE(hwoarang): 15.0 is newer than 42.3.
 for DISTVER in 42.3 15.0; do
-    REPO=distribution/leap/$DISTVER
+    REPO=distribution/leap/$DISTVER/repo
     if ! [ -f $BASE/$REPO ]; then
         $K5START mkdir -p $BASE/$REPO
     fi
