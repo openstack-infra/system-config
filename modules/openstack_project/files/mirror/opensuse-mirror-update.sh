@@ -124,8 +124,7 @@ $K5START rsync -rlptDvz \
     --delete-excluded \
     --exclude="i586" \
     --ignore-errors \
-    rsync://rsync.opensuse.org/buildservice-repos-main/openSUSE:/Factory:/Update/standard/ \
-    $BASE/$REPO || :
+    $OBS_MIRROR/openSUSE:/Factory:/Update/standard/ $BASE/$REPO || :
 
 date --iso-8601=ns | $K5START tee $BASE/timestamp.txt
 echo "rsync completed successfully, running vos release."
