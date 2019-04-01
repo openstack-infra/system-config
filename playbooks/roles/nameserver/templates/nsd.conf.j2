@@ -35,7 +35,6 @@ key:
 {% for zone in dns_zones %}
 zone:
     name: {{ zone.name }}
-    zonefile: /var/lib/nsd/zone/{{ zone.name }}
     allow-notify: {{ dns_master }} NOKEY
     request-xfr: AXFR {{ dns_master }} tsig
 {% endfor %}
