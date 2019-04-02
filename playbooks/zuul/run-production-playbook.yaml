@@ -3,6 +3,7 @@
     - name: Add bridge.o.o to inventory
       add_host:
         name: bridge.openstack.org
+        ansible_python_interpreter: python3
         ansible_user: zuulcd
 
 - hosts: localhost
