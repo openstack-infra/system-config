@@ -2,7 +2,7 @@
   tasks:
     - name: Make log directories for testing hosts
       file:
-        path: "{{ zuul.executor.log_root }}/hosts/{{ item }}/logs"
+        path: "{{ zuul.executor.log_root }}/{{ item }}/logs"
         state: directory
         recurse: true
       loop: "{{ query('inventory_hostnames', 'all') }}"
@@ -12,7 +12,7 @@
         path: "{{ item }}"
         state: directory
       with_items:
-        - "{{ zuul.executor.log_root }}/hosts/bridge.openstack.org/ara-report"
+        - "{{ zuul.executor.log_root }}/bridge.openstack.org/ara-report"
 
 - hosts: all
   tasks:
@@ -49,7 +49,7 @@
   tasks:
     - name: Set log directory
       set_fact:
-        log_dir: "{{ zuul.executor.log_root }}/hosts/{{ inventory_hostname }}"
+        log_dir: "{{ zuul.executor.log_root }}/{{ inventory_hostname }}"
 
       # Because during the test we run ansible as root, we need
       # to allow ourselves permissions to copy the results
