@@ -234,6 +234,7 @@ class openstack_project::review (
           'archive' => ['tar', 'tbz2', 'tgz', 'txz'],
       },
       replication_force_update            => true,
+      replication_auto_reload             => true,
       replication                         => [
         {
           name                 => 'github',
