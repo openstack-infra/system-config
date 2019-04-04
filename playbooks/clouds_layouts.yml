@@ -420,7 +420,7 @@ clouds:
 # Arm64 CI Cloud
   - name: openstackci-arm64ci
     oscc_cloud: openstackci-arm64ci
-    region_name: nrt1
+    region_name: ewr1
     profiles:
       - openstackci-keypairs
       - openstackci-security
@@ -436,7 +436,7 @@ clouds:
           hw_scsi_model: virtio-scsi
   - name: openstackzuul-arm64ci
     oscc_cloud: openstackzuul-arm64ci
-    region_name: nrt1
+    region_name: ewr1
     profiles:
       - openstackci-keypairs
       - openstackci-security
