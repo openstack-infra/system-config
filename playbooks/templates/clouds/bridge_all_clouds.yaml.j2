@@ -262,6 +262,8 @@ clouds:
       user_domain_name: default
       project_domain_name: default
     identity_api_version: '3'
+
+# Arm64 CI Cloud (depreciated - will be decommissioned at some point in the future - 2019-04-09)
   openstackci-arm64ci:
     regions:
       - nrt1
@@ -282,6 +284,32 @@ clouds:
       username: '{{ clouds.openstackzuul_arm64ci_username }}'
       password: '{{ clouds.openstackzuul_arm64ci_password }}'
       project_name: '{{ clouds.openstackzuul_arm64ci_project_name }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+    interface: public
+    identity_api_version: '3'
+
+# Arm64 CI Cloud (ewr1cloud)
+  openstackci-arm64ci-ewr1:
+    regions:
+      - ewr1
+    auth:
+      auth_url: https://ewr1cloud.arm64ci.cloud:5000
+      username: '{{ clouds.openstackci_arm64ci_ewr1_username }}'
+      password: '{{ clouds.openstackci_arm64ci_ewr1_password }}'
+      project_name: '{{ clouds.openstackci_arm64ci_ewr1_project_name }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+    interface: public
+    identity_api_version: '3'
+  openstackzuul-arm64ci-ewr1:
+    regions:
+      - ewr1
+    auth:
+      auth_url: https://ewr1cloud.arm64ci.cloud:5000
+      username: '{{ clouds.openstackzuul_ewr1_arm64ci_username }}'
+      password: '{{ clouds.openstackzuul_ewr1_arm64ci_password }}'
+      project_name: '{{ clouds.openstackzuul_ewr1_arm64ci_project_name }}'
       project_domain_name: openstack-infra
       user_domain_name: openstack-infra
     interface: public
