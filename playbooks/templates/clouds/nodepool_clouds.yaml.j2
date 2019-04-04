@@ -144,6 +144,8 @@ clouds:
       project_domain_name: default
     identity_api_version: '3'
     image_format: 'raw'
+
+# Arm64 CI Cloud (depreciated - will be decommissioned at some point in the future - 2019-04-09)
   arm64ci:
     regions:
       - nrt1
@@ -153,6 +155,20 @@ clouds:
       username: '{{ nodepool_arm64ci_username }}'
       password: '{{ nodepool_arm64ci_password }}'
       project_name: '{{ nodepool_arm64ci_project }}'
+      project_domain_name: openstack-infra
+      user_domain_name: openstack-infra
+    interface: public
+
+# Arm64 CI Cloud (ewr1cloud)
+  arm64ci-ewr1:
+    regions:
+      - ewr1
+    identity_api_version: '3'
+    auth:
+      auth_url: https://ewr1cloud.arm64ci.cloud:5000
+      username: '{{ nodepool_arm64ci_ewr1_username }}'
+      password: '{{ nodepool_arm64ci_ewr1_password }}'
+      project_name: '{{ nodepool_arm64ci_ewr1_project }}'
       project_domain_name: openstack-infra
       user_domain_name: openstack-infra
     interface: public
