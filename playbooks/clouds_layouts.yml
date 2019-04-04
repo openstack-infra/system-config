@@ -417,7 +417,7 @@ clouds:
       - openstackci-keypairs
       - openstackci-security
 
-# Arm64 CI Cloud
+# Arm64 CI Cloud (depreciated - will be decommissioned at some point in the future - 2018-04-09)
   - name: openstackci-arm64ci
     oscc_cloud: openstackci-arm64ci
     region_name: nrt1
@@ -437,6 +437,30 @@ clouds:
   - name: openstackzuul-arm64ci
     oscc_cloud: openstackzuul-arm64ci
     region_name: nrt1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+
+# Arm64 CI Cloud (ewr1cloud) 
+  - name: openstackci-arm64ci-ewr1
+    oscc_cloud: openstackci-arm64ci-ewr1
+    region_name: ewr1
+    profiles:
+      - openstackci-keypairs
+      - openstackci-security
+    images:
+      - name: ubuntu-xenial
+        download_image_url: https://cloud-images.ubuntu.com/releases/16.04/release/ubuntu-16.04-server-cloudimg-arm64-uefi1.img
+        download_image_dest: /tmp/ubuntu-xenial-aarch64-uefi.img
+        filename: /tmp/ubuntu-xenial-aarch64-uefi.img
+        properties:
+          hw_firmware_type: uefi
+          os_command_line: console=ttyAMA0
+          hw_disk_bus: scsi
+          hw_scsi_model: virtio-scsi
+  - name: openstackzuul-arm64ci-ewr1
+    oscc_cloud: openstackzuul-arm64ci-ewr1
+    region_name: ewr1
     profiles:
       - openstackci-keypairs
       - openstackci-security
