@@ -24,9 +24,9 @@ results:
     - webservers
 
   lists.katacontainers.io:
-    - futureparser
     - mailman
     - puppet
+    - puppet4
 
   logstash-worker02.openstack.org:
     - logstash-worker
