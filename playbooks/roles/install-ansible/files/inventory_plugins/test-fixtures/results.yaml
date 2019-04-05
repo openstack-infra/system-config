@@ -58,8 +58,8 @@ results:
     - nodepool
     - nodepool-builder
     - puppet
+    - puppet4
     - webservers
-    - futureparser
 
   ze01.openstack.org:
     - afs-client

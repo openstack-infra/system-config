@@ -39,8 +39,6 @@ groups:
     - git.openstack.org
     - git[0-9]*.openstack.org
     - lists*.open*.org
-    - nb[0-9]*.open*.org
-    - nl[0-9]*.open*.org
     - ze[0-9]*.open*.org
     - zk[0-9]*.open*.org
     - zm[0-9]*.open*.org
@@ -174,6 +172,8 @@ groups:
     - logstash[0-9]*.open*.org
     - mirror-update[0-9]*.open*.org
     - mirror[0-9]*.*.*.open*.org
+    - nb[0-9]*.open*.org
+    - nl[0-9]*.open*.org
     - openstackid[0-9]*.openstack.org
     - openstackid-dev[0-9]*.openstack.org
     - paste[0-9]*.open*.org
