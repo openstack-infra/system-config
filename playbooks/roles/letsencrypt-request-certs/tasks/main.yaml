@@ -16,7 +16,8 @@
 #
 # All required TXT keys are put into acme_txt_required
 
-- include_tasks: acme.yaml
+- name: Generate certificate creation/renewal requests
+  include_tasks: acme.yaml
   loop: "{{ query('dict', letsencrypt_certs) }}"
   loop_control:
     loop_var: cert

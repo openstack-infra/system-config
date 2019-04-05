@@ -17,13 +17,17 @@
 - debug:
     var: acme_output.stdout_lines
 
-# NOTE(ianw): The output is domain:key which we split into a tuple
-# here.  We don't make use of the domain part ATM; our default CNAME
-# setup points "_acme-challenge.host.acme.opendev.org" to just
-# "acme.opendev.org" so we put all the keys into "top-level" TXT
-# records directly at acme.opendev.org.  letsencyrpt doesn't care; it
-# just follows the CNAME and enumerates all the TXT records in
-# acme.opendev.org looking for one that matches.
+# NOTE(ianw): The output is challenge-domain:txt-key which we split
+# into a tuple here.  acme.sh by default puts the hostname into the
+# challenge domain it outputs.  For simplicity, we don't actually make
+# use of the full challenge-domain part; our default CNAME setup
+# points "_acme-challenge.host.opendev.org" to just "acme.opendev.org"
+# -- thus we put all the keys into "top-level" TXT records directly at
+# acme.opendev.org.  letsencyrpt doesn't care; it just follows the
+# CNAME and enumerates all the TXT records in acme.opendev.org looking
+# for one that matches.  So even though we don't put it in the dns
+# records, having the hostname the TXT record is for is handy for
+# debugging, etc, so we pass it through.
 - set_fact:
     acme_txt_required: '{{ acme_txt_required + [(item.split(":")[0], item.split(":")[1])] }}'
   loop: '{{ acme_output.stdout_lines }}'
