@@ -1,0 +1,11 @@
+- hosts: letsencrypt01.opendev.org
+  become: true
+  tasks:
+    - name: Install apache2
+      package:
+        name: apache2
+        state: present
+    - name: Ensure that apache2 is running before we restart it with LE
+      service:
+        name: apache2
+        state: started

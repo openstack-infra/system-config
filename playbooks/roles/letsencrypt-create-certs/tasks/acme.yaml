@@ -14,3 +14,11 @@
     var: acme_output.stdout_lines
 
 # Keys generated!
+
+- name: 'Reload Apache if requested'
+  service:
+    # Currently this only supports debuntu hosts
+    name: apache2
+    state: reloaded
+  # Apache will only install new certs on full restart not reload.
+  when: letsencrypt_restart_apache | default(false) | bool

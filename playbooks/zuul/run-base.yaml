@@ -73,6 +73,8 @@
       command: ansible localhost -m debug -a 'var=groups'
     - name: Run base.yaml
       command: ansible-playbook -v /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
+    - name: Run test base.yaml allows us to test things that aren't in production yet.
+      command: ansible-playbook -v /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/zuul/test-base.yaml
     - name: Run test playbook
       when: run_base_test_playbook is defined
       shell: "ANSIBLE_ROLES_PATH=/home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/roles ansible-playbook -v /home/zuul/src/git.openstack.org/openstack-infra/system-config/{{ run_base_test_playbook }}"
