@@ -303,6 +303,101 @@ Note if you created your working directory in a path that is not
 excluded by bup you will want to remove that directory when your work is
 done. /root/backup-restore-* is excluded so the path above is safe.
 
+Rotating backup storage
+-----------------------
+
+Since ``bup`` only stores differences, it does not have an effective
+way to prune old backups.  The easiest way is to simply periodically
+start the backups fresh.
+
+The backup server keeps an active volume and the previously rotated
+volume.  Each consists of 3 x 1TiB volumes grouped with LVM.  The
+volumes are mounted at ``/opt/backups-YYYYMM`` for the date it was
+created; ``/opt/backups`` is a symlink to the latest volume.
+Periodically we rotate the active volume for a fresh one.  Follow this
+procedure:
+
+#. Create the new volumes via API (on ``bridge.o.o``).  Create 3
+   volumes, named for the server with the year and date added::
+
+     DATE=$(date +%Y%m)
+     OS_VOLUME_API_VERSION=1
+     OS_CMD="./env/bin/openstack --os-cloud-openstackci-rax --os-region=ORD"
+     SERVER="backup01.ord.rax.ci.openstack.org"
+     ${CMD} volume create --size 1024 ${SERVER}/main01-${DATE}
+     ${CMD} volume create --size 1024 ${SERVER}/main02-${DATE}
+     ${CMD} volume create --size 1024 ${SERVER}/main03-${DATE}
+
+#. Attach the volumes to the backup server::
+     ${OS_CMD} server add volume ${SERVER} ${SERVER}/main01-${DATE}
+     ${OS_CMD} server add volume ${SERVER} ${SERVER}/main02-${DATE}
+     ${OS_CMD} server add volume ${SERVER} ${SERVER}/main03-${DATE}
+
+#. Now on the backup server, create the new backup LVM volume (get the
+   device names from ``dmesg`` when they were attached).  For
+   simplicity we create a new volume group for each backup series, and
+   a single logical volume ontop::
+
+     DATE=$(date +%Y%m)
+     pvcreate /dev/xvd<DRIVE1> /dev/xvd<DRIVE2> /dev/xvd<DRIVE3>
+     vgcreate main-${DATE} /dev/xvdX /dev/xvdY /dev/xvdZ
+     lvcreate -l 100%FREE -n backups-${DATE} main-${DATE}
+
+     mkfs.ext4 -m 0 -j -L "backups-${DATE}" /dev/main-${DATE}/backups-${DATE}
+     tune2fs -i 0 -c 0 /dev/main-${DATE}/backups-${DATE}
+
+     mkdir /opt/backups-${DATE}
+     # manually add mount details to /etc/fstab
+     mount /opt/backups-${DATE}
+
+#. Making sure there are no backups currently running you can now
+   begin to switch the backups (you can stop the ssh service, but be
+   careful not to then drop your connection and lock yourself out; you
+   can always reboot via the API if you do).  Firstly, edit
+   ``/etc/fstab`` and make the current (soon to be *old*) backup
+   volume mount read-only.  Unmount the old volume and then remount it
+   (now as read-only).  This should prevent any accidental removal of
+   the existing backups during the following procedures.
+
+#. Pre-seed the new backup directory (same terminal as above).  This
+   will copy all the directories and authentication details (but none
+   of the actual backups) and initalise for fresh backups::
+
+     cd /opt/backups-${DATE}
+     rsync -avz --exclude '.bup' /opt/backups/ .
+     for dir in bup-*; do su $dir -c "BUP_DIR=/opt/backups-${DATE}/$dir/.bup bup init"; done
+#. The ``/opt/backups`` symlink can now be switched to the new
+   volume::
+
+     ln -sf /opt/backups-${DATE} /opt/backups
+#. ssh can be re-enabled and the new backup volume is effectively
+   active.
+
+#. Now run a test backup from a server manually.  Choose one, get the
+   backup command from cron and run it manually in a screen (it might
+   take a while), ensuring everything seems to be writing correctly to
+   the new volume.
+
+#. You can now clean up the oldest backups (the one *before* the one
+   you just rotated).  Remove the mount from fstab, unmount the volume
+   and cleanup the LVM components::
+
+     DATE=<INSERT OLD DATE CODE HERE>
+     umount /opt/backups-${DATE}
+     lvremove /dev/main-${DATE}/backups-${DATE}
+     vgremove main-${DATE}
+     # pvremove the volumes; they will have PFree @ 1024.00g as
+     # they are now not assigned to anything
+     pvremove /dev/xvd<DRIVE1>
+     pvremove /dev/xvd<DRIVE2>
+     pvremove /dev/xvd<DRIVE3>
+
+#. Remove volumes via API (opposite of adding above with ``server
+   volume detach`` then ``volume delete``).
+
+#. Done!  Come back and rotate it again next year.
+
+
 .. _force-merging-a-change:
 
 Force-Merging a Change
