@@ -71,6 +71,8 @@
         - host_vars/letsencrypt02.opendev.org.yaml
     - name: Display group membership
       command: ansible localhost -m debug -a 'var=groups'
+    - name: Run test base.yaml allows us to test things that aren't in production yet.
+      command: ansible-playbook -v /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/zuul/test-base.yaml
     - name: Run base.yaml
       command: ansible-playbook -v /home/zuul/src/git.openstack.org/openstack-infra/system-config/playbooks/base.yaml
     - name: Run test playbook

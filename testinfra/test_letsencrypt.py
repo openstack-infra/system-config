@@ -58,3 +58,10 @@ def test_certs_created(host):
 
     else:
         pytest.skip()
+
+def test_apache_restart(host):
+    if host.backend.get_hostname() == 'letsencrypt01.opendev.org':
+        proc = host.process.get(user='root', comm='apache2')
+        # Check that the process has been running for less than a minute
+        # TODO is there a better way to check that the service was restarted?
+        assert proc.time.startswith('00:00')
