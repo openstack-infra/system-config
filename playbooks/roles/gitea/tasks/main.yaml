@@ -43,7 +43,7 @@
     chdir: /etc/gitea-docker/
 - name: Run docker-compose up
   shell:
-    cmd: docker-compose up -d
+    cmd: docker-compose up -d --timeout 60
     chdir: /etc/gitea-docker/
 - name: Check if root user exists
   uri:
