@@ -69,10 +69,10 @@ results:
   ze01.openstack.org:
     - afs-client
     - puppet
+    - puppet4
     - zuul-executor
-    - futureparser
 
   zk01.openstack.org:
     - puppet
+    - puppet4
     - zookeeper
-    - futureparser

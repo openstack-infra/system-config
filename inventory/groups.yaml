@@ -39,10 +39,6 @@ groups:
     - git.openstack.org
     - git[0-9]*.openstack.org
     - lists*.open*.org
-    - ze[0-9]*.open*.org
-    - zk[0-9]*.open*.org
-    - zm[0-9]*.open*.org
-    - zuul01.open*.org
   gerrit:
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
@@ -194,6 +190,10 @@ groups:
     - translate-dev[0-9]*.open*.org
     - wiki[0-9]*.openstack.org
     - wiki-dev[0-9]*.openstack.org
+    - ze[0-9]*.open*.org
+    - zk[0-9]*.open*.org
+    - zm[0-9]*.open*.org
+    - zuul01.open*.org
   refstack:
     - refstack*.open*.org
   registry:
