@@ -86,6 +86,7 @@ class openstack_project::review_dev (
       swift_username                      => $swift_username,
       swift_password                      => $swift_password,
       replication_force_update            => true,
+      replication_auto_reload             => true,
       commentlinks                        => [
         {
           name  => 'bugheader',
