@@ -56,7 +56,7 @@ parser.add_argument('value', help='the value', nargs='?')
 parser.add_argument('-f', dest='file', help='file to read in as value')
 
 args = parser.parse_args()
-data = yaml.load(open(args.yaml))
+data = yaml.safe_load(open(args.yaml))
 
 changed = False
 if args.value:
@@ -65,12 +65,12 @@ if args.value:
 if args.file:
     data[args.key] = open(args.file).read()
     changed = True
-print data[args.key]
+print(data[args.key])
 
 if changed:
     dn = os.path.dirname(args.yaml)
     (out, fn) = tempfile.mkstemp(dir=dn)
-    os.write(out, yaml.dump(data, default_flow_style=False, Dumper=MyDumper))
+    os.write(out, yaml.dump(data, default_flow_style=False, Dumper=MyDumper).encode('utf8'))
     os.close(out)
-    os.chown(fn, pwd.getpwnam('puppet').pw_uid, grp.getgrnam('puppet').gr_gid)
+    os.chown(fn, pwd.getpwnam('root').pw_uid, grp.getgrnam('admin').gr_gid)
     os.rename(fn, args.yaml)
