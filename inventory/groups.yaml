@@ -72,6 +72,8 @@ groups:
     - kdc[0-9]*.open*.org
   kubernetes:
     - opendev-k8s*.opendev.org
+#  letsencrypt:
+#    - TBD
   logstash:
     - logstash[0-9]*.open*.org
   logstash-worker:
