@@ -28,6 +28,7 @@ zuul_connections:
   - name: 'github'
     driver: 'github'
     app_key: '/etc/zuul/github.key'
+    rate_limit_logging: 'false'
 
   - name: 'googlesource'
     driver: 'git'
