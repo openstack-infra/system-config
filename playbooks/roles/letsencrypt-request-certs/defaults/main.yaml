@@ -1,1 +1,1 @@
-letsencrypt_test_only: False
+letsencrypt_use_staging: False
