@@ -4,6 +4,7 @@
       add_host:
         name: bridge.openstack.org
         ansible_user: zuulcd
+        ansible_python_interpreter: /usr/bin/python3
 
 - hosts: localhost
   tasks:
