@@ -637,15 +637,15 @@
       nodes: []
 
 - job:
-    name: infra-prod-zuul_reconfigure
+    name: infra-prod-manage-nameservers
     parent: infra-prod-playbook
     description: |
-      Perform a full Zuul reconfiguration.
+      Update our nameservers
 
-      This reloads the tenant config file and clears all configuration
-      caches.
+      This applies new zone info and other config management updates to
+      our nameservers.
     vars:
-      playbook_name: zuul_reconfigure.yaml
+      playbook_name: zuul_manage_nameservers.yaml
 
 - project:
     templates:
@@ -717,3 +717,14 @@
         - system-config-promote-image-gerrit
         - system-config-promote-image-python-base
         - system-config-promote-image-python-builder
+        - infra-prod-manage-nameservers:
+            files:
+              # Changes to the job
+              - .zuul.yaml
+              # Changes to the roles
+              - playbooks/roles/master-nameserver/.*
+              - playbooks/roles/nameserver/.*
+              # Changes to the input data
+              - playbooks/group_vars/adns.yaml
+              - playbooks/group_vars/dns.yaml
+
