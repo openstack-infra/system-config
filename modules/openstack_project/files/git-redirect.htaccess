@@ -4,6 +4,14 @@
 RewriteCond %{QUERY_STRING} "^(.*)h=([^&]+)%2F([^&]+)(.*)$"
 RewriteRule "^(.*)$" "/$1?%1h=%2/%3%4" [N]
 
+# Map whitelabeled project git sites with repository prefixes
+RewriteCond %{HTTP_HOST} ^git\.airshipit\.org$ [NC]
+RewriteRule "^(cgit/|)(airship-.*)$" "$1openstack/$2" [L]
+RewriteCond %{HTTP_HOST} ^git\.starlingx\.io$ [NC]
+RewriteRule "^(cgit/|)(stx-.*)$" "$1openstack/$2" [L]
+RewriteCond %{HTTP_HOST} ^git\.zuul-ci\.org$ [NC]
+RewriteRule "^(cgit/|)((nodepool|zuul).*)$" "$1openstack-infra/$2" [L]
+
 ###################################
 # summary
 #  ignore all args
