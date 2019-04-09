@@ -1,0 +1,9 @@
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 09 Apr 2019 00:33:25 +0000
+Reviewed-on: https://review.openstack.org/648288
+Project: openstack-infra/system-config
+Branch: refs/heads/master
