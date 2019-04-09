@@ -1,1 +1,2 @@
-letsencrypt_test_only: False
+letsencrypt_use_staging: False
+letsencrypt_self_sign_only: False

@@ -15,9 +15,11 @@ provision process.
 
 **Role Variables**
 
-.. zuul:rolevar:: letsencrypt_test_only
+.. zuul:rolevar:: letsencrypt_use_staging
 
-   Uses staging, rather than prodcution requests to letsencrypt
+   If set to True will use the letsencrypt staging environment, rather
+   than make production requests.  Useful during initial provisioning
+   of hosts to avoid affecting production quotas.
 
 .. zuul:rolevar:: letsencrypt_certs
 
