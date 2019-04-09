@@ -400,7 +400,7 @@ node /^firehose\d+\.open.*\.org$/ {
     imap_hostname       => hiera('lpmqtt_imap_server'),
     imap_username       => hiera('lpmqtt_imap_username'),
     imap_password       => hiera('lpmqtt_imap_password'),
-    statsd_host         => 'graphite.openstack.org',
+    statsd_host         => 'graphite.opendev.org',
   }
 }
 
@@ -742,7 +742,7 @@ node /^nl\d+\.open.*\.org$/ {
   class { '::openstackci::nodepool_launcher':
     nodepool_ssh_private_key => hiera('zuul_worker_ssh_private_key_contents'),
     project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
-    statsd_host              => 'graphite.openstack.org',
+    statsd_host              => 'graphite.opendev.org',
     revision                 => 'master',
     python_version           => 3,
     enable_webapp            => true,
@@ -762,7 +762,7 @@ node /^nb\d+\.open.*\.org$/ {
     vhost_name                    => $::fqdn,
     enable_build_log_via_http     => true,
     project_config_repo           => 'https://git.openstack.org/openstack-infra/project-config',
-    statsd_host                   => 'graphite.openstack.org',
+    statsd_host                   => 'graphite.opendev.org',
     upload_workers                => '16',
     revision                      => 'master',
     python_version                => 3,
@@ -853,7 +853,7 @@ node /^ze\d+\.open.*\.org$/ {
     disk_limit_per_job       => 5000,  # Megabytes
     site_variables_yaml_file => $::project_config::zuul_site_variables_yaml,
     require                  => $::project_config::config_dir,
-    statsd_host              => 'graphite.openstack.org',
+    statsd_host              => 'graphite.opendev.org',
   }
 
   class { '::zuul::executor': }
@@ -932,7 +932,7 @@ node /^zuul\d+\.open.*\.org$/ {
     proxy_ssl_cert_file_contents  => hiera('zuul_ssl_cert_file_contents'),
     proxy_ssl_chain_file_contents => hiera('zuul_ssl_chain_file_contents'),
     proxy_ssl_key_file_contents   => hiera('zuul_ssl_key_file_contents'),
-    statsd_host                   => 'graphite.openstack.org',
+    statsd_host                   => 'graphite.opendev.org',
     status_url                    => 'https://zuul.openstack.org',
     relative_priority             => true,
   }
@@ -1080,7 +1080,7 @@ node /^zm\d+.open.*\.org$/ {
     gearman_client_ssl_cert => hiera('gearman_client_ssl_cert'),
     gearman_client_ssl_key  => hiera('gearman_client_ssl_key'),
     gearman_ssl_ca          => hiera('gearman_ssl_ca'),
-    statsd_host             => 'graphite.openstack.org',
+    statsd_host             => 'graphite.opendev.org',
   }
 
   class { 'openstack_project::zuul_merger':

@@ -61,4 +61,4 @@ fi
 _CURRENT_TIME=$(date '+%s')
 _ELAPSED_MS=$(( (_CURRENT_TIME - _START_TIME) * 1000 ))
 echo "bridge.ansible.run_cloud_launcher:${_ELAPSED_MS}|ms" | \
-    nc -w 1 -u graphite.openstack.org 8125
+    nc -w 1 -u graphite.opendev.org 8125

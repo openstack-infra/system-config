@@ -18,7 +18,7 @@ results:
     - puppet
     - puppet4
 
-  graphite.openstack.org:
+  graphite.opendev.org:
     - graphite
     - puppet
     - webservers

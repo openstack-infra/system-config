@@ -1,2 +1,2 @@
-STATSD_HOST=graphite.openstack.org
+STATSD_HOST=graphite.opendev.org
 STATSD_PORT=8125

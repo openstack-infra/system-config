@@ -42,5 +42,5 @@ hand:
    - name: OpenStack
    - type: Graphite
    - default: checked
-   - url: http://graphite.openstack.org
+   - url: http://graphite.opendev.org
    - access: direct

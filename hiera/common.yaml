@@ -259,7 +259,6 @@ cacti_hosts:
 - git07.openstack.org
 - git08.openstack.org
 - grafana.openstack.org
-- graphite.openstack.org
 - graphite01.opendev.org
 - groups-dev.openstack.org
 - groups.openstack.org

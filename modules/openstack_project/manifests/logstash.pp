@@ -16,7 +16,7 @@
 #
 class openstack_project::logstash (
   $discover_nodes = ['elasticsearch01.openstack.org:9200'],
-  $statsd_host = 'graphite.openstack.org',
+  $statsd_host = 'graphite.opendev.org',
   $subunit2sql_db_host,
   $subunit2sql_db_pass,
 ) {

@@ -50,7 +50,7 @@ function send_timer {
     local start=${2-$_START_TIME}
     local elapsed_ms=$(( (current - start) * 1000 ))
 
-    echo "bridge.ansible.run_all.${name}:${elapsed_ms}|ms" | nc -w 1 -u graphite.openstack.org 8125
+    echo "bridge.ansible.run_all.${name}:${elapsed_ms}|ms" | nc -w 1 -u graphite.opendev.org 8125
     echo "End $name"
 }
 # See send_timer
