@@ -7,9 +7,22 @@
   when: puppet_install_version == 5
   become: true
   block:
+    # The puppetlabs-release-pc1 deb install below unfortunatley isn't
+    # idempotent.  If you install the puppet repo with this deb and
+    # then upgrade, you pull in a new version of
+    # puppetlabs-release-pc1 ... now ansible gets upset because we're
+    # trying to downgrade the package.  This could be fixed by puppet
+    # symlinking the version at the top-level to the latest .deb
+    # ... or we just skip installing it if we seem to have the repo
+    # already.
+    - name: "Check for puppet 4 repo"
+      stat:
+        path: /etc/apt/sources.list.d/puppetlabs-pc1.list
+      register: puppet4_repo
     - name: Install puppetlabs repo
       apt:
         deb: https://apt.puppetlabs.com/puppet5-release-bionic.deb
+      when: not puppet4_repo.stat.exists
 
     - name: Install puppet packages
       apt:
