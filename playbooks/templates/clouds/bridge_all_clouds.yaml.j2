@@ -150,16 +150,6 @@ clouds:
       project_name: 'OpenStack CI Project'
       project_domain_name: 'CCP_Domain_27611'
       user_domain_name: 'CCP_Domain_27611'
-  openstackci-linaro:
-    regions:
-      - RegionOne
-    auth:
-      auth_url: https://cn1.linaro.cloud:35357
-      username: '{{ clouds.openstackci_linaro_username }}'
-      password: '{{ clouds.openstackci_linaro_password }}'
-      project_name: '{{ clouds.openstackci_linaro_project_name }}'
-      project_domain_name: default
-      user_domain_name: default
   openstackzuul-linaro:
     regions:
       - RegionOne

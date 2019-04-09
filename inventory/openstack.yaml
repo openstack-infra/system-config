@@ -558,13 +558,6 @@ all:
         region_name: ca-ymq-1
       public_v4: 162.253.55.61
       public_v6: 2604:e100:1:0:f816:3eff:fee2:d1d6
-    mirror01.cn1.linaro.openstack.org:
-      ansible_host: 103.20.251.153
-      location:
-        cloud: openstackci-linaro
-        region_name: RegionOne
-      public_v4: 103.20.251.153
-      public_v6: ''
     mirror01.gra1.ovh.openstack.org:
       ansible_host: 147.135.133.8
       location:
