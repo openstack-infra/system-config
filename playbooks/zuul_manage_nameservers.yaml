@@ -1,0 +1,7 @@
+- hosts: 'dns:!disabled'
+  any_errors_fatal: true
+  tasks:
+    - name: Say hello
+      debug:
+        msg: Hello world!
+    # TODO remove dns servers from base.yaml and manage them here.
