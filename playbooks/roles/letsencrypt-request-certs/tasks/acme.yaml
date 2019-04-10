@@ -10,12 +10,9 @@
       /opt/acme.sh/driver.sh issue {{ acme_args }}
   args:
     chdir: /opt/acme.sh/
-  environment:
-    LETSENCRYPT_STAGING: '{{ "1" if letsencrypt_test_only else "0" }}'
   register: acme_output
-
-- debug:
-    var: acme_output.stdout_lines
+  environment:
+    LETSENCRYPT_STAGING: '{{ "1" if letsencrypt_use_staging else "0" }}'
 
 # NOTE(ianw): The output is challenge-domain:txt-key which we split
 # into a tuple here.  acme.sh by default puts the hostname into the

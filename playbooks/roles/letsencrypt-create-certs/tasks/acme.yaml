@@ -5,12 +5,10 @@
 - name: 'Run acme.sh driver for {{ item.key }} certificate issue'
   shell:
     cmd: |
-      /opt/acme.sh/driver.sh {{ 'selfsign' if letsencrypt_test_only else 'renew' }}  {{ acme_args }}
+      /opt/acme.sh/driver.sh {{ 'selfsign' if letsencrypt_self_sign_only else 'renew' }}  {{ acme_args }}
   args:
     chdir: /opt/acme.sh/
-  register: acme_output
-
-- debug:
-    var: acme_output.stdout_lines
+  environment:
+    LETSENCRYPT_STAGING: '{{ "1" if letsencrypt_use_staging else "0" }}'
 
 # Keys generated!
