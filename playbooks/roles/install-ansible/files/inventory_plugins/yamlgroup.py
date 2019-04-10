@@ -3,6 +3,7 @@
 
 import fnmatch
 import os
+import re
 
 from ansible.parsing.yaml.objects import AnsibleMapping
 from ansible.plugins.inventory import BaseFileInventoryPlugin
@@ -28,7 +29,10 @@ DOCUMENTATION = '''
           - section: inventory_plugin_yaml
             key: yaml_valid_extensions
       groups:
-        description: dict with group name as key and list of fnmatch patterns
+        description: |
+          dict with group name as key. If the list item starts with a
+          ^ it will be considered a regex pattern (i.e. passed to
+          re.match), otherwise it is considered a fnmatch pattern.
         type: dict
         default: {}
 '''
@@ -38,6 +42,7 @@ groups:
   amazing:
     - fullhost.example.com
     - amazing*
+    - ^regex.*pattern
 '''
 
 
@@ -75,8 +80,16 @@ class InventoryModule(BaseFileInventoryPlugin):
                 # failing.
                 if isinstance(candidate, AnsibleMapping):
                     candidate = list(candidate.keys())[0]
+
+                # Starts with ^ means it is already a regex.
+                # Otherwise it's a fnmatch compatible string; use it's
+                # helper to turn that into a regex so we have a common
+                # match below.
+                if not candidate.startswith('^'):
+                    candidate = fnmatch.translate(candidate)
+
                 for existing in self.inventory.hosts.values():
-                    if fnmatch.fnmatch(existing.get_name(), candidate):
+                    if re.match(candidate, existing.get_name()):
                         found_groups.setdefault(group, [])
                         found_groups[group].append(existing)
 
