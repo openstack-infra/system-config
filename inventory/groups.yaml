@@ -35,8 +35,6 @@ groups:
   files: files[0-9]*.open*.org
   firehose: firehose[0-9]*.open*.org
   futureparser:
-    - afs[0-9]*.open*.org
-    - afsdb[0-9]*.open*.org
     - ask*.open*.org
     - git.openstack.org
     - git[0-9]*.openstack.org
@@ -155,6 +153,8 @@ groups:
     - zuul[0-9]*.open*.org
     - zk[0-9]*.open*.org
   puppet4:
+    - afs[0-9]*.open*.org
+    - afsdb[0-9]*.open*.org
     - ask-staging[0-9]*.open*.org
     - cacti[0-9]*.open*.org
     - codesearch[0-9]*.open*.org
