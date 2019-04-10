@@ -37,7 +37,7 @@ class TestInventory(testtools.TestCase):
 
         results_yaml = os.path.join(FIXTURE_DIR, 'results.yaml')
         with open(results_yaml) as f:
-            results = yaml.load(f)
+            results = yaml.load(f, Loader=yaml.FullLoader)
             results = results['results']
 
         # Build the inventory list.  This is a list of Host objects
@@ -65,7 +65,7 @@ class TestInventory(testtools.TestCase):
         # real-life, which gets the groups into the config object
         path = os.path.join(FIXTURE_DIR, 'groups.yaml')
         with open(path) as f:
-            config_groups = yaml.load(f)
+            config_groups = yaml.load(f, Loader=yaml.FullLoader)
             config_groups = config_groups['groups']
         im = InventoryModule()
         im._read_config_data = mock.MagicMock()

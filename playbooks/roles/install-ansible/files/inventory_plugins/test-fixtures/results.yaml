@@ -39,6 +39,11 @@ results:
     - puppet
     - puppet4
 
+  mirror01.lon1.linaro-london.openstack.org:
+    - afs-client
+    - mirror
+    - puppet
+
   mirror-update01.openstack.org:
     - afsadmin
     - puppet
