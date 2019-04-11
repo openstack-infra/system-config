@@ -45,16 +45,26 @@ def test_certs_created(host):
             '/etc/letsencrypt-certs/'
             'letsencrypt01.opendev.org/letsencrypt01.opendev.org.key')
         assert domain_one.exists
+        assert domain_one.user == "root"
+        assert domain_one.group == "letsencrypt"
+        assert domain_one.mode == 0o750
+
         domain_two = host.file(
             '/etc/letsencrypt-certs/'
             'someotherservice.opendev.org/someotherservice.opendev.org.key')
         assert domain_two.exists
+        assert domain_two.user == "root"
+        assert domain_two.group == "letsencrypt"
+        assert domain_two.mode == 0o750
 
     elif host.backend.get_hostname() == 'letsencrypt02.opendev.org':
         domain_one = host.file(
             '/etc/letsencrypt-certs/'
             'letsencrypt02.opendev.org/letsencrypt02.opendev.org.key')
         assert domain_one.exists
+        assert domain_one.user == "root"
+        assert domain_one.group == "letsencrypt"
+        assert domain_one.mode == 0o750
 
     else:
         pytest.skip()
