@@ -12,6 +12,9 @@ if [[ ${LETSENCRYPT_STAGING} != 0 ]]; then
     STAGING="--staging"
 fi
 
+# Ensure we don't write out files as world-readable
+umask 027
+
 echo -e  "\n--- start --- ${1} --- $(date -u '+%Y-%m-%dT%k:%M:%S%z') ---" >> ${LOG_FILE}
 
 if [[ ${1} == "issue" ]]; then
