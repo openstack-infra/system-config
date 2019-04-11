@@ -1,5 +1,3 @@
-# NOTE(ianw): 2019-03 initial bringup in testing only mode
-letsencrypt_use_staging: True
 letsencrypt_certs:
   main:
     - graphite01.opendev.org
