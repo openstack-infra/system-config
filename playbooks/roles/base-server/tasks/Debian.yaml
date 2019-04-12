@@ -7,6 +7,12 @@
       - lxd-client
     state: absent
 
+- name: Disable the apport service
+  service:
+    name: apport
+    enabled: no
+    state: stopped
+
 - name: Configure file limits
   copy:
     mode: 0644
