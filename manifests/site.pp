@@ -144,6 +144,10 @@ node /^graphite\d*\.open.*\.org$/ {
     graphite_admin_user     => hiera('graphite_admin_user', 'username'),
     graphite_admin_email    => hiera('graphite_admin_email', 'email@example.com'),
     graphite_admin_password => hiera('graphite_admin_password'),
+    # NOTE(ianw): installed on the host via ansible
+    ssl_cert_file           => '/etc/letsencrypt-certs/graphite01.opendev.org/graphite01.opendev.org.cer',
+    ssl_key_file            => '/etc/letsencrypt-certs/graphite01.opendev.org/graphite01.opendev.org.key',
+    ssl_chain_file          => '/etc/letsencrypt-certs/graphite01.opendev.org/ca.cer',
   }
 }
 
