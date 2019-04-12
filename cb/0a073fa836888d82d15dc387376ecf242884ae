@@ -1,0 +1,11 @@
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Code-Review+2: Joshua Hesketh <josh@nitrotech.org>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Andriy Shevchenko <huang.zhiping@99cloud.net>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 12 Apr 2019 16:48:59 +0000
+Reviewed-on: https://review.openstack.org/650914
+Project: openstack-infra/system-config
+Branch: refs/heads/master
