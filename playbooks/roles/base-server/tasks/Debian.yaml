@@ -1,6 +1,7 @@
 - name: Remove packages that make no sense for our servers
   package:
     name:
+      - apport
       - whoopsie
       - popularity-contest
       - lxd
