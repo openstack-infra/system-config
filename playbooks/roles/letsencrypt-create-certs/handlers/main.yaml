@@ -1,0 +1,24 @@
+# Handlers for "letsencrypt update {{ key }}" events
+#
+# Note that because Ansible requires every called handler to have a
+# listener, every host will need to provide a handler somehow.
+
+- name: letsencrypt updated letsencrypt01-main-service
+  import_tasks: touch_file.yaml
+  vars:
+    touch_file: '/tmp/letsencrypt01-main-service.stamp'
+#  listen: 'letsencrypt updated letsencrypt01-main-service'
+
+- name: letsencrypt updated letsencrypt01-other-service
+  import_tasks: touch_file.yaml
+  vars:
+    touch_file: '/tmp/letsencrypt01-other-service.stamp'
+#  listen: 'letsencrypt updated letsencrypt01-other-service'
+
+- name: letsencrypt updated letsencrypt02-main-service
+  import_tasks: touch_file.yaml
+  vars:
+    touch_file: '/tmp/letsencrypt02-main-service.stamp'
+#  listen: 'letsencrypt updated letsencrypt02-main-service'
+
+
