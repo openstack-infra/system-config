@@ -10,5 +10,6 @@
     chdir: /opt/acme.sh/
   environment:
     LETSENCRYPT_STAGING: '{{ "1" if letsencrypt_use_staging else "0" }}'
+  notify: 'letsencrypt updated {{ item.key }}'
 
 # Keys generated!
