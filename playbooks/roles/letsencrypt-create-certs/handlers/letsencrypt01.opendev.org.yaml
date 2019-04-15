@@ -1,0 +1,9 @@
+- name: Handler for letsencrypt main update
+  file: '/tmp/letsencrypt01-main-updated.stamp'
+  state: touch
+  listen: 'letsencrypt updated letsencrypt01-main-service'
+
+- name: Handler for letsencrypt other service update
+  file: '/tmp/letsencrypt-other-updated.stamp'
+  state: touch
+  listen: 'letsencrypt updated letsencrypt01-other-service'
