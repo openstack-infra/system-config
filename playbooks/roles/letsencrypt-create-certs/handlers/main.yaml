@@ -1,0 +1,11 @@
+# Handlers for "letsencrypt update {{ key }}" events
+#
+# Note that because Ansible requires every called handler to have a
+# listener, every host will need to provide a handler somehow.
+
+- name: Handlers for letsencrypt01
+  include_tasks: handlers/letsencrypt01.opendev.org.yaml
+
+- name: Handlers for letsencrypt02
+  include_tasks: handlers/letsencrypt02.opendev.org.yaml
+

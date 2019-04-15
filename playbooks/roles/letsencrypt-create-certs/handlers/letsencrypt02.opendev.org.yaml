@@ -1,0 +1,5 @@
+- name: Handler for letsencrypt02 main update
+  file:
+    path: '/tmp/letsencrypt02-main-updated.stamp'
+    state: touch
+  listen: 'letsencrypt updated letsencrypt02-main-service'
