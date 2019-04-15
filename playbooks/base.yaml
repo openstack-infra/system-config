@@ -106,5 +106,13 @@
     - letsencrypt-install-txt-record
 - hosts: "letsencrypt:!disabled"
   name: "Create certs"
+  pre_tasks:
+    - name: Look for update handler tasks
+      stat:
+        path: 'handlers/letsencrypt.{{ inventory_hostname }}.yaml'
+      register: update_handler
+  handlers:
+    - include_tasks: 'handlers/letsencrypt.{{ inventory_hostname }}.yaml'
+      when: update_handler.stat.exists
   roles:
     - letsencrypt-create-certs

@@ -1,0 +1,4 @@
+- name: Handler for letsencrypt update
+  file: '/tmp/letsencrypt-updated.stamp'
+  state: touch
+  listen: 'letsencrypt updated {{ inventory_hostname }}'
