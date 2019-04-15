@@ -244,7 +244,7 @@ class openstack_project::review (
           replicatePermissions => false,
           mirror               => true,
           projects             => [
-            'openstack/(?!ara$|ara-web$|ara-infra$).*',
+            '^openstack/(?!ara$|ara-web$|ara-infra$).*',
             'openstack-dev/*',
             'openstack-infra/*',
           ]
