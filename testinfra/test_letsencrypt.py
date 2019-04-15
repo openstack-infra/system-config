@@ -68,3 +68,17 @@ def test_certs_created(host):
 
     else:
         pytest.skip()
+
+def test_updated_handler(host):
+    if host.backend.get_hostname() == 'letsencrypt01.opendev.org':
+        stamp_file = host.file('/tmp/letsencrypt01-main-service.stamp')
+        assert stamp_file.exists
+        stamp_file = host.file('/tmp/letsencrypt01-other-service.stamp')
+        assert stamp_file.exists
+
+    elif host.backend.get_hostname() == 'letsencrypt02.opendev.org':
+        stamp_file = host.file('/tmp/letsencrypt02-main-service.stamp')
+        assert stamp_file.exists
+
+    else:
+        pytest.skip()

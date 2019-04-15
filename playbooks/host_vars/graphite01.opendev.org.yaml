@@ -1,4 +1,4 @@
 letsencrypt_certs:
-  main:
+  graphtite01-main:
     - graphite01.opendev.org
     - graphite.opendev.org

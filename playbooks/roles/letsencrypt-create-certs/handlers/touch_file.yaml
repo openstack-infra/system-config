@@ -1,0 +1,5 @@
+- name: 'Touch {{ touch_file }}'
+  file:
+    path: '{{ touch_file }}'
+    state: touch
+
