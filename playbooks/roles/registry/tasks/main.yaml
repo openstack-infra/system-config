@@ -5,7 +5,7 @@
 - name: Ensure registry volume directories exists
   file:
     state: directory
-    path: "/var/registry/{{ item }}"
+    path: "/opt/registry/{{ item }}"
   loop:
     - data
     - certs
@@ -20,17 +20,17 @@
   htpasswd:
     create: true
     crypt_scheme: bcrypt
-    path: /var/registry/auth/htpasswd
+    path: /opt/registry/auth/htpasswd
     name: "{{ registry_user }}"
     password: "{{ registry_password }}"
 - name: Write TLS private key
   copy:
     content: "{{ registry_tls_key }}"
-    dest: /var/registry/certs/domain.key
+    dest: /opt/registry/certs/domain.key
 - name: Write TLS certificate
   copy:
     content: "{{ registry_tls_cert }}{{ registry_tls_chain | default('') }}"
-    dest: /var/registry/certs/domain.crt
+    dest: /opt/registry/certs/domain.crt
 - name: Install docker-compose
   package:
     name:

@@ -553,8 +553,8 @@
     host-vars:
       insecure-ci-registry01.opendev.org:
         host_copy_output:
-          '/var/registry/auth': logs
-          '/var/registry/certs': logs
+          '/opt/registry/auth': logs
+          '/opt/registry/certs': logs
     files:
       - .zuul.yaml
       - playbooks/group_vars/registry.yaml

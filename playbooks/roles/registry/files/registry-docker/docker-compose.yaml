@@ -14,6 +14,6 @@ services:
       REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
       REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
     volumes:
-      - /var/registry/data:/var/lib/registry
-      - /var/registry/certs:/certs
-      - /var/registry/auth:/auth
+      - /opt/registry/data:/var/lib/registry
+      - /opt/registry/certs:/certs
+      - /opt/registry/auth:/auth
