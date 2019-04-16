@@ -1,0 +1,130 @@
+#!/usr/bin/python3
+
+import os
+import re
+import subprocess
+import sys
+import tempfile
+
+import yaml
+
+def run(commandlist):
+    (o, x) = subprocess.Popen(
+        commandlist, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL
+        ).communicate()
+    return o.decode('utf-8').strip().split('\n')
+
+
+# the gerrit git directory
+top = sys.argv[1]
+
+# the repo renames file and a corresponding regex for finding them
+renames = {}
+for repo in yaml.safe_load(open(sys.argv[2]))['repos']:
+    renames[repo['old']] = repo['new']
+renames_regex = re.compile('( |/|^)(%s)( |/|\.|$)' % '|'.join(renames.keys()))
+
+# add this to skip custom YAML tags Zuul groks
+class EncryptedPKCS1_OAEP(yaml.YAMLObject):
+    yaml_tag = u'!encrypted/pkcs1-oaep'
+    yaml_loader = yaml.SafeLoader
+
+    def __init__(self, x):
+        pass
+
+    @classmethod
+    def from_yaml(cls, loader, node):
+        return cls(node.value)
+
+
+# find all second-level directories on which we will operate
+repos = run(['find', top, '-maxdepth', '2', '-mindepth', '2', '-name', '*.git', '-type', 'd'])
+
+# iterate over each repo
+# TODO(fungi): drop the [1000:1100] used for testing
+#for bare in repos[1000:1100]:
+for bare in repos:
+    # clone the repo into a temporary working tree
+    with tempfile.TemporaryDirectory() as repodir:
+        print(bare)
+        run(['git', 'clone', bare, repodir])
+        origdir = os.getcwd()
+        os.chdir(repodir)
+
+        # build a list of branches for this repo
+        branches = []
+        branchdump = run(['git', 'branch', '-a'])
+
+        # iterate over each branch
+        for line in branchdump:
+            branch = re.match('^remotes/origin/([^ ]+)$', line.strip())
+            if branch:
+                branches.append(branch.group(1))
+        for branch in branches:
+            run(['git', 'checkout', 'origin/' + branch])
+
+            # build up a list of files to edit
+            editfiles = set()
+
+            # find zuul configs and add ansible playbooks they reference
+            zuulfiles = run(['find', '.zuul.d/', 'zuul.d/', '.zuul.yaml', 'zuul.yaml', '-name', '*.yaml', '-type', 'f'])
+            for zuulfile in zuulfiles:
+                if zuulfile:
+                    conf = yaml.safe_load(open(zuulfile))
+                    if not conf:
+                        # some repos have empty zuul configs
+                        continue
+                    for node in conf:
+                        if 'job' in node:
+                            for subnode in ('post-run', 'pre-run', 'run'):
+                                if subnode in node['job']:
+                                    if type(node['job'][subnode]) is list:
+                                        editfiles.update(node['job'][subnode])
+                                    else:
+                                        editfiles.add(node['job'][subnode])
+
+            # if there are roles dirs relative to the playbooks, add them too
+            for playbook in list(editfiles):
+                rolesdir = os.path.join(os.path.dirname(playbook), 'roles')
+                if os.path.isdir(rolesdir):
+                    editfiles.update(run([
+                        'find', rolesdir, '-type', 'f', '(', '-name', '*.j2',
+                        '-o', '-name', '*.yaml', '-o', '-name', '*.yml', ')']))
+
+            # zuul looks at the top level roles dir too
+            editfiles.update(run([
+                'find', 'roles', '-type', 'f', '(', '-name', '*.j2', '-o',
+                '-name', '*.yaml', '-o', '-name', '*.yml', ')']))
+
+            # and add the zuul configs themselves
+            editfiles.update(zuulfiles)
+
+            # drop any empty filename we ended up with
+            editfiles.discard('')
+
+            # read through each file and replace specific patterns
+            for fname in editfiles:
+                if not os.path.exists(fname):
+                    continue
+                with open(fname) as rfd, tempfile.TemporaryFile() as wfd:
+                    for line in rfd:
+                        found = renames_regex.search(line)
+                        if found:
+                            # TODO(fungi): include .gitreview files
+                            # TODO(fungi): recurse over line and replace
+                            # matches until there are no more matches
+                            # TODO(fungi): add patterns for git.o.o and
+                            # review.o.o
+                            # TODO(fungi): flag if files had matches and copy
+                            # wfd to fname if so
+                            # TODO(fungi): add special case routine for
+                            # openstack-infra/project-config's
+                            # gerrit/projects.yaml file and to move files in
+                            # its gerrit/acls tree matching rename patterns
+                            # TODO(fungi): git commit and push
+                            # TODO(fungi): remove debugging print
+                            print("[%s] %s (%s): %s" % (
+                                branch, fname, found.group(2), line))
+
+        # switch back before the context manager deletes our cwd
+        os.chdir(origdir)
