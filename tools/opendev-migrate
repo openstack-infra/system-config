@@ -1,0 +1,95 @@
+#!/usr/bin/python3
+
+import csv
+import io
+import json
+import requests
+import yaml
+
+# this will hold our mapping of old names(paces) to new
+moves = {}
+
+# here's a list of all (non-meta)projects in gerrit
+repos = [r for r in json.loads(requests.get(
+    'http://review.openstack.org/projects/').text[5:]).keys() if '/' in r]
+
+# a map of the first pair of columns from the namespace request ethercalc
+overrides = dict([r[:2] for r in csv.reader(io.StringIO(
+    requests.get('https://ethercalc.openstack.org/opendev-transition.csv').text
+    )) if '/' in r[1]])
+
+# all projects which are officially governed by openstack or osf
+openstack = []
+o_gov = 'https://opendev.org/openstack/governance/raw/branch/master/reference/'
+data = yaml.safe_load(requests.get(o_gov + 'projects.yaml').text)
+for team in data.values():
+    for deli in team['deliverables'].values():
+        for repo in deli['repos']:
+            openstack.append(repo)
+for f in ('foundation-board-repos.yaml', 'sigs-repos.yaml',
+          'technical-committee-repos.yaml', 'user-committee-repos.yaml'):
+    data = yaml.safe_load(requests.get(o_gov + f).text)
+    for team in data.values():
+        for repo in team:
+            openstack.append(repo['repo'])
+
+# projects which were at one time officially governed by openstack
+openstack_legacy = []
+data = yaml.safe_load(requests.get(o_gov + 'legacy.yaml').text)
+for team in data.values():
+    for deli in team['deliverables'].values():
+        for repo in deli['repos']:
+            openstack_legacy.append(repo)
+
+# use the jeepyb config to identify whitelabeled oip git projects
+airship = []
+starlingx = []
+zuul = []
+data = yaml.safe_load(requests.get(
+    'https://opendev.org/openstack-infra/project-config/raw/branch/master/'
+    'gerrit/projects.yaml').text)
+for project in data:
+    if 'cgit-alias' in project:
+        if project['cgit-alias']['site'] == 'git.airshipit.org':
+            airship.append(project['project'])
+        elif project['cgit-alias']['site'] == 'git.starlingx.io':
+            starlingx.append(project['project'])
+        elif project['cgit-alias']['site'] == 'git.zuul-ci.org':
+            zuul.append(project['project'])
+
+for repo in repos:
+    # airship repos identified drop the airship- prefix and move to airship
+    if repo in airship:
+        moves[repo] = 'airship/' + repo.split('/')[1].replace('airship-', '')
+
+    # starlingx repos drop the stx- prefix and move to starlingx
+    elif repo in starlingx:
+        moves[repo] = 'starlingx/' + repo.split('/')[1].replace('stx-', '')
+
+    # all current openstack repos move to openstack
+    elif repo in openstack:
+        moves[repo] = 'openstack/' + repo.split('/')[1]
+
+    # zuul repos move to zuul
+    elif repo in zuul:
+        moves[repo] = 'zuul/' + repo.split('/')[1]
+
+    # apply the requested namespace overrides
+    elif repo in overrides:
+        moves[repo] = overrides[repo]
+
+    # former openstack repositories which aren't accounted for go in openstack
+    elif repo in openstack_legacy:
+        moves[repo] = 'openstack/' + repo.split('/')[1]
+
+    # unofficial repositories move from openstack to x
+    elif repo.startswith('openstack/'):
+        moves[repo] = 'x/' + repo.split('/')[1]
+
+    # everything else is unchanged
+    else:
+        moves[repo] = repo
+
+for mapping in moves.items():
+    if mapping[0] != mapping[1]:
+        print('%s -> %s' % mapping)
