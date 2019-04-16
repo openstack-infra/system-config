@@ -44,10 +44,14 @@
   shell:
     cmd: docker-compose up -d
     chdir: /etc/registry-docker/
-
+- name: Copy registry GC script
+  copy:
+    src: registry-gc.sh
+    dest: /usr/local/bin
+    mode: 0445
 - name: Install cron to garbage collect the registry daily
   cron:
     name: "docker registry garbage-collect"
     minute: "0"
     hour: "0"
-    job: "/usr/bin/docker exec registrydocker_registry_1 registry garbage-collect /etc/docker/registry/config.yml > /dev/null"
+    job: "/usr/localbin/registry-gc.sh > /dev/null"
