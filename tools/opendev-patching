@@ -1,0 +1,219 @@
+#!/usr/bin/python3
+
+# Copyright (c) 2019 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+
+import yaml
+
+
+def run(commandlist):
+    """Wrapper to run a shell command and return a list of stdout lines."""
+    (o, x) = subprocess.Popen(
+        commandlist, env=gitenv, stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL).communicate()
+    return o.decode('utf-8').strip().split('\n')
+
+
+class EncryptedPKCS1_OAEP(yaml.YAMLObject):
+    """Causes pyyaml to skip custom YAML tags Zuul groks."""
+    yaml_tag = u'!encrypted/pkcs1-oaep'
+    yaml_loader = yaml.SafeLoader
+
+    def __init__(self, x):
+        pass
+
+    @classmethod
+    def from_yaml(cls, loader, node):
+        return cls(node.value)
+
+
+# the gerrit git directory
+top = sys.argv[1]
+
+# the repo renames file and a corresponding regex for finding them
+renames = {}
+for repo in yaml.safe_load(open(sys.argv[2]))['repos']:
+    renames[repo['old']] = repo['new']
+renames_regex = re.compile(
+    '([^a-z0-9_-]|^)(%s)([^a-z0-9_-]|$)' % '|'.join(renames.keys()))
+
+# our custom git author/committer used by the run function
+gitenv = dict(os.environ)
+gitenv.update({
+            'GIT_AUTHOR_NAME': 'OpenDev Sysadmins',
+            'GIT_AUTHOR_EMAIL': 'openstack-infra@lists.openstack.org',
+            'GIT_COMMITTER_NAME': 'OpenDev Sysadmins',
+            'GIT_COMMITTER_EMAIL': 'openstack-infra@lists.openstack.org',
+            })
+
+# commit message string for generated commits
+commit_message = """\
+OpenDev Migration Patch
+
+This commit was bulk generated and pushed by the OpenDev sysadmins
+as a part of the Git hosting and code review systems migration
+detailed in these mailing list posts:
+
+http://lists.openstack.org/pipermail/openstack-discuss/2019-March/003603.html
+http://lists.openstack.org/pipermail/openstack-discuss/2019-April/004920.html
+
+Attempts have been made to correct repository namespaces and
+hostnames based on simple pattern matching, but it's possible some
+were updated incorrectly or missed entirely. Please reach out to us
+via the contact information listed at https://opendev.org/ with any
+questions you may have.
+"""
+
+# find all second-level directories on which we will operate
+repos = run(['find', top, '-maxdepth', '2', '-mindepth', '2', '-name', '*.git', '-type', 'd'])
+
+# iterate over each repo
+for bare in repos:
+    # clone the repo into a temporary working tree
+    with tempfile.TemporaryDirectory() as repodir:
+        run(['git', 'clone', bare, repodir])
+        origdir = os.getcwd()
+        os.chdir(repodir)
+
+        # build a list of branches for this repo
+        branches = []
+        branchdump = run(['git', 'branch', '-a'])
+
+        # iterate over each branch
+        for line in branchdump:
+            branch = re.match('^remotes/origin/([^ ]+)$', line.strip())
+            if branch:
+                branches.append(branch.group(1))
+        for branch in branches:
+            run(['git', 'checkout', '-B', branch, 'origin/' + branch])
+
+            # build up a list of files to edit
+            editfiles = set()
+
+            # find zuul configs and add ansible playbooks they reference
+            zuulfiles = run([
+                'find', '.zuul.d/', 'zuul.d/', '.zuul.yaml', 'zuul.yaml',
+                '-name', '*.yaml', '-type', 'f'])
+            for zuulfile in zuulfiles:
+                if zuulfile:
+                    conf = yaml.safe_load(open(zuulfile))
+                    if not conf:
+                        # some repos have empty zuul configs
+                        continue
+                    for node in conf:
+                        if 'job' in node:
+                            for subnode in ('post-run', 'pre-run', 'run'):
+                                if subnode in node['job']:
+                                    if type(node['job'][subnode]) is list:
+                                        editfiles.update(node['job'][subnode])
+                                    else:
+                                        editfiles.add(node['job'][subnode])
+
+            # if there are roles dirs relative to the playbooks, add them too
+            for playbook in list(editfiles):
+                rolesdir = os.path.join(os.path.dirname(playbook), 'roles')
+                if os.path.isdir(rolesdir):
+                    editfiles.update(run([
+                        'find', rolesdir, '-type', 'f', '(', '-name', '*.j2',
+                        '-o', '-name', '*.yaml', '-o', '-name', '*.yml', ')']))
+
+            # zuul looks at the top level roles dir too
+            editfiles.update(run([
+                'find', 'roles', '-type', 'f', '(', '-name', '*.j2', '-o',
+                '-name', '*.yaml', '-o', '-name', '*.yml', ')']))
+
+            # and add the zuul configs themselves
+            editfiles.update(zuulfiles)
+
+            # and add .gitreview of course
+            editfiles.add('.gitreview')
+
+            # and zuul/main.yaml so we catch the tenant config
+            editfiles.add('zuul/main.yaml')
+
+            # and gerrit/projects.yaml for manage-projects
+            editfiles.add('gerrit/projects.yaml')
+
+            # and gerritbot/channels.yaml for gerritbot
+            editfiles.add('gerritbot/channels.yaml')
+
+            # drop any empty filename we ended up with
+            editfiles.discard('')
+
+            # read through each file and replace specific patterns
+            for fname in editfiles:
+                if not os.path.exists(fname):
+                    continue
+                with open(fname) as rfd, tempfile.NamedTemporaryFile() as wfd:
+                    # track modifications for efficiency
+                    modified = False
+                    for line in rfd:
+                        # apply renames from the mapping
+                        found = renames_regex.search(line)
+                        while found:
+                            line = line.replace(
+                                found.group(2), renames[found.group(2)])
+                            modified = True
+                            found = renames_regex.search(line)
+
+                        # same for git.openstack.org -> opendev.org
+                        found = re.search("git\.openstack\.org", line)
+                        while found:
+                            line = line.replace(
+                                "git.openstack.org", "opendev.org")
+                            modified = True
+                            found = renames_regex.search(line)
+
+                        # and review.openstack.org -> review.opendev.org
+                        found = re.search("review\.openstack\.org", line)
+                        while found:
+                            line = line.replace(
+                                "review.openstack.org", "review.opendev.org")
+                            modified = True
+                            found = renames_regex.search(line)
+
+                        wfd.write(line.encode('utf-8'))
+
+                    # copy any modified file back into the worktree
+                    if modified:
+                        wfd.flush()
+                        shutil.copyfile(wfd.name, fname)
+                        modified = False
+
+            # special logic to rename Gerrit ACL files
+            if bare.endswith('/project-config.git'):
+                for acl in run(['git', 'ls-files', 'gerrit/acls/']):
+                    found = renames_regex.search(acl)
+                    if found:
+                        newpath = acl.replace(
+                            found.group(2), renames[found.group(2)])
+                        os.makedirs(os.path.dirname(newpath), exist_ok=True)
+                        run(['git', 'mv', acl, newpath])
+
+            # commit and push our changes, if there are any
+            if run(['git', 'diff']):
+                with tempfile.NamedTemporaryFile() as message:
+                    message.write(commit_message.encode('utf-8'))
+                    message.flush()
+                    run(['git', 'commit', '-a', '-F', message.name])
+                    run(['git', 'push', 'origin', 'HEAD'])
+
+        # switch back before the context manager deletes our cwd
+        os.chdir(origdir)
