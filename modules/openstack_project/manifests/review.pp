@@ -81,6 +81,10 @@ class openstack_project::review (
   $project_config_repo = '',
   $projects_config = 'openstack_project/review.projects.ini.erb',
   $gerrit_configure = true,
+  # Compatibility for old domain name vars below here.
+  $review_openstack_cert_file_contents = '',
+  $review_openstack_key_file_contents = '',
+  $review_openstack_chain_file_contents = '',
 ) {
 
   class { 'project_config':
@@ -90,9 +94,9 @@ class openstack_project::review (
   if ($gerrit_configure) {
     $accountpatchreviewdb_url = "jdbc:mysql://${mysql_host}:3306/accountPatchReviewDb?characterSetResults=utf8&characterEncoding=utf8&connectionCollation=utf8_bin&useUnicode=yes&user=gerrit2&password=${mysql_password}"
     class { 'openstack_project::gerrit':
-      vhost_name                          => 'review.openstack.org',
-      canonicalweburl                     => 'https://review.openstack.org/',
-      git_http_url                        => 'https://git.openstack.org/',
+      vhost_name                          => 'review.opendev.org',
+      canonicalweburl                     => 'https://review.opendev.org/',
+      git_http_url                        => 'https://opendev.org/',
       ssl_cert_file                       => $ssl_cert_file,
       ssl_key_file                        => $ssl_key_file,
       ssl_chain_file                      => $ssl_chain_file,
@@ -109,7 +113,7 @@ class openstack_project::review (
       ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
       ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
       ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
-      email                               => 'review@openstack.org',
+      email                               => 'review@opendev.org',
         # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
       database_poollimit                  => '225',
       container_heaplimit                 => '48g',
@@ -480,5 +484,47 @@ class openstack_project::review (
   bup::site { 'ord.rax':
     backup_user   => 'bup-review',
     backup_server => 'backup01.ord.rax.ci.openstack.org',
+  }
+
+  # Compatibility layer for old domain name below here
+  include ::httpd
+
+  if ! defined(Httpd::Mod['alias']) {
+    httpd::mod { 'alias':
+      ensure => present,
+      before => Service['httpd'],
+    }
+  }
+
+  ::httpd::vhost { 'review.openstack.org':
+    port     => 443, # Is required despite not being used.
+    docroot  => 'MEANINGLESS_ARGUMENT',
+    priority => '50',
+    template => 'openstack_project/review-openstack-redirect.vhost.erb',
+  }
+  file { '/etc/ssl/certs/review-redirect.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $review_openstack_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/review-redirect.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $review_openstack_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/review-redirect.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $review_openstack_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.zuul-ci.org.pem'],
   }
 }
