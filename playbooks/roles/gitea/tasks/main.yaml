@@ -79,7 +79,7 @@
     status_code: 201
     body_format: json
     body:
-      email: "gerrit@review.opendev.org"
+      email: "gerrit@review.openstack.org"
       full_name: Gerrit
       login_name: gerrit
       password: "{{ gitea_gerrit_password }}"
