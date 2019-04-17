@@ -38,7 +38,6 @@ groups:
     - ask*.open*.org
     - git.openstack.org
     - git[0-9]*.openstack.org
-    - lists*.open*.org
   gerrit:
     - review-dev[0-9]*.open*.org
     - review[0-9]*.open*.org
@@ -165,6 +164,7 @@ groups:
     - health[0-9]*.openstack.org
     - kdc[0-9]*.open*.org
     - lists*.katacontainers.io
+    - lists*.open*.org
     - lists-dev[0-9]*.open*.org
     - logstash-worker[0-9]*.open*.org
     - logstash[0-9]*.open*.org
