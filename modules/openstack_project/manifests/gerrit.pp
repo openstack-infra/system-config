@@ -68,7 +68,7 @@ class openstack_project::gerrit (
   $swift_password = '',
   $gitweb = false,
   $cgit = true,
-  $web_repo_url = 'https://git.openstack.org/cgit/',
+  $web_repo_url = 'https://opendev.org/',
   $web_repo_url_encode = false,
   $secondary_index = true,
   $report_bug_text = 'Get Help',
@@ -262,7 +262,7 @@ class openstack_project::gerrit (
 
   file { '/home/gerrit2/review_site/static/title.svg':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.svg',
+    source  => 'puppet:///modules/openstack_project/opendev.svg',
     require => Class['::gerrit'],
     notify => Exec['reload_gerrit_header'],
   }
