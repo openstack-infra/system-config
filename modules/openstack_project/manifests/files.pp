@@ -20,6 +20,9 @@ class openstack_project::files (
   $git_zuul_cert_file_contents,
   $git_zuul_key_file_contents,
   $git_zuul_chain_file_contents,
+  $review_openstack_cert_file_contents,
+  $review_openstack_key_file_contents,
+  $review_openstack_chain_file_contents,
 ) {
 
   $afs_root = '/afs/openstack.org/'
@@ -91,6 +94,11 @@ class openstack_project::files (
   }
 
   httpd_mod { 'rewrite':
+    ensure => present,
+    before => Service['httpd'],
+  }
+
+  httpd_mod { 'alias':
     ensure => present,
     before => Service['httpd'],
   }
@@ -364,6 +372,41 @@ class openstack_project::files (
     group   => 'root',
     mode    => '0644',
     content => $git_zuul_chain_file_contents,
+    require => File['/etc/ssl/certs'],
+    before  => File['/etc/ssl/certs/git.zuul-ci.org.pem'],
+  }
+
+  ###########################################################
+  # review.openstack.org
+
+  ::httpd::vhost { 'review.openstack.org':
+    port     => 443, # Is required despite not being used.
+    docroot  => 'MEANINGLESS_ARGUMENT',
+    priority => '50',
+    template => 'openstack_project/review-openstack-redirect.vhost.erb',
+  }
+  file { '/etc/ssl/certs/review.openstack.org.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $review_openstack_cert_file_contents,
+    require => File['/etc/ssl/certs'],
+  }
+  file { '/etc/ssl/private/review.openstack.org.key':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+    content => $review_openstack_key_file_contents,
+    require => File['/etc/ssl/private'],
+  }
+  file { '/etc/ssl/certs/review.openstack.org_intermediate.pem':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => $review_openstack_chain_file_contents,
     require => File['/etc/ssl/certs'],
     before  => File['/etc/ssl/certs/git.zuul-ci.org.pem'],
   }
