@@ -262,7 +262,7 @@ class openstack_project::gerrit (
 
   file { '/home/gerrit2/review_site/static/title.svg':
     ensure  => present,
-    source  => 'puppet:///modules/openstack_project/openstack.svg',
+    source  => 'puppet:///modules/openstack_project/opendev.svg',
     require => Class['::gerrit'],
     notify => Exec['reload_gerrit_header'],
   }
