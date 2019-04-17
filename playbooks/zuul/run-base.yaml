@@ -66,6 +66,7 @@
         - group_vars/gitea.yaml
         - group_vars/gitea-lb.yaml
         - group_vars/letsencrypt.yaml
+        - group_vars/registry.yaml
         - host_vars/bridge.openstack.org.yaml
         - host_vars/letsencrypt01.opendev.org.yaml
         - host_vars/letsencrypt02.opendev.org.yaml

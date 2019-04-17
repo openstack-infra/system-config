@@ -7,13 +7,8 @@ services:
     restart: always
     image: registry:2
     network_mode: host
-    environment:
-      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
-      REGISTRY_HTTP_TLS_KEY: /certs/domain.key
-      REGISTRY_AUTH: htpasswd
-      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
-      REGISTRY_AUTH_HTPASSWD_REALM: Registry Realm
     volumes:
       - /var/registry/data:/var/lib/registry
       - /var/registry/certs:/certs
       - /var/registry/auth:/auth
+      - /var/registry/etc:/etc/docker/registry
