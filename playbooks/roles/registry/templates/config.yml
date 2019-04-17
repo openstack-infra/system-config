@@ -1,0 +1,30 @@
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+  swift:
+    username: {{ registry_swift_username }}
+    password: {{ registry_swift_password }}
+    authurl: {{ registry_swift_authurl }}
+    tenant: {{ registry_swift_tenant }}
+    region: {{ registry_swift_region }}
+    container: {{ registry_swift_container }}
+    secretkey: {{ registry_swift_secretkey }}
+  delete:
+    enabled: true
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+auth:
+  htpasswd:
+    realm: Registry Realm
+    path: /auth/htpasswd

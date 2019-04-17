@@ -10,6 +10,7 @@
     - data
     - certs
     - auth
+    - etc
 - name: Install passlib
   package:
     name:
@@ -31,6 +32,10 @@
   copy:
     content: "{{ registry_tls_cert }}{{ registry_tls_chain | default('') }}"
     dest: /var/registry/certs/domain.crt
+- name: Write registry config
+  template:
+    src: config.yml.j2
+    dest: /var/registry/etc/config.yml
 - name: Install docker-compose
   package:
     name:
