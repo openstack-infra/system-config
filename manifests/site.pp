@@ -101,6 +101,7 @@ node /^review-dev\d*\.open.*\.org$/ {
 }
 
 # Node-OS: xenial
+# Puppet-Version: !3
 node /^grafana\d*\.open.*\.org$/ {
   $group = "grafana"
   class { 'openstack_project::server': }
