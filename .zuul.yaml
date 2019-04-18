@@ -544,13 +544,60 @@
     description: |
       Run the playbook for the docker registry.
     dependencies: opendev-buildset-registry
+    # pre-run: playbooks/zuul/devstack-swift.yaml
+    run:
+      # Temporarily put this in run so that we don't retry 3 times while developing
+      - playbooks/zuul/devstack-swift.yaml
+      - playbooks/zuul/run-base.yaml
+      - playbooks/zuul/test-registry.yaml
     nodeset:
       nodes:
+        - name: swift
+          label: ubuntu-bionic
         - name: bridge.openstack.org
           label: ubuntu-bionic
         - name: insecure-ci-registry01.opendev.org
           label: ubuntu-bionic
+    roles:
+      - zuul: openstack-dev/devstack
+      - zuul: openstack-infra/devstack-gate
+      - zuul: openstack-infra/openstack-zuul-jobs
+    required-projects:
+      - openstack-dev/devstack
+      - openstack/requirements
+      - openstack/swift
+      - openstack/keystone
     host-vars:
+      swift:
+        disabled: true
+        devstack_localrc:
+          # From devstack
+          DATABASE_PASSWORD: secretdatabase
+          RABBIT_PASSWORD: secretrabbit
+          ADMIN_PASSWORD: secretadmin
+          SERVICE_PASSWORD: secretservice
+          NETWORK_GATEWAY: 10.1.0.1
+          FIXED_RANGE: 10.1.0.0/20
+          IPV4_ADDRS_SAFE_TO_USE: 10.1.0.0/20
+          FLOATING_RANGE: 172.24.5.0/24
+          PUBLIC_NETWORK_GATEWAY: 172.24.5.1
+          LOGFILE: /opt/stack/logs/devstacklog.txt
+          LOG_COLOR: false
+          VERBOSE: true
+          VERBOSE_NO_TIMESTAMP: true
+          NOVNC_FROM_PACKAGE: true
+          ERROR_ON_CLONE: true
+          LIBVIRT_TYPE: qemu
+          # From swift
+          SWIFT_HASH: changeme
+          SWIFT_REPLICAS: 1
+          SWIFT_START_ALL_SERVICES: False
+          ENABLE_IDENTITY_V2: False
+          IDENTITY_API_VERSION: 3
+        devstack_services:
+          base: false
+          keystone: true
+          swift: true
       insecure-ci-registry01.opendev.org:
         host_copy_output:
           '/var/registry/auth': logs

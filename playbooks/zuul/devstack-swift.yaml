@@ -1,0 +1,11 @@
+- hosts: swift
+  roles:
+    - configure-swap
+    - setup-stack-user
+    - setup-tempest-user
+    - setup-devstack-source-dirs
+    - setup-devstack-log-dir
+    - setup-devstack-cache
+    - start-fresh-logging
+    - write-devstack-local-conf
+    - orchestrate-devstack

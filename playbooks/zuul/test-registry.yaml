@@ -1,0 +1,2 @@
+- hosts: insecure-ci-registry01.opendev.org
+  tasks: []  # TODO: test an image push
