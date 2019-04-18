@@ -104,3 +104,12 @@ for mapping in moves.items():
 # https://docs.openstack.org/infra/system-config/gerrit.html#renaming-a-project
 with open('repos.yaml', 'w') as outfile:
     yaml.dump(output, outfile)
+
+# We should add this to the rename playbook, but time is short
+with open('zuul-rename.sh', 'w') as outfile:
+    keyroot = '/var/lib/zuul/keys'
+    for d in output['repos']:
+        outfile.write('mv %s/ssh/project/gerrit/%s %s/ssh/project/gerrit/%s\n' %
+                      (keyroot, d['old'], keyroot, d['new']))
+        outfile.write('mv %s/secrets/project/gerrit/%s %s/secrets/project/gerrit/%s\n' %
+                      (keyroot, d['old'], keyroot, d['new']))
