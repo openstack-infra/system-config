@@ -9,11 +9,11 @@ zuul_connections:
 
   - name: 'gerrit'
     driver: 'gerrit'
-    server: 'review.openstack.org'
-    canonical_hostname: 'git.openstack.org'
+    server: 'review.opendev.org'
+    canonical_hostname: 'opendev.org'
     user: 'zuul'
     sshkey: '/var/lib/zuul/ssh/id_rsa'
-    gitweb_url_template: 'https://git.openstack.org/cgit/{project.name}/commit/?id={sha}'
+    gitweb_url_template: 'https://opendev.org/{project.name}/commit/{sha}'
 
   - name: 'opendaylight'
     driver: 'gerrit'

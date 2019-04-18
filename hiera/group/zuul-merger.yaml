@@ -32,8 +32,8 @@ zuul_nodes: []
 zuul_connections:
   - name: 'gerrit'
     driver: 'gerrit'
-    server: 'review.openstack.org'
-    canonical_hostname: 'git.openstack.org'
+    server: 'review.opendev.org'
+    canonical_hostname: 'opendev.org'
     user: 'zuul'
     sshkey: '/var/lib/zuul/ssh/id_rsa'
 
