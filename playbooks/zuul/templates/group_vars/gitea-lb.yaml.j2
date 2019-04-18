@@ -1,13 +1,13 @@
 haproxy_listeners:
   - name: balance_git_http
     bind:
-      - "*:80"
+      - ":::80"
     servers:
       - name: "gitea01.opendev.org"
         address: "{{ (hostvars['gitea01.opendev.org'] | default({})).get('nodepool', {}).get('public_ipv4', '') }}:3080"
   - name: balance_git_https
     bind:
-      - "*:443"
+      - ":::443"
     servers:
       - name: "gitea01.opendev.org"
         address: "{{ (hostvars['gitea01.opendev.org'] | default({})).get('nodepool', {}).get('public_ipv4', '') }}:3000"

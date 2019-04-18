@@ -31,4 +31,5 @@ listen {{ listener.name }}
   {% for server in listener.servers %}
   server {{ server.name }} {{ server.address }}
   {% endfor %}
+
 {% endfor %}

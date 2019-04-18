@@ -1,7 +1,7 @@
 haproxy_listeners:
   - name: balance_git_http
     bind:
-      - '*:80'
+      - ':::80'
     servers:
       - name: 'gitea01.opendev.org'
         address: '38.108.68.93:3080'
@@ -21,7 +21,7 @@ haproxy_listeners:
         address: '38.108.68.22:3080'
   - name: balance_git_https
     bind:
-      - '*:443'
+      - ':::443'
     servers:
       - name: 'gitea01.opendev.org'
         address: '38.108.68.93:3000'
