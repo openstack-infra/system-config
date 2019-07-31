@@ -1,5 +1,0 @@
-- name: Copy edit-secrets script
-  copy:
-    mode: 0750
-    src: edit-secrets
-    dest: /usr/local/bin/edit-secrets

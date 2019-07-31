@@ -1,6 +1,0 @@
-package_name: iptables-persistent
-service_name: netfilter-persistent
-rules_dir: /etc/iptables
-ipv4_rules: /etc/iptables/rules.v4
-ipv6_rules: /etc/iptables/rules.v6
-reload_command: /usr/sbin/netfilter-persistent start

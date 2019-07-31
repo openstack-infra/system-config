@@ -1,6 +1,0 @@
-package: exim
-exim_service_name: exim
-config_file: /etc/exim/exim.conf
-conf_dir: /etc/exim/
-sysdefault_file: /etc/sysconfig/exim
-sysdefault_template: exim.sysconfig.j2

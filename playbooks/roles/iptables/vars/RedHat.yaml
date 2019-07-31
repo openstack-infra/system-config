@@ -1,6 +1,0 @@
-package_name: iptables-services
-service_name: iptables
-rules_dir: /etc/sysconfig
-ipv4_rules: /etc/sysconfig/iptables
-ipv6_rules: /etc/sysconfig/ip6tables
-setype: 'etc_t'

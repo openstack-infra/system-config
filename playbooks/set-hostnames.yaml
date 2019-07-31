@@ -1,4 +1,0 @@
-- hosts: "{{ target }}"
-  user: root
-  roles:
-    - set-hostname

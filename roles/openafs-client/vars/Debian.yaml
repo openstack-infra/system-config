@@ -1,5 +1,0 @@
-openafs_client_config_path: '/etc/openafs'
-# ARM64 wasn't supported in openafs until
-#  https://gerrit.openafs.org/11940
-# This custom PPA has 1.8.x packages with these patches
-openafs_client_apt_repo: ppa:openstack-ci-core/openafs-arm64

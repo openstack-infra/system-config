@@ -1,2 +1,0 @@
-- name: Reconfigure NSD
-  command: "nsd-control reconfig"

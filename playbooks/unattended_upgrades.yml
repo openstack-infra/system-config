@@ -1,6 +1,0 @@
-- hosts: all
-  gather_facts: true
-  tasks:
-  - name: run unattended upgrades
-    shell: apt-get update &&  unattended-upgrade
-    when: ansible_os_family == "Debian"

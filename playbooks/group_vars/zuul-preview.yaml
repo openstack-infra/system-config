@@ -1,3 +1,0 @@
-ansible_python_interpreter: python3
-iptables_extra_public_tcp_ports:
-  - 80

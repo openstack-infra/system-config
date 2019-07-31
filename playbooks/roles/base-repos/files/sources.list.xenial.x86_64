@@ -1,7 +1,0 @@
-# This file is kept updated by ansible, adapted from
-# https://help.ubuntu.com/lts/serverguide/configuration.html
-
-deb http://us.archive.ubuntu.com/ubuntu xenial main universe
-deb http://us.archive.ubuntu.com/ubuntu xenial-updates main universe
-deb http://us.archive.ubuntu.com/ubuntu xenial-backports main universe
-deb http://security.ubuntu.com/ubuntu xenial-security main universe

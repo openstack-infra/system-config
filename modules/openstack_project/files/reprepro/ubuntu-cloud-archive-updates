@@ -1,7 +1,0 @@
-Name: ubuntu-cloud-archive
-Method: http://ubuntu-cloud.archive.canonical.com/ubuntu
-Components: main
-UDebComponents: main
-Architectures: amd64
-GetInRelease: no
-VerifyRelease: EC4926EA

@@ -1,6 +1,0 @@
-# We don't want CI tests trying to really authenticate against
-# letsencrypt; apart from just being unfriendly it might cause quota
-# issues.  As we don't have the authentication keys exposed in the
-# gate, only generate a place-holder self-signed cert for testing.
-letsencrypt_use_staging: True
-letsencrypt_self_sign_only: True

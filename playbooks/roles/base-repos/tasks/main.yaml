@@ -1,9 +1,0 @@
-- name: Set up additional repos
-  include_tasks: "{{ item }}"
-  vars:
-    params:
-      files:
-        - "{{ ansible_facts.distribution }}.yaml"
-        - "{{ ansible_facts.os_family }}.yaml"
-      skip: true
-  loop: "{{ query('first_found', params) }}"

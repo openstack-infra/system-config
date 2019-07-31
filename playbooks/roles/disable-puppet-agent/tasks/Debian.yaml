@@ -1,5 +1,0 @@
-- name: Prevent puppet agent from running
-  copy:
-    mode: 0644
-    src: puppet.default
-    dest: /etc/default/puppet

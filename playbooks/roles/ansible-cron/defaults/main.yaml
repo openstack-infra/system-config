@@ -1,8 +1,0 @@
-update_cron_interval:
-  minute: '*/15'
-  hour: '*'
-  day: '*'
-  month: '*'
-  weekday: '*'
-# Flag that can be set in tests to ensure cron is not run
-ansible_cron_install_cron: true

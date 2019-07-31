@@ -1,3 +1,0 @@
-iptables_extra_public_tcp_ports:
-  - 79
-  - 7900

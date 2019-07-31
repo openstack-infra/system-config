@@ -1,8 +1,0 @@
-exim_queue_interval: '1m'
-exim_queue_run_max: '50'
-exim_smtp_accept_max: '100'
-exim_smtp_accept_max_per_host: '10'
-iptables_extra_public_tcp_ports:
-  - 25
-  - 80
-  - 465

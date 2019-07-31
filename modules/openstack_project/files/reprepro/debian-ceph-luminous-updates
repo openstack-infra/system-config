@@ -1,7 +1,0 @@
-Name: debian-ceph-luminous
-Method: http://download.ceph.com/debian-luminous/
-Components: main
-UDebComponents: main
-Architectures: amd64
-GetInRelease: no
-VerifyRelease: 460f3994

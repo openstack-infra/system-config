@@ -1,7 +1,0 @@
-Name: debian-docker
-Method: https://download.docker.com/linux/ubuntu/
-Components: stable
-UDebComponents: stable
-Architectures: amd64
-GetInRelease: no
-VerifyRelease: F273FCD8

@@ -1,4 +1,0 @@
-kube_config_dir: ~nodepool/.kube
-kube_config_owner: nodepool
-kube_config_group: nodepool
-kube_config_template: clouds/nodepool_kube_config.yaml.j2

@@ -1,4 +1,0 @@
-kube_config_dir: /root/.kube
-kube_config_owner: root
-kube_config_group: root
-kube_config_file: '{{ kube_config_dir }}/config'

@@ -1,5 +1,0 @@
-ansible_python_interpreter: python2
-iptables_extra_public_tcp_ports:
-  - 4443
-  - 8080
-  - 29418

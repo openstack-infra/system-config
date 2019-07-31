@@ -1,8 +1,0 @@
-# This file is kept updated by ansible, adapted from
-# https://help.ubuntu.com/lts/serverguide/configuration.html
-# Note the use of ports.ubuntu.com.
-
-deb http://ports.ubuntu.com/ubuntu-ports/ bionic main universe
-deb http://ports.ubuntu.com/ubuntu-ports/ bionic-updates main universe
-deb http://ports.ubuntu.com/ubuntu-ports/ bionic-backports main universe
-deb http://ports.ubuntu.com/ubuntu-ports/ bionic-security main universe

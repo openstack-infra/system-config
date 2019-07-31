@@ -1,9 +1,0 @@
-iptables_extra_public_tcp_ports:
-  - 88
-  - 464
-  - 749
-  - 754
-iptables_extra_public_udp_ports:
-  - 88
-  - 464
-  - 749

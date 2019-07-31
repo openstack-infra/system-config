@@ -1,6 +1,0 @@
-Name: debian-security
-Method: http://security.debian.org/
-Suite: */updates
-Architectures: amd64 arm64
-GetInRelease: no
-VerifyRelease: C857C906

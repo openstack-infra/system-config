@@ -1,4 +1,0 @@
-openstacksdk_config_dir: /etc/openstack
-openstacksdk_config_owner: root
-openstacksdk_config_group: root
-openstacksdk_config_file: '{{ openstacksdk_config_dir }}/clouds.yaml'

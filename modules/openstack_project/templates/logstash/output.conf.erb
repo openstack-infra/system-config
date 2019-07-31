@@ -1,9 +1,0 @@
-output {
-  elasticsearch {
-    hosts => <%= @elasticsearch_nodes.map { |node| node + ":9200" }.inspect %>
-    manage_template => false
-    flush_size => 1024
-    timeout => 300
-  }
-
-}

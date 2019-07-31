@@ -1,5 +1,0 @@
-- hosts: "afs:afsdb:!disabled"
-  name: "AFS: run puppet on the AFS servers"
-  strategy: free
-  roles:
-    - puppet

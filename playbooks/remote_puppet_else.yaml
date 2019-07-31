@@ -1,5 +1,0 @@
-- hosts: 'puppet:!review:!git-server:!zuul-scheduler:!afs:!afsdb:!puppetmaster*:!disabled'
-  name: "Puppet-else: run puppet on all other servers"
-  strategy: free
-  roles:
-    - puppet

@@ -1,3 +1,0 @@
-kerberos_admin_server: '{{ ansible_fqdn }}'
-kerberos_kdcs:
-  - '{{ ansible_fqdn }}'

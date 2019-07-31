@@ -1,6 +1,0 @@
-package: exim4-daemon-light
-exim_service_name: exim4
-config_file: /etc/exim4/exim4.conf
-conf_dir: /etc/exim4
-sysdefault_file: /etc/default/exim4
-sysdefault_template: exim4.default.j2

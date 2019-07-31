@@ -1,8 +1,0 @@
-exim_extra_aliases:
-  gerrit2: root
-iptables_rules:
-  - -p tcp --syn --dport 29418 -m connlimit --connlimit-above 100 -j REJECT
-iptables_extra_public_tcp_ports:
-  - 80
-  - 443
-  - 29418

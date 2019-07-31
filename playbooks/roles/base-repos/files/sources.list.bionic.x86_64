@@ -1,7 +1,0 @@
-# This file is kept updated by ansible, adapted from
-# https://help.ubuntu.com/lts/serverguide/configuration.html
-
-deb http://us.archive.ubuntu.com/ubuntu bionic main universe
-deb http://us.archive.ubuntu.com/ubuntu bionic-updates main universe
-deb http://us.archive.ubuntu.com/ubuntu bionic-backports main universe
-deb http://security.ubuntu.com/ubuntu bionic-security main universe

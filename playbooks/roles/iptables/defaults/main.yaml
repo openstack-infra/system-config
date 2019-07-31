@@ -1,7 +1,0 @@
-iptables_allowed_hosts: []
-iptables_public_ports: []
-iptables_public_tcp_ports: '{{ iptables_public_ports }}'
-iptables_public_udp_ports: '{{ iptables_public_ports }}'
-iptables_rules: []
-iptables_rules_v4: '{{ iptables_rules }}'
-iptables_rules_v6: '{{ iptables_rules }}'
